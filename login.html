@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Entrar (área do administrador) — Aqui Tem Achadinhos</title>
+<meta name="description" content="Área restrita do administrador do Aqui Tem Achadinhos.">
+<meta name="robots" content="noindex,nofollow">
+<link rel="manifest" href="manifest.webmanifest"><meta name="theme-color" content="#0B1E3F">
+<meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="apple-mobile-web-app-title" content="Achadinhos">
+<link rel="icon" type="image/svg+xml" href="logo.svg"><link rel="apple-touch-icon" href="icon-192.png">
+<link rel="stylesheet" href="assets/tailwind.css"><link rel="stylesheet" href="assets/styles.css">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body data-page="login" class="bg-silver-100 text-navy-900">
+<div id="site-header"></div>
+<section class="navy-hero text-white relative overflow-hidden"><div class="absolute inset-0 dot-grid opacity-40"></div>
+  <div class="relative max-w-md mx-auto px-4 sm:px-6 py-14 md:py-20">
+    <h1 class="font-display text-3xl md:text-4xl font-extrabold text-chrome">Área do administrador</h1>
+    <p class="text-silver-200 mt-2">Acesso restrito. Entre com seu e-mail e senha de administrador.</p>
+  </div>
+</section>
+<section class="max-w-md mx-auto px-4 sm:px-6 py-10">
+  <form id="formLogin" class="bg-white rounded-3xl shadow-soft ring-silver p-6 md:p-8 space-y-4" novalidate>
+    <div><label class="block text-sm font-semibold mb-1.5">E-mail</label><input name="email" type="email" autocomplete="username" required class="w-full px-4 py-3 rounded-xl bg-silver-50 ring-silver outline-none focus:ring-2 focus:ring-navy-500"></div>
+    <div><label class="block text-sm font-semibold mb-1.5">Senha</label><input name="password" type="password" autocomplete="current-password" required class="w-full px-4 py-3 rounded-xl bg-silver-50 ring-silver outline-none focus:ring-2 focus:ring-navy-500"></div>
+    <div id="msg" role="status" aria-live="polite"></div>
+    <button type="submit" class="btn-shine w-full bg-peao-500 hover:bg-peao-600 text-white font-bold py-3.5 rounded-xl shadow-redglow">Entrar</button>
+  </form>
+  <p class="text-xs text-slate-500 mt-4 text-center">É o primeiro acesso? Crie seu usuário em <b>Supabase → Authentication → Users → Add user</b> (marque "Auto Confirm User").</p>
+  <p class="text-xs text-slate-400 mt-2 text-center"><a href="index.html" class="hover:text-navy-700">← Voltar ao site</a></p>
+</section>
+<div id="site-footer"></div>
+<script src="assets/app.js"></script>
+</body>
+</html>

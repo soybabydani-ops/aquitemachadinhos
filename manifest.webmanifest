@@ -1,0 +1,19 @@
+{
+  "name": "Aqui Tem Achadinhos — Guia de Compras de Barretos",
+  "short_name": "Achadinhos",
+  "description": "O guia de compras e ofertas de Barretos. Encontre qualquer loja, serviço e achadinho da cidade.",
+  "start_url": "./?utm_source=pwa",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#0B1E3F",
+  "theme_color": "#0B1E3F",
+  "lang": "pt-BR",
+  "categories": ["shopping", "business", "lifestyle"],
+  "icons": [
+    { "src": "icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" },
+    { "src": "logo.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" }
+  ]
+}
