@@ -11,6 +11,7 @@ body{font-family:'Inter',sans-serif;padding-bottom:env(safe-area-inset-bottom)}
 h1,h2,h3,h4,.font-display{font-family:'Plus Jakarta Sans',sans-serif}
 .text-chrome{background:linear-gradient(180deg,#fff 0%,#dfe7f0 42%,#9aa7ba 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
 .navy-hero{background:radial-gradient(820px 480px at 88% -8%, rgba(38,78,142,.55), transparent 60%),radial-gradient(680px 420px at -5% 12%, rgba(212,32,44,.18), transparent 55%),radial-gradient(500px 360px at 50% 120%, rgba(120,140,170,.18), transparent 60%),linear-gradient(160deg,#060f27 0%,#081433 45%,#0B1E3F 100%)}
+.peao-hero{background:linear-gradient(115deg, rgba(6,15,39,.95) 0%, rgba(8,20,51,.86) 40%, rgba(11,30,63,.72) 100%), url('peao-hero.jpg') center 32%/cover no-repeat, linear-gradient(160deg,#060f27,#0B1E3F)}
 .glass{background:rgba(255,255,255,.05);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border:1px solid rgba(201,212,226,.14)}
 .glass-light{background:rgba(255,255,255,.7);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border:1px solid rgba(201,212,226,.4)}
 .card-hover{transition:transform .28s ease,box-shadow .28s ease}
