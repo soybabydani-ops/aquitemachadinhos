@@ -360,8 +360,8 @@
     var btnVoltar = $('#btnVoltar'); if (btnVoltar) btnVoltar.addEventListener('click', function () { s2.classList.add('hidden'); s1.classList.remove('hidden'); window.scrollTo(0, 0); });
     form.addEventListener('submit', function (e) {
       e.preventDefault();
-      if (!validateStep1(form)) { s1.classList.remove('hidden'); s2.classList.add('hidden'); return; }
-      if (!form.querySelector('[name=aceite_termos]').checked || !form.querySelector('[name=autorizacao_cadastrar]').checked) { showMsg('#msg', '⚠️ É necessário aceitar os termos e confirmar que está autorizado a cadastrar a empresa.', false); return; }
+      if (!validateStep1(form)) { s1.classList.remove('hidden'); s2.classList.add('hidden'); window.scrollTo(0, 0); return; }
+      if (!form.querySelector('[name=aceite_termos]').checked || !form.querySelector('[name=autorizacao_cadastrar]').checked) { showMsg('#msg', '⚠️ É necessário aceitar os termos e confirmar que está autorizado a cadastrar a empresa.', false); window.scrollTo(0, 0); return; }
       var btn = form.querySelector('[type=submit]'); var orig = btn.textContent; btn.disabled = true; btn.textContent = 'Enviando…';
       Metrics.log('cadastro_iniciado');
       var fd = {}; new FormData(form).forEach(function (v, k) { var f = form.querySelector('[name=' + k + ']'); fd[k] = (f && f.type === 'checkbox') ? (f.checked ? true : false) : v; });
@@ -400,10 +400,10 @@
     });
   }
   function validateStep1(f) {
-    if (!f.querySelector('[name=nome]').value.trim()) { showMsg('#msg', '⚠️ Informe o nome da empresa.', false); return false; }
-    if (!f.querySelector('[name=categoria]').value) { showMsg('#msg', '⚠️ Selecione a categoria.', false); return false; }
-    if (!f.querySelector('[name=whatsapp]').value.trim()) { showMsg('#msg', '⚠️ Informe um WhatsApp.', false); return false; }
-    showMsg('#msg', '', true); return true;
+    if (!f.querySelector('[name=nome]').value.trim()) { showMsg('#msg1', '⚠️ Informe o nome da empresa.', false); return false; }
+    if (!f.querySelector('[name=categoria]').value) { showMsg('#msg1', '⚠️ Selecione a categoria.', false); return false; }
+    if (!f.querySelector('[name=whatsapp]').value.trim()) { showMsg('#msg1', '⚠️ Informe um WhatsApp.', false); return false; }
+    showMsg('#msg1', '', true); return true;
   }
 
   /* AUTH + ADMIN */
