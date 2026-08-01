@@ -33,4 +33,22 @@ h1,h2,h3,h4,.font-display{font-family:'Plus Jakarta Sans',sans-serif}
 /* seletor e inputs base */
 input,select,textarea{font-family:inherit}
 input::placeholder,textarea::placeholder{color:#8C99AC}
-.text-silver-500{color:#4b5563!important}
+.text-silver-500{color:#9fb0c8!important}
+/* ===== TEMA ESCURO (navy + Peão) ===== */
+body{background:#060f27;color:#dde4ee}
+.bg-silver-100{background-color:#060f27!important}
+.bg-silver-50{background-color:#081433!important}
+.bg-silver-200{background-color:#122A55!important}
+.bg-white{background-color:#0B1E3F!important}
+.text-navy-900{color:#e8edf5!important}
+.text-navy-700{color:#cdd6e4!important}
+.text-slate-700,.text-slate-600{color:#cdd6e4!important}
+.text-slate-500{color:#9fb0c8!important}
+.text-slate-400{color:#8295ad!important}
+.text-peao-600{color:#F25563!important}
+.text-amber-600{color:#FBBF24!important}
+.text-emerald-600,.text-emerald-700{color:#34D399!important}
+.ring-silver{border-color:rgba(255,255,255,.16)!important}
+.border-silver-200{border-color:rgba(255,255,255,.10)!important}
+input,select,textarea{background-color:#081433!important;color:#e8edf5!important}
+input::placeholder,textarea::placeholder{color:#6b7a92}
