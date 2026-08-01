@@ -106,7 +106,7 @@
         .then(function (r) { if (!r.ok) throw new Error('upload'); return CONFIG.supabase.url + '/storage/v1/object/public/fotos/' + path; });
     });
   }
-  window.ATA = { CONFIG: CONFIG, Stores: Stores, Offers: Offers, Categories: Categories, Metrics: Metrics, uploadPhoto: uploadPhoto, waLink: waLink, esc: esc };
+  window.ATA = { CONFIG: CONFIG, LojistaAuth: LojistaAuth, Stores: Stores, Offers: Offers, Categories: Categories, Metrics: Metrics, uploadPhoto: uploadPhoto, waLink: waLink, esc: esc };
 
   /* LAYOUT */
   var LOGO = '<svg viewBox="0 0 64 64" class="w-9 h-9 rounded-xl shadow-soft" aria-hidden="true"><rect width="64" height="64" rx="16" fill="#0B1E3F"/><path d="M19 47 L32 16 L45 47" fill="none" stroke="#dfe7f0" stroke-width="6.5" stroke-linecap="round" stroke-linejoin="round"/><line x1="24" y1="38" x2="40" y2="38" stroke="#E63946" stroke-width="5" stroke-linecap="round"/></svg>';
@@ -136,7 +136,7 @@
   function catCard(c) { return '<a href="categoria.html?cat=' + c.id + '" class="card-hover bg-white rounded-2xl p-5 text-center shadow-soft ring-silver"><div class="text-4xl">' + (c.emoji || '🏪') + '</div><div class="mt-2 font-display font-bold">' + esc(c.nome) + '</div><div class="text-xs text-silver-500">' + esc(c.desc || '') + '</div></a>'; }
   function storeCard(s, cats) {
     var logo = s.logo_url ? '<img src="' + esc(s.logo_url) + '" alt="' + esc(s.nome) + '" class="w-16 h-16 rounded-2xl object-cover" loading="lazy">' : '<div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-navy-700 to-navy-500 grid place-items-center text-white text-xl font-extrabold">' + esc(initials(s.nome)) + '</div>';
-    return '<a href="loja.html?id=' + encodeURIComponent(s.id) + '" class="card-hover bg-white rounded-2xl p-5 shadow-soft ring-silver text-center relative"><button data-fav="' + encodeURIComponent(s.id) + '" class="absolute top-2 right-2 z-10 w-7 h-7 grid place-items-center text-base bg-white/70 rounded-full">' + (isFav(s.id) ? '❤️' : '🤍') + '</button><div class="mx-auto w-fit">' + logo + '</div><h3 class="font-display font-bold mt-3">' + esc(s.nome) + '</h3><p class="text-xs text-silver-500">' + esc(catName(s.categoria, cats)) + (s.bairro ? ' · ' + esc(s.bairro) : '') + '</p>' + (s.rating_count > 0 ? '<span class="inline-block mt-1 text-[11px] font-semibold text-amber-600">' + ratingMini(s) + '</span>' : '') + (s.destaque ? '<span class="inline-block mt-1 text-[10px] font-bold text-peao-600 bg-peao-500/10 px-2 py-0.5 rounded">Destaque</span>' : '') + '</a>';
+    return '<a href="loja.html?id=' + encodeURIComponent(s.id) + '" class="card-hover bg-white rounded-2xl p-5 shadow-soft ring-silver text-center relative"><button data-fav="' + encodeURIComponent(s.id) + '" class="absolute top-2 right-2 z-10 w-7 h-7 grid place-items-center text-base bg-white/70 rounded-full">' + (isFav(s.id) ? '❤️' : '🤍') + '</button><div class="mx-auto w-fit">' + logo + '</div><h3 class="font-display font-bold mt-3">' + esc(s.nome) + '</h3><p class="text-xs text-silver-500">' + esc(catName(s.categoria, cats)) + (s.bairro ? ' · ' + esc(s.bairro) : '') + '</p>' + (s.rating_count > 0 ? '<span class="inline-block mt-1 text-[11px] font-semibold text-amber-600">' + ratingMini(s) + '</span>' : '') + (abertoAgora(s) === true ? '<span class="inline-block mt-1 text-[10px] font-bold text-emerald-600 bg-emerald-500/10 px-2 py-0.5 rounded">🟢 Aberto</span>' : abertoAgora(s) === false ? '<span class="inline-block mt-1 text-[10px] font-bold text-peao-600 bg-peao-500/10 px-2 py-0.5 rounded">🔴 Fechado</span>' : '') + (s.destaque ? '<span class="inline-block mt-1 text-[10px] font-bold text-peao-600 bg-peao-500/10 px-2 py-0.5 rounded">Destaque</span>' : '') + '</a>';
   }
   function offerCard(o) {
     var img = o.imagem_url ? '<img src="' + esc(o.imagem_url) + '" alt="" class="h-32 w-full object-cover" loading="lazy">' : '<div class="h-32 bg-gradient-to-br from-navy-700 to-navy-500 grid place-items-center text-3xl text-white">🏷️</div>';
@@ -225,6 +225,18 @@
     return '<div class="text-center py-10"><div class="inline-block w-8 h-8 border-4 border-silver-300 border-t-peao-500 rounded-full animate-spin"></div><p class="text-sm text-silver-500 mt-3">' + (msg || 'Carregando...') + '</p></div>';
   }
 
+  function abertoAgora(s) {
+    if (!s.horario_dias || !s.horario_abre || !s.horario_fecha) return null;
+    var agora = new Date(); var dia = agora.getDay();
+    var dias = s.horario_dias.split(',').map(function (d) { return parseInt(d.trim(), 10); });
+    if (dias.indexOf(dia) === -1) return false;
+    var min = agora.getHours() * 60 + agora.getMinutes();
+    var pA = s.horario_abre.split(':'); var pF = s.horario_fecha.split(':');
+    var minA = parseInt(pA[0], 10) * 60 + parseInt(pA[1] || 0, 10);
+    var minF = parseInt(pF[0], 10) * 60 + parseInt(pF[1] || 0, 10);
+    return min >= minA && min <= minF;
+  }
+
   /* FAVORITOS + PWA */
   var FAVS_KEY = 'ata_favs';
   function getFavs() { return JSON.parse(localStorage.getItem(FAVS_KEY) || '[]'); }
@@ -254,7 +266,14 @@
           var c = cats.filter(function (x) { return x.id === cat; })[0] || { nome: cat, emoji: '🏪' };
           if (t) t.innerHTML = c.emoji + ' ' + esc(c.nome); if (s) s.textContent = 'Empresas de ' + c.nome + ' em Barretos.';
           var f = stores.filter(function (x) { return x.categoria === cat; }); f = sortByPlano(f);
-          l.innerHTML = f.length ? '<div class="grid grid-cols-2 md:grid-cols-4 gap-5">' + f.map(function (x) { return storeCard(x, cats); }).join('') + '</div>' : emptyState('Nenhuma empresa aqui ainda', 'Seja a primeira empresa de ' + esc(c.nome) + ' no guia.', true);
+          var _cf = f;
+          function renderCatList() {
+            var hasGeo = _cf.some(function (x) { return x.lat && x.lng; });
+            var btn = hasGeo ? '<button id="btnNearCat" class="btn-shine bg-navy-800 hover:bg-navy-700 text-white text-sm font-semibold px-4 py-2 rounded-xl mb-4">📍 Ordenar por distância</button>' : '';
+            l.innerHTML = btn + (_cf.length ? '<div class="grid grid-cols-2 md:grid-cols-4 gap-5">' + _cf.map(function (x) { return storeCard(x, cats); }).join('') + '</div>' : emptyState('Nenhuma empresa aqui ainda', 'Seja a primeira empresa de ' + esc(c.nome) + ' no guia.', true));
+            var nb = $('#btnNearCat'); if (nb) nb.addEventListener('click', function () { nb.textContent = '📍 Localizando...'; navigator.geolocation.getCurrentPosition(function (pos) { var me = [pos.coords.latitude, pos.coords.longitude]; _cf.sort(function (a, b) { return ((a.lat && a.lng) ? haversine(me, [a.lat, a.lng]) : 99999) - ((b.lat && b.lng) ? haversine(me, [b.lat, b.lng]) : 99999); }); renderCatList(); }, function () { nb.textContent = '📍 Localização negada'; }); });
+          }
+          renderCatList();
         } else {
           if (t) t.textContent = 'Categorias'; if (s) s.textContent = 'Todas as categorias do guia de Barretos.';
           l.innerHTML = '<div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">' + cats.map(catCard).join('') + '</div>';
@@ -361,6 +380,8 @@
       Promise.all(tasks).then(function () {
         delete fd.logo; delete fd.capa; delete fd.galeria;
         fd.cidade = fd.cidade || 'Barretos';
+      var dias = []; [0,1,2,3,4,5,6].forEach(function (dd) { var cb = form.querySelector('[name=dia_' + dd + ']'); if (cb && cb.checked) dias.push(dd); }); fd.horario_dias = dias.length ? dias.join(',') : '';
+      if (LojistaAuth.uid()) { fd.owner_id = LojistaAuth.uid(); }
         return Stores.create(fd).then(function (created) {
           if (!created) throw new Error('insert');
           var pTasks = galUrls.map(function (u) { return apiPost('store_photos', { store_id: created.id, url: u }); });
@@ -423,7 +444,8 @@
 
   function pageAdmin() {
     var root = $('#adminRoot'); if (!root) return;
-    if (!AUTH.tok()) { location.href = 'login.html'; return; }
+    if (!AUTH.tok() && !LojistaAuth.tok()) { location.href = 'login.html'; return; }
+    var _isLojista = !AUTH.tok() && !!LojistaAuth.tok();
     root.innerHTML = '<p class="text-center text-silver-500 py-10">Carregando painel…</p>';
     Promise.all([aGet('stores?select=*&order=criado_em.desc'), aGet('offers?select=id,status'), aGet('metrics_events?select=tipo'), aGet('reviews?select=*&order=criado_em.desc'), aGet('drivers?select=*&order=criado_em.desc')]).then(function (r) {
       renderAdmin(root, r[0], r[1], r[2], r[3], r[4]);
@@ -477,12 +499,29 @@
     root.querySelectorAll('select[data-dplano-id]').forEach(function (sel) { sel.addEventListener('change', function () { aPatch('drivers', sel.getAttribute('data-dplano-id'), { plano: sel.value }).then(function () {}); }); });
   }
 
+  var LojistaAuth = {
+    tok: function () { return localStorage.getItem('ata_lojista_token'); },
+    uid: function () { return localStorage.getItem('ata_lojista_uid'); },
+    logout: function () { localStorage.removeItem('ata_lojista_token'); localStorage.removeItem('ata_lojista_uid'); location.href = 'cadastro.html'; },
+    login: function (email, pass) {
+      return fetch(CONFIG.supabase.url + '/auth/v1/token?grant_type=password', { method: 'POST', headers: { apikey: CONFIG.supabase.anonKey, 'Content-Type': 'application/json' }, body: JSON.stringify({ email: email, password: pass }) })
+        .then(function (r) { return r.json().then(function (j) { if (!r.ok) throw new Error(j.error_description || j.msg || 'Erro ao entrar'); return j; }); });
+    },
+    signup: function (email, pass) {
+      return fetch(CONFIG.supabase.url + '/auth/v1/signup', { method: 'POST', headers: { apikey: CONFIG.supabase.anonKey, 'Content-Type': 'application/json' }, body: JSON.stringify({ email: email, password: pass }) })
+        .then(function (r) { return r.json().then(function (j) { if (!r.ok) throw new Error(j.msg || j.message || 'Erro ao criar conta'); return j; }); });
+    }
+  };
+  function lojistaHeaders() { var t = LojistaAuth.tok(); return { apikey: CONFIG.supabase.anonKey, Authorization: 'Bearer ' + (t || CONFIG.supabase.anonKey) }; }
+  function lojistaGet(path) { return fetch(B(path), { headers: lojistaHeaders() }).then(function (r) { return r.ok ? r.json() : []; }).catch(function () { return []; }); }
+
   /* PAINEL DO LOJISTA / GESTAO DE EMPRESA */
   function pagePainel() {
     var root = $('#painelRoot'); if (!root) return;
     if (!AUTH.tok()) { location.href = 'login.html'; return; }
     root.innerHTML = '<p class="text-center text-silver-500 py-10">Carregando...</p>';
-    aGet('stores?select=*&order=criado_em.desc').then(function (stores) {
+    var storeQuery = _isLojista ? ('stores?select=*&owner_id=eq.' + LojistaAuth.uid() + '&order=criado_em.desc') : 'stores?select=*&order=criado_em.desc';
+    aGet(storeQuery).then(function (stores) {
       if (!stores.length) { root.innerHTML = emptyState('Nenhuma empresa ainda', 'Cadastre ou aprove uma empresa primeiro.', false); return; }
       renderPainel(root, stores, params().get('id') || stores[0].id);
     });
