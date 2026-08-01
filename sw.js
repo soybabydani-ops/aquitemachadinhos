@@ -1,5 +1,5 @@
 // Service Worker — Aqui Tem Achadinhos (v4 — fix Safari redirects)
-const CACHE = 'achadinhos-v10';
+const CACHE = 'achadinhos-v11';
 const ASSETS = [
   './', './index.html', './cadastro.html', './cadastro-motorista.html', './categoria.html',
   './loja.html', './ofertas.html', './busca.html', './turista.html', './anuncie.html',
