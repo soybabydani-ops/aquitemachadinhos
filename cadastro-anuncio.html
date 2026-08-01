@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Anunciar grátis em Barretos — Imóvel, vaga, veículo | Aqui Tem Achadinhos</title>
+<meta name="description" content="Anuncie grátis em Barretos: imóvel para alugar/vender, vaga de emprego, veículo e mais. Contato direto no WhatsApp.">
+<link rel="manifest" href="manifest.webmanifest"><meta name="theme-color" content="#0B1E3F">
+<meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="apple-mobile-web-app-title" content="Achadinhos">
+<link rel="icon" type="image/svg+xml" href="logo.svg"><link rel="apple-touch-icon" href="icon-192.png">
+<link rel="stylesheet" href="assets/tailwind.css"><link rel="stylesheet" href="assets/styles.css">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body data-page="cadanuncio" class="bg-silver-100 text-navy-900">
+<div id="site-header"></div>
+
+<section class="navy-hero text-white relative overflow-hidden"><div class="absolute inset-0 dot-grid opacity-40"></div>
+  <div class="relative max-w-3xl mx-auto px-4 sm:px-6 py-12 md:py-14">
+    <span class="text-peao-400 font-bold uppercase text-xs tracking-[0.18em]">Grátis no lançamento</span>
+    <h1 class="font-display text-3xl md:text-4xl font-extrabold mt-2 text-chrome">📢 Anunciar em Barretos</h1>
+    <p class="text-silver-200 mt-3">Imóvel (aluguel, venda ou temporada), vaga de emprego, veículo e mais. Seu anúncio entra como <b>pendente</b> e aparece após nossa aprovação.</p>
+  </div>
+</section>
+
+<section class="max-w-3xl mx-auto px-4 sm:px-6 py-10">
+  <form id="formAnuncio" class="bg-white rounded-3xl shadow-soft ring-silver p-6 md:p-8 space-y-5" novalidate>
+    <div class="grid sm:grid-cols-2 gap-5">
+      <div><label class="block text-sm font-semibold mb-1.5">Categoria *</label><select name="categoria" class="w-full px-4 py-3 rounded-xl bg-silver-50 ring-silver outline-none focus:ring-2 focus:ring-navy-500"></select></div>
+      <div><label class="block text-sm font-semibold mb-1.5">Preço / Valor</label><input name="preco" type="text" placeholder="Ex.: R$ 1.200/mês · R$ 89.000 · A combinar" class="w-full px-4 py-3 rounded-xl bg-silver-50 ring-silver outline-none focus:ring-2 focus:ring-navy-500"></div>
+    </div>
+    <div id="extraFields" class="grid sm:grid-cols-2 gap-5"></div>
+    <div><label class="block text-sm font-semibold mb-1.5">Título do anúncio *</label><input name="titulo" type="text" placeholder="Ex.: Apto 2 quartos centro, próximo à Festa do Peão" class="w-full px-4 py-3 rounded-xl bg-silver-50 ring-silver outline-none focus:ring-2 focus:ring-navy-500"></div>
+    <div><label class="block text-sm font-semibold mb-1.5">Descrição</label><textarea name="descricao" rows="4" placeholder="Detalhe seu anúncio: condições, o que inclui, regras..." class="w-full px-4 py-3 rounded-xl bg-silver-50 ring-silver outline-none focus:ring-2 focus:ring-navy-500"></textarea></div>
+    <div class="grid sm:grid-cols-2 gap-5">
+      <div><label class="block text-sm font-semibold mb-1.5">Seu nome / anunciante</label><input name="anunciante_nome" type="text" placeholder="Ex.: João Silva ou Imobiliária X" class="w-full px-4 py-3 rounded-xl bg-silver-50 ring-silver outline-none focus:ring-2 focus:ring-navy-500"></div>
+      <div><label class="block text-sm font-semibold mb-1.5">WhatsApp para contato *</label><input name="whatsapp" type="tel" placeholder="(17) 9XXXX-XXXX" class="w-full px-4 py-3 rounded-xl bg-silver-50 ring-silver outline-none focus:ring-2 focus:ring-navy-500"></div>
+    </div>
+    <div><label class="block text-sm font-semibold mb-1.5">E-mail (opcional)</label><input name="email" type="email" placeholder="seu@email.com" class="w-full px-4 py-3 rounded-xl bg-silver-50 ring-silver outline-none focus:ring-2 focus:ring-navy-500"></div>
+    <div class="grid sm:grid-cols-3 gap-5">
+      <div><label class="block text-sm font-semibold mb-1.5">Cidade</label><input name="cidade" type="text" value="Barretos" class="w-full px-4 py-3 rounded-xl bg-silver-50 ring-silver outline-none focus:ring-2 focus:ring-navy-500"></div>
+      <div><label class="block text-sm font-semibold mb-1.5">Bairro</label><input name="bairro" type="text" placeholder="Ex.: Centro" class="w-full px-4 py-3 rounded-xl bg-silver-50 ring-silver outline-none focus:ring-2 focus:ring-navy-500"></div>
+      <div><label class="block text-sm font-semibold mb-1.5">Endereço</label><input name="endereco" type="text" placeholder="Rua, nº" class="w-full px-4 py-3 rounded-xl bg-silver-50 ring-silver outline-none focus:ring-2 focus:ring-navy-500"></div>
+    </div>
+    <div class="grid sm:grid-cols-2 gap-5">
+      <div><label class="block text-sm font-semibold mb-1.5">Foto de capa</label><input name="capa" type="file" accept="image/*" class="text-sm w-full"></div>
+      <div><label class="block text-sm font-semibold mb-1.5">Mais fotos (até 6)</label><input name="galeria" type="file" accept="image/*" multiple class="text-sm w-full"></div>
+    </div>
+    <div class="rounded-xl bg-silver-50 ring-silver p-4 text-sm text-slate-600">
+      <label class="flex items-start gap-2"><input name="aceite" type="checkbox" class="mt-0.5 w-4 h-4 accent-peao-500"> Aceito os <a href="termos.html" class="text-peao-600 underline">Termos de uso</a> e a <a href="politica-de-privacidade.html" class="text-peao-600 underline">Política de privacidade</a>, e confirmo que o anúncio é verdadeiro e que estou autorizado a publicá-lo. *</label>
+    </div>
+    <div id="msg" role="status" aria-live="polite" class="mb-2"></div>
+    <button type="submit" class="btn-shine w-full bg-peao-500 hover:bg-peao-600 text-white font-bold py-3.5 rounded-xl shadow-redglow">Publicar anúncio →</button>
+    <p class="text-xs text-slate-400 text-center">Imagens até 3MB cada. Após o envio, aprovamos e seu anúncio aparece no guia.</p>
+  </form>
+
+  <div id="anuncioOk" class="hidden bg-white rounded-3xl shadow-soft ring-silver p-8 text-center mt-2">
+    <div class="text-5xl">✅</div>
+    <h2 class="font-display text-2xl font-extrabold mt-3">Anúncio enviado!</h2>
+    <p class="text-slate-600 mt-2">Seu anúncio foi registrado como <b>pendente</b>. Assim que aprovarmos, ele aparece nos classificados de Barretos.</p>
+    <div class="mt-5 flex flex-col sm:flex-row gap-3 justify-center">
+      <a href="classificados.html" class="btn-shine bg-navy-800 hover:bg-navy-700 text-white font-bold px-6 py-3 rounded-xl">Ver classificados</a>
+      <a href="https://wa.me/5517992641746?text=Acabei%20de%20anunciar%20e%20gostaria%20da%20aprovação" target="_blank" rel="noopener noreferrer" class="btn-shine bg-[#25D366] text-white font-bold px-6 py-3 rounded-xl">💬 Avisar aprovação</a>
+    </div>
+  </div>
+</section>
+
+<div id="site-footer"></div>
+<script src="assets/app.js"></script>
+</body>
+</html>
