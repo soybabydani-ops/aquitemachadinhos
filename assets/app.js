@@ -17,7 +17,8 @@
       anonKey: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVmdnV6eGRoc2lycHZ4Y2xnZGZnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODU1MDM1OTEsImV4cCI6MjEwMTA3OTU5MX0.nPVBBKO_W9-tAccFRv7ajnllxTXvkqbsVsYecDqyeQc'
     },
     analytics: { plausible: { domain: '', src: 'https://plausible.io/js/script.js' } },
-    mp: { links: { lojista_destaque: 'https://mpago.la/25UHZqr', lojista_pro: 'https://mpago.la/2HBxp5v', driver_destaque: 'https://mpago.la/2ZSErEf', driver_pro: 'https://mpago.la/11BbdJs' }, autoUrl: 'https://efvuzxdhsirpvxclgdfg.supabase.co/functions/v1/upgrade-checkout' }
+    mp: { links: { lojista_destaque: 'https://mpago.la/25UHZqr', lojista_pro: 'https://mpago.la/2HBxp5v', driver_destaque: 'https://mpago.la/2ZSErEf', driver_pro: 'https://mpago.la/11BbdJs' }, autoUrl: 'https://efvuzxdhsirpvxclgdfg.supabase.co/functions/v1/upgrade-checkout' },
+    planLimits: { fotos: { gratis: 3, destaque: 10, pro: 20 }, ofertas: { gratis: 1, destaque: 5, pro: 99 } }
   };
   window.ATA_CONFIG = CONFIG;
 
@@ -75,7 +76,7 @@
       var a = JSON.parse(localStorage.getItem(LS_S) || '[]'); return Promise.resolve(a.filter(function (s) { return s.id === key || s.slug === key; })[0] || null);
     },
     photos: function (sid) {
-      if (isRemote()) return apiGet('store_photos?select=url&store_id=eq.' + encodeURIComponent(sid) + '&order=criado_em.asc');
+      if (isRemote()) return apiGet('store_photos?select=id,url&store_id=eq.' + encodeURIComponent(sid) + '&order=criado_em.asc');
       return Promise.resolve([]);
     },
     search: function (q) {
@@ -97,18 +98,20 @@
     log: function (tipo, sid) { if (!isRemote()) return Promise.resolve(); return fetch(B('metrics_events'), { method: 'POST', headers: H({ 'Content-Type': 'application/json' }), body: JSON.stringify({ tipo: tipo, store_id: sid || null }) }).catch(function () {}); }
   };
   function uploadPhoto(file) {
-    if (!isRemote()) return new Promise(function (res) { var r = new FileReader(); r.onload = function () { res(r.result); }; r.readAsDataURL(file); });
-    var ext = (file.name.split('.').pop() || 'jpg').toLowerCase();
-    var path = 'lojas/' + Date.now() + '-' + Math.random().toString(36).slice(2) + '.' + ext;
-    return fetch(CONFIG.supabase.url + '/storage/v1/object/fotos/' + path, { method: 'POST', headers: H({ 'Content-Type': file.type || 'image/*' }), body: file })
-      .then(function (r) { if (!r.ok) throw new Error('upload'); return CONFIG.supabase.url + '/storage/v1/object/public/fotos/' + path; });
+    return compressImage(file).then(function (f) {
+      if (!isRemote()) return new Promise(function (res) { var r = new FileReader(); r.onload = function () { res(r.result); }; r.readAsDataURL(f); });
+      var isPng = f.type === 'image/png'; var ext = isPng ? 'png' : 'jpg';
+      var path = 'lojas/' + Date.now() + '-' + Math.random().toString(36).slice(2) + '.' + ext;
+      return fetch(CONFIG.supabase.url + '/storage/v1/object/fotos/' + path, { method: 'POST', headers: H({ 'Content-Type': isPng ? 'image/png' : 'image/jpeg' }), body: f })
+        .then(function (r) { if (!r.ok) throw new Error('upload'); return CONFIG.supabase.url + '/storage/v1/object/public/fotos/' + path; });
+    });
   }
   window.ATA = { CONFIG: CONFIG, Stores: Stores, Offers: Offers, Categories: Categories, Metrics: Metrics, uploadPhoto: uploadPhoto, waLink: waLink, esc: esc };
 
   /* LAYOUT */
   var LOGO = '<svg viewBox="0 0 64 64" class="w-9 h-9 rounded-xl shadow-soft" aria-hidden="true"><rect width="64" height="64" rx="16" fill="#0B1E3F"/><path d="M19 47 L32 16 L45 47" fill="none" stroke="#dfe7f0" stroke-width="6.5" stroke-linecap="round" stroke-linejoin="round"/><line x1="24" y1="38" x2="40" y2="38" stroke="#E63946" stroke-width="5" stroke-linecap="round"/></svg>';
   function headerHTML(active) {
-    var it = [{ k: 'home', l: 'Início', h: 'index.html' }, { k: 'categoria', l: 'Categorias', h: 'categoria.html' }, { k: 'busca', l: '🔍 Buscar', h: 'busca.html' }, { k: 'ofertas', l: 'Ofertas', h: 'ofertas.html' }, { k: 'mapa', l: 'Mapa', h: 'mapa.html' }, { k: 'turista', l: 'Turista', h: 'turista.html' }, { k: 'motoristas', l: '🚗 Motoristas', h: 'motoristas.html' }, { k: 'anuncie', l: 'Para empresas', h: 'anuncie.html' }];
+    var it = [{ k: 'home', l: 'Início', h: 'index.html' }, { k: 'categoria', l: 'Categorias', h: 'categoria.html' }, { k: 'busca', l: '🔍 Buscar', h: 'busca.html' }, { k: 'favoritos', l: '❤️ Favoritos', h: 'favoritos.html' }, { k: 'ofertas', l: 'Ofertas', h: 'ofertas.html' }, { k: 'mapa', l: 'Mapa', h: 'mapa.html' }, { k: 'turista', l: 'Turista', h: 'turista.html' }, { k: 'motoristas', l: '🚗 Motoristas', h: 'motoristas.html' }, { k: 'anuncie', l: 'Para empresas', h: 'anuncie.html' }];
     var nav = it.map(function (i) { return '<a href="' + i.h + '" class="' + (active === i.k ? 'text-white' : 'text-silver-200 hover:text-white') + ' transition">' + i.l + '</a>'; }).join('');
     var mob = it.map(function (i) { return '<a href="' + i.h + '" class="py-2.5 px-3 rounded-lg hover:bg-white/5 ' + (active === i.k ? 'text-white' : '') + '">' + i.l + '</a>'; }).join('');
     return '<header class="sticky top-0 z-50 bg-navy-950/80 backdrop-blur border-b border-white/10"><div class="max-w-7xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between gap-3"><a href="index.html" class="flex items-center gap-2.5 shrink-0">' + LOGO + '<span class="leading-tight"><span class="block font-display font-extrabold text-[15px] text-chrome">' + esc(CONFIG.brand) + '</span><span class="block text-[10px] text-silver-400 tracking-wide">GUIA DE COMPRAS DE BARRETOS</span></span></a><nav class="hidden md:flex items-center gap-7 text-sm font-medium">' + nav + '</nav><div class="flex items-center gap-2"><a href="cadastro.html" class="hidden sm:inline-flex btn-shine bg-peao-500 hover:bg-peao-600 text-white text-sm font-semibold px-4 py-2.5 rounded-xl shadow-redglow transition">Cadastrar empresa</a><button id="menuBtn" class="md:hidden w-10 h-10 grid place-items-center rounded-xl glass text-white" aria-label="Menu"><svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button></div></div><div id="mobileMenu" class="hidden md:hidden border-t border-white/10 bg-navy-950/95"><div class="px-4 py-3 flex flex-col gap-1 text-silver-200">' + mob + '<a href="cadastro.html" class="mt-1 text-center bg-peao-500 text-white font-semibold py-3 rounded-xl">Cadastrar empresa</a></div></div></header>';
@@ -133,7 +136,7 @@
   function catCard(c) { return '<a href="categoria.html?cat=' + c.id + '" class="card-hover bg-white rounded-2xl p-5 text-center shadow-soft ring-silver"><div class="text-4xl">' + (c.emoji || '🏪') + '</div><div class="mt-2 font-display font-bold">' + esc(c.nome) + '</div><div class="text-xs text-silver-500">' + esc(c.desc || '') + '</div></a>'; }
   function storeCard(s, cats) {
     var logo = s.logo_url ? '<img src="' + esc(s.logo_url) + '" alt="' + esc(s.nome) + '" class="w-16 h-16 rounded-2xl object-cover" loading="lazy">' : '<div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-navy-700 to-navy-500 grid place-items-center text-white text-xl font-extrabold">' + esc(initials(s.nome)) + '</div>';
-    return '<a href="loja.html?id=' + encodeURIComponent(s.id) + '" class="card-hover bg-white rounded-2xl p-5 shadow-soft ring-silver text-center"><div class="mx-auto w-fit">' + logo + '</div><h3 class="font-display font-bold mt-3">' + esc(s.nome) + '</h3><p class="text-xs text-silver-500">' + esc(catName(s.categoria, cats)) + (s.bairro ? ' · ' + esc(s.bairro) : '') + '</p>' + (s.rating_count > 0 ? '<span class="inline-block mt-1 text-[11px] font-semibold text-amber-600">' + ratingMini(s) + '</span>' : '') + (s.destaque ? '<span class="inline-block mt-1 text-[10px] font-bold text-peao-600 bg-peao-500/10 px-2 py-0.5 rounded">Destaque</span>' : '') + '</a>';
+    return '<a href="loja.html?id=' + encodeURIComponent(s.id) + '" class="card-hover bg-white rounded-2xl p-5 shadow-soft ring-silver text-center relative"><button data-fav="' + encodeURIComponent(s.id) + '" class="absolute top-2 right-2 z-10 w-7 h-7 grid place-items-center text-base bg-white/70 rounded-full">' + (isFav(s.id) ? '❤️' : '🤍') + '</button><div class="mx-auto w-fit">' + logo + '</div><h3 class="font-display font-bold mt-3">' + esc(s.nome) + '</h3><p class="text-xs text-silver-500">' + esc(catName(s.categoria, cats)) + (s.bairro ? ' · ' + esc(s.bairro) : '') + '</p>' + (s.rating_count > 0 ? '<span class="inline-block mt-1 text-[11px] font-semibold text-amber-600">' + ratingMini(s) + '</span>' : '') + (s.destaque ? '<span class="inline-block mt-1 text-[10px] font-bold text-peao-600 bg-peao-500/10 px-2 py-0.5 rounded">Destaque</span>' : '') + '</a>';
   }
   function offerCard(o) {
     var img = o.imagem_url ? '<img src="' + esc(o.imagem_url) + '" alt="" class="h-32 w-full object-cover" loading="lazy">' : '<div class="h-32 bg-gradient-to-br from-navy-700 to-navy-500 grid place-items-center text-3xl text-white">🏷️</div>';
@@ -198,10 +201,42 @@
     });
   }
 
+  function sortByPlano(arr) { return arr.sort(function (a, b) { var pa = a.plano === 'pro' ? 3 : (a.plano === 'destaque' ? 2 : 1); var pb = b.plano === 'pro' ? 3 : (b.plano === 'destaque' ? 2 : 1); return pb - pa || (b.destaque ? 1 : 0) - (a.destaque ? 1 : 0) || (b.rating_avg || 0) - (a.rating_avg || 0); }); }
+
+  function compressImage(file) {
+    return new Promise(function (resolve) {
+      if (!file.type || file.type.indexOf('image/') !== 0 || file.size <= 204800) { resolve(file); return; }
+      var img = new Image(); var u = URL.createObjectURL(file);
+      img.onload = function () {
+        URL.revokeObjectURL(u);
+        var maxD = 1200, w = img.width, h = img.height;
+        if (w > maxD) { h = h * (maxD / w); w = maxD; }
+        if (h > maxD) { w = w * (maxD / h); h = maxD; }
+        var cv = document.createElement('canvas'); cv.width = w; cv.height = h;
+        cv.getContext('2d').drawImage(img, 0, 0, w, h);
+        var mime = file.type === 'image/png' ? 'image/png' : 'image/jpeg';
+        cv.toBlob(function (b) { resolve(b || file); }, mime, mime === 'image/jpeg' ? 0.85 : 0.9);
+      };
+      img.onerror = function () { URL.revokeObjectURL(u); resolve(file); };
+      img.src = u;
+    });
+  }
+  function loadingHTML(msg) {
+    return '<div class="text-center py-10"><div class="inline-block w-8 h-8 border-4 border-silver-300 border-t-peao-500 rounded-full animate-spin"></div><p class="text-sm text-silver-500 mt-3">' + (msg || 'Carregando...') + '</p></div>';
+  }
+
+  /* FAVORITOS + PWA */
+  var FAVS_KEY = 'ata_favs';
+  function getFavs() { return JSON.parse(localStorage.getItem(FAVS_KEY) || '[]'); }
+  function toggleFav(id) { var f = getFavs(); var idx = f.indexOf(id); if (idx > -1) f.splice(idx, 1); else f.push(id); localStorage.setItem(FAVS_KEY, JSON.stringify(f)); return idx === -1; }
+  function isFav(id) { return getFavs().indexOf(id) > -1; }
+  var _dp = null;
+  window.addEventListener('beforeinstallprompt', function (e) { e.preventDefault(); _dp = e; var b = document.createElement('button'); b.id = 'installBtn'; b.className = 'fixed bottom-20 right-5 z-50 bg-navy-900 text-white text-sm font-semibold px-4 py-2.5 rounded-xl shadow-lg hover:bg-navy-800 transition'; b.innerHTML = '📲 Instalar app'; b.onclick = function () { if (_dp) { _dp.prompt(); _dp.userChoice.then(function () { _dp = null; b.remove(); }); } }; document.body.appendChild(b); });
+
   /* PAGES */
   function pageHome() {
     Promise.all([Categories.list(), Stores.list(), Offers.listActive()]).then(function (r) {
-      var cats = r[0], stores = r[1], offers = r[2];
+      var cats = r[0], stores = r[1], offers = r[2]; stores = sortByPlano(stores);
       var cg = $('#catGrid'); if (cg) cg.innerHTML = cats.map(catCard).join('');
       var og = $('#ofertasGrid'); if (og) og.innerHTML = offers.length ? offers.map(offerCard).join('') : emptyGrid('Nenhuma oferta ativa ainda.');
       var dg = $('#destaqueGrid'); if (dg) dg.innerHTML = stores.length ? stores.map(function (s) { return storeCard(s, cats); }).join('') : emptyGrid('Nenhuma empresa cadastrada — seja a primeira!');
@@ -211,14 +246,14 @@
   function emptyGrid(msg) { return '<div class="col-span-full text-center py-10 text-silver-500 text-sm">' + msg + '</div>'; }
 
   function pageCategoria() {
-    var t = $('#catTitle'), s = $('#catSubtitle'), l = $('#catList'); if (!l) return;
+    var t = $('#catTitle'), s = $('#catSubtitle'), l = $('#catList'); if (!l) return; l.innerHTML = loadingHTML();
     var cat = params().get('cat');
     Categories.list().then(function (cats) {
       Stores.list().then(function (stores) {
         if (cat) {
           var c = cats.filter(function (x) { return x.id === cat; })[0] || { nome: cat, emoji: '🏪' };
           if (t) t.innerHTML = c.emoji + ' ' + esc(c.nome); if (s) s.textContent = 'Empresas de ' + c.nome + ' em Barretos.';
-          var f = stores.filter(function (x) { return x.categoria === cat; });
+          var f = stores.filter(function (x) { return x.categoria === cat; }); f = sortByPlano(f);
           l.innerHTML = f.length ? '<div class="grid grid-cols-2 md:grid-cols-4 gap-5">' + f.map(function (x) { return storeCard(x, cats); }).join('') + '</div>' : emptyState('Nenhuma empresa aqui ainda', 'Seja a primeira empresa de ' + esc(c.nome) + ' no guia.', true);
         } else {
           if (t) t.textContent = 'Categorias'; if (s) s.textContent = 'Todas as categorias do guia de Barretos.';
@@ -229,7 +264,7 @@
   }
 
   function pageOfertas() {
-    var l = $('#ofertasList'); if (!l) return;
+    var l = $('#ofertasList'); if (!l) return; l.innerHTML = loadingHTML();
     Offers.listActive().then(function (offers) { l.innerHTML = offers.length ? '<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">' + offers.map(offerCard).join('') + '</div>' : emptyState('Nenhuma oferta ativa no momento', 'As ofertas reais aparecem aqui assim que as empresas publicarem (e estiverem dentro da validade).', false); });
   }
 
@@ -240,7 +275,7 @@
     if (tt) tt.textContent = q ? ('Resultados para "' + q + '"') : 'Busca';
     if (!q) { l.innerHTML = emptyState('Digite algo para buscar', 'Use a busca para encontrar lojas, serviços e ofertas em Barretos.', false); return; }
     Promise.all([Categories.list(), Stores.search(q), Offers.search(q)]).then(function (r) {
-      var cats = r[0], stores = r[1], offers = r[2], html = '';
+      var cats = r[0], stores = r[1], offers = r[2], html = ''; stores = sortByPlano(stores);
       if (stores.length) html += '<h2 class="font-display font-bold mb-3">Empresas (' + stores.length + ')</h2><div class="grid grid-cols-2 md:grid-cols-4 gap-5 mb-8">' + stores.map(function (s) { return storeCard(s, cats); }).join('') + '</div>';
       if (offers.length) html += '<h2 class="font-display font-bold mb-3">Ofertas (' + offers.length + ')</h2><div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">' + offers.map(offerCard).join('') + '</div>';
       l.innerHTML = html || emptyState('Nada encontrado', 'Tente outro termo ou navegue pelas categorias.', false);
@@ -248,7 +283,7 @@
   }
 
   function pageLoja() {
-    var el = $('#perfil'); if (!el) return;
+    var el = $('#perfil'); if (!el) return; el.innerHTML = loadingHTML();
     var key = params().get('id') || params().get('slug');
     Stores.get(key).then(function (s) {
       if (!s) { el.innerHTML = emptyState('Empresa não encontrada', 'Essa empresa não está disponível ou ainda não foi aprovada.', false); return; }
@@ -270,7 +305,7 @@
     var end = (s.endereco || s.bairro) ? '<p>📍 ' + esc([s.endereco, s.bairro, 'Barretos/SP'].filter(Boolean).join(' — ')) + '</p>' : '';
     var mapQ = encodeURIComponent([s.endereco, s.bairro, 'Barretos SP'].filter(Boolean).join(', '));
     var map = mapQ ? '<div class="mt-3 rounded-2xl overflow-hidden ring-silver"><iframe title="Mapa" class="w-full h-48" style="border:0" loading="lazy" src="https://www.google.com/maps?q=' + mapQ + '&output=embed"></iframe></div><a href="https://www.google.com/maps/dir/?api=1&destination=' + mapQ + '" target="_blank" rel="noopener noreferrer" onclick="window.ATA&&window.ATA.Metrics.log(\'click_mapa\',\'' + esc(s.id) + '\')" class="btn-shine inline-block mt-2 bg-navy-800 hover:bg-navy-700 text-white font-semibold px-4 py-2.5 rounded-xl text-sm">📍 Como chegar</a>' : '';
-    return '<div class="max-w-4xl mx-auto px-4 sm:px-6 py-6"><a href="javascript:history.back()" class="text-silver-500 text-sm hover:text-navy-700">← Voltar</a><div class="mt-3 bg-white rounded-3xl shadow-soft ring-silver overflow-hidden">' + capa + '<div class="p-6 -mt-12 relative">' + logo + '<div class="mt-3 flex items-center gap-2 flex-wrap"><span class="text-xs font-semibold text-peao-600 bg-peao-500/10 px-2 py-0.5 rounded">' + esc(catName(s.categoria, cats)) + '</span>' + (s.verificada ? '<span class="text-xs font-semibold text-emerald-700 bg-emerald-500/10 px-2 py-0.5 rounded">✓ Empresa verificada</span>' : '') + (s.destaque ? '<span class="text-xs font-semibold text-peao-600 bg-peao-500/10 px-2 py-0.5 rounded">Destaque</span>' : '') + '</div><h1 class="font-display text-2xl md:text-3xl font-extrabold mt-2">' + esc(s.nome) + '</h1>' + (s.descricao_curta ? '<p class="text-slate-600 mt-1">' + esc(s.descricao_curta) + '</p>' : '') + (s.descricao ? '<p class="text-slate-700 mt-3 leading-relaxed">' + esc(s.descricao) + '</p>' : '') + '<div class="mt-4 grid sm:grid-cols-2 gap-2 text-sm text-slate-700">' + (s.horario ? '<p>🕒 ' + esc(s.horario) + '</p>' : '') + (s.telefone ? '<p>☎️ ' + esc(s.telefone) + '</p>' : '') + end + '</div>' + map + '<div class="mt-5 flex flex-wrap gap-3"><a href="' + wa + '" target="_blank" rel="noopener noreferrer" onclick="window.ATA&&window.ATA.Metrics.log(\'click_whatsapp\',\'' + esc(s.id) + '\')" class="btn-shine bg-[#25D366] text-white font-bold px-5 py-3 rounded-xl">💬 Falar no WhatsApp</a><button onclick="navigator.share?navigator.share({title:\'' + esc(s.nome) + '\',url:location.href}):copy(location.href)" class="btn-shine glass-light text-navy-800 font-bold px-5 py-3 rounded-xl">🔗 Compartilhar</button></div></div></div>' + ofs + gal + ratingBlock(s, reviews) + upsellCard('store', s.id) + '</div>';
+    return '<div class="max-w-4xl mx-auto px-4 sm:px-6 py-6"><a href="javascript:history.back()" class="text-silver-500 text-sm hover:text-navy-700">← Voltar</a><div class="mt-3 bg-white rounded-3xl shadow-soft ring-silver overflow-hidden">' + capa + '<div class="p-6 -mt-12 relative">' + logo + '<div class="mt-3 flex items-center gap-2 flex-wrap"><span class="text-xs font-semibold text-peao-600 bg-peao-500/10 px-2 py-0.5 rounded">' + esc(catName(s.categoria, cats)) + '</span>' + (s.verificada ? '<span class="text-xs font-semibold text-emerald-700 bg-emerald-500/10 px-2 py-0.5 rounded">✓ Empresa verificada</span>' : '') + (s.destaque ? '<span class="text-xs font-semibold text-peao-600 bg-peao-500/10 px-2 py-0.5 rounded">Destaque</span>' : '') + '</div><h1 class="font-display text-2xl md:text-3xl font-extrabold mt-2">' + esc(s.nome) + '</h1>' + (s.descricao_curta ? '<p class="text-slate-600 mt-1">' + esc(s.descricao_curta) + '</p>' : '') + (s.descricao ? '<p class="text-slate-700 mt-3 leading-relaxed">' + esc(s.descricao) + '</p>' : '') + '<div class="mt-4 grid sm:grid-cols-2 gap-2 text-sm text-slate-700">' + (s.horario ? '<p>🕒 ' + esc(s.horario) + '</p>' : '') + (s.telefone ? '<p>☎️ ' + esc(s.telefone) + '</p>' : '') + end + '</div>' + map + '<div class="mt-5 flex flex-wrap gap-3"><a href="' + wa + '" target="_blank" rel="noopener noreferrer" onclick="window.ATA&&window.ATA.Metrics.log(\'click_whatsapp\',\'' + esc(s.id) + '\')" class="btn-shine bg-[#25D366] text-white font-bold px-5 py-3 rounded-xl">💬 Falar no WhatsApp</a><button onclick="navigator.share?navigator.share({title:\'' + esc(s.nome) + '\',url:location.href}):copy(location.href)" class="btn-shine glass-light text-navy-800 font-bold px-5 py-3 rounded-xl">🔗 Compartilhar</button></div></div></div>' + ofs + gal + ratingBlock(s, reviews) + upsellCard('store', s.id) + '<a href="' + waLink('Den\u00fancia sobre: ' + s.nome) + '" target="_blank" rel="noopener noreferrer" class="block mt-4 text-center text-xs text-slate-400 hover:text-peao-600">\U0001f6a9 Denunciar conte\u00fado incorreto</a></div>';
   }
 
   function pageTurista() {
@@ -278,8 +313,19 @@
     Promise.all([Categories.list(), Stores.list()]).then(function (r) {
       var cats = r[0], stores = r[1];
       var uteis = ['restaurantes', 'lanches', 'farmacias', 'mercados', 'eletronicos', 'hoteis'];
-      var lista = stores.filter(function (s) { return uteis.indexOf(s.categoria) !== -1; });
+      var lista = stores.filter(function (s) { return uteis.indexOf(s.categoria) !== -1; }); lista = sortByPlano(lista);
       el.innerHTML = lista.length ? '<div class="grid grid-cols-2 md:grid-cols-4 gap-5">' + lista.map(function (s) { return storeCard(s, cats); }).join('') + '</div>' : emptyState('As lojas estão chegando', 'Em breve o turista encontra tudo de Barretos aqui. Lojista, seja um dos primeiros!', true);
+    });
+  }
+
+  function pageFavoritos() {
+    var el = $('#favList'); if (!el) return;
+    var favs = getFavs();
+    if (!favs.length) { el.innerHTML = emptyState('Nenhum favorito ainda', 'Toque no coração nas lojas para salvar aqui.', false); return; }
+    el.innerHTML = loadingHTML();
+    Promise.all([Categories.list(), Promise.all(favs.map(function (id) { return Stores.get(id); }))]).then(function (r) {
+      var cats = r[0], stores = r[1].filter(Boolean);
+      el.innerHTML = stores.length ? '<div class="grid grid-cols-2 md:grid-cols-4 gap-5">' + stores.map(function (s) { return storeCard(s, cats); }).join('') + '</div>' : emptyState('Favoritos indisponíveis', 'As lojas podem ter sido removidas.', false);
     });
   }
 
@@ -304,7 +350,7 @@
       var tasks = [];
       var logoFile = form.querySelector('[name=logo]').files[0];
       var capaFile = form.querySelector('[name=capa]').files[0];
-      var galFiles = Array.prototype.slice.call(form.querySelector('[name=galeria]').files).slice(0, 10);
+      var galFiles = Array.prototype.slice.call(form.querySelector('[name=galeria]').files).slice(0, 3);
       function validImg(f) { return f && f.type.indexOf('image/') === 0 && f.size <= 3 * 1024 * 1024; }
       if (logoFile && !validImg(logoFile)) { showMsg('#msg', '❌ Logo: use imagem de até 3MB.', false); btn.disabled = false; btn.textContent = orig; return; }
       if (capaFile && !validImg(capaFile)) { showMsg('#msg', '❌ Capa: use imagem de até 3MB.', false); btn.disabled = false; btn.textContent = orig; return; }
@@ -450,13 +496,37 @@
   }
   function loadStoreManage(s) {
     var box = $('#pStore');
-    Promise.all([aGet('metrics_events?select=tipo&store_id=eq.' + encodeURIComponent(s.id)), aGet('offers?select=*&store_id=eq.' + encodeURIComponent(s.id) + '&order=criado_em.desc')]).then(function (r) {
-      box.innerHTML = painelMetrics(r[0]) + painelEditForm(s) + painelOffers(s, r[1]) + painelMapPicker(s);
-      wireEdit(s); wireOffers(s); wireMapPicker(s);
+    var mesInicio = new Date(); mesInicio.setDate(1); mesInicio.setHours(0, 0, 0, 0);
+    Promise.all([aGet('metrics_events?select=tipo&store_id=eq.' + encodeURIComponent(s.id)), aGet('metrics_events?select=tipo&store_id=eq.' + encodeURIComponent(s.id) + '&criado_em=gte.' + mesInicio.toISOString()), aGet('offers?select=*&store_id=eq.' + encodeURIComponent(s.id) + '&order=criado_em.desc'), Stores.photos(s.id)]).then(function (r) {
+      box.innerHTML = painelMetrics(r[0], r[1]) + painelEditForm(s) + painelPhotos(s, r[3]) + painelOffers(s, r[2]) + painelMapPicker(s);
+      wireEdit(s); wireOffers(s, r[2]); wirePainelPhotos(s, r[3]); wireMapPicker(s);
     });
   }
-  function painelMetrics(met) {
-    return '<div class="grid grid-cols-3 gap-3 mb-6">' + statCard('\u{1F441}\u{FE0F}', countBy(met, 'tipo', 'view'), 'Visualizações') + statCard('\u{1F4AC}', countBy(met, 'tipo', 'click_whatsapp'), 'Cliques WhatsApp') + statCard('\u{1F4CD}', countBy(met, 'tipo', 'click_mapa'), 'Cliques mapa') + '</div>';
+  function painelMetrics(met, metMes) {
+    metMes = metMes || [];
+    return '<div class="rounded-2xl bg-silver-50 ring-silver p-5 mb-6"><p class="text-[11px] text-silver-500 font-bold uppercase tracking-wide mb-3">Relatório de desempenho</p><div class="grid grid-cols-3 gap-3">' + statCard('\u{1F441}\u{FE0F}', countBy(met, 'tipo', 'view'), 'Visualizações') + statCard('\u{1F4AC}', countBy(met, 'tipo', 'click_whatsapp'), 'Cliques WhatsApp') + statCard('\u{1F4CD}', countBy(met, 'tipo', 'click_mapa'), 'Cliques mapa') + '</div><p class="text-[11px] text-slate-400 mt-3">Este mês: <b>' + countBy(metMes, 'tipo', 'view') + '</b> views · <b>' + countBy(metMes, 'tipo', 'click_whatsapp') + '</b> cliques no WhatsApp</p></div>';
+  }
+  function painelPhotos(s, photos) {
+    photos = photos || [];
+    var lim = (CONFIG.planLimits && CONFIG.planLimits.fotos[s.plano || 'gratis']) || 3;
+    var used = photos.length;
+    var imgs = photos.map(function (p) { return '<div class="relative"><img src="' + esc(p.url) + '" class="w-full h-20 object-cover rounded-lg"><button data-delphoto="' + esc(p.id) + '" class="absolute -top-1 -right-1 bg-peao-600 text-white rounded-full w-5 h-5 text-xs leading-none">✕</button></div>'; }).join('');
+    return '<div class="bg-white rounded-2xl ring-silver shadow-soft p-5 mb-6"><h2 class="font-display font-bold mb-1">Fotos da galeria</h2><p class="text-xs text-silver-500 mb-3">' + used + '/' + lim + ' fotos (plano ' + esc(s.plano || 'gratis') + ')</p>' + (imgs ? '<div class="grid grid-cols-3 sm:grid-cols-5 gap-2 mb-3">' + imgs + '</div>' : '') + (used < lim ? '<input id="photoInput" type="file" accept="image/*" class="text-sm mb-2"><button id="btnAddPhoto" class="btn-shine bg-navy-800 hover:bg-navy-700 text-white text-sm font-semibold px-4 py-2 rounded-xl">＋ Adicionar foto</button>' : '<p class="text-xs text-peao-600 font-semibold">Limite do plano atingido — faça upgrade para mais fotos.</p>') + '<span id="photoMsg" class="text-sm ml-2"></span></div>';
+  }
+  function wirePainelPhotos(s, photos) {
+    var btn = $('#btnAddPhoto');
+    if (btn) btn.addEventListener('click', function () {
+      var inp = $('#photoInput'); var f = inp && inp.files[0]; var msg = $('#photoMsg');
+      if (!f || !f.type || f.type.indexOf('image/') !== 0 || f.size > 3 * 1024 * 1024) { msg.className = 'text-sm ml-2 text-peao-600'; msg.textContent = 'Imagem inválida (até 3MB).'; return; }
+      btn.disabled = true; btn.textContent = 'Enviando…';
+      uploadPhoto(f).then(function (u) { return apiPost('store_photos', { store_id: s.id, url: u }); }).then(function () { loadStoreManage(s); }).catch(function () { msg.className = 'text-sm ml-2 text-peao-600'; msg.textContent = 'Erro ao enviar.'; btn.disabled = false; btn.textContent = '＋ Adicionar foto'; });
+    });
+    document.querySelectorAll('[data-delphoto]').forEach(function (b) {
+      b.addEventListener('click', function () {
+        if (!confirm('Remover esta foto?')) return;
+        fetch(B('store_photos?id=eq.' + encodeURIComponent(b.getAttribute('data-delphoto'))), { method: 'DELETE', headers: aH() }).then(function () { loadStoreManage(s); });
+      });
+    });
   }
   function painelEditForm(s) {
     function val(v) { return esc(v == null ? '' : v); }
@@ -487,7 +557,7 @@
     return '<div class="bg-white rounded-2xl ring-silver shadow-soft p-5"><h2 class="font-display font-bold mb-3">Ofertas</h2><div class="space-y-2 mb-4">' + (list || '<p class="text-sm text-silver-500">Nenhuma oferta ainda.</p>') + '</div>'
       + '<form id="formOffer" class="grid sm:grid-cols-2 gap-3"><input name="titulo" placeholder="Título da oferta *" class="px-3 py-2 rounded-lg bg-silver-50 ring-silver"><input name="preco_atual" placeholder="Preço (ex.: R$ 29)" class="px-3 py-2 rounded-lg bg-silver-50 ring-silver"><input name="preco_anterior" placeholder="Preço antigo (opcional)" class="px-3 py-2 rounded-lg bg-silver-50 ring-silver"><input name="termino" type="date" class="px-3 py-2 rounded-lg bg-silver-50 ring-silver"><input name="condicoes" placeholder="Condições (opcional)" class="sm:col-span-2 px-3 py-2 rounded-lg bg-silver-50 ring-silver"><input name="imagem" type="file" accept="image/*" class="sm:col-span-2 text-sm"><button class="sm:col-span-2 btn-shine bg-navy-800 hover:bg-navy-700 text-white font-bold py-2.5 rounded-lg">Adicionar oferta</button></form><span id="offerMsg" class="text-sm"></span></div>';
   }
-  function wireOffers(s) {
+  function wireOffers(s, offers) {
     var f = $('#formOffer');
     if (f) f.addEventListener('submit', function (e) {
       e.preventDefault();
@@ -496,6 +566,9 @@
       new FormData(f).forEach(function (v, k) { if (k !== 'imagem') o[k] = v; });
       var msg = $('#offerMsg');
       if (!o.titulo || !o.titulo.trim()) { msg.className = 'text-sm text-peao-600'; msg.textContent = 'Informe o título.'; return; }
+      var limO = (CONFIG.planLimits && CONFIG.planLimits.ofertas[s.plano || 'gratis']) || 1;
+      var ativasO = (offers || []).filter(function (oo) { return oo.status === 'ativa'; }).length;
+      if (ativasO >= limO) { msg.className = 'text-sm text-peao-600'; msg.textContent = 'Limite de ofertas do seu plano atingido (' + limO + '). Faça upgrade para mais.'; return; }
       function finalizeOferta() { aPost('offers', o).then(function (arr) { var created = arr && arr[0]; if (!created) { msg.className = 'text-sm text-peao-600'; msg.textContent = 'Erro ao criar oferta.'; return; } aPatch('offers', created.id, { status: 'ativa' }).then(function () { loadStoreManage(s); }); }); }
       if (imgFile) { if (!imgFile.type || imgFile.type.indexOf('image/') !== 0 || imgFile.size > 3 * 1024 * 1024) { msg.className = 'text-sm text-peao-600'; msg.textContent = 'Imagem inválida (use até 3MB).'; return; } uploadPhoto(imgFile).then(function (u) { o.imagem_url = u; finalizeOferta(); }); }
       else finalizeOferta();
@@ -632,7 +705,7 @@
     });
   }
   function upsellCard(entity, id) {
-    return '<div class="bg-navy-900 text-white rounded-2xl p-5 mt-5"><p class="text-sm text-silver-200 mb-3">👑 É dono(a) deste perfil? Assine um plano e apareça em destaque nas buscas e no mapa.</p><input data-email type="email" placeholder="Seu melhor e-mail" class="w-full px-3 py-2 rounded-xl text-navy-900 mb-3"><div class="flex flex-wrap gap-2"><button data-assinar="' + entity + ':' + id + ':destaque" class="btn-shine bg-peao-500 hover:bg-peao-600 text-white font-bold text-sm px-4 py-2 rounded-xl">Assinar Destaque</button><button data-assinar="' + entity + ':' + id + ':pro" class="btn-shine bg-white text-navy-900 font-bold text-sm px-4 py-2 rounded-xl">Assinar Pro</button></div></div>';
+    return '<div class="bg-silver-50 ring-silver rounded-xl p-4 mt-4"><p class="text-sm text-silver-200 mb-3">É dono(a) deste perfil?</p><input data-email type="email" placeholder="Seu melhor e-mail" class="w-full px-3 py-2 rounded-xl text-navy-900 mb-3"><div class="flex flex-wrap gap-2"><button data-assinar="' + entity + ':' + id + ':destaque" class="btn-shine bg-peao-500 hover:bg-peao-600 text-white font-bold text-sm px-4 py-2 rounded-xl">Assinar Destaque</button><button data-assinar="' + entity + ':' + id + ':pro" class="btn-shine bg-white text-navy-900 font-bold text-sm px-4 py-2 rounded-xl">Assinar Pro</button></div></div>';
   }
 
   /* MOTORISTAS / CORRIDAS (diretório: conecta via WhatsApp) */
@@ -643,21 +716,21 @@
     reviews: function (id) { if (isRemote()) return apiGet('driver_reviews?select=*&driver_id=eq.' + encodeURIComponent(id) + '&status=eq.ativo&order=criado_em.desc'); return Promise.resolve([]); }
   };
   function driverCard(d) {
-    var foto = d.foto_url ? '<img src="' + esc(d.foto_url) + '" alt="" class="w-16 h-16 rounded-2xl object-cover">' : '<div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-navy-700 to-navy-500 grid place-items-center text-white text-xl">🚗</div>';
+    var foto = d.foto_url ? '<img src="' + esc(d.foto_url) + '" alt="' + esc(d.nome) + '" class="w-16 h-16 rounded-2xl object-cover">' : '<div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-navy-700 to-navy-500 grid place-items-center text-white text-xl">🚗</div>';
     return '<a href="motorista.html?id=' + encodeURIComponent(d.id) + '" class="card-hover bg-white rounded-2xl p-5 shadow-soft ring-silver text-center"><div class="mx-auto w-fit relative">' + foto + (d.disponivel_agora ? '<span class="absolute -bottom-1 -right-1 text-[10px] bg-emerald-500 text-white px-1.5 py-0.5 rounded-full">no ar</span>' : '') + '</div><h3 class="font-display font-bold mt-3">' + esc(d.nome) + '</h3><p class="text-xs text-silver-500">' + esc(d.tipo_veiculo || 'Motorista') + (d.disponibilidade ? ' · ' + esc(d.disponibilidade) : '') + '</p>' + (d.rating_count > 0 ? '<span class="inline-block mt-1 text-[11px] font-semibold text-amber-600">' + ratingMini(d) + '</span>' : '') + (d.plano === 'pro' ? '<span class="inline-block mt-1 text-[10px] font-bold text-white bg-navy-800 px-2 py-0.5 rounded">Pro</span>' : '') + (d.destaque ? '<span class="inline-block mt-1 text-[10px] font-bold text-peao-600 bg-peao-500/10 px-2 py-0.5 rounded">Destaque</span>' : '') + '</a>';
   }
   function pageMotoristas() {
-    var box = $('#motBox'); if (!box) return;
+    var box = $('#motBox'); if (!box) return; box.innerHTML = loadingHTML();
     var filt = params().get('f') || 'all';
     Drivers.list().then(function (drivers) {
       var chips = [{ id: 'all', label: '👥 Todos' }, { id: 'agora', label: '🟢 Disponíveis agora' }, { id: '24h', label: '🕐 24h' }, { id: 'noite', label: '🌙 Noite/madrugada' }];
       var f = function (d) { if (filt === 'agora') return d.disponivel_agora; if (filt === '24h') return (d.disponibilidade || '').indexOf('24') !== -1; if (filt === 'noite') return (d.disponibilidade || '').toLowerCase().indexOf('noite') !== -1; return true; };
-      var lista = drivers.filter(f);
+      var lista = drivers.filter(f); lista = sortByPlano(lista);
       box.innerHTML = '<div class="flex flex-wrap gap-2 mb-6">' + chips.map(function (ch) { return '<a href="motoristas.html?f=' + ch.id + '" class="px-3 py-1.5 rounded-full text-xs font-semibold ' + (ch.id === filt ? 'bg-peao-500 text-white' : 'bg-white ring-silver') + '">' + ch.label + '</a>'; }).join('') + '</div>' + (lista.length ? '<div class="grid grid-cols-2 md:grid-cols-4 gap-5">' + lista.map(driverCard).join('') + '</div>' : emptyState('Nenhum motorista disponível', 'Conhece motoristas em Barretos? Indique o cadastro — grátis no lançamento!', true));
     });
   }
   function pageMotorista() {
-    var el = $('#motPerfil'); if (!el) return;
+    var el = $('#motPerfil'); if (!el) return; el.innerHTML = loadingHTML();
     var id = params().get('id');
     Drivers.get(id).then(function (d) {
       if (!d) { el.innerHTML = emptyState('Motorista não encontrado', 'Esse perfil não está disponível ou não foi aprovado.', false); return; }
@@ -671,7 +744,7 @@
   function driverProfile(d, reviews) {
     var wa = 'https://wa.me/' + (digits(d.whatsapp) || CONFIG.whatsapp) + '?text=' + encodeURIComponent('Olá ' + d.nome + '! Vi seu perfil no Aqui Tem Achadinhos e preciso de uma corrida em Barretos.');
     var foto = d.foto_url ? '<img src="' + esc(d.foto_url) + '" alt="" class="w-24 h-24 rounded-3xl object-cover ring-4 ring-white shadow">' : '<div class="w-24 h-24 rounded-3xl bg-gradient-to-br from-navy-700 to-navy-500 grid place-items-center text-white text-4xl">🚗</div>';
-    return '<div class="max-w-3xl mx-auto px-4 sm:px-6 py-6"><a href="motoristas.html" class="text-silver-500 text-sm hover:text-navy-700">← Motoristas</a><div class="mt-3 bg-white rounded-3xl shadow-soft ring-silver p-6"><div class="flex items-center gap-4">' + foto + '<div><div class="flex items-center gap-2 flex-wrap"><span class="text-xs font-semibold text-peao-600 bg-peao-500/10 px-2 py-0.5 rounded">🚗 Motorista</span>' + (d.disponivel_agora ? '<span class="text-xs font-semibold text-emerald-700 bg-emerald-500/10 px-2 py-0.5 rounded">🟢 Disponível agora</span>' : '') + (d.verificada ? '<span class="text-xs font-semibold text-emerald-700 bg-emerald-500/10 px-2 py-0.5 rounded">✓ Verificado</span>' : '') + '</div><h1 class="font-display text-2xl md:text-3xl font-extrabold mt-1">' + esc(d.nome) + '</h1></div></div><div class="mt-4 grid sm:grid-cols-2 gap-2 text-sm text-slate-700">' + (d.tipo_veiculo ? '<p>🚙 Veículo: ' + esc(d.tipo_veiculo) + (d.lotacao ? ' · até ' + esc(d.lotacao) + ' pax' : '') + '</p>' : '') + (d.disponibilidade ? '<p>🕐 Disponibilidade: ' + esc(d.disponibilidade) + '</p>' : '') + (d.area ? '<p>🗺️ Atende: ' + esc(d.area) + '</p>' : '') + (d.bairro ? '<p>📍 Base: ' + esc(d.bairro) + '</p>' : '') + '</div>' + (d.descricao ? '<p class="text-slate-700 mt-3 leading-relaxed">' + esc(d.descricao) + '</p>' : '') + '<div class="mt-5"><a href="' + wa + '" target="_blank" rel="noopener noreferrer" class="btn-shine bg-[#25D366] text-white font-bold px-5 py-3 rounded-xl">💬 Pedir corrida no WhatsApp</a></div><p class="text-[11px] text-slate-400 mt-3">O Aqui Tem Achadinhos é um diretório: conecta passageiro e motorista via WhatsApp. A corrida e o pagamento são combinados diretamente com o motorista.</p></div><div class="mt-6">' + ratingSummary(d, reviews) + driverReviewForm(d) + reviewList(reviews) + upsellCard('driver', d.id) + '</div></div>';
+    return '<div class="max-w-3xl mx-auto px-4 sm:px-6 py-6"><a href="motoristas.html" class="text-silver-500 text-sm hover:text-navy-700">← Motoristas</a><div class="mt-3 bg-white rounded-3xl shadow-soft ring-silver p-6"><div class="flex items-center gap-4">' + foto + '<div><div class="flex items-center gap-2 flex-wrap"><span class="text-xs font-semibold text-peao-600 bg-peao-500/10 px-2 py-0.5 rounded">🚗 Motorista</span>' + (d.disponivel_agora ? '<span class="text-xs font-semibold text-emerald-700 bg-emerald-500/10 px-2 py-0.5 rounded">🟢 Disponível agora</span>' : '') + (d.verificada ? '<span class="text-xs font-semibold text-emerald-700 bg-emerald-500/10 px-2 py-0.5 rounded">✓ Verificado</span>' : '') + '</div><h1 class="font-display text-2xl md:text-3xl font-extrabold mt-1">' + esc(d.nome) + '</h1></div></div><div class="mt-4 grid sm:grid-cols-2 gap-2 text-sm text-slate-700">' + (d.tipo_veiculo ? '<p>🚙 Veículo: ' + esc(d.tipo_veiculo) + (d.lotacao ? ' · até ' + esc(d.lotacao) + ' pax' : '') + '</p>' : '') + (d.disponibilidade ? '<p>🕐 Disponibilidade: ' + esc(d.disponibilidade) + '</p>' : '') + (d.area ? '<p>🗺️ Atende: ' + esc(d.area) + '</p>' : '') + (d.bairro ? '<p>📍 Base: ' + esc(d.bairro) + '</p>' : '') + '</div>' + (d.descricao ? '<p class="text-slate-700 mt-3 leading-relaxed">' + esc(d.descricao) + '</p>' : '') + '<div class="mt-5"><a href="' + wa + '" target="_blank" rel="noopener noreferrer" class="btn-shine bg-[#25D366] text-white font-bold px-5 py-3 rounded-xl">💬 Pedir corrida no WhatsApp</a></div><p class="text-[11px] text-slate-400 mt-3">O Aqui Tem Achadinhos é um diretório: conecta passageiro e motorista via WhatsApp. A corrida e o pagamento são combinados diretamente com o motorista.</p></div><div class="mt-6">' + ratingSummary(d, reviews) + driverReviewForm(d) + reviewList(reviews) + upsellCard('driver', d.id) + '<a href="' + waLink('Den\u00fancia sobre: ' + d.nome) + '" target="_blank" rel="noopener noreferrer" class="block mt-4 text-center text-xs text-slate-400 hover:text-peao-600">\U0001f6a9 Denunciar conte\u00fado incorreto</a></div></div>';
   }
   function driverReviewForm(d) {
     return '<form id="formReview" class="bg-white rounded-2xl ring-silver shadow-soft p-5 mb-4"><h3 class="font-display font-bold mb-3">Avalie este motorista</h3><div id="starInput" class="flex gap-1 mb-3" data-val="0" role="radiogroup" aria-label="Sua nota de 1 a 5 estrelas">' + [1, 2, 3, 4, 5].map(function (i) { return '<span data-s="' + i + '" class="star cursor-pointer text-3xl text-silver-300 hover:text-amber-400 transition" role="button" tabindex="0" aria-label="' + i + ' estrela' + (i > 1 ? 's' : '') + '">★</span>'; }).join('') + '</div><input name="nome" placeholder="Seu nome (opcional)" class="w-full px-3 py-2 rounded-lg bg-silver-50 ring-silver mb-2"><textarea name="comentario" rows="2" placeholder="Como foi a corrida? (opcional)" class="w-full px-3 py-2 rounded-lg bg-silver-50 ring-silver mb-2"></textarea><button class="btn-shine bg-peao-500 hover:bg-peao-600 text-white font-bold px-5 py-2.5 rounded-xl">Enviar avaliação</button><span id="reviewMsg" class="text-sm ml-2"></span></form>';
@@ -724,8 +797,9 @@
   /* BOOT */
   document.addEventListener('DOMContentLoaded', function () {
     injectLayout(); initCountdown(); registerSW(); initAnalytics(); wireMP();
+    document.addEventListener('click', function (e) { var b = e.target.closest('[data-fav]'); if (b) { e.preventDefault(); e.stopPropagation(); var added = toggleFav(b.getAttribute('data-fav')); b.innerHTML = added ? '❤️' : '🤍'; } });
     var p = document.body.dataset.page;
-    var ROUTES = { home: pageHome, categoria: pageCategoria, loja: pageLoja, ofertas: pageOfertas, busca: pageBusca, cadastro: pageCadastro, turista: pageTurista, login: pageLogin, admin: pageAdmin, painel: pagePainel, mapa: pageMapa, motoristas: pageMotoristas, motorista: pageMotorista, cadmotorista: pageCadastroMotorista, obrigado: pageObrigado };
+    var ROUTES = { home: pageHome, categoria: pageCategoria, loja: pageLoja, ofertas: pageOfertas, busca: pageBusca, cadastro: pageCadastro, turista: pageTurista, login: pageLogin, admin: pageAdmin, painel: pagePainel, mapa: pageMapa, motoristas: pageMotoristas, motorista: pageMotorista, cadmotorista: pageCadastroMotorista, obrigado: pageObrigado, favoritos: pageFavoritos };
     if (ROUTES[p]) ROUTES[p]();
   });
 })();
