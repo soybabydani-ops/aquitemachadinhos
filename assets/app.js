@@ -55,7 +55,7 @@
   }
   function apiPost(table, obj) {
     if (!isRemote()) return Promise.resolve(obj);
-    return fetch(B(table), { method: 'POST', headers: H({ 'Content-Type': 'application/json', Prefer: 'return=representation' }), body: JSON.stringify(obj) })
+    return fetch(B(table), { method: 'POST', headers: H({ 'Content-Type': 'application/json' }), body: JSON.stringify(obj) })
       .then(function (r) { return r.ok; });
   }
 
@@ -111,7 +111,7 @@
   /* LAYOUT */
   var LOGO = '<svg viewBox="0 0 64 64" class="w-9 h-9 rounded-xl shadow-soft" aria-hidden="true"><rect width="64" height="64" rx="16" fill="#0B1E3F"/><path d="M19 47 L32 16 L45 47" fill="none" stroke="#dfe7f0" stroke-width="6.5" stroke-linecap="round" stroke-linejoin="round"/><line x1="24" y1="38" x2="40" y2="38" stroke="#E63946" stroke-width="5" stroke-linecap="round"/></svg>';
   function headerHTML(active) {
-    var it = [{ k: 'home', l: 'Início', h: 'index.html' }, { k: 'categoria', l: 'Categorias', h: 'categoria.html' }, { k: 'busca', l: '🔍 Buscar', h: 'busca.html' }, { k: 'favoritos', l: '❤️ Favoritos', h: 'favoritos.html' }, { k: 'ofertas', l: 'Ofertas', h: 'ofertas.html' }, { k: 'mapa', l: 'Mapa', h: 'mapa.html' }, { k: 'turista', l: 'Turista', h: 'turista.html' }, { k: 'motoristas', l: '🚗 Motoristas', h: 'motoristas.html' }, { k: 'anuncie', l: 'Para empresas', h: 'anuncie.html' }];
+    var it = [{ k: 'home', l: 'Início', h: 'index.html' }, { k: 'categoria', l: 'Categorias', h: 'categoria.html' }, { k: 'busca', l: '🔍 Buscar', h: 'busca.html' }, { k: 'favoritos', l: '❤️ Favoritos', h: 'favoritos.html' }, { k: 'ofertas', l: 'Ofertas', h: 'ofertas.html' }, { k: 'imoveis', l: '🏠 Imóveis', h: 'imoveis.html' }, { k: 'mapa', l: 'Mapa', h: 'mapa.html' }, { k: 'turista', l: 'Turista', h: 'turista.html' }, { k: 'motoristas', l: '🚗 Motoristas', h: 'motoristas.html' }, { k: 'classificados', l: 'Classificados', h: 'classificados.html' }, { k: 'anuncie', l: 'Para empresas', h: 'anuncie.html' }];
     var nav = it.map(function (i) { return '<a href="' + i.h + '" class="' + (active === i.k ? 'text-white' : 'text-silver-200 hover:text-white') + ' transition">' + i.l + '</a>'; }).join('');
     var mob = it.map(function (i) { return '<a href="' + i.h + '" class="py-2.5 px-3 rounded-lg hover:bg-white/5 ' + (active === i.k ? 'text-white' : '') + '">' + i.l + '</a>'; }).join('');
     return '<header class="sticky top-0 z-50 bg-navy-950/80 backdrop-blur border-b border-white/10"><div class="max-w-7xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between gap-3"><a href="index.html" class="flex items-center gap-2.5 shrink-0">' + LOGO + '<span class="leading-tight"><span class="block font-display font-extrabold text-[15px] text-chrome">' + esc(CONFIG.brand) + '</span><span class="block text-[10px] text-silver-400 tracking-wide">GUIA DE COMPRAS DE BARRETOS</span></span></a><nav class="hidden md:flex items-center gap-7 text-sm font-medium">' + nav + '</nav><div class="flex items-center gap-2"><a href="cadastro.html" class="hidden sm:inline-flex btn-shine bg-peao-500 hover:bg-peao-600 text-white text-sm font-semibold px-4 py-2.5 rounded-xl shadow-redglow transition">Cadastrar empresa</a><button id="menuBtn" class="md:hidden w-10 h-10 grid place-items-center rounded-xl glass text-white" aria-label="Menu"><svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button></div></div><div id="mobileMenu" class="hidden md:hidden border-t border-white/10 bg-navy-950/95"><div class="px-4 py-3 flex flex-col gap-1 text-silver-200">' + mob + '<a href="cadastro.html" class="mt-1 text-center bg-peao-500 text-white font-semibold py-3 rounded-xl">Cadastrar empresa</a></div></div></header>';
@@ -381,6 +381,8 @@
         delete fd.logo; delete fd.capa; delete fd.galeria;
         fd.cidade = fd.cidade || 'Barretos';
       var dias = []; [0,1,2,3,4,5,6].forEach(function (dd) { var cb = form.querySelector('[name=dia_' + dd + ']'); if (cb && cb.checked) dias.push(dd); }); fd.horario_dias = dias.length ? dias.join(',') : '';
+      delete fd.autorizacao_cadastrar;
+      [0,1,2,3,4,5,6].forEach(function (dd) { delete fd['dia_' + dd]; });
       if (LojistaAuth.uid()) { fd.owner_id = LojistaAuth.uid(); }
         return Stores.create(fd).then(function (created) {
           if (!created) throw new Error('insert');
@@ -447,8 +449,8 @@
     if (!AUTH.tok() && !LojistaAuth.tok()) { location.href = 'login.html'; return; }
     var _isLojista = !AUTH.tok() && !!LojistaAuth.tok();
     root.innerHTML = '<p class="text-center text-silver-500 py-10">Carregando painel…</p>';
-    Promise.all([aGet('stores?select=*&order=criado_em.desc'), aGet('offers?select=id,status'), aGet('metrics_events?select=tipo'), aGet('reviews?select=*&order=criado_em.desc'), aGet('drivers?select=*&order=criado_em.desc')]).then(function (r) {
-      renderAdmin(root, r[0], r[1], r[2], r[3], r[4]);
+    Promise.all([aGet('stores?select=*&order=criado_em.desc'), aGet('offers?select=id,status'), aGet('metrics_events?select=tipo'), aGet('reviews?select=*&order=criado_em.desc'), aGet('drivers?select=*&order=criado_em.desc'), aGet('listings?select=*&order=criado_em.desc')]).then(function (r) {
+      renderAdmin(root, r[0], r[1], r[2], r[3], r[4], r[5]);
     });
   }
   function statCard(icon, n, label) { return '<div class="bg-white rounded-2xl ring-silver shadow-soft p-5 text-center"><div class="text-2xl">' + icon + '</div><div class="font-display text-2xl font-extrabold mt-1">' + n + '</div><div class="text-xs text-silver-500">' + label + '</div></div>'; }
@@ -467,15 +469,17 @@
     var planoSel = '<select data-dplano-id="' + esc(d.id) + '" class="text-xs bg-silver-50 ring-silver rounded-lg px-2 py-1"><option value="gratis"' + (d.plano === 'gratis' ? ' selected' : '') + '>Grátis</option><option value="destaque"' + (d.plano === 'destaque' ? ' selected' : '') + '>Destaque</option><option value="pro"' + (d.plano === 'pro' ? ' selected' : '') + '>Pro</option></select>';
     return '<div class="bg-white rounded-2xl ring-silver shadow-soft p-4 flex items-center gap-3"><div class="shrink-0">' + foto + '</div><div class="flex-1 min-w-0"><a href="motorista.html?id=' + encodeURIComponent(d.id) + '" class="font-display font-bold truncate block hover:underline">' + esc(d.nome) + '</a><p class="text-xs text-silver-500">' + esc(d.tipo_veiculo || '') + (d.disponibilidade ? ' · ' + esc(d.disponibilidade) : '') + ' · <span class="' + sc + ' font-semibold">' + esc(d.status) + '</span>' + (d.disponivel_agora ? ' · 🟢' : '') + '</p></div><div class="flex items-center gap-2 shrink-0 flex-wrap justify-end">' + (d.status !== 'ativo' ? '<button data-dap="' + esc(d.id) + '" class="text-xs font-bold text-white bg-emerald-600 px-3 py-1.5 rounded-lg">Aprovar</button>' : '') + '<button data-ddis="' + esc(d.id) + '" data-st="' + (d.disponivel_agora ? 0 : 1) + '" class="text-xs font-semibold text-navy-700 hover:underline">' + (d.disponivel_agora ? 'Offline' : 'Disponível') + '</button>' + planoSel + '<button data-ddest="' + esc(d.id) + '" data-st="' + (d.destaque ? 0 : 1) + '" class="text-xs font-semibold text-slate-600 hover:underline">' + (d.destaque ? 'Tirar destaque' : 'Destacar') + '</button></div></div>';
   }
-  function renderAdmin(root, stores, offers, met, reviews, drivers) {
+  function renderAdmin(root, stores, offers, met, reviews, drivers, listings) {
     var pend = stores.filter(function (s) { return s.status === 'pendente'; });
-    var stats = '<div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">' + statCard('🏢', stores.length, 'Empresas') + statCard('⏳', pend.length, 'Pendentes') + statCard('✅', countBy(stores, 'status', 'ativo'), 'Ativas') + statCard('🔥', countBy(offers, 'status', 'ativa'), 'Ofertas ativas') + statCard('👁️', countBy(met, 'tipo', 'view'), 'Visualizações') + statCard('💬', countBy(met, 'tipo', 'click_whatsapp'), 'Cliques WhatsApp') + statCard('📍', countBy(met, 'tipo', 'click_mapa'), 'Cliques mapa') + statCard('🚗', (drivers||[]).length, 'Motoristas') + statCard('🟢', countBy(drivers||[], 'disponivel_agora', true), 'Motoristas online') + '</div>';
+    var stats = '<div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">' + statCard('🏢', stores.length, 'Empresas') + statCard('⏳', pend.length, 'Pendentes') + statCard('✅', countBy(stores, 'status', 'ativo'), 'Ativas') + statCard('🔥', countBy(offers, 'status', 'ativa'), 'Ofertas ativas') + statCard('👁️', countBy(met, 'tipo', 'view'), 'Visualizações') + statCard('💬', countBy(met, 'tipo', 'click_whatsapp'), 'Cliques WhatsApp') + statCard('📍', countBy(met, 'tipo', 'click_mapa'), 'Cliques mapa') + statCard('🚗', (drivers||[]).length, 'Motoristas') + statCard('🟢', countBy(drivers||[], 'disponivel_agora', true), 'Motoristas online') + statCard('📋', (listings||[]).length, 'Anúncios') + '</div>';
     var pendHtml = pend.length ? '<h2 class="font-display text-xl font-extrabold mb-3">⏳ Aguardando aprovação</h2><div class="space-y-3 mb-8">' + pend.map(function (s) { return adminRow(s, true); }).join('') + '</div>' : '<div class="bg-white rounded-2xl ring-silver shadow-soft p-5 text-silver-500 text-sm mb-8">Nenhuma empresa pendente. 🎉</div>';
     var revPend = (reviews || []).filter(function (rv) { return rv.status === 'pendente'; });
     var revHtml = revPend.length ? '<h2 class="font-display text-xl font-extrabold mb-3 mt-8">⭐ Avaliações aguardando análise</h2><div class="space-y-3 mb-8">' + revPend.map(function (rv) { var st = (stores.filter(function (x) { return x.id === rv.store_id; })[0] || {}).nome || '—'; return '<div class="bg-white rounded-2xl ring-silver shadow-soft p-4 flex items-center gap-3"><div class="flex-1 min-w-0"><p class="text-sm"><b>' + esc(rv.nota) + '★</b> — ' + esc(st) + (rv.nome ? ' · ' + esc(rv.nome) : '') + '</p><p class="text-xs text-slate-500 truncate">' + esc(rv.comentario || 'Sem comentário') + '</p></div><button data-rev-ap="' + esc(rv.id) + '" class="text-xs font-bold text-white bg-emerald-600 px-3 py-1.5 rounded-lg">Aprovar</button><button data-rev-rj="' + esc(rv.id) + '" class="text-xs font-bold text-peao-600 bg-peao-500/10 px-3 py-1.5 rounded-lg">Rejeitar</button></div>'; }).join('') + '</div>' : '';
     var driHtml = (drivers && drivers.length) ? '<h2 class="font-display text-xl font-extrabold mb-3 mt-8">🚗 Motoristas</h2><div class="space-y-3 mb-8">' + drivers.map(driverAdminRow).join('') + '</div>' : '';
+    var lstPend = (listings || []).filter(function (l) { return l.status === 'pendente'; });
+    var lstHtml = lstPend.length ? '<h2 class="font-display text-xl font-extrabold mb-3 mt-8">📋 Anúncios aguardando aprovação</h2><div class="space-y-3 mb-8">' + lstPend.map(function (l) { return '<div class="bg-white rounded-2xl ring-silver shadow-soft p-4 flex items-center gap-3"><div class="flex-1 min-w-0"><a href="anuncio.html?id=' + encodeURIComponent(l.id) + '" class="font-display font-bold truncate block hover:underline">' + esc(catEmoji(l.categoria)) + ' ' + esc(l.titulo) + '</a><p class="text-xs text-silver-500">' + esc(catClassified(l.categoria)) + (l.preco ? ' · ' + esc(l.preco) : '') + (l.bairro ? ' · ' + esc(l.bairro) : '') + '</p></div><button data-lst-ap="' + esc(l.id) + '" class="text-xs font-bold text-white bg-emerald-600 px-3 py-1.5 rounded-lg">Aprovar</button><button data-lst-rj="' + esc(l.id) + '" class="text-xs font-bold text-peao-600 bg-peao-500/10 px-3 py-1.5 rounded-lg">Rejeitar</button></div>'; }).join('') + '</div>' : '';
     var allHtml = '<h2 class="font-display text-xl font-extrabold mb-3">Todas as empresas</h2><div class="space-y-3">' + stores.map(function (s) { return adminRow(s, false); }).join('') + '</div>';
-    root.innerHTML = '<div class="flex items-center justify-between mb-6"><h1 class="font-display text-2xl md:text-3xl font-extrabold">Painel administrativo</h1><button id="btnCsv" class="text-sm font-semibold text-navy-700 hover:underline">⬇ Exportar CSV</button><button id="btnLogout" class="text-sm font-semibold text-peao-600 hover:underline ml-4">Sair</button></div>' + stats + pendHtml + revHtml + driHtml + allHtml;
+    root.innerHTML = '<div class="flex items-center justify-between mb-6"><h1 class="font-display text-2xl md:text-3xl font-extrabold">Painel administrativo</h1><button id="btnCsv" class="text-sm font-semibold text-navy-700 hover:underline">⬇ Exportar CSV</button><button id="btnLogout" class="text-sm font-semibold text-peao-600 hover:underline ml-4">Sair</button></div>' + stats + pendHtml + revHtml + driHtml + lstHtml + allHtml;
     $('#btnLogout').addEventListener('click', AUTH.logout);
     var btnCsv = $('#btnCsv'); if (btnCsv) btnCsv.addEventListener('click', function () { exportCSV(stores); });
     root.querySelectorAll('[data-act]').forEach(function (btn) {
@@ -497,6 +501,8 @@
     root.querySelectorAll('[data-ddis]').forEach(function (b) { b.addEventListener('click', function () { aPatch('drivers', b.getAttribute('data-ddis'), { disponivel_agora: b.getAttribute('data-st') === '1' }).then(function () { pageAdmin(); }); }); });
     root.querySelectorAll('[data-ddest]').forEach(function (b) { b.addEventListener('click', function () { aPatch('drivers', b.getAttribute('data-ddest'), { destaque: b.getAttribute('data-st') === '1' }).then(function () { pageAdmin(); }); }); });
     root.querySelectorAll('select[data-dplano-id]').forEach(function (sel) { sel.addEventListener('change', function () { aPatch('drivers', sel.getAttribute('data-dplano-id'), { plano: sel.value }).then(function () {}); }); });
+    root.querySelectorAll('[data-lst-ap]').forEach(function (b) { b.addEventListener('click', function () { aPatch('listings', b.getAttribute('data-lst-ap'), { status: 'ativo' }).then(function () { pageAdmin(); }); }); });
+    root.querySelectorAll('[data-lst-rj]').forEach(function (b) { b.addEventListener('click', function () { aPatch('listings', b.getAttribute('data-lst-rj'), { status: 'rejeitado' }).then(function () { pageAdmin(); }); }); });
   }
 
   var LojistaAuth = {
@@ -833,12 +839,181 @@
     $('#accNo').addEventListener('click', function () { localStorage.setItem('ata_consent', 'no'); b.remove(); });
   }
 
+  /* ============================================================
+     CLASSIFICADOS (Imoveis, Empregos, Veiculos, ...) — Barretos
+     ============================================================ */
+  var CLASSIFIED_CATS = [
+    { id: 'imoveis', nome: 'Imóveis', emoji: '🏠', slug: 'imoveis' }, { id: 'empregos', nome: 'Empregos', emoji: '💼', slug: 'empregos' },
+    { id: 'veiculos', nome: 'Veículos', emoji: '🚗', slug: 'veiculos' }, { id: 'moveis-eletro', nome: 'Móveis e Eletro', emoji: '🛋️', slug: 'moveis-eletro' },
+    { id: 'eletronicos', nome: 'Eletrônicos', emoji: '📱', slug: 'eletronicos' }, { id: 'animais', nome: 'Animais e Pets', emoji: '🐾', slug: 'animais' },
+    { id: 'servicos', nome: 'Serviços', emoji: '🔧', slug: 'servicos' }, { id: 'eventos-peao', nome: 'Festa do Peão', emoji: '🤠', slug: 'eventos-peao' }
+  ];
+  function catClassified(id, cats) { var c = (cats || CLASSIFIED_CATS).filter(function (x) { return x.id === id; })[0]; return c ? (c.emoji + ' ' + c.nome) : '📋 Anúncio'; }
+  function catEmoji(id, cats) { var c = (cats || CLASSIFIED_CATS).filter(function (x) { return x.id === id; })[0]; return c ? (c.emoji || '📋') : '📋'; }
+
+  /* Campos dinâmicos por categoria (vão pra coluna 'atributos' em JSON) */
+  var LISTING_FIELDS = {
+    'imoveis': [
+      { k: 'subcategoria', label: 'Tipo de negócio', type: 'select', opts: [['alugar', 'Alugar'], ['vender', 'Vender'], ['temporada', 'Temporada / Peão']] },
+      { k: 'quartos', label: 'Quartos', ph: 'Ex.: 2' }, { k: 'banheiros', label: 'Banheiros', ph: 'Ex.: 1' },
+      { k: 'vagas', label: 'Vagas', ph: 'Ex.: 1' }, { k: 'area', label: 'Área (m²)', ph: 'Ex.: 60' }
+    ],
+    'empregos': [
+      { k: 'subcategoria', label: 'Contratação', type: 'select', opts: [['clt', 'CLT'], ['temporario', 'Temporário'], ['freelancer', 'Freelancer'], ['estagio', 'Estágio']] },
+      { k: 'salario', label: 'Salário', ph: 'Ex.: R$ 2.000 ou A combinar' },
+      { k: 'jornada', label: 'Jornada', ph: 'Ex.: Seg-Sex 8h-18h' }, { k: 'requisitos', label: 'Requisitos', ph: 'Ex.: Ensino médio completo' }
+    ],
+    'veiculos': [
+      { k: 'subcategoria', label: 'Tipo', type: 'select', opts: [['carros', 'Carro'], ['motos', 'Moto'], ['caminhoes', 'Caminhão'], ['outro', 'Outro']] },
+      { k: 'marca', label: 'Marca / Modelo', ph: 'Ex.: Honda CG 160' },
+      { k: 'ano', label: 'Ano', ph: 'Ex.: 2020' }, { k: 'km', label: 'KM', ph: 'Ex.: 25000' }
+    ],
+    'moveis-eletro': [{ k: 'estado', label: 'Estado', type: 'select', opts: [['novo', 'Novo'], ['usado', 'Usado'], ['semi', 'Semi-novo']] }],
+    'eletronicos': [{ k: 'estado', label: 'Estado', type: 'select', opts: [['novo', 'Novo'], ['usado', 'Usado'], ['semi', 'Semi-novo']] }],
+    'animais': [{ k: 'especie', label: 'Espécie', ph: 'Ex.: Cachorro' }],
+    'servicos': [{ k: 'tipo_servico', label: 'Tipo de serviço', ph: 'Ex.: Pedreiro' }],
+    'eventos-peao': [{ k: 'subcategoria', label: 'Tipo', type: 'select', opts: [['temporada', 'Aluguel temporada'], ['ingressos', 'Ingressos'], ['hospedagem', 'Hospedagem'], ['servico', 'Serviço']] }]
+  };
+
+  var Classifieds = {
+    cats: function () { if (isRemote()) return apiGet('classified_categories?select=*&order=ordem.asc').then(function (a) { return a.length ? a : CLASSIFIED_CATS; }); return Promise.resolve(CLASSIFIED_CATS); },
+    list: function (cat) {
+      if (!isRemote()) return Promise.resolve([]);
+      var base = 'listings?select=*&status=eq.ativo', order = '&order=destaque.desc,criado_em.desc';
+      return apiGet(cat ? (base + '&categoria=eq.' + encodeURIComponent(cat) + order) : (base + order));
+    },
+    get: function (key) {
+      if (!key || !isRemote()) return Promise.resolve(null);
+      return apiGet('listings?select=*&or=(id.eq.' + encodeURIComponent(key) + ',slug.eq.' + encodeURIComponent(key) + ')&status=eq.ativo').then(function (a) { return a[0] || null; });
+    },
+    photos: function (lid) { if (isRemote()) return apiGet('listings_photos?select=id,url&listing_id=eq.' + encodeURIComponent(lid) + '&order=criado_em.asc'); return Promise.resolve([]); },
+    create: function (obj) { obj.id = uuid(); obj.status = 'pendente'; obj.criado_em = new Date().toISOString(); return apiPost('listings', obj).then(function (ok) { return ok ? obj : null; }); }
+  };
+
+  function listingCard(l, cats) {
+    var capa = l.foto_capa_url ? '<img src="' + esc(l.foto_capa_url) + '" alt="' + esc(l.titulo) + '" class="h-36 w-full object-cover" loading="lazy">' : '<div class="h-36 w-full grid place-items-center text-4xl bg-gradient-to-br from-navy-700 to-navy-500">' + esc(catEmoji(l.categoria, cats)) + '</div>';
+    return '<a href="anuncio.html?id=' + encodeURIComponent(l.id) + '" class="card-hover bg-white rounded-2xl overflow-hidden shadow-soft ring-silver block"><div class="relative">' + capa + (l.destaque ? '<span class="absolute top-2 right-2 text-[10px] font-bold text-white bg-peao-500 px-1.5 py-0.5 rounded">⭐ Destaque</span>' : '') + '</div><div class="p-4"><div class="text-[10px] font-semibold text-silver-500 uppercase tracking-wide">' + esc(catClassified(l.categoria, cats)) + '</div><h3 class="font-display font-bold mt-1 truncate">' + esc(l.titulo) + '</h3>' + (l.preco ? '<p class="text-peao-500 font-extrabold">' + esc(l.preco) + '</p>' : '') + (l.bairro ? '<p class="text-xs text-silver-500">📍 ' + esc(l.bairro) + (l.cidade ? ' · ' + esc(l.cidade) : '') + '</p>' : '') + '</div></a>';
+  }
+
+  function pageClassificadosHub() {
+    var grid = $('#classGrid'); if (!grid) return; grid.innerHTML = loadingHTML();
+    Promise.all([Classifieds.cats(), Classifieds.list()]).then(function (r) {
+      var cats = r[0], all = r[1];
+      var catHtml = '<div class="grid grid-cols-2 sm:grid-cols-4 gap-4">' + cats.map(function (c) {
+        return '<a href="' + (c.slug || c.id) + '.html" class="card-hover bg-white rounded-2xl p-5 text-center shadow-soft ring-silver"><div class="text-4xl">' + esc(c.emoji || '📋') + '</div><div class="mt-2 font-display font-bold">' + esc(c.nome) + '</div></a>';
+      }).join('') + '</div>';
+      var rec = all.length ? '<h2 class="font-display text-xl font-extrabold mb-3 mt-10">🔥 Anúncios recentes</h2><div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">' + all.slice(0, 8).map(function (l) { return listingCard(l, cats); }).join('') + '</div>' : '<div class="mt-8">' + emptyState('Seja o primeiro a anunciar', 'Cadastre seu imóvel, vaga de emprego ou produto grátis. Principalmente agora na época da Festa do Peão!', true) + '</div>';
+      grid.innerHTML = catHtml + rec;
+    });
+  }
+
+  function pageListings() {
+    var root = $('#listingsRoot'); if (!root) return; root.innerHTML = loadingHTML();
+    var cat = params().get('cat') || document.body.dataset.cat || '';
+    Promise.all([Classifieds.cats(), Classifieds.list(cat)]).then(function (r) {
+      var cats = r[0], list = r[1];
+      var c = cats.filter(function (x) { return x.id === cat; })[0];
+      var titleEl = $('#listingsTitle'); if (titleEl) titleEl.textContent = c ? (c.emoji + ' ' + c.nome) : 'Todos os anúncios';
+      var subEl = $('#listingsSubtitle'); if (subEl) subEl.textContent = (c ? c.nome : 'Classificados') + ' em Barretos/SP.';
+      var navCats = '<div class="flex flex-wrap gap-2 mb-6">' + cats.map(function (cc) { return '<a href="' + (cc.slug || cc.id) + '.html" class="px-3 py-1.5 rounded-full text-xs font-semibold ' + (cc.id === cat ? 'bg-peao-500 text-white' : 'bg-white ring-silver') + '">' + esc(cc.emoji || '') + ' ' + esc(cc.nome) + '</a>'; }).join('') + '</div>';
+      var body = list.length ? '<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">' + list.map(function (l) { return listingCard(l, cats); }).join('') + '</div>' : emptyState('Nenhum anúncio aqui ainda', 'Seja o primeiro a anunciar em ' + esc(c ? c.nome : 'Barretos') + '. Cadastro grátis no lançamento!', true);
+      root.innerHTML = navCats + body;
+    });
+  }
+
+  function listingProfile(l, photos, cats) {
+    var wa = 'https://wa.me/' + (digits(l.whatsapp) || CONFIG.whatsapp) + '?text=' + encodeURIComponent('Olá! Vi seu anúncio "' + l.titulo + '" no Aqui Tem Achadinhos e tenho interesse.');
+    var capa = l.foto_capa_url ? '<div class="h-48 md:h-64 bg-cover bg-center" style="background-image:url(' + esc(l.foto_capa_url) + ')"></div>' : '<div class="h-48 md:h-64 grid place-items-center text-6xl navy-hero">' + esc(catEmoji(l.categoria, cats)) + '</div>';
+    var attrs = l.atributos || {};
+    var attrRows = Object.keys(attrs).filter(function (k) { return k !== 'subcategoria'; }).map(function (k) { return '<span class="text-xs bg-silver-50 ring-silver px-2 py-1 rounded"><b>' + esc(k) + ':</b> ' + esc(attrs[k]) + '</span>'; }).join('');
+    var gal = photos.length ? '<div class="mt-4 grid grid-cols-3 md:grid-cols-5 gap-3">' + photos.map(function (p) { return '<img src="' + esc(p.url) + '" class="w-full h-24 md:h-28 object-cover rounded-xl ring-silver" loading="lazy">'; }).join('') + '</div>' : '';
+    return '<div class="max-w-4xl mx-auto px-4 sm:px-6 py-6"><a href="javascript:history.back()" class="text-silver-500 text-sm hover:text-navy-700">← Voltar</a><div class="mt-3 bg-white rounded-3xl shadow-soft ring-silver overflow-hidden">' + capa + '<div class="p-6"><div class="flex items-center gap-2 flex-wrap"><span class="text-xs font-semibold text-peao-600 bg-peao-500/10 px-2 py-0.5 rounded">' + esc(catClassified(l.categoria, cats)) + '</span>' + (l.subcategoria ? '<span class="text-xs font-semibold text-navy-700 bg-silver-100 px-2 py-0.5 rounded">' + esc(l.subcategoria) + '</span>' : '') + (l.destaque ? '<span class="text-xs font-semibold text-peao-600 bg-peao-500/10 px-2 py-0.5 rounded">⭐ Destaque</span>' : '') + '</div><h1 class="font-display text-2xl md:text-3xl font-extrabold mt-2">' + esc(l.titulo) + '</h1>' + (l.preco ? '<p class="text-2xl font-extrabold text-peao-500 mt-1">' + esc(l.preco) + '</p>' : '') + (l.descricao ? '<p class="text-slate-700 mt-3 leading-relaxed whitespace-pre-line">' + esc(l.descricao) + '</p>' : '') + (attrRows ? '<div class="mt-4 flex flex-wrap gap-2">' + attrRows + '</div>' : '') + '<div class="mt-4 text-sm text-slate-700 space-y-0.5">' + (l.bairro || l.endereco ? '<p>📍 ' + esc([l.endereco, l.bairro, l.cidade || 'Barretos'].filter(Boolean).join(' — ')) + '</p>' : '') + (l.anunciante_nome ? '<p>👤 ' + esc(l.anunciante_nome) + '</p>' : '') + '</div><div class="mt-5"><a href="' + wa + '" target="_blank" rel="noopener noreferrer" class="btn-shine bg-[#25D366] text-white font-bold px-5 py-3 rounded-xl">💬 Tenho interesse (WhatsApp)</a></div></div></div>' + gal + '<div class="bg-silver-50 ring-silver rounded-xl p-4 mt-4 text-sm text-slate-600"><p class="font-semibold">📢 Quer aparecer no topo?</p><p class="mt-1">Impulsione este anúncio (R$ 19,90 / 7 dias ou R$ 49 na Temporada Peão) e seja visto primeiro. <a href="' + waLink('Quero impulsionar meu anúncio') + '" target="_blank" rel="noopener noreferrer" class="text-peao-600 font-semibold underline">Falar no WhatsApp</a></p></div><a href="' + waLink('Denúncia sobre o anúncio: ' + l.titulo) + '" target="_blank" rel="noopener noreferrer" class="block mt-4 text-center text-xs text-slate-400 hover:text-peao-600">🚩 Denunciar conteúdo incorreto</a></div>';
+  }
+
+  function pageAnuncio() {
+    var el = $('#anuncioRoot'); if (!el) return; el.innerHTML = loadingHTML();
+    var key = params().get('id') || params().get('slug');
+    Classifieds.get(key).then(function (l) {
+      if (!l) { el.innerHTML = emptyState('Anúncio não encontrado', 'Esse anúncio não está disponível ou foi removido.', false); return; }
+      Classifieds.photos(l.id).then(function (photos) {
+        el.innerHTML = listingProfile(l, photos, CLASSIFIED_CATS);
+        document.title = l.titulo + ' — Barretos · Aqui Tem Achadinhos';
+        setMeta('description', (l.descricao_curta || l.titulo) + ' — ' + catClassified(l.categoria) + ' em Barretos.');
+      });
+    });
+  }
+
+  function pageCadastroAnuncio() {
+    var form = $('#formAnuncio'); if (!form) return;
+    var catSel = form.querySelector('[name=categoria]');
+    var extra = $('#extraFields');
+    Classifieds.cats().then(function (cats) {
+      if (catSel) catSel.innerHTML = '<option value="">Selecione…</option>' + cats.map(function (c) { return '<option value="' + c.id + '">' + c.emoji + ' ' + esc(c.nome) + '</option>'; }).join('');
+    });
+    function renderExtra(cat) {
+      if (!extra) return;
+      var fields = LISTING_FIELDS[cat] || [];
+      extra.innerHTML = fields.map(function (f) {
+        if (f.type === 'select') return '<div><label class="block text-sm font-semibold mb-1.5">' + esc(f.label) + '</label><select data-attr="' + esc(f.k) + '" class="w-full px-4 py-3 rounded-xl bg-silver-50 ring-silver outline-none focus:ring-2 focus:ring-navy-500"><option value="">Selecione…</option>' + f.opts.map(function (o) { return '<option value="' + esc(o[0]) + '">' + esc(o[1]) + '</option>'; }).join('') + '</select></div>';
+        return '<div><label class="block text-sm font-semibold mb-1.5">' + esc(f.label) + '</label><input data-attr="' + esc(f.k) + '" type="text" placeholder="' + esc(f.ph || '') + '" class="w-full px-4 py-3 rounded-xl bg-silver-50 ring-silver outline-none focus:ring-2 focus:ring-navy-500"></div>';
+      }).join('');
+    }
+    if (catSel) catSel.addEventListener('change', function () { renderExtra(catSel.value); });
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var msg = '#msg';
+      if (!catSel.value) { showMsg(msg, '⚠️ Selecione uma categoria.', false); return; }
+      if (!form.querySelector('[name=titulo]').value.trim()) { showMsg(msg, '⚠️ Informe o título do anúncio.', false); return; }
+      if (!form.querySelector('[name=whatsapp]').value.trim()) { showMsg(msg, '⚠️ Informe seu WhatsApp para contato.', false); return; }
+      if (!form.querySelector('[name=aceite]').checked) { showMsg(msg, '⚠️ É necessário aceitar os termos para continuar.', false); return; }
+      var btn = form.querySelector('[type=submit]'); var orig = btn.textContent; btn.disabled = true; btn.textContent = 'Enviando…';
+      var o = {
+        categoria: catSel.value,
+        titulo: form.querySelector('[name=titulo]').value.trim(),
+        descricao: form.querySelector('[name=descricao]').value.trim(),
+        preco: form.querySelector('[name=preco]').value.trim(),
+        anunciante_nome: form.querySelector('[name=anunciante_nome]').value.trim(),
+        whatsapp: form.querySelector('[name=whatsapp]').value.trim(),
+        email: form.querySelector('[name=email]').value.trim(),
+        cidade: form.querySelector('[name=cidade]').value.trim() || 'Barretos',
+        bairro: form.querySelector('[name=bairro]').value.trim(),
+        endereco: form.querySelector('[name=endereco]').value.trim()
+      };
+      var atributos = {};
+      extra.querySelectorAll('[data-attr]').forEach(function (el2) { var v = (el2.value || '').trim(); if (v) { if (el2.getAttribute('data-attr') === 'subcategoria') o.subcategoria = v; else atributos[el2.getAttribute('data-attr')] = v; } });
+      if (Object.keys(atributos).length) o.atributos = atributos;
+      var capaFile = form.querySelector('[name=capa]').files[0];
+      var galFiles = Array.prototype.slice.call(form.querySelector('[name=galeria]').files).slice(0, 6);
+      function validImg(f) { return f && f.type.indexOf('image/') === 0 && f.size <= 3 * 1024 * 1024; }
+      if (capaFile && !validImg(capaFile)) { showMsg(msg, '❌ Capa: use imagem até 3MB.', false); btn.disabled = false; btn.textContent = orig; return; }
+      for (var i = 0; i < galFiles.length; i++) { if (!validImg(galFiles[i])) { showMsg(msg, '❌ Uma foto da galeria excede 3MB.', false); btn.disabled = false; btn.textContent = orig; return; } }
+      var tasks = [];
+      if (capaFile) tasks.push(uploadPhoto(capaFile).then(function (u) { o.foto_capa_url = u; }));
+      var galUrls = []; galFiles.forEach(function (f) { tasks.push(uploadPhoto(f).then(function (u) { galUrls.push(u); })); });
+      Promise.all(tasks).then(function () {
+        return Classifieds.create(o).then(function (created) {
+          if (!created) throw new Error('insert');
+          var pTasks = galUrls.map(function (u) { return apiPost('listings_photos', { listing_id: created.id, url: u }); });
+          return Promise.all(pTasks).then(function () { return created; });
+        });
+      }).then(function () {
+        Metrics.log('anuncio_cadastrado');
+        form.classList.add('hidden');
+        var ok = $('#anuncioOk'); if (ok) ok.classList.remove('hidden');
+        window.scrollTo(0, 0);
+      }).catch(function (err) {
+        showMsg(msg, '❌ Não foi possível enviar. Verifique sua internet e tente novamente. (' + (err && err.message ? err.message : 'erro') + ')', false);
+        btn.disabled = false; btn.textContent = orig;
+      });
+    });
+  }
+
   /* BOOT */
   document.addEventListener('DOMContentLoaded', function () {
     injectLayout(); initCountdown(); registerSW(); initAnalytics(); wireMP();
     document.addEventListener('click', function (e) { var b = e.target.closest('[data-fav]'); if (b) { e.preventDefault(); e.stopPropagation(); var added = toggleFav(b.getAttribute('data-fav')); b.innerHTML = added ? '❤️' : '🤍'; } });
     var p = document.body.dataset.page;
-    var ROUTES = { home: pageHome, categoria: pageCategoria, loja: pageLoja, ofertas: pageOfertas, busca: pageBusca, cadastro: pageCadastro, turista: pageTurista, login: pageLogin, admin: pageAdmin, painel: pagePainel, mapa: pageMapa, motoristas: pageMotoristas, motorista: pageMotorista, cadmotorista: pageCadastroMotorista, obrigado: pageObrigado, favoritos: pageFavoritos };
+    var ROUTES = { home: pageHome, categoria: pageCategoria, loja: pageLoja, ofertas: pageOfertas, busca: pageBusca, cadastro: pageCadastro, turista: pageTurista, login: pageLogin, admin: pageAdmin, painel: pagePainel, mapa: pageMapa, motoristas: pageMotoristas, motorista: pageMotorista, cadmotorista: pageCadastroMotorista, obrigado: pageObrigado, favoritos: pageFavoritos, classificados: pageClassificadosHub, listings: pageListings, anuncio: pageAnuncio, cadanuncio: pageCadastroAnuncio };
     if (ROUTES[p]) ROUTES[p]();
   });
 })();
