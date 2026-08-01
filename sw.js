@@ -1,11 +1,14 @@
 // Service Worker — Aqui Tem Achadinhos (v4 — fix Safari redirects)
-const CACHE = 'achadinhos-v4';
+const CACHE = 'achadinhos-v5';
 const ASSETS = [
   './', './index.html', './cadastro.html', './cadastro-motorista.html', './categoria.html',
   './loja.html', './ofertas.html', './busca.html', './turista.html', './anuncie.html',
   './motoristas.html', './motorista.html', './painel.html', './admin.html', './login.html',
   './sobre.html', './contato.html', './faq.html', './politica-de-privacidade.html',
   './termos.html', './politica-de-ofertas.html', './obrigado.html', './favoritos.html', './404.html',
+  './mapa.html', './classificados.html', './imoveis.html', './empregos.html', './veiculos.html',
+  './moveis-eletro.html', './eletronicos.html', './animais.html', './servicos.html', './eventos-peao.html',
+  './anuncio.html', './cadastro-anuncio.html',
   './assets/styles.css', './assets/tailwind.css', './assets/app.js',
   './assets/vendor/leaflet.js', './assets/vendor/leaflet.markercluster.js',
   './assets/vendor/leaflet.css', './assets/vendor/MarkerCluster.css', './assets/vendor/MarkerCluster.Default.css',

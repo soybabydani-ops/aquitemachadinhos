@@ -3,22 +3,31 @@
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>Página não encontrada — Aqui Tem Achadinhos</title>
+<meta name="description" content="A página não foi encontrada. Volte ao início do guia de Barretos ou busque empresas, imóveis e serviços.">
 <meta name="robots" content="noindex">
 <link rel="manifest" href="manifest.webmanifest"><meta name="theme-color" content="#0B1E3F">
+<meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="apple-mobile-web-app-title" content="Achadinhos">
 <link rel="icon" type="image/svg+xml" href="logo.svg"><link rel="apple-touch-icon" href="icon-192.png">
 <link rel="stylesheet" href="assets/tailwind.css"><link rel="stylesheet" href="assets/styles.css">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 </head>
-<body data-page="404" class="bg-silver-100 text-navy-900 min-h-screen grid place-items-center">
-<div class="text-center px-4">
-<div class="text-7xl mb-4">🤷</div>
-<h1 class="font-display text-3xl md:text-4xl font-extrabold">Ops! Página não encontrada.</h1>
-<p class="text-slate-500 mt-3">A página que você procura pode ter sido movida ou não existe mais.</p>
-<div class="mt-6 flex flex-col sm:flex-row gap-3 justify-center">
-<a href="index.html" class="btn-shine bg-peao-500 hover:bg-peao-600 text-white font-bold px-6 py-3 rounded-xl">Voltar ao início</a>
-<a href="busca.html" class="btn-shine bg-navy-800 hover:bg-navy-700 text-white font-bold px-6 py-3 rounded-xl">🔍 Buscar lojas</a>
-</div>
-</div>
+<body data-page="404" class="bg-silver-100 text-navy-900">
+<div id="site-header"></div>
+<section class="min-h-[60vh] grid place-items-center px-4 py-16">
+  <div class="text-center max-w-lg">
+    <div class="text-7xl mb-4">🤷</div>
+    <h1 class="font-display text-3xl md:text-4xl font-extrabold">Ops! Página não encontrada.</h1>
+    <p class="text-slate-500 mt-3">A página que você procura pode ter sido movida ou não existe mais. Mas calma — tem muito pra explorar em Barretos!</p>
+    <div class="mt-6 flex flex-col sm:flex-row gap-3 justify-center">
+      <a href="index.html" class="btn-shine bg-peao-500 hover:bg-peao-600 text-white font-bold px-6 py-3 rounded-xl">Voltar ao início</a>
+      <a href="classificados.html" class="btn-shine bg-navy-800 hover:bg-navy-700 text-white font-bold px-6 py-3 rounded-xl">📋 Ver classificados</a>
+      <a href="busca.html" class="btn-shine glass-light text-navy-800 font-bold px-6 py-3 rounded-xl">🔍 Buscar</a>
+    </div>
+  </div>
+</section>
+<div id="site-footer"></div>
 <script src="assets/app.js"></script>
 </body>
 </html>
