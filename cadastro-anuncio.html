@@ -42,6 +42,11 @@
       <div><label class="block text-sm font-semibold mb-1.5">Bairro</label><input name="bairro" type="text" placeholder="Ex.: Centro" class="w-full px-4 py-3 rounded-xl bg-silver-50 ring-silver outline-none focus:ring-2 focus:ring-navy-500"></div>
       <div><label class="block text-sm font-semibold mb-1.5">Endereço</label><input name="endereco" type="text" placeholder="Rua, nº" class="w-full px-4 py-3 rounded-xl bg-silver-50 ring-silver outline-none focus:ring-2 focus:ring-navy-500"></div>
     </div>
+    <div>
+      <label class="block text-sm font-semibold mb-1.5">📍 Localização no mapa (opcional, mas recomendado para imóveis)</label>
+      <p class="text-xs text-slate-500 mb-2">Clique no mapa para marcar o ponto exato. Ajuda o interessado a encontrar.</p>
+      <div id="pickMap" style="height:280px;border-radius:0.75rem;overflow:hidden" class="ring-silver"></div>
+    </div>
     <div class="grid sm:grid-cols-2 gap-5">
       <div><label class="block text-sm font-semibold mb-1.5">Foto de capa</label><input name="capa" type="file" accept="image/*" class="text-sm w-full"></div>
       <div><label class="block text-sm font-semibold mb-1.5">Mais fotos (até 6)</label><input name="galeria" type="file" accept="image/*" multiple class="text-sm w-full"></div>
