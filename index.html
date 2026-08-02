@@ -96,6 +96,22 @@
   .orb-2{width:420px;height:420px;background:rgba(230,57,70,.14);bottom:-140px;right:-100px;animation-delay:-7s}
   @keyframes orb{from{transform:translate(0,0) scale(1)}to{transform:translate(40px,30px) scale(1.15)}}
 
+
+  /* ===== SEARCH ===== */
+  .search{max-width:640px;margin:34px auto 0;display:flex;gap:10px;padding:8px 8px 8px 22px;
+    background:var(--glass);border:1px solid rgba(255,255,255,.16);border-radius:999px;
+    backdrop-filter:blur(14px);box-shadow:inset 0 1px 0 rgba(255,255,255,.12), 0 16px 44px rgba(0,0,0,.4);
+    transition:.3s}
+  .search:focus-within{border-color:rgba(240,194,75,.55);box-shadow:0 0 0 4px rgba(240,194,75,.14), 0 16px 44px rgba(0,0,0,.4)}
+  .search input{flex:1;min-width:0;background:transparent;border:none;outline:none;color:#fff;
+    font-size:15.5px;font-family:inherit;padding:10px 0}
+  .search input::placeholder{color:var(--silver-2)}
+  .search button{flex-shrink:0;border:none;cursor:pointer;display:inline-flex;align-items:center;gap:8px;
+    font-size:14.5px;font-weight:700;color:#0B1E3F;background:linear-gradient(135deg,var(--gold-2),var(--gold) 50%,var(--gold-3));
+    padding:12px 22px;border-radius:999px;box-shadow:0 6px 20px rgba(240,194,75,.35);transition:.25s}
+  .search button:hover{transform:translateY(-2px);box-shadow:0 10px 28px rgba(240,194,75,.5)}
+  @media(max-width:560px){.search{flex-wrap:wrap;padding:10px;border-radius:24px}.search button{width:100%;justify-content:center}}
+
   /* ===== HERO ===== */
   .hero{position:relative;max-width:1200px;margin:0 auto;padding:64px 22px 40px;text-align:center}
   .badge{display:inline-flex;align-items:center;gap:8px;font-size:12.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;
@@ -265,6 +281,11 @@
   <span class="badge reveal"><span class="dot"></span> Guia premium de Barretos · SP</span>
   <h1 class="reveal" style="transition-delay:.08s">Onde Barretos<br><span class="grad">encontra.</span></h1>
   <p class="sub reveal" style="transition-delay:.16s">Lojas, ofertas e serviços reais da cidade — com contato direto no WhatsApp. E a experiência completa da maior Festa do Peão do Brasil.</p>
+  <form class="search reveal" style="transition-delay:.2s" action="busca.html" method="get" role="search">
+    <input type="text" name="q" placeholder="Buscar loja, produto, serviço ou oferta em Barretos..." aria-label="Buscar">
+    <button type="submit">🔍 Buscar</button>
+  </form>
+
   <div class="hero-ctas reveal" style="transition-delay:.24s">
     <a class="btn btn-primary" href="categoria.html">✨ Explorar o guia</a>
     <a class="btn btn-ghost" href="guia-peao.html">🤠 Ver a Festa do Peão</a>
