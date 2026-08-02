@@ -520,7 +520,7 @@
       return '<div class="bg-white rounded-2xl ring-silver shadow-soft p-4 flex items-center gap-3"><div class="flex-1 min-w-0"><a href="anuncio.html?id=' + encodeURIComponent(l.id) + '" class="font-display font-bold truncate block hover:underline">' + esc(catEmoji(l.categoria)) + ' ' + esc(l.titulo) + '</a><p class="text-xs text-silver-500">' + esc(catClassified(l.categoria)) + (l.preco ? ' · ' + esc(l.preco) : '') + (l.bairro ? ' · ' + esc(l.bairro) : '') + ' · <span class="font-semibold">' + esc(l.status) + '</span>' + (l.destaque ? ' · ⭐' : '') + '</p></div><div class="flex items-center gap-2 shrink-0 flex-wrap justify-end">' + btns + '</div></div>';
     }).join('') + '</div>' : '';
     var allHtml = '<h2 class="font-display text-xl font-extrabold mb-3">Todas as empresas</h2><div class="space-y-3">' + stores.map(function (s) { return adminRow(s, false); }).join('') + '</div>';
-    root.innerHTML = '<div class="flex items-center justify-between mb-6"><h1 class="font-display text-2xl md:text-3xl font-extrabold">Painel administrativo</h1><button id="btnCsv" class="text-sm font-semibold text-navy-700 hover:underline">⬇ Exportar CSV</button><button id="btnLogout" class="text-sm font-semibold text-peao-600 hover:underline ml-4">Sair</button></div><div class="mb-6"><button id="btnAddStore" class="btn-shine bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-4 py-2.5 rounded-xl text-sm">+ Cadastrar empresa (rápido · discreto)</button><div id="addStoreForm" class="hidden mt-4 bg-white rounded-2xl ring-silver shadow-soft p-5 space-y-3"><h3 class="font-display font-bold">Cadastro rápido · admin</h3><p class="text-xs text-slate-500">Só você vê isso. A empresa entra ATIVA, com o plano que você escolher (Pro = tudo liberado, sem cobrança).</p><input id="as_nome" placeholder="Nome da empresa *" class="w-full px-3 py-2 rounded-lg bg-silver-50 ring-silver"><select id="as_cat" class="w-full px-3 py-2 rounded-lg bg-silver-50 ring-silver"></select><input id="as_end" placeholder="Endereço completo (rua, número)" class="w-full px-3 py-2 rounded-lg bg-silver-50 ring-silver"><div class="grid grid-cols-2 gap-2"><input id="as_wa" placeholder="WhatsApp" class="px-3 py-2 rounded-lg bg-silver-50 ring-silver"><input id="as_tel" placeholder="Telefone" class="px-3 py-2 rounded-lg bg-silver-50 ring-silver"></div><input id="as_bairro" placeholder="Bairro" class="w-full px-3 py-2 rounded-lg bg-silver-50 ring-silver"><input id="as_desc" placeholder="Descrição curta" class="w-full px-3 py-2 rounded-lg bg-silver-50 ring-silver"><div class="grid grid-cols-2 gap-2 items-center"><select id="as_plano" class="px-3 py-2 rounded-lg bg-silver-50 ring-silver"><option value="pro">Pro (tudo liberado)</option><option value="destaque">Destaque</option><option value="gratis">Grátis</option></select><label class="flex items-center gap-2 text-sm"><input id="as_destaque" type="checkbox" checked class="w-4 h-4 accent-peao-500"> Destacar (topo + selo)</label></div><button id="as_submit" class="btn-shine bg-peao-500 hover:bg-peao-600 text-white font-bold px-5 py-2.5 rounded-xl w-full">Cadastrar e publicar agora</button><span id="as_msg" class="text-sm"></span></div></div>' + stats + pendHtml + revHtml + driHtml + lstHtml + allHtml;
+    root.innerHTML = '<div class="flex items-center justify-between mb-6"><h1 class="font-display text-2xl md:text-3xl font-extrabold">Painel administrativo</h1><button id="btnCsv" class="text-sm font-semibold text-navy-700 hover:underline">⬇ Exportar CSV</button><button id="btnLogout" class="text-sm font-semibold text-peao-600 hover:underline ml-4">Sair</button></div><div class="mb-6"><button id="btnAddStore" class="btn-shine bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-4 py-2.5 rounded-xl text-sm">+ Cadastrar empresa (rápido · discreto)</button><div id="addStoreForm" class="hidden mt-4 bg-white rounded-2xl ring-silver shadow-soft p-5 space-y-3"><h3 class="font-display font-bold">Cadastro rápido · admin</h3><p class="text-xs text-slate-500">Só você vê isso. A empresa entra ATIVA, com o plano que você escolher (Pro = tudo liberado, sem cobrança).</p><input id="as_nome" placeholder="Nome da empresa *" class="w-full px-3 py-2 rounded-lg bg-silver-50 ring-silver"><select id="as_cat" class="w-full px-3 py-2 rounded-lg bg-silver-50 ring-silver"></select><input id="as_cep" placeholder="CEP (preenche automático)" class="w-full px-3 py-2 rounded-lg bg-silver-50 ring-silver"><input id="as_end" placeholder="Rua, Av., número" class="w-full px-3 py-2 rounded-lg bg-silver-50 ring-silver"><div class="grid grid-cols-2 gap-2"><input id="as_wa" placeholder="WhatsApp" class="px-3 py-2 rounded-lg bg-silver-50 ring-silver"><input id="as_tel" placeholder="Telefone" class="px-3 py-2 rounded-lg bg-silver-50 ring-silver"></div><input id="as_bairro" placeholder="Bairro" class="w-full px-3 py-2 rounded-lg bg-silver-50 ring-silver"><input id="as_desc" placeholder="Descrição curta" class="w-full px-3 py-2 rounded-lg bg-silver-50 ring-silver"><div class="grid grid-cols-2 gap-2 items-center"><select id="as_plano" class="px-3 py-2 rounded-lg bg-silver-50 ring-silver"><option value="pro">Pro (tudo liberado)</option><option value="destaque">Destaque</option><option value="gratis">Grátis</option></select><label class="flex items-center gap-2 text-sm"><input id="as_destaque" type="checkbox" checked class="w-4 h-4 accent-peao-500"> Destacar (topo + selo)</label></div><button id="as_submit" class="btn-shine bg-peao-500 hover:bg-peao-600 text-white font-bold px-5 py-2.5 rounded-xl w-full">Cadastrar e publicar agora</button><span id="as_msg" class="text-sm"></span></div></div>' + stats + pendHtml + revHtml + driHtml + lstHtml + allHtml;
     $('#btnLogout').addEventListener('click', AUTH.logout);
     var btnAdd = $('#btnAddStore'); if (btnAdd) btnAdd.addEventListener('click', function () { var f = $('#addStoreForm'); if (f) f.classList.toggle('hidden'); var sel = $('#as_cat'); if (sel && !sel.getAttribute('data-f')) { sel.setAttribute('data-f', '1'); sel.innerHTML = '<option value="">Categoria…</option>' + CATS.map(function (c) { return '<option value="' + c.id + '">' + c.emoji + ' ' + c.nome + '</option>'; }).join(''); } });
     var asSub = $('#as_submit'); if (asSub) asSub.addEventListener('click', function () { var msg = $('#as_msg'); var nome = $('#as_nome').value.trim(); var cat = $('#as_cat').value; if (!nome || !cat) { msg.className = 'text-sm text-peao-600'; msg.textContent = 'Preencha nome e categoria.'; return; } asSub.disabled = true; asSub.textContent = 'Cadastrando…'; aPost('stores', { nome: nome, categoria: cat, endereco: $('#as_end').value.trim(), whatsapp: $('#as_wa').value.trim(), telefone: $('#as_tel').value.trim(), bairro: $('#as_bairro').value.trim(), descricao_curta: $('#as_desc').value.trim(), cidade: 'Barretos', status: 'pendente', aceite_termos: true, autorizacao_contato: true }).then(function (arr) { var cr = arr && arr[0]; if (!cr) { msg.className = 'text-sm text-peao-600'; msg.textContent = 'Erro ao cadastrar.'; asSub.disabled = false; asSub.textContent = 'Cadastrar e publicar agora'; return; } aPatch('stores', cr.id, { status: 'ativo', plano: $('#as_plano').value, destaque: $('#as_destaque').checked }).then(function () { msg.className = 'text-sm text-emerald-600'; msg.textContent = '✓ Cadastrada e publicada!'; pageAdmin(); }); }); });
@@ -1090,9 +1090,83 @@
       box.innerHTML = total > 0 ? '<div class="max-w-5xl mx-auto px-4 py-8"><div class="grid ' + cols + ' gap-5 text-center">' + grid + '</div><p class="text-center text-xs text-silver-500 mt-5">🤠 Números reais, ao vivo · Barretos/SP</p></div>' : '<div class="max-w-5xl mx-auto px-4 py-8 text-center text-silver-400 text-sm">Conectando Barretos — <a href="cadastro.html" class="text-peao-400 font-semibold underline">cadastre grátis</a></div>';
     });
   }
+
+  /* BUSCADOR DE CEP (ViaCEP) — auto-preenche endereço */
+  document.addEventListener('blur', function (e) {
+    var el = e.target;
+    if (el.name !== 'cep' && el.id !== 'cep' && el.id !== 'as_cep') return;
+    var cep = (el.value || '').replace(/\D/g, '');
+    if (cep.length !== 8) return;
+    el.value = cep.slice(0,5) + '-' + cep.slice(5);
+    fetch('https://viacep.com.br/ws/' + cep + '/json/').then(function (r) { return r.json(); }).then(function (d) {
+      if (d.erro) return;
+      var ctx = el.closest('form') || el.closest('#addStoreForm') || document;
+      function setVal(sel, val) { var e2 = ctx.querySelector(sel); if (e2 && val) e2.value = val; }
+      if (el.id === 'as_cep') {
+        setVal('#as_end', d.logradouro); setVal('#as_bairro', d.bairro);
+      } else {
+        setVal('[name=endereco]', d.logradouro); setVal('[name=bairro]', d.bairro);
+        var cid = ctx.querySelector('[name=cidade]'); if (cid && d.localidade) cid.value = d.localidade;
+      }
+    }).catch(function () {});
+  }, true);
+
+  /* ===== INTELIGÊNCIA: Máscaras + Busca com sugestões ===== */
+  /* Máscara de telefone (WhatsApp/Telefone) — formata enquanto digita */
+  document.addEventListener('input', function (e) {
+    var el = e.target;
+    var isPhone = el.name === 'whatsapp' || el.name === 'telefone' || el.id === 'as_wa' || el.id === 'as_tel';
+    var isCep = el.name === 'cep' || el.id === 'cep' || el.id === 'as_cep';
+    if (!isPhone && !isCep) return;
+    if (isPhone) {
+      var v = el.value.replace(/\D/g, '').slice(0, 11);
+      if (v.length > 6) el.value = '(' + v.slice(0,2) + ') ' + v.slice(2,7) + '-' + v.slice(7);
+      else if (v.length > 2) el.value = '(' + v.slice(0,2) + ') ' + v.slice(2);
+      else if (v.length > 0) el.value = '(' + v;
+      el.style.borderColor = v.length >= 10 ? '#34D399' : (v.length > 0 ? '#F25563' : '');
+    }
+    if (isCep) {
+      var c = el.value.replace(/\D/g, '').slice(0, 8);
+      if (c.length > 5) el.value = c.slice(0,5) + '-' + c.slice(5);
+      else el.value = c;
+    }
+  }, true);
+
+  /* Busca com sugestões (autocomplete tipo Google) */
+  function wireSearchAutocomplete() {
+    document.querySelectorAll('input[name=q]').forEach(function (inp) {
+      if (inp.getAttribute('data-ac')) return; inp.setAttribute('data-ac', '1');
+      var wrap = inp.closest('form') || inp.parentElement;
+      if (wrap) wrap.style.position = 'relative';
+      var box = document.createElement('div');
+      box.className = 'absolute left-0 right-0 top-full mt-1 bg-navy-900 rounded-xl shadow-glow ring-silver z-50 max-h-80 overflow-auto hidden text-sm';
+      if (wrap) wrap.appendChild(box);
+      var timer = null;
+      inp.addEventListener('input', function () {
+        clearTimeout(timer);
+        var q = inp.value.trim();
+        if (q.length < 2) { box.classList.add('hidden'); return; }
+        timer = setTimeout(function () {
+          Promise.all([Stores.search(q), Classifieds.search(q)]).then(function (r) {
+            var stores = r[0].slice(0, 5), listings = r[1].slice(0, 3), html = '';
+            if (stores.length) html += '<div class="px-3 py-1.5 text-[10px] font-bold uppercase text-silver-500 tracking-wide border-b border-white/10">Lojas e empresas</div>';
+            stores.forEach(function (s) { html += '<a href="loja.html?id=' + encodeURIComponent(s.id) + '" class="block px-3 py-2 text-silver-200 hover:bg-white/5">🏪 ' + esc(s.nome) + (s.bairro ? ' <span class="text-silver-500 text-xs">' + esc(s.bairro) + '</span>' : '') + '</a>'; });
+            if (listings.length) html += '<div class="px-3 py-1.5 text-[10px] font-bold uppercase text-silver-500 tracking-wide border-b border-white/10 border-t border-white/10 mt-1">Anúncios</div>';
+            listings.forEach(function (l) { html += '<a href="anuncio.html?id=' + encodeURIComponent(l.id) + '" class="block px-3 py-2 text-silver-200 hover:bg-white/5">' + esc(catEmoji(l.categoria)) + ' ' + esc(l.titulo) + (l.preco ? ' <span class="text-peao-400 text-xs">' + esc(l.preco) + '</span>' : '') + '</a>'; });
+            if (!html) html = '<div class="px-3 py-3 text-silver-400">Nada encontrado pra "' + esc(q) + '"</div>';
+            box.innerHTML = html;
+            box.classList.remove('hidden');
+          });
+        }, 300);
+      });
+      inp.addEventListener('blur', function () { setTimeout(function () { box.classList.add('hidden'); }, 200); });
+      inp.addEventListener('focus', function () { if (inp.value.trim().length >= 2) inp.dispatchEvent(new Event('input')); });
+    });
+  }
+
   /* BOOT */
   document.addEventListener('DOMContentLoaded', function () {
-    injectLayout(); renderSocialProof(); initCountdown(); Metrics.log('pageview'); registerSW(); initAnalytics(); wireMP();
+    injectLayout(); renderSocialProof(); initCountdown(); Metrics.log('pageview'); wireSearchAutocomplete(); registerSW(); initAnalytics(); wireMP();
     document.addEventListener('click', function (e) { var b = e.target.closest('[data-fav]'); if (b) { e.preventDefault(); e.stopPropagation(); var added = toggleFav(b.getAttribute('data-fav')); b.innerHTML = added ? '❤️' : '🤍'; } });
     var p = document.body.dataset.page;
     var ROUTES = { home: pageHome, categoria: pageCategoria, loja: pageLoja, ofertas: pageOfertas, busca: pageBusca, cadastro: pageCadastro, turista: pageTurista, login: pageLogin, admin: pageAdmin, painel: pagePainel, mapa: pageMapa, motoristas: pageMotoristas, motorista: pageMotorista, cadmotorista: pageCadastroMotorista, obrigado: pageObrigado, favoritos: pageFavoritos, classificados: pageClassificadosHub, listings: pageListings, anuncio: pageAnuncio, cadanuncio: pageCadastroAnuncio };
