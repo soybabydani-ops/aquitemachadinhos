@@ -133,11 +133,7 @@
 
   /* CARDS */
   function catName(id, cats) { var c = (cats || CATS).filter(function (x) { return x.id === id; })[0]; return c ? (c.emoji + ' ' + c.nome) : '🏪 Loja'; }
-  function catCard(c) { return '<a href="categoria.html?cat=' + c.id + '" class="card-hover bg-white rounded-2xl p-5 text-center shadow-soft ring-silver"><div class="text-4xl">' + (c.emoji || '🏪') + '</div><div class="mt-2 font-display font-bold">' + esc(c.nome) + '</div><div class="text-xs text-silver-500">' + esc(c.desc || '') + '</div></a>'; }
-  function storeCard(s, cats) {
-    var logo = s.logo_url ? '<img src="' + esc(s.logo_url) + '" alt="' + esc(s.nome) + '" class="w-16 h-16 rounded-2xl object-cover" loading="lazy">' : '<div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-navy-700 to-navy-500 grid place-items-center text-white text-xl font-extrabold">' + esc(initials(s.nome)) + '</div>';
-    return '<a href="loja.html?id=' + encodeURIComponent(s.id) + '" class="card-hover bg-white rounded-2xl p-5 shadow-soft ring-silver text-center relative"><button data-fav="' + encodeURIComponent(s.id) + '" class="absolute top-2 right-2 z-10 w-7 h-7 grid place-items-center text-base bg-white/70 rounded-full">' + (isFav(s.id) ? '❤️' : '🤍') + '</button><div class="mx-auto w-fit">' + logo + '</div><h3 class="font-display font-bold mt-3">' + esc(s.nome) + '</h3><p class="text-xs text-silver-500">' + esc(catName(s.categoria, cats)) + (s.bairro ? ' · ' + esc(s.bairro) : '') + '</p>' + (s.rating_count > 0 ? '<span class="inline-block mt-1 text-[11px] font-semibold text-amber-600">' + ratingMini(s) + '</span>' : '') + (abertoAgora(s) === true ? '<span class="inline-block mt-1 text-[10px] font-bold text-emerald-600 bg-emerald-500/10 px-2 py-0.5 rounded">🟢 Aberto</span>' : abertoAgora(s) === false ? '<span class="inline-block mt-1 text-[10px] font-bold text-peao-600 bg-peao-500/10 px-2 py-0.5 rounded">🔴 Fechado</span>' : '') + (s.destaque ? '<span class="inline-block mt-1 text-[10px] font-bold text-peao-600 bg-peao-500/10 px-2 py-0.5 rounded">Destaque</span>' : '') + (s.tags && s.tags.indexOf('24h') > -1 ? '<span class="inline-block mt-1 text-[10px] font-bold text-emerald-700 bg-emerald-500/10 px-2 py-0.5 rounded">🕐 24h</span>' : '') + (s.tags && s.tags.indexOf('plantao') > -1 ? '<span class="inline-block mt-1 text-[10px] font-bold text-navy-700 bg-navy-500/10 px-2 py-0.5 rounded">🌙 Plantão</span>' : '') + (s.tags && s.tags.indexOf('madrugada') > -1 ? '<span class="inline-block mt-1 text-[10px] font-bold text-indigo-700 bg-indigo-500/10 px-2 py-0.5 rounded">🌙 Madrugada</span>' : '') + '</a>';
-  }
+  function catCard(c) { var cnt = window._ataCatCounts && window._ataCatCounts[c.id] ? window._ataCatCounts[c.id] : 0; return '<a href="categoria.html?cat=' + c.id + '" class="card-hover bg-white rounded-2xl p-5 text-center shadow-soft ring-silver relative"><div class="text-4xl">' + (c.emoji || '🏢') + '</div><div class="mt-2 font-display font-bold">' + esc(c.nome) + '</div>' + (cnt > 0 ? '<span class="inline-block mt-1 text-[10px] font-bold text-peao-600 bg-peao-500/10 px-2 py-0.5 rounded-full">' + cnt + (cnt === 1 ? ' empresa' : ' empresas') + '</span>' : '<div class="text-xs text-silver-500">' + esc(c.desc || 'Seja o primeiro!') + '</div>') + '</a>'; }
   function offerCard(o) {
     var img = o.imagem_url ? '<img src="' + esc(o.imagem_url) + '" alt="" class="h-32 w-full object-cover" loading="lazy">' : '<div class="h-32 bg-gradient-to-br from-navy-700 to-navy-500 grid place-items-center text-3xl text-white">🏷️</div>';
     return '<a href="loja.html?id=' + encodeURIComponent(o.store_id) + '" class="card-hover rounded-2xl overflow-hidden bg-white ring-silver shadow-soft block">' + img + '<div class="p-4"><h3 class="font-display font-bold">' + esc(o.titulo) + '</h3>' + (o.preco_atual ? '<p class="text-peao-500 font-extrabold mt-1">' + esc(o.preco_atual) + (o.preco_anterior ? ' <span class="text-xs line-through text-silver-400">' + esc(o.preco_anterior) + '</span>' : '') + '</p>' : '') + (o.termino ? '<p class="text-[11px] text-silver-500 mt-1">Válido até ' + esc(formatDate(o.termino)) + '</p>' : '') + '</div></a>';
@@ -273,6 +269,7 @@
   function pageHome() {
     Promise.all([Categories.list(), Stores.list(), Offers.listActive()]).then(function (r) {
       var cats = r[0], stores = r[1], offers = r[2]; stores = sortByPlano(stores);
+      window._ataCatCounts = {}; stores.forEach(function (s) { window._ataCatCounts[s.categoria] = (window._ataCatCounts[s.categoria] || 0) + 1; });
       var cg = $('#catGrid'); if (cg) cg.innerHTML = cats.map(catCard).join('');
       var og = $('#ofertasGrid'); if (og) og.innerHTML = offers.length ? offers.map(offerCard).join('') : emptyGrid('Nenhuma oferta ativa ainda.');
       var dg = $('#destaqueGrid'); if (dg) dg.innerHTML = stores.length ? stores.map(function (s) { return storeCard(s, cats); }).join('') : emptyGrid('Nenhuma empresa cadastrada — seja a primeira!');
@@ -331,12 +328,13 @@
     var key = params().get('id') || params().get('slug');
     Stores.get(key).then(function (s) {
       if (!s) { el.innerHTML = emptyState('Empresa não encontrada', 'Essa empresa não está disponível ou ainda não foi aprovada.', false); return; }
-      Metrics.log('view', s.id);
+      Metrics.log('view', s.id); addRecent(s.id);
       Promise.all([Stores.photos(s.id), Offers.byStore(s.id), Categories.list(), aGet('reviews?select=*&store_id=eq.' + encodeURIComponent(s.id) + '&status=eq.ativo&order=criado_em.desc')]).then(function (r) {
         var photos = r[0], offers = r[1], cats = r[2];
         el.innerHTML = storeProfile(s, photos, offers, cats, r[3]);
         setStoreSEO(s);
         wireReview(s); wireHelpful('store'); wireAssinar();
+        Stores.list().then(function (all) { var rel = all.filter(function (x) { return x.categoria === s.categoria && x.id !== s.id; }).slice(0, 4); var rd = $('#relatedStores'); if (rd && rel.length) rd.innerHTML = '<h3 class="font-display font-bold mb-3 mt-6">Você também pode gostar</h3><div class="grid grid-cols-2 md:grid-cols-4 gap-4">' + rel.map(function (x) { return storeCard(x, CATS); }).join('') + '</div>'; });
       });
     });
   }
@@ -1111,6 +1109,19 @@
     }).catch(function () {});
   }, true);
 
+
+  var RECENT_KEY = 'ata_recent';
+  function getRecent() { return JSON.parse(localStorage.getItem(RECENT_KEY) || '[]'); }
+  function addRecent(id) { var r = getRecent(); r = r.filter(function (x) { return x !== id; }); r.unshift(id); if (r.length > 8) r = r.slice(0, 8); localStorage.setItem(RECENT_KEY, JSON.stringify(r)); }
+  function renderRecent() {
+    var box = $('#recentStrip'); if (!box) return; var ids = getRecent(); if (!ids.length) return;
+    Promise.all([Categories.list(), Promise.all(ids.slice(0, 5).map(function (id) { return Stores.get(id); }))]).then(function (r) {
+      var cats = r[0], stores = r[1].filter(Boolean); if (!stores.length) return;
+      box.innerHTML = '<div class="max-w-7xl mx-auto px-4 sm:px-6 py-8"><h2 class="font-display text-xl font-extrabold mb-4">👀 Vistos recentemente</h2><div class="grid grid-cols-2 md:grid-cols-5 gap-4">' + stores.map(function (s) { return storeCard(s, cats); }).join('') + '</div></div>';
+      box.style.display = 'block';
+    });
+  }
+
   /* ===== INTELIGÊNCIA: Máscaras + Busca com sugestões ===== */
   /* Máscara de telefone (WhatsApp/Telefone) — formata enquanto digita */
   document.addEventListener('input', function (e) {
@@ -1166,7 +1177,7 @@
 
   /* BOOT */
   document.addEventListener('DOMContentLoaded', function () {
-    injectLayout(); renderSocialProof(); initCountdown(); Metrics.log('pageview'); wireSearchAutocomplete(); registerSW(); initAnalytics(); wireMP();
+    injectLayout(); renderSocialProof(); initCountdown(); Metrics.log('pageview'); wireSearchAutocomplete(); renderRecent(); registerSW(); initAnalytics(); wireMP();
     document.addEventListener('click', function (e) { var b = e.target.closest('[data-fav]'); if (b) { e.preventDefault(); e.stopPropagation(); var added = toggleFav(b.getAttribute('data-fav')); b.innerHTML = added ? '❤️' : '🤍'; } });
     var p = document.body.dataset.page;
     var ROUTES = { home: pageHome, categoria: pageCategoria, loja: pageLoja, ofertas: pageOfertas, busca: pageBusca, cadastro: pageCadastro, turista: pageTurista, login: pageLogin, admin: pageAdmin, painel: pagePainel, mapa: pageMapa, motoristas: pageMotoristas, motorista: pageMotorista, cadmotorista: pageCadastroMotorista, obrigado: pageObrigado, favoritos: pageFavoritos, classificados: pageClassificadosHub, listings: pageListings, anuncio: pageAnuncio, cadanuncio: pageCadastroAnuncio };
