@@ -72,7 +72,7 @@
     },
     get: function (key) {
       if (!key) return Promise.resolve(null);
-      if (isRemote()) return apiGet('stores?select=*&or=(id.eq.' + encodeURIComponent(key) + ',slug.eq.' + encodeURIComponent(key) + ')&status=eq.ativo').then(function (a) { return a[0] || null; });
+      if (isRemote()) return apiGet('stores?select=*&or=(id.eq.' + encodeURIComponent(key) + ',slug.eq.' + encodeURIComponent(key) + ')&status=eq.ativo').then(function (a) { var s = a[0] || null; if (s && document.body && document.body.getAttribute('data-page') === 'loja') { try { setListingSEO(s); } catch (e) {} } return s; });
       var a = JSON.parse(localStorage.getItem(LS_S) || '[]'); return Promise.resolve(a.filter(function (s) { return s.id === key || s.slug === key; })[0] || null);
     },
     photos: function (sid) {
@@ -84,7 +84,7 @@
       if (isRemote()) { var t = encodeURIComponent(q); return apiGet('stores?select=*&status=eq.ativo&or=(nome.ilike.*' + t + '*,descricao.ilike.*' + t + '*,bairro.ilike.*' + t + '*,subcategoria.ilike.*' + t + '*)'); }
       return Stores.list().then(function (a) { var ql = q.toLowerCase(); return a.filter(function (s) { return JSON.stringify(s).toLowerCase().indexOf(ql) !== -1; }); });
     },
-    create: function (obj) { obj.id = uuid(); obj.status = 'ativo'; obj.criado_em = new Date().toISOString(); return apiPost('stores', obj).then(function (ok) { return ok ? obj : null; }); }
+    create: function (obj) { obj.id = uuid(); obj.status = 'pendente'; obj.criado_em = new Date().toISOString(); return apiPost('stores', obj).then(function (ok) { return ok ? obj : null; }); }
   };
   var Offers = {
     listActive: function () {
@@ -105,6 +105,21 @@
       return fetch(CONFIG.supabase.url + '/storage/v1/object/fotos/' + path, { method: 'POST', headers: H({ 'Content-Type': isPng ? 'image/png' : 'image/jpeg' }), body: f })
         .then(function (r) { if (!r.ok) throw new Error('upload'); return CONFIG.supabase.url + '/storage/v1/object/public/fotos/' + path; });
     });
+  }
+  
+  function setListingSEO(s) {
+    try {
+      document.title = (s.nome || 'Empresa') + ' em Barretos — Aqui Tem Achadinhos';
+      var md = document.querySelector('meta[name="description"]');
+      if (md) md.setAttribute('content', (s.descricao_curta || s.nome || '') + ' Veja endereço, horário e contato direto no WhatsApp em Barretos/SP.');
+      function setMeta(p, c) { var m = document.querySelector('meta[property="' + p + '"]'); if (!m) { m = document.createElement('meta'); m.setAttribute('property', p); document.head.appendChild(m); } m.setAttribute('content', c); }
+      setMeta('og:title', (s.nome || '') + ' em Barretos');
+      setMeta('og:description', s.descricao_curta || s.nome || '');
+      setMeta('og:url', location.href);
+      var ld = document.createElement('script'); ld.type = 'application/ld+json';
+      ld.text = JSON.stringify({ "@context": "https://schema.org", "@type": "LocalBusiness", "name": s.nome || '', "description": s.descricao_curta || '', "image": s.capa || s.foto || '', "telephone": s.telefone || '', "url": location.href, "address": { "@type": "PostalAddress", "addressLocality": "Barretos", "addressRegion": "SP", "addressCountry": "BR", "streetAddress": s.bairro || '' }, "priceRange": "$$" });
+      document.head.appendChild(ld);
+    } catch (e) {}
   }
   window.ATA = { CONFIG: CONFIG, LojistaAuth: LojistaAuth, Stores: Stores, Offers: Offers, Categories: Categories, Metrics: Metrics, uploadPhoto: uploadPhoto, waLink: waLink, esc: esc };
 
