@@ -219,3 +219,45 @@
   .split-inv{grid-template-columns:.95fr 1.05fr}
   .txt-white{color:#fff}
   .txt-gold-link{color:var(--gold-2);font-weight:700}
+
+  /* ===== TOURO SCROLL 3D (Apple-style) ===== */
+  .scroll-hint{margin-top:26px;font-size:13px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--silver-2);
+    display:inline-flex;align-items:center;gap:8px;border:1px solid rgba(255,255,255,.14);padding:10px 18px;border-radius:999px;
+    background:var(--glass);backdrop-filter:blur(10px);animation:hint-bob 2.2s ease-in-out infinite}
+  @keyframes hint-bob{0%,100%{transform:translateY(0)}50%{transform:translateY(6px)}}
+
+  .bull-scroll{position:relative;height:340vh}
+  .bull-pin{position:sticky;top:0;height:100vh;display:flex;align-items:center;justify-content:center;
+    perspective:1300px;overflow:hidden}
+  .bull-stage{position:relative;max-width:940px;width:100%;padding:0 22px;
+    transform-style:preserve-3d;will-change:transform;transition:transform .05s linear}
+  .bull-glow{position:absolute;inset:6% 10%;border-radius:50%;filter:blur(70px);opacity:.5;
+    background:radial-gradient(50% 50% at 50% 50%, rgba(240,194,75,.55), rgba(230,57,70,.25) 60%, transparent 75%);
+    transition:opacity .1s linear;will-change:opacity}
+  .bull{position:relative;border-radius:40px;overflow:hidden;
+    box-shadow:0 60px 120px -30px rgba(0,0,0,.8),0 0 0 1px rgba(255,255,255,.12),0 0 120px rgba(240,194,75,.22);
+    animation:float 7s ease-in-out infinite}
+  .bull img{width:100%;height:auto;display:block}
+  .bull::after{content:"";position:absolute;inset:0;pointer-events:none;
+    background:linear-gradient(180deg,transparent 55%,rgba(11,30,63,.55) 100%)}
+  @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-16px)}}
+  .bull-cap{position:absolute;left:0;right:0;bottom:18px;z-index:2;display:flex;justify-content:center;gap:10px;flex-wrap:wrap;padding:0 18px}
+  .chip{font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--gold-2);
+    background:rgba(11,30,63,.72);border:1px solid rgba(240,194,75,.35);padding:8px 14px;border-radius:999px;backdrop-filter:blur(8px)}
+
+  /* frase que acompanha o touro (camada de profundidade) */
+  .bull-caption{position:absolute;z-index:3;text-align:center;pointer-events:none;
+    font-family:'Plus Jakarta Sans';font-weight:800;font-size:clamp(22px,3.4vw,40px);line-height:1.1;letter-spacing:-.02em;
+    color:#fff;text-shadow:0 4px 30px rgba(0,0,0,.6);bottom:12%;opacity:0;transform:translateY(20px);
+    transition:opacity .3s ease,transform .3s ease}
+  .bull-caption span{background:linear-gradient(100deg,var(--gold-2),var(--gold));
+    -webkit-background-clip:text;background-clip:text;color:transparent}
+  .bull-caption.on{opacity:1;transform:none}
+
+  /* brasas douradas subindo */
+  .embers{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+  .ember{position:absolute;bottom:-2vh;border-radius:50%;opacity:0;
+    background:radial-gradient(circle,rgba(255,217,122,.95) 0%,rgba(240,194,75,.25) 55%,transparent 75%);
+    animation:ember-rise linear infinite;will-change:transform,opacity}
+  @keyframes ember-rise{0%{transform:translateY(0) translateX(0) scale(.5);opacity:0}
+    10%{opacity:.85}100%{transform:translateY(-108vh) translateX(var(--dx,0px)) scale(1.1);opacity:0}}
