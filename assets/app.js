@@ -28,7 +28,7 @@
     { id: 'moda', nome: 'Moda', emoji: '👗', desc: 'Roupas e calçados' }, { id: 'beleza', nome: 'Beleza', emoji: '💅', desc: 'Salões e estética' },
     { id: 'eletronicos', nome: 'Eletrônicos', emoji: '📱', desc: 'Tech e celulares' }, { id: 'petshops', nome: 'Pet Shops', emoji: '🐾', desc: 'Para o seu pet' },
     { id: 'hoteis', nome: 'Hotéis e Pousadas', emoji: '🏨', desc: 'Onde se hospedar' }, { id: 'moveis', nome: 'Móveis', emoji: '🛋️', desc: 'Casa e decoração' },
-    { id: 'automotivo', nome: 'Automotivo', emoji: '🚗', desc: 'Carros e auto' }, { id: 'servicos', nome: 'Serviços', emoji: '🔧', desc: 'Prestadores' }
+    { id: 'automotivo', nome: 'Automotivo', emoji: '🚗', desc: 'Carros e auto' }, { id: 'servicos', nome: 'Serviços', emoji: '🔧', desc: 'Prestadores' }, { id: 'saude', nome: 'Saúde e Bem-estar', emoji: '🩺', desc: 'Dentistas, acupuntura e mais' }
   ];
 
   /* HELPERS */
