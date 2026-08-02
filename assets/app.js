@@ -572,6 +572,7 @@
     var root = $('#painelRoot'); if (!root) return;
     if (!AUTH.tok()) { location.href = 'login.html'; return; }
     root.innerHTML = '<p class="text-center text-silver-500 py-10">Carregando...</p>';
+    var _isLojista = !AUTH.tok() && !!LojistaAuth.tok();
     var storeQuery = _isLojista ? ('stores?select=*&owner_id=eq.' + LojistaAuth.uid() + '&order=criado_em.desc') : 'stores?select=*&order=criado_em.desc';
     aGet(storeQuery).then(function (stores) {
       if (!stores.length) { root.innerHTML = emptyState('Nenhuma empresa ainda', 'Cadastre ou aprove uma empresa primeiro.', false); return; }
