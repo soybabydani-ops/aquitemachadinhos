@@ -1,5 +1,5 @@
 // Service Worker — Aqui Tem Achadinhos (v4 — fix Safari redirects)
-const CACHE = 'achadinhos-v15';
+const CACHE = 'achadinhos-v16';
 const ASSETS = [
   './', './index.html', './cadastro.html', './cadastro-motorista.html', './categoria.html',
   './loja.html', './ofertas.html', './busca.html', './turista.html', './anuncie.html',
@@ -8,7 +8,7 @@ const ASSETS = [
   './termos.html', './politica-de-ofertas.html', './obrigado.html', './favoritos.html', './404.html',
   './mapa.html', './classificados.html', './imoveis.html', './empregos.html', './veiculos.html',
   './moveis-eletro.html', './eletronicos.html', './animais.html', './servicos.html', './eventos-peao.html',
-  './anuncio.html', './cadastro-anuncio.html', './guia-peao.html',
+  './anuncio.html', './cadastro-anuncio.html', './guia-peao.html', './o-que-fazer-festa-do-peao.html', './onde-comer-barretos.html',
   './assets/styles.css', './assets/tailwind.css', './assets/app.js', './assets/peao-hero.jpg',
   './assets/vendor/leaflet.js', './assets/vendor/leaflet.markercluster.js',
   './assets/vendor/leaflet.css', './assets/vendor/MarkerCluster.css', './assets/vendor/MarkerCluster.Default.css',
