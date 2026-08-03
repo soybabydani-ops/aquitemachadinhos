@@ -1,0 +1,119 @@
+diff --git a/anuncie.html b/anuncie.html
+index af58923..8c11a1b 100644
+--- a/anuncie.html
++++ b/anuncie.html
+@@ -27,12 +27,12 @@
+   <div class="relative max-w-4xl mx-auto px-4 sm:px-6 py-16 md:py-22">
+     <span class="text-peao-400 font-bold uppercase text-xs tracking-[0.18em]">Para empresas de Barretos</span>
+     <h1 class="font-display text-4xl md:text-6xl font-extrabold leading-[1.05] mt-2">Coloque sua empresa <span class="text-chrome">onde Barretos procura.</span></h1>
+-    <p class="mt-5 text-lg md:text-xl text-silver-200 max-w-2xl">Crie uma página própria com fotos, informações e ofertas, e facilite o contato direto pelo WhatsApp com quem pesquisa empresas em Barretos.</p>
++    <p class="mt-5 text-lg md:text-xl text-silver-200 max-w-2xl">Inauguração: os 50 primeiros negócios aprovados ganham destaque no guia por 90 dias, sem custo. Crie sua página com fotos, informações e contato direto pelo WhatsApp.</p>
+     <div class="mt-8 flex flex-col sm:flex-row gap-3">
+-      <a href="cadastro.html" onclick="window.ATA&&window.ATA.Metrics?window.ATA.Metrics.log('cadastro_iniciado'):0" class="btn-shine bg-peao-500 hover:bg-peao-600 text-white font-bold px-7 py-4 rounded-xl shadow-redglow text-lg text-center">Cadastrar gratuitamente 🚀</a>
++      <a href="cadastro.html" onclick="window.ATA&&window.ATA.Metrics?window.ATA.Metrics.log('cadastro_iniciado'):0" class="btn-shine bg-peao-500 hover:bg-peao-600 text-white font-bold px-7 py-4 rounded-xl shadow-redglow text-lg text-center">Quero meu destaque gratuito 🚀</a>
+       <a href="https://wa.me/5517992641746?text=Olá! Quero saber mais sobre anunciar no Aqui Tem Achadinhos." target="_blank" rel="noopener noreferrer" class="btn-shine glass text-white font-bold px-7 py-4 rounded-xl text-center">💬 Tirar dúvidas no WhatsApp</a>
+     </div>
+-    <p class="mt-4 text-sm text-silver-400">Cadastre-se grátis no lançamento. Sem compromisso.</p>
++    <p class="mt-4 text-sm text-silver-400">Vagas por ordem de aprovação. Cadastro completo sujeito à análise.</p>
+   </div>
+ </section>
+ 
+@@ -108,7 +108,7 @@
+   <div class="relative max-w-3xl mx-auto px-4 sm:px-6 py-16 text-center">
+     <h2 class="font-display text-3xl md:text-4xl font-extrabold leading-tight">Pronto para criar a página da sua empresa?</h2>
+     <p class="mt-4 text-lg text-silver-200">Comece grátis agora e seja encontrado por quem procura empresas em Barretos.</p>
+-    <a href="cadastro.html" class="btn-shine inline-block mt-7 bg-peao-500 hover:bg-peao-600 text-white font-bold px-8 py-4 rounded-xl shadow-redglow text-lg">Cadastrar gratuitamente 🚀</a>
++    <a href="cadastro.html" class="btn-shine inline-block mt-7 bg-peao-500 hover:bg-peao-600 text-white font-bold px-8 py-4 rounded-xl shadow-redglow text-lg">Quero meu destaque gratuito 🚀</a>
+   </div>
+ </section>
+ 
+diff --git a/cadastro.html b/cadastro.html
+index 49ef71c..e9b9803 100644
+--- a/cadastro.html
++++ b/cadastro.html
+@@ -3,7 +3,7 @@
+ <head>
+ <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+ <title>Cadastrar empresa em Barretos — Aqui Tem Achadinhos</title>
+-<meta name="description" content="Cadastre sua empresa no guia de Barretos. Grátis no lançamento. Crie sua vitrine com fotos e ofertas.">
++<meta name="description" content="Inauguração em Barretos: os 50 primeiros negócios aprovados ganham destaque no guia por 90 dias, sem custo.">
+ <link rel="manifest" href="manifest.webmanifest"><meta name="theme-color" content="#0B1E3F">
+ <meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes">
+ <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="apple-mobile-web-app-title" content="Achadinhos">
+@@ -17,13 +17,18 @@
+ 
+ <section class="navy-hero text-white relative overflow-hidden"><div class="absolute inset-0 dot-grid opacity-40"></div>
+   <div class="relative max-w-3xl mx-auto px-4 sm:px-6 py-12 md:py-16">
+-    <span class="text-peao-400 font-bold uppercase text-xs tracking-[0.18em]">Grátis no lançamento</span>
+-    <h1 class="font-display text-3xl md:text-5xl font-extrabold mt-2 text-chrome">Cadastrar minha empresa</h1>
+-    <p class="text-silver-200 mt-3">Leva poucos minutos. Sua página entra como <b>pendente</b> e aparece no guia após nossa aprovação.</p>
++    <span class="text-peao-400 font-bold uppercase text-xs tracking-[0.18em]">Inauguração em Barretos</span>
++    <h1 class="font-display text-3xl md:text-5xl font-extrabold mt-2 text-chrome">50 destaques gratuitos</h1>
++    <p class="text-silver-200 mt-3">Os <b>50 primeiros negócios aprovados</b> recebem destaque no guia por <b>90 dias, sem custo.</b></p>
+   </div>
+ </section>
+ 
+ <section class="max-w-3xl mx-auto px-4 sm:px-6 py-10">
++  <div class="mb-5 rounded-2xl border border-peao-500/30 bg-peao-500/10 p-5 text-center">
++    <p class="font-display text-lg font-extrabold text-navy-900">✨ Benefício de inauguração</p>
++    <p class="mt-1 text-sm text-slate-700">Cadastros completos, aprovados e entre os 50 primeiros recebem prioridade e selo de destaque por 90 dias.</p>
++    <p class="mt-2 text-xs text-slate-500">Válido por ordem de aprovação. Sujeito à análise das informações enviadas.</p>
++  </div>
+   <form id="formCadastro" class="bg-white rounded-3xl shadow-soft ring-silver p-6 md:p-8 space-y-5" novalidate>
+     <!-- ETAPA 1 -->
+     <div id="step1" class="space-y-5">
+@@ -94,7 +99,7 @@
+   <div id="cadOk" class="hidden bg-white rounded-3xl shadow-soft ring-silver p-8 text-center mt-2">
+     <div class="text-5xl">✅</div>
+     <h2 class="font-display text-2xl font-extrabold mt-3">Cadastro enviado!</h2>
+-    <p class="text-slate-600 mt-2">Sua empresa foi registrada como <b>pendente</b>. Assim que aprovarmos, ela aparece no guia de Barretos.</p>
++    <p class="text-slate-600 mt-2">Sua empresa foi registrada como <b>pendente</b>. Após a aprovação, ela entra no guia de Barretos. Se estiver entre os 50 primeiros cadastros aprovados, receberá o destaque gratuito por 90 dias.</p>
+     <div class="mt-5 flex flex-col sm:flex-row gap-3 justify-center">
+       <a href="index.html" class="btn-shine bg-navy-800 hover:bg-navy-700 text-white font-bold px-6 py-3 rounded-xl">Voltar ao início</a>
+       <a href="https://wa.me/5517992641746?text=Acabei%20de%20cadastrar%20minha%20empresa%20e%20gostaria%20da%20aprovação" target="_blank" rel="noopener noreferrer" class="btn-shine bg-[#25D366] text-white font-bold px-6 py-3 rounded-xl">💬 Avisar aprovação</a>
+diff --git a/index.html b/index.html
+index bd3f5ad..cab3539 100644
+--- a/index.html
++++ b/index.html
+@@ -223,7 +223,7 @@
+     <div class="dual-card dark reveal" d1>
+       <div class="e">🏪</div>
+       <h3>Pra quem tem empresa</h3>
+-      <p>Crie sua vitrine online e seja encontrado por pessoas que procuram produtos e serviços em Barretos — grátis no lançamento.</p>
++      <p>Inauguração: os 50 primeiros negócios aprovados recebem destaque no guia por 90 dias, sem custo.</p>
+       <a class="btn btn-primary" href="anuncie.html">Cadastrar minha empresa</a>
+     </div>
+   </div>
+@@ -275,9 +275,9 @@
+ <section class="block" id="planos" pt20>
+   <div class="cta-wrap reveal">
+     <h2>Sua empresa pode estar<br><span class="grad">onde Barretos encontra.</span></h2>
+-    <p>Crie sua página com fotos, ofertas e contato direto no WhatsApp. Cadastro gratuito no lançamento — e o palco está montado para a Festa do Peão.</p>
++    <p>Crie sua página com fotos, ofertas e contato direto no WhatsApp. Os 50 primeiros negócios aprovados ganham destaque no guia por 90 dias — e o palco está montado para a Festa do Peão.</p>
+     <div class="cta-actions">
+-      <a class="btn btn-primary" href="cadastro.html">🚀 Cadastrar gratuitamente</a>
++      <a class="btn btn-primary" href="cadastro.html">🚀 Quero meu destaque gratuito</a>
+       <a class="btn btn-ghost" href="anuncie.html">Ver planos</a>
+     </div>
+   </div>
+diff --git a/termos.html b/termos.html
+index f306d61..0a989b0 100644
+--- a/termos.html
++++ b/termos.html
+@@ -36,11 +36,13 @@
+   <p>É proibido publicar conteúdo ilegal, enganoso, discriminatório, ofensivo ou que viole direitos de terceiros. Casos assim podem ser <b>rejeitados, suspensos ou removidos</b>.</p>
+   <h2 class="font-display text-xl font-extrabold text-navy-900">4. Moderação</h2>
+   <p>Reservamo-nos o direito de aprovar, rejeitar, editar ou remover cadastros e ofertas, e de destacar conteúdos. Posições pagas serão sempre identificadas como “Destaque”.</p>
+-  <h2 class="font-display text-xl font-extrabold text-navy-900">5. Propriedade e responsabilidade</h2>
++  <h2 class="font-display text-xl font-extrabold text-navy-900">5. Campanha de inauguração</h2>
++  <p>Quando anunciada, a campanha de inauguração concede destaque gratuito por 90 dias aos 50 primeiros negócios com cadastro completo e aprovado. A ordem é definida no momento da aprovação. O benefício é pessoal, não transferível, não inclui serviços não descritos na campanha e pode ser cancelado em caso de informação incorreta ou descumprimento destes termos.</p>
++  <h2 class="font-display text-xl font-extrabold text-navy-900">6. Propriedade e responsabilidade</h2>
+   <p>O conteúdo enviado permanece de responsabilidade de quem o cadastrou. A marca “Aqui Tem Achadinhos”, o logotipo e o design do site são nossos.</p>
+-  <h2 class="font-display text-xl font-extrabold text-navy-900">6. Limitação de responsabilidade</h2>
++  <h2 class="font-display text-xl font-extrabold text-navy-900">7. Limitação de responsabilidade</h2>
+   <p>Buscamos oferecer um serviço de qualidade, mas não nos responsabilizamos por indisponibilidades eventuais ou por acordos firmados diretamente entre clientes e empresas.</p>
+-  <h2 class="font-display text-xl font-extrabold text-navy-900">7. Alterações</h2>
++  <h2 class="font-display text-xl font-extrabold text-navy-900">8. Alterações</h2>
+   <p>Estes termos podem ser atualizados a qualquer tempo. O uso continuado implica aceitação.</p>
+ </section>
+ <div id="site-footer"></div>
