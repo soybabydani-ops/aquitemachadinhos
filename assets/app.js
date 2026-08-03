@@ -32,14 +32,15 @@
 /* === MOTOR MULTI-CIDADE (Aqui Tem) — v4 EXTERNO (compatível CSP) === */
 (function () {
   var CIDADES = {
-    "www":     ["Barretos", "SP"],
-    "gramado": ["Gramado", "RS"],
-    "campos":  ["Campos do Jordão", "SP"]
+    "www": ["Barretos","SP"], "gramado": ["Gramado","RS"], "campos": ["Campos do Jordão","SP"],
+    "salvador": ["Salvador","BA"], "buzios": ["Búzios","RJ"], "florianopolis": ["Florianópolis","SC"],
+    "porto": ["Porto de Galinhas","PE"], "jericoacoara": ["Jericoacoara","CE"],
+    "caruaru": ["Caruaru","PE"], "blumenau": ["Blumenau","SC"], "bonito": ["Bonito","MS"]
   };
   var partes = location.hostname.split(".");
   var sub = (partes[0] || "www").toLowerCase();
   if (sub === "www" || partes.length <= 2 || sub === "localhost") sub = "www";
-  if ((sub === "gramado" || sub === "campos") && (location.pathname === "/" || location.pathname === "/index.html")) { location.replace("/" + sub + "-home.html"); }
+  if (sub !== "www" && (location.pathname === "/" || location.pathname === "/index.html")) { location.replace("/" + sub + "-home.html"); }
   var par = CIDADES[sub] || CIDADES["www"];
   var CIDADE = par[0], UF = par[1], CIDUP = CIDADE.toUpperCase();
   window.CIDADE = { nome: CIDADE, uf: UF };
