@@ -113,6 +113,8 @@
   var img = document.getElementById('bull3dImg');
   var dustBox = document.querySelector('.bull3d-dust');
   var reflect = document.querySelector('.bull3d-reflect');
+  var backImg = document.querySelector('.bull3d-back');
+  var shadow = document.querySelector('.bull3d-shadow');
   if (!tilt || !img) return;
 
   /* partículas douradas */
@@ -148,6 +150,7 @@
 
   window.__bullTilt = {
     setScroll: function (p, x, y) { scroll = p; },
+    getInput: function () { return { mx: mx, my: my, smx: smx, smy: smy }; },
     getTilt: function () { return tilt; }
   };
 
@@ -156,34 +159,48 @@
     requestAnimationFrame(frame);
     t += 0.016;
 
-    smx += (mx - smx) * 0.045;
-    smy += (my - smy) * 0.045;
+    smx += (mx - smx) * 0.16;
+    smy += (my - smy) * 0.16;
 
     /* movimento orgânico natural: respiração + balanço suave */
-    var breath = 1 + Math.sin(t * 1.5) * 0.012;
-    var sway = Math.sin(t * 0.85) * 1.6;         // balança o corpo
-    var tiltX = smy * -7;                        // mouse: inclinação
-    var tiltY = smx * 9;                         // mouse: giro lateral
+    var breath = 1 + Math.sin(t * 1.5) * 0.014;
+    var sway = Math.sin(t * 0.85) * 2.2;         // balança o corpo
+    var tiltX = smy * -11;                       // mouse: inclinação (dramática)
+    var tiltY = smx * 15;                        // mouse: giro lateral (dramático)
     /* investida furiosa a cada ~5s (avança em escala, orgânico) */
     var charge = Math.pow(Math.max(0, Math.sin(t * 1.25 + 2)), 24);
-    var chargeScale = 1 + charge * 0.12;
-    var chargeRot = charge * -3;
+    var chargeScale = 1 + charge * 0.16;
+    var chargeRot = charge * -4;
 
     tilt.style.transform =
-      'rotateX(' + (tiltX + sway * 0.3 + chargeRot).toFixed(2) + 'deg) ' +
+      'rotateX(' + (tiltX + sway * 0.4 + chargeRot).toFixed(2) + 'deg) ' +
       'rotateY(' + (tiltY + sway).toFixed(2) + 'deg) ' +
       'scale(' + (breath * chargeScale).toFixed(4) + ')';
 
-    /* imagem flutua com profundidade (translateZ) + respira */
+    /* imagem principal flutua com profundidade (translateZ) + respira */
     img.style.transform =
-      'translateZ(30px) ' +
-      'translateY(' + (Math.sin(t * 1.5) * -6 + charge * -8).toFixed(2) + 'px) ' +
-      'scale(' + (1 + Math.sin(t * 1.5) * 0.01).toFixed(4) + ')';
+      'translateZ(46px) ' +
+      'translateY(' + (Math.sin(t * 1.5) * -8 + charge * -10).toFixed(2) + 'px) ' +
+      'scale(' + (1 + Math.sin(t * 1.5) * 0.012).toFixed(4) + ')';
+
+    /* camada de fundo contra-movimento (parallax 2.5D) */
+    if (backImg) {
+      backImg.style.transform =
+        'translateZ(-30px) scale(.94) ' +
+        'translateY(' + (Math.sin(t * 1.2 + 1) * 5 + charge * 6).toFixed(2) + 'px) ' +
+        'translateX(' + (smx * -8).toFixed(2) + 'px)';
+    }
 
     /* reflexo acompanha */
     if (reflect) {
-      reflect.style.opacity = (0.18 + Math.abs(smx) * 0.08).toFixed(2);
-      reflect.style.transform = 'scaleY(-1) translateX(' + (smx * -12).toFixed(2) + 'px)';
+      reflect.style.opacity = (0.18 + Math.abs(smx) * 0.1).toFixed(2);
+      reflect.style.transform = 'scaleY(-1) translateX(' + (smx * -14).toFixed(2) + 'px)';
+    }
+
+    /* sombra projetada se move com o tilt */
+    if (shadow) {
+      shadow.style.transform = 'translateX(' + (smx * 26).toFixed(2) + 'px) scale(' + (1 + Math.abs(smy) * 0.12).toFixed(3) + ')';
+      shadow.style.opacity = (0.55 + Math.abs(smy) * 0.3).toFixed(2);
     }
   }
   requestAnimationFrame(frame);

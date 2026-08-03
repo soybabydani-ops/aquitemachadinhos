@@ -52,3 +52,6 @@ body{background:#060f27;color:#dde4ee}
 .border-silver-200{border-color:rgba(255,255,255,.10)!important}
 input,select,textarea{background-color:#081433!important;color:#e8edf5!important}
 input::placeholder,textarea::placeholder{color:#6b7a92}
+
+/* Área para preencher (empresas reais) — classe permitida pela CSP */
+.area-preenchimento{border:2px dashed #E63946;border-radius:1.25rem;background:#fff7f7;padding:1.5rem 1.25rem}
