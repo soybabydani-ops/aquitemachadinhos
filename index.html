@@ -89,17 +89,16 @@
   <div class="scroll-hint reveal">🐂 Role para ver o touro ganhar vida</div>
 </section>
 
-<!-- ===== TOURO SCROLL 3D — CENAS ESTILO APPLE (iPhone) ===== -->
-<section class="bull-scroll" aria-label="Touro em 3D — cenas coreografadas">
+<!-- ===== TOURO 3D REAL — CENAS COREOGRAFADAS ===== -->
+<section class="bull-scroll" aria-label="Touro 3D — cenas coreografadas">
   <div class="bull-pin">
     <div class="bs-bg" aria-hidden="true"></div>
     <div class="embers" aria-hidden="true"></div>
 
     <div class="bull-stage">
       <div class="bull-glow"></div>
-      <div class="bull">
-        <img class="bull-img-main" src="assets/touro-hero.webp" alt="Touro de rodeio 3D premium — a força da Festa do Peão de Barretos">
-        <img class="bull-img-detail" src="assets/touro-solto-detalhe.webp" alt="Detalhe em dourado do touro de rodeio premium">
+      <div class="bull3d-canvas" id="bull3dWrap">
+        <canvas id="bull3d" aria-label="Touro 3D animado — Festa do Peão de Barretos"></canvas>
       </div>
       <div class="bull-cap">
         <span class="chip">🐂 71ª Festa do Peão</span>
@@ -130,13 +129,6 @@
     <div class="bs-progress" aria-hidden="true"><span></span></div>
   </div>
 </section>
-
-<div class="stats reveal" d36>
-    <div class="stat"><b>990 mil</b><span>visitas em 2025</span></div>
-    <div class="stat"><b>R$ 600 mi</b><span>movimentados na região</span></div>
-    <div class="stat"><b>11 dias</b><span>de festa sem parar</span></div>
-    <div class="stat"><b>4 palcos</b><span>de shows simultâneos</span></div>
-  </div>
 
 <!-- ===== MARQUEE ===== -->
 <div class="marquee">
@@ -215,30 +207,14 @@
         <a class="btn btn-ghost" href="classificados.html">Ver todos</a>
       </div>
     </div>
-    <div class="bull8d reveal" aria-label="Touro de rodeio em 3D, vivo e furioso">
-      <div class="b8d-scene" data-src="assets/touro-solto.webp">
-        <div class="b8d-slices" aria-hidden="false"></div>
-        <div class="b8d-sheen" aria-hidden="true"></div>
-        <div class="b8d-reflect" aria-hidden="true"></div>
-        <div class="b8d-dust" aria-hidden="true"></div>
-        <div class="b8d-glow" aria-hidden="true"></div>
-      </div>
-    </div>
+    
   </div>
 </section>
 
 <!-- ===== FESTA ===== -->
 <section class="block" id="festa">
   <div class="split" split-inv>
-    <div class="bull8d reveal" aria-label="Touro de rodeio em 3D, vivo e furioso">
-      <div class="b8d-scene" data-src="assets/touro-solto.webp">
-        <div class="b8d-slices" aria-hidden="false"></div>
-        <div class="b8d-sheen" aria-hidden="true"></div>
-        <div class="b8d-reflect" aria-hidden="true"></div>
-        <div class="b8d-dust" aria-hidden="true"></div>
-        <div class="b8d-glow" aria-hidden="true"></div>
-      </div>
-    </div>
+    
     <div order1>
       <p class="kicker reveal">A experiência do Peão</p>
       <h2 class="sec-title reveal">A maior festa do rodeio da América Latina.</h2>
@@ -272,6 +248,7 @@
 
 <div id="site-footer"></div>
 <script src="assets/app.js"></script>
+<script src="assets/three.min.js"></script>
 <script src="assets/premium.js"></script>
 
 </body>
