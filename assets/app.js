@@ -1,3 +1,34 @@
+/* === BOTAO CTA "Quero mais clientes" (Aqui Tem Achadinhos) === */
+(function(){
+  function criarCTA(){
+    if(document.getElementById('ctaMaoFree')) return;
+    if(!document.body) return;
+    var a=document.createElement('a');
+    a.id='ctaMaoFree';
+    a.href='https://docs.google.com/forms/d/e/1FAIpQLSdEIq9IrOb7I5q1FFVGXC2_6p9zchhKkq7NfZhG4GUQOSfAIA/viewform';
+    a.target='_blank'; a.rel='noopener';
+    var s=a.style;
+    s.position='fixed'; s.right='16px'; s.bottom='80px'; s.zIndex='99998';
+    s.background='linear-gradient(135deg,#16a34a,#22c55e)'; s.color='#ffffff';
+    s.fontFamily='inherit'; s.fontWeight='700'; s.fontSize='14px';
+    s.padding='14px 18px'; s.borderRadius='16px';
+    s.boxShadow='0 12px 30px rgba(0,0,0,.35)';
+    s.display='flex'; s.flexDirection='column'; s.alignItems='center'; s.gap='2px';
+    s.textDecoration='none'; s.maxWidth='62vw'; s.lineHeight='1.2';
+    var e=document.createElement('span'); e.textContent='🚀'; e.style.fontSize='20px';
+    var t=document.createElement('span'); t.textContent='Quero mais clientes em Barretos';
+    var sub=document.createElement('span'); sub.textContent='cadastro grátis no guia';
+    sub.style.fontWeight='500'; sub.style.fontSize='11px'; sub.style.opacity='.9';
+    a.appendChild(e); a.appendChild(t); a.appendChild(sub);
+    document.body.appendChild(a);
+    setInterval(function(){ s.boxShadow='0 12px 30px rgba(34,197,94,.65)'; setTimeout(function(){ s.boxShadow='0 12px 30px rgba(0,0,0,.35)'; },900); },4000);
+  }
+  if(document.body) criarCTA();
+  document.addEventListener('DOMContentLoaded', criarCTA);
+  setTimeout(criarCTA, 800);
+})();
+/* === FIM BOTAO CTA === */
+
 /* === MOTOR MULTI-CIDADE (Aqui Tem) — v4 EXTERNO (compatível CSP) === */
 (function () {
   var CIDADES = {
