@@ -55,7 +55,37 @@
       "addressRegion": "SP",
       "addressCountry": "BR"
     }
-  }
+  },
+  "offers": {
+    "@type": "Offer",
+    "name": "Ingressos — 71ª Festa do Peão de Barretos",
+    "price": "80",
+    "priceCurrency": "BRL",
+    "availability": "https://schema.org/PreOrder",
+    "url": "https://www.aquitemachadinhos.com.br/programacao-71-festa-peao.html",
+    "validFrom": "2026-05-01T00:00:00-03:00"
+  },
+  "organizer": {
+    "@type": "Organization",
+    "name": "Os Independentes — Festa do Peão de Barretos",
+    "url": "https://www.aquitemachadinhos.com.br/programacao-71-festa-peao.html"
+  },
+  "performer": [
+    { "@type": "PerformingGroup", "name": "Gusttavo Lima" },
+    { "@type": "PerformingGroup", "name": "Ana Castela" },
+    { "@type": "PerformingGroup", "name": "Alok" },
+    { "@type": "PerformingGroup", "name": "Leonardo" },
+    { "@type": "PerformingGroup", "name": "Chitãozinho & Xororó" },
+    { "@type": "PerformingGroup", "name": "Wesley Safadão" },
+    { "@type": "PerformingGroup", "name": "Bruno & Marrone" },
+    { "@type": "PerformingGroup", "name": "Simone Mendes" },
+    { "@type": "PerformingGroup", "name": "Alexandre Pires" },
+    { "@type": "PerformingGroup", "name": "Michel Teló" },
+    { "@type": "PerformingGroup", "name": "Zezé Di Camargo & Luciano" },
+    { "@type": "PerformingGroup", "name": "Paula Fernandes" },
+    { "@type": "PerformingGroup", "name": "Matheus & Kauan" },
+    { "@type": "PerformingGroup", "name": "Calcinha Preta" }
+  ]
 }
 </script>
 
@@ -258,28 +288,49 @@
 <script src="assets/app.js"></script>
 <script src="assets/premium.js"></script>
 
-<!-- MOTOR MULTI-CIDADE (Aqui Tem) — versão robusta (final do body) -->
+
+<!-- MOTOR MULTI-CIDADE (Aqui Tem) — override global -->
 <script>
-(function(){
+(function () {
   var CIDADES = {
-    "www":     {nome:"Barretos",          uf:"SP", cor:"#C9A227"},
-    "gramado": {nome:"Gramado",           uf:"RS", cor:"#B11226"},
-    "campos":  {nome:"Campos do Jordão",  uf:"SP", cor:"#7b5cd6"}
+    "www":     ["Barretos", "SP"],
+    "gramado": ["Gramado", "RS"],
+    "campos":  ["Campos do Jordão", "SP"]
   };
-  var h = location.hostname.split(".");
-  var sub = (h[0]||"www").toLowerCase();
-  if(sub==="www" || h.length<=2 || sub==="localhost") sub="www";
-  var c = CIDADES[sub] || CIDADES["www"];
-  window.CIDADE = c;
-  function trocar(){
-    document.querySelectorAll("[data-cidade-nome]").forEach(function(el){ el.textContent = c.nome; });
-    document.querySelectorAll("[data-cidade-uf]").forEach(function(el){ el.textContent = c.uf; });
-    document.documentElement.style.setProperty("--cor-cidade", c.cor);
-    document.title = "Aqui Tem Achadinhos — Onde " + c.nome + " encontra. | Guia de " + c.nome;
+  var partes = location.hostname.split(".");
+  var sub = (partes[0] || "www").toLowerCase();
+  if (sub === "www" || partes.length <= 2 || sub === "localhost") sub = "www";
+  var par = CIDADES[sub] || CIDADES["www"];
+  var CIDADE = par[0], UF = par[1];
+  window.CIDADE = { nome: CIDADE, uf: UF };
+  function trocaTexto(s) {
+    return s.split("Barretos/SP").join(CIDADE + "/" + UF)
+            .split("Barretos, SP").join(CIDADE + ", " + UF)
+            .split("Barretos · SP").join(CIDADE + " · " + UF)
+            .split("Barretos").join(CIDADE);
   }
-  trocar();                                   // DOM já existe (estamos no fim do body)
-  document.addEventListener("DOMContentLoaded", trocar);  // segurança extra
-  console.log("Cidade ativa:", c.nome);
+  function percorre(no) {
+    if (no.nodeType === 3) {
+      if (no.nodeValue && no.nodeValue.indexOf("Barretos") !== -1) no.nodeValue = trocaTexto(no.nodeValue);
+    } else if (no.nodeType === 1 && no.tagName !== "SCRIPT" && no.tagName !== "STYLE") {
+      var f = no.childNodes, i;
+      for (i = 0; i < f.length; i++) percorre(f[i]);
+    }
+  }
+  var rodando = false;
+  function aplicar() {
+    if (rodando) return; rodando = true;
+    try {
+      if (document.body) percorre(document.body);
+      if (document.title && document.title.indexOf("Barretos") !== -1) document.title = trocaTexto(document.title);
+    } catch (e) {} rodando = false;
+  }
+  if (document.body) aplicar();
+  document.addEventListener("DOMContentLoaded", aplicar);
+  window.addEventListener("load", aplicar);
+  setTimeout(aplicar, 150);
+  setTimeout(aplicar, 600);
+  setTimeout(aplicar, 1500);
 })();
 </script>
 </body>
