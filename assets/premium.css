@@ -244,9 +244,33 @@
     background:radial-gradient(50% 50% at 50% 50%, rgba(240,194,75,.55), rgba(230,57,70,.25) 60%, transparent 75%);
     will-change:opacity}
   .bull{position:relative;width:100%}
-  .bull3d-canvas{position:relative;width:100%;aspect-ratio:883/610;border-radius:40px;overflow:hidden;
-    box-shadow:0 60px 120px -30px rgba(0,0,0,.8),0 0 0 1px rgba(255,255,255,.12),0 0 120px rgba(240,194,75,.22)}
-  .bull3d-canvas canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
+  .bull3d-canvas{position:relative;width:100%;aspect-ratio:883/610;border-radius:40px;overflow:visible;
+    perspective:1300px;perspective-origin:50% 42%}
+  .bull3d-tilt{position:relative;width:100%;height:100%;transform-style:preserve-3d;will-change:transform;
+    transition:transform .12s ease-out}
+  .bull3d-tilt img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;display:block;
+    filter:drop-shadow(0 34px 44px rgba(0,0,0,.55)) drop-shadow(0 0 46px rgba(240,194,75,.2));
+    will-change:transform;transform:translateZ(30px)}
+  /* brilho que varre o corpo (dá vida ao cromado) */
+  .bull3d-sheen{position:absolute;inset:0;pointer-events:none;mix-blend-mode:overlay;opacity:.85;
+    background:linear-gradient(115deg,transparent 22%,rgba(255,255,255,.9) 40%,rgba(255,217,122,1) 48%,transparent 64%);
+    background-size:260% 100%;background-position:125% 0;
+    animation:sheen 4.6s cubic-bezier(.4,0,.2,1) infinite;will-change:background-position}
+  @keyframes sheen{0%{background-position:130% 0}55%{background-position:-45% 0}100%{background-position:-45% 0}}
+  /* reflexo no chão */
+  .bull3d-reflect{position:absolute;left:6%;right:6%;top:92%;height:52%;pointer-events:none;
+    background:url('assets/bull-3d.webp') no-repeat center top/contain;
+    transform:scaleY(-1);opacity:.2;filter:blur(1.5px);
+    -webkit-mask-image:linear-gradient(180deg,rgba(0,0,0,.85) 0%,transparent 72%);
+            mask-image:linear-gradient(180deg,rgba(0,0,0,.85) 0%,transparent 72%);
+    will-change:transform,opacity}
+  /* partículas douradas */
+  .bull3d-dust{position:absolute;inset:-8%;pointer-events:none;overflow:visible}
+  .bull3d-dust span{position:absolute;border-radius:50%;
+    background:radial-gradient(circle,rgba(255,217,122,.95),rgba(240,194,75,0) 70%);
+    opacity:0;animation:bd-rise linear infinite;will-change:transform,opacity}
+  @keyframes bd-rise{0%{transform:translateY(0) translateX(0) scale(.5);opacity:0}
+    12%{opacity:.85}100%{transform:translateY(-190px) translateX(var(--dx,20px)) scale(1.05);opacity:0}}
   .bull::after{content:"";position:absolute;inset:0;pointer-events:none;
     background:linear-gradient(180deg,transparent 55%,rgba(11,30,63,.55) 100%)}
   .bull-cap{position:absolute;left:0;right:0;bottom:18px;z-index:2;display:flex;justify-content:center;gap:10px;flex-wrap:wrap;padding:0 18px;opacity:0;transition:opacity .4s;will-change:opacity}
@@ -269,10 +293,3 @@
     background:linear-gradient(90deg,var(--gold-2),var(--gold));box-shadow:0 0 12px rgba(240,194,75,.7);
     will-change:width}
 
-  .ar-hidden{display:none!important}
-  #arBtn.ar-visible{display:inline-flex!important}
-  #arBtn{display:none;position:absolute;left:50%;bottom:14px;transform:translateX(-50%);z-index:5;
-    font:700 13px 'Plus Jakarta Sans',sans-serif;color:#0B1E3F;background:linear-gradient(135deg,var(--gold-2),var(--gold));
-    border:none;border-radius:999px;padding:11px 20px;cursor:pointer;gap:8px;align-items:center;
-    box-shadow:0 8px 24px rgba(240,194,75,.45);transition:.25s}
-  #arBtn:hover{transform:translateX(-50%) translateY(-2px)}
