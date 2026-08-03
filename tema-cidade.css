@@ -1,27 +1,10 @@
-/* ============================================================
-   SISTEMA DE TEMA POR CIDADE (CORRIGIDO) — hero dark premium + brilho da cor
-   O motor (app.js) define --accent/--accent-d/--accent-s por cidade.
-   ============================================================ */
-:root{
-  --accent:#dc2626;      /* padrão (Barretos) */
-  --accent-d:#991b1b;
-  --accent-s:#fecaca;
-}
-/* Hero DARK premium (igual ao original) + brilho sutil da cor da cidade no canto */
-.cidade-hero{
-  position:relative;
-  background:
-    radial-gradient(55% 70% at 80% -8%, color-mix(in srgb, var(--accent) 55%, transparent), transparent 62%),
-    linear-gradient(160deg,#060f27,#0B1E3F);
-}
-/* Botão principal na cor da cidade */
+/* TEMA POR CIDADE — cores via CSS fixo por cidade ({slug}-tema.css) */
+.cidade-hero{position:relative;overflow:hidden;background:linear-gradient(180deg,rgba(6,15,39,.22) 0%,rgba(6,15,39,.55) 100%),linear-gradient(155deg,var(--accent) 0%,#060f27 70%)}
 .cidade-btn{background:var(--accent);color:#fff;transition:background .2s}
 .cidade-btn:hover{background:var(--accent-d)}
-/* Textos/selo na cor da cidade */
 .cidade-text{color:var(--accent)}
 .cidade-eyebrow{color:var(--accent)}
 .cidade-stat{color:var(--accent)}
 .cidade-chip{background:var(--accent-s);color:#0e1322}
-/* Realce do card na cor da cidade */
 .cidade-card{transition:box-shadow .2s}
-.cidade-card:hover{box-shadow:0 18px 40px rgba(0,0,0,.18), inset 0 0 0 2px var(--accent-s)}
+.cidade-card:hover{box-shadow:0 18px 40px rgba(0,0,0,.18),inset 0 0 0 2px var(--accent-s)}
