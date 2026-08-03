@@ -90,7 +90,8 @@
 </script>
 
 </head>
-<body data-page="home">
+<div id="__dbg" style="position:fixed;bottom:0;left:0;right:0;background:#000;color:#0f0;font:bold 13px monospace;padding:10px;z-index:999999;text-align:center;border-top:3px solid #0f0">🔍 DEBUG: analisando o site...</div><body data-page="home">
+<div id="__dbg" style="position:fixed;bottom:0;left:0;right:0;background:#000;color:#0f0;font:bold 13px monospace;padding:10px;z-index:999999;text-align:center;border-top:3px solid #0f0">🔍 DEBUG: analisando o site...</div>
 
 <div class="bg-scene"></div>
 <div class="bg-grid"></div>
@@ -339,6 +340,20 @@
     var obs = new MutationObserver(function () { aplicar(); });
     obs.observe(document.body, { childList: true, subtree: true, characterData: true });
   }
+})();
+</script>
+<script>
+(function(){
+  function rel(){
+    var h=location.hostname;
+    var sub=h.split(".")[0];
+    var espero=({www:"Barretos",gramado:"Gramado",campos:"Campos do Jordão"}[sub])||"Barretos (?)";
+    var cab=document.getElementById("site-header");
+    var t=cab?cab.textContent.replace(/\s+/g," ").trim():"(cabecalho vazio)";
+    var d=document.getElementById("__dbg");
+    if(d) d.textContent="HOST="+h+" | espero="+espero+" | motor="+(window.CIDADE?("RODOU: "+window.CIDADE.nome):"NAO RODOU")+" | topo=["+t.slice(0,45)+"]";
+  }
+  setTimeout(rel,400);setTimeout(rel,1800);setTimeout(rel,3500);
 })();
 </script>
 </body>
