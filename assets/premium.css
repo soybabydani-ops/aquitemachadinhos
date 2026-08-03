@@ -269,6 +269,8 @@
     background:linear-gradient(90deg,var(--gold-2),var(--gold));box-shadow:0 0 12px rgba(240,194,75,.7);
     will-change:width}
 
+  .ar-hidden{display:none!important}
+  #arBtn.ar-visible{display:inline-flex!important}
   #arBtn{display:none;position:absolute;left:50%;bottom:14px;transform:translateX(-50%);z-index:5;
     font:700 13px 'Plus Jakarta Sans',sans-serif;color:#0B1E3F;background:linear-gradient(135deg,var(--gold-2),var(--gold));
     border:none;border-radius:999px;padding:11px 20px;cursor:pointer;gap:8px;align-items:center;

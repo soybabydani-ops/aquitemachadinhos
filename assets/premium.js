@@ -289,7 +289,7 @@
   if (arBtn && navigator.xr) {
     if (navigator.xr.isSessionSupported) {
       navigator.xr.isSessionSupported('immersive-ar').then(function (ok) {
-        if (ok) arBtn.style.display = 'inline-flex';
+        if (ok) arBtn.classList.remove('ar-hidden'), arBtn.classList.add('ar-visible');
       }).catch(function () {});
     }
     arBtn.addEventListener('click', function () {
@@ -300,7 +300,7 @@
             renderer.xr.setSession(session);
             bull.position.set(0, 0.5, -1.5);
             bull.scale.setScalar(0.9);
-          }).catch(function () { arBtn.style.display = 'none'; });
+          }).catch(function () { arBtn.classList.add('ar-hidden'); });
       } catch (e) {}
     });
   }
