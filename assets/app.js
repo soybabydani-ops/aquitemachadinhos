@@ -1,35 +1,84 @@
-/* MOTOR MULTI-CIDADE v5 (tema por cidade) */
+/* === BOTAO CTA "Quero mais clientes" (Aqui Tem Achadinhos) === */
 (function(){
+  function criarCTA(){
+    if(document.getElementById('ctaMaoFree')) return;
+    if(!document.body) return;
+    var a=document.createElement('a');
+    a.id='ctaMaoFree';
+    a.href='https://docs.google.com/forms/d/e/1FAIpQLSdEIq9IrOb7I5q1FFVGXC2_6p9zchhKkq7NfZhG4GUQOSfAIA/viewform';
+    a.target='_blank'; a.rel='noopener';
+    var s=a.style;
+    s.position='fixed'; s.right='16px'; s.bottom='80px'; s.zIndex='99998';
+    s.background='linear-gradient(135deg,#16a34a,#22c55e)'; s.color='#ffffff';
+    s.fontFamily='inherit'; s.fontWeight='700'; s.fontSize='14px';
+    s.padding='14px 18px'; s.borderRadius='16px';
+    s.boxShadow='0 12px 30px rgba(0,0,0,.35)';
+    s.display='flex'; s.flexDirection='column'; s.alignItems='center'; s.gap='2px';
+    s.textDecoration='none'; s.maxWidth='62vw'; s.lineHeight='1.2';
+    var e=document.createElement('span'); e.textContent='🚀'; e.style.fontSize='20px';
+    var t=document.createElement('span'); t.textContent='Quero mais clientes em Barretos';
+    var sub=document.createElement('span'); sub.textContent='cadastro grátis no guia';
+    sub.style.fontWeight='500'; sub.style.fontSize='11px'; sub.style.opacity='.9';
+    a.appendChild(e); a.appendChild(t); a.appendChild(sub);
+    document.body.appendChild(a);
+    setInterval(function(){ s.boxShadow='0 12px 30px rgba(34,197,94,.65)'; setTimeout(function(){ s.boxShadow='0 12px 30px rgba(0,0,0,.35)'; },900); },4000);
+  }
+  if(document.body) criarCTA();
+  document.addEventListener('DOMContentLoaded', criarCTA);
+  setTimeout(criarCTA, 800);
+})();
+/* === FIM BOTAO CTA === */
+
+/* === MOTOR MULTI-CIDADE (Aqui Tem) — v4 EXTERNO (compatível CSP) === */
+(function () {
   var CIDADES = {
-    "gramado":{nome:"Gramado",uf:"RS",a:"#166534",d:"#14532D",s:"#BBF7D0"},
-    "campos":{nome:"Campos do Jordão",uf:"SP",a:"#7C3AED",d:"#6D28D9",s:"#DDD6FE"},
-    "salvador":{nome:"Salvador",uf:"BA",a:"#CA8A04",d:"#A16207",s:"#FEF08A"},
-    "buzios":{nome:"Búzios",uf:"RJ",a:"#0891B2",d:"#0E7490",s:"#CFFAFE"},
-    "florianopolis":{nome:"Florianópolis",uf:"SC",a:"#2563EB",d:"#1D4ED8",s:"#BFDBFE"},
-    "porto":{nome:"Porto de Galinhas",uf:"PE",a:"#0D9488",d:"#0F766E",s:"#99F6E4"},
-    "jericoacoara":{nome:"Jericoacoara",uf:"CE",a:"#EA580C",d:"#C2410C",s:"#FED7AA"},
-    "caruaru":{nome:"Caruaru",uf:"PE",a:"#BE123C",d:"#9F1239",s:"#FECDD3"},
-    "blumenau":{nome:"Blumenau",uf:"SC",a:"#78350F",d:"#5C2A0A",s:"#FDE68A"},
-    "bonito":{nome:"Bonito",uf:"MS",a:"#059669",d:"#047857",s:"#A7F3D0"}
+    "www": ["Barretos","SP"], "gramado": ["Gramado","RS"], "campos": ["Campos do Jordão","SP"],
+    "salvador": ["Salvador","BA"], "buzios": ["Búzios","RJ"], "florianopolis": ["Florianópolis","SC"],
+    "porto": ["Porto de Galinhas","PE"], "jericoacoara": ["Jericoacoara","CE"],
+    "caruaru": ["Caruaru","PE"], "blumenau": ["Blumenau","SC"], "bonito": ["Bonito","MS"]
   };
   var partes = location.hostname.split(".");
-  var sub = (partes[0]||"www").toLowerCase();
-  if(sub==="www"||partes.length<=2||sub==="localhost") sub="www";
-  if(sub!=="www" && (location.pathname==="/"||location.pathname==="/index.html")){ location.replace("/"+sub+"-home.html"); }
-  var c = CIDADES[sub];
-  if(!c){ return; }
-  window.CIDADE = c;
-  var r = document.documentElement.style;
-  r.setProperty("--accent", c.a); r.setProperty("--accent-d", c.d); r.setProperty("--accent-s", c.s);
-  function tem(x){return x&&(x.indexOf("Barretos")!==-1||x.indexOf("BARRETOS")!==-1);}
-  function tr(x){return x.split("BARRETOS").join(c.nome.toUpperCase()).split("Barretos").join(c.nome);}
-  function per(no){if(no.nodeType===3){if(tem(no.nodeValue))no.nodeValue=tr(no.nodeValue);}else if(no.nodeType===1&&no.tagName!=="SCRIPT"&&no.tagName!=="STYLE"){var f=no.childNodes,i;for(i=0;i<f.length;i++)per(f[i]);}}
-  function aplicar(){try{if(document.body)per(document.body);if(tem(document.title))document.title=tr(document.title);}catch(e){}}
-  if(document.body)aplicar();
-  document.addEventListener("DOMContentLoaded",aplicar);setTimeout(aplicar,200);setTimeout(aplicar,800);setTimeout(aplicar,1800);
+  var sub = (partes[0] || "www").toLowerCase();
+  if (sub === "www" || partes.length <= 2 || sub === "localhost") sub = "www";
+  if (sub !== "www" && (location.pathname === "/" || location.pathname === "/index.html")) { location.replace("/" + sub + "-home.html"); }
+  var par = CIDADES[sub] || CIDADES["www"];
+  var CIDADE = par[0], UF = par[1], CIDUP = CIDADE.toUpperCase();
+  window.CIDADE = { nome: CIDADE, uf: UF };
+  function temCidade(s) { return s && (s.indexOf("Barretos") !== -1 || s.indexOf("BARRETOS") !== -1 || s.indexOf("barretos") !== -1); }
+  function trocaTexto(s) {
+    return s.split("BARRETOS/SP").join(CIDUP + "/" + UF)
+            .split("BARRETOS").join(CIDUP)
+            .split("Barretos/SP").join(CIDADE + "/" + UF)
+            .split("Barretos, SP").join(CIDADE + ", " + UF)
+            .split("Barretos · SP").join(CIDADE + " · " + UF)
+            .split("Barretos").join(CIDADE)
+            .split("barretos").join(CIDADE.toLowerCase());
+  }
+  function percorre(no) {
+    if (no.nodeType === 3) {
+      if (temCidade(no.nodeValue)) no.nodeValue = trocaTexto(no.nodeValue);
+    } else if (no.nodeType === 1 && no.tagName !== "SCRIPT" && no.tagName !== "STYLE") {
+      var f = no.childNodes, i;
+      for (i = 0; i < f.length; i++) percorre(f[i]);
+    }
+  }
+  var rodando = false;
+  function aplicar() {
+    if (rodando) return; rodando = true;
+    try {
+      if (document.body) percorre(document.body);
+      if (temCidade(document.title)) document.title = trocaTexto(document.title);
+      var dbg = document.getElementById("__dbg"); if (dbg) dbg.remove();
+    } catch (e) {} rodando = false;
+  }
+  if (document.body) aplicar();
+  document.addEventListener("DOMContentLoaded", aplicar);
+  window.addEventListener("load", aplicar);
+  setTimeout(aplicar, 150); setTimeout(aplicar, 600); setTimeout(aplicar, 1500);
+  setTimeout(aplicar, 3000);
 })();
-/* BOTAO CTA */
-(function(){function ct(){if(document.getElementById("ctaMaoFree")||!document.body)return;var a=document.createElement("a");a.id="ctaMaoFree";a.href="https://docs.google.com/forms/d/e/1FAIpQLSdEIq9IrOb7I5q1FFVGXC2_6p9zchhKkq7NfZhG4GUQOSfAIA/viewform";a.target="_blank";a.rel="noopener";var s=a.style;s.position="fixed";s.right="16px";s.bottom="80px";s.zIndex="99998";s.background="linear-gradient(135deg,#16a34a,#22c55e)";s.color="#fff";s.fontWeight="700";s.fontSize="14px";s.padding="14px 18px";s.borderRadius="16px";s.boxShadow="0 12px 30px rgba(0,0,0,.35)";s.display="flex";s.flexDirection="column";s.alignItems="center";s.gap="2px";s.textDecoration="none";s.maxWidth="62vw";s.lineHeight="1.2";var e=document.createElement("span");e.textContent="\u{1F680}";e.style.fontSize="20px";var t=document.createElement("span");t.textContent="Quero mais clientes";var u=document.createElement("span");u.textContent="cadastro gratis";u.style.fontWeight="500";u.style.fontSize="11px";u.style.opacity=".9";a.appendChild(e);a.appendChild(t);a.appendChild(u);document.body.appendChild(a);setInterval(function(){s.boxShadow="0 12px 30px rgba(34,197,94,.65)";setTimeout(function(){s.boxShadow="0 12px 30px rgba(0,0,0,.35)"},900)},4000);}if(document.body)ct();document.addEventListener("DOMContentLoaded",ct);setTimeout(ct,800);})();
+/* === FIM MOTOR MULTI-CIDADE === */
+
 /* ============================================================
    AQUI TEM ACHADINHOS — app.js (v2 / plataforma) — COMPLETO
    Banco real (Supabase) + fallback local. Empresas, ofertas,
