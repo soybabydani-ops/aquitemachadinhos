@@ -1,27 +1,5 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-<!-- MOTOR MULTI-CIDADE (Aqui Tem) -->
-<script>
-(function(){
-  var CIDADES = {
-    "www":     {nome:"Barretos",          uf:"SP", cor:"#C9A227"},
-    "gramado": {nome:"Gramado",           uf:"RS", cor:"#B11226"},
-    "campos":  {nome:"Campos do Jordão",  uf:"SP", cor:"#7b5cd6"}
-  };
-  var h = location.hostname.split(".");
-  var sub = (h[0]||"www").toLowerCase();
-  if(sub==="www" || h.length<=2 || sub==="localhost") sub="www";
-  var c = CIDADES[sub] || CIDADES["www"];
-  window.CIDADE = c;
-  document.addEventListener("DOMContentLoaded", function(){
-    document.querySelectorAll("[data-cidade-nome]").forEach(function(el){ el.textContent = c.nome; });
-    document.querySelectorAll("[data-cidade-uf]").forEach(function(el){ el.textContent = c.uf; });
-    document.documentElement.style.setProperty("--cor-cidade", c.cor);
-    document.title = "Aqui Tem Achadinhos — Onde " + c.nome + " encontra. | Guia de " + c.nome;
-  });
-  console.log("Cidade ativa:", c.nome);
-})();
-</script>
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>Aqui Tem Achadinhos — Onde Barretos encontra. | Guia de Barretos</title>
@@ -280,5 +258,29 @@
 <script src="assets/app.js"></script>
 <script src="assets/premium.js"></script>
 
+<!-- MOTOR MULTI-CIDADE (Aqui Tem) — versão robusta (final do body) -->
+<script>
+(function(){
+  var CIDADES = {
+    "www":     {nome:"Barretos",          uf:"SP", cor:"#C9A227"},
+    "gramado": {nome:"Gramado",           uf:"RS", cor:"#B11226"},
+    "campos":  {nome:"Campos do Jordão",  uf:"SP", cor:"#7b5cd6"}
+  };
+  var h = location.hostname.split(".");
+  var sub = (h[0]||"www").toLowerCase();
+  if(sub==="www" || h.length<=2 || sub==="localhost") sub="www";
+  var c = CIDADES[sub] || CIDADES["www"];
+  window.CIDADE = c;
+  function trocar(){
+    document.querySelectorAll("[data-cidade-nome]").forEach(function(el){ el.textContent = c.nome; });
+    document.querySelectorAll("[data-cidade-uf]").forEach(function(el){ el.textContent = c.uf; });
+    document.documentElement.style.setProperty("--cor-cidade", c.cor);
+    document.title = "Aqui Tem Achadinhos — Onde " + c.nome + " encontra. | Guia de " + c.nome;
+  }
+  trocar();                                   // DOM já existe (estamos no fim do body)
+  document.addEventListener("DOMContentLoaded", trocar);  // segurança extra
+  console.log("Cidade ativa:", c.nome);
+})();
+</script>
 </body>
 </html>
