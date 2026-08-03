@@ -1,5 +1,5 @@
 // premium.js — Aqui Tem Achadinhos (externo por causa da CSP)
-// v10: Reveal + cenas de scroll + TOURO 3D com a imagem premium (WebGL)
+// v11: RELEVO 3D REAL (depth displacement) + galope + parallax + tilt + WebXR
 
 /* ============================================================
    1) REVEAL
@@ -22,7 +22,7 @@
 })();
 
 /* ============================================================
-   2) SCROLL CHOREOGRAPHY (cenas do topo)
+   2) SCROLL CHOREOGRAPHY (cenas do topo) — drive o 3D
    ============================================================ */
 (function () {
   var pin = document.querySelector('.bull-pin');
@@ -37,7 +37,7 @@
   var bar = pin.querySelector('.bs-progress span');
 
   var KEYS = [0, 0.25, 0.5, 0.75, 1];
-  var SCALE = [0.8, 1.08, 1.28, 1.1, 0.95];
+  var SCALE = [0.78, 1.06, 1.26, 1.08, 0.94];
   var BG = [[11,30,63],[13,34,74],[58,20,28],[10,22,45],[11,30,63]];
 
   var mx = 0, my = 0, smx = 0, smy = 0;
@@ -105,9 +105,13 @@
 })();
 
 /* ============================================================
-   3) TOURO 3D — imagem premium em ambiente WebGL 3D de verdade
-      (textura alpha, partículas douradas 3D, reflexo no chão,
-       câmera que orbita com o mouse e dá zoom no scroll)
+   3) TOURO — RELEVO 3D REAL (Three.js/WebGL)
+      • malha deformada por mapa de profundidade (relevo de verdade)
+      • galope furioso bem visível + investidas
+      • parallax: câmera cinematográfica guiada pelo scroll
+      • 3D tilt: câmera/grupo seguem o mouse
+      • partículas douradas em 3D + reflexo no chão
+      • WebXR (Realidade Aumentada) se o aparelho suportar
    ============================================================ */
 (function () {
   var canvas = document.getElementById('bull3d');
@@ -121,119 +125,184 @@
   renderer.shadowMap.enabled = true;
 
   var scene = new THREE.Scene();
-  var camera = new THREE.PerspectiveCamera(42, 1, 0.1, 100);
-  camera.position.set(0, 0, 6.2);
-  camera.lookAt(0, 0, 0);
+  var camera = new THREE.PerspectiveCamera(40, 1, 0.1, 100);
+  camera.position.set(0, 0.15, 6.4);
+  camera.lookAt(0, 0.05, 0);
 
-  /* --- luzes para as partículas e o ambiente --- */
-  scene.add(new THREE.HemisphereLight(0xffffff, 0x0B1E3F, 0.7));
-  var gold = new THREE.PointLight(0xF0C24B, 2.2, 12);
-  gold.position.set(2.5, 3, 3);
-  scene.add(gold);
-  var red = new THREE.PointLight(0xE63946, 1.4, 12);
-  red.position.set(-3, 1, -3);
-  scene.add(red);
+  /* ---------- LUZES ---------- */
+  scene.add(new THREE.HemisphereLight(0xffffff, 0x0B1E3F, 0.75));
+  var key = new THREE.DirectionalLight(0xF0C24B, 2.6);
+  key.position.set(4, 5, 4); scene.add(key);
+  var rim = new THREE.DirectionalLight(0xE63946, 1.8);
+  rim.position.set(-5, 2, -4); scene.add(rim);
+  var fill = new THREE.DirectionalLight(0x9fb8e8, 0.9);
+  fill.position.set(0, 1, -5); scene.add(fill);
+  var goldPoint = new THREE.PointLight(0xFFD97A, 1.2, 8);
+  goldPoint.position.set(1.5, 2.5, 2); scene.add(goldPoint);
 
-  /* --- O TOURO (a imagem premium como objeto 3D) --- */
-  var bullGroup = new THREE.Group();
-  scene.add(bullGroup);
-
-  new THREE.TextureLoader().load('assets/bull-3d.webp', function (tex) {
-    tex.encoding = THREE.sRGBEncoding;
-    var mat = new THREE.MeshBasicMaterial({
-      map: tex, transparent: true, alphaTest: 0.05, depthWrite: false, side: THREE.DoubleSide
-    });
-    var w = 4.4, h = w * (622 / 1069); // proporção da imagem recortada
-    var mesh = new THREE.Mesh(new THREE.PlaneGeometry(w, h), mat);
-    bullGroup.add(mesh);
-
-    /* reflexo no chão (cópia espelhada, esmaecida) */
-    var refMat = new THREE.MeshBasicMaterial({
-      map: tex, transparent: true, opacity: 0.16, alphaTest: 0.05,
-      depthWrite: false, side: THREE.DoubleSide
-    });
-    var ref = new THREE.Mesh(new THREE.PlaneGeometry(w, h), refMat);
-    ref.rotation.x = Math.PI;
-    ref.position.y = -h / 2 - 0.22;
-    ref.scale.y = -1;
-    bullGroup.add(ref);
-  });
-
-  /* --- partículas douradas em 3D --- */
-  var N = 260;
-  var pos = new Float32Array(N * 3);
-  var vel = new Float32Array(N);
-  for (var i = 0; i < N; i++) {
-    pos[i * 3] = (Math.random() - 0.5) * 12;
-    pos[i * 3 + 1] = (Math.random() - 0.5) * 7;
-    pos[i * 3 + 2] = (Math.random() - 0.5) * 6;
-    vel[i] = 0.15 + Math.random() * 0.5;
-  }
-  var geo = new THREE.BufferGeometry();
-  geo.setAttribute('position', new THREE.BufferAttribute(pos, 3));
-  var pm = new THREE.PointsMaterial({
-    color: 0xFFD97A, size: 0.07, transparent: true, opacity: 0.85,
-    blending: THREE.AdditiveBlending, depthWrite: false
-  });
-  var points = new THREE.Points(geo, pm);
-  scene.add(points);
-
-  /* --- chão com reflexo suave --- */
+  /* ---------- CHÃO com reflexo (espelhado, estilo anamórfico) ---------- */
   var floor = new THREE.Mesh(
-    new THREE.CircleGeometry(7, 48),
-    new THREE.MeshBasicMaterial({ color: 0x0a1a36, transparent: true, opacity: 0.85 })
+    new THREE.CircleGeometry(8, 48),
+    new THREE.MeshPhysicalMaterial({ color: 0x0a1a36, metalness: 0.85, roughness: 0.28, clearcoat: 0.7 })
   );
   floor.rotation.x = -Math.PI / 2;
-  floor.position.y = -h_floor();
+  floor.position.y = -1.42;
+  floor.receiveShadow = true;
   scene.add(floor);
 
-  function h_floor() { return -(622 / 1069) * 4.4 / 2 - 0.22; }
+  /* ---------- GRUPO DO TOURO ---------- */
+  var bull = new THREE.Group();
+  scene.add(bull);
 
-  /* --- estado --- */
+  var W = 4.6, H = W * (622 / 1069);
+
+  /* carrega o depth map ANTES de montar a malha (robusto) */
+  function loadDepth(cb) {
+    var img = new Image();
+    img.onload = function () {
+      try {
+        var c = document.createElement('canvas');
+        c.width = img.width; c.height = img.height;
+        var ctx = c.getContext('2d');
+        ctx.drawImage(img, 0, 0);
+        cb(ctx.getImageData(0, 0, c.width, c.height));
+      } catch (e) { cb(null); }
+    };
+    img.onerror = function () { cb(null); };
+    img.src = 'assets/bull-depth.webp';
+  }
+
+  loadDepth(function (depthData) {
+    var segX = 130, segY = 76;
+    var geo = new THREE.PlaneGeometry(W, H, segX, segY);
+    var pos = geo.attributes.position;
+
+    if (depthData) {
+      var dw = depthData.width, dh = depthData.height, dd = depthData.data;
+      var maxZ = 0.92;
+      for (var i = 0; i < pos.count; i++) {
+        var u = pos.getX(i) / W + 0.5;
+        var v = 1 - (pos.getY(i) / H + 0.5);
+        var px = Math.min(dw - 1, Math.max(0, Math.round(u * (dw - 1))));
+        var py = Math.min(dh - 1, Math.max(0, Math.round(v * (dh - 1))));
+        var d = dd[(py * dw + px) * 4] / 255;
+        pos.setZ(i, (d - 0.35) * maxZ * 2.2);
+      }
+      pos.needsUpdate = true;
+      geo.computeVertexNormals();
+    }
+
+    new THREE.TextureLoader().load('assets/bull-3d.webp', function (tex) {
+      tex.encoding = THREE.sRGBEncoding;
+      var mat = new THREE.MeshStandardMaterial({
+        map: tex, transparent: true, alphaTest: 0.06,
+        roughness: 0.42, metalness: 0.28,
+        side: THREE.DoubleSide, depthWrite: false
+      });
+      var mesh = new THREE.Mesh(geo, mat);
+      mesh.castShadow = true;
+      bull.add(mesh);
+    });
+  });
+
+  /* ---------- PARTÍCULAS DOURADAS 3D ---------- */
+  var N = 300;
+  var pPos = new Float32Array(N * 3);
+  var pVel = new Float32Array(N);
+  for (var i = 0; i < N; i++) {
+    pPos[i * 3] = (Math.random() - 0.5) * 13;
+    pPos[i * 3 + 1] = (Math.random() - 0.5) * 7.5;
+    pPos[i * 3 + 2] = (Math.random() - 0.5) * 6;
+    pVel[i] = 0.12 + Math.random() * 0.5;
+  }
+  var pGeo = new THREE.BufferGeometry();
+  pGeo.setAttribute('position', new THREE.BufferAttribute(pPos, 3));
+  var pMat = new THREE.PointsMaterial({
+    color: 0xFFD97A, size: 0.075, transparent: true, opacity: 0.9,
+    blending: THREE.AdditiveBlending, depthWrite: false
+  });
+  var points = new THREE.Points(pGeo, pMat);
+  scene.add(points);
+
+  /* ---------- ESTADO ---------- */
   var t = 0, scroll = 0, smx = 0, smy = 0;
+  var chargePhase = Math.random() * 10;
+
   window.__bull3d = {
     setScroll: function (p, x, y) { scroll = p; smx = x; smy = y; },
-    getBull: function () { return bullGroup; },
+    getBull: function () { return bull; },
     getCamera: function () { return camera; }
   };
 
+  /* ===== GALOPE FURIOSO (amplitudes grandes e visíveis) ===== */
   function frame() {
     requestAnimationFrame(frame);
     t += 0.016;
 
-    /* touro: levita com respiração + balanço 3D + investida furiosa */
-    var charge = Math.pow(Math.max(0, Math.sin(t * 0.9 + 1.2)), 22);
-    bullGroup.position.y = Math.sin(t * 1.5) * 0.06 + charge * 0.1;
-    bullGroup.position.z = charge * 0.5;
-    bullGroup.rotation.y = Math.sin(t * 0.8) * 0.05 + smx * 0.35 + charge * 0.25;
-    bullGroup.rotation.x = Math.sin(t * 1.1) * 0.03 + smy * 0.2 - charge * 0.2;
-    bullGroup.rotation.z = Math.sin(t * 0.7) * 0.015;
-    bullGroup.scale.setScalar(1 + Math.sin(t * 1.4) * 0.008 + charge * 0.12);
+    /* investida furiosa a cada ~6s */
+    var charge = Math.pow(Math.max(0, Math.sin(t * 1.6 + chargePhase)), 20);
+
+    /* galope FURIOSO: coices grandes e visíveis */
+    var gallop = Math.sin(t * 6.6);
+    var buck = Math.sin(t * 2.1) * 0.38; // coices grandes e lentos
+    bull.rotation.x = gallop * 0.22 + buck * 0.85 + charge * 0.95 + smy * 0.2;
+    bull.rotation.z = Math.sin(t * 5.5) * 0.12 + Math.sin(t * 1.8) * 0.07;
+    bull.rotation.y = Math.sin(t * 0.9) * 0.3 + smx * 0.45 + charge * 0.4;
+
+    bull.position.y = Math.abs(gallop) * 0.5 + Math.sin(t * 1.6) * 0.1 + charge * 0.55 + smy * -0.25;
+    bull.position.z = charge * 1.6;
+    bull.position.x = smx * 0.3;
+
+    bull.scale.setScalar(1 + Math.sin(t * 1.6) * 0.012 + charge * 0.2);
 
     /* partículas sobem em 3D */
-    var pArr = geo.attributes.position.array;
+    var arr = pGeo.attributes.position.array;
     for (var i = 0; i < N; i++) {
-      pArr[i * 3 + 1] += vel[i] * 0.016;
-      if (pArr[i * 3 + 1] > 3.6) {
-        pArr[i * 3 + 1] = -3.6;
-        pArr[i * 3] = (Math.random() - 0.5) * 12;
+      arr[i * 3 + 1] += pVel[i] * 0.016;
+      if (arr[i * 3 + 1] > 3.8) {
+        arr[i * 3 + 1] = -3.8;
+        arr[i * 3] = (Math.random() - 0.5) * 13;
       }
     }
-    geo.attributes.position.needsUpdate = true;
-    points.rotation.y = t * 0.03;
+    pGeo.attributes.position.needsUpdate = true;
+    points.rotation.y = t * 0.035;
 
-    /* câmera: orbita com o mouse + zoom no scroll */
+    /* ===== PARALLAX DA CÂMERA (cinematográfica, guiada pelo scroll) ===== */
     var zoom = 0;
     if (scroll > 0.42 && scroll < 0.78) {
       zoom = scroll < 0.55 ? (scroll - 0.42) / 0.13 : (scroll > 0.65 ? (0.78 - scroll) / 0.13 : 1);
       zoom = Math.max(0, Math.min(1, zoom));
     }
-    camera.position.x = smx * 1.1;
-    camera.position.y = -smy * 0.7;
-    camera.position.z = 6.2 - zoom * 3.0;
-    camera.lookAt(smx * 0.3, -smy * 0.2 + zoom * 0.4, 0);
+    /* câmera: orbita suave (autônoma) + segue o mouse (tilt 3D) + scroll */
+    var camAngle = Math.sin(t * 0.13) * 0.5;            // órbita lenta automática
+    var camX = Math.sin(camAngle) * 0.9 + smx * 1.25;
+    var camY = 0.15 - smy * 0.85 + zoom * 0.55;
+    var camZ = 6.4 - zoom * 3.4 + Math.cos(camAngle) * 0.35;
+    camera.position.set(camX, camY, camZ);
+    camera.lookAt(smx * 0.35, 0.05 + zoom * 0.7 - smy * 0.3, 0);
 
     renderer.render(scene, camera);
+  }
+
+  /* ---------- WebXR (Realidade Aumentada) — só se o aparelho suportar ---------- */
+  var arBtn = document.getElementById('arBtn');
+  if (arBtn && navigator.xr) {
+    if (navigator.xr.isSessionSupported) {
+      navigator.xr.isSessionSupported('immersive-ar').then(function (ok) {
+        if (ok) arBtn.style.display = 'inline-flex';
+      }).catch(function () {});
+    }
+    arBtn.addEventListener('click', function () {
+      try {
+        renderer.xr.enabled = true;
+        navigator.xr.requestSession('immersive-ar', { optionalFeatures: ['local-floor', 'dom-overlay'] })
+          .then(function (session) {
+            renderer.xr.setSession(session);
+            bull.position.set(0, 0.5, -1.5);
+            bull.scale.setScalar(0.9);
+          }).catch(function () { arBtn.style.display = 'none'; });
+      } catch (e) {}
+    });
   }
 
   function resize() {
