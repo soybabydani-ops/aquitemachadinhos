@@ -73,10 +73,7 @@
   document.addEventListener("DOMContentLoaded", aplicar);
   window.addEventListener("load", aplicar);
   setTimeout(aplicar, 150); setTimeout(aplicar, 600); setTimeout(aplicar, 1500);
-  if (window.MutationObserver && document.body) {
-    var obs = new MutationObserver(function () { aplicar(); });
-    obs.observe(document.body, { childList: true, subtree: true, characterData: true });
-  }
+  setTimeout(aplicar, 3000);
 })();
 /* === FIM MOTOR MULTI-CIDADE === */
 
