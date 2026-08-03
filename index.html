@@ -4,9 +4,9 @@
 <script>
 (function(){
   var CIDADES = {
-    "www":     {nome:"Barretos",          cor:"#C9A227"},
-    "gramado": {nome:"Gramado",           cor:"#B11226"},
-    "campos":  {nome:"Campos do Jordão",  cor:"#7b5cd6"}
+    "www":     {nome:"Barretos",          uf:"SP", cor:"#C9A227"},
+    "gramado": {nome:"Gramado",           uf:"RS", cor:"#B11226"},
+    "campos":  {nome:"Campos do Jordão",  uf:"SP", cor:"#7b5cd6"}
   };
   var h = location.hostname.split(".");
   var sub = (h[0]||"www").toLowerCase();
@@ -15,14 +15,16 @@
   window.CIDADE = c;
   document.addEventListener("DOMContentLoaded", function(){
     document.querySelectorAll("[data-cidade-nome]").forEach(function(el){ el.textContent = c.nome; });
+    document.querySelectorAll("[data-cidade-uf]").forEach(function(el){ el.textContent = c.uf; });
     document.documentElement.style.setProperty("--cor-cidade", c.cor);
+    document.title = "Aqui Tem Achadinhos — Onde " + c.nome + " encontra. | Guia de " + c.nome;
   });
   console.log("Cidade ativa:", c.nome);
 })();
 </script>
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>Aqui Tem Achadinhos — Onde <span data-cidade-nome>Barretos</span> encontra. | Guia de Barretos</title>
+<title>Aqui Tem Achadinhos — Onde Barretos encontra. | Guia de Barretos</title>
 <meta name="description" content="O guia local de Barretos/SP: lojas, ofertas e serviços reais com contato direto no WhatsApp — e o guia completo da Festa do Peão. Onde Barretos encontra.">
 <link rel="manifest" href="manifest.webmanifest"><meta name="theme-color" content="#0B1E3F">
 <meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes">
@@ -93,8 +95,8 @@
 
 <!-- ===== HERO ===== -->
 <section class="hero">
-  <span class="badge reveal"><span class="dot"></span> Guia premium de Barretos · SP</span>
-  <h1 class="reveal" d08>Onde Barretos<br><span class="grad">encontra.</span></h1>
+  <span class="badge reveal"><span class="dot"></span> Guia premium de <span data-cidade-nome>Barretos</span> · <span data-cidade-uf>SP</span></span>
+  <h1 class="reveal" d08>Onde <span data-cidade-nome>Barretos</span><br><span class="grad">encontra.</span></h1>
   <p class="sub reveal" d16>Lojas, ofertas e serviços reais da cidade — com contato direto no WhatsApp. E a experiência completa da maior Festa do Peão do Brasil.</p>
   <form class="search reveal" d2 action="busca.html" method="get" role="search">
     <input type="text" name="q" placeholder="Buscar loja, produto, serviço ou oferta em Barretos..." aria-label="Buscar">
