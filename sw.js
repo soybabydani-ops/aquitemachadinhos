@@ -1,5 +1,7 @@
-// Service Worker — Aqui Tem Achadinhos (v22 — fix iOS Safari)
-const CACHE = 'achadinhos-v22';
+// Service Worker — Aqui Tem Achadinhos (v23 — correção DEFINITIVA de cache)
+// O que mudou: (1) nova versão v23, (2) skipWaiting + clients.claim = atualiza IMEDIATAMENTE,
+// (3) apaga TODOS os caches velhos (v22 e anteriores) na ativação, (4) HTML sempre fresco (network-first).
+const CACHE = 'achadinhos-v23';
 const ASSETS = [
   './', './index.html', './cadastro.html', './cadastro-motorista.html', './categoria.html',
   './loja.html', './ofertas.html', './busca.html', './turista.html', './anuncie.html',
@@ -15,29 +17,29 @@ const ASSETS = [
   './manifest.webmanifest', './logo.svg', './icon-192.png', './icon-512.png'
 ];
 
-// INSTALL — SEM skipWaiting (deixa o iOS trocar naturalmente)
+// INSTALL — skipWaiting: a versão nova assume IMEDIATAMENTE (não espera fechar abas)
 self.addEventListener('install', (e) => {
+  self.skipWaiting();
   e.waitUntil(
     caches.open(CACHE).then((c) => c.addAll(ASSETS).catch(() => {}))
   );
 });
 
-// ACTIVATE — SEM clients.claim (não força takeover no iOS)
+// ACTIVATE — apaga TODOS os caches antigos (v22 etc.) e assume as abas abertas
 self.addEventListener('activate', (e) => {
   e.waitUntil(
-    caches.keys().then((keys) =>
-      Promise.all(keys.filter((k) => k !== CACHE).map((k) => caches.delete(k)))
-    )
+    caches.keys()
+      .then((keys) => Promise.all(keys.filter((k) => k !== CACHE).map((k) => caches.delete(k))))
+      .then(() => self.clients.claim())
   );
 });
 
-// FETCH — network-first para TUDO (mais seguro no iOS)
+// FETCH — network-first: HTML sempre fresco do servidor; só usa cache se offline
 self.addEventListener('fetch', (e) => {
   if (e.request.method !== 'GET') return;
   const u = new URL(e.request.url);
   if (u.origin !== self.location.origin) return;
 
-  // NAVEGAÇÃO e RECURSOS: network-first com fallback de cache
   e.respondWith(
     fetch(e.request)
       .then((r) => {
