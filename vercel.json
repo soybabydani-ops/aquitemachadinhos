@@ -14,5 +14,9 @@
         { "key": "Content-Security-Policy", "value": "default-src 'self'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; object-src 'none'; upgrade-insecure-requests; script-src 'self'; style-src 'self' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://*.supabase.co https://viacep.com.br; frame-src https://www.google.com; manifest-src 'self'" }
       ]
     }
+  ],
+  "rewrites": [
+    { "source": "/assets/(.*)", "has": [ { "type": "host", "value": "gramado.aquitemachadinhos.com.br" } ], "destination": "/assets/$1" },
+    { "source": "/(.*)", "has": [ { "type": "host", "value": "gramado.aquitemachadinhos.com.br" } ], "destination": "/gramado/$1" }
   ]
 }
