@@ -17,6 +17,9 @@
   ],
   "rewrites": [
     { "source": "/assets/(.*)", "has": [ { "type": "host", "value": "gramado.aquitemachadinhos.com.br" } ], "destination": "/assets/$1" },
-    { "source": "/(.*)", "has": [ { "type": "host", "value": "gramado.aquitemachadinhos.com.br" } ], "destination": "/gramado/$1" }
+    { "source": "/", "has": [ { "type": "host", "value": "gramado.aquitemachadinhos.com.br" } ], "destination": "/gramado-home.html" },
+    { "source": "/natal-luz-2026.html", "has": [ { "type": "host", "value": "gramado.aquitemachadinhos.com.br" } ], "destination": "/gramado-natal-luz.html" },
+    { "source": "/o-que-fazer-em-gramado.html", "has": [ { "type": "host", "value": "gramado.aquitemachadinhos.com.br" } ], "destination": "/gramado-o-que-fazer.html" },
+    { "source": "/(.*)", "has": [ { "type": "host", "value": "gramado.aquitemachadinhos.com.br" } ], "destination": "/gramado-home.html" }
   ]
 }
