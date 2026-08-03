@@ -243,11 +243,10 @@
   .bull-glow{position:absolute;inset:6% 10%;border-radius:50%;filter:blur(70px);opacity:.5;pointer-events:none;
     background:radial-gradient(50% 50% at 50% 50%, rgba(240,194,75,.55), rgba(230,57,70,.25) 60%, transparent 75%);
     will-change:opacity}
-  .bull{position:relative;border-radius:40px;overflow:hidden;
+  .bull{position:relative;width:100%}
+  .bull3d-canvas{position:relative;width:100%;aspect-ratio:883/610;border-radius:40px;overflow:hidden;
     box-shadow:0 60px 120px -30px rgba(0,0,0,.8),0 0 0 1px rgba(255,255,255,.12),0 0 120px rgba(240,194,75,.22)}
-  .bull img{width:100%;height:auto;display:block}
-  .bull-img-main{display:block}
-  .bull-img-detail{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;will-change:opacity}
+  .bull3d-canvas canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
   .bull::after{content:"";position:absolute;inset:0;pointer-events:none;
     background:linear-gradient(180deg,transparent 55%,rgba(11,30,63,.55) 100%)}
   .bull-cap{position:absolute;left:0;right:0;bottom:18px;z-index:2;display:flex;justify-content:center;gap:10px;flex-wrap:wrap;padding:0 18px;opacity:0;transition:opacity .4s;will-change:opacity}
@@ -270,35 +269,4 @@
     background:linear-gradient(90deg,var(--gold-2),var(--gold));box-shadow:0 0 12px rgba(240,194,75,.7);
     will-change:width}
 
-  /* ============================================================
-     TOURO 8D — FATIAS 3D (slice parallax) + movimento furioso
-     O touro recortado é dividido em fatias; cada fatia desloca
-     conforme o mouse → o touro "gira" em profundidade real.
-     ============================================================ */
-  .bull8d{position:relative;width:100%;max-width:640px;margin:0 auto;perspective:1400px;perspective-origin:50% 42%}
-  .b8d-scene{position:relative;transform-style:preserve-3d;will-change:transform}
-  .b8d-slices{position:relative;aspect-ratio:883/610;transform-style:preserve-3d;will-change:transform}
-  .b8d-slice{position:absolute;top:0;bottom:0;overflow:hidden;will-change:transform;
-    background-repeat:no-repeat;background-size:2400% 100%;
-    filter:drop-shadow(0 26px 34px rgba(0,0,0,.42))}
-  .b8d-sheen{position:absolute;inset:0;pointer-events:none;mix-blend-mode:overlay;opacity:.9;z-index:3;
-    background:linear-gradient(115deg,transparent 20%,rgba(255,255,255,.85) 38%,rgba(255,217,122,.95) 46%,transparent 62%);
-    background-size:250% 100%;background-position:120% 0;
-    animation:sheen 5s cubic-bezier(.4,0,.2,1) infinite;will-change:background-position}
-  @keyframes sheen{0%{background-position:130% 0}55%{background-position:-40% 0}100%{background-position:-40% 0}}
-  .b8d-reflect{position:absolute;left:2%;right:2%;top:88%;height:64%;pointer-events:none;z-index:0;
-    background:url('assets/touro-solto.webp') no-repeat center top/contain;
-    transform:scaleY(-1);opacity:.15;filter:blur(2px);
-    -webkit-mask-image:linear-gradient(180deg,rgba(0,0,0,.75) 0%,transparent 75%);
-            mask-image:linear-gradient(180deg,rgba(0,0,0,.75) 0%,transparent 75%);
-    will-change:transform,opacity}
-  .b8d-dust{position:absolute;inset:-8%;pointer-events:none;z-index:4}
-  .dust{position:absolute;border-radius:50%;background:radial-gradient(circle,rgba(255,217,122,.9),rgba(240,194,75,0) 70%);
-    opacity:0;animation:dust-rise linear infinite;will-change:transform,opacity}
-  @keyframes dust-rise{0%{transform:translate3d(0,0,0) scale(.5);opacity:0}
-    12%{opacity:.8}100%{transform:translate3d(var(--dx,20px),-200px,60px) scale(1.1);opacity:0}}
-  .b8d-glow{position:absolute;inset:0;pointer-events:none;z-index:1;filter:blur(60px);
-    background:radial-gradient(45% 45% at 50% 55%,rgba(240,194,75,.5),rgba(230,57,70,.16) 60%,transparent 75%);
-    animation:glow-pulse 4s ease-in-out infinite;will-change:opacity,transform}
-  @keyframes glow-pulse{0%,100%{opacity:.4;transform:scale(1)}50%{opacity:.62;transform:scale(1.07)}}
-  /* ===== FIM TOURO 8D ===== */
+
