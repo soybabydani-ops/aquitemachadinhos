@@ -39,6 +39,7 @@
   var partes = location.hostname.split(".");
   var sub = (partes[0] || "www").toLowerCase();
   if (sub === "www" || partes.length <= 2 || sub === "localhost") sub = "www";
+  if (sub === "gramado" && (location.pathname === "/" || location.pathname === "/index.html")) { location.replace("/gramado-home.html"); }
   var par = CIDADES[sub] || CIDADES["www"];
   var CIDADE = par[0], UF = par[1], CIDUP = CIDADE.toUpperCase();
   window.CIDADE = { nome: CIDADE, uf: UF };
