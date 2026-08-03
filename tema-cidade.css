@@ -1,5 +1,5 @@
 /* ============================================================
-   SISTEMA DE TEMA POR CIDADE — cada cidade ganha sua cor
+   SISTEMA DE TEMA POR CIDADE (CORRIGIDO) — hero dark premium + brilho da cor
    O motor (app.js) define --accent/--accent-d/--accent-s por cidade.
    ============================================================ */
 :root{
@@ -7,8 +7,13 @@
   --accent-d:#991b1b;
   --accent-s:#fecaca;
 }
-/* Hero com brilho da cor da cidade */
-.cidade-hero{position:relative;background:radial-gradient(95% 130% at 80% -12%, var(--accent) -65%, #0e1322 62%);}
+/* Hero DARK premium (igual ao original) + brilho sutil da cor da cidade no canto */
+.cidade-hero{
+  position:relative;
+  background:
+    radial-gradient(55% 70% at 80% -8%, color-mix(in srgb, var(--accent) 55%, transparent), transparent 62%),
+    linear-gradient(160deg,#060f27,#0B1E3F);
+}
 /* Botão principal na cor da cidade */
 .cidade-btn{background:var(--accent);color:#fff;transition:background .2s}
 .cidade-btn:hover{background:var(--accent-d)}
@@ -17,5 +22,6 @@
 .cidade-eyebrow{color:var(--accent)}
 .cidade-stat{color:var(--accent)}
 .cidade-chip{background:var(--accent-s);color:#0e1322}
-/* Realce do card na cor da cidade (borda suave) */
+/* Realce do card na cor da cidade */
+.cidade-card{transition:box-shadow .2s}
 .cidade-card:hover{box-shadow:0 18px 40px rgba(0,0,0,.18), inset 0 0 0 2px var(--accent-s)}
