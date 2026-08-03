@@ -1,5 +1,25 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+<!-- MOTOR MULTI-CIDADE (Aqui Tem) -->
+<script>
+(function(){
+  var CIDADES = {
+    "www":     {nome:"Barretos",          cor:"#C9A227"},
+    "gramado": {nome:"Gramado",           cor:"#B11226"},
+    "campos":  {nome:"Campos do Jordão",  cor:"#7b5cd6"}
+  };
+  var h = location.hostname.split(".");
+  var sub = (h[0]||"www").toLowerCase();
+  if(sub==="www" || h.length<=2 || sub==="localhost") sub="www";
+  var c = CIDADES[sub] || CIDADES["www"];
+  window.CIDADE = c;
+  document.addEventListener("DOMContentLoaded", function(){
+    document.querySelectorAll("[data-cidade-nome]").forEach(function(el){ el.textContent = c.nome; });
+    document.documentElement.style.setProperty("--cor-cidade", c.cor);
+  });
+  console.log("Cidade ativa:", c.nome);
+})();
+</script>
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>Aqui Tem Achadinhos — Onde Barretos encontra. | Guia de Barretos</title>
