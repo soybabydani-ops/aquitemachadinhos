@@ -1,3 +1,54 @@
+/* === MOTOR MULTI-CIDADE (Aqui Tem) — v4 EXTERNO (compatível CSP) === */
+(function () {
+  var CIDADES = {
+    "www":     ["Barretos", "SP"],
+    "gramado": ["Gramado", "RS"],
+    "campos":  ["Campos do Jordão", "SP"]
+  };
+  var partes = location.hostname.split(".");
+  var sub = (partes[0] || "www").toLowerCase();
+  if (sub === "www" || partes.length <= 2 || sub === "localhost") sub = "www";
+  var par = CIDADES[sub] || CIDADES["www"];
+  var CIDADE = par[0], UF = par[1], CIDUP = CIDADE.toUpperCase();
+  window.CIDADE = { nome: CIDADE, uf: UF };
+  function temCidade(s) { return s && (s.indexOf("Barretos") !== -1 || s.indexOf("BARRETOS") !== -1 || s.indexOf("barretos") !== -1); }
+  function trocaTexto(s) {
+    return s.split("BARRETOS/SP").join(CIDUP + "/" + UF)
+            .split("BARRETOS").join(CIDUP)
+            .split("Barretos/SP").join(CIDADE + "/" + UF)
+            .split("Barretos, SP").join(CIDADE + ", " + UF)
+            .split("Barretos · SP").join(CIDADE + " · " + UF)
+            .split("Barretos").join(CIDADE)
+            .split("barretos").join(CIDADE.toLowerCase());
+  }
+  function percorre(no) {
+    if (no.nodeType === 3) {
+      if (temCidade(no.nodeValue)) no.nodeValue = trocaTexto(no.nodeValue);
+    } else if (no.nodeType === 1 && no.tagName !== "SCRIPT" && no.tagName !== "STYLE") {
+      var f = no.childNodes, i;
+      for (i = 0; i < f.length; i++) percorre(f[i]);
+    }
+  }
+  var rodando = false;
+  function aplicar() {
+    if (rodando) return; rodando = true;
+    try {
+      if (document.body) percorre(document.body);
+      if (temCidade(document.title)) document.title = trocaTexto(document.title);
+      var dbg = document.getElementById("__dbg"); if (dbg) dbg.remove();
+    } catch (e) {} rodando = false;
+  }
+  if (document.body) aplicar();
+  document.addEventListener("DOMContentLoaded", aplicar);
+  window.addEventListener("load", aplicar);
+  setTimeout(aplicar, 150); setTimeout(aplicar, 600); setTimeout(aplicar, 1500);
+  if (window.MutationObserver && document.body) {
+    var obs = new MutationObserver(function () { aplicar(); });
+    obs.observe(document.body, { childList: true, subtree: true, characterData: true });
+  }
+})();
+/* === FIM MOTOR MULTI-CIDADE === */
+
 /* ============================================================
    AQUI TEM ACHADINHOS — app.js (v2 / plataforma) — COMPLETO
    Banco real (Supabase) + fallback local. Empresas, ofertas,
