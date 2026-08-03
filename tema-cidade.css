@@ -1,0 +1,21 @@
+/* ============================================================
+   SISTEMA DE TEMA POR CIDADE — cada cidade ganha sua cor
+   O motor (app.js) define --accent/--accent-d/--accent-s por cidade.
+   ============================================================ */
+:root{
+  --accent:#dc2626;      /* padrão (Barretos) */
+  --accent-d:#991b1b;
+  --accent-s:#fecaca;
+}
+/* Hero com brilho da cor da cidade */
+.cidade-hero{position:relative;background:radial-gradient(95% 130% at 80% -12%, var(--accent) -65%, #0e1322 62%);}
+/* Botão principal na cor da cidade */
+.cidade-btn{background:var(--accent);color:#fff;transition:background .2s}
+.cidade-btn:hover{background:var(--accent-d)}
+/* Textos/selo na cor da cidade */
+.cidade-text{color:var(--accent)}
+.cidade-eyebrow{color:var(--accent)}
+.cidade-stat{color:var(--accent)}
+.cidade-chip{background:var(--accent-s);color:#0e1322}
+/* Realce do card na cor da cidade (borda suave) */
+.cidade-card:hover{box-shadow:0 18px 40px rgba(0,0,0,.18), inset 0 0 0 2px var(--accent-s)}
