@@ -98,8 +98,12 @@
     <div class="bull-stage">
       <div class="bull-glow"></div>
       <div class="bull3d-canvas" id="bull3dWrap">
-        <canvas id="bull3d" aria-label="Touro 3D animado — Festa do Peão de Barretos"></canvas>
-        <button id="arBtn" type="button" class="ar-hidden" aria-label="Ver em realidade aumentada">📱 Ver em Realidade Aumentada</button>
+        <div class="bull3d-tilt" id="bull3dTilt">
+          <img src="assets/bull-3d.webp" id="bull3dImg" alt="Touro de rodeio premium cromado com chifres dourados — Festa do Peão de Barretos">
+          <div class="bull3d-sheen" aria-hidden="true"></div>
+          <div class="bull3d-reflect" aria-hidden="true"></div>
+        </div>
+        <div class="bull3d-dust" aria-hidden="true"></div>
       </div>
       <div class="bull-cap">
         <span class="chip">🐂 71ª Festa do Peão</span>
@@ -249,7 +253,6 @@
 
 <div id="site-footer"></div>
 <script src="assets/app.js"></script>
-<script src="assets/three.min.js"></script>
 <script src="assets/premium.js"></script>
 
 </body>
