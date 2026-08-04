@@ -1,6 +1,8 @@
 /* === BOTAO CTA "Quero mais clientes" (Aqui Tem Achadinhos) === */
 (function(){
   function criarCTA(){
+    // CTAs já existem nas páginas; não usar cartão flutuante que cobre conteúdo no mobile.
+    return;
     if(document.getElementById('ctaMaoFree')) return;
     if(!document.body) return;
     if(['admin','painel','login'].indexOf(document.body.getAttribute('data-page')) !== -1) return;
@@ -250,8 +252,11 @@
     var f = $('#site-footer'); if (f) f.innerHTML = footerHTML();
     var b = $('#menuBtn'), m = $('#mobileMenu');
     if (b && m) { b.addEventListener('click', function () { m.classList.toggle('hidden'); }); m.querySelectorAll('a').forEach(function (a) { a.addEventListener('click', function () { m.classList.add('hidden'); }); }); }
-    var isAdminSurface = document.body && ['admin','painel','login'].indexOf(document.body.getAttribute('data-page')) !== -1;
-    if (!isAdminSurface && !$('#ataFloatingWa')) { var a = document.createElement('a'); a.id = 'ataFloatingWa'; a.href = waLink('Olá! Vim pelo Aqui Tem Achadinhos.'); a.target = '_blank'; a.rel = 'noopener noreferrer'; a.className = 'fixed bottom-5 right-5 z-50 w-14 h-14 rounded-full bg-[#25D366] text-white grid place-items-center shadow-2xl hover:scale-105 transition'; a.setAttribute('aria-label', 'WhatsApp'); a.innerHTML = '💬'; document.body.appendChild(a); }
+    var pageSurface = document.body && document.body.getAttribute('data-page');
+    var isAdminSurface = document.body && ['admin','painel','login'].indexOf(pageSurface) !== -1;
+    var landingPages = ['home','gramado','blumenau','bonito','buzios','campos','caruaru','florianopolis','jericoacoara','porto','salvador'];
+    var allowFloatingWa = landingPages.indexOf(pageSurface) !== -1;
+    if (!isAdminSurface && allowFloatingWa && !$('#ataFloatingWa')) { var a = document.createElement('a'); a.id = 'ataFloatingWa'; a.href = waLink('Olá! Vim pelo Aqui Tem Achadinhos.'); a.target = '_blank'; a.rel = 'noopener noreferrer'; a.className = 'fixed bottom-5 right-5 z-50 w-14 h-14 rounded-full bg-[#25D366] text-white grid place-items-center shadow-2xl hover:scale-105 transition'; a.setAttribute('aria-label', 'WhatsApp'); a.innerHTML = '💬'; document.body.appendChild(a); }
   }
 
   /* COUNTDOWN / SW */
@@ -641,7 +646,7 @@
     var status = lead.status || 'novo';
     var opts = ['novo','contatado','qualificado','cadastro_enviado','ativo','perdido'].map(function(x){ return '<option value="' + x + '"' + (x === status ? ' selected' : '') + '>' + x.replace('_',' ') + '</option>'; }).join('');
     var wa = String(lead.whatsapp || '').replace(/\D/g, '');
-    return '<div class="bg-white rounded-2xl ring-silver shadow-soft p-4 flex items-center gap-3"><div class="w-11 h-11 rounded-xl bg-navy-800 text-white grid place-items-center font-bold">' + esc(city.slice(0,2).toUpperCase()) + '</div><div class="flex-1 min-w-0"><p class="font-display font-bold truncate">' + esc(lead.empresa_nome) + '</p><p class="text-xs text-silver-500">📍 ' + esc(city) + (lead.categoria ? ' · ' + esc(lead.categoria) : '') + (lead.origem ? ' · ' + esc(lead.origem) : '') + '</p><p class="text-xs text-slate-500 truncate">' + esc(lead.responsavel || '') + (lead.email ? ' · ' + esc(lead.email) : '') + '</p></div><div class="flex items-center gap-2 shrink-0 flex-wrap justify-end"><button data-lead-convert="' + esc(lead.id) + '" class="text-xs font-bold text-white bg-navy-800 px-3 py-1.5 rounded-lg">Publicar empresa</button><a href="https://wa.me/' + esc(wa) + '?text=' + encodeURIComponent('Olá! Recebemos o interesse da sua empresa na AQUITÉM. Posso ajudar com o cadastro?') + '" target="_blank" rel="noopener noreferrer" class="text-xs font-bold text-white bg-[#25D366] px-3 py-1.5 rounded-lg">WhatsApp</a><select data-lead-status="' + esc(lead.id) + '" class="text-xs bg-silver-50 ring-silver rounded-lg px-2 py-1">' + opts + '</select></div></div>';
+    return '<div class="bg-white rounded-2xl ring-silver shadow-soft p-4 flex flex-col sm:flex-row items-stretch sm:items-center gap-3"><div class="w-11 h-11 rounded-xl bg-navy-800 text-white grid place-items-center font-bold">' + esc(city.slice(0,2).toUpperCase()) + '</div><div class="flex-1 min-w-0"><p class="font-display font-bold truncate">' + esc(lead.empresa_nome) + '</p><p class="text-xs text-silver-500">📍 ' + esc(city) + (lead.categoria ? ' · ' + esc(lead.categoria) : '') + (lead.origem ? ' · ' + esc(lead.origem) : '') + '</p><p class="text-xs text-slate-500 truncate">' + esc(lead.responsavel || '') + (lead.email ? ' · ' + esc(lead.email) : '') + '</p></div><div class="flex w-full sm:w-auto items-center gap-2 shrink-0 flex-wrap justify-end">' + (status === 'ativo' ? '<span class="text-xs font-bold text-emerald-700 bg-emerald-500/10 px-3 py-1.5 rounded-lg">✓ Publicada</span>' : '<button data-lead-convert="' + esc(lead.id) + '" class="text-xs font-bold text-white bg-navy-800 px-3 py-1.5 rounded-lg">Publicar empresa</button>') + '<a href="https://wa.me/' + esc(wa) + '?text=' + encodeURIComponent('Olá! Recebemos o interesse da sua empresa na AQUITÉM. Posso ajudar com o cadastro?') + '" target="_blank" rel="noopener noreferrer" class="text-xs font-bold text-white bg-[#25D366] px-3 py-1.5 rounded-lg">WhatsApp</a><select data-lead-status="' + esc(lead.id) + '" class="text-xs bg-silver-50 ring-silver rounded-lg px-2 py-1">' + opts + '</select></div></div>';
   }
   function leadCategoryGuess(v) {
     var x = String(v || '').toLowerCase();
