@@ -55,3 +55,27 @@ input::placeholder,textarea::placeholder{color:#6b7a92}
 
 /* Área para preencher (empresas reais) — classe permitida pela CSP */
 .area-preenchimento{border:2px dashed #E63946;border-radius:1.25rem;background:#fff7f7;padding:1.5rem 1.25rem}
+
+/* ============================================================
+   AQUITEM — Identidade oficial / guias locais
+   O vermelho fica reservado para comunicações especiais de eventos.
+   ============================================================ */
+:root{--aqui-gold:#D9AA42;--aqui-gold-light:#F5D77F;--aqui-ink:#07142B;--aqui-ice:#EEF4FC}
+.bg-peao-500{background-color:var(--aqui-gold)!important}.hover\:bg-peao-600:hover{background-color:#B98420!important}.text-peao-400,.text-peao-500,.text-peao-600{color:var(--aqui-gold-light)!important}.bg-peao-500\/10{background-color:rgba(217,170,66,.14)!important}.accent-peao-500{accent-color:var(--aqui-gold)!important}.shadow-redglow{box-shadow:0 18px 50px -18px rgba(217,170,66,.48)!important}.area-preenchimento{border-color:var(--aqui-gold);background:rgba(217,170,66,.08)}
+.aquitem-header{min-height:72px}.aquitem-wordmark{letter-spacing:.08em}.aquitem-submark{letter-spacing:.16em}.aquitem-footer-links{display:flex;flex-wrap:wrap;gap:12px 20px;line-height:1.45}.aquitem-footer-links a{display:inline-block}.aquitem-footer-nav{display:flex;flex-direction:column;gap:12px}.aquitem-card-logo{background:linear-gradient(145deg,#10264A,#07142B)}
+@media(max-width:640px){.aquitem-header{min-height:66px}.aquitem-wordmark{font-size:14px}.aquitem-submark{font-size:8px}.aquitem-footer-links{gap:12px 16px}.aquitem-footer-nav{gap:14px}}
+
+/* Temas contextuais por cidade — a marca continua AQUITEM */
+:root{--city-accent:#D9AA42;--city-accent-soft:rgba(217,170,66,.15);--city-glow:rgba(217,170,66,.26);--city-deep:#10264A}
+html[data-aquitem-city="barretos"]{--city-accent:#D9AA42;--city-accent-soft:rgba(217,170,66,.15);--city-glow:rgba(217,170,66,.26);--city-deep:#182A4B}
+html[data-aquitem-city="gramado"]{--city-accent:#B9C96A;--city-accent-soft:rgba(185,201,106,.16);--city-glow:rgba(185,201,106,.25);--city-deep:#18372E}
+html[data-aquitem-city="buzios"]{--city-accent:#55C5D8;--city-accent-soft:rgba(85,197,216,.15);--city-glow:rgba(85,197,216,.27);--city-deep:#123C5B}
+html[data-aquitem-city="bonito"]{--city-accent:#53C6AC;--city-accent-soft:rgba(83,198,172,.16);--city-glow:rgba(83,198,172,.28);--city-deep:#103C44}
+html[data-aquitem-city="campos"]{--city-accent:#C58B62;--city-accent-soft:rgba(197,139,98,.16);--city-glow:rgba(197,139,98,.27);--city-deep:#22354B}
+html[data-aquitem-city="blumenau"]{--city-accent:#E1A33A;--city-accent-soft:rgba(225,163,58,.16);--city-glow:rgba(225,163,58,.27);--city-deep:#1C3155}
+html[data-aquitem-city="caruaru"]{--city-accent:#E48D4D;--city-accent-soft:rgba(228,141,77,.16);--city-glow:rgba(228,141,77,.28);--city-deep:#482B25}
+html[data-aquitem-city="florianopolis"]{--city-accent:#62C7C2;--city-accent-soft:rgba(98,199,194,.16);--city-glow:rgba(98,199,194,.28);--city-deep:#153B58}
+html[data-aquitem-city="jericoacoara"]{--city-accent:#EDC26C;--city-accent-soft:rgba(237,194,108,.16);--city-glow:rgba(237,194,108,.28);--city-deep:#50412B}
+html[data-aquitem-city="porto"]{--city-accent:#59C8D2;--city-accent-soft:rgba(89,200,210,.16);--city-glow:rgba(89,200,210,.28);--city-deep:#0B3C5C}
+html[data-aquitem-city="salvador"]{--city-accent:#F0B65D;--city-accent-soft:rgba(240,182,93,.16);--city-glow:rgba(240,182,93,.28);--city-deep:#123C6B}
+.city-themed-surface{background:radial-gradient(700px 260px at 86% 5%,var(--city-glow),transparent 67%),linear-gradient(135deg,var(--city-deep),#081630)}.city-accent{color:var(--city-accent)!important}.city-accent-border{border-color:var(--city-accent)!important}.city-accent-bg{background:var(--city-accent)!important;color:#07142B!important}

@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024" role="img" aria-label="AQUITEM símbolo de guias locais">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#10264A"/>
+      <stop offset="0.58" stop-color="#081630"/>
+      <stop offset="1" stop-color="#050C1C"/>
+    </linearGradient>
+    <linearGradient id="gold" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#9C681A"/>
+      <stop offset="0.35" stop-color="#FFE9A4"/>
+      <stop offset="0.63" stop-color="#D8A83E"/>
+      <stop offset="1" stop-color="#8C5810"/>
+    </linearGradient>
+    <linearGradient id="ice" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#FFFFFF"/>
+      <stop offset="0.45" stop-color="#D7E4F4"/>
+      <stop offset="1" stop-color="#9EB3CD"/>
+    </linearGradient>
+    <filter id="shadow" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="0" dy="20" stdDeviation="20" flood-color="#000" flood-opacity=".48"/>
+    </filter>
+    <pattern id="dots" width="24" height="24" patternUnits="userSpaceOnUse">
+      <circle cx="3" cy="3" r="1.8" fill="#D8E4F4" opacity=".10"/>
+    </pattern>
+  </defs>
+  <rect width="1024" height="1024" rx="246" fill="url(#bg)"/>
+  <rect width="1024" height="1024" rx="246" fill="url(#dots)"/>
+  <rect x="28" y="28" width="968" height="968" rx="220" fill="none" stroke="#EEC765" stroke-opacity=".43" stroke-width="3"/>
+  <g filter="url(#shadow)">
+    <!-- location path, deliberately forming an A without animal imagery -->
+    <path d="M512 180 C359 180 272 303 272 447 C272 636 512 828 512 828 C512 828 752 636 752 447 C752 303 665 180 512 180Z" fill="#0B1A35" stroke="url(#gold)" stroke-width="26"/>
+    <path d="M385 610 L512 305 L639 610" fill="none" stroke="url(#ice)" stroke-width="47" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M430 500 H594" fill="none" stroke="url(#gold)" stroke-width="37" stroke-linecap="round"/>
+    <circle cx="512" cy="305" r="29" fill="url(#gold)"/>
+    <circle cx="512" cy="305" r="10" fill="#FFF7DB"/>
+  </g>
+  <path d="M212 813 C336 890 688 890 812 813" fill="none" stroke="#E9C35B" stroke-opacity=".5" stroke-width="5"/>
+</svg>
