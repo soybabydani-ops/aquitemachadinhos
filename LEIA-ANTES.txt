@@ -1,10 +1,18 @@
-MICROCORREÇÃO — PAINEL DE LEADS E NAVEGAÇÃO NACIONAL
+FASE 3 — DIRETÓRIOS REAIS POR CIDADE
 
-Publique somente este arquivo dentro da pasta assets no GitHub:
-- assets/app.js
+1. No Supabase > SQL Editor, execute primeiro:
+   multicidade-fase-2-diretorios.sql
 
-O que ele faz:
-- "Ver outras cidades" passa a levar para /cidades.html.
-- O painel administrativo passa a mostrar leads por cidade.
-- Cada lead terá botão de WhatsApp e etapa comercial atualizável.
-- O link interno de Instagram permanece @aquitatem.
+2. No GitHub, substitua somente:
+   assets/app.js
+
+3. Faça Commit e aguarde a Vercel publicar.
+
+O que muda:
+- Todas as empresas atuais passam a pertencer a Barretos sem apagar dados.
+- Novas empresas recebem a cidade correta.
+- Listas, busca e páginas de empresa passam a filtrar pela cidade do subdomínio.
+- O painel administrativo permite cadastrar empresa em qualquer cidade.
+- Páginas de cidades ganham o acesso "Explorar empresas da cidade".
+
+Não envie este arquivo LEIA-ANTES.txt ao site.
