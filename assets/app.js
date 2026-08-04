@@ -655,14 +655,20 @@
     });
   }
   function statCard(icon, n, label) { return '<div class="bg-white rounded-2xl ring-silver shadow-soft p-5 text-center"><div class="text-2xl">' + icon + '</div><div class="font-display text-2xl font-extrabold mt-1">' + n + '</div><div class="text-xs text-silver-500">' + label + '</div></div>'; }
+  function storeProfileScore(s) {
+    var fields = ['logo_url','capa_url','descricao_curta','whatsapp','horario','instagram'];
+    var done = fields.filter(function(k){ return String(s[k] || '').trim() !== ''; }).length;
+    return Math.round(done / fields.length * 100);
+  }
   function adminRow(s, isPend) {
     var logo = s.logo_url ? '<img src="' + esc(s.logo_url) + '" alt="" class="w-12 h-12 rounded-xl object-cover">' : '<div class="w-12 h-12 rounded-xl bg-gradient-to-br from-navy-700 to-navy-500 grid place-items-center text-white font-extrabold">' + esc(initials(s.nome)) + '</div>';
     var sc = s.status === 'ativo' ? 'text-emerald-600' : (s.status === 'pendente' ? 'text-amber-600' : 'text-peao-600');
+    var quality = storeProfileScore(s); var qualityBadge = '<span class="text-[10px] font-bold ' + (quality >= 80 ? 'text-emerald-600' : 'text-amber-600') + '">Perfil ' + quality + '%</span>';
     var planoSel = '<select data-plano-id="' + esc(s.id) + '" class="text-xs bg-silver-50 ring-silver rounded-lg px-2 py-1"><option value="gratis"' + (s.plano === 'gratis' ? ' selected' : '') + '>Grátis</option><option value="destaque"' + (s.plano === 'destaque' ? ' selected' : '') + '>Destaque</option><option value="pro"' + (s.plano === 'pro' ? ' selected' : '') + '>Pro</option></select>';
     var actions = isPend
       ? '<button data-act="aprovar" data-id="' + esc(s.id) + '" class="text-sm font-bold text-white bg-emerald-600 px-3 py-1.5 rounded-lg">✓ Aprovar</button><button data-act="rejeitar" data-id="' + esc(s.id) + '" class="text-sm font-bold text-peao-600 bg-peao-500/10 px-3 py-1.5 rounded-lg">Rejeitar</button>'
       : '<button data-act="' + (s.destaque ? 'destaque-off' : 'destaque-on') + '" data-id="' + esc(s.id) + '" class="text-xs font-semibold text-slate-600 hover:underline">' + (s.destaque ? 'Tirar destaque' : 'Destacar') + '</button>' + planoSel + (s.status !== 'ativo' ? '<button data-act="aprovar" data-id="' + esc(s.id) + '" class="text-xs font-semibold text-emerald-600 hover:underline">Ativar</button>' : '');
-    return '<div class="bg-white rounded-2xl ring-silver shadow-soft p-4 flex items-center gap-3"><div class="shrink-0">' + logo + '</div><div class="flex-1 min-w-0"><a href="loja.html?id=' + encodeURIComponent(s.id) + '" class="font-display font-bold truncate block hover:underline">' + esc(s.nome) + '</a><p class="text-xs text-silver-500">' + esc(s.categoria || '') + ' · ' + esc(s.cidade || CITY_NAMES[s.city_slug] || currentCityName()) + (s.bairro ? ' · ' + esc(s.bairro) : '') + ' · <span class="' + sc + ' font-semibold">' + esc(s.status) + '</span>' + (s.destaque ? ' · ⭐' : '') + '</p></div><div class="flex items-center gap-2 shrink-0 flex-wrap justify-end">' + actions + '</div></div>';
+    return '<div class="bg-white rounded-2xl ring-silver shadow-soft p-4 flex items-center gap-3"><div class="shrink-0">' + logo + '</div><div class="flex-1 min-w-0"><a href="loja.html?id=' + encodeURIComponent(s.id) + '" class="font-display font-bold truncate block hover:underline">' + esc(s.nome) + '</a><p class="text-xs text-silver-500">' + esc(s.categoria || '') + ' · ' + esc(s.cidade || CITY_NAMES[s.city_slug] || currentCityName()) + (s.bairro ? ' · ' + esc(s.bairro) : '') + ' · <span class="' + sc + ' font-semibold">' + esc(s.status) + '</span>' + (s.destaque ? ' · ⭐' : '') + ' · ' + qualityBadge + '</p></div><div class="flex items-center gap-2 shrink-0 flex-wrap justify-end">' + actions + '</div></div>';
   }
   function driverAdminRow(d) {
     var foto = d.foto_url ? '<img src="' + esc(d.foto_url) + '" alt="" class="w-12 h-12 rounded-xl object-cover">' : '<div class="w-12 h-12 rounded-xl bg-gradient-to-br from-navy-700 to-navy-500 grid place-items-center text-white">🚗</div>';
