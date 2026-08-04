@@ -1,22 +1,25 @@
-AQUITEM — FUNIL FUNDADORAS + FILA DE AUTOMAÇÃO
+AQUITEM — GROWTH OPERATIONS
 
-1) SUPABASE
-Execute nesta ordem no SQL Editor:
-- fundadores-schema.sql
-- automacao-queue-schema.sql
+SUPABASE — execute nesta ordem:
+1. fundadores-schema.sql
+2. automacao-queue-schema.sql
 
-2) GITHUB — raiz
+GITHUB raiz:
 - fundadores.html
 - cidades.html
+- anuncie.html
+- logo.svg
 
-3) GITHUB — assets
+GITHUB assets:
 - app.js
 - fundadores.css
 - fundadores.js
 - cidades.css
+- aquitem-symbol.png
 
-4) Documentos de operação
+DOCUMENTOS:
 - OPERACAO-GROWTH-AUTOMATIZADA.md
 - AUTOMACOES-INSTITUCIONAIS-AQUITEM.md
+- n8n-fundadoras-blueprint.json
 
-A automação externa fica em modo seguro: a fila registra eventos, mas não envia mensagens até que um e-mail institucional ou WhatsApp Business seja conectado.
+A fila de automação fica segura até conectar e-mail institucional/WhatsApp Business. Não coloque chaves ou credenciais no GitHub.

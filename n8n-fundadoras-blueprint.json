@@ -1,0 +1,48 @@
+{
+  "name": "AQUITEM | Empresas Fundadoras — Blueprint",
+  "active": false,
+  "note": "Blueprint documental. Configure credenciais Supabase, e-mail institucional e WhatsApp Business antes de ativar.",
+  "nodes": [
+    {
+      "name": "Schedule",
+      "type": "n8n-nodes-base.cron",
+      "purpose": "Executar a cada 10 minutos"
+    },
+    {
+      "name": "Get pending founder events",
+      "type": "n8n-nodes-base.httpRequest",
+      "method": "GET",
+      "url": "{{SUPABASE_URL}}/rest/v1/automation_queue?event_type=eq.founder_lead_received&status=eq.pending&order=created_at.asc",
+      "purpose": "Buscar somente eventos autorizados"
+    },
+    {
+      "name": "Validate consent and priority",
+      "type": "n8n-nodes-base.code",
+      "purpose": "Cancelar evento sem consentimento ou contato válido"
+    },
+    {
+      "name": "Send institutional email",
+      "type": "n8n-nodes-base.emailSend",
+      "from": "AQUITEM | Parcerias Locais <parcerias@aquitemachadinhos.com.br>",
+      "purpose": "Confirmação de inscrição Fundadora"
+    },
+    {
+      "name": "Queue WhatsApp review",
+      "type": "n8n-nodes-base.code",
+      "purpose": "Criar tarefa de WhatsApp Business apenas quando houver opt-in e aprovação de template"
+    },
+    {
+      "name": "Mark sent",
+      "type": "n8n-nodes-base.httpRequest",
+      "method": "PATCH",
+      "url": "{{SUPABASE_URL}}/rest/v1/automation_queue?id=eq.{{event_id}}",
+      "body": { "status": "sent", "processed_at": "{{now}}" }
+    }
+  ],
+  "safety": [
+    "Nunca ativar sem e-mail institucional e domínio autenticado",
+    "Nunca enviar WhatsApp sem consentimento e template aprovado",
+    "Registrar opt-out e status do envio",
+    "Não colocar service_role key no front-end ou GitHub"
+  ]
+}
