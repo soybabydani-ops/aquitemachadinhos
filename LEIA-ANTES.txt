@@ -1,0 +1,16 @@
+ARQUIVOS PARA PUBLICAR — CAMPANHA DE INAUGURAÇÃO
+
+Estes arquivos substituem arquivos existentes no repositório GitHub:
+
+NA RAIZ DO REPOSITÓRIO:
+- index.html
+- cadastro.html
+- anuncie.html
+- termos.html
+
+DENTRO DA PASTA assets:
+- assets/app.js
+
+Não envie este arquivo LEIA-ANTES.txt para o site. Ele é apenas um guia.
+
+Depois de publicar e fazer o Commit, aguarde a Vercel concluir a publicação.
