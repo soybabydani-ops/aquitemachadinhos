@@ -1,9 +1,11 @@
-MICROCORREÇÃO — ROBUSTEZ DAS CATEGORIAS
+FASE 4 — CONVERTER LEAD EM EMPRESA
 
-Publique somente:
-assets/app.js
+1) Supabase: execute multicidade-fase-3-converter-lead.sql no SQL Editor.
+2) GitHub: substitua assets/app.js.
+3) Commit e aguarde a Vercel.
 
-Melhoria:
-- categorias continuam carregando normalmente;
-- se houver falha ou demora fora do esperado, a página deixa de ficar em "Carregando..." e mostra uma mensagem clara da cidade, com cadastro correto;
-- não altera banco, empresas ou leads.
+No painel administrativo, cada lead terá o botão "Publicar empresa".
+O formulário abre dados pré-preenchidos, permite revisar categoria/plano/destaque e publica a empresa na cidade certa.
+O lead fica vinculado à empresa e é marcado como ativo.
+
+Não envie este LEIA-ANTES.txt ao site.
