@@ -263,7 +263,7 @@
     var img = o.imagem_url ? '<img src="' + esc(o.imagem_url) + '" alt="" class="h-32 w-full object-cover" loading="lazy">' : '<div class="h-32 bg-gradient-to-br from-navy-700 to-navy-500 grid place-items-center text-3xl text-white">🏷️</div>';
     return '<a href="loja.html?id=' + encodeURIComponent(o.store_id) + '" class="card-hover rounded-2xl overflow-hidden bg-white ring-silver shadow-soft block">' + img + '<div class="p-4"><h3 class="font-display font-bold">' + esc(o.titulo) + '</h3>' + (o.preco_atual ? '<p class="text-peao-500 font-extrabold mt-1">' + esc(o.preco_atual) + (o.preco_anterior ? ' <span class="text-xs line-through text-silver-400">' + esc(o.preco_anterior) + '</span>' : '') + '</p>' : '') + (o.termino ? '<p class="text-[11px] text-silver-500 mt-1">Válido até ' + esc(formatDate(o.termino)) + '</p>' : '') + '</div></a>';
   }
-  function emptyState(t, d, cta) { return '<div class="text-center py-14 px-4"><div class="text-5xl mb-3">🏪</div><h3 class="font-display font-bold text-xl text-slate-700">' + t + '</h3><p class="text-slate-500 mt-1 max-w-md mx-auto">' + d + '</p>' + (cta ? '<a href="cadastro.html" class="btn-shine inline-block mt-5 bg-peao-500 hover:bg-peao-600 text-white font-bold px-6 py-3 rounded-xl shadow-redglow transition">Cadastrar empresa 🚀</a>' : '') + '</div>'; }
+  function emptyState(t, d, cta) { var slug = currentCitySlug(); var href = slug === 'barretos' ? 'cadastro.html' : 'https://www.aquitemachadinhos.com.br/cadastro-cidade.html?cidade=' + encodeURIComponent(slug) + '&utm_source=site&utm_medium=empty_state&utm_campaign=expansao_' + encodeURIComponent(slug); var label = slug === 'barretos' ? 'Cadastrar empresa 🚀' : 'Cadastrar empresa nesta cidade 🚀'; return '<div class="text-center py-14 px-4"><div class="text-5xl mb-3">🏪</div><h3 class="font-display font-bold text-xl text-slate-700">' + t + '</h3><p class="text-slate-500 mt-1 max-w-md mx-auto">' + d + '</p>' + (cta ? '<a href="' + href + '" class="btn-shine inline-block mt-5 bg-peao-500 hover:bg-peao-600 text-white font-bold px-6 py-3 rounded-xl shadow-redglow transition">' + label + '</a>' : '') + '</div>'; }
 
   /* SEO para página da empresa */
   function setStoreSEO(s) {
@@ -410,7 +410,7 @@
       Stores.list().then(function (stores) {
         if (cat) {
           var c = cats.filter(function (x) { return x.id === cat; })[0] || { nome: cat, emoji: '🏪' };
-          if (t) t.innerHTML = c.emoji + ' ' + esc(c.nome); if (s) s.textContent = 'Empresas de ' + c.nome + ' em Barretos.';
+          if (t) t.innerHTML = c.emoji + ' ' + esc(c.nome); if (s) s.textContent = 'Empresas de ' + c.nome + ' em ' + currentCityName() + '.';
           var f = stores.filter(function (x) { return x.categoria === cat; }); f = sortByPlano(f);
           var _cf = f;
           function renderCatList() {
@@ -421,7 +421,7 @@
           }
           renderCatList();
         } else {
-          if (t) t.textContent = 'Categorias'; if (s) s.textContent = 'Todas as categorias do guia de Barretos.';
+          if (t) t.textContent = 'Categorias'; if (s) s.textContent = 'Todas as categorias do guia de ' + currentCityName() + '.';
           l.innerHTML = '<div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">' + cats.map(catCard).join('') + '</div>';
         }
       });
