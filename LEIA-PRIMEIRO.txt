@@ -1,15 +1,16 @@
-AQUITEM — HOTFIX FINAL DE VISUAL
+AQUITEM — HOTFIX OPERACIONAL FINAL
 
-Publicar na raiz:
+RAIZ:
 - index.html
 
-Publicar dentro de assets:
+assets:
+- app.js
 - aquitem-orbit.js
 - premium.css
 
-Resolve:
-- remove o último emoji de touro da home institucional;
-- usa WebGL apenas em telas grandes;
-- garante fallback estático premium em celular;
-- corrige o canvas 3D para não ocupar a tela ou criar bloco dourado;
-- mantém a experiência de marca, com segurança e performance.
+Corrige:
+1. WebGL só no desktop, sem bloco dourado no celular.
+2. Fallback premium estático no celular.
+3. Último resquício de touro removido da home institucional.
+4. Contador de rodapé passa a mostrar apenas empresas da cidade atual.
+   Ex.: empresa em Gramado não aparece mais no contador de Barretos.
