@@ -1,11 +1,22 @@
-AQUITEM — FUNIL EMPRESAS FUNDADORAS
+AQUITEM — FUNIL FUNDADORAS + FILA DE AUTOMAÇÃO
 
-1) SUPABASE: execute fundadores-schema.sql no SQL Editor.
-2) RAIZ DO GITHUB: publique fundadores.html e cidades.html.
-3) PASTA assets: publique app.js, fundadores.css, fundadores.js e cidades.css.
-4) Commit e aguarde a Vercel.
+1) SUPABASE
+Execute nesta ordem no SQL Editor:
+- fundadores-schema.sql
+- automacao-queue-schema.sql
 
-Depois, a landing estará em:
-https://www.aquitemachadinhos.com.br/fundadores.html
+2) GITHUB — raiz
+- fundadores.html
+- cidades.html
 
-A página é institucional, não expõe nome pessoal e cria leads marcados como Fundadora com score de prioridade.
+3) GITHUB — assets
+- app.js
+- fundadores.css
+- fundadores.js
+- cidades.css
+
+4) Documentos de operação
+- OPERACAO-GROWTH-AUTOMATIZADA.md
+- AUTOMACOES-INSTITUCIONAIS-AQUITEM.md
+
+A automação externa fica em modo seguro: a fila registra eventos, mas não envia mensagens até que um e-mail institucional ou WhatsApp Business seja conectado.
