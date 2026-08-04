@@ -1,11 +1,9 @@
-MICROCORREÇÃO — CATEGORIAS POR CIDADE
+MICROCORREÇÃO — ROBUSTEZ DAS CATEGORIAS
 
-Publique somente este arquivo no GitHub:
+Publique somente:
 assets/app.js
 
-Corrige:
-- "Todas as categorias do guia de Barretos" para a cidade correta.
-- "Empresas de [categoria] em Barretos" para a cidade correta.
-- Botão de categoria vazia: em cidades fora de Barretos, leva ao cadastro oficial daquela cidade, sem mostrar a campanha dos 50 destaques de Barretos.
-
-Não há SQL nesta microcorreção.
+Melhoria:
+- categorias continuam carregando normalmente;
+- se houver falha ou demora fora do esperado, a página deixa de ficar em "Carregando..." e mostra uma mensagem clara da cidade, com cadastro correto;
+- não altera banco, empresas ou leads.
