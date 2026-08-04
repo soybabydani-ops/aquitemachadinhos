@@ -26,6 +26,16 @@
     document.body.appendChild(a);
     setInterval(function(){ s.boxShadow='0 12px 30px rgba(34,197,94,.65)'; setTimeout(function(){ s.boxShadow='0 12px 30px rgba(0,0,0,.35)'; },900); },4000);
   }
+  function inserirAcessoDiretorioCidade(){
+    var subdominio=(location.hostname.split('.')[0]||'www').toLowerCase();
+    var cidadesAtivas=['gramado','blumenau','bonito','buzios','campos','caruaru','florianopolis','jericoacoara','porto','salvador'];
+    if(cidadesAtivas.indexOf(subdominio)===-1 || document.getElementById('ataExplorarCidade')) return;
+    var grupo=document.querySelector('.cidade-hero .flex.flex-col');
+    if(!grupo) return;
+    var a=document.createElement('a'); a.id='ataExplorarCidade'; a.href='/categoria.html';
+    a.className='btn-shine glass text-white font-bold px-6 py-3.5 rounded-xl';
+    a.textContent='🔎 Explorar empresas da cidade'; grupo.appendChild(a);
+  }
   function redirecionarFormsLegados(){
     var subdominio=(location.hostname.split('.')[0]||'www').toLowerCase();
     var cidadesAtivas=['gramado','blumenau','bonito','buzios','campos','caruaru','florianopolis','jericoacoara','porto','salvador'];
@@ -36,9 +46,9 @@
       if ((link.textContent || '').indexOf('Ver outras cidades') !== -1) link.href='https://www.aquitemachadinhos.com.br/cidades.html';
     });
   }
-  if(document.body) { criarCTA(); redirecionarFormsLegados(); }
-  document.addEventListener('DOMContentLoaded', function(){ criarCTA(); redirecionarFormsLegados(); });
-  setTimeout(function(){ criarCTA(); redirecionarFormsLegados(); }, 800);
+  if(document.body) { criarCTA(); redirecionarFormsLegados(); inserirAcessoDiretorioCidade(); }
+  document.addEventListener('DOMContentLoaded', function(){ criarCTA(); redirecionarFormsLegados(); inserirAcessoDiretorioCidade(); });
+  setTimeout(function(){ criarCTA(); redirecionarFormsLegados(); inserirAcessoDiretorioCidade(); }, 800);
 })();
 /* === FIM BOTAO CTA === */
 
@@ -135,6 +145,12 @@
   var uuid = function () { return (crypto.randomUUID ? crypto.randomUUID() : 'id-' + Date.now() + '-' + Math.random().toString(36).slice(2)); };
   var waLink = function (msg) { return 'https://wa.me/' + CONFIG.whatsapp + '?text=' + encodeURIComponent(msg || 'Olá! Vim pelo Aqui Tem Achadinhos.'); };
   var formatDate = function (d) { try { return new Date(d + 'T00:00:00').toLocaleDateString('pt-BR'); } catch (e) { return d; } };
+  var CITY_HOSTS = { gramado:'gramado', blumenau:'blumenau', bonito:'bonito', buzios:'buzios', campos:'campos', caruaru:'caruaru', florianopolis:'florianopolis', jericoacoara:'jericoacoara', porto:'porto', salvador:'salvador' };
+  var CITY_NAMES = { barretos:'Barretos', gramado:'Gramado', blumenau:'Blumenau', bonito:'Bonito', buzios:'Búzios', campos:'Campos do Jordão', caruaru:'Caruaru', florianopolis:'Florianópolis', jericoacoara:'Jericoacoara', porto:'Porto de Galinhas', salvador:'Salvador' };
+  var CITY_UFS = { barretos:'SP', gramado:'RS', blumenau:'SC', bonito:'MS', buzios:'RJ', campos:'SP', caruaru:'PE', florianopolis:'SC', jericoacoara:'CE', porto:'PE', salvador:'BA' };
+  function currentCitySlug() { var h = (location.hostname.split('.')[0] || 'www').toLowerCase(); return CITY_HOSTS[h] || 'barretos'; }
+  function currentCityName() { return CITY_NAMES[currentCitySlug()] || 'Barretos'; }
+  function currentCityUF() { return CITY_UFS[currentCitySlug()] || 'SP'; }
   var showMsg = function (sel, txt, ok) { var e = $(sel); if (!e) return; e.className = 'msg ' + (ok ? 'msg-ok' : 'msg-err'); e.innerHTML = txt; };
 
   /* DATA LAYER */
@@ -161,12 +177,12 @@
   };
   var Stores = {
     list: function () {
-      if (isRemote()) return apiGet('stores?select=*&status=eq.ativo&order=destaque.desc,criado_em.desc');
+      if (isRemote()) return apiGet('stores?select=*&status=eq.ativo&city_slug=eq.' + encodeURIComponent(currentCitySlug()) + '&order=destaque.desc,criado_em.desc');
       return Promise.resolve(JSON.parse(localStorage.getItem(LS_S) || '[]').filter(function (s) { return s.status === 'ativo'; }));
     },
     get: function (key) {
       if (!key) return Promise.resolve(null);
-      if (isRemote()) return apiGet('stores?select=*&or=(id.eq.' + encodeURIComponent(key) + ',slug.eq.' + encodeURIComponent(key) + ')&status=eq.ativo').then(function (a) { var s = a[0] || null; if (s && document.body && document.body.getAttribute('data-page') === 'loja') { try { setListingSEO(s); } catch (e) {} } return s; });
+      if (isRemote()) return apiGet('stores?select=*&or=(id.eq.' + encodeURIComponent(key) + ',slug.eq.' + encodeURIComponent(key) + ')&status=eq.ativo&city_slug=eq.' + encodeURIComponent(currentCitySlug())).then(function (a) { var s = a[0] || null; if (s && document.body && document.body.getAttribute('data-page') === 'loja') { try { setListingSEO(s); } catch (e) {} } return s; });
       var a = JSON.parse(localStorage.getItem(LS_S) || '[]'); return Promise.resolve(a.filter(function (s) { return s.id === key || s.slug === key; })[0] || null);
     },
     photos: function (sid) {
@@ -175,10 +191,10 @@
     },
     search: function (q) {
       q = (q || '').trim(); if (!q) return Stores.list();
-      if (isRemote()) { var t = encodeURIComponent(q); return apiGet('stores?select=*&status=eq.ativo&or=(nome.ilike.*' + t + '*,descricao.ilike.*' + t + '*,bairro.ilike.*' + t + '*,subcategoria.ilike.*' + t + '*)'); }
+      if (isRemote()) { var t = encodeURIComponent(q); return apiGet('stores?select=*&status=eq.ativo&city_slug=eq.' + encodeURIComponent(currentCitySlug()) + '&or=(nome.ilike.*' + t + '*,descricao.ilike.*' + t + '*,bairro.ilike.*' + t + '*,subcategoria.ilike.*' + t + '*)'); }
       return Stores.list().then(function (a) { var ql = q.toLowerCase(); return a.filter(function (s) { return JSON.stringify(s).toLowerCase().indexOf(ql) !== -1; }); });
     },
-    create: function (obj) { obj.id = uuid(); obj.status = 'pendente'; obj.criado_em = new Date().toISOString(); return apiPost('stores', obj).then(function (ok) { return ok ? obj : null; }); }
+    create: function (obj) { obj.id = uuid(); obj.status = 'pendente'; obj.city_slug = obj.city_slug || currentCitySlug(); obj.cidade = obj.cidade || currentCityName(); obj.criado_em = new Date().toISOString(); return apiPost('stores', obj).then(function (ok) { return ok ? obj : null; }); }
   };
   var Offers = {
     listActive: function () {
@@ -211,7 +227,7 @@
       setMeta('og:description', s.descricao_curta || s.nome || '');
       setMeta('og:url', location.href);
       var ld = document.createElement('script'); ld.type = 'application/ld+json';
-      ld.text = JSON.stringify({ "@context": "https://schema.org", "@type": "LocalBusiness", "name": s.nome || '', "description": s.descricao_curta || '', "image": s.capa || s.foto || '', "telephone": s.telefone || '', "url": location.href, "address": { "@type": "PostalAddress", "addressLocality": "Barretos", "addressRegion": "SP", "addressCountry": "BR", "streetAddress": s.bairro || '' }, "priceRange": "$$" });
+      ld.text = JSON.stringify({ "@context": "https://schema.org", "@type": "LocalBusiness", "name": s.nome || '', "description": s.descricao_curta || '', "image": s.capa || s.foto || '', "telephone": s.telefone || '', "url": location.href, "address": { "@type": "PostalAddress", "addressLocality": s.cidade || currentCityName(), "addressRegion": CITY_UFS[s.city_slug] || currentCityUF(), "addressCountry": "BR", "streetAddress": s.bairro || '' }, "priceRange": "$$" });
       document.head.appendChild(ld);
     } catch (e) {}
   }
@@ -253,7 +269,7 @@
   function setStoreSEO(s) {
     document.title = s.nome + ' em Barretos · Aqui Tem Achadinhos';
     setMeta('description', (s.descricao_curta || s.nome) + ' — ' + catName(s.categoria) + ' em Barretos. Contato direto pelo WhatsApp.');
-    var ld = { '@context': 'https://schema.org', '@type': 'LocalBusiness', name: s.nome, description: s.descricao_curta || s.descricao, address: { '@type': 'PostalAddress', addressLocality: 'Barretos', addressRegion: 'SP', streetAddress: s.endereco }, telephone: s.telefone, url: location.href };
+    var ld = { '@context': 'https://schema.org', '@type': 'LocalBusiness', name: s.nome, description: s.descricao_curta || s.descricao, address: { '@type': 'PostalAddress', addressLocality: (s.cidade || currentCityName()), addressRegion: CITY_UFS[s.city_slug] || currentCityUF(), streetAddress: s.endereco }, telephone: s.telefone, url: location.href };
     setJsonLd(ld);
   }
   function setMeta(name, content) { var m = document.querySelector('meta[name="' + name + '"]') || document.createElement('meta'); m.setAttribute('name', name); m.setAttribute('content', content); if (!m.parentNode) document.head.appendChild(m); }
@@ -465,7 +481,7 @@
     if (s.instagram) { var ig = String(s.instagram); ig = ig.indexOf('http') === 0 ? ig : 'https://instagram.com/' + ig.replace('@', ''); det += '<a href="' + esc(ig) + '" target="_blank" rel="noopener noreferrer" class="text-xs bg-silver-50 ring-silver px-2.5 py-1 rounded-full">📸 Instagram</a>'; }
     if (s.site) { var st = String(s.site); st = st.indexOf('http') === 0 ? st : 'https://' + st; det += '<a href="' + esc(st) + '" target="_blank" rel="noopener noreferrer" class="text-xs bg-silver-50 ring-silver px-2.5 py-1 rounded-full">🌐 Site</a>'; }
 
-    var mapQ = encodeURIComponent([s.endereco, s.bairro, 'Barretos SP'].filter(Boolean).join(', '));
+    var mapQ = encodeURIComponent([s.endereco, s.bairro, (s.cidade || currentCityName())].filter(Boolean).join(', '));
     var map = mapQ ? '<div class="mt-3 rounded-2xl overflow-hidden ring-silver"><iframe title="Mapa" class="w-full h-48" style="border:0" loading="lazy" src="https://www.google.com/maps?q=' + mapQ + '&output=embed"></iframe></div><a href="https://www.google.com/maps/dir/?api=1&destination=' + mapQ + '" target="_blank" rel="noopener noreferrer" onclick="window.ATA&&window.ATA.Metrics.log(\'click_mapa\',\'' + esc(s.id) + '\')" class="btn-shine inline-block mt-2 bg-navy-800 hover:bg-navy-700 text-white font-semibold px-4 py-2.5 rounded-xl text-sm">📍 Como chegar</a>' : '';
     return '<div class="max-w-4xl mx-auto px-4 sm:px-6 py-6"><a href="javascript:history.back()" class="text-silver-500 text-sm hover:text-navy-700">← Voltar</a><div class="mt-3 bg-white rounded-3xl shadow-soft ring-silver overflow-hidden">' + capa + '<div class="p-6 -mt-12 relative">' + logo + '<div class="mt-3 flex items-center gap-2 flex-wrap"><span class="text-xs font-semibold text-peao-600 bg-peao-500/10 px-2 py-0.5 rounded">' + esc(catName(s.categoria, cats)) + '</span>' + (s.verificada ? '<span class="text-xs font-semibold text-emerald-700 bg-emerald-500/10 px-2 py-0.5 rounded">✓ Empresa verificada</span>' : '') + (s.destaque ? '<span class="text-xs font-semibold text-peao-600 bg-peao-500/10 px-2 py-0.5 rounded">Destaque</span>' : '') + '</div><h1 class="font-display text-2xl md:text-3xl font-extrabold mt-2">' + esc(s.nome) + '</h1>' + (s.descricao_curta ? '<p class="text-slate-600 mt-1">' + esc(s.descricao_curta) + '</p>' : '') + (s.descricao ? '<p class="text-slate-700 mt-3 leading-relaxed">' + esc(s.descricao) + '</p>' : '') + '<div class="mt-4 grid sm:grid-cols-2 gap-2 text-sm text-slate-700">' + (s.horario ? '<p>🕒 ' + esc(s.horario) + '</p>' : '') + (s.telefone ? '<p>☎️ ' + esc(s.telefone) + '</p>' : '') + end + '</div>' + (det ? '<div class="mt-4 flex flex-wrap gap-2">' + det + '</div>' : '') + map + '<div class="mt-5 flex flex-wrap gap-3"><a href="' + wa + '" target="_blank" rel="noopener noreferrer" onclick="window.ATA&&window.ATA.Metrics.log(\'click_whatsapp\',\'' + esc(s.id) + '\')" class="btn-shine bg-[#25D366] text-white font-bold px-5 py-3 rounded-xl">💬 Falar no WhatsApp</a><button onclick="navigator.share?navigator.share({title:\'' + esc(s.nome) + '\',url:location.href}):copy(location.href)" class="btn-shine glass-light text-navy-800 font-bold px-5 py-3 rounded-xl">🔗 Compartilhar</button></div></div></div>' + ofs + gal + ratingBlock(s, reviews) + upsellCard('store', s.id, s.nome) + '<a href="' + waLink('Den\u00fancia sobre: ' + s.nome) + '" target="_blank" rel="noopener noreferrer" class="block mt-4 text-center text-xs text-slate-400 hover:text-peao-600">\U0001f6a9 Denunciar conte\u00fado incorreto</a></div>';
   }
@@ -522,7 +538,7 @@
       var galUrls = []; galFiles.forEach(function (f) { tasks.push(uploadPhoto(f).then(function (u) { galUrls.push(u); })); });
       Promise.all(tasks).then(function () {
         delete fd.logo; delete fd.capa; delete fd.galeria;
-        fd.cidade = fd.cidade || 'Barretos';
+        fd.city_slug = currentCitySlug(); fd.cidade = currentCityName();
       var dias = []; [0,1,2,3,4,5,6].forEach(function (dd) { var cb = form.querySelector('[name=dia_' + dd + ']'); if (cb && cb.checked) dias.push(dd); }); fd.horario_dias = dias.length ? dias.join(',') : '';
       delete fd.autorizacao_cadastrar;
       [0,1,2,3,4,5,6].forEach(function (dd) { delete fd['dia_' + dd]; });
@@ -604,7 +620,7 @@
     var actions = isPend
       ? '<button data-act="aprovar" data-id="' + esc(s.id) + '" class="text-sm font-bold text-white bg-emerald-600 px-3 py-1.5 rounded-lg">✓ Aprovar</button><button data-act="rejeitar" data-id="' + esc(s.id) + '" class="text-sm font-bold text-peao-600 bg-peao-500/10 px-3 py-1.5 rounded-lg">Rejeitar</button>'
       : '<button data-act="' + (s.destaque ? 'destaque-off' : 'destaque-on') + '" data-id="' + esc(s.id) + '" class="text-xs font-semibold text-slate-600 hover:underline">' + (s.destaque ? 'Tirar destaque' : 'Destacar') + '</button>' + planoSel + (s.status !== 'ativo' ? '<button data-act="aprovar" data-id="' + esc(s.id) + '" class="text-xs font-semibold text-emerald-600 hover:underline">Ativar</button>' : '');
-    return '<div class="bg-white rounded-2xl ring-silver shadow-soft p-4 flex items-center gap-3"><div class="shrink-0">' + logo + '</div><div class="flex-1 min-w-0"><a href="loja.html?id=' + encodeURIComponent(s.id) + '" class="font-display font-bold truncate block hover:underline">' + esc(s.nome) + '</a><p class="text-xs text-silver-500">' + esc(s.categoria || '') + (s.bairro ? ' · ' + esc(s.bairro) : '') + ' · <span class="' + sc + ' font-semibold">' + esc(s.status) + '</span>' + (s.destaque ? ' · ⭐' : '') + '</p></div><div class="flex items-center gap-2 shrink-0 flex-wrap justify-end">' + actions + '</div></div>';
+    return '<div class="bg-white rounded-2xl ring-silver shadow-soft p-4 flex items-center gap-3"><div class="shrink-0">' + logo + '</div><div class="flex-1 min-w-0"><a href="loja.html?id=' + encodeURIComponent(s.id) + '" class="font-display font-bold truncate block hover:underline">' + esc(s.nome) + '</a><p class="text-xs text-silver-500">' + esc(s.categoria || '') + ' · ' + esc(s.cidade || CITY_NAMES[s.city_slug] || currentCityName()) + (s.bairro ? ' · ' + esc(s.bairro) : '') + ' · <span class="' + sc + ' font-semibold">' + esc(s.status) + '</span>' + (s.destaque ? ' · ⭐' : '') + '</p></div><div class="flex items-center gap-2 shrink-0 flex-wrap justify-end">' + actions + '</div></div>';
   }
   function driverAdminRow(d) {
     var foto = d.foto_url ? '<img src="' + esc(d.foto_url) + '" alt="" class="w-12 h-12 rounded-xl object-cover">' : '<div class="w-12 h-12 rounded-xl bg-gradient-to-br from-navy-700 to-navy-500 grid place-items-center text-white">🚗</div>';
@@ -637,10 +653,10 @@
       return '<div class="bg-white rounded-2xl ring-silver shadow-soft p-4 flex items-center gap-3"><div class="flex-1 min-w-0"><a href="anuncio.html?id=' + encodeURIComponent(l.id) + '" class="font-display font-bold truncate block hover:underline">' + esc(catEmoji(l.categoria)) + ' ' + esc(l.titulo) + '</a><p class="text-xs text-silver-500">' + esc(catClassified(l.categoria)) + (l.preco ? ' · ' + esc(l.preco) : '') + (l.bairro ? ' · ' + esc(l.bairro) : '') + ' · <span class="font-semibold">' + esc(l.status) + '</span>' + (l.destaque ? ' · ⭐' : '') + '</p></div><div class="flex items-center gap-2 shrink-0 flex-wrap justify-end">' + btns + '</div></div>';
     }).join('') + '</div>' : '';
     var allHtml = '<h2 class="font-display text-xl font-extrabold mb-3">Todas as empresas</h2><div class="space-y-3">' + stores.map(function (s) { return adminRow(s, false); }).join('') + '</div>';
-    root.innerHTML = '<div class="flex items-center justify-between mb-6"><h1 class="font-display text-2xl md:text-3xl font-extrabold">Painel administrativo</h1><button id="btnCsv" class="text-sm font-semibold text-navy-700 hover:underline">⬇ Exportar CSV</button><a href="painel.html" class="text-sm font-semibold text-emerald-600 hover:underline ml-4">✏️ Editar lojas →</a><button id="btnLogout" class="text-sm font-semibold text-peao-600 hover:underline ml-4">Sair</button></div><div class="mb-6"><button id="btnAddStore" class="btn-shine bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-4 py-2.5 rounded-xl text-sm">+ Cadastrar empresa (rápido · discreto)</button><div id="addStoreForm" class="hidden mt-4 bg-white rounded-2xl ring-silver shadow-soft p-5 space-y-3"><h3 class="font-display font-bold">Cadastro rápido · admin</h3><p class="text-xs text-slate-500">Só você vê isso. A empresa entra ATIVA, com o plano que você escolher (Pro = tudo liberado, sem cobrança).</p><input id="as_nome" placeholder="Nome da empresa *" class="w-full px-3 py-2 rounded-lg bg-silver-50 ring-silver"><select id="as_cat" class="w-full px-3 py-2 rounded-lg bg-silver-50 ring-silver"></select><input id="as_cep" placeholder="CEP (preenche automático)" class="w-full px-3 py-2 rounded-lg bg-silver-50 ring-silver"><input id="as_end" placeholder="Rua, Av., número" class="w-full px-3 py-2 rounded-lg bg-silver-50 ring-silver"><div class="grid grid-cols-2 gap-2"><input id="as_wa" placeholder="WhatsApp" class="px-3 py-2 rounded-lg bg-silver-50 ring-silver"><input id="as_tel" placeholder="Telefone" class="px-3 py-2 rounded-lg bg-silver-50 ring-silver"></div><input id="as_bairro" placeholder="Bairro" class="w-full px-3 py-2 rounded-lg bg-silver-50 ring-silver"><input id="as_desc" placeholder="Descrição curta" class="w-full px-3 py-2 rounded-lg bg-silver-50 ring-silver"><div class="grid grid-cols-2 gap-2 items-center"><select id="as_plano" class="px-3 py-2 rounded-lg bg-silver-50 ring-silver"><option value="pro">Pro (tudo liberado)</option><option value="destaque">Destaque</option><option value="gratis">Grátis</option></select><label class="flex items-center gap-2 text-sm"><input id="as_destaque" type="checkbox" checked class="w-4 h-4 accent-peao-500"> Destacar (topo + selo)</label></div><button id="as_submit" class="btn-shine bg-peao-500 hover:bg-peao-600 text-white font-bold px-5 py-2.5 rounded-xl w-full">Cadastrar e publicar agora</button><span id="as_msg" class="text-sm"></span></div></div>' + stats + leadsHtml + pendHtml + revHtml + driHtml + lstHtml + allHtml;
+    root.innerHTML = '<div class="flex items-center justify-between mb-6"><h1 class="font-display text-2xl md:text-3xl font-extrabold">Painel administrativo</h1><button id="btnCsv" class="text-sm font-semibold text-navy-700 hover:underline">⬇ Exportar CSV</button><a href="painel.html" class="text-sm font-semibold text-emerald-600 hover:underline ml-4">✏️ Editar lojas →</a><button id="btnLogout" class="text-sm font-semibold text-peao-600 hover:underline ml-4">Sair</button></div><div class="mb-6"><button id="btnAddStore" class="btn-shine bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-4 py-2.5 rounded-xl text-sm">+ Cadastrar empresa (rápido · discreto)</button><div id="addStoreForm" class="hidden mt-4 bg-white rounded-2xl ring-silver shadow-soft p-5 space-y-3"><h3 class="font-display font-bold">Cadastro rápido · admin</h3><p class="text-xs text-slate-500">Só você vê isso. A empresa entra ATIVA, com o plano que você escolher (Pro = tudo liberado, sem cobrança).</p><input id="as_nome" placeholder="Nome da empresa *" class="w-full px-3 py-2 rounded-lg bg-silver-50 ring-silver"><select id="as_cat" class="w-full px-3 py-2 rounded-lg bg-silver-50 ring-silver"></select><input id="as_cep" placeholder="CEP (preenche automático)" class="w-full px-3 py-2 rounded-lg bg-silver-50 ring-silver"><input id="as_end" placeholder="Rua, Av., número" class="w-full px-3 py-2 rounded-lg bg-silver-50 ring-silver"><div class="grid grid-cols-2 gap-2"><input id="as_wa" placeholder="WhatsApp" class="px-3 py-2 rounded-lg bg-silver-50 ring-silver"><input id="as_tel" placeholder="Telefone" class="px-3 py-2 rounded-lg bg-silver-50 ring-silver"></div><input id="as_bairro" placeholder="Bairro" class="w-full px-3 py-2 rounded-lg bg-silver-50 ring-silver"><input id="as_desc" placeholder="Descrição curta" class="w-full px-3 py-2 rounded-lg bg-silver-50 ring-silver"><select id="as_city" class="w-full px-3 py-2 rounded-lg bg-silver-50 ring-silver"><option value="barretos">Barretos · SP</option><option value="gramado">Gramado · RS</option><option value="blumenau">Blumenau · SC</option><option value="bonito">Bonito · MS</option><option value="buzios">Búzios · RJ</option><option value="campos">Campos do Jordão · SP</option><option value="caruaru">Caruaru · PE</option><option value="florianopolis">Florianópolis · SC</option><option value="jericoacoara">Jericoacoara · CE</option><option value="porto">Porto de Galinhas · PE</option><option value="salvador">Salvador · BA</option></select><div class="grid grid-cols-2 gap-2 items-center"><select id="as_plano" class="px-3 py-2 rounded-lg bg-silver-50 ring-silver"><option value="pro">Pro (tudo liberado)</option><option value="destaque">Destaque</option><option value="gratis">Grátis</option></select><label class="flex items-center gap-2 text-sm"><input id="as_destaque" type="checkbox" checked class="w-4 h-4 accent-peao-500"> Destacar (topo + selo)</label></div><button id="as_submit" class="btn-shine bg-peao-500 hover:bg-peao-600 text-white font-bold px-5 py-2.5 rounded-xl w-full">Cadastrar e publicar agora</button><span id="as_msg" class="text-sm"></span></div></div>' + stats + leadsHtml + pendHtml + revHtml + driHtml + lstHtml + allHtml;
     $('#btnLogout').addEventListener('click', AUTH.logout);
     var btnAdd = $('#btnAddStore'); if (btnAdd) btnAdd.addEventListener('click', function () { var f = $('#addStoreForm'); if (f) f.classList.toggle('hidden'); var sel = $('#as_cat'); if (sel && !sel.getAttribute('data-f')) { sel.setAttribute('data-f', '1'); sel.innerHTML = '<option value="">Categoria…</option>' + CATS.map(function (c) { return '<option value="' + c.id + '">' + c.emoji + ' ' + c.nome + '</option>'; }).join(''); } });
-    var asSub = $('#as_submit'); if (asSub) asSub.addEventListener('click', function () { var msg = $('#as_msg'); var nome = $('#as_nome').value.trim(); var cat = $('#as_cat').value; if (!nome || !cat) { msg.className = 'text-sm text-peao-600'; msg.textContent = 'Preencha nome e categoria.'; return; } asSub.disabled = true; asSub.textContent = 'Cadastrando…'; aPost('stores', { nome: nome, categoria: cat, endereco: $('#as_end').value.trim(), whatsapp: $('#as_wa').value.trim(), telefone: $('#as_tel').value.trim(), bairro: $('#as_bairro').value.trim(), descricao_curta: $('#as_desc').value.trim(), cidade: 'Barretos', status: 'pendente', aceite_termos: true, autorizacao_contato: true }).then(function (arr) { var cr = arr && arr[0]; if (!cr) { msg.className = 'text-sm text-peao-600'; msg.textContent = 'Erro ao cadastrar.'; asSub.disabled = false; asSub.textContent = 'Cadastrar e publicar agora'; return; } aPatch('stores', cr.id, { status: 'ativo', plano: $('#as_plano').value, destaque: $('#as_destaque').checked }).then(function () { msg.className = 'text-sm text-emerald-600'; msg.textContent = '✓ Cadastrada e publicada!'; pageAdmin(); }); }); });
+    var asSub = $('#as_submit'); if (asSub) asSub.addEventListener('click', function () { var msg = $('#as_msg'); var nome = $('#as_nome').value.trim(); var cat = $('#as_cat').value; if (!nome || !cat) { msg.className = 'text-sm text-peao-600'; msg.textContent = 'Preencha nome e categoria.'; return; } var adminCitySlug = $('#as_city').value || 'barretos'; var adminCityName = CITY_NAMES[adminCitySlug] || 'Barretos'; asSub.disabled = true; asSub.textContent = 'Cadastrando…'; aPost('stores', { nome: nome, categoria: cat, endereco: $('#as_end').value.trim(), whatsapp: $('#as_wa').value.trim(), telefone: $('#as_tel').value.trim(), bairro: $('#as_bairro').value.trim(), descricao_curta: $('#as_desc').value.trim(), cidade: adminCityName, city_slug: adminCitySlug, status: 'pendente', aceite_termos: true, autorizacao_contato: true }).then(function (arr) { var cr = arr && arr[0]; if (!cr) { msg.className = 'text-sm text-peao-600'; msg.textContent = 'Erro ao cadastrar.'; asSub.disabled = false; asSub.textContent = 'Cadastrar e publicar agora'; return; } aPatch('stores', cr.id, { status: 'ativo', plano: $('#as_plano').value, destaque: $('#as_destaque').checked }).then(function () { msg.className = 'text-sm text-emerald-600'; msg.textContent = '✓ Cadastrada e publicada!'; pageAdmin(); }); }); });
 
     var btnCsv = $('#btnCsv'); if (btnCsv) btnCsv.addEventListener('click', function () { exportCSV(stores); });
     root.querySelectorAll('[data-act]').forEach(function (btn) {
