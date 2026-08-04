@@ -1,18 +1,11 @@
-FASE 3 — DIRETÓRIOS REAIS POR CIDADE
+MICROCORREÇÃO — CATEGORIAS POR CIDADE
 
-1. No Supabase > SQL Editor, execute primeiro:
-   multicidade-fase-2-diretorios.sql
+Publique somente este arquivo no GitHub:
+assets/app.js
 
-2. No GitHub, substitua somente:
-   assets/app.js
+Corrige:
+- "Todas as categorias do guia de Barretos" para a cidade correta.
+- "Empresas de [categoria] em Barretos" para a cidade correta.
+- Botão de categoria vazia: em cidades fora de Barretos, leva ao cadastro oficial daquela cidade, sem mostrar a campanha dos 50 destaques de Barretos.
 
-3. Faça Commit e aguarde a Vercel publicar.
-
-O que muda:
-- Todas as empresas atuais passam a pertencer a Barretos sem apagar dados.
-- Novas empresas recebem a cidade correta.
-- Listas, busca e páginas de empresa passam a filtrar pela cidade do subdomínio.
-- O painel administrativo permite cadastrar empresa em qualquer cidade.
-- Páginas de cidades ganham o acesso "Explorar empresas da cidade".
-
-Não envie este arquivo LEIA-ANTES.txt ao site.
+Não há SQL nesta microcorreção.
