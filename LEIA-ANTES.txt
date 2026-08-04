@@ -1,11 +1,6 @@
-CORREÇÃO OPERACIONAL COMPLETA
+CORREÇÃO FINAL — EXIBIÇÃO DE EMPRESAS
 
-1. Execute correcao-operacao-final.sql no Supabase > SQL Editor.
-2. Publique assets/app.js no GitHub.
+1) No Supabase execute correcao-operacao-final.sql (é seguro repetir; apenas ativa empresa vinculada a lead ativo que ficou pendente).
+2) No GitHub substitua assets/app.js.
 
-Resolve:
-- ativa as empresas que foram convertidas por lead mas ficaram pendentes;
-- remove o grande CTA verde flutuante que cobria conteúdo no celular;
-- deixa WhatsApp flutuante apenas em páginas de entrada;
-- organiza cartões de lead no painel mobile;
-- identifica lead já publicado como "Publicada".
+Corrige o componente que renderiza o cartão da empresa no diretório. Sem ele, a contagem mostrava 1 mas o cartão não era exibido.
