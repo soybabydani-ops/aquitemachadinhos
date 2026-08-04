@@ -1,8 +1,6 @@
-CORREÇÃO — CONVERSÃO DE LEAD EM EMPRESA
+CORREÇÃO DO BOTÃO "REVISAR E PUBLICAR EMPRESA"
 
-1) No Supabase, execute multicidade-fase-4-conversao-transacional.sql.
-2) No GitHub, substitua assets/app.js.
-3) Commit e aguarde a Vercel.
+Publique somente este arquivo:
+assets/app.js
 
-Esta versão publica a empresa e atualiza o lead em UMA única operação do banco.
-Se algo falhar, nenhuma empresa parcial é criada.
+Não é necessário executar SQL. A função do Supabase já está publicada.
