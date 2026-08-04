@@ -266,6 +266,17 @@
   /* CARDS */
   function catName(id, cats) { var c = (cats || CATS).filter(function (x) { return x.id === id; })[0]; return c ? (c.emoji + ' ' + c.nome) : '🏪 Loja'; }
   function catCard(c) { var cnt = window._ataCatCounts && window._ataCatCounts[c.id] ? window._ataCatCounts[c.id] : 0; return '<a href="categoria.html?cat=' + c.id + '" class="card-hover bg-white rounded-2xl p-5 text-center shadow-soft ring-silver relative"><div class="text-4xl">' + (c.emoji || '🏢') + '</div><div class="mt-2 font-display font-bold">' + esc(c.nome) + '</div>' + (cnt > 0 ? '<span class="inline-block mt-1 text-[10px] font-bold text-peao-600 bg-peao-500/10 px-2 py-0.5 rounded-full">' + cnt + (cnt === 1 ? ' empresa' : ' empresas') + '</span>' : '<div class="text-xs text-silver-500">' + esc(c.desc || 'Seja o primeiro!') + '</div>') + '</a>'; }
+  function storeCard(s, cats) {
+    var logo = s.logo_url
+      ? '<img src="' + esc(s.logo_url) + '" alt="" class="w-14 h-14 rounded-xl object-cover bg-silver-100">'
+      : '<div class="w-14 h-14 rounded-xl bg-gradient-to-br from-navy-800 to-navy-600 text-white grid place-items-center font-extrabold text-lg">' + esc(initials(s.nome)) + '</div>';
+    var category = catName(s.categoria, cats);
+    var rating = Number(s.rating_count || 0) > 0 ? '<span class="text-[11px] text-amber-600 font-semibold">' + ratingMini(s) + '</span>' : '';
+    var badge = s.destaque ? '<span class="text-[10px] font-bold text-peao-700 bg-peao-500/10 px-2 py-0.5 rounded-full">⭐ Destaque</span>' : '';
+    var local = s.bairro ? '📍 ' + esc(s.bairro) : (s.cidade ? '📍 ' + esc(s.cidade) : '');
+    return '<a href="loja.html?id=' + encodeURIComponent(s.id) + '" class="card-hover block bg-white rounded-2xl p-4 shadow-soft ring-silver"><div class="flex gap-3"><div class="shrink-0">' + logo + '</div><div class="min-w-0 flex-1"><div class="flex items-start justify-between gap-2"><h3 class="font-display font-bold text-sm leading-snug line-clamp-2">' + esc(s.nome) + '</h3>' + badge + '</div><p class="text-xs text-silver-500 mt-1 truncate">' + esc(category) + '</p>' + (local ? '<p class="text-xs text-slate-500 mt-1 truncate">' + local + '</p>' : '') + (rating ? '<div class="mt-1">' + rating + '</div>' : '') + '</div></div></a>';
+  }
+
   function offerCard(o) {
     var img = o.imagem_url ? '<img src="' + esc(o.imagem_url) + '" alt="" class="h-32 w-full object-cover" loading="lazy">' : '<div class="h-32 bg-gradient-to-br from-navy-700 to-navy-500 grid place-items-center text-3xl text-white">🏷️</div>';
     return '<a href="loja.html?id=' + encodeURIComponent(o.store_id) + '" class="card-hover rounded-2xl overflow-hidden bg-white ring-silver shadow-soft block">' + img + '<div class="p-4"><h3 class="font-display font-bold">' + esc(o.titulo) + '</h3>' + (o.preco_atual ? '<p class="text-peao-500 font-extrabold mt-1">' + esc(o.preco_atual) + (o.preco_anterior ? ' <span class="text-xs line-through text-silver-400">' + esc(o.preco_anterior) + '</span>' : '') + '</p>' : '') + (o.termino ? '<p class="text-[11px] text-silver-500 mt-1">Válido até ' + esc(formatDate(o.termino)) + '</p>' : '') + '</div></a>';
