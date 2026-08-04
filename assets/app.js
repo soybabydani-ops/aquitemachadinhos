@@ -5,7 +5,7 @@
     if(!document.body) return;
     var a=document.createElement('a');
     a.id='ctaMaoFree';
-    a.href='https://docs.google.com/forms/d/e/1FAIpQLSdEIq9IrOb7I5q1FFVGXC2_6p9zchhKkq7NfZhG4GUQOSfAIA/viewform';
+    a.href='https://www.aquitemachadinhos.com.br/cadastro.html?utm_source=site&utm_medium=floating_cta&utm_campaign=inauguracao50';
     a.target='_blank'; a.rel='noopener';
     var s=a.style;
     s.position='fixed'; s.right='16px'; s.bottom='80px'; s.zIndex='99998';
@@ -16,7 +16,7 @@
     s.display='flex'; s.flexDirection='column'; s.alignItems='center'; s.gap='2px';
     s.textDecoration='none'; s.maxWidth='62vw'; s.lineHeight='1.2';
     var e=document.createElement('span'); e.textContent='🚀'; e.style.fontSize='20px';
-    var t=document.createElement('span'); t.textContent='Quero mais clientes em Barretos';
+    var t=document.createElement('span'); t.textContent='50 destaques gratuitos';
     var sub=document.createElement('span'); sub.textContent='cadastro grátis no guia';
     sub.style.fontWeight='500'; sub.style.fontSize='11px'; sub.style.opacity='.9';
     a.appendChild(e); a.appendChild(t); a.appendChild(sub);
