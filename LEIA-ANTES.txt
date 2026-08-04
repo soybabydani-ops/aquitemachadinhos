@@ -1,5 +1,11 @@
-CORREÇÃO — CATEGORIAS COM RENDERIZAÇÃO IMEDIATA
+CORREÇÃO OPERACIONAL COMPLETA
 
-Publique somente assets/app.js.
+1. Execute correcao-operacao-final.sql no Supabase > SQL Editor.
+2. Publique assets/app.js no GitHub.
 
-A página deixa de exibir "Carregando...". As categorias aparecem na hora e atualizam automaticamente quando a consulta de empresas retorna.
+Resolve:
+- ativa as empresas que foram convertidas por lead mas ficaram pendentes;
+- remove o grande CTA verde flutuante que cobria conteúdo no celular;
+- deixa WhatsApp flutuante apenas em páginas de entrada;
+- organiza cartões de lead no painel mobile;
+- identifica lead já publicado como "Publicada".
