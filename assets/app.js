@@ -1272,13 +1272,16 @@
 
   function renderSocialProof() {
     var box = $('#socialProof'); if (!box) return;
+    var slug = currentCitySlug(), city = currentCityName(), uf = currentCityUF();
     function cnt(p) { return fetch(B(p), { headers: H({ Prefer: 'count=exact' }) }).then(function (r) { var cr = (r.headers.get('content-range') || '').split('/'); return parseInt(cr[1], 10) || 0; }).catch(function () { return 0; }); }
-    Promise.all([cnt('stores?select=id&status=eq.ativo'), cnt('listings?select=id&status=eq.ativo'), cnt('reviews?select=id&status=eq.ativo'), cnt('drivers?select=id&status=eq.ativo')]).then(function (r) {
-      var stats = [['🏢', r[0], 'empresas em Barretos'], ['🏠', r[1], 'imóveis e anúncios'], ['🌟', r[2], 'avaliações reais'], ['🚗', r[3], 'motoristas']].filter(function (s) { return s[1] > 0; });
-      var total = r[0] + r[1] + r[2] + r[3];
-      var grid = stats.map(function (s) { return '<div><div class="text-3xl">' + s[0] + '</div><div class="font-display text-2xl md:text-3xl font-extrabold text-chrome">' + s[1] + '</div><div class="text-xs text-silver-400 mt-0.5">' + s[2] + '</div></div>'; }).join('');
-      var cols = stats.length >= 4 ? 'grid-cols-2 sm:grid-cols-4' : (stats.length >= 3 ? 'grid-cols-3' : (stats.length === 2 ? 'grid-cols-2' : 'grid-cols-1'));
-      box.innerHTML = total > 0 ? '<div class="max-w-5xl mx-auto px-4 py-8"><div class="grid ' + cols + ' gap-5 text-center">' + grid + '</div><p class="text-center text-xs text-silver-500 mt-5">🤠 Números reais, ao vivo · Barretos/SP</p></div>' : '<div class="max-w-5xl mx-auto px-4 py-8 text-center text-silver-400 text-sm">Conectando Barretos — <a href="cadastro.html" class="text-peao-400 font-semibold underline">cadastre grátis</a></div>';
+    var cityText = encodeURIComponent(city);
+    Promise.all([cnt('stores?select=id&status=eq.ativo&city_slug=eq.' + encodeURIComponent(slug)), cnt('listings?select=id&status=eq.ativo&cidade=ilike.' + cityText), cnt('drivers?select=id&status=eq.ativo&city_slug=eq.' + encodeURIComponent(slug))]).then(function (r) {
+      var stats = [['🏢', r[0], 'empresas em ' + city], ['🏠', r[1], 'anúncios em ' + city], ['🚗', r[2], 'motoristas em ' + city]].filter(function (x) { return x[1] > 0; });
+      var total = r[0] + r[1] + r[2];
+      var grid = stats.map(function (x) { return '<div><div class="text-3xl">' + x[0] + '</div><div class="font-display text-2xl md:text-3xl font-extrabold text-chrome">' + x[1] + '</div><div class="text-xs text-silver-400 mt-0.5">' + esc(x[2]) + '</div></div>'; }).join('');
+      var cols = stats.length >= 3 ? 'grid-cols-3' : (stats.length === 2 ? 'grid-cols-2' : 'grid-cols-1');
+      var register = cityRegistrationUrl();
+      box.innerHTML = total > 0 ? '<div class="max-w-5xl mx-auto px-4 py-8"><div class="grid ' + cols + ' gap-5 text-center">' + grid + '</div><p class="text-center text-xs text-silver-500 mt-5">✦ Números reais, ao vivo · ' + esc(city) + '/' + esc(uf) + '</p></div>' : '<div class="max-w-5xl mx-auto px-4 py-8 text-center text-silver-400 text-sm">Conectando ' + esc(city) + ' — <a href="' + register + '" class="text-peao-400 font-semibold underline">cadastre sua empresa</a></div>';
     });
   }
 
