@@ -1,26 +1,15 @@
-AQUITEM — RELEASE VISUAL CONSOLIDADO
+AQUITEM — HOTFIX FINAL DE VISUAL
 
-Este pacote é o resultado da nova identidade visual oficial, sem touro e sem acento.
-
-PUBLICAR NA RAIZ DO GITHUB:
+Publicar na raiz:
 - index.html
-- cidades.html
-- cadastro-cidade.html
-- contato.html
-- manifest.webmanifest
-- sw.js
-- logo.svg
-- favicon.ico
-- icon-192.png
-- icon-512.png
-- GUIA-MARCA-AQUITEM.md (opcional, é documentação)
 
-PUBLICAR DENTRO DA PASTA assets:
-- todos os arquivos da pasta assets deste pacote
+Publicar dentro de assets:
+- aquitem-orbit.js
+- premium.css
 
-ARQUIVOS PARA REDES SOCIAIS (não enviar ao GitHub):
-- brand/aquitem-perfil-oficial.png
-- brand/capa-facebook-aquitem-oficial.png
-- brand/aquitem-wordmark.png
-
-Antes de publicar, faça backup ou use uma branch. Após o commit, aguarde a Vercel e teste a home, Gramado, uma categoria e o formulário de cidade.
+Resolve:
+- remove o último emoji de touro da home institucional;
+- usa WebGL apenas em telas grandes;
+- garante fallback estático premium em celular;
+- corrige o canvas 3D para não ocupar a tela ou criar bloco dourado;
+- mantém a experiência de marca, com segurança e performance.
