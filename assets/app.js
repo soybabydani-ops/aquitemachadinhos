@@ -5,7 +5,10 @@
     if(!document.body) return;
     var a=document.createElement('a');
     a.id='ctaMaoFree';
-    a.href='https://www.aquitemachadinhos.com.br/cadastro.html?utm_source=site&utm_medium=floating_cta&utm_campaign=inauguracao50';
+    var subdominio=(location.hostname.split('.')[0]||'www').toLowerCase();
+    var cidadesAtivas=['gramado','blumenau','bonito','buzios','campos','caruaru','florianopolis','jericoacoara','porto','salvador'];
+    var eCidade=cidadesAtivas.indexOf(subdominio)!==-1;
+    a.href=eCidade ? 'https://www.aquitemachadinhos.com.br/cadastro-cidade.html?cidade='+encodeURIComponent(subdominio)+'&utm_source=site&utm_medium=floating_cta&utm_campaign=expansao_'+encodeURIComponent(subdominio) : 'https://www.aquitemachadinhos.com.br/cadastro.html?utm_source=site&utm_medium=floating_cta&utm_campaign=inauguracao50';
     a.target='_blank'; a.rel='noopener';
     var s=a.style;
     s.position='fixed'; s.right='16px'; s.bottom='80px'; s.zIndex='99998';
@@ -16,16 +19,23 @@
     s.display='flex'; s.flexDirection='column'; s.alignItems='center'; s.gap='2px';
     s.textDecoration='none'; s.maxWidth='62vw'; s.lineHeight='1.2';
     var e=document.createElement('span'); e.textContent='🚀'; e.style.fontSize='20px';
-    var t=document.createElement('span'); t.textContent='50 destaques gratuitos';
-    var sub=document.createElement('span'); sub.textContent='cadastro grátis no guia';
+    var t=document.createElement('span'); t.textContent=eCidade ? 'Cadastrar minha empresa' : '50 destaques gratuitos';
+    var sub=document.createElement('span'); sub.textContent=eCidade ? 'guia local em expansão' : 'cadastro grátis no guia';
     sub.style.fontWeight='500'; sub.style.fontSize='11px'; sub.style.opacity='.9';
     a.appendChild(e); a.appendChild(t); a.appendChild(sub);
     document.body.appendChild(a);
     setInterval(function(){ s.boxShadow='0 12px 30px rgba(34,197,94,.65)'; setTimeout(function(){ s.boxShadow='0 12px 30px rgba(0,0,0,.35)'; },900); },4000);
   }
-  if(document.body) criarCTA();
-  document.addEventListener('DOMContentLoaded', criarCTA);
-  setTimeout(criarCTA, 800);
+  function redirecionarFormsLegados(){
+    var subdominio=(location.hostname.split('.')[0]||'www').toLowerCase();
+    var cidadesAtivas=['gramado','blumenau','bonito','buzios','campos','caruaru','florianopolis','jericoacoara','porto','salvador'];
+    var eCidade=cidadesAtivas.indexOf(subdominio)!==-1;
+    var destino=eCidade ? 'https://www.aquitemachadinhos.com.br/cadastro-cidade.html?cidade='+encodeURIComponent(subdominio)+'&utm_source=site&utm_medium=city_cta&utm_campaign=expansao_'+encodeURIComponent(subdominio) : 'https://www.aquitemachadinhos.com.br/cadastro.html?utm_source=site&utm_medium=legacy_cta&utm_campaign=inauguracao50';
+    document.querySelectorAll('a[href*="docs.google.com/forms"]').forEach(function(link){ link.href=destino; link.target='_self'; });
+  }
+  if(document.body) { criarCTA(); redirecionarFormsLegados(); }
+  document.addEventListener('DOMContentLoaded', function(){ criarCTA(); redirecionarFormsLegados(); });
+  setTimeout(function(){ criarCTA(); redirecionarFormsLegados(); }, 800);
 })();
 /* === FIM BOTAO CTA === */
 
@@ -90,7 +100,7 @@
   var CONFIG = {
     brand: 'Aqui Tem Achadinhos',
     whatsapp: '5517992641746',
-    instagram: 'https://instagram.com/barretosshop.com',
+    instagram: 'https://instagram.com/aquitatem',
     domain: 'aquitemachadinhos.com.br',
     cidade: 'Barretos',
     supabase: {
