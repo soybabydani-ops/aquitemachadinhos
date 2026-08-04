@@ -404,13 +404,23 @@
   function emptyGrid(msg) { return '<div class="col-span-full text-center py-10 text-silver-500 text-sm">' + msg + '</div>'; }
 
   function pageCategoria() {
-    var t = $('#catTitle'), s = $('#catSubtitle'), l = $('#catList'); if (!l) return; l.innerHTML = loadingHTML();
-    var cat = params().get('cat');
+    var t = $('#catTitle'), sub = $('#catSubtitle'), l = $('#catList'); if (!l) return; l.innerHTML = loadingHTML();
+    var cat = params().get('cat'), done = false;
+    function fallback() {
+      if (done) return;
+      done = true;
+      if (t) t.textContent = cat ? 'Categorias' : 'Categorias';
+      if (sub) sub.textContent = 'Estamos preparando o guia de ' + currentCityName() + '.';
+      l.innerHTML = emptyState('Estamos preparando esta cidade', 'As categorias e empresas de ' + currentCityName() + ' aparecerão aqui em breve.', true);
+    }
+    var guard = setTimeout(fallback, 7000);
     Categories.list().then(function (cats) {
-      Stores.list().then(function (stores) {
+      return Stores.list().then(function (stores) {
+        if (done) return;
+        done = true; clearTimeout(guard);
         if (cat) {
           var c = cats.filter(function (x) { return x.id === cat; })[0] || { nome: cat, emoji: '🏪' };
-          if (t) t.innerHTML = c.emoji + ' ' + esc(c.nome); if (s) s.textContent = 'Empresas de ' + c.nome + ' em ' + currentCityName() + '.';
+          if (t) t.innerHTML = c.emoji + ' ' + esc(c.nome); if (sub) sub.textContent = 'Empresas de ' + c.nome + ' em ' + currentCityName() + '.';
           var f = stores.filter(function (x) { return x.categoria === cat; }); f = sortByPlano(f);
           var _cf = f;
           function renderCatList() {
@@ -421,11 +431,11 @@
           }
           renderCatList();
         } else {
-          if (t) t.textContent = 'Categorias'; if (s) s.textContent = 'Todas as categorias do guia de ' + currentCityName() + '.';
+          if (t) t.textContent = 'Categorias'; if (sub) sub.textContent = 'Todas as categorias do guia de ' + currentCityName() + '.';
           l.innerHTML = '<div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">' + cats.map(catCard).join('') + '</div>';
         }
       });
-    });
+    }).catch(fallback);
   }
 
   function pageOfertas() {
