@@ -406,38 +406,29 @@
   function emptyGrid(msg) { return '<div class="col-span-full text-center py-10 text-silver-500 text-sm">' + msg + '</div>'; }
 
   function pageCategoria() {
-    var t = $('#catTitle'), sub = $('#catSubtitle'), l = $('#catList'); if (!l) return; l.innerHTML = loadingHTML();
-    var cat = params().get('cat'), done = false;
-    function fallback() {
-      if (done) return;
-      done = true;
-      if (t) t.textContent = cat ? 'Categorias' : 'Categorias';
-      if (sub) sub.textContent = 'Estamos preparando o guia de ' + currentCityName() + '.';
-      l.innerHTML = emptyState('Estamos preparando esta cidade', 'As categorias e empresas de ' + currentCityName() + ' aparecerão aqui em breve.', true);
+    var t = $('#catTitle'), sub = $('#catSubtitle'), l = $('#catList'); if (!l) return;
+    var cat = params().get('cat');
+    function render(stores, cats) {
+      cats = (cats && cats.length) ? cats : CATS; stores = stores || [];
+      if (cat) {
+        var c = cats.filter(function (x) { return x.id === cat; })[0] || { nome: cat, emoji: '🏪' };
+        if (t) t.innerHTML = c.emoji + ' ' + esc(c.nome);
+        if (sub) sub.textContent = 'Empresas de ' + c.nome + ' em ' + currentCityName() + '.';
+        var list = sortByPlano(stores.filter(function (x) { return x.categoria === cat; }));
+        var hasGeo = list.some(function (x) { return x.lat && x.lng; });
+        var near = hasGeo ? '<button id="btnNearCat" class="btn-shine bg-navy-800 hover:bg-navy-700 text-white text-sm font-semibold px-4 py-2 rounded-xl mb-4">📍 Ordenar por distância</button>' : '';
+        l.innerHTML = near + (list.length ? '<div class="grid grid-cols-2 md:grid-cols-4 gap-5">' + list.map(function (x) { return storeCard(x, cats); }).join('') + '</div>' : emptyState('Nenhuma empresa aqui ainda', 'Seja a primeira empresa de ' + esc(c.nome) + ' no guia.', true));
+        var nb = $('#btnNearCat'); if (nb) nb.addEventListener('click', function () { nb.textContent = '📍 Localizando...'; navigator.geolocation.getCurrentPosition(function (pos) { var me = [pos.coords.latitude, pos.coords.longitude]; list.sort(function (x, y) { return ((x.lat && x.lng) ? haversine(me, [x.lat, x.lng]) : 99999) - ((y.lat && y.lng) ? haversine(me, [y.lat, y.lng]) : 99999); }); render(list, cats); }, function () { nb.textContent = '📍 Localização negada'; }); });
+      } else {
+        if (t) t.textContent = 'Categorias';
+        if (sub) sub.textContent = 'Todas as categorias do guia de ' + currentCityName() + '.';
+        window._ataCatCounts = {}; stores.forEach(function (x) { window._ataCatCounts[x.categoria] = (window._ataCatCounts[x.categoria] || 0) + 1; });
+        l.innerHTML = '<div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">' + cats.map(catCard).join('') + '</div>';
+      }
     }
-    var guard = setTimeout(fallback, 7000);
-    Categories.list().then(function (cats) {
-      return Stores.list().then(function (stores) {
-        if (done) return;
-        done = true; clearTimeout(guard);
-        if (cat) {
-          var c = cats.filter(function (x) { return x.id === cat; })[0] || { nome: cat, emoji: '🏪' };
-          if (t) t.innerHTML = c.emoji + ' ' + esc(c.nome); if (sub) sub.textContent = 'Empresas de ' + c.nome + ' em ' + currentCityName() + '.';
-          var f = stores.filter(function (x) { return x.categoria === cat; }); f = sortByPlano(f);
-          var _cf = f;
-          function renderCatList() {
-            var hasGeo = _cf.some(function (x) { return x.lat && x.lng; });
-            var btn = hasGeo ? '<button id="btnNearCat" class="btn-shine bg-navy-800 hover:bg-navy-700 text-white text-sm font-semibold px-4 py-2 rounded-xl mb-4">📍 Ordenar por distância</button>' : '';
-            l.innerHTML = btn + (_cf.length ? '<div class="grid grid-cols-2 md:grid-cols-4 gap-5">' + _cf.map(function (x) { return storeCard(x, cats); }).join('') + '</div>' : emptyState('Nenhuma empresa aqui ainda', 'Seja a primeira empresa de ' + esc(c.nome) + ' no guia.', true));
-            var nb = $('#btnNearCat'); if (nb) nb.addEventListener('click', function () { nb.textContent = '📍 Localizando...'; navigator.geolocation.getCurrentPosition(function (pos) { var me = [pos.coords.latitude, pos.coords.longitude]; _cf.sort(function (a, b) { return ((a.lat && a.lng) ? haversine(me, [a.lat, a.lng]) : 99999) - ((b.lat && b.lng) ? haversine(me, [b.lat, b.lng]) : 99999); }); renderCatList(); }, function () { nb.textContent = '📍 Localização negada'; }); });
-          }
-          renderCatList();
-        } else {
-          if (t) t.textContent = 'Categorias'; if (sub) sub.textContent = 'Todas as categorias do guia de ' + currentCityName() + '.';
-          l.innerHTML = '<div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">' + cats.map(catCard).join('') + '</div>';
-        }
-      });
-    }).catch(fallback);
+    // Renderização imediata evita tela presa em “Carregando...” no celular.
+    render([], CATS);
+    Promise.all([Categories.list(), Stores.list()]).then(function (r) { render(r[1], r[0]); }).catch(function () { /* a versão imediata continua utilizável */ });
   }
 
   function pageOfertas() {
