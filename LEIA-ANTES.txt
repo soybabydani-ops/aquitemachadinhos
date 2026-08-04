@@ -1,16 +1,21 @@
-ARQUIVOS PARA PUBLICAR — CAMPANHA DE INAUGURAÇÃO
+PACOTE AUDITADO — FASE 2 ESTRUTURA NACIONAL
 
-Estes arquivos substituem arquivos existentes no repositório GitHub:
+A ordem importa:
 
-NA RAIZ DO REPOSITÓRIO:
-- index.html
-- cadastro.html
-- anuncie.html
-- termos.html
+1) SUPABASE
+Abra multicidade-fase-1.sql, copie todo o conteúdo e execute no Supabase > SQL Editor > New query > Run.
 
-DENTRO DA PASTA assets:
-- assets/app.js
+2) GITHUB
+Publique os dois arquivos na RAIZ:
+- cidades.html
+- cadastro-cidade.html
 
-Não envie este arquivo LEIA-ANTES.txt para o site. Ele é apenas um guia.
+Publique estes quatro arquivos dentro de assets:
+- app.js
+- cidades.css
+- cadastro-cidade.css
+- cadastro-cidade.js
 
-Depois de publicar e fazer o Commit, aguarde a Vercel concluir a publicação.
+3) Faça Commit e aguarde a Vercel concluir o deploy.
+
+Não envie este LEIA-ANTES.txt ao site.
