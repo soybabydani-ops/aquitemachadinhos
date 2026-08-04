@@ -1,16 +1,11 @@
-AQUITEM — HOTFIX OPERACIONAL FINAL
+AQUITEM — FUNIL EMPRESAS FUNDADORAS
 
-RAIZ:
-- index.html
+1) SUPABASE: execute fundadores-schema.sql no SQL Editor.
+2) RAIZ DO GITHUB: publique fundadores.html e cidades.html.
+3) PASTA assets: publique app.js, fundadores.css, fundadores.js e cidades.css.
+4) Commit e aguarde a Vercel.
 
-assets:
-- app.js
-- aquitem-orbit.js
-- premium.css
+Depois, a landing estará em:
+https://www.aquitemachadinhos.com.br/fundadores.html
 
-Corrige:
-1. WebGL só no desktop, sem bloco dourado no celular.
-2. Fallback premium estático no celular.
-3. Último resquício de touro removido da home institucional.
-4. Contador de rodapé passa a mostrar apenas empresas da cidade atual.
-   Ex.: empresa em Gramado não aparece mais no contador de Barretos.
+A página é institucional, não expõe nome pessoal e cria leads marcados como Fundadora com score de prioridade.
