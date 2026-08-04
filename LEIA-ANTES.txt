@@ -1,6 +1,5 @@
-CORREÇÃO DO BOTÃO "REVISAR E PUBLICAR EMPRESA"
+CORREÇÃO — CATEGORIAS COM RENDERIZAÇÃO IMEDIATA
 
-Publique somente este arquivo:
-assets/app.js
+Publique somente assets/app.js.
 
-Não é necessário executar SQL. A função do Supabase já está publicada.
+A página deixa de exibir "Carregando...". As categorias aparecem na hora e atualizam automaticamente quando a consulta de empresas retorna.
