@@ -3,6 +3,7 @@
   function criarCTA(){
     if(document.getElementById('ctaMaoFree')) return;
     if(!document.body) return;
+    if(['admin','painel','login'].indexOf(document.body.getAttribute('data-page')) !== -1) return;
     var a=document.createElement('a');
     a.id='ctaMaoFree';
     var subdominio=(location.hostname.split('.')[0]||'www').toLowerCase();
@@ -249,7 +250,8 @@
     var f = $('#site-footer'); if (f) f.innerHTML = footerHTML();
     var b = $('#menuBtn'), m = $('#mobileMenu');
     if (b && m) { b.addEventListener('click', function () { m.classList.toggle('hidden'); }); m.querySelectorAll('a').forEach(function (a) { a.addEventListener('click', function () { m.classList.add('hidden'); }); }); }
-    if (!$('#ataFloatingWa')) { var a = document.createElement('a'); a.id = 'ataFloatingWa'; a.href = waLink('Olá! Vim pelo Aqui Tem Achadinhos.'); a.target = '_blank'; a.rel = 'noopener noreferrer'; a.className = 'fixed bottom-5 right-5 z-50 w-14 h-14 rounded-full bg-[#25D366] text-white grid place-items-center shadow-2xl hover:scale-105 transition'; a.setAttribute('aria-label', 'WhatsApp'); a.innerHTML = '💬'; document.body.appendChild(a); }
+    var isAdminSurface = document.body && ['admin','painel','login'].indexOf(document.body.getAttribute('data-page')) !== -1;
+    if (!isAdminSurface && !$('#ataFloatingWa')) { var a = document.createElement('a'); a.id = 'ataFloatingWa'; a.href = waLink('Olá! Vim pelo Aqui Tem Achadinhos.'); a.target = '_blank'; a.rel = 'noopener noreferrer'; a.className = 'fixed bottom-5 right-5 z-50 w-14 h-14 rounded-full bg-[#25D366] text-white grid place-items-center shadow-2xl hover:scale-105 transition'; a.setAttribute('aria-label', 'WhatsApp'); a.innerHTML = '💬'; document.body.appendChild(a); }
   }
 
   /* COUNTDOWN / SW */
