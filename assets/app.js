@@ -114,6 +114,13 @@
 (function () {
   'use strict';
 
+  function loadPublicSupabaseConfig() {
+    try {
+      var req = new XMLHttpRequest(); req.open('GET', 'assets/supabase-config.json', false); req.send(null);
+      return req.status >= 200 && req.status < 300 ? JSON.parse(req.responseText) : {};
+    } catch (_e) { return {}; }
+  }
+  var PUBLIC_SUPABASE = loadPublicSupabaseConfig();
   var CONFIG = {
     brand: 'AQUITEM',
     productName: 'Aqui Tem Achadinhos',
@@ -122,8 +129,8 @@
     domain: 'aquitemachadinhos.com.br',
     cidade: 'Barretos',
     supabase: {
-      url: 'https://efvuzxdhsirpvxclgdfg.supabase.co',
-      anonKey: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVmdnV6eGRoc2lycHZ4Y2xnZGZnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODU1MDM1OTEsImV4cCI6MjEwMTA3OTU5MX0.nPVBBKO_W9-tAccFRv7ajnllxTXvkqbsVsYecDqyeQc'
+      url: PUBLIC_SUPABASE.url || '',
+      anonKey: PUBLIC_SUPABASE.anonKey || ''
     },
     analytics: { plausible: { domain: '', src: 'https://plausible.io/js/script.js' } },
     mp: { links: { lojista_destaque: 'https://mpago.la/25UHZqr', lojista_pro: 'https://mpago.la/2HBxp5v', driver_destaque: 'https://mpago.la/2ZSErEf', driver_pro: 'https://mpago.la/11BbdJs' }, autoUrl: 'https://efvuzxdhsirpvxclgdfg.supabase.co/functions/v1/upgrade-checkout' },
