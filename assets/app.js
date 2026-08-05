@@ -139,12 +139,17 @@
   window.ATA_CONFIG = CONFIG;
 
   var CATS = [
-    { id: 'restaurantes', nome: 'Restaurantes', emoji: '🍔', desc: 'Onde comer bem' }, { id: 'lanches', nome: 'Lanches', emoji: '🍟', desc: 'Hamburguerias' },
-    { id: 'farmacias', nome: 'Farmácias', emoji: '💊', desc: 'Saúde e remédios' }, { id: 'mercados', nome: 'Mercados', emoji: '🛒', desc: 'Compras do dia' },
-    { id: 'moda', nome: 'Moda', emoji: '👗', desc: 'Roupas e calçados' }, { id: 'beleza', nome: 'Beleza', emoji: '💅', desc: 'Salões e estética' },
-    { id: 'eletronicos', nome: 'Eletrônicos', emoji: '📱', desc: 'Tech e celulares' }, { id: 'petshops', nome: 'Pet Shops', emoji: '🐾', desc: 'Para o seu pet' },
-    { id: 'hoteis', nome: 'Hotéis e Pousadas', emoji: '🏨', desc: 'Onde se hospedar' }, { id: 'moveis', nome: 'Móveis', emoji: '🛋️', desc: 'Casa e decoração' },
-    { id: 'automotivo', nome: 'Automotivo', emoji: '🚗', desc: 'Carros e auto' }, { id: 'servicos', nome: 'Serviços', emoji: '🔧', desc: 'Prestadores' }, { id: 'saude', nome: 'Saúde e Bem-estar', emoji: '🩺', desc: 'Dentistas, acupuntura e mais' }
+    { id:'restaurantes', nome:'Restaurantes', emoji:'🍔', desc:'Onde comer bem' }, { id:'lanches', nome:'Lanches', emoji:'🍟', desc:'Lanches e delivery' },
+    { id:'farmacias', nome:'Farmácias', emoji:'💊', desc:'Saúde e plantão' }, { id:'mercados', nome:'Mercados', emoji:'🛒', desc:'Compras do dia' },
+    { id:'moda', nome:'Moda', emoji:'👗', desc:'Roupas e calçados' }, { id:'beleza', nome:'Beleza', emoji:'💅', desc:'Salões e estética' },
+    { id:'eletronicos', nome:'Eletrônicos', emoji:'📱', desc:'Tecnologia e celulares' }, { id:'petshops', nome:'Pet Shops', emoji:'🐾', desc:'Cuidados para pets' },
+    { id:'hoteis', nome:'Hotéis e Pousadas', emoji:'🏨', desc:'Onde ficar' }, { id:'moveis', nome:'Móveis', emoji:'🛋️', desc:'Casa e decoração' },
+    { id:'automotivo', nome:'Automotivo', emoji:'🚗', desc:'Veículos e oficinas' }, { id:'servicos', nome:'Serviços', emoji:'🔧', desc:'Profissionais e reparos' },
+    { id:'saude', nome:'Saúde e Bem-estar', emoji:'🩺', desc:'Clínicas e profissionais' }, { id:'educacao', nome:'Educação e Cursos', emoji:'🎓', desc:'Faculdades e cursos' },
+    { id:'turismo', nome:'Turismo e Experiências', emoji:'🧭', desc:'Passeios e lazer' }, { id:'transporte', nome:'Transporte e Mobilidade', emoji:'🚌', desc:'Transfer e deslocamento' },
+    { id:'esportes', nome:'Esportes e Fitness', emoji:'🏋️', desc:'Academias e atividades' }, { id:'casa-construcao', nome:'Casa e Construção', emoji:'🏠', desc:'Obras e reformas' },
+    { id:'imobiliarias', nome:'Imobiliárias', emoji:'🏘️', desc:'Imóveis e locação' }, { id:'eventos', nome:'Eventos e Festas', emoji:'🎉', desc:'Celebrações e produção' },
+    { id:'financeiro', nome:'Financeiro, Jurídico e Seguros', emoji:'⚖️', desc:'Consultoria e proteção' }, { id:'agro', nome:'Agro e Rural', emoji:'🌾', desc:'Campo e agronegócio' }
   ];
 
   /* HELPERS */
@@ -552,6 +557,28 @@
     });
   }
 
+  var SUBCATEGORIES = {
+    saude:['Dentista','Médico','Psicólogo','Fisioterapia','Nutricionista','Massoterapia','Clínica','Laboratório','Ótica'],
+    beleza:['Salão de beleza','Barbearia','Cabeleireiro(a)','Manicure','Estética','Maquiagem','Sobrancelhas','Depilação'],
+    educacao:['Faculdade','Polo universitário','Graduação','Pós-graduação','Curso técnico','Curso profissionalizante','EAD','Idiomas','Preparatório','Reforço escolar','Escola infantil'],
+    turismo:['Passeios','Guia turístico','Agência de turismo','Lazer','Cultura','Roteiro local'],
+    transporte:['Transfer','Motorista particular','Táxi','Locadora','Ônibus','Frete','Entrega'],
+    esportes:['Academia','Personal trainer','Pilates','Dança','Luta','Esporte'],
+    'casa-construcao':['Construtora','Arquiteto','Engenheiro','Material de construção','Móveis planejados','Reforma'],
+    imobiliarias:['Imobiliária','Corretor(a)','Locação','Temporada','Venda de imóveis'],
+    eventos:['Buffet','Decoração','Fotografia','Som e iluminação','Locação para festas','Cerimonial'],
+    financeiro:['Contabilidade','Advocacia','Seguros','Consultoria','Financiamento','Imobiliário'],
+    agro:['Agropecuária','Máquinas agrícolas','Insumos','Veterinária rural','Agronomia'],
+    restaurantes:['Restaurante','Pizzaria','Cafeteria','Comida japonesa','Marmitaria'],
+    lanches:['Hamburgueria','Pastelaria','Lanchonete','Delivery','Sorveteria','Padaria'],
+    servicos:['Limpeza','Manutenção','Informática','Segurança','Lavanderia','Chaveiro']
+  };
+  function setupSubcategories(form) {
+    var cat=form.querySelector('[name=categoria]'), list=form.querySelector('#subcatList'); if(!cat||!list)return;
+    function refresh(){var arr=SUBCATEGORIES[cat.value]||[];list.innerHTML=arr.map(function(v){return '<option value="'+esc(v)+'">';}).join('');}
+    cat.addEventListener('change',refresh); refresh();
+  }
+
   function setupAddressLookup(inputId, buttonId, resultsId, apply) {
     var input = $(inputId), button = $(buttonId), results = $(resultsId); if (!input || !button || !results) return;
     function run() {
@@ -572,6 +599,7 @@
     Categories.list().then(function (cats) {
       var sel = form.querySelector('[name=categoria]'); if (sel) sel.innerHTML = '<option value="">Selecione…</option>' + cats.map(function (c) { return '<option value="' + c.id + '">' + c.emoji + ' ' + esc(c.nome) + '</option>'; }).join('') + '<option value="outro">🏪 Outro</option>';
     });
+    setupSubcategories(form);
     setupAddressLookup('#addressSearch','#btnAddressSearch','#addressSearchResults',function(v){
       var fields={endereco:v.endereco,bairro:v.bairro,cidade:v.cidade,cep:v.cep}; Object.keys(fields).forEach(function(k){var el=form.querySelector('[name='+k+']');if(el&&fields[k])el.value=fields[k];}); form.dataset.lat=v.lat; form.dataset.lng=v.lng;
     });
