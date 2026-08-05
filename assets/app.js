@@ -294,13 +294,13 @@
   function catCard(c) { var cnt = window._ataCatCounts && window._ataCatCounts[c.id] ? window._ataCatCounts[c.id] : 0; return '<a href="categoria.html?cat=' + c.id + '" class="card-hover bg-white rounded-2xl p-5 text-center shadow-soft ring-silver relative"><div class="text-4xl">' + (c.emoji || '🏢') + '</div><div class="mt-2 font-display font-bold">' + esc(c.nome) + '</div>' + (cnt > 0 ? '<span class="inline-block mt-1 text-[10px] font-bold text-peao-600 bg-peao-500/10 px-2 py-0.5 rounded-full">' + cnt + (cnt === 1 ? ' empresa' : ' empresas') + '</span>' : '<div class="text-xs text-silver-500">' + esc(c.desc || 'Seja o primeiro!') + '</div>') + '</a>'; }
   function storeCard(s, cats) {
     var logo = s.logo_url
-      ? '<img src="' + esc(s.logo_url) + '" alt="" class="w-14 h-14 rounded-xl object-cover bg-silver-100">'
-      : '<div class="w-14 h-14 rounded-xl bg-gradient-to-br from-navy-800 to-navy-600 text-white grid place-items-center font-extrabold text-lg">' + esc(initials(s.nome)) + '</div>';
+      ? '<img src="' + esc(s.logo_url) + '" alt="Logo de ' + esc(s.nome) + '" class="aquitem-store-logo">'
+      : '<div class="aquitem-store-logo aquitem-store-initials">' + esc(initials(s.nome)) + '</div>';
     var category = catName(s.categoria, cats);
     var rating = Number(s.rating_count || 0) > 0 ? '<span class="text-[11px] text-amber-600 font-semibold">' + ratingMini(s) + '</span>' : '';
-    var badge = s.destaque ? '<span class="text-[10px] font-bold text-peao-700 bg-peao-500/10 px-2 py-0.5 rounded-full">⭐ Destaque</span>' : '';
+    var badge = s.destaque ? '<span class="aquitem-store-badge">✦ Em destaque</span>' : '';
     var local = s.bairro ? '📍 ' + esc(s.bairro) : (s.cidade ? '📍 ' + esc(s.cidade) : '');
-    return '<a href="loja.html?id=' + encodeURIComponent(s.id) + '" class="card-hover block bg-white rounded-2xl p-4 shadow-soft ring-silver"><div class="flex gap-3"><div class="shrink-0">' + logo + '</div><div class="min-w-0 flex-1"><div class="flex items-start justify-between gap-2"><h3 class="font-display font-bold text-sm leading-snug line-clamp-2">' + esc(s.nome) + '</h3>' + badge + '</div><p class="text-xs text-silver-500 mt-1 truncate">' + esc(category) + '</p>' + (local ? '<p class="text-xs text-slate-500 mt-1 truncate">' + local + '</p>' : '') + (rating ? '<div class="mt-1">' + rating + '</div>' : '') + '</div></div></a>';
+    return '<a href="loja.html?id=' + encodeURIComponent(s.id) + '" class="aquitem-store-card"><div class="aquitem-store-head">' + logo + '<div class="min-w-0 flex-1"><h3 class="font-display font-bold text-base leading-snug">' + esc(s.nome) + '</h3><div class="aquitem-store-tags"><span>' + esc(category) + '</span>' + badge + '</div>' + (local ? '<p class="text-xs text-slate-500 mt-2 truncate">' + local + '</p>' : '') + (rating ? '<div class="mt-1">' + rating + '</div>' : '') + '</div></div><div class="aquitem-store-arrow">Ver perfil →</div></a>';
   }
 
   function offerCard(o) {
@@ -459,7 +459,7 @@
         var list = sortByPlano(stores.filter(function (x) { return x.categoria === cat; }));
         var hasGeo = list.some(function (x) { return x.lat && x.lng; });
         var near = hasGeo ? '<button id="btnNearCat" class="btn-shine bg-navy-800 hover:bg-navy-700 text-white text-sm font-semibold px-4 py-2 rounded-xl mb-4">📍 Ordenar por distância</button>' : '';
-        l.innerHTML = near + (list.length ? '<div class="grid grid-cols-2 md:grid-cols-4 gap-5">' + list.map(function (x) { return storeCard(x, cats); }).join('') + '</div>' : emptyState('Nenhuma empresa aqui ainda', 'Seja a primeira empresa de ' + esc(c.nome) + ' no guia.', true));
+        l.innerHTML = near + (list.length ? '<div class="aquitem-store-list">' + list.map(function (x) { return storeCard(x, cats); }).join('') + '</div>' : emptyState('Nenhuma empresa aqui ainda', 'Seja a primeira empresa de ' + esc(c.nome) + ' no guia.', true));
         var nb = $('#btnNearCat'); if (nb) nb.addEventListener('click', function () { nb.textContent = '📍 Localizando...'; navigator.geolocation.getCurrentPosition(function (pos) { var me = [pos.coords.latitude, pos.coords.longitude]; list.sort(function (x, y) { return ((x.lat && x.lng) ? haversine(me, [x.lat, x.lng]) : 99999) - ((y.lat && y.lng) ? haversine(me, [y.lat, y.lng]) : 99999); }); render(list, cats); }, function () { nb.textContent = '📍 Localização negada'; }); });
       } else {
         if (t) t.textContent = 'Categorias';
@@ -808,36 +808,43 @@
     var box = $('#pStore');
     var mesInicio = new Date(); mesInicio.setDate(1); mesInicio.setHours(0, 0, 0, 0);
     Promise.all([aGet('metrics_events?select=tipo&store_id=eq.' + encodeURIComponent(s.id)), aGet('metrics_events?select=tipo&store_id=eq.' + encodeURIComponent(s.id) + '&criado_em=gte.' + mesInicio.toISOString()), aGet('offers?select=*&store_id=eq.' + encodeURIComponent(s.id) + '&order=criado_em.desc'), Stores.photos(s.id)]).then(function (r) {
-      box.innerHTML = painelMetrics(r[0], r[1]) + painelEditForm(s) + painelPhotos(s, r[3]) + painelOffers(s, r[2]) + painelMapPicker(s);
-      wireEdit(s); wireOffers(s, r[2]); wirePainelPhotos(s, r[3]); wireMapPicker(s);
+      box.innerHTML = painelMetrics(r[0], r[1]) + painelIdentity(s) + painelEditForm(s) + painelPhotos(s, r[3]) + painelOffers(s, r[2]) + painelMapPicker(s);
+      wireEdit(s); wireIdentity(s); wireOffers(s, r[2]); wirePainelPhotos(s, r[3]); wireMapPicker(s);
     });
   }
   function painelMetrics(met, metMes) {
     metMes = metMes || [];
     return '<div class="rounded-2xl bg-silver-50 ring-silver p-5 mb-6"><p class="text-[11px] text-silver-500 font-bold uppercase tracking-wide mb-3">Relatório de desempenho</p><div class="grid grid-cols-3 gap-3">' + statCard('\u{1F441}\u{FE0F}', countBy(met, 'tipo', 'view'), 'Visualizações') + statCard('\u{1F4AC}', countBy(met, 'tipo', 'click_whatsapp'), 'Cliques WhatsApp') + statCard('\u{1F4CD}', countBy(met, 'tipo', 'click_mapa'), 'Cliques mapa') + '</div><p class="text-[11px] text-slate-400 mt-3">Este mês: <b>' + countBy(metMes, 'tipo', 'view') + '</b> views · <b>' + countBy(metMes, 'tipo', 'click_whatsapp') + '</b> cliques no WhatsApp</p></div>';
   }
+  function painelIdentity(s) {
+    var logo = s.logo_url ? '<img src="' + esc(s.logo_url) + '" class="aquitem-identity-logo" alt="Logo atual">' : '<div class="aquitem-identity-logo aquitem-store-initials">' + esc(initials(s.nome)) + '</div>';
+    var cover = s.capa_url ? '<img src="' + esc(s.capa_url) + '" class="aquitem-identity-cover" alt="Capa atual">' : '<div class="aquitem-identity-cover aquitem-identity-empty">Adicione uma foto de capa que represente a empresa</div>';
+    return '<section class="aquitem-identity-panel"><div><p class="text-[11px] text-amber-600 font-bold uppercase tracking-wide">Identidade do perfil</p><h2 class="font-display font-bold text-xl mt-1">Como turistas enxergam esta empresa</h2><p class="text-sm text-silver-500 mt-1">Logo e capa são os elementos mais importantes do perfil.</p></div><div class="aquitem-identity-preview"><div>' + logo + '<label class="aquitem-upload-button">Trocar logo<input id="profileLogoInput" type="file" accept="image/*"></label></div><div class="flex-1">' + cover + '<label class="aquitem-upload-button mt-2">Trocar capa<input id="profileCoverInput" type="file" accept="image/*"></label></div></div><p id="identityMsg" class="text-sm"></p></section>';
+  }
+  function wireIdentity(s) {
+    function bind(id, field, label) { var inp = $(id); if (!inp) return; inp.addEventListener('change', function () { var f = inp.files[0], msg = $('#identityMsg'); if (!f || !f.type || f.type.indexOf('image/') !== 0 || f.size > 5 * 1024 * 1024) { msg.textContent='Use uma imagem de até 5MB.'; msg.className='text-sm text-peao-600'; return; } msg.textContent='Enviando '+label+'…'; msg.className='text-sm text-silver-500'; uploadPhoto(f).then(function(url){ return aPatch('stores',s.id,(function(){var o={};o[field]=url;return o;})()); }).then(function(ok){ msg.textContent=ok?'✓ '+label+' atualizada!':'Erro ao salvar '+label+'.'; msg.className='text-sm '+(ok?'text-emerald-600':'text-peao-600'); if(ok) aGet('stores?select=*&id=eq.'+encodeURIComponent(s.id)).then(function(rows){loadStoreManage((rows&&rows[0])||s);}); }); }); }
+    bind('#profileLogoInput','logo_url','logo'); bind('#profileCoverInput','capa_url','capa');
+  }
   function painelPhotos(s, photos) {
     photos = photos || [];
     var lim = (CONFIG.planLimits && CONFIG.planLimits.fotos[s.plano || 'gratis']) || 3;
-    var used = photos.length;
-    var imgs = photos.map(function (p) { return '<div class="relative"><img src="' + esc(p.url) + '" class="w-full h-20 object-cover rounded-lg"><button data-delphoto="' + esc(p.id) + '" class="absolute -top-1 -right-1 bg-peao-600 text-white rounded-full w-5 h-5 text-xs leading-none">✕</button></div>'; }).join('');
-    return '<div class="bg-white rounded-2xl ring-silver shadow-soft p-5 mb-6"><h2 class="font-display font-bold mb-1">Fotos da galeria</h2><p class="text-xs text-silver-500 mb-3">' + used + '/' + lim + ' fotos (plano ' + esc(s.plano || 'gratis') + ')</p>' + (imgs ? '<div class="grid grid-cols-3 sm:grid-cols-5 gap-2 mb-3">' + imgs + '</div>' : '') + (used < lim ? '<input id="photoInput" type="file" accept="image/*" class="text-sm mb-2"><button id="btnAddPhoto" class="btn-shine bg-navy-800 hover:bg-navy-700 text-white text-sm font-semibold px-4 py-2 rounded-xl">＋ Adicionar foto</button>' : '<p class="text-xs text-peao-600 font-semibold">Limite do plano atingido — faça upgrade para mais fotos.</p>') + '<span id="photoMsg" class="text-sm ml-2"></span></div>';
+    var used = photos.length, remaining = Math.max(0, lim-used);
+    var imgs = photos.map(function (p) { return '<figure class="aquitem-gallery-item"><img src="' + esc(p.url) + '" alt="Foto da empresa"><button data-delphoto="' + esc(p.id) + '" aria-label="Remover foto">×</button></figure>'; }).join('');
+    return '<section class="aquitem-gallery-panel"><div class="flex items-start justify-between gap-3"><div><p class="text-[11px] text-amber-600 font-bold uppercase tracking-wide">Galeria profissional</p><h2 class="font-display font-bold text-xl mt-1">Fotos da empresa</h2><p class="text-sm text-silver-500 mt-1">' + used + '/' + lim + ' fotos publicadas. Adicione várias de uma vez.</p></div><span class="aquitem-gallery-count">' + remaining + ' vagas</span></div>' + (imgs ? '<div class="aquitem-gallery-grid">' + imgs + '</div>' : '<div class="aquitem-gallery-empty">Adicione fotos da fachada, recepção, equipe ou ambiente.</div>') + (remaining ? '<div class="aquitem-gallery-upload"><label class="aquitem-upload-drop">Selecionar fotos<input id="photoInput" type="file" accept="image/*" multiple><span>Você pode selecionar até '+remaining+' fotos de uma vez</span></label><button id="btnAddPhoto" class="aquitem-primary-action">Adicionar fotos</button></div>' : '<p class="text-xs text-amber-600 font-semibold mt-4">Limite do plano atingido.</p>') + '<span id="photoMsg" class="text-sm"></span></section>';
   }
   function wirePainelPhotos(s, photos) {
     var btn = $('#btnAddPhoto');
     if (btn) btn.addEventListener('click', function () {
-      var inp = $('#photoInput'); var f = inp && inp.files[0]; var msg = $('#photoMsg');
-      if (!f || !f.type || f.type.indexOf('image/') !== 0 || f.size > 3 * 1024 * 1024) { msg.className = 'text-sm ml-2 text-peao-600'; msg.textContent = 'Imagem inválida (até 3MB).'; return; }
-      btn.disabled = true; btn.textContent = 'Enviando…';
-      uploadPhoto(f).then(function (u) { return apiPost('store_photos', { store_id: s.id, url: u }); }).then(function () { loadStoreManage(s); }).catch(function () { msg.className = 'text-sm ml-2 text-peao-600'; msg.textContent = 'Erro ao enviar.'; btn.disabled = false; btn.textContent = '＋ Adicionar foto'; });
+      var inp = $('#photoInput'), files = inp ? Array.prototype.slice.call(inp.files || []) : [], msg = $('#photoMsg');
+      var lim = (CONFIG.planLimits && CONFIG.planLimits.fotos[s.plano || 'gratis']) || 3, remaining = Math.max(0, lim-(photos||[]).length);
+      files = files.slice(0, remaining);
+      if (!files.length || files.some(function(f){return !f.type || f.type.indexOf('image/') !== 0 || f.size > 5 * 1024 * 1024;})) { msg.className='text-sm text-peao-600'; msg.textContent='Selecione imagens de até 5MB.'; return; }
+      btn.disabled=true; btn.textContent='Enviando '+files.length+' foto(s)…';
+      Promise.all(files.map(function(f){return uploadPhoto(f).then(function(url){return apiPost('store_photos',{store_id:s.id,url:url});});})).then(function(){loadStoreManage(s);}).catch(function(){msg.className='text-sm text-peao-600';msg.textContent='Não foi possível enviar todas as fotos.';btn.disabled=false;btn.textContent='Adicionar fotos';});
     });
-    document.querySelectorAll('[data-delphoto]').forEach(function (b) {
-      b.addEventListener('click', function () {
-        if (!confirm('Remover esta foto?')) return;
-        fetch(B('store_photos?id=eq.' + encodeURIComponent(b.getAttribute('data-delphoto'))), { method: 'DELETE', headers: aH() }).then(function () { loadStoreManage(s); });
-      });
-    });
+    document.querySelectorAll('[data-delphoto]').forEach(function (b) { b.addEventListener('click', function () { if (!confirm('Remover esta foto?')) return; fetch(B('store_photos?id=eq.'+encodeURIComponent(b.getAttribute('data-delphoto'))),{method:'DELETE',headers:aH()}).then(function(){loadStoreManage(s);}); }); });
   }
+
   function painelEditForm(s) {
     function val(v) { return esc(v == null ? '' : v); }
     return '<form id="formEdit" class="bg-white rounded-2xl ring-silver shadow-soft p-5 space-y-4 mb-6"><h2 class="font-display font-bold">Editar informações</h2>'
@@ -949,25 +956,17 @@
     });
   }
   function painelMapPicker(s) {
-    return '<div class="bg-white rounded-2xl ring-silver shadow-soft p-5 mb-6"><h2 class="font-display font-bold mb-1">Localização no mapa</h2><p class="text-xs text-silver-500 mb-3">Clique no mapa para marcar o ponto exato da empresa. Assim ela aparece no mapa do guia.</p><div id="pickMap" style="height:300px;border-radius:0.75rem;overflow:hidden" class="ring-silver"></div><button id="btnSavePin" class="btn-shine mt-3 bg-navy-800 hover:bg-navy-700 text-white text-sm font-semibold px-4 py-2 rounded-xl">Salvar localização</button><span id="pinMsg" class="text-sm ml-2"></span></div>';
+    var query = encodeURIComponent([s.endereco,s.bairro,s.cidade||currentCityName()].filter(Boolean).join(', '));
+    return '<section class="aquitem-map-panel"><div><p class="text-[11px] text-amber-600 font-bold uppercase tracking-wide">Localização</p><h2 class="font-display font-bold text-xl mt-1">Localização no mapa</h2><p class="text-sm text-silver-500 mt-1">Toque no mapa para ajustar o ponto exato. O endereço continua visível para turistas.</p></div><div id="pickMap" class="aquitem-map-canvas"><div class="aquitem-map-loading">Carregando mapa…</div></div><div class="aquitem-map-actions"><a href="https://www.google.com/maps/search/?api=1&query='+query+'" target="_blank" rel="noopener noreferrer" class="aquitem-secondary-action">Abrir no Google Maps</a><button id="btnSavePin" class="aquitem-primary-action">Salvar localização</button></div><span id="pinMsg" class="text-sm"></span></section>';
   }
   function wireMapPicker(s) {
-    if (!$('#pickMap')) return;
-    var pin = null;
-    loadLeaflet().then(function () {
-      if (!window.L) return;
-      var map = L.map('pickMap').setView((s.lat && s.lng) ? [s.lat, s.lng] : BARRETOS, 15);
-      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 19, attribution: '© OpenStreetMap' }).addTo(map);
-      if (s.lat && s.lng) pin = L.marker([s.lat, s.lng], { icon: pinIcon('📍'), draggable: true }).addTo(map);
-      map.on('click', function (e) { if (pin) pin.setLatLng(e.latlng); else pin = L.marker(e.latlng, { icon: pinIcon('📍'), draggable: true }).addTo(map); });
-      var btn = $('#btnSavePin'); if (btn) btn.addEventListener('click', function () {
-        var m = $('#pinMsg');
-        if (!pin) { m.textContent = 'Marque um ponto no mapa primeiro.'; m.className = 'text-sm ml-2 text-peao-600'; return; }
-        var ll = pin.getLatLng();
-        aPatch('stores', s.id, { lat: ll.lat, lng: ll.lng }).then(function (ok) { m.textContent = ok ? '✓ Localização salva!' : 'Erro ao salvar'; m.className = 'text-sm ml-2 ' + (ok ? 'text-emerald-600' : 'text-peao-600'); });
-      });
+    var box=$('#pickMap'); if (!box) return; var pin=null;
+    loadLeaflet().then(function(){
+      if(!window.L){box.innerHTML='<div class="aquitem-map-error">Mapa indisponível agora. Use “Abrir no Google Maps” para conferir o endereço.</div>';return;}
+      try { var map=L.map('pickMap').setView((s.lat&&s.lng)?[s.lat,s.lng]:BARRETOS,15); L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:19,attribution:'© OpenStreetMap'}).addTo(map); if(s.lat&&s.lng)pin=L.marker([s.lat,s.lng],{icon:pinIcon('📍'),draggable:true}).addTo(map); map.on('click',function(e){if(pin)pin.setLatLng(e.latlng);else pin=L.marker(e.latlng,{icon:pinIcon('📍'),draggable:true}).addTo(map);}); setTimeout(function(){map.invalidateSize();},350); var btn=$('#btnSavePin');if(btn)btn.addEventListener('click',function(){var m=$('#pinMsg');if(!pin){m.textContent='Toque no mapa para marcar o local.';m.className='text-sm text-peao-600';return;}var ll=pin.getLatLng();aPatch('stores',s.id,{lat:ll.lat,lng:ll.lng}).then(function(ok){m.textContent=ok?'✓ Localização salva!':'Erro ao salvar localização.';m.className='text-sm '+(ok?'text-emerald-600':'text-peao-600');});}); } catch(_e){box.innerHTML='<div class="aquitem-map-error">Não foi possível abrir o mapa. Use o Google Maps como alternativa.</div>';}
     });
   }
+
 
   function pageObrigado() {
     var el = $('#obg'); if (!el) return;
