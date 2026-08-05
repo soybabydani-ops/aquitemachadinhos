@@ -6,7 +6,7 @@
 <meta name="description" content="Inauguração em Barretos: os 50 primeiros negócios aprovados ganham destaque no guia por 90 dias, sem custo.">
 <link rel="manifest" href="manifest.webmanifest"><meta name="theme-color" content="#0B1E3F">
 <meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="apple-mobile-web-app-title" content="Achadinhos">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="apple-mobile-web-app-title" content="AQUITEM">
 <link rel="icon" type="image/svg+xml" href="logo.svg"><link rel="apple-touch-icon" href="icon-192.png">
 <link rel="stylesheet" href="assets/tailwind.css"><link rel="stylesheet" href="assets/styles.css">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -44,9 +44,10 @@
       </div>
       <div class="grid sm:grid-cols-2 gap-5">
         <div><label class="block text-sm font-semibold mb-1.5">Telefone</label><input name="telefone" type="tel" class="w-full px-4 py-3 rounded-xl bg-silver-50 ring-silver outline-none focus:ring-2 focus:ring-navy-500"></div>
-        <div><label class="block text-sm font-semibold mb-1.5">CEP (preenche automático)</label><input name="cep" type="text" placeholder="Digite o CEP e preenche sozinho" maxlength="9" class="w-full px-4 py-3 rounded-xl bg-silver-50 ring-silver outline-none focus:ring-2 focus:ring-navy-500"></div>
+        <div><label class="block text-sm font-semibold mb-1.5">CEP (opcional — preenche automático)</label><input name="cep" type="text" placeholder="Se souber o CEP, digite aqui" maxlength="9" class="w-full px-4 py-3 rounded-xl bg-silver-50 ring-silver outline-none focus:ring-2 focus:ring-navy-500"></div>
         <div><label class="block text-sm font-semibold mb-1.5">Cidade</label><input name="cidade" type="text" value="Barretos" class="w-full px-4 py-3 rounded-xl bg-silver-50 ring-silver outline-none focus:ring-2 focus:ring-navy-500"></div>
       </div>
+      <div class="aquitem-address-search"><label class="block text-sm font-semibold mb-1.5">Buscar endereço por nome (opcional)</label><div class="aquitem-address-search-row"><input id="addressSearch" type="text" placeholder="Ex.: Rua 34, Barretos"><button type="button" id="btnAddressSearch">Buscar endereço</button></div><div id="addressSearchResults" class="aquitem-address-results"></div><p class="text-xs text-silver-500 mt-2">Você também pode preencher o endereço manualmente, sem CEP.</p></div>
       <div class="grid sm:grid-cols-2 gap-5">
         <div><label class="block text-sm font-semibold mb-1.5">Bairro</label><input name="bairro" type="text" placeholder="Ex.: Centro" class="w-full px-4 py-3 rounded-xl bg-silver-50 ring-silver outline-none focus:ring-2 focus:ring-navy-500"></div>
         <div><label class="block text-sm font-semibold mb-1.5">Endereço (rua, av., número)</label><input name="endereco" type="text" placeholder="Rua, Av., nº" class="w-full px-4 py-3 rounded-xl bg-silver-50 ring-silver outline-none focus:ring-2 focus:ring-navy-500"></div>
