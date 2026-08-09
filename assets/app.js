@@ -219,7 +219,22 @@
       if (isRemote()) { var t = encodeURIComponent(q); return apiGet('stores?select=*&status=eq.ativo&city_slug=eq.' + encodeURIComponent(currentCitySlug()) + '&or=(nome.ilike.*' + t + '*,descricao.ilike.*' + t + '*,bairro.ilike.*' + t + '*,subcategoria.ilike.*' + t + '*)'); }
       return Stores.list().then(function (a) { var ql = q.toLowerCase(); return a.filter(function (s) { return JSON.stringify(s).toLowerCase().indexOf(ql) !== -1; }); });
     },
-    create: function (obj) { obj.id = uuid(); obj.status = 'pendente'; obj.city_slug = obj.city_slug || currentCitySlug(); obj.cidade = obj.cidade || currentCityName(); obj.criado_em = new Date().toISOString(); return apiPost('stores', obj).then(function (ok) { return ok ? obj : null; }); }
+    create: function (obj) {
+      obj.id = uuid();
+      obj.status = 'pendente';
+      obj.city_slug = obj.city_slug || currentCitySlug();
+      obj.cidade = obj.cidade || currentCityName();
+      obj.criado_em = new Date().toISOString();
+      // Garantir que campos problemáticos não causem FK error
+      if (!obj.categoria || obj.categoria === 'outro') {
+        obj.categoria = null; // NULL é melhor que FK inválida
+      }
+      console.log('[AQUITEM] Stores.create payload:', JSON.stringify(obj).slice(0, 300));
+      return aPost('stores', obj).then(function (created) {
+        if (!created) { console.error('[AQUITEM] Stores.create retornou null'); return null; }
+        return created;
+      });
+    }
   };
   var Offers = {
     listActive: function () {
@@ -660,7 +675,21 @@
         try { window.open(waLink('Cadastro enviado: ' + fd.nome + ' (' + fd.categoria + '). Já aprovou?'), '_blank'); } catch (e) {}
         window.scrollTo(0, 0);
       }).catch(function (err) {
-        showMsg('#msg', '❌ Não foi possível enviar. Verifique sua internet e tente novamente. (' + (err && err.message ? err.message : 'erro') + ')', false);
+        var msg = err && err.message ? err.message : 'Erro desconhecido';
+        // Traduzir erros técnicos para linguagem humana
+        if (msg.includes('violates foreign key') || msg.includes('categories')) {
+          msg = 'Categoria inválida. Selecione uma das opções disponíveis.';
+        } else if (msg.includes('violates not-null') || msg.includes('null value')) {
+          msg = 'Campo obrigatório em branco. Revise o formulário.';
+        } else if (msg.includes('duplicate') || msg.includes('unique')) {
+          msg = 'Esta empresa já está cadastrada. Tente com outro nome ou WhatsApp.';
+        } else if (msg.includes('network') || msg.includes('fetch') || msg.includes('Failed')) {
+          msg = 'Sem conexão. Verifique sua internet e tente novamente.';
+        } else if (msg.includes('JWT') || msg.includes('token')) {
+          msg = 'Sessão expirada. Recarregue a página e tente novamente.';
+        }
+        console.error('[AQUITEM] Cadastro erro:', err);
+        showMsg('#msg', '❌ ' + msg, false);
         btn.disabled = false; btn.textContent = orig;
       });
     });
@@ -681,14 +710,44 @@
         .then(function (r) { return r.json().then(function (j) { if (!r.ok) throw new Error(j.error_description || j.msg || j.message || 'Erro ao entrar'); return j; }); });
     }
   };
-  function aH() { var t = AUTH.tok(); return { apikey: CONFIG.supabase.anonKey, Authorization: 'Bearer ' + (t || CONFIG.supabase.anonKey) }; }
-  function aGet(path) { return fetch(B(path), { headers: aH() }).then(function (r) { return r.ok ? r.json() : []; }).catch(function () { return []; }); }
-  function aPatch(table, id, obj) { return fetch(B(table + '?id=eq.' + encodeURIComponent(id)), { method: 'PATCH', headers: Object.assign({ 'Content-Type': 'application/json', Prefer: 'return=representation' }, aH()), body: JSON.stringify(obj) }).then(function (r) { return r.ok; }).catch(function () { return false; }); }
-  function aPost(table, obj) { return fetch(B(table), { method: 'POST', headers: Object.assign({ 'Content-Type': 'application/json', Prefer: 'return=representation' }, aH()), body: JSON.stringify(obj) }).then(function (r) { return r.ok ? r.json() : []; }).catch(function () { return []; }); }
-  function convertLead(payload) {
-    return fetch(CONFIG.supabase.url + '/rest/v1/rpc/convert_city_lead', { method: 'POST', headers: Object.assign({ 'Content-Type': 'application/json' }, aH()), body: JSON.stringify(payload) })
-      .then(function (r) { return r.text().then(function (txt) { if (!r.ok) { var msg = txt; try { msg = JSON.parse(txt).message || txt; } catch (e) {} throw new Error(msg || 'Não foi possível publicar.'); } return txt; }); });
+  function aH() {
+    var t = AUTH.tok() || LojistaAuth.tok();
+    return { apikey: CONFIG.supabase.anonKey, Authorization: 'Bearer ' + (t || CONFIG.supabase.anonKey) };
   }
+  function aHAuth() {
+    var t = AUTH.tok() || LojistaAuth.tok();
+    if (!t) console.warn('[AQUITEM] aHAuth: operação requer autenticação');
+    return { apikey: CONFIG.supabase.anonKey, Authorization: 'Bearer ' + (t || CONFIG.supabase.anonKey), 'Content-Type': 'application/json', Prefer: 'return=representation' };
+  }
+  function aGet(path) { return fetch(B(path), { headers: aH() }).then(function (r) { return r.ok ? r.json() : []; }).catch(function () { return []; }); }
+  function aPatch(table, id, obj) {
+    var t = AUTH.tok() || LojistaAuth.tok();
+    if (!t) { console.error('[AQUITEM] aPatch sem token:', table, id); return Promise.resolve(false); }
+    return fetch(B(table + '?id=eq.' + encodeURIComponent(id)), {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json', Prefer: 'return=representation', apikey: CONFIG.supabase.anonKey, Authorization: 'Bearer ' + t },
+      body: JSON.stringify(obj)
+    }).then(function (r) {
+      if (!r.ok) return r.json().catch(function(){ return {}; }).then(function(err){ console.error('[AQUITEM] aPatch erro', r.status, table, id, err); return false; });
+      return true;
+    }).catch(function (e) { console.error('[AQUITEM] aPatch network:', e); return false; });
+  }
+  function aPost(table, obj) {
+    return fetch(B(table), {
+      method: 'POST',
+      headers: Object.assign({ 'Content-Type': 'application/json', Prefer: 'return=representation' }, aH()),
+      body: JSON.stringify(obj)
+    }).then(function (r) {
+      return r.json().then(function (data) {
+        if (!r.ok) {
+          var errMsg = (data && (data.message || data.error || data.hint || JSON.stringify(data))) || ('HTTP ' + r.status);
+          console.error('[AQUITEM] aPost erro', r.status, table, errMsg, 'payload:', JSON.stringify(obj).slice(0,200));
+          throw new Error(errMsg);
+        }
+        return Array.isArray(data) ? data[0] : data;
+      });
+    }).catch(function (e) { console.error('[AQUITEM] aPost catch:', e.message); throw e; });
+  }}
   function countBy(arr, key, val) { return arr.filter(function (x) { return x[key] === val; }).length; }
   function exportCSV(rows) {
     if (!rows || !rows.length) return;
@@ -707,14 +766,22 @@
       var email = form.querySelector('[name=email]').value.trim(), pass = form.querySelector('[name=password]').value;
       if (!email || !pass) { showMsg('#msg', 'Preencha e-mail e senha.', false); return; }
       var btn = form.querySelector('[type=submit]'); btn.disabled = true; btn.textContent = 'Entrando…';
-      AUTH.login(email, pass).then(function (j) { localStorage.setItem('ata_admin_token', j.access_token); location.href = 'admin.html'; })
+      AUTH.login(email, pass).then(function (j) { localStorage.setItem('ata_admin_token', j.access_token);
+          var redirect = sessionStorage.getItem('ata_redirect_after_login') || 'admin.html';
+          sessionStorage.removeItem('ata_redirect_after_login');
+          location.href = redirect; })
         .catch(function (err) { showMsg('#msg', '❌ ' + (err.message || 'Não foi possível entrar.'), false); btn.disabled = false; btn.textContent = 'Entrar'; });
     });
   }
 
   function pageAdmin() {
     var root = $('#adminRoot'); if (!root) return;
-    if (!AUTH.tok() && !LojistaAuth.tok()) { location.href = 'login.html'; return; }
+    if (!AUTH.tok() && !LojistaAuth.tok()) {
+      console.warn('[AQUITEM] pageAdmin: sem token, redirecionando para login');
+      sessionStorage.setItem('ata_redirect_after_login', 'admin.html');
+      location.href = 'login.html';
+      return;
+    }
     var _isLojista = !AUTH.tok() && !!LojistaAuth.tok();
     root.innerHTML = '<p class="text-center text-silver-500 py-10">Carregando painel…</p>';
     Promise.all([aGet('stores?select=*&order=criado_em.desc'), aGet('offers?select=id,status'), aGet('metrics_events?select=tipo'), aGet('reviews?select=*&order=criado_em.desc'), aGet('drivers?select=*&order=criado_em.desc'), aGet('listings?select=*&order=criado_em.desc'), aGet('city_leads?select=*&order=criado_em.desc'), aGet('automation_queue?select=id,status')]).then(function (r) {
@@ -978,8 +1045,7 @@
       if (window.L) { res(); return; }
       ['leaflet.css', 'MarkerCluster.css', 'MarkerCluster.Default.css'].forEach(function (f) { var l = document.createElement('link'); l.rel = 'stylesheet'; l.href = 'assets/vendor/' + f; document.head.appendChild(l); });
       var s = document.createElement('script'); s.src = 'assets/vendor/leaflet.js';
-      s.onload = function () { var m = document.createElement('script'); m.src = 'assets/vendor/leaflet.markercluster.js'; m.onload = function () { res(); }; m.onerror = function () { res(); }; document.head.appendChild(m); };
-      s.onerror = function () { res(); };
+      s.onload = function () { var m = document.createElement('script'); m.src = 'assets/vendor/leaflet.markercluster.js'; m.onload = function () { res(); }; m.onerror = function () { console.error('[AQUITEM] leaflet.markercluster.js falhou'); res(); }; document.head.appendChild(m)rror = function () { res(); };
       document.head.appendChild(s);
     });
   }
