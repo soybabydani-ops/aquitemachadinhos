@@ -27,6 +27,21 @@
       "source": "/trabalhar",
       "destination": "/empregos",
       "permanent": false
+    },
+    {
+      "source": "/gramado",
+      "destination": "/guia-gramado",
+      "permanent": false
+    },
+    {
+      "source": "/gramadoRS",
+      "destination": "/guia-gramado",
+      "permanent": false
+    },
+    {
+      "source": "/nataluz",
+      "destination": "/guia-nataluz",
+      "permanent": false
     }
   ],
   "headers": [
