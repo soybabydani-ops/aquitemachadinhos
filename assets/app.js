@@ -851,6 +851,21 @@
     return doFetch(1);
   }
   function aPost(table, obj) { return fetch(B(table), { method: 'POST', headers: Object.assign({ 'Content-Type': 'application/json', Prefer: 'return=representation' }, aH()), body: JSON.stringify(obj) }).then(function (r) { return r.ok ? r.json() : []; }).catch(function () { return []; }); }
+  /* aAdminRpc — usa SECURITY DEFINER RPCs para bypasear RLS de SELECT */
+  function aAdminRpc(fnName, params) {
+    return fetch(CONFIG.supabase.url + '/rest/v1/rpc/' + fnName, {
+      method: 'POST',
+      headers: Object.assign({ 'Content-Type': 'application/json' }, aH()),
+      body: JSON.stringify(params)
+    }).then(function(r) {
+      if (!r.ok) return r.json().catch(function(){ return null; }).then(function(err){
+        console.error('[aAdminRpc]', fnName, r.status, err);
+        return null;
+      });
+      return r.json().catch(function(){ return true; });
+    }).catch(function(e){ console.error('[aAdminRpc] rede:', fnName, e.message||e); return null; });
+  }
+
   function convertLead(payload) {
     return fetch(CONFIG.supabase.url + '/rest/v1/rpc/convert_city_lead', { method: 'POST', headers: Object.assign({ 'Content-Type': 'application/json' }, aH()), body: JSON.stringify(payload) })
       .then(function (r) { return r.text().then(function (txt) { if (!r.ok) { var msg = txt; try { msg = JSON.parse(txt).message || txt; } catch (e) {} throw new Error(msg || 'Não foi possível publicar.'); } return txt; }); });
@@ -1039,22 +1054,22 @@
       });
     });
     root.querySelectorAll('select[data-plano-id]').forEach(function (sel) {
-      sel.addEventListener('change', function () { aPatch('stores', sel.getAttribute('data-plano-id'), { plano: sel.value }).then(function () { /* ok */ }); });
+      sel.addEventListener('change', function () { aAdminRpc('admin_set_store_plano', { p_store_id: sel.getAttribute('data-plano-id'), p_plano: sel.value }); });
     });
-    root.querySelectorAll('[data-rev-ap]').forEach(function (b) { b.addEventListener('click', function () { aPatch('reviews', b.getAttribute('data-rev-ap'), { status: 'ativo' }).then(function () { pageAdmin(); }); }); });
-    root.querySelectorAll('[data-rev-rj]').forEach(function (b) { b.addEventListener('click', function () { aPatch('reviews', b.getAttribute('data-rev-rj'), { status: 'rejeitado' }).then(function () { pageAdmin(); }); }); });
-    root.querySelectorAll('[data-dap]').forEach(function (b) { b.addEventListener('click', function () { aPatch('drivers', b.getAttribute('data-dap'), { status: 'ativo' }).then(function () { pageAdmin(); }); }); });
+    root.querySelectorAll('[data-rev-ap]').forEach(function (b) { b.addEventListener('click', function () { aAdminRpc('admin_set_review_status', { p_review_id: b.getAttribute('data-rev-ap'), p_status: 'ativo' }).then(function(){ pageAdmin(); }); }); });
+    root.querySelectorAll('[data-rev-rj]').forEach(function (b) { b.addEventListener('click', function () { aAdminRpc('admin_set_review_status', { p_review_id: b.getAttribute('data-rev-rj'), p_status: 'rejeitado' }).then(function(){ pageAdmin(); }); }); });
+    root.querySelectorAll('[data-dap]').forEach(function (b) { b.addEventListener('click', function () { aAdminRpc('admin_set_driver_status', { p_driver_id: b.getAttribute('data-dap'), p_status: 'ativo' }).then(function(){ pageAdmin(); }); }); });
     root.querySelectorAll('[data-ddis]').forEach(function (b) { b.addEventListener('click', function () { aPatch('drivers', b.getAttribute('data-ddis'), { disponivel_agora: b.getAttribute('data-st') === '1' }).then(function () { pageAdmin(); }); }); });
     root.querySelectorAll('[data-ddest]').forEach(function (b) { b.addEventListener('click', function () { aPatch('drivers', b.getAttribute('data-ddest'), { destaque: b.getAttribute('data-st') === '1' }).then(function () { pageAdmin(); }); }); });
     root.querySelectorAll('select[data-dplano-id]').forEach(function (sel) { sel.addEventListener('change', function () { aPatch('drivers', sel.getAttribute('data-dplano-id'), { plano: sel.value }).then(function () {}); }); });
-    root.querySelectorAll('[data-lst-ap]').forEach(function (b) { b.addEventListener('click', function () { aPatch('listings', b.getAttribute('data-lst-ap'), { status: 'ativo' }).then(function () { pageAdmin(); }); }); });
-    root.querySelectorAll('[data-lst-rj]').forEach(function (b) { b.addEventListener('click', function () { aPatch('listings', b.getAttribute('data-lst-rj'), { status: 'rejeitado' }).then(function () { pageAdmin(); }); }); });
+    root.querySelectorAll('[data-lst-ap]').forEach(function (b) { b.addEventListener('click', function () { aAdminRpc('admin_set_listing_status', { p_listing_id: b.getAttribute('data-lst-ap'), p_status: 'ativo' }).then(function(){ pageAdmin(); }); }); });
+    root.querySelectorAll('[data-lst-rj]').forEach(function (b) { b.addEventListener('click', function () { aAdminRpc('admin_set_listing_status', { p_listing_id: b.getAttribute('data-lst-rj'), p_status: 'rejeitado' }).then(function(){ pageAdmin(); }); }); });
     root.querySelectorAll('[data-lst-dest]').forEach(function (b) { b.addEventListener('click', function () { aPatch('listings', b.getAttribute('data-lst-dest'), { destaque: b.getAttribute('data-st') === '1' }).then(function () { pageAdmin(); }); }); });
     root.querySelectorAll('[data-lst-end]').forEach(function (b) { b.addEventListener('click', function () { if (confirm('Marcar como vendido/alugado? O anúncio some das listagens.')) aPatch('listings', b.getAttribute('data-lst-end'), { status: 'encerrado' }).then(function () { pageAdmin(); }); }); });
     root.querySelectorAll('[data-lst-act]').forEach(function (b) { b.addEventListener('click', function () { aPatch('listings', b.getAttribute('data-lst-act'), { status: 'ativo' }).then(function () { pageAdmin(); }); }); });
     root.querySelectorAll('[data-lst-del]').forEach(function (b) { b.addEventListener('click', function () { if (confirm('Excluir este anúncio permanentemente?')) fetch(B('listings?id=eq.' + encodeURIComponent(b.getAttribute('data-lst-del'))), { method: 'DELETE', headers: aH() }).then(function () { pageAdmin(); }); }); });
     root.querySelectorAll('[data-lead-convert]').forEach(function (btn) { btn.addEventListener('click', function () { var lead = cityLeads.filter(function(x){ return x.id === btn.getAttribute('data-lead-convert'); })[0]; var box = $('#leadConvertRoot'); if (!lead || !box) return; box.innerHTML = leadConvertForm(lead); window.scrollTo(0, 0); var close = $('#closeLeadConvert'); if (close) close.addEventListener('click', function(){ box.innerHTML=''; }); var form = $('#leadConvertForm'); if (form) form.addEventListener('submit', function(e){ e.preventDefault(); var msg=$('#leadConvertMsg'), fd=new FormData(form), citySlug=fd.get('city_slug'), nome=String(fd.get('nome')||'').trim(), categoria=fd.get('categoria'); if(!nome || !categoria){ msg.textContent='Preencha nome e categoria.'; msg.className='sm:col-span-2 text-sm text-red-200'; return; } var submit=form.querySelector('[type=submit]') || form.querySelector('button'); if(!submit){ msg.textContent='Botão de publicação não encontrado.'; msg.className='sm:col-span-2 text-sm text-red-200'; return; } submit.disabled=true; submit.textContent='Publicando…'; var obj={ p_lead_id:fd.get('lead_id'), p_nome:nome, p_categoria:categoria, p_plano:fd.get('plano')||'gratis', p_destaque:fd.get('destaque') === 'on', p_whatsapp:String(fd.get('whatsapp')||'').trim(), p_responsavel:String(fd.get('responsavel')||'').trim(), p_descricao_curta:String(fd.get('descricao_curta')||'').trim() }; convertLead(obj).then(function(){ msg.textContent='✓ Empresa publicada em '+(CITY_NAMES[citySlug]||citySlug)+'!'; msg.className='sm:col-span-2 text-sm text-emerald-200'; setTimeout(pageAdmin,800); }).catch(function(err){ msg.textContent=err.message||'Erro ao publicar.'; msg.className='sm:col-span-2 text-sm text-red-200'; submit.disabled=false; submit.textContent='Revisar e publicar empresa →'; }); }); }); });
-    root.querySelectorAll('select[data-lead-status]').forEach(function (sel) { sel.addEventListener('change', function () { aPatch('city_leads', sel.getAttribute('data-lead-status'), { status: sel.value }).then(function () { pageAdmin(); }); }); });
+    root.querySelectorAll('select[data-lead-status]').forEach(function (sel) { sel.addEventListener('change', function () { aAdminRpc('admin_set_lead_status', { p_lead_id: sel.getAttribute('data-lead-status'), p_status: sel.value }).then(function(){ pageAdmin(); }); }); });
   }
 
   var LojistaAuth = {
