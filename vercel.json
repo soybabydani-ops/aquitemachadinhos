@@ -30,17 +30,17 @@
     },
     {
       "source": "/gramado",
-      "destination": "/assets/gramado-home.html?utm_source=facebook&utm_medium=grupo&utm_campaign=gramado_guia",
+      "destination": "/gramado-home.html?utm_source=facebook&utm_medium=grupo&utm_campaign=gramado_guia",
       "permanent": false
     },
     {
       "source": "/nataluz",
-      "destination": "/assets/gramado-natal-luz.html?utm_source=facebook&utm_medium=grupo&utm_campaign=gramado_natal_luz",
+      "destination": "/gramado-natal-luz.html?utm_source=facebook&utm_medium=grupo&utm_campaign=gramado_natal",
       "permanent": false
     },
     {
       "source": "/gramadoRS",
-      "destination": "/assets/gramado-home.html?utm_source=facebook&utm_medium=grupo&utm_campaign=gramado_guia",
+      "destination": "/gramado-home.html?utm_source=facebook&utm_medium=grupo&utm_campaign=gramado_guia",
       "permanent": false
     }
   ],
