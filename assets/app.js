@@ -114,6 +114,23 @@
 (function () {
   'use strict';
 
+/* Inject skeleton CSS se não existir */
+(function() {
+  if (document.getElementById('ata-skeleton-css')) return;
+  var s = document.createElement('style');
+  s.id = 'ata-skeleton-css';
+  s.textContent = [
+    '@keyframes ata-pulse{0%,100%{opacity:1}50%{opacity:.4}}',
+    '.animate-pulse{animation:ata-pulse 1.8s cubic-bezier(.4,0,.6,1) infinite}',
+    '.bg-silver-100{background:#f1f5f9}',
+    '.h-16{height:4rem}.h-24{height:6rem}.h-32{height:8rem}.h-40{height:10rem}',
+    '.rounded-2xl{border-radius:1rem}.space-y-3>*+*{margin-top:.75rem}',
+    '.p-4{padding:1rem}'
+  ].join('');
+  document.head.appendChild(s);
+})();
+
+
   /* ================================================================
    *  AQUITEM v3.5 — CAMADA DE PERFORMANCE & RESILIÊNCIA
    *  ⚡ Cache SWR (stale-while-revalidate)
@@ -434,13 +451,36 @@
   var Metrics = {
     log: function (tipo, sid) { if (!isRemote()) return Promise.resolve(); return fetch(B('metrics_events'), { method: 'POST', headers: H({ 'Content-Type': 'application/json' }), body: JSON.stringify({ tipo: tipo, store_id: sid || null }) }).catch(function () {}); }
   };
-  function uploadPhoto(file) {
+  /* uploadPhoto v3.5 — compressão + retry + progresso */
+  function uploadPhoto(file, onProgress) {
     return compressImage(file).then(function (f) {
       if (!isRemote()) return new Promise(function (res) { var r = new FileReader(); r.onload = function () { res(r.result); }; r.readAsDataURL(f); });
       var isPng = f.type === 'image/png'; var ext = isPng ? 'png' : 'jpg';
-      var path = 'lojas/' + Date.now() + '-' + Math.random().toString(36).slice(2) + '.' + ext;
-      return fetch(CONFIG.supabase.url + '/storage/v1/object/fotos/' + path, { method: 'POST', headers: H({ 'Content-Type': isPng ? 'image/png' : 'image/jpeg' }), body: f })
-        .then(function (r) { if (!r.ok) throw new Error('upload'); return CONFIG.supabase.url + '/storage/v1/object/public/fotos/' + path; });
+      var path  = 'lojas/' + Date.now() + '-' + Math.random().toString(36).slice(2) + '.' + ext;
+      var url   = CONFIG.supabase.url + '/storage/v1/object/fotos/' + path;
+      var hdrs  = H({ 'Content-Type': isPng ? 'image/png' : 'image/jpeg' });
+      if (typeof onProgress === 'function') onProgress(0);
+      function attempt(n) {
+        return fetch(url, { method: 'POST', headers: hdrs, body: f })
+          .then(function (r) {
+            if (!r.ok) {
+              if (r.status >= 500 && n < 3) {
+                console.warn('[uploadPhoto] retry ' + n + '/3');
+                return new Promise(function(res){ setTimeout(res, 1000 * Math.pow(2, n-1)); }).then(function(){ return attempt(n+1); });
+              }
+              throw new Error('upload HTTP ' + r.status);
+            }
+            if (typeof onProgress === 'function') onProgress(100);
+            return CONFIG.supabase.url + '/storage/v1/object/public/fotos/' + path;
+          })
+          .catch(function(e) {
+            if (n < 3 && (!e.message || e.message.indexOf('fetch') !== -1)) {
+              return new Promise(function(res){ setTimeout(res, 1000 * Math.pow(2, n-1)); }).then(function(){ return attempt(n+1); });
+            }
+            throw e;
+          });
+      }
+      return attempt(1);
     });
   }
   
@@ -880,6 +920,20 @@
       Metrics.log('cadastro_iniciado');
       var fd = {}; new FormData(form).forEach(function (v, k) { var f = form.querySelector('[name=' + k + ']'); fd[k] = (f && f.type === 'checkbox') ? (f.checked ? true : false) : v; });
       // uploads
+      /* Validação Zod-style — 0ms, aborta antes de qualquer fetch */
+      var _erros = [];
+      var _nome = (fd.nome || '').trim();
+      var _wa   = (fd.whatsapp || '').trim();
+      if (!_nome) _erros.push('Nome da empresa é obrigatório.');
+      if (!_wa || _wa.replace(/\D/g,'').length < 8) _erros.push('WhatsApp inválido — mínimo 8 dígitos.');
+      if ((fd.descricao_curta || '').length > 300) _erros.push('Descrição deve ter no máximo 300 caracteres.');
+      if ((fd.instagram || '').trim() && !/^@?[\w\.]+$/.test((fd.instagram||'').trim())) _erros.push('Instagram inválido (ex: @minhaloja).');
+      if (!fd.aceite_termos) _erros.push('Você precisa aceitar os termos para continuar.');
+      if (_erros.length) { showMsg('#msg', '❌ ' + _erros[0], false); btn.disabled = false; btn.textContent = orig; return; }
+      // Sanitizar strings antes de enviar
+      ['nome','responsavel','bairro','endereco','descricao_curta','horario'].forEach(function(k){ if (fd[k]) fd[k] = String(fd[k]).trim().replace(/[<>]/g,''); });
+
+
       var tasks = [];
       var logoFile = form.querySelector('[name=logo]').files[0];
       var capaFile = form.querySelector('[name=capa]').files[0];
@@ -945,9 +999,11 @@
         .then(function (r) { return r.json().then(function (j) { if (!r.ok) throw new Error(j.error_description || j.msg || j.message || 'Erro ao entrar'); return j; }); });
     }
   };
+  /* aH v3.5 — sempre envia Authorization: Bearer explícito */
   function aH() {
     var t = AUTH.tok() || LojistaAuth.tok();
-    return { apikey: CONFIG.supabase.anonKey, Authorization: 'Bearer ' + (t || CONFIG.supabase.anonKey) };
+    if (t) return { apikey: CONFIG.supabase.anonKey, Authorization: 'Bearer ' + t };
+    return { apikey: CONFIG.supabase.anonKey, Authorization: 'Bearer ' + CONFIG.supabase.anonKey };
   }
   function aHAuth() {
     var t = AUTH.tok() || LojistaAuth.tok();
@@ -1145,7 +1201,13 @@
       root.innerHTML = '<p class="text-center text-silver-500 py-2 text-xs">⚡ Carregado do cache — atualizando…</p>';
       renderAdmin(root, cachedStores.data, [], [], [], [], [], [], []);
     } else {
-      root.innerHTML = '<p class="text-center text-silver-500 py-10">Carregando painel…</p>';
+      /* SWR: cache instantâneo + skeleton */
+    var _cachedStores = _swrCache['aGet:stores?select=*&order=criado_em.desc'];
+    root.innerHTML = _cachedStores
+      ? '<p class="text-center text-xs text-amber-600 py-1 font-semibold">⚡ Cache — atualizando em segundo plano…</p>'
+      : '<div class="space-y-3 p-4 animate-pulse">' +
+        ['','','','',''].map(function(){return '<div class="h-16 bg-silver-100 rounded-2xl"></div>';}).join('') +
+        '</div>';
     }
     Promise.all([aGet('stores?select=*&order=criado_em.desc'), aGet('offers?select=id,status'), aGet('metrics_events?select=tipo'), aGet('reviews?select=*&order=criado_em.desc'), aGet('drivers?select=*&order=criado_em.desc'), aGet('listings?select=*&order=criado_em.desc'), aGet('city_leads?select=*&order=criado_em.desc'), aGet('automation_queue?select=id,status')]).then(function (r) {
       renderAdmin(root, r[0], r[1], r[2], r[3], r[4], r[5], r[6], r[7]);
@@ -1283,7 +1345,11 @@
   function pagePainel() {
     var root = $('#painelRoot'); if (!root) return;
     if (!AUTH.tok()) { location.href = 'login.html'; return; }
-    root.innerHTML = '<p class="text-center text-silver-500 py-10">Carregando...</p>';
+    root.innerHTML = '<div class="space-y-3 p-4 animate-pulse">' +
+      '<div class="h-24 bg-silver-100 rounded-2xl"></div>' +
+      '<div class="h-40 bg-silver-100 rounded-2xl"></div>' +
+      '<div class="h-32 bg-silver-100 rounded-2xl"></div>' +
+      '</div>';
     var _isLojista = !AUTH.tok() && !!LojistaAuth.tok();
     var storeQuery = _isLojista ? ('stores?select=*&owner_id=eq.' + LojistaAuth.uid() + '&order=criado_em.desc') : 'stores?select=*&order=criado_em.desc';
     aGet(storeQuery).then(function (stores) {
@@ -1443,7 +1509,9 @@
     var box = $('#mapaBox'); if (!box) return;
     Promise.all([Categories.list(), Stores.list()]).then(function (r) { renderMapaPage(box, r[0], r[1]); });
   }
+  /* renderMapaPage v3.5 — ErrorBoundary rígido */
   function renderMapaPage(box, cats, stores) {
+    try {
     var comCoords = stores.filter(function (s) { return s.lat && s.lng; });
     var chipsIds = ['all'].concat(cats.map(function (c) { return c.id; }));
     box.innerHTML = '<div class="flex flex-wrap gap-2 mb-4">' + chipsIds.map(function (cid) { var c = cid === 'all' ? { id: 'all', nome: 'Todas', emoji: '📍' } : cats.filter(function (x) { return x.id === cid; })[0]; return '<button data-fcat="' + cid + '" class="filt-btn px-3 py-1.5 rounded-full text-xs font-semibold bg-white ring-silver">' + (c.emoji || '') + ' ' + esc(c.nome) + '</button>'; }).join('') + '</div>'
