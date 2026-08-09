@@ -30,17 +30,17 @@
     },
     {
       "source": "/gramado",
-      "destination": "/gramado-home",
+      "destination": "/gramado.html",
       "permanent": false
     },
     {
       "source": "/nataluz",
-      "destination": "/gramado-natal-luz",
+      "destination": "/nataluz.html",
       "permanent": false
     },
     {
       "source": "/gramadoRS",
-      "destination": "/gramado-home",
+      "destination": "/gramado.html",
       "permanent": false
     }
   ],
