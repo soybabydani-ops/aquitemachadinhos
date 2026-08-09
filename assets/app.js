@@ -114,6 +114,166 @@
 (function () {
   'use strict';
 
+  /* ================================================================
+   *  AQUITEM v3.5 — CAMADA DE PERFORMANCE & RESILIÊNCIA
+   *  ⚡ Cache SWR (stale-while-revalidate)
+   *  🔁 Exponential Backoff para mutations
+   *  🛡️  Validação de schema (Zod-style puro JS)
+   *  📋 Mapeador de erros Supabase tipados
+   *  📝 Trilha de auditoria imutável
+   * ================================================================ */
+
+  /* ------ MAPEADOR DE ERROS SUPABASE ------ */
+  var SUPABASE_ERR_MAP = {
+    '23505': 'Esta empresa já está cadastrada com esse nome ou WhatsApp.',
+    '23503': 'Categoria inválida ou não encontrada. Tente outra opção.',
+    '23502': 'Há campos obrigatórios não preenchidos. Revise o formulário.',
+    '42501': 'Sem permissão para realizar esta ação. Faça login novamente.',
+    '23514': 'Valor fora do intervalo permitido para este campo.',
+    'PGRST301': 'Sessão expirada. Faça login novamente.',
+    'PGRST116': 'Nenhum resultado encontrado.',
+    '22001': 'Um dos campos excede o tamanho máximo permitido.',
+    '22P02': 'Formato inválido em um dos campos.',
+    '42P01': 'Tabela não encontrada. Contate o suporte.'
+  };
+
+  function mapSupabaseError(data, status) {
+    if (!data) return 'Erro desconhecido (HTTP ' + status + ')';
+    // Tenta capturar pelo código do Postgres
+    var code = data.code || '';
+    if (code && SUPABASE_ERR_MAP[code]) return SUPABASE_ERR_MAP[code];
+    // Tenta pela mensagem da API
+    var raw = data.message || data.error || data.hint || '';
+    // Mapeamento por palavras-chave na mensagem
+    if (/duplicate|unique/i.test(raw)) return SUPABASE_ERR_MAP['23505'];
+    if (/foreign key|violates/i.test(raw)) return SUPABASE_ERR_MAP['23503'];
+    if (/not.null|null value/i.test(raw)) return SUPABASE_ERR_MAP['23502'];
+    if (/permission|policy|rls/i.test(raw)) return SUPABASE_ERR_MAP['42501'];
+    if (/jwt|expired|token/i.test(raw)) return SUPABASE_ERR_MAP['PGRST301'];
+    // Fallback rico
+    return raw ? raw.slice(0, 120) : ('Erro HTTP ' + status);
+  }
+
+  /* ------ VALIDADOR DE SCHEMA (Zod-style, zero dependências) ------ */
+  var StoreSchema = {
+    nome:        { type: 'string', required: true, maxLen: 100, label: 'Nome da empresa' },
+    whatsapp:    { type: 'string', required: true, maxLen: 20,  label: 'WhatsApp', pattern: /^[\d\s\-\+\(\)]+$/ },
+    categoria:   { type: 'string', required: false, maxLen: 50, label: 'Categoria' },
+    descricao_curta: { type: 'string', required: false, maxLen: 300, label: 'Descrição curta' },
+    bairro:      { type: 'string', required: false, maxLen: 80,  label: 'Bairro' },
+    cidade:      { type: 'string', required: false, maxLen: 80,  label: 'Cidade' },
+    endereco:    { type: 'string', required: false, maxLen: 200, label: 'Endereço' },
+    instagram:   { type: 'string', required: false, maxLen: 100, label: 'Instagram', pattern: /^(@?[\w\.]+)?$/ },
+    site:        { type: 'string', required: false, maxLen: 200, label: 'Site' },
+    horario:     { type: 'string', required: false, maxLen: 100, label: 'Horário' }
+  };
+
+  function validateStore(obj) {
+    var errors = [];
+    Object.keys(StoreSchema).forEach(function(key) {
+      var rule = StoreSchema[key];
+      var val = String(obj[key] || '').trim();
+      if (rule.required && !val) {
+        errors.push(rule.label + ' é obrigatório.');
+      } else if (val) {
+        if (rule.maxLen && val.length > rule.maxLen) {
+          errors.push(rule.label + ' deve ter no máximo ' + rule.maxLen + ' caracteres.');
+        }
+        if (rule.pattern && !rule.pattern.test(val)) {
+          errors.push(rule.label + ' contém caracteres inválidos.');
+        }
+      }
+    });
+    // Sanitiza todos os campos string
+    var sanitized = {};
+    Object.keys(obj).forEach(function(k) {
+      sanitized[k] = (typeof obj[k] === 'string') ? obj[k].trim().replace(/[<>]/g, '') : obj[k];
+    });
+    return { ok: errors.length === 0, errors: errors, data: sanitized };
+  }
+
+  /* ------ CACHE SWR (Stale-While-Revalidate) ------ */
+  var _swrCache = {};
+  var SWR_TTL = 30000; // 30s de TTL — atualiza em background
+
+  function swrGet(key, fetchFn) {
+    var now = Date.now();
+    var cached = _swrCache[key];
+    if (cached) {
+      // Retorna imediato (stale) e revalida em background
+      if (now - cached.ts < SWR_TTL) {
+        return Promise.resolve(cached.data); // Ainda fresco
+      }
+      // Stale: retorna dados antigos E dispara fetch em background
+      fetchFn().then(function(fresh) {
+        _swrCache[key] = { data: fresh, ts: Date.now() };
+      }).catch(function() {});
+      return Promise.resolve(cached.data);
+    }
+    // Cache miss — fetch real
+    return fetchFn().then(function(data) {
+      _swrCache[key] = { data: data, ts: Date.now() };
+      return data;
+    });
+  }
+
+  function swrInvalidate(keyPrefix) {
+    Object.keys(_swrCache).forEach(function(k) {
+      if (k.indexOf(keyPrefix) === 0) delete _swrCache[k];
+    });
+  }
+
+  /* ------ EXPONENTIAL BACKOFF ------ */
+  function withRetry(fn, opts) {
+    opts = opts || {};
+    var maxRetries = opts.maxRetries || 3;
+    var baseDelay = opts.baseDelay || 1000;
+    var retryOn = opts.retryOn || function(err, status) {
+      // Retry em erros de rede ou 5xx
+      return !status || status >= 500;
+    };
+
+    function attempt(n) {
+      return fn().then(function(result) {
+        return result;
+      }).catch(function(err) {
+        var status = err._httpStatus || 0;
+        if (n >= maxRetries || !retryOn(err, status)) {
+          throw err; // Desiste
+        }
+        var delay = baseDelay * Math.pow(2, n - 1); // 1s → 2s → 4s
+        console.warn('[AQUITEM] Retry ' + n + '/' + maxRetries + ' em ' + delay + 'ms — ' + (err.message || err));
+        return new Promise(function(res) { setTimeout(res, delay); }).then(function() {
+          return attempt(n + 1);
+        });
+      });
+    }
+    return attempt(1);
+  }
+
+  /* ------ TRILHA DE AUDITORIA ------ */
+  function auditLog(action, table, recordId, before, after) {
+    // Não bloqueia a operação principal — fire and forget
+    var t = (typeof AUTH !== 'undefined' && AUTH.tok()) || '';
+    if (!t) return; // Só loga se autenticado
+    var payload = {
+      action: action,         // 'UPDATE' | 'DELETE' | 'STATUS_CHANGE'
+      table_name: table,
+      record_id: recordId,
+      before_data: before || null,
+      after_data: after || null,
+      performed_at: new Date().toISOString(),
+      user_agent: navigator.userAgent.slice(0, 80)
+    };
+    // Supabase REST insert (sem retorno necessário)
+    fetch(B('admin_audit_log'), {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', apikey: CONFIG.supabase.anonKey, Authorization: 'Bearer ' + t },
+      body: JSON.stringify(payload)
+    }).catch(function() {}); // Silencia erros — log é best-effort
+  }
+
+
   function loadPublicSupabaseConfig() {
     try {
       var req = new XMLHttpRequest(); req.open('GET', 'assets/supabase-config.json', false); req.send(null);
@@ -234,6 +394,13 @@
       return Stores.list().then(function (a) { var ql = q.toLowerCase(); return a.filter(function (s) { return JSON.stringify(s).toLowerCase().indexOf(ql) !== -1; }); });
     },
     create: function (obj) {
+      // 🛡️ Validação de schema completa (Zod-style)
+      var validation = validateStore(obj);
+      if (!validation.ok) {
+        return Promise.reject(new Error(validation.errors[0]));
+      }
+      obj = validation.data; // Dados sanitizados
+
       obj.id = uuid();
       obj.status = 'pendente';
       obj.city_slug = obj.city_slug || currentCitySlug();
@@ -243,9 +410,6 @@
       // Garantir aceite obrigatório
       if (!obj.aceite_termos) obj.aceite_termos = false;
       if (!obj.autorizacao_contato) obj.autorizacao_contato = false;
-      // Campos NOT NULL com default seguro
-      if (!obj.nome || !obj.nome.trim()) { throw new Error('Nome da empresa é obrigatório'); }
-      if (!obj.whatsapp || !obj.whatsapp.trim()) { throw new Error('WhatsApp é obrigatório'); }
       // FK safety: categoria NULL se não for uma das conhecidas
       if (!obj.categoria || obj.categoria === 'outro') {
         obj.categoria = null;
@@ -443,21 +607,69 @@
 
   function sortByPlano(arr) { return arr.sort(function (a, b) { var pa = a.plano === 'pro' ? 3 : (a.plano === 'destaque' ? 2 : 1); var pb = b.plano === 'pro' ? 3 : (b.plano === 'destaque' ? 2 : 1); return pb - pa || (b.destaque ? 1 : 0) - (a.destaque ? 1 : 0) || (b.rating_avg || 0) - (a.rating_avg || 0); }); }
 
+  /* -------------------------------------------------------
+   * compressImage v2.0 — Canvas API pura, zero deps
+   * • Max 1200px em qualquer dimensão
+   * • JPEG → qualidade 80% | PNG → qualidade 90%
+   * • Imagens < 200KB passam sem re-encode (fast path)
+   * • EXIF removido automaticamente pelo re-draw no canvas
+   * • Emite evento customizado 'ata:compress' com stats
+   * ----------------------------------------------------- */
   function compressImage(file) {
     return new Promise(function (resolve) {
-      if (!file.type || file.type.indexOf('image/') !== 0 || file.size <= 204800) { resolve(file); return; }
-      var img = new Image(); var u = URL.createObjectURL(file);
+      // Fast-path: não é imagem ou já está dentro do limite de 200 KB
+      if (!file || !file.type || file.type.indexOf('image/') !== 0 || file.size <= 204800) {
+        resolve(file);
+        return;
+      }
+      var origSize = file.size;
+      var u = URL.createObjectURL(file);
+      var img = new Image();
+
       img.onload = function () {
         URL.revokeObjectURL(u);
-        var maxD = 1200, w = img.width, h = img.height;
-        if (w > maxD) { h = h * (maxD / w); w = maxD; }
-        if (h > maxD) { w = w * (maxD / h); h = maxD; }
-        var cv = document.createElement('canvas'); cv.width = w; cv.height = h;
-        cv.getContext('2d').drawImage(img, 0, 0, w, h);
-        var mime = file.type === 'image/png' ? 'image/png' : 'image/jpeg';
-        cv.toBlob(function (b) { resolve(b || file); }, mime, mime === 'image/jpeg' ? 0.85 : 0.9);
+        var MAX_W = 1200, MAX_H = 1200;
+        var w = img.naturalWidth || img.width;
+        var h = img.naturalHeight || img.height;
+
+        // Escala proporcional — jamais aumenta, só reduz
+        if (w > MAX_W) { h = Math.round(h * MAX_W / w); w = MAX_W; }
+        if (h > MAX_H) { w = Math.round(w * MAX_H / h); h = MAX_H; }
+
+        var cv = document.createElement('canvas');
+        cv.width = w; cv.height = h;
+        var ctx = cv.getContext('2d');
+        // Fundo branco (evita transparência virar preto em JPEG)
+        ctx.fillStyle = '#ffffff';
+        ctx.fillRect(0, 0, w, h);
+        ctx.drawImage(img, 0, 0, w, h);
+
+        var isPng = file.type === 'image/png';
+        var mime = isPng ? 'image/png' : 'image/jpeg';
+        var quality = isPng ? 0.90 : 0.80; // 80% JPEG conforme spec
+
+        cv.toBlob(function (blob) {
+          var result = blob || file;
+          // Emitir evento para feedback visual externo
+          try {
+            var ev = new CustomEvent('ata:compress', { detail: {
+              origSize: origSize, newSize: result.size,
+              reduction: Math.round((1 - result.size / origSize) * 100),
+              dims: w + 'x' + h
+            }});
+            window.dispatchEvent(ev);
+          } catch (_) {}
+          console.log('[AQUITEM] compressImage:', Math.round(origSize/1024) + 'KB → ' + Math.round(result.size/1024) + 'KB (' + w + 'x' + h + ')');
+          resolve(result);
+        }, mime, quality);
       };
-      img.onerror = function () { URL.revokeObjectURL(u); resolve(file); };
+
+      img.onerror = function () {
+        URL.revokeObjectURL(u);
+        console.warn('[AQUITEM] compressImage: falha ao carregar imagem, usando original');
+        resolve(file);
+      };
+
       img.src = u;
     });
   }
@@ -742,50 +954,144 @@
     if (!t) console.warn('[AQUITEM] aHAuth: operação requer autenticação');
     return { apikey: CONFIG.supabase.anonKey, Authorization: 'Bearer ' + (t || CONFIG.supabase.anonKey), 'Content-Type': 'application/json', Prefer: 'return=representation' };
   }
+  /* -------------------------------------------------------
+   * aGet v3.5 — SWR cache + erros tipados
+   * • Dados frescos em < 30s: retorna do cache instantâneo
+   * • Dados stale (> 30s): serve cache + revalida em background
+   * • Erros HTTP mapeados via mapSupabaseError
+   * ----------------------------------------------------- */
   function aGet(path) {
-    return fetch(B(path), { headers: aH() })
-      .then(function (r) {
+    var cacheKey = 'aGet:' + path;
+
+    function fetchFn() {
+      return fetch(B(path), { headers: aH() })
+        .then(function (r) {
+          if (r.status >= 500) {
+            var err = new Error('Servidor indisponível (HTTP ' + r.status + ')');
+            err._httpStatus = r.status;
+            throw err;
+          }
+          if (!r.ok) {
+            return r.json().catch(function () { return {}; }).then(function (data) {
+              var msg = mapSupabaseError(data, r.status);
+              console.error('[AQUITEM] aGet erro', r.status, path, msg);
+              return [];
+            });
+          }
+          return r.json().catch(function () { return []; });
+        })
+        .catch(function (e) {
+          if (e._httpStatus) throw e; // Propaga para retry
+          console.error('[AQUITEM] aGet rede:', path, e.message || e);
+          return [];
+        });
+    }
+
+    // Só usa cache para paths de listagem (GET sem parâmetros de filtro complexos do painel admin)
+    // Paths contendo 'automation_queue' ou 'metrics_events' nunca são cacheados
+    var noCache = /automation_queue|metrics_events/.test(path);
+    if (noCache) return fetchFn();
+    return swrGet(cacheKey, fetchFn);
+  }
+  /* -------------------------------------------------------
+   * aPatch v3.5 — Exponential Backoff + Audit Trail
+   * • Retry automático em falhas de rede (5xx / timeout)
+   * • 3 tentativas: 1s → 2s → 4s
+   * • Invalida cache SWR da tabela modificada
+   * • Registra trilha de auditoria antes/depois
+   * ----------------------------------------------------- */
+  function aPatch(table, id, obj, opts) {
+    var t = AUTH.tok() || LojistaAuth.tok();
+    if (!t) {
+      console.error('[AQUITEM] aPatch sem token:', table, id);
+      return Promise.resolve(false);
+    }
+    opts = opts || {};
+    var auditBefore = opts.before || null; // estado anterior para audit
+
+    function doFetch() {
+      return fetch(B(table + '?id=eq.' + encodeURIComponent(id)), {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+          Prefer: 'return=representation',
+          apikey: CONFIG.supabase.anonKey,
+          Authorization: 'Bearer ' + t
+        },
+        body: JSON.stringify(obj)
+      }).then(function (r) {
+        if (r.status >= 500) {
+          // Força o retry para erros de servidor
+          var err = new Error('Servidor indisponível (HTTP ' + r.status + ')');
+          err._httpStatus = r.status;
+          throw err;
+        }
         if (!r.ok) {
-          return r.json().catch(function(){ return {}; }).then(function(err){
-            console.error('[AQUITEM] aGet erro', r.status, path, err.message || JSON.stringify(err).slice(0,100));
-            return [];
+          return r.json().catch(function () { return {}; }).then(function (data) {
+            var friendlyMsg = mapSupabaseError(data, r.status);
+            console.error('[AQUITEM] aPatch erro', r.status, table, id, friendlyMsg);
+            var err = new Error(friendlyMsg);
+            err._httpStatus = r.status;
+            throw err;
           });
         }
-        return r.json().catch(function(){ return []; });
-      })
-      .catch(function (e) {
-        console.error('[AQUITEM] aGet network error:', path, e.message || e);
-        return [];
+        // Sucesso: invalida cache e registra audit
+        swrInvalidate(table);
+        auditLog('UPDATE', table, id, auditBefore, obj);
+        return true;
       });
+    }
+
+    return withRetry(doFetch, {
+      maxRetries: 3,
+      baseDelay: 1000,
+      retryOn: function (err, status) { return !status || status >= 500; }
+    }).catch(function (e) {
+      console.error('[AQUITEM] aPatch falhou após retries:', table, id, e.message || e);
+      return false;
+    });
   }
-  function aPatch(table, id, obj) {
-    var t = AUTH.tok() || LojistaAuth.tok();
-    if (!t) { console.error('[AQUITEM] aPatch sem token:', table, id); return Promise.resolve(false); }
-    return fetch(B(table + '?id=eq.' + encodeURIComponent(id)), {
-      method: 'PATCH',
-      headers: { 'Content-Type': 'application/json', Prefer: 'return=representation', apikey: CONFIG.supabase.anonKey, Authorization: 'Bearer ' + t },
-      body: JSON.stringify(obj)
-    }).then(function (r) {
-      if (!r.ok) return r.json().catch(function(){ return {}; }).then(function(err){ console.error('[AQUITEM] aPatch erro', r.status, table, id, err); return false; });
-      return true;
-    }).catch(function (e) { console.error('[AQUITEM] aPatch network:', e); return false; });
-  }
+  /* -------------------------------------------------------
+   * aPost v3.5 — Mapeador de erros Supabase tipado
+   * • Erros 23505/23503/etc → mensagens PT-BR amigáveis
+   * • Invalida cache da tabela após insert bem-sucedido
+   * ----------------------------------------------------- */
   function aPost(table, obj) {
-    return fetch(B(table), {
-      method: 'POST',
-      headers: Object.assign({ 'Content-Type': 'application/json', Prefer: 'return=representation' }, aH()),
-      body: JSON.stringify(obj)
-    }).then(function (r) {
-      return r.json().then(function (data) {
-        if (!r.ok) {
-          var errMsg = (data && (data.message || data.error || data.hint || JSON.stringify(data))) || ('HTTP ' + r.status);
-          console.error('[AQUITEM] aPost erro', r.status, table, errMsg, 'payload:', JSON.stringify(obj).slice(0,200));
-          throw new Error(errMsg);
-        }
-        return Array.isArray(data) ? data[0] : data;
+    function doPost() {
+      return fetch(B(table), {
+        method: 'POST',
+        headers: Object.assign({ 'Content-Type': 'application/json', Prefer: 'return=representation' }, aH()),
+        body: JSON.stringify(obj)
+      }).then(function (r) {
+        return r.json().then(function (data) {
+          if (r.status >= 500) {
+            var err = new Error('Servidor indisponível (HTTP ' + r.status + ')');
+            err._httpStatus = r.status;
+            throw err;
+          }
+          if (!r.ok) {
+            var friendlyMsg = mapSupabaseError(data, r.status);
+            console.error('[AQUITEM] aPost erro', r.status, table, friendlyMsg, 'payload:', JSON.stringify(obj).slice(0, 200));
+            var err2 = new Error(friendlyMsg);
+            err2._httpStatus = r.status;
+            throw err2;
+          }
+          swrInvalidate(table); // Limpa cache da tabela
+          return Array.isArray(data) ? data[0] : data;
+        });
+      }).catch(function (e) {
+        if (!e._httpStatus) console.error('[AQUITEM] aPost rede:', table, e.message || e);
+        throw e;
       });
-    }).catch(function (e) { console.error('[AQUITEM] aPost catch:', e.message); throw e; });
-  }}
+    }
+
+    return withRetry(doPost, {
+      maxRetries: 2,
+      baseDelay: 1000,
+      retryOn: function (err, status) { return !status || status >= 500; }
+    });
+  }
+}}
   function countBy(arr, key, val) { return arr.filter(function (x) { return x[key] === val; }).length; }
   function exportCSV(rows) {
     if (!rows || !rows.length) return;
@@ -833,7 +1139,14 @@
       return;
     }
     var _isLojista = !AUTH.tok() && !!LojistaAuth.tok();
-    root.innerHTML = '<p class="text-center text-silver-500 py-10">Carregando painel…</p>';
+    /* SWR: se há cache, renderiza imediatamente e revalida em background */
+    var cachedStores = _swrCache['aGet:stores?select=*&order=criado_em.desc'];
+    if (cachedStores) {
+      root.innerHTML = '<p class="text-center text-silver-500 py-2 text-xs">⚡ Carregado do cache — atualizando…</p>';
+      renderAdmin(root, cachedStores.data, [], [], [], [], [], [], []);
+    } else {
+      root.innerHTML = '<p class="text-center text-silver-500 py-10">Carregando painel…</p>';
+    }
     Promise.all([aGet('stores?select=*&order=criado_em.desc'), aGet('offers?select=id,status'), aGet('metrics_events?select=tipo'), aGet('reviews?select=*&order=criado_em.desc'), aGet('drivers?select=*&order=criado_em.desc'), aGet('listings?select=*&order=criado_em.desc'), aGet('city_leads?select=*&order=criado_em.desc'), aGet('automation_queue?select=id,status')]).then(function (r) {
       renderAdmin(root, r[0], r[1], r[2], r[3], r[4], r[5], r[6], r[7]);
     });
@@ -920,7 +1233,7 @@
     var btnCsv = $('#btnCsv'); if (btnCsv) btnCsv.addEventListener('click', function () { exportCSV(stores); });
     var btnCleanLost = $('#btnCleanLost'); if (btnCleanLost) btnCleanLost.addEventListener('click', function () { if (!confirm('Excluir permanentemente todos os leads marcados como perdido?')) return; fetch(B('city_leads?status=eq.perdido'), { method:'DELETE', headers:aH() }).then(function(){ pageAdmin(); }); });
     root.querySelectorAll('[data-lead-delete]').forEach(function (b) { b.addEventListener('click', function () { if (!confirm('Excluir permanentemente o lead '+b.getAttribute('data-lead-name')+'?')) return; fetch(B('city_leads?id=eq.'+encodeURIComponent(b.getAttribute('data-lead-delete'))),{method:'DELETE',headers:aH()}).then(function(){pageAdmin();}); }); });
-    root.querySelectorAll('[data-store-delete]').forEach(function (b) { b.addEventListener('click', function () { if (!confirm('Excluir permanentemente a empresa '+b.getAttribute('data-store-name')+'? Fotos e ofertas também serão removidas.')) return; fetch(B('stores?id=eq.'+encodeURIComponent(b.getAttribute('data-store-delete'))),{method:'DELETE',headers:aH()}).then(function(){pageAdmin();}); }); });
+    root.querySelectorAll('[data-store-delete]').forEach(function (b) { b.addEventListener('click', function () { var sid = b.getAttribute('data-store-delete'), sname = b.getAttribute('data-store-name'); if (!confirm('Excluir permanentemente a empresa '+sname+'? Fotos e ofertas também serão removidas.')) return; /* Captura snapshot antes de deletar para audit */ var storeSnapshot = (stores || []).filter(function(x){ return x.id === sid; })[0] || { id: sid, nome: sname }; auditLog('DELETE', 'stores', sid, storeSnapshot, null); fetch(B('stores?id=eq.'+encodeURIComponent(sid)),{method:'DELETE',headers:aH()}).then(function(){ swrInvalidate('stores'); pageAdmin(); }); }); });
     root.querySelectorAll('[data-act]').forEach(function (btn) {
       btn.addEventListener('click', function () {
         var id = btn.getAttribute('data-id'), act = btn.getAttribute('data-act'), patch = {};
@@ -928,7 +1241,7 @@
         if (act === 'rejeitar') patch.status = 'rejeitado';
         if (act === 'destaque-on') patch.destaque = true;
         if (act === 'destaque-off') patch.destaque = false;
-        aPatch('stores', id, patch).then(function () { pageAdmin(); });
+        aPatch('stores', id, patch, { before: { status: btn.getAttribute('data-act') } }).then(function (ok) { if (ok) swrInvalidate('stores'); pageAdmin(); });
       });
     });
     root.querySelectorAll('select[data-plano-id]').forEach(function (sel) {
@@ -1041,6 +1354,12 @@
       + '<label class="flex items-center gap-2 text-sm mt-3"><input type="checkbox" name="destaque" class="w-4 h-4 accent-peao-500"' + (s.destaque ? ' checked' : '') + '> Destacar empresa</label>'
       + '<button class="btn-shine bg-peao-500 hover:bg-peao-600 text-white font-bold px-5 py-2.5 rounded-xl">Salvar</button><span id="editMsg" class="text-sm text-emerald-600 ml-2"></span></form>';
   }
+  /* -------------------------------------------------------
+   * wireEdit v3.5 — Validação StoreSchema + Audit Trail
+   * • Valida campos antes de enviar
+   * • Snapshot do estado anterior para trilha de auditoria
+   * • Feedback visual rico com erros específicos
+   * ----------------------------------------------------- */
   function wireEdit(s) {
     var f = $('#formEdit'); if (!f) return;
     f.addEventListener('submit', function (e) {
@@ -1053,11 +1372,29 @@
       var tagsArr = [];
       ['24h', 'plantao', 'madrugada'].forEach(function (t) { if (f.querySelector('[name=tag_' + t + ']') && f.querySelector('[name=tag_' + t + ']').checked) tagsArr.push(t); });
       ['24h', 'plantao', 'madrugada'].forEach(function (t) { delete obj['tag_' + t]; });
-      var m = $('#editMsg'); if(m){m.textContent='Salvando…';m.className='text-sm ml-2 text-silver-500';}
-      aPatch('stores', s.id, obj).then(function (ok) {
-        if (ok) aPatch('stores', s.id, { tags: tagsArr });
-        if (m) { m.textContent = ok ? '✅ Salvo com sucesso!' : '❌ Erro ao salvar'; m.className = 'text-sm ml-2 ' + (ok ? 'text-emerald-600' : 'text-peao-600'); }
-        if (ok) setTimeout(function(){ if(m) m.textContent=''; }, 3000);
+
+      // 🛡️ Validação de schema
+      var validation = validateStore(obj);
+      var m = $('#editMsg');
+      if (!validation.ok) {
+        if (m) { m.textContent = '❌ ' + validation.errors[0]; m.className = 'text-sm ml-2 text-peao-600'; }
+        return;
+      }
+      obj = validation.data; // usa dados sanitizados
+
+      // 📸 Snapshot do estado anterior para audit
+      var beforeState = {};
+      Object.keys(obj).forEach(function(k) { if (s[k] !== undefined) beforeState[k] = s[k]; });
+
+      if (m) { m.textContent = 'Salvando…'; m.className = 'text-sm ml-2 text-silver-500'; }
+
+      aPatch('stores', s.id, obj, { before: beforeState }).then(function (ok) {
+        if (ok) aPatch('stores', s.id, { tags: tagsArr }, { before: { tags: s.tags } });
+        if (m) {
+          m.textContent = ok ? '✅ Salvo com sucesso!' : '❌ Erro ao salvar. Tente novamente.';
+          m.className = 'text-sm ml-2 ' + (ok ? 'text-emerald-600' : 'text-peao-600');
+        }
+        if (ok) setTimeout(function() { if (m) m.textContent = ''; }, 3000);
       });
     });
   }
