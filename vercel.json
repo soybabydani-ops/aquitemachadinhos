@@ -42,6 +42,91 @@
       "source": "/nataluz",
       "destination": "/guia-nataluz",
       "permanent": false
+    },
+    {
+      "source": "/buzios",
+      "destination": "/guia-buzios",
+      "permanent": false
+    },
+    {
+      "source": "/veraobuzios",
+      "destination": "/guia-buzios",
+      "permanent": false
+    },
+    {
+      "source": "/florianopolis",
+      "destination": "/guia-florianopolis",
+      "permanent": false
+    },
+    {
+      "source": "/floripa",
+      "destination": "/guia-florianopolis",
+      "permanent": false
+    },
+    {
+      "source": "/blumenau",
+      "destination": "/guia-blumenau",
+      "permanent": false
+    },
+    {
+      "source": "/oktoberfest",
+      "destination": "/guia-blumenau",
+      "permanent": false
+    },
+    {
+      "source": "/bonito",
+      "destination": "/guia-bonito",
+      "permanent": false
+    },
+    {
+      "source": "/campos",
+      "destination": "/guia-campos",
+      "permanent": false
+    },
+    {
+      "source": "/camposdojordao",
+      "destination": "/guia-campos",
+      "permanent": false
+    },
+    {
+      "source": "/caruaru",
+      "destination": "/guia-caruaru",
+      "permanent": false
+    },
+    {
+      "source": "/saojoaocaruaru",
+      "destination": "/guia-caruaru",
+      "permanent": false
+    },
+    {
+      "source": "/jericoacoara",
+      "destination": "/guia-jericoacoara",
+      "permanent": false
+    },
+    {
+      "source": "/jeri",
+      "destination": "/guia-jericoacoara",
+      "permanent": false
+    },
+    {
+      "source": "/porto",
+      "destination": "/guia-porto",
+      "permanent": false
+    },
+    {
+      "source": "/portodegalinhas",
+      "destination": "/guia-porto",
+      "permanent": false
+    },
+    {
+      "source": "/salvador",
+      "destination": "/guia-salvador",
+      "permanent": false
+    },
+    {
+      "source": "/carnavalsalvador",
+      "destination": "/guia-salvador",
+      "permanent": false
     }
   ],
   "headers": [
