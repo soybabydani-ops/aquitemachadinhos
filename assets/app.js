@@ -185,8 +185,22 @@
   }
   function apiPost(table, obj) {
     if (!isRemote()) return Promise.resolve(obj);
-    return fetch(B(table), { method: 'POST', headers: H({ 'Content-Type': 'application/json' }), body: JSON.stringify(obj) })
-      .then(function (r) { return r.ok; });
+    return fetch(B(table), {
+      method: 'POST',
+      headers: H({ 'Content-Type': 'application/json', Prefer: 'return=representation' }),
+      body: JSON.stringify(obj)
+    }).then(function (r) {
+      if (!r.ok) {
+        return r.json().catch(function(){ return {}; }).then(function(err){
+          console.error('[AQUITEM] apiPost erro', r.status, table, err.message || JSON.stringify(err).slice(0,120));
+          return null;
+        });
+      }
+      return r.json().then(function(d){ return Array.isArray(d) ? d[0] : d; }).catch(function(){ return true; });
+    }).catch(function(e){
+      console.error('[AQUITEM] apiPost network:', table, e.message || e);
+      return null;
+    });
   }
 
   var Categories = {
@@ -225,10 +239,19 @@
       obj.city_slug = obj.city_slug || currentCitySlug();
       obj.cidade = obj.cidade || currentCityName();
       obj.criado_em = new Date().toISOString();
-      // Garantir que campos problemáticos não causem FK error
+      obj.atualizado_em = new Date().toISOString();
+      // Garantir aceite obrigatório
+      if (!obj.aceite_termos) obj.aceite_termos = false;
+      if (!obj.autorizacao_contato) obj.autorizacao_contato = false;
+      // Campos NOT NULL com default seguro
+      if (!obj.nome || !obj.nome.trim()) { throw new Error('Nome da empresa é obrigatório'); }
+      if (!obj.whatsapp || !obj.whatsapp.trim()) { throw new Error('WhatsApp é obrigatório'); }
+      // FK safety: categoria NULL se não for uma das conhecidas
       if (!obj.categoria || obj.categoria === 'outro') {
-        obj.categoria = null; // NULL é melhor que FK inválida
+        obj.categoria = null;
       }
+      // Remover campos que não existem na tabela
+      delete obj.logo; delete obj.capa; delete obj.galeria;
       console.log('[AQUITEM] Stores.create payload:', JSON.stringify(obj).slice(0, 300));
       return aPost('stores', obj).then(function (created) {
         if (!created) { console.error('[AQUITEM] Stores.create retornou null'); return null; }
@@ -719,7 +742,22 @@
     if (!t) console.warn('[AQUITEM] aHAuth: operação requer autenticação');
     return { apikey: CONFIG.supabase.anonKey, Authorization: 'Bearer ' + (t || CONFIG.supabase.anonKey), 'Content-Type': 'application/json', Prefer: 'return=representation' };
   }
-  function aGet(path) { return fetch(B(path), { headers: aH() }).then(function (r) { return r.ok ? r.json() : []; }).catch(function () { return []; }); }
+  function aGet(path) {
+    return fetch(B(path), { headers: aH() })
+      .then(function (r) {
+        if (!r.ok) {
+          return r.json().catch(function(){ return {}; }).then(function(err){
+            console.error('[AQUITEM] aGet erro', r.status, path, err.message || JSON.stringify(err).slice(0,100));
+            return [];
+          });
+        }
+        return r.json().catch(function(){ return []; });
+      })
+      .catch(function (e) {
+        console.error('[AQUITEM] aGet network error:', path, e.message || e);
+        return [];
+      });
+  }
   function aPatch(table, id, obj) {
     var t = AUTH.tok() || LojistaAuth.tok();
     if (!t) { console.error('[AQUITEM] aPatch sem token:', table, id); return Promise.resolve(false); }
@@ -766,13 +804,25 @@
       var email = form.querySelector('[name=email]').value.trim(), pass = form.querySelector('[name=password]').value;
       if (!email || !pass) { showMsg('#msg', 'Preencha e-mail e senha.', false); return; }
       var btn = form.querySelector('[type=submit]'); btn.disabled = true; btn.textContent = 'Entrando…';
-      AUTH.login(email, pass).then(function (j) { localStorage.setItem('ata_admin_token', j.access_token);
+      AUTH.login(email, pass).then(function (j) {
+          // Verificar se o email é um administrador autorizado
+          var ADMINS = ['id.fernandes@icloud.com', 'id.fernandes@outlook.com', 'soybabydani@gmail.com'];
+          if (ADMINS.indexOf(email.toLowerCase().trim()) === -1) {
+            console.warn('[AQUITEM] Login de não-admin bloqueado:', email);
+            showMsg('#msg', '❌ Acesso restrito. Este painel é exclusivo para administradores.', false);
+            btn.disabled = false; btn.textContent = 'Entrar';
+            return;
+          }
+          localStorage.setItem('ata_admin_token', j.access_token);
           var redirect = sessionStorage.getItem('ata_redirect_after_login') || 'admin.html';
           sessionStorage.removeItem('ata_redirect_after_login');
           location.href = redirect; })
         .catch(function (err) { showMsg('#msg', '❌ ' + (err.message || 'Não foi possível entrar.'), false); btn.disabled = false; btn.textContent = 'Entrar'; });
     });
   }
+
+  // E-mails autorizados como administradores
+  var ADMIN_EMAILS = ['id.fernandes@icloud.com', 'id.fernandes@outlook.com', 'soybabydani@gmail.com'];
 
   function pageAdmin() {
     var root = $('#adminRoot'); if (!root) return;
@@ -1066,8 +1116,31 @@
       + '<p class="text-xs text-silver-500 mt-3">' + comCoords.length + ' de ' + stores.length + ' empresas com localização no mapa. Defina a localização no painel da empresa.</p>';
     var active = 'all';
     loadLeaflet().then(function () {
-      if (!window.L) { var el = box.querySelector('#leaf'); if (el) el.innerHTML = '<div class="p-6 text-sm text-silver-500">Não foi possível carregar o mapa.</div>'; return; }
-      var map = L.map('leaf').setView(BARRETOS, 13);
+      if (!window.L) {
+        var el = box.querySelector('#leaf');
+        if (el) {
+          el.innerHTML = '<div style="padding:24px;text-align:center;background:#f8fafc;border-radius:12px">'
+            + '<div style="font-size:32px;margin-bottom:12px">🗺️</div>'
+            + '<p style="color:#64748b;font-size:14px;margin-bottom:12px">Mapa temporariamente indisponível</p>'
+            + '<a href="https://www.google.com/maps/search/Barretos+SP" target="_blank" rel="noopener" '
+            + 'style="background:#1a56db;color:#fff;padding:8px 18px;border-radius:8px;text-decoration:none;font-size:13px;font-weight:600">'
+            + '📍 Ver no Google Maps</a>'
+            + '<p style="color:#94a3b8;font-size:12px;margin-top:12px">'
+            + comCoords.length + ' empresa(s) com localização cadastrada</p>'
+            + '</div>';
+        }
+        console.error('[AQUITEM] Leaflet não carregou — mapa indisponível');
+        return;
+      }
+      var map;
+      try {
+        map = L.map('leaf').setView(BARRETOS, 13);
+      } catch(mapErr) {
+        console.error('[AQUITEM] L.map erro:', mapErr);
+        var el2 = box.querySelector('#leaf');
+        if (el2) el2.innerHTML = '<div style="padding:20px;text-align:center;color:#64748b">⚠️ Erro ao inicializar mapa. <a href="https://www.google.com/maps/place/Barretos" target="_blank" style="color:#1a56db">Abrir Google Maps</a></div>';
+        return;
+      }
       L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 19, attribution: '© OpenStreetMap' }).addTo(map);
       var markers = (L.markerClusterGroup ? L.markerClusterGroup() : L.layerGroup()); markers.addTo(map);
       function apply() {
@@ -1114,7 +1187,7 @@
         }).catch(function(){});
     }
     loadLeaflet().then(function(){
-      if(!window.L){box.innerHTML='<div class="aquitem-map-error">Mapa indisponível agora. Use “Abrir no Google Maps” para conferir o endereço.</div>';return;}
+      if(!window.L){box.innerHTML='<div class="aquitem-map-error">Mapa indisponível agora. Use “Abrir no Google Maps” para conferir o endereço.</div>';var mlnk=box.querySelector('a'); if(mlnk&&s){mlnk.href='https://www.google.com/maps/search/?api=1&query='+encodeURIComponent([(s.endereco||''),(s.bairro||''),(s.cidade||'Barretos')].filter(Boolean).join(', '));} return;}
       try {
         mapObj=L.map('pickMap').setView((s.lat&&s.lng)?[s.lat,s.lng]:BARRETOS,15);
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:19,attribution:'© OpenStreetMap'}).addTo(mapObj);
