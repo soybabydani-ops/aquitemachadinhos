@@ -999,7 +999,7 @@
       var citySlug = $('#job_city').value || 'barretos';
       var cityName = CITY_NAMES[citySlug] || 'Barretos';
       var expira = $('#job_expira').value || null;
-      aPost('listings', {
+      aAdminRpc('admin_insert_listing', { p_data: {
         titulo: titulo,
         anunciante_nome: empresa,
         categoria: 'empregos',
@@ -1009,11 +1009,12 @@
         whatsapp: wa,
         email: ($('#job_email').value||'').trim(),
         cidade: cityName,
+        city_slug: citySlug,
         status: 'ativo',
         plano: 'gratis',
         anunciante_tipo: 'empresa',
         expira_em: expira
-      }).then(function(cr){ if(!cr){msg.className='text-sm text-peao-600';msg.textContent='Erro ao publicar.';jobSub.disabled=false;jobSub.textContent='Publicar vaga agora';return;} msg.className='text-sm text-emerald-600';msg.textContent='Vaga publicada em '+cityName+'! Aparece em /empregos.'; jobSub.textContent='Publicar vaga agora'; jobSub.disabled=false; setTimeout(pageAdmin,1500); }).catch(function(e){ msg.className='text-sm text-peao-600'; msg.textContent='Erro: '+(e.message||e); jobSub.disabled=false; jobSub.textContent='Publicar vaga agora'; });
+      }}).then(function(cr){ if(!cr){msg.className='text-sm text-peao-600';msg.textContent='Erro ao publicar. Verifique os campos e tente novamente.';jobSub.disabled=false;jobSub.textContent='Publicar vaga agora';return;} msg.className='text-sm text-emerald-600';msg.textContent='Vaga publicada em '+cityName+'! Aparece em /empregos.'; jobSub.textContent='Publicar vaga agora'; jobSub.disabled=false; setTimeout(pageAdmin,1500); }).catch(function(e){ msg.className='text-sm text-peao-600'; msg.textContent='Erro: '+(e.message||e); jobSub.disabled=false; jobSub.textContent='Publicar vaga agora'; });
     });
     // -- Submit anuncio
     var anSub = $('#an_submit'); if (anSub) anSub.addEventListener('click', function () {
@@ -1026,7 +1027,7 @@
       anSub.disabled=true; anSub.textContent='Criando...';
       var citySlug = $('#an_city').value || 'barretos';
       var cityName = CITY_NAMES[citySlug] || 'Barretos';
-      aPost('listings', {
+      aAdminRpc('admin_insert_listing', { p_data: {
         titulo: titulo,
         anunciante_nome: anunciante,
         categoria: cat,
@@ -1034,10 +1035,11 @@
         preco: ($('#an_preco').value||'').trim(),
         whatsapp: wa,
         cidade: cityName,
+        city_slug: citySlug,
         status: 'ativo',
         plano: 'pro',
         anunciante_tipo: 'particular'
-      }).then(function(cr){ if(!cr){msg.className='text-sm text-peao-600';msg.textContent='Erro.';anSub.disabled=false;anSub.textContent='Criar anuncio agora';return;} msg.className='text-sm text-emerald-600';msg.textContent='Anuncio publicado em '+cityName+'!'; anSub.textContent='Criar anuncio agora'; anSub.disabled=false; setTimeout(pageAdmin,1500); }).catch(function(e){ msg.className='text-sm text-peao-600'; msg.textContent='Erro: '+(e.message||e); anSub.disabled=false; anSub.textContent='Criar anuncio agora'; });
+      }}).then(function(cr){ if(!cr){msg.className='text-sm text-peao-600';msg.textContent='Erro.';anSub.disabled=false;anSub.textContent='Criar anuncio agora';return;} msg.className='text-sm text-emerald-600';msg.textContent='Anuncio publicado em '+cityName+'!'; anSub.textContent='Criar anuncio agora'; anSub.disabled=false; setTimeout(pageAdmin,1500); }).catch(function(e){ msg.className='text-sm text-peao-600'; msg.textContent='Erro: '+(e.message||e); anSub.disabled=false; anSub.textContent='Criar anuncio agora'; });
     });
     var btnCsv = $('#btnCsv'); if (btnCsv) btnCsv.addEventListener('click', function () { exportCSV(stores); });
     var btnCleanLost = $('#btnCleanLost'); if (btnCleanLost) btnCleanLost.addEventListener('click', function () { if (!confirm('Excluir permanentemente todos os leads marcados como perdido?')) return; fetch(B('city_leads?status=eq.perdido'), { method:'DELETE', headers:aH() }).then(function(){ pageAdmin(); }); });
