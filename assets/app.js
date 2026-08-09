@@ -149,7 +149,10 @@
     { id:'turismo', nome:'Turismo e Experiências', emoji:'🧭', desc:'Passeios e lazer' }, { id:'transporte', nome:'Transporte e Mobilidade', emoji:'🚌', desc:'Transfer e deslocamento' },
     { id:'esportes', nome:'Esportes e Fitness', emoji:'🏋️', desc:'Academias e atividades' }, { id:'casa-construcao', nome:'Casa e Construção', emoji:'🏠', desc:'Obras e reformas' },
     { id:'imobiliarias', nome:'Imobiliárias', emoji:'🏘️', desc:'Imóveis e locação' }, { id:'eventos', nome:'Eventos e Festas', emoji:'🎉', desc:'Celebrações e produção' },
-    { id:'financeiro', nome:'Financeiro, Jurídico e Seguros', emoji:'⚖️', desc:'Consultoria e proteção' }, { id:'agro', nome:'Agro e Rural', emoji:'🌾', desc:'Campo e agronegócio' }
+    { id:'financeiro', nome:'Financeiro, Jurídico e Seguros', emoji:'⚖️', desc:'Consultoria e proteção' }, { id:'agro', nome:'Agro e Rural', emoji:'🌾', desc:'Campo e agronegócio' },
+    { id:'sorveterias', nome:'Sorveterias e Açaí', emoji:'🍦', desc:'Sorvete, açaí e gelados' }, { id:'suplementos', nome:'Suplementos e Vitaminas', emoji:'💪', desc:'Nutrição e suplementação' },
+    { id:'padarias', nome:'Padarias e Confeitarias', emoji:'🥖', desc:'Pães, bolos e doces' }, { id:'bares', nome:'Bares e Bebidas', emoji:'🍺', desc:'Bares e drinks' },
+    { id:'grafica', nome:'Gráficas e Papelarias', emoji:'🖨️', desc:'Impressão e papelaria' }, { id:'clinicas', nome:'Clínicas e Laboratórios', emoji:'🏥', desc:'Clínicas médicas e exames' }
   ];
 
   /* HELPERS */
@@ -558,7 +561,7 @@
   }
 
   var SUBCATEGORIES = {
-    saude:['Dentista','Médico','Psicólogo','Fisioterapia','Nutricionista','Massoterapia','Clínica','Laboratório','Ótica'],
+    saude:['Dentista','Médico','Psicólogo','Fisioterapia','Nutricionista','Massoterapia','Clínica','Laboratório','Ótica','Suplementos e Vitaminas','Farmácia de manipulação','Terapia'],
     beleza:['Salão de beleza','Barbearia','Cabeleireiro(a)','Manicure','Estética','Maquiagem','Sobrancelhas','Depilação'],
     educacao:['Faculdade','Polo universitário','Graduação','Pós-graduação','Curso técnico','Curso profissionalizante','EAD','Idiomas','Preparatório','Reforço escolar','Escola infantil'],
     turismo:['Passeios','Guia turístico','Agência de turismo','Lazer','Cultura','Roteiro local'],
@@ -571,7 +574,14 @@
     agro:['Agropecuária','Máquinas agrícolas','Insumos','Veterinária rural','Agronomia'],
     restaurantes:['Restaurante','Pizzaria','Cafeteria','Comida japonesa','Marmitaria'],
     lanches:['Hamburgueria','Pastelaria','Lanchonete','Delivery','Sorveteria','Padaria'],
-    servicos:['Limpeza','Manutenção','Informática','Segurança','Lavanderia','Chaveiro']
+    servicos:['Limpeza','Manutenção','Informática','Segurança','Lavanderia','Chaveiro'],
+    sorveterias:['Sorveteria','Açaíteria','Gelateria','Milk shake','Paleta mexicana'],
+    suplementos:['Suplementos','Vitaminas','Whey protein','Creatina','Nutrição esportiva'],
+    padarias:['Padaria','Confeitaria','Bolo','Doces','Salgados','Café'],
+    bares:['Bar','Boteco','Drinks','Cerveja artesanal','Lounge'],
+    grafica:['Gráfica','Papelaria','Impressão','Banner','Cartão de visita'],
+    clinicas:['Clínica médica','Laboratório','Exames','Raio-X','Cardiologia','Dermatologia','Ortopedia'],
+    moda:['Roupas femininas','Roupas masculinas','Roupas infantis','Calçados','Acessórios','Bolsas','Moda festa']
   };
   function setupSubcategories(form) {
     var cat=form.querySelector('[name=categoria]'), list=form.querySelector('#subcatList'); if(!cat||!list)return;
@@ -900,6 +910,7 @@
       + '<div><label class="block text-xs font-semibold mb-1">Nome</label><input name="nome" class="w-full px-3 py-2 rounded-lg bg-silver-50 ring-silver" value="' + val(s.nome) + '"></div>'
       + '<div><label class="block text-xs font-semibold mb-1">Descrição curta</label><input name="descricao_curta" class="w-full px-3 py-2 rounded-lg bg-silver-50 ring-silver" value="' + val(s.descricao_curta) + '"></div>'
       + '<div><label class="block text-xs font-semibold mb-1">Descrição completa</label><textarea name="descricao" rows="2" class="w-full px-3 py-2 rounded-lg bg-silver-50 ring-silver">' + val(s.descricao) + '</textarea></div>'
+      + '<div class="grid sm:grid-cols-2 gap-3"><div><label class="block text-xs font-semibold mb-1">Categoria ✏️</label><select name="categoria" id="editCatSelect" class="w-full px-3 py-2 rounded-lg bg-silver-50 ring-silver"><option value="">Selecione a categoria…</option>' + CATS.map(function(c){ return '<option value="'+esc(c.id)+'"'+(s.categoria===c.id?' selected':'')+'>'+esc(c.emoji)+' '+esc(c.nome)+'</option>'; }).join('') + '</select></div><div><label class="block text-xs font-semibold mb-1">Tipo / Subcategoria</label><input name="subcategoria" id="editSubcatInput" class="w-full px-3 py-2 rounded-lg bg-silver-50 ring-silver" value="' + val(s.subcategoria) + '" placeholder="Ex: Hamburgueria, Academia…"></div></div>'
       + '<div class="grid sm:grid-cols-2 gap-3"><div><label class="block text-xs font-semibold mb-1">WhatsApp</label><input name="whatsapp" class="w-full px-3 py-2 rounded-lg bg-silver-50 ring-silver" value="' + val(s.whatsapp) + '"></div><div><label class="block text-xs font-semibold mb-1">Telefone</label><input name="telefone" class="w-full px-3 py-2 rounded-lg bg-silver-50 ring-silver" value="' + val(s.telefone) + '"></div></div>'
       + '<div class="grid sm:grid-cols-2 gap-3"><div><label class="block text-xs font-semibold mb-1">Endereço</label><input name="endereco" class="w-full px-3 py-2 rounded-lg bg-silver-50 ring-silver" value="' + val(s.endereco) + '"></div><div><label class="block text-xs font-semibold mb-1">Bairro</label><input name="bairro" class="w-full px-3 py-2 rounded-lg bg-silver-50 ring-silver" value="' + val(s.bairro) + '"></div></div>'
       + '<div class="grid sm:grid-cols-2 gap-3"><div><label class="block text-xs font-semibold mb-1">Horário</label><input name="horario" class="w-full px-3 py-2 rounded-lg bg-silver-50 ring-silver" value="' + val(s.horario) + '"></div><div><label class="block text-xs font-semibold mb-1">Pagamento</label><input name="pagamento" class="w-full px-3 py-2 rounded-lg bg-silver-50 ring-silver" value="' + val(s.pagamento) + '"></div></div>'
@@ -1009,10 +1020,34 @@
     return '<section class="aquitem-map-panel"><div><p class="text-[11px] text-amber-600 font-bold uppercase tracking-wide">Localização</p><h2 class="font-display font-bold text-xl mt-1">Localização no mapa</h2><p class="text-sm text-silver-500 mt-1">Toque no mapa para ajustar o ponto exato. O endereço continua visível para turistas.</p></div><div id="pickMap" class="aquitem-map-canvas"><div class="aquitem-map-loading">Carregando mapa…</div></div><div class="aquitem-map-actions"><a href="https://www.google.com/maps/search/?api=1&query='+query+'" target="_blank" rel="noopener noreferrer" class="aquitem-secondary-action">Abrir no Google Maps</a><button id="btnSavePin" class="aquitem-primary-action">Salvar localização</button></div><span id="pinMsg" class="text-sm"></span></section>';
   }
   function wireMapPicker(s) {
-    var box=$('#pickMap'); if (!box) return; var pin=null;
+    var box=$('#pickMap'); if (!box) return; var pin=null; var mapObj=null;
+    function geocodeAndUpdateMap(query){
+      if(!mapObj||!query||query.length<5)return;
+      fetch('https://photon.komoot.io/api/?limit=1&lang=pt&q='+encodeURIComponent(query+', Barretos, SP, Brasil'))
+        .then(function(r){return r.json();})
+        .then(function(data){
+          var feat=data.features&&data.features[0];
+          if(!feat||!feat.geometry)return;
+          var lat=feat.geometry.coordinates[1], lng=feat.geometry.coordinates[0];
+          if(pin)pin.setLatLng([lat,lng]); else pin=L.marker([lat,lng],{icon:pinIcon('📍'),draggable:true}).addTo(mapObj);
+          mapObj.setView([lat,lng],16);
+          var pm=$('#pinMsg'); if(pm){pm.textContent='📍 Mapa sincronizado com o endereço. Ajuste o pino se necessário.';pm.className='text-sm text-emerald-600';}
+        }).catch(function(){});
+    }
     loadLeaflet().then(function(){
       if(!window.L){box.innerHTML='<div class="aquitem-map-error">Mapa indisponível agora. Use “Abrir no Google Maps” para conferir o endereço.</div>';return;}
-      try { var map=L.map('pickMap').setView((s.lat&&s.lng)?[s.lat,s.lng]:BARRETOS,15); L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:19,attribution:'© OpenStreetMap'}).addTo(map); if(s.lat&&s.lng)pin=L.marker([s.lat,s.lng],{icon:pinIcon('📍'),draggable:true}).addTo(map); map.on('click',function(e){if(pin)pin.setLatLng(e.latlng);else pin=L.marker(e.latlng,{icon:pinIcon('📍'),draggable:true}).addTo(map);}); setTimeout(function(){map.invalidateSize();},350); var btn=$('#btnSavePin');if(btn)btn.addEventListener('click',function(){var m=$('#pinMsg');if(!pin){m.textContent='Toque no mapa para marcar o local.';m.className='text-sm text-peao-600';return;}var ll=pin.getLatLng();aPatch('stores',s.id,{lat:ll.lat,lng:ll.lng}).then(function(ok){m.textContent=ok?'✓ Localização salva!':'Erro ao salvar localização.';m.className='text-sm '+(ok?'text-emerald-600':'text-peao-600');});}); } catch(_e){box.innerHTML='<div class="aquitem-map-error">Não foi possível abrir o mapa. Use o Google Maps como alternativa.</div>';}
+      try {
+        mapObj=L.map('pickMap').setView((s.lat&&s.lng)?[s.lat,s.lng]:BARRETOS,15);
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:19,attribution:'© OpenStreetMap'}).addTo(mapObj);
+        if(s.lat&&s.lng)pin=L.marker([s.lat,s.lng],{icon:pinIcon('📍'),draggable:true}).addTo(mapObj);
+        mapObj.on('click',function(e){if(pin)pin.setLatLng(e.latlng);else pin=L.marker(e.latlng,{icon:pinIcon('📍'),draggable:true}).addTo(mapObj);});
+        setTimeout(function(){mapObj.invalidateSize();},350);
+        var endInput=$('input[name=endereco]'), bairroInput=$('input[name=bairro]'); var geoTimer=null;
+        function scheduleGeo(){clearTimeout(geoTimer);var addr=(endInput?endInput.value.trim():'')+' '+(bairroInput?bairroInput.value.trim():''); geoTimer=setTimeout(function(){geocodeAndUpdateMap(addr.trim());},800);}
+        if(endInput)endInput.addEventListener('input',scheduleGeo);
+        if(bairroInput)bairroInput.addEventListener('input',scheduleGeo);
+        var btn=$('#btnSavePin');if(btn)btn.addEventListener('click',function(){var m=$('#pinMsg');if(!pin){m.textContent='Toque no mapa para marcar o local.';m.className='text-sm text-peao-600';return;}var ll=pin.getLatLng();aPatch('stores',s.id,{lat:ll.lat,lng:ll.lng}).then(function(ok){m.textContent=ok?'✓ Localização salva!':'Erro ao salvar localização.';m.className='text-sm '+(ok?'text-emerald-600':'text-peao-600');});});
+      } catch(_e){box.innerHTML='<div class="aquitem-map-error">Não foi possível abrir o mapa. Use o Google Maps como alternativa.</div>';}
     });
   }
 
