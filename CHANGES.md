@@ -29,3 +29,6 @@ Todos os arquivos desta pasta são cópias dos arquivos **publicados hoje** no s
 2. **Rodar `01-seguranca-rls.sql`** (o INSERT público ainda está aberto — o script força `pendente` e protege as demais operações). ✅ *Nota: com o app.js corrigido, o cadastro já envia `pendente`, então a nova política não quebra o formulário.*
 3. **Search Console:** enviar o novo sitemap e pedir indexação (arquivo `03-google-analytics.md`).
 4. Testar o site após o deploy: home, busca, uma ficha de loja, cadastro público e o painel admin (login).
+
+## og: tags todas as cidades — 2026-08-09 15:14
+Blumenau, Bonito, Búzios, Campos do Jordão, Caruaru, Florianópolis, Jericoacoara, Porto de Galinhas, Salvador — og:title, og:description e og:image adicionados em todas as home pages e sub-páginas.
