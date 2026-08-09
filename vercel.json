@@ -12,26 +12,104 @@
       "source": "/fundadoras",
       "destination": "/fundadores?cidade=barretos&utm_source=instagram&utm_medium=bio&utm_campaign=fundadoras_barretos",
       "permanent": false
+    },
+    {
+      "source": "/vagas",
+      "destination": "/empregos.html?utm_source=facebook&utm_medium=grupo&utm_campaign=peao2026_vagas",
+      "permanent": false
+    },
+    {
+      "source": "/peao",
+      "destination": "/empregos.html?utm_source=facebook&utm_medium=grupo&utm_campaign=peao2026_vagas",
+      "permanent": false
+    },
+    {
+      "source": "/trabalhar",
+      "destination": "/empregos.html?utm_source=facebook&utm_medium=grupo&utm_campaign=peao2026_trabalho",
+      "permanent": false
     }
   ],
   "headers": [
     {
       "source": "/(.*)",
       "headers": [
-        { "key": "Strict-Transport-Security", "value": "max-age=63072000; includeSubDomains; preload" },
-        { "key": "X-Content-Type-Options", "value": "nosniff" },
-        { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" },
-        { "key": "X-Frame-Options", "value": "DENY" },
-        { "key": "Permissions-Policy", "value": "camera=(), microphone=(), geolocation=(self), payment=()" },
-        { "key": "Content-Security-Policy", "value": "default-src 'self'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; object-src 'none'; upgrade-insecure-requests; script-src 'self'; style-src 'self' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://*.supabase.co https://viacep.com.br https://photon.komoot.io; frame-src https://www.google.com; manifest-src 'self'" }
+        {
+          "key": "Strict-Transport-Security",
+          "value": "max-age=63072000; includeSubDomains; preload"
+        },
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "strict-origin-when-cross-origin"
+        },
+        {
+          "key": "X-Frame-Options",
+          "value": "DENY"
+        },
+        {
+          "key": "Permissions-Policy",
+          "value": "camera=(), microphone=(), geolocation=(self), payment=()"
+        },
+        {
+          "key": "Content-Security-Policy",
+          "value": "default-src 'self'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; object-src 'none'; upgrade-insecure-requests; script-src 'self'; style-src 'self' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://*.supabase.co https://viacep.com.br https://photon.komoot.io; frame-src https://www.google.com; manifest-src 'self'"
+        }
       ]
     }
   ],
   "rewrites": [
-    { "source": "/assets/(.*)", "has": [ { "type": "host", "value": "gramado.aquitemachadinhos.com.br" } ], "destination": "/assets/$1" },
-    { "source": "/", "has": [ { "type": "host", "value": "gramado.aquitemachadinhos.com.br" } ], "destination": "/gramado-home.html" },
-    { "source": "/natal-luz-2026.html", "has": [ { "type": "host", "value": "gramado.aquitemachadinhos.com.br" } ], "destination": "/gramado-natal-luz.html" },
-    { "source": "/o-que-fazer-em-gramado.html", "has": [ { "type": "host", "value": "gramado.aquitemachadinhos.com.br" } ], "destination": "/gramado-o-que-fazer.html" },
-    { "source": "/(.*)", "has": [ { "type": "host", "value": "gramado.aquitemachadinhos.com.br" } ], "destination": "/gramado-home.html" }
+    {
+      "source": "/assets/(.*)",
+      "has": [
+        {
+          "type": "host",
+          "value": "gramado.aquitemachadinhos.com.br"
+        }
+      ],
+      "destination": "/assets/$1"
+    },
+    {
+      "source": "/",
+      "has": [
+        {
+          "type": "host",
+          "value": "gramado.aquitemachadinhos.com.br"
+        }
+      ],
+      "destination": "/gramado-home.html"
+    },
+    {
+      "source": "/natal-luz-2026.html",
+      "has": [
+        {
+          "type": "host",
+          "value": "gramado.aquitemachadinhos.com.br"
+        }
+      ],
+      "destination": "/gramado-natal-luz.html"
+    },
+    {
+      "source": "/o-que-fazer-em-gramado.html",
+      "has": [
+        {
+          "type": "host",
+          "value": "gramado.aquitemachadinhos.com.br"
+        }
+      ],
+      "destination": "/gramado-o-que-fazer.html"
+    },
+    {
+      "source": "/(.*)",
+      "has": [
+        {
+          "type": "host",
+          "value": "gramado.aquitemachadinhos.com.br"
+        }
+      ],
+      "destination": "/gramado-home.html"
+    }
   ]
 }
