@@ -15,32 +15,32 @@
     },
     {
       "source": "/vagas",
-      "destination": "/empregos.html?utm_source=facebook&utm_medium=grupo&utm_campaign=peao2026_vagas",
+      "destination": "/empregos",
       "permanent": false
     },
     {
       "source": "/peao",
-      "destination": "/empregos.html?utm_source=facebook&utm_medium=grupo&utm_campaign=peao2026_vagas",
+      "destination": "/empregos",
       "permanent": false
     },
     {
       "source": "/trabalhar",
-      "destination": "/empregos.html?utm_source=facebook&utm_medium=grupo&utm_campaign=peao2026_trabalho",
+      "destination": "/empregos",
       "permanent": false
     },
     {
       "source": "/gramado",
-      "destination": "/gramado-home.html?utm_source=facebook&utm_medium=grupo&utm_campaign=gramado_guia",
+      "destination": "/gramado-home",
       "permanent": false
     },
     {
       "source": "/nataluz",
-      "destination": "/gramado-natal-luz.html?utm_source=facebook&utm_medium=grupo&utm_campaign=gramado_natal",
+      "destination": "/gramado-natal-luz",
       "permanent": false
     },
     {
       "source": "/gramadoRS",
-      "destination": "/gramado-home.html?utm_source=facebook&utm_medium=grupo&utm_campaign=gramado_guia",
+      "destination": "/gramado-home",
       "permanent": false
     }
   ],
