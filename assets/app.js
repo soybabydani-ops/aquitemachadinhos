@@ -139,21 +139,50 @@
   window.ATA_CONFIG = CONFIG;
 
   var CATS = [
-    { id:'restaurantes', nome:'Restaurantes', emoji:'🍔', desc:'Onde comer bem' }, { id:'lanches', nome:'Lanches', emoji:'🍟', desc:'Lanches e delivery' },
-    { id:'farmacias', nome:'Farmácias', emoji:'💊', desc:'Saúde e plantão' }, { id:'mercados', nome:'Mercados', emoji:'🛒', desc:'Compras do dia' },
-    { id:'moda', nome:'Moda', emoji:'👗', desc:'Roupas e calçados' }, { id:'beleza', nome:'Beleza', emoji:'💅', desc:'Salões e estética' },
-    { id:'eletronicos', nome:'Eletrônicos', emoji:'📱', desc:'Tecnologia e celulares' }, { id:'petshops', nome:'Pet Shops', emoji:'🐾', desc:'Cuidados para pets' },
-    { id:'hoteis', nome:'Hotéis e Pousadas', emoji:'🏨', desc:'Onde ficar' }, { id:'moveis', nome:'Móveis', emoji:'🛋️', desc:'Casa e decoração' },
-    { id:'automotivo', nome:'Automotivo', emoji:'🚗', desc:'Veículos e oficinas' }, { id:'servicos', nome:'Serviços', emoji:'🔧', desc:'Profissionais e reparos' },
-    { id:'saude', nome:'Saúde e Bem-estar', emoji:'🩺', desc:'Clínicas e profissionais' }, { id:'educacao', nome:'Educação e Cursos', emoji:'🎓', desc:'Faculdades e cursos' },
-    { id:'turismo', nome:'Turismo e Experiências', emoji:'🧭', desc:'Passeios e lazer' }, { id:'transporte', nome:'Transporte e Mobilidade', emoji:'🚌', desc:'Transfer e deslocamento' },
-    { id:'esportes', nome:'Esportes e Fitness', emoji:'🏋️', desc:'Academias e atividades' }, { id:'casa-construcao', nome:'Casa e Construção', emoji:'🏠', desc:'Obras e reformas' },
-    { id:'imobiliarias', nome:'Imobiliárias', emoji:'🏘️', desc:'Imóveis e locação' }, { id:'eventos', nome:'Eventos e Festas', emoji:'🎉', desc:'Celebrações e produção' },
-    { id:'financeiro', nome:'Financeiro, Jurídico e Seguros', emoji:'⚖️', desc:'Consultoria e proteção' }, { id:'agro', nome:'Agro e Rural', emoji:'🌾', desc:'Campo e agronegócio' },
-    { id:'sorveterias', nome:'Sorveterias e Açaí', emoji:'🍦', desc:'Sorvete, açaí e gelados' }, { id:'suplementos', nome:'Suplementos e Vitaminas', emoji:'💪', desc:'Nutrição e suplementação' },
-    { id:'padarias', nome:'Padarias e Confeitarias', emoji:'🥖', desc:'Pães, bolos e doces' }, { id:'bares', nome:'Bares e Bebidas', emoji:'🍺', desc:'Bares e drinks' },
-    { id:'grafica', nome:'Gráficas e Papelarias', emoji:'🖨️', desc:'Impressão e papelaria' }, { id:'clinicas', nome:'Clínicas e Laboratórios', emoji:'🏥', desc:'Clínicas médicas e exames' }
-  ];
+    { id:'restaurantes',     nome:'Restaurantes',               emoji:'🍔', desc:'Onde comer bem' },
+    { id:'lanches',          nome:'Lanches',                    emoji:'🍟', desc:'Lanches e delivery' },
+    { id:'farmacias',        nome:'Farmácias',                  emoji:'💊', desc:'Saúde e plantão' },
+    { id:'mercados',         nome:'Mercados',                   emoji:'🛒', desc:'Compras do dia' },
+    { id:'moda',             nome:'Moda',                       emoji:'👗', desc:'Roupas e calçados' },
+    { id:'beleza',           nome:'Beleza',                     emoji:'💅', desc:'Salões e estética' },
+    { id:'eletronicos',      nome:'Eletrônicos',                emoji:'📱', desc:'Tecnologia e celulares' },
+    { id:'petshops',         nome:'Pet Shops',                  emoji:'🐾', desc:'Cuidados para pets' },
+    { id:'hoteis',           nome:'Hotéis e Pousadas',          emoji:'🏨', desc:'Onde ficar' },
+    { id:'moveis',           nome:'Móveis',                     emoji:'🛋️', desc:'Casa e decoração' },
+    { id:'automotivo',       nome:'Automotivo',                 emoji:'🚗', desc:'Veículos e oficinas' },
+    { id:'servicos',         nome:'Serviços',                   emoji:'🔧', desc:'Profissionais e reparos' },
+    { id:'saude',            nome:'Saúde e Bem-estar',          emoji:'🩺', desc:'Clínicas e profissionais' },
+    { id:'educacao',         nome:'Educação e Cursos',          emoji:'🎓', desc:'Ensino e capacitação' },
+    { id:'turismo',          nome:'Turismo e Experiências',     emoji:'🧭', desc:'Passeios e aventuras' },
+    { id:'transporte',       nome:'Transporte e Mobilidade',    emoji:'🚌', desc:'Táxi, mototáxi e cia' },
+    { id:'esportes',         nome:'Esportes e Fitness',         emoji:'🏋️', desc:'Academias e esportes' },
+    { id:'casa-construcao',  nome:'Casa e Construção',          emoji:'🏠', desc:'Materiais e serviços' },
+    { id:'imobiliarias',     nome:'Imobiliárias',               emoji:'🏘️', desc:'Imóveis e aluguéis' },
+    { id:'eventos',          nome:'Eventos e Festas',           emoji:'🎉', desc:'Decoração e buffet' },
+    { id:'financeiro',       nome:'Financeiro e Jurídico',      emoji:'⚖️', desc:'Contabilidade e seguros' },
+    { id:'agro',             nome:'Agro e Rural',               emoji:'🌾', desc:'Produtos e serviços rurais' },
+    { id:'sorveterias',      nome:'Sorveterias e Açaí',         emoji:'🍦', desc:'Gelados e sorvetes' },
+    { id:'suplementos',      nome:'Suplementos',                emoji:'💪', desc:'Nutrição e suplementos' },
+    { id:'padarias',         nome:'Padarias e Cafés',           emoji:'🥖', desc:'Pão, bolo e café' },
+    { id:'bares',            nome:'Bares e Botequins',          emoji:'🍺', desc:'Bares e drinks' },
+    { id:'grafica',          nome:'Gráfica e Impressão',        emoji:'🖨️', desc:'Gráfica e brindes' },
+    { id:'clinicas',         nome:'Clínicas e Consultórios',    emoji:'🏥', desc:'Médicos e especialistas' },
+    { id:'artesanato',       nome:'Artesanato',                 emoji:'🧵', desc:'Produtos artesanais' },
+    { id:'produtos-naturais',nome:'Produtos Naturais',          emoji:'🌿', desc:'Naturais e orgânicos' },
+    { id:'cosmeticos',       nome:'Cosméticos e Cuidados',      emoji:'🧴', desc:'Beleza e cuidados pessoais' },
+    { id:'papelaria',        nome:'Papelaria e Presentes',      emoji:'📓', desc:'Papelaria e gift' },
+    { id:'delivery',         nome:'Delivery e Marmitas',        emoji:'🛵', desc:'Comida em casa' },
+    { id:'fotografo',        nome:'Fotografia e Vídeo',         emoji:'📸', desc:'Fotografia e filmagem' },
+    { id:'tecnologia',       nome:'Tecnologia e TI',            emoji:'💻', desc:'TI e informática' },
+    { id:'advocacia',        nome:'Advocacia e Contabilidade',  emoji:'📋', desc:'Jurídico e contábil' },
+    { id:'religioso',        nome:'Artigos Religiosos',         emoji:'✝️', desc:'Artigos e serviços religiosos' },
+    { id:'infantil',         nome:'Infantil e Brinquedos',      emoji:'🧸', desc:'Crianças e bebês' },
+    { id:'academia',         nome:'Academia e Personal',        emoji:'🏋️', desc:'Fitness e treinamento' },
+    { id:'clinica-estetica', nome:'Clínica Estética',           emoji:'💆', desc:'Estética e bem-estar' },
+    { id:'sorveteria',       nome:'Sorveteria e Açaí',          emoji:'🍦', desc:'Sorvetes e açaí' },
+    { id:'tabacaria',        nome:'Tabacaria e Conveniência',   emoji:'🚬', desc:'Tabacaria e conveniência' },
+    { id:'turismo-aventura', nome:'Turismo de Aventura',        emoji:'🧗', desc:'Aventura e ecoturismo' }
+];
 
   /* HELPERS */
   var $ = function (s, el) { return (el || document).querySelector(s); };
@@ -671,7 +700,23 @@
     grafica:['Gráfica','Papelaria','Impressão','Banner','Cartão de visita'],
     clinicas:['Clínica médica','Laboratório','Exames','Raio-X','Cardiologia','Dermatologia','Ortopedia'],
     moda:['Roupas femininas','Roupas masculinas','Roupas infantis','Calçados','Acessórios','Bolsas','Moda festa']
-  };
+  ,
+    'artesanato':        ['Crochê e Tricô', 'Macramê', 'Bordado', 'Cerâmica', 'Madeira', 'Biscuit', 'Costura', 'Bijuteria', 'Pintura', 'Decoupage'],
+    'produtos-naturais': ['Sabonetes Artesanais', 'Velas', 'Óleos Essenciais', 'Produtos Orgânicos', 'Ervas e Chás', 'Cosméticos Naturais', 'Mel e Derivados'],
+    'cosmeticos':        ['Maquiagem', 'Skincare', 'Perfumaria', 'Cabelos', 'Unhas', 'Corpo e Banho', 'Protetor Solar', 'Cosméticos Naturais'],
+    'papelaria':         ['Papelaria Criativa', 'Cadernos', 'Canetas e Lápis', 'Presentes', 'Festas', 'Scrapbook', 'Quadros e Posters'],
+    'delivery':          ['Marmitas', 'Lanches', 'Pizzas', 'Salgados', 'Doces', 'Almoço', 'Jantar', 'Bebidas'],
+    'fotografo':         ['Casamento', 'Aniversário', 'Newborn', 'Ensaio Externo', 'Corporativo', 'Vídeo', 'Drone', 'Redes Sociais'],
+    'tecnologia':        ['Assistência Técnica', 'Computadores', 'Celulares', 'Redes e Internet', 'Desenvolvimento de Sites', 'TI Empresarial'],
+    'advocacia':         ['Direito Civil', 'Direito Trabalhista', 'Contabilidade', 'Abertura de Empresa', 'Imposto de Renda', 'Direito de Família'],
+    'religioso':         ['Igreja', 'Artigos Religiosos', 'Biblia e Livros', 'Velas e Incenso', 'Presépios', 'Objetos Sacros'],
+    'infantil':          ['Brinquedos', 'Roupas Infantis', 'Calçados Infantis', 'Escola e Material', 'Festa Infantil', 'Bebê e Enxoval'],
+    'academia':          ['Academia', 'Personal Trainer', 'Pilates', 'Yoga', 'Crossfit', 'Dança', 'Artes Marciais', 'Natação'],
+    'clinica-estetica':  ['Estética Facial', 'Estética Corporal', 'Depilação', 'Massagem', 'Drenagem', 'Micropigmentação', 'Lipo Enzimática'],
+    'sorveteria':        ['Sorvete Artesanal', 'Açaí', 'Picolé', 'Milk Shake', 'Crepe', 'Waffle'],
+    'tabacaria':         ['Cigarros', 'Narguilé', 'Cachimbo', 'Charutos', 'Conveniência', 'Bebidas'],
+    'turismo-aventura':  ['Trilha', 'Rapel', 'Rafting', 'Arvorismo', 'Tirolesa', 'Mergulho', 'Kitesurf', 'Stand Up Paddle']
+  };;
   function setupSubcategories(form) {
     var cat=form.querySelector('[name=categoria]'), list=form.querySelector('#subcatList'); if(!cat||!list)return;
     function refresh(){var arr=SUBCATEGORIES[cat.value]||[];list.innerHTML=arr.map(function(v){return '<option value="'+esc(v)+'">';}).join('');}
