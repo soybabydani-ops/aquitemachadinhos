@@ -191,7 +191,12 @@
 
   var Categories = {
     list: function () {
-      if (isRemote()) return apiGet('categories?select=*&order=ordem.asc').then(function (a) { return a.length ? a : CATS; });
+      if (isRemote()) return apiGet('categories?select=*&order=ordem.asc').then(function (remote) {
+        // Merge: banco + categorias locais que não estão no banco ainda
+        var remoteIds = remote.map(function(c){ return c.id; });
+        var extras = CATS.filter(function(c){ return remoteIds.indexOf(c.id) === -1; });
+        return remote.length ? remote.concat(extras).sort(function(a,b){ return (a.ordem||99)-(b.ordem||99); }) : CATS;
+      });
       return Promise.resolve(CATS);
     }
   };
@@ -925,10 +930,18 @@
       e.preventDefault();
       var obj = {};
       new FormData(f).forEach(function (v, k) { var el = f.querySelector('[name=' + k + ']'); obj[k] = (el && el.type === 'checkbox') ? el.checked : v; });
+      // Garantir que categoria e subcategoria do select/input são incluídas
+      var catSel = f.querySelector('#editCatSelect'); if(catSel && catSel.value) obj.categoria = catSel.value;
+      var subInp = f.querySelector('#editSubcatInput'); if(subInp) obj.subcategoria = subInp.value;
       var tagsArr = [];
       ['24h', 'plantao', 'madrugada'].forEach(function (t) { if (f.querySelector('[name=tag_' + t + ']') && f.querySelector('[name=tag_' + t + ']').checked) tagsArr.push(t); });
       ['24h', 'plantao', 'madrugada'].forEach(function (t) { delete obj['tag_' + t]; });
-      aPatch('stores', s.id, obj).then(function (ok) { if (ok) aPatch('stores', s.id, { tags: tagsArr }); var m = $('#editMsg'); if (m) { m.textContent = ok ? 'Salvo!' : 'Erro ao salvar'; m.className = 'text-sm ml-2 ' + (ok ? 'text-emerald-600' : 'text-peao-600'); } });
+      var m = $('#editMsg'); if(m){m.textContent='Salvando…';m.className='text-sm ml-2 text-silver-500';}
+      aPatch('stores', s.id, obj).then(function (ok) {
+        if (ok) aPatch('stores', s.id, { tags: tagsArr });
+        if (m) { m.textContent = ok ? '✅ Salvo com sucesso!' : '❌ Erro ao salvar'; m.className = 'text-sm ml-2 ' + (ok ? 'text-emerald-600' : 'text-peao-600'); }
+        if (ok) setTimeout(function(){ if(m) m.textContent=''; }, 3000);
+      });
     });
   }
   function painelOffers(s, offers) {
@@ -1041,11 +1054,21 @@
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:19,attribution:'© OpenStreetMap'}).addTo(mapObj);
         if(s.lat&&s.lng)pin=L.marker([s.lat,s.lng],{icon:pinIcon('📍'),draggable:true}).addTo(mapObj);
         mapObj.on('click',function(e){if(pin)pin.setLatLng(e.latlng);else pin=L.marker(e.latlng,{icon:pinIcon('📍'),draggable:true}).addTo(mapObj);});
-        setTimeout(function(){mapObj.invalidateSize();},350);
-        var endInput=$('input[name=endereco]'), bairroInput=$('input[name=bairro]'); var geoTimer=null;
-        function scheduleGeo(){clearTimeout(geoTimer);var addr=(endInput?endInput.value.trim():'')+' '+(bairroInput?bairroInput.value.trim():''); geoTimer=setTimeout(function(){geocodeAndUpdateMap(addr.trim());},800);}
-        if(endInput)endInput.addEventListener('input',scheduleGeo);
-        if(bairroInput)bairroInput.addEventListener('input',scheduleGeo);
+        setTimeout(function(){
+          mapObj.invalidateSize();
+          // Geocodificar endereço atual ao abrir o mapa (se não tiver coords)
+          if(!s.lat||!s.lng){
+            var formEl=$('#formEdit')||document;
+            var endEl=formEl.querySelector('input[name=endereco]'), bairEl=formEl.querySelector('input[name=bairro]');
+            var initialAddr=[(endEl?endEl.value.trim():s.endereco||''),(bairEl?bairEl.value.trim():s.bairro||'')].filter(Boolean).join(' ');
+            if(initialAddr.length>4) geocodeAndUpdateMap(initialAddr);
+          }
+        },400);
+        var editForm=$('#formEdit')||document;
+        var endInput=editForm.querySelector('input[name=endereco]'), bairroInput=editForm.querySelector('input[name=bairro]'); var geoTimer=null;
+        function scheduleGeo(){clearTimeout(geoTimer);var addr=(endInput?endInput.value.trim():'')+' '+(bairroInput?bairroInput.value.trim():''); if(addr.trim().length<4)return; geoTimer=setTimeout(function(){geocodeAndUpdateMap(addr.trim());},900);}
+        if(endInput){endInput.addEventListener('input',scheduleGeo);endInput.addEventListener('change',scheduleGeo);}
+        if(bairroInput){bairroInput.addEventListener('input',scheduleGeo);bairroInput.addEventListener('change',scheduleGeo);}
         var btn=$('#btnSavePin');if(btn)btn.addEventListener('click',function(){var m=$('#pinMsg');if(!pin){m.textContent='Toque no mapa para marcar o local.';m.className='text-sm text-peao-600';return;}var ll=pin.getLatLng();aPatch('stores',s.id,{lat:ll.lat,lng:ll.lng}).then(function(ok){m.textContent=ok?'✓ Localização salva!':'Erro ao salvar localização.';m.className='text-sm '+(ok?'text-emerald-600':'text-peao-600');});});
       } catch(_e){box.innerHTML='<div class="aquitem-map-error">Não foi possível abrir o mapa. Use o Google Maps como alternativa.</div>';}
     });
