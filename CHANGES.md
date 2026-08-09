@@ -32,3 +32,9 @@ Todos os arquivos desta pasta são cópias dos arquivos **publicados hoje** no s
 
 ## og: tags todas as cidades — 2026-08-09 15:14
 Blumenau, Bonito, Búzios, Campos do Jordão, Caruaru, Florianópolis, Jericoacoara, Porto de Galinhas, Salvador — og:title, og:description e og:image adicionados em todas as home pages e sub-páginas.
+
+## Admin v4 — 2026-08-09 15:51
+- 3 botoes no admin: Cadastrar empresa, Publicar vaga, Criar anuncio
+- Campos instagram/site/horario no cadastro rapido
+- Todas as 11 cidades no formulario de vaga e anuncio
+- Fix: city_slug removido do INSERT listings
