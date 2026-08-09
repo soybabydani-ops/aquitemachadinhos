@@ -810,9 +810,46 @@
         .then(function (r) { return r.json().then(function (j) { if (!r.ok) throw new Error(j.error_description || j.msg || j.message || 'Erro ao entrar'); return j; }); });
     }
   };
-  function aH() { var t = AUTH.tok(); return { apikey: CONFIG.supabase.anonKey, Authorization: 'Bearer ' + (t || CONFIG.supabase.anonKey) }; }
+  /* aH v4 — garante Bearer JWT válido */
+  function aH() {
+    var t = AUTH.tok() || LojistaAuth.tok();
+    return {
+      apikey: CONFIG.supabase.anonKey,
+      Authorization: 'Bearer ' + (t || CONFIG.supabase.anonKey)
+    };
+  }
   function aGet(path) { return fetch(B(path), { headers: aH() }).then(function (r) { return r.ok ? r.json() : []; }).catch(function () { return []; }); }
-  function aPatch(table, id, obj) { return fetch(B(table + '?id=eq.' + encodeURIComponent(id)), { method: 'PATCH', headers: Object.assign({ 'Content-Type': 'application/json', Prefer: 'return=representation' }, aH()), body: JSON.stringify(obj) }).then(function (r) { return r.ok; }).catch(function () { return false; }); }
+  /* aPatch v4 — retry + log de erro para admin */
+  function aPatch(table, id, obj) {
+    var t = AUTH.tok() || LojistaAuth.tok();
+    var headers = {
+      'Content-Type': 'application/json',
+      'Prefer': 'return=representation',
+      'apikey': CONFIG.supabase.anonKey,
+      'Authorization': 'Bearer ' + (t || CONFIG.supabase.anonKey)
+    };
+    function doFetch(attempt) {
+      return fetch(B(table + '?id=eq.' + encodeURIComponent(id)), {
+        method: 'PATCH', headers: headers, body: JSON.stringify(obj)
+      }).then(function(r) {
+        if (!r.ok) {
+          return r.json().catch(function(){ return {}; }).then(function(err) {
+            console.error('[aPatch] erro HTTP', r.status, table, id, err.message || JSON.stringify(err).slice(0,100));
+            if (r.status >= 500 && attempt < 3) {
+              return new Promise(function(res){ setTimeout(res, 1000 * attempt); }).then(function(){ return doFetch(attempt + 1); });
+            }
+            return false;
+          });
+        }
+        return true;
+      }).catch(function(e) {
+        console.error('[aPatch] rede:', e.message || e);
+        if (attempt < 3) return new Promise(function(res){ setTimeout(res, 1000 * attempt); }).then(function(){ return doFetch(attempt + 1); });
+        return false;
+      });
+    }
+    return doFetch(1);
+  }
   function aPost(table, obj) { return fetch(B(table), { method: 'POST', headers: Object.assign({ 'Content-Type': 'application/json', Prefer: 'return=representation' }, aH()), body: JSON.stringify(obj) }).then(function (r) { return r.ok ? r.json() : []; }).catch(function () { return []; }); }
   function convertLead(payload) {
     return fetch(CONFIG.supabase.url + '/rest/v1/rpc/convert_city_lead', { method: 'POST', headers: Object.assign({ 'Content-Type': 'application/json' }, aH()), body: JSON.stringify(payload) })
