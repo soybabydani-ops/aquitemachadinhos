@@ -38,3 +38,20 @@ Blumenau, Bonito, Búzios, Campos do Jordão, Caruaru, Florianópolis, Jericoaco
 - Campos instagram/site/horario no cadastro rapido
 - Todas as 11 cidades no formulario de vaga e anuncio
 - Fix: city_slug removido do INSERT listings
+
+## Pente Fino Completo — 2026-08-09 18:46
+### Corrigidos
+- app.js: + PLANOS object + validarLimiteFotos + validarLimiteOfertas (sistema de planos client-side)
+- empregos.html: og:title genérico (sem 'Barretos' hardcoded)
+- banco: plano_id sincronizado com plano em todas as stores
+- banco: validar_limite_fotos() corrigida (usa COALESCE plano_id, plano)
+- banco: forcar_pendente() respeita admin_users
+
+### Testado
+- 14/14 testes funcionais Supabase
+- 15/15 páginas principais HTTP 200
+- 25/25 short links com og:title correto
+- 11/11 home pages de cidades com og:title correto
+- 23/23 tabelas com RLS ativo
+- 14 RPCs admin funcionando
+- 43 categorias no banco
