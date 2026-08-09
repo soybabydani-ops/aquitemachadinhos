@@ -960,6 +960,32 @@
     var options = CATS.map(function(c){ return '<option value="' + esc(c.id) + '"' + (c.id === cat ? ' selected' : '') + '>' + c.emoji + ' ' + esc(c.nome) + '</option>'; }).join('');
     return '<div id="leadConvertBox" class="bg-navy-900 text-white rounded-2xl shadow-glow p-5 mb-7"><div class="flex items-start justify-between gap-3"><div><p class="text-xs font-bold uppercase tracking-wide text-peao-400">Converter lead em empresa</p><h2 class="font-display text-xl font-extrabold mt-1">' + esc(lead.empresa_nome) + '</h2><p class="text-sm text-silver-300 mt-1">📍 ' + esc(city) + ' · dados pré-preenchidos. Revise antes de publicar.</p></div><button id="closeLeadConvert" class="text-silver-300 hover:text-white text-lg" aria-label="Fechar">✕</button></div><form id="leadConvertForm" class="grid sm:grid-cols-2 gap-3 mt-5"><input type="hidden" name="lead_id" value="' + esc(lead.id) + '"><input type="hidden" name="city_slug" value="' + esc(lead.city_slug) + '"><div class="sm:col-span-2"><label class="block text-xs font-semibold mb-1">Nome da empresa *</label><input name="nome" value="' + esc(lead.empresa_nome) + '" class="w-full px-3 py-2.5 rounded-lg text-navy-900"></div><div><label class="block text-xs font-semibold mb-1">Categoria *</label><select name="categoria" class="w-full px-3 py-2.5 rounded-lg text-navy-900">' + options + '</select></div><div><label class="block text-xs font-semibold mb-1">Plano inicial</label><select name="plano" class="w-full px-3 py-2.5 rounded-lg text-navy-900"><option value="gratis">Grátis</option><option value="destaque">Destaque</option><option value="pro">Pro</option></select></div><div><label class="block text-xs font-semibold mb-1">WhatsApp</label><input name="whatsapp" value="' + esc(lead.whatsapp || '') + '" class="w-full px-3 py-2.5 rounded-lg text-navy-900"></div><div><label class="block text-xs font-semibold mb-1">Responsável</label><input name="responsavel" value="' + esc(lead.responsavel || '') + '" class="w-full px-3 py-2.5 rounded-lg text-navy-900"></div><div class="sm:col-span-2"><label class="block text-xs font-semibold mb-1">Descrição</label><textarea name="descricao_curta" rows="2" class="w-full px-3 py-2.5 rounded-lg text-navy-900">' + esc(lead.mensagem || '') + '</textarea></div><label class="sm:col-span-2 flex items-center gap-2 text-sm text-silver-200"><input name="destaque" type="checkbox" class="w-4 h-4 accent-peao-500"> Publicar com selo Destaque</label><button type="submit" class="sm:col-span-2 btn-shine bg-peao-500 hover:bg-peao-600 text-white font-bold py-3 rounded-xl">Revisar e publicar empresa →</button><p id="leadConvertMsg" class="sm:col-span-2 text-sm"></p></form></div>';
   }
+
+  /* ── Sistema de Planos (validação client-side) ── */
+  var PLANOS = {
+    gratis:   { id:'gratis',   nome:'Grátis',   preco:0,   fotos:3,  ofertas:1,  prioridade:1 },
+    destaque: { id:'destaque', nome:'Destaque',  preco:79,  fotos:10, ofertas:5,  prioridade:2 },
+    pro:      { id:'pro',      nome:'Pro',       preco:149, fotos:20, ofertas:-1, prioridade:3 }
+  };
+  function validarLimiteFotos(planoId, totalAtual) {
+    var p = PLANOS[planoId] || PLANOS.gratis;
+    if (p.fotos === -1) return { ok: true };
+    if (totalAtual >= p.fotos) {
+      var prox = planoId === 'gratis' ? 'Destaque' : planoId === 'destaque' ? 'Pro' : null;
+      return { ok: false, msg: 'Limite de ' + p.fotos + ' foto(s) atingido no plano ' + p.nome + (prox ? '. Faça upgrade para ' + prox + '.' : '.') };
+    }
+    return { ok: true, atual: totalAtual, limite: p.fotos };
+  }
+  function validarLimiteOfertas(planoId, ativasAtual) {
+    var p = PLANOS[planoId] || PLANOS.gratis;
+    if (p.ofertas === -1) return { ok: true, ilimitado: true };
+    if (ativasAtual >= p.ofertas) {
+      var prox = planoId === 'gratis' ? 'Destaque' : planoId === 'destaque' ? 'Pro' : null;
+      return { ok: false, msg: 'Limite de ' + p.ofertas + ' oferta(s) atingido no plano ' + p.nome + (prox ? '. Upgrade para ' + prox + '.' : '.') };
+    }
+    return { ok: true };
+  }
+
   function renderAdmin(root, stores, offers, met, reviews, drivers, listings, cityLeads, automationQueue) {
     cityLeads = cityLeads || []; automationQueue = automationQueue || [];
     var pend = stores.filter(function (s) { return s.status === 'pendente'; });
