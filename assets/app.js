@@ -114,183 +114,6 @@
 (function () {
   'use strict';
 
-/* Inject skeleton CSS se não existir */
-(function() {
-  if (document.getElementById('ata-skeleton-css')) return;
-  var s = document.createElement('style');
-  s.id = 'ata-skeleton-css';
-  s.textContent = [
-    '@keyframes ata-pulse{0%,100%{opacity:1}50%{opacity:.4}}',
-    '.animate-pulse{animation:ata-pulse 1.8s cubic-bezier(.4,0,.6,1) infinite}',
-    '.bg-silver-100{background:#f1f5f9}',
-    '.h-16{height:4rem}.h-24{height:6rem}.h-32{height:8rem}.h-40{height:10rem}',
-    '.rounded-2xl{border-radius:1rem}.space-y-3>*+*{margin-top:.75rem}',
-    '.p-4{padding:1rem}'
-  ].join('');
-  document.head.appendChild(s);
-})();
-
-
-  /* ================================================================
-   *  AQUITEM v3.5 — CAMADA DE PERFORMANCE & RESILIÊNCIA
-   *  ⚡ Cache SWR (stale-while-revalidate)
-   *  🔁 Exponential Backoff para mutations
-   *  🛡️  Validação de schema (Zod-style puro JS)
-   *  📋 Mapeador de erros Supabase tipados
-   *  📝 Trilha de auditoria imutável
-   * ================================================================ */
-
-  /* ------ MAPEADOR DE ERROS SUPABASE ------ */
-  var SUPABASE_ERR_MAP = {
-    '23505': 'Esta empresa já está cadastrada com esse nome ou WhatsApp.',
-    '23503': 'Categoria inválida ou não encontrada. Tente outra opção.',
-    '23502': 'Há campos obrigatórios não preenchidos. Revise o formulário.',
-    '42501': 'Sem permissão para realizar esta ação. Faça login novamente.',
-    '23514': 'Valor fora do intervalo permitido para este campo.',
-    'PGRST301': 'Sessão expirada. Faça login novamente.',
-    'PGRST116': 'Nenhum resultado encontrado.',
-    '22001': 'Um dos campos excede o tamanho máximo permitido.',
-    '22P02': 'Formato inválido em um dos campos.',
-    '42P01': 'Tabela não encontrada. Contate o suporte.'
-  };
-
-  function mapSupabaseError(data, status) {
-    if (!data) return 'Erro desconhecido (HTTP ' + status + ')';
-    // Tenta capturar pelo código do Postgres
-    var code = data.code || '';
-    if (code && SUPABASE_ERR_MAP[code]) return SUPABASE_ERR_MAP[code];
-    // Tenta pela mensagem da API
-    var raw = data.message || data.error || data.hint || '';
-    // Mapeamento por palavras-chave na mensagem
-    if (/duplicate|unique/i.test(raw)) return SUPABASE_ERR_MAP['23505'];
-    if (/foreign key|violates/i.test(raw)) return SUPABASE_ERR_MAP['23503'];
-    if (/not.null|null value/i.test(raw)) return SUPABASE_ERR_MAP['23502'];
-    if (/permission|policy|rls/i.test(raw)) return SUPABASE_ERR_MAP['42501'];
-    if (/jwt|expired|token/i.test(raw)) return SUPABASE_ERR_MAP['PGRST301'];
-    // Fallback rico
-    return raw ? raw.slice(0, 120) : ('Erro HTTP ' + status);
-  }
-
-  /* ------ VALIDADOR DE SCHEMA (Zod-style, zero dependências) ------ */
-  var StoreSchema = {
-    nome:        { type: 'string', required: true, maxLen: 100, label: 'Nome da empresa' },
-    whatsapp:    { type: 'string', required: true, maxLen: 20,  label: 'WhatsApp', pattern: /^[\d\s\-\+\(\)]+$/ },
-    categoria:   { type: 'string', required: false, maxLen: 50, label: 'Categoria' },
-    descricao_curta: { type: 'string', required: false, maxLen: 300, label: 'Descrição curta' },
-    bairro:      { type: 'string', required: false, maxLen: 80,  label: 'Bairro' },
-    cidade:      { type: 'string', required: false, maxLen: 80,  label: 'Cidade' },
-    endereco:    { type: 'string', required: false, maxLen: 200, label: 'Endereço' },
-    instagram:   { type: 'string', required: false, maxLen: 100, label: 'Instagram', pattern: /^(@?[\w\.]+)?$/ },
-    site:        { type: 'string', required: false, maxLen: 200, label: 'Site' },
-    horario:     { type: 'string', required: false, maxLen: 100, label: 'Horário' }
-  };
-
-  function validateStore(obj) {
-    var errors = [];
-    Object.keys(StoreSchema).forEach(function(key) {
-      var rule = StoreSchema[key];
-      var val = String(obj[key] || '').trim();
-      if (rule.required && !val) {
-        errors.push(rule.label + ' é obrigatório.');
-      } else if (val) {
-        if (rule.maxLen && val.length > rule.maxLen) {
-          errors.push(rule.label + ' deve ter no máximo ' + rule.maxLen + ' caracteres.');
-        }
-        if (rule.pattern && !rule.pattern.test(val)) {
-          errors.push(rule.label + ' contém caracteres inválidos.');
-        }
-      }
-    });
-    // Sanitiza todos os campos string
-    var sanitized = {};
-    Object.keys(obj).forEach(function(k) {
-      sanitized[k] = (typeof obj[k] === 'string') ? obj[k].trim().replace(/[<>]/g, '') : obj[k];
-    });
-    return { ok: errors.length === 0, errors: errors, data: sanitized };
-  }
-
-  /* ------ CACHE SWR (Stale-While-Revalidate) ------ */
-  var _swrCache = {};
-  var SWR_TTL = 30000; // 30s de TTL — atualiza em background
-
-  function swrGet(key, fetchFn) {
-    var now = Date.now();
-    var cached = _swrCache[key];
-    if (cached) {
-      // Retorna imediato (stale) e revalida em background
-      if (now - cached.ts < SWR_TTL) {
-        return Promise.resolve(cached.data); // Ainda fresco
-      }
-      // Stale: retorna dados antigos E dispara fetch em background
-      fetchFn().then(function(fresh) {
-        _swrCache[key] = { data: fresh, ts: Date.now() };
-      }).catch(function() {});
-      return Promise.resolve(cached.data);
-    }
-    // Cache miss — fetch real
-    return fetchFn().then(function(data) {
-      _swrCache[key] = { data: data, ts: Date.now() };
-      return data;
-    });
-  }
-
-  function swrInvalidate(keyPrefix) {
-    Object.keys(_swrCache).forEach(function(k) {
-      if (k.indexOf(keyPrefix) === 0) delete _swrCache[k];
-    });
-  }
-
-  /* ------ EXPONENTIAL BACKOFF ------ */
-  function withRetry(fn, opts) {
-    opts = opts || {};
-    var maxRetries = opts.maxRetries || 3;
-    var baseDelay = opts.baseDelay || 1000;
-    var retryOn = opts.retryOn || function(err, status) {
-      // Retry em erros de rede ou 5xx
-      return !status || status >= 500;
-    };
-
-    function attempt(n) {
-      return fn().then(function(result) {
-        return result;
-      }).catch(function(err) {
-        var status = err._httpStatus || 0;
-        if (n >= maxRetries || !retryOn(err, status)) {
-          throw err; // Desiste
-        }
-        var delay = baseDelay * Math.pow(2, n - 1); // 1s → 2s → 4s
-        console.warn('[AQUITEM] Retry ' + n + '/' + maxRetries + ' em ' + delay + 'ms — ' + (err.message || err));
-        return new Promise(function(res) { setTimeout(res, delay); }).then(function() {
-          return attempt(n + 1);
-        });
-      });
-    }
-    return attempt(1);
-  }
-
-  /* ------ TRILHA DE AUDITORIA ------ */
-  function auditLog(action, table, recordId, before, after) {
-    // Não bloqueia a operação principal — fire and forget
-    var t = (typeof AUTH !== 'undefined' && AUTH.tok()) || '';
-    if (!t) return; // Só loga se autenticado
-    var payload = {
-      action: action,         // 'UPDATE' | 'DELETE' | 'STATUS_CHANGE'
-      table_name: table,
-      record_id: recordId,
-      before_data: before || null,
-      after_data: after || null,
-      performed_at: new Date().toISOString(),
-      user_agent: navigator.userAgent.slice(0, 80)
-    };
-    // Supabase REST insert (sem retorno necessário)
-    fetch(B('admin_audit_log'), {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json', apikey: CONFIG.supabase.anonKey, Authorization: 'Bearer ' + t },
-      body: JSON.stringify(payload)
-    }).catch(function() {}); // Silencia erros — log é best-effort
-  }
-
-
   function loadPublicSupabaseConfig() {
     try {
       var req = new XMLHttpRequest(); req.open('GET', 'assets/supabase-config.json', false); req.send(null);
@@ -356,28 +179,74 @@
   var H = function (x) { return Object.assign({ apikey: CONFIG.supabase.anonKey, Authorization: 'Bearer ' + CONFIG.supabase.anonKey }, x || {}); };
   var LS_S = 'ata_stores_v2', LS_O = 'ata_offers_v2';
 
-  function apiGet(path) {
+  /* ── SWR Cache ── */
+  var _swrCache = {};
+  var SWR_TTL = 30000;
+  function swrGet(key, fetchFn) {
+    var now = Date.now();
+    var cached = _swrCache[key];
+    if (cached) {
+      if (now - cached.ts < SWR_TTL) return Promise.resolve(cached.data);
+      fetchFn().then(function(fresh){ _swrCache[key] = { data: fresh, ts: Date.now() }; }).catch(function(){});
+      return Promise.resolve(cached.data);
+    }
+    return fetchFn().then(function(data){ _swrCache[key] = { data: data, ts: Date.now() }; return data; });
+  }
+  function swrInvalidate(prefix) { Object.keys(_swrCache).forEach(function(k){ if (k.indexOf(prefix) === 0) delete _swrCache[k]; }); }
+
+  /* ── Exponential Backoff ── */
+  function withRetry(fn, opts) {
+    opts = opts || {};
+    var maxRetries = opts.maxRetries || 3;
+    var baseDelay = opts.baseDelay || 1000;
+    var retryOn = opts.retryOn || function(err, status) { return !status || status >= 500; };
+    function attempt(n) {
+      return fn().then(function(r){ return r; }).catch(function(err) {
+        var status = err._httpStatus || 0;
+        if (n >= maxRetries || !retryOn(err, status)) throw err;
+        var delay = baseDelay * Math.pow(2, n - 1);
+        return new Promise(function(res){ setTimeout(res, delay); }).then(function(){ return attempt(n + 1); });
+      });
+    }
+    return attempt(1);
+  }
+
+  /* ── Mapeador de erros Supabase ── */
+  var SUPABASE_ERR_MAP = {
+    '23505': 'Esta empresa já está cadastrada.', '23503': 'Categoria inválida.',
+    '23502': 'Campo obrigatório não preenchido.', '42501': 'Sem permissão. Faça login novamente.',
+    'PGRST301': 'Sessão expirada. Faça login novamente.'
+  };
+  function mapSupabaseError(data, status) {
+    if (!data) return 'Erro HTTP ' + status;
+    var code = data.code || '';
+    if (code && SUPABASE_ERR_MAP[code]) return SUPABASE_ERR_MAP[code];
+    var raw = data.message || data.error || data.hint || '';
+    if (/duplicate|unique/i.test(raw)) return SUPABASE_ERR_MAP['23505'];
+    if (/permission|policy|rls/i.test(raw)) return SUPABASE_ERR_MAP['42501'];
+    if (/jwt|expired/i.test(raw)) return SUPABASE_ERR_MAP['PGRST301'];
+    return raw ? raw.slice(0, 120) : ('Erro HTTP ' + status);
+  }
+
+  /* ── Audit Log ── */
+  function auditLog(action, table, recordId, before, after) {
+    var t = (typeof AUTH !== 'undefined' && AUTH.tok()) || '';
+    if (!t) return;
+    fetch(B('admin_audit_logs'), {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', apikey: CONFIG.supabase.anonKey, Authorization: 'Bearer ' + t },
+      body: JSON.stringify({ acao: action, tabela_afetada: table, registro_id: recordId, payload_antigo: before || null, payload_novo: after || null, criado_em: new Date().toISOString() })
+    }).catch(function(){});
+  }
+
+    function apiGet(path) {
     if (!isRemote()) return Promise.resolve([]);
     return fetch(B(path), { headers: H() }).then(function (r) { return r.ok ? r.json() : []; }).catch(function () { return []; });
   }
   function apiPost(table, obj) {
     if (!isRemote()) return Promise.resolve(obj);
-    return fetch(B(table), {
-      method: 'POST',
-      headers: H({ 'Content-Type': 'application/json', Prefer: 'return=representation' }),
-      body: JSON.stringify(obj)
-    }).then(function (r) {
-      if (!r.ok) {
-        return r.json().catch(function(){ return {}; }).then(function(err){
-          console.error('[AQUITEM] apiPost erro', r.status, table, err.message || JSON.stringify(err).slice(0,120));
-          return null;
-        });
-      }
-      return r.json().then(function(d){ return Array.isArray(d) ? d[0] : d; }).catch(function(){ return true; });
-    }).catch(function(e){
-      console.error('[AQUITEM] apiPost network:', table, e.message || e);
-      return null;
-    });
+    return fetch(B(table), { method: 'POST', headers: H({ 'Content-Type': 'application/json' }), body: JSON.stringify(obj) })
+      .then(function (r) { return r.ok; });
   }
 
   var Categories = {
@@ -410,35 +279,7 @@
       if (isRemote()) { var t = encodeURIComponent(q); return apiGet('stores?select=*&status=eq.ativo&city_slug=eq.' + encodeURIComponent(currentCitySlug()) + '&or=(nome.ilike.*' + t + '*,descricao.ilike.*' + t + '*,bairro.ilike.*' + t + '*,subcategoria.ilike.*' + t + '*)'); }
       return Stores.list().then(function (a) { var ql = q.toLowerCase(); return a.filter(function (s) { return JSON.stringify(s).toLowerCase().indexOf(ql) !== -1; }); });
     },
-    create: function (obj) {
-      // 🛡️ Validação de schema completa (Zod-style)
-      var validation = validateStore(obj);
-      if (!validation.ok) {
-        return Promise.reject(new Error(validation.errors[0]));
-      }
-      obj = validation.data; // Dados sanitizados
-
-      obj.id = uuid();
-      obj.status = 'pendente';
-      obj.city_slug = obj.city_slug || currentCitySlug();
-      obj.cidade = obj.cidade || currentCityName();
-      obj.criado_em = new Date().toISOString();
-      obj.atualizado_em = new Date().toISOString();
-      // Garantir aceite obrigatório
-      if (!obj.aceite_termos) obj.aceite_termos = false;
-      if (!obj.autorizacao_contato) obj.autorizacao_contato = false;
-      // FK safety: categoria NULL se não for uma das conhecidas
-      if (!obj.categoria || obj.categoria === 'outro') {
-        obj.categoria = null;
-      }
-      // Remover campos que não existem na tabela
-      delete obj.logo; delete obj.capa; delete obj.galeria;
-      console.log('[AQUITEM] Stores.create payload:', JSON.stringify(obj).slice(0, 300));
-      return aPost('stores', obj).then(function (created) {
-        if (!created) { console.error('[AQUITEM] Stores.create retornou null'); return null; }
-        return created;
-      });
-    }
+    create: function (obj) { obj.id = uuid(); obj.status = 'pendente'; obj.city_slug = obj.city_slug || currentCitySlug(); obj.cidade = obj.cidade || currentCityName(); obj.criado_em = new Date().toISOString(); return apiPost('stores', obj).then(function (ok) { return ok ? obj : null; }); }
   };
   var Offers = {
     listActive: function () {
@@ -451,34 +292,20 @@
   var Metrics = {
     log: function (tipo, sid) { if (!isRemote()) return Promise.resolve(); return fetch(B('metrics_events'), { method: 'POST', headers: H({ 'Content-Type': 'application/json' }), body: JSON.stringify({ tipo: tipo, store_id: sid || null }) }).catch(function () {}); }
   };
-  /* uploadPhoto v3.5 — compressão + retry + progresso */
-  function uploadPhoto(file, onProgress) {
+  /* uploadPhoto v3.5 — retry */
+  function uploadPhoto(file) {
     return compressImage(file).then(function (f) {
       if (!isRemote()) return new Promise(function (res) { var r = new FileReader(); r.onload = function () { res(r.result); }; r.readAsDataURL(f); });
       var isPng = f.type === 'image/png'; var ext = isPng ? 'png' : 'jpg';
-      var path  = 'lojas/' + Date.now() + '-' + Math.random().toString(36).slice(2) + '.' + ext;
-      var url   = CONFIG.supabase.url + '/storage/v1/object/fotos/' + path;
-      var hdrs  = H({ 'Content-Type': isPng ? 'image/png' : 'image/jpeg' });
-      if (typeof onProgress === 'function') onProgress(0);
+      var path = 'lojas/' + Date.now() + '-' + Math.random().toString(36).slice(2) + '.' + ext;
+      var url  = CONFIG.supabase.url + '/storage/v1/object/fotos/' + path;
+      var hdrs = H({ 'Content-Type': isPng ? 'image/png' : 'image/jpeg' });
       function attempt(n) {
-        return fetch(url, { method: 'POST', headers: hdrs, body: f })
-          .then(function (r) {
-            if (!r.ok) {
-              if (r.status >= 500 && n < 3) {
-                console.warn('[uploadPhoto] retry ' + n + '/3');
-                return new Promise(function(res){ setTimeout(res, 1000 * Math.pow(2, n-1)); }).then(function(){ return attempt(n+1); });
-              }
-              throw new Error('upload HTTP ' + r.status);
-            }
-            if (typeof onProgress === 'function') onProgress(100);
-            return CONFIG.supabase.url + '/storage/v1/object/public/fotos/' + path;
-          })
-          .catch(function(e) {
-            if (n < 3 && (!e.message || e.message.indexOf('fetch') !== -1)) {
-              return new Promise(function(res){ setTimeout(res, 1000 * Math.pow(2, n-1)); }).then(function(){ return attempt(n+1); });
-            }
-            throw e;
-          });
+        return fetch(url, { method: 'POST', headers: hdrs, body: f }).then(function (r) {
+          if (!r.ok && r.status >= 500 && n < 3) return new Promise(function(res){ setTimeout(res, 1000*Math.pow(2,n-1)); }).then(function(){ return attempt(n+1); });
+          if (!r.ok) throw new Error('upload HTTP ' + r.status);
+          return CONFIG.supabase.url + '/storage/v1/object/public/fotos/' + path;
+        }).catch(function(e){ if (n < 3) return new Promise(function(res){ setTimeout(res, 1000*Math.pow(2,n-1)); }).then(function(){ return attempt(n+1); }); throw e; });
       }
       return attempt(1);
     });
@@ -647,69 +474,36 @@
 
   function sortByPlano(arr) { return arr.sort(function (a, b) { var pa = a.plano === 'pro' ? 3 : (a.plano === 'destaque' ? 2 : 1); var pb = b.plano === 'pro' ? 3 : (b.plano === 'destaque' ? 2 : 1); return pb - pa || (b.destaque ? 1 : 0) - (a.destaque ? 1 : 0) || (b.rating_avg || 0) - (a.rating_avg || 0); }); }
 
-  /* -------------------------------------------------------
-   * compressImage v2.0 — Canvas API pura, zero deps
-   * • Max 1200px em qualquer dimensão
-   * • JPEG → qualidade 80% | PNG → qualidade 90%
-   * • Imagens < 200KB passam sem re-encode (fast path)
-   * • EXIF removido automaticamente pelo re-draw no canvas
-   * • Emite evento customizado 'ata:compress' com stats
-   * ----------------------------------------------------- */
+  /* compressImage v2.0 */
   function compressImage(file) {
     return new Promise(function (resolve) {
-      // Fast-path: não é imagem ou já está dentro do limite de 200 KB
-      if (!file || !file.type || file.type.indexOf('image/') !== 0 || file.size <= 204800) {
-        resolve(file);
-        return;
-      }
+      if (!file || !file.type || file.type.indexOf('image/') !== 0 || file.size <= 204800) { resolve(file); return; }
       var origSize = file.size;
       var u = URL.createObjectURL(file);
       var img = new Image();
-
       img.onload = function () {
         URL.revokeObjectURL(u);
         var MAX_W = 1200, MAX_H = 1200;
         var w = img.naturalWidth || img.width;
         var h = img.naturalHeight || img.height;
-
-        // Escala proporcional — jamais aumenta, só reduz
         if (w > MAX_W) { h = Math.round(h * MAX_W / w); w = MAX_W; }
         if (h > MAX_H) { w = Math.round(w * MAX_H / h); h = MAX_H; }
-
         var cv = document.createElement('canvas');
         cv.width = w; cv.height = h;
         var ctx = cv.getContext('2d');
-        // Fundo branco (evita transparência virar preto em JPEG)
         ctx.fillStyle = '#ffffff';
         ctx.fillRect(0, 0, w, h);
         ctx.drawImage(img, 0, 0, w, h);
-
         var isPng = file.type === 'image/png';
         var mime = isPng ? 'image/png' : 'image/jpeg';
-        var quality = isPng ? 0.90 : 0.80; // 80% JPEG conforme spec
-
-        cv.toBlob(function (blob) {
-          var result = blob || file;
-          // Emitir evento para feedback visual externo
-          try {
-            var ev = new CustomEvent('ata:compress', { detail: {
-              origSize: origSize, newSize: result.size,
-              reduction: Math.round((1 - result.size / origSize) * 100),
-              dims: w + 'x' + h
-            }});
-            window.dispatchEvent(ev);
-          } catch (_) {}
-          console.log('[AQUITEM] compressImage:', Math.round(origSize/1024) + 'KB → ' + Math.round(result.size/1024) + 'KB (' + w + 'x' + h + ')');
+        var quality = isPng ? 0.90 : 0.80;
+        cv.toBlob(function (b) {
+          var result = b || file;
+          try { window.dispatchEvent(new CustomEvent('ata:compress', { detail: { origSize: origSize, newSize: result.size } })); } catch (_) {}
           resolve(result);
         }, mime, quality);
       };
-
-      img.onerror = function () {
-        URL.revokeObjectURL(u);
-        console.warn('[AQUITEM] compressImage: falha ao carregar imagem, usando original');
-        resolve(file);
-      };
-
+      img.onerror = function () { URL.revokeObjectURL(u); resolve(file); };
       img.src = u;
     });
   }
@@ -920,20 +714,6 @@
       Metrics.log('cadastro_iniciado');
       var fd = {}; new FormData(form).forEach(function (v, k) { var f = form.querySelector('[name=' + k + ']'); fd[k] = (f && f.type === 'checkbox') ? (f.checked ? true : false) : v; });
       // uploads
-      /* Validação Zod-style — 0ms, aborta antes de qualquer fetch */
-      var _erros = [];
-      var _nome = (fd.nome || '').trim();
-      var _wa   = (fd.whatsapp || '').trim();
-      if (!_nome) _erros.push('Nome da empresa é obrigatório.');
-      if (!_wa || _wa.replace(/\D/g,'').length < 8) _erros.push('WhatsApp inválido — mínimo 8 dígitos.');
-      if ((fd.descricao_curta || '').length > 300) _erros.push('Descrição deve ter no máximo 300 caracteres.');
-      if ((fd.instagram || '').trim() && !/^@?[\w\.]+$/.test((fd.instagram||'').trim())) _erros.push('Instagram inválido (ex: @minhaloja).');
-      if (!fd.aceite_termos) _erros.push('Você precisa aceitar os termos para continuar.');
-      if (_erros.length) { showMsg('#msg', '❌ ' + _erros[0], false); btn.disabled = false; btn.textContent = orig; return; }
-      // Sanitizar strings antes de enviar
-      ['nome','responsavel','bairro','endereco','descricao_curta','horario'].forEach(function(k){ if (fd[k]) fd[k] = String(fd[k]).trim().replace(/[<>]/g,''); });
-
-
       var tasks = [];
       var logoFile = form.querySelector('[name=logo]').files[0];
       var capaFile = form.querySelector('[name=capa]').files[0];
@@ -964,21 +744,7 @@
         try { window.open(waLink('Cadastro enviado: ' + fd.nome + ' (' + fd.categoria + '). Já aprovou?'), '_blank'); } catch (e) {}
         window.scrollTo(0, 0);
       }).catch(function (err) {
-        var msg = err && err.message ? err.message : 'Erro desconhecido';
-        // Traduzir erros técnicos para linguagem humana
-        if (msg.includes('violates foreign key') || msg.includes('categories')) {
-          msg = 'Categoria inválida. Selecione uma das opções disponíveis.';
-        } else if (msg.includes('violates not-null') || msg.includes('null value')) {
-          msg = 'Campo obrigatório em branco. Revise o formulário.';
-        } else if (msg.includes('duplicate') || msg.includes('unique')) {
-          msg = 'Esta empresa já está cadastrada. Tente com outro nome ou WhatsApp.';
-        } else if (msg.includes('network') || msg.includes('fetch') || msg.includes('Failed')) {
-          msg = 'Sem conexão. Verifique sua internet e tente novamente.';
-        } else if (msg.includes('JWT') || msg.includes('token')) {
-          msg = 'Sessão expirada. Recarregue a página e tente novamente.';
-        }
-        console.error('[AQUITEM] Cadastro erro:', err);
-        showMsg('#msg', '❌ ' + msg, false);
+        showMsg('#msg', '❌ Não foi possível enviar. Verifique sua internet e tente novamente. (' + (err && err.message ? err.message : 'erro') + ')', false);
         btn.disabled = false; btn.textContent = orig;
       });
     });
@@ -999,155 +765,14 @@
         .then(function (r) { return r.json().then(function (j) { if (!r.ok) throw new Error(j.error_description || j.msg || j.message || 'Erro ao entrar'); return j; }); });
     }
   };
-  /* aH v3.5 — sempre envia Authorization: Bearer explícito */
-  function aH() {
-    var t = AUTH.tok() || LojistaAuth.tok();
-    if (t) return { apikey: CONFIG.supabase.anonKey, Authorization: 'Bearer ' + t };
-    return { apikey: CONFIG.supabase.anonKey, Authorization: 'Bearer ' + CONFIG.supabase.anonKey };
+  function aH() { var t = AUTH.tok(); return { apikey: CONFIG.supabase.anonKey, Authorization: 'Bearer ' + (t || CONFIG.supabase.anonKey) }; }
+  function aGet(path) { return fetch(B(path), { headers: aH() }).then(function (r) { return r.ok ? r.json() : []; }).catch(function () { return []; }); }
+  function aPatch(table, id, obj) { return fetch(B(table + '?id=eq.' + encodeURIComponent(id)), { method: 'PATCH', headers: Object.assign({ 'Content-Type': 'application/json', Prefer: 'return=representation' }, aH()), body: JSON.stringify(obj) }).then(function (r) { return r.ok; }).catch(function () { return false; }); }
+  function aPost(table, obj) { return fetch(B(table), { method: 'POST', headers: Object.assign({ 'Content-Type': 'application/json', Prefer: 'return=representation' }, aH()), body: JSON.stringify(obj) }).then(function (r) { return r.ok ? r.json() : []; }).catch(function () { return []; }); }
+  function convertLead(payload) {
+    return fetch(CONFIG.supabase.url + '/rest/v1/rpc/convert_city_lead', { method: 'POST', headers: Object.assign({ 'Content-Type': 'application/json' }, aH()), body: JSON.stringify(payload) })
+      .then(function (r) { return r.text().then(function (txt) { if (!r.ok) { var msg = txt; try { msg = JSON.parse(txt).message || txt; } catch (e) {} throw new Error(msg || 'Não foi possível publicar.'); } return txt; }); });
   }
-  function aHAuth() {
-    var t = AUTH.tok() || LojistaAuth.tok();
-    if (!t) console.warn('[AQUITEM] aHAuth: operação requer autenticação');
-    return { apikey: CONFIG.supabase.anonKey, Authorization: 'Bearer ' + (t || CONFIG.supabase.anonKey), 'Content-Type': 'application/json', Prefer: 'return=representation' };
-  }
-  /* -------------------------------------------------------
-   * aGet v3.5 — SWR cache + erros tipados
-   * • Dados frescos em < 30s: retorna do cache instantâneo
-   * • Dados stale (> 30s): serve cache + revalida em background
-   * • Erros HTTP mapeados via mapSupabaseError
-   * ----------------------------------------------------- */
-  function aGet(path) {
-    var cacheKey = 'aGet:' + path;
-
-    function fetchFn() {
-      return fetch(B(path), { headers: aH() })
-        .then(function (r) {
-          if (r.status >= 500) {
-            var err = new Error('Servidor indisponível (HTTP ' + r.status + ')');
-            err._httpStatus = r.status;
-            throw err;
-          }
-          if (!r.ok) {
-            return r.json().catch(function () { return {}; }).then(function (data) {
-              var msg = mapSupabaseError(data, r.status);
-              console.error('[AQUITEM] aGet erro', r.status, path, msg);
-              return [];
-            });
-          }
-          return r.json().catch(function () { return []; });
-        })
-        .catch(function (e) {
-          if (e._httpStatus) throw e; // Propaga para retry
-          console.error('[AQUITEM] aGet rede:', path, e.message || e);
-          return [];
-        });
-    }
-
-    // Só usa cache para paths de listagem (GET sem parâmetros de filtro complexos do painel admin)
-    // Paths contendo 'automation_queue' ou 'metrics_events' nunca são cacheados
-    var noCache = /automation_queue|metrics_events/.test(path);
-    if (noCache) return fetchFn();
-    return swrGet(cacheKey, fetchFn);
-  }
-  /* -------------------------------------------------------
-   * aPatch v3.5 — Exponential Backoff + Audit Trail
-   * • Retry automático em falhas de rede (5xx / timeout)
-   * • 3 tentativas: 1s → 2s → 4s
-   * • Invalida cache SWR da tabela modificada
-   * • Registra trilha de auditoria antes/depois
-   * ----------------------------------------------------- */
-  function aPatch(table, id, obj, opts) {
-    var t = AUTH.tok() || LojistaAuth.tok();
-    if (!t) {
-      console.error('[AQUITEM] aPatch sem token:', table, id);
-      return Promise.resolve(false);
-    }
-    opts = opts || {};
-    var auditBefore = opts.before || null; // estado anterior para audit
-
-    function doFetch() {
-      return fetch(B(table + '?id=eq.' + encodeURIComponent(id)), {
-        method: 'PATCH',
-        headers: {
-          'Content-Type': 'application/json',
-          Prefer: 'return=representation',
-          apikey: CONFIG.supabase.anonKey,
-          Authorization: 'Bearer ' + t
-        },
-        body: JSON.stringify(obj)
-      }).then(function (r) {
-        if (r.status >= 500) {
-          // Força o retry para erros de servidor
-          var err = new Error('Servidor indisponível (HTTP ' + r.status + ')');
-          err._httpStatus = r.status;
-          throw err;
-        }
-        if (!r.ok) {
-          return r.json().catch(function () { return {}; }).then(function (data) {
-            var friendlyMsg = mapSupabaseError(data, r.status);
-            console.error('[AQUITEM] aPatch erro', r.status, table, id, friendlyMsg);
-            var err = new Error(friendlyMsg);
-            err._httpStatus = r.status;
-            throw err;
-          });
-        }
-        // Sucesso: invalida cache e registra audit
-        swrInvalidate(table);
-        auditLog('UPDATE', table, id, auditBefore, obj);
-        return true;
-      });
-    }
-
-    return withRetry(doFetch, {
-      maxRetries: 3,
-      baseDelay: 1000,
-      retryOn: function (err, status) { return !status || status >= 500; }
-    }).catch(function (e) {
-      console.error('[AQUITEM] aPatch falhou após retries:', table, id, e.message || e);
-      return false;
-    });
-  }
-  /* -------------------------------------------------------
-   * aPost v3.5 — Mapeador de erros Supabase tipado
-   * • Erros 23505/23503/etc → mensagens PT-BR amigáveis
-   * • Invalida cache da tabela após insert bem-sucedido
-   * ----------------------------------------------------- */
-  function aPost(table, obj) {
-    function doPost() {
-      return fetch(B(table), {
-        method: 'POST',
-        headers: Object.assign({ 'Content-Type': 'application/json', Prefer: 'return=representation' }, aH()),
-        body: JSON.stringify(obj)
-      }).then(function (r) {
-        return r.json().then(function (data) {
-          if (r.status >= 500) {
-            var err = new Error('Servidor indisponível (HTTP ' + r.status + ')');
-            err._httpStatus = r.status;
-            throw err;
-          }
-          if (!r.ok) {
-            var friendlyMsg = mapSupabaseError(data, r.status);
-            console.error('[AQUITEM] aPost erro', r.status, table, friendlyMsg, 'payload:', JSON.stringify(obj).slice(0, 200));
-            var err2 = new Error(friendlyMsg);
-            err2._httpStatus = r.status;
-            throw err2;
-          }
-          swrInvalidate(table); // Limpa cache da tabela
-          return Array.isArray(data) ? data[0] : data;
-        });
-      }).catch(function (e) {
-        if (!e._httpStatus) console.error('[AQUITEM] aPost rede:', table, e.message || e);
-        throw e;
-      });
-    }
-
-    return withRetry(doPost, {
-      maxRetries: 2,
-      baseDelay: 1000,
-      retryOn: function (err, status) { return !status || status >= 500; }
-    });
-  }
-}}
   function countBy(arr, key, val) { return arr.filter(function (x) { return x[key] === val; }).length; }
   function exportCSV(rows) {
     if (!rows || !rows.length) return;
@@ -1166,49 +791,19 @@
       var email = form.querySelector('[name=email]').value.trim(), pass = form.querySelector('[name=password]').value;
       if (!email || !pass) { showMsg('#msg', 'Preencha e-mail e senha.', false); return; }
       var btn = form.querySelector('[type=submit]'); btn.disabled = true; btn.textContent = 'Entrando…';
-      AUTH.login(email, pass).then(function (j) {
-          // Verificar se o email é um administrador autorizado
-          var ADMINS = ['id.fernandes@icloud.com', 'id.fernandes@outlook.com', 'soybabydani@gmail.com'];
-          if (ADMINS.indexOf(email.toLowerCase().trim()) === -1) {
-            console.warn('[AQUITEM] Login de não-admin bloqueado:', email);
-            showMsg('#msg', '❌ Acesso restrito. Este painel é exclusivo para administradores.', false);
-            btn.disabled = false; btn.textContent = 'Entrar';
-            return;
-          }
-          localStorage.setItem('ata_admin_token', j.access_token);
-          var redirect = sessionStorage.getItem('ata_redirect_after_login') || 'admin.html';
-          sessionStorage.removeItem('ata_redirect_after_login');
-          location.href = redirect; })
+      AUTH.login(email, pass).then(function (j) { localStorage.setItem('ata_admin_token', j.access_token); location.href = 'admin.html'; })
         .catch(function (err) { showMsg('#msg', '❌ ' + (err.message || 'Não foi possível entrar.'), false); btn.disabled = false; btn.textContent = 'Entrar'; });
     });
   }
 
-  // E-mails autorizados como administradores
-  var ADMIN_EMAILS = ['id.fernandes@icloud.com', 'id.fernandes@outlook.com', 'soybabydani@gmail.com'];
-
   function pageAdmin() {
     var root = $('#adminRoot'); if (!root) return;
-    if (!AUTH.tok() && !LojistaAuth.tok()) {
-      console.warn('[AQUITEM] pageAdmin: sem token, redirecionando para login');
-      sessionStorage.setItem('ata_redirect_after_login', 'admin.html');
-      location.href = 'login.html';
-      return;
-    }
+    if (!AUTH.tok() && !LojistaAuth.tok()) { location.href = 'login.html'; return; }
     var _isLojista = !AUTH.tok() && !!LojistaAuth.tok();
-    /* SWR: se há cache, renderiza imediatamente e revalida em background */
-    var cachedStores = _swrCache['aGet:stores?select=*&order=criado_em.desc'];
-    if (cachedStores) {
-      root.innerHTML = '<p class="text-center text-silver-500 py-2 text-xs">⚡ Carregado do cache — atualizando…</p>';
-      renderAdmin(root, cachedStores.data, [], [], [], [], [], [], []);
-    } else {
-      /* SWR: cache instantâneo + skeleton */
-    var _cachedStores = _swrCache['aGet:stores?select=*&order=criado_em.desc'];
-    root.innerHTML = _cachedStores
-      ? '<p class="text-center text-xs text-amber-600 py-1 font-semibold">⚡ Cache — atualizando em segundo plano…</p>'
-      : '<div class="space-y-3 p-4 animate-pulse">' +
-        ['','','','',''].map(function(){return '<div class="h-16 bg-silver-100 rounded-2xl"></div>';}).join('') +
-        '</div>';
-    }
+    var _cachedS = _swrCache && _swrCache['aGet:stores?select=*&order=criado_em.desc'];
+    root.innerHTML = _cachedS
+      ? '<p class="text-center text-xs text-amber-600 py-1">⚡ Atualizando…</p>'
+      : '<div style="padding:1rem"><div style="height:4rem;background:#f1f5f9;border-radius:1rem;margin-bottom:.75rem;animation:ata-pulse 1.8s ease infinite"></div><div style="height:4rem;background:#f1f5f9;border-radius:1rem;margin-bottom:.75rem;animation:ata-pulse 1.8s ease infinite"></div><div style="height:4rem;background:#f1f5f9;border-radius:1rem;animation:ata-pulse 1.8s ease infinite"></div></div>';
     Promise.all([aGet('stores?select=*&order=criado_em.desc'), aGet('offers?select=id,status'), aGet('metrics_events?select=tipo'), aGet('reviews?select=*&order=criado_em.desc'), aGet('drivers?select=*&order=criado_em.desc'), aGet('listings?select=*&order=criado_em.desc'), aGet('city_leads?select=*&order=criado_em.desc'), aGet('automation_queue?select=id,status')]).then(function (r) {
       renderAdmin(root, r[0], r[1], r[2], r[3], r[4], r[5], r[6], r[7]);
     });
@@ -1295,7 +890,7 @@
     var btnCsv = $('#btnCsv'); if (btnCsv) btnCsv.addEventListener('click', function () { exportCSV(stores); });
     var btnCleanLost = $('#btnCleanLost'); if (btnCleanLost) btnCleanLost.addEventListener('click', function () { if (!confirm('Excluir permanentemente todos os leads marcados como perdido?')) return; fetch(B('city_leads?status=eq.perdido'), { method:'DELETE', headers:aH() }).then(function(){ pageAdmin(); }); });
     root.querySelectorAll('[data-lead-delete]').forEach(function (b) { b.addEventListener('click', function () { if (!confirm('Excluir permanentemente o lead '+b.getAttribute('data-lead-name')+'?')) return; fetch(B('city_leads?id=eq.'+encodeURIComponent(b.getAttribute('data-lead-delete'))),{method:'DELETE',headers:aH()}).then(function(){pageAdmin();}); }); });
-    root.querySelectorAll('[data-store-delete]').forEach(function (b) { b.addEventListener('click', function () { var sid = b.getAttribute('data-store-delete'), sname = b.getAttribute('data-store-name'); if (!confirm('Excluir permanentemente a empresa '+sname+'? Fotos e ofertas também serão removidas.')) return; /* Captura snapshot antes de deletar para audit */ var storeSnapshot = (stores || []).filter(function(x){ return x.id === sid; })[0] || { id: sid, nome: sname }; auditLog('DELETE', 'stores', sid, storeSnapshot, null); fetch(B('stores?id=eq.'+encodeURIComponent(sid)),{method:'DELETE',headers:aH()}).then(function(){ swrInvalidate('stores'); pageAdmin(); }); }); });
+    root.querySelectorAll('[data-store-delete]').forEach(function (b) { b.addEventListener('click', function () { if (!confirm('Excluir permanentemente a empresa '+b.getAttribute('data-store-name')+'? Fotos e ofertas também serão removidas.')) return; fetch(B('stores?id=eq.'+encodeURIComponent(b.getAttribute('data-store-delete'))),{method:'DELETE',headers:aH()}).then(function(){pageAdmin();}); }); });
     root.querySelectorAll('[data-act]').forEach(function (btn) {
       btn.addEventListener('click', function () {
         var id = btn.getAttribute('data-id'), act = btn.getAttribute('data-act'), patch = {};
@@ -1303,7 +898,7 @@
         if (act === 'rejeitar') patch.status = 'rejeitado';
         if (act === 'destaque-on') patch.destaque = true;
         if (act === 'destaque-off') patch.destaque = false;
-        aPatch('stores', id, patch, { before: { status: btn.getAttribute('data-act') } }).then(function (ok) { if (ok) swrInvalidate('stores'); pageAdmin(); });
+        aPatch('stores', id, patch).then(function () { pageAdmin(); });
       });
     });
     root.querySelectorAll('select[data-plano-id]').forEach(function (sel) {
@@ -1345,11 +940,7 @@
   function pagePainel() {
     var root = $('#painelRoot'); if (!root) return;
     if (!AUTH.tok()) { location.href = 'login.html'; return; }
-    root.innerHTML = '<div class="space-y-3 p-4 animate-pulse">' +
-      '<div class="h-24 bg-silver-100 rounded-2xl"></div>' +
-      '<div class="h-40 bg-silver-100 rounded-2xl"></div>' +
-      '<div class="h-32 bg-silver-100 rounded-2xl"></div>' +
-      '</div>';
+    root.innerHTML = '<p class="text-center text-silver-500 py-10">Carregando...</p>';
     var _isLojista = !AUTH.tok() && !!LojistaAuth.tok();
     var storeQuery = _isLojista ? ('stores?select=*&owner_id=eq.' + LojistaAuth.uid() + '&order=criado_em.desc') : 'stores?select=*&order=criado_em.desc';
     aGet(storeQuery).then(function (stores) {
@@ -1420,12 +1011,6 @@
       + '<label class="flex items-center gap-2 text-sm mt-3"><input type="checkbox" name="destaque" class="w-4 h-4 accent-peao-500"' + (s.destaque ? ' checked' : '') + '> Destacar empresa</label>'
       + '<button class="btn-shine bg-peao-500 hover:bg-peao-600 text-white font-bold px-5 py-2.5 rounded-xl">Salvar</button><span id="editMsg" class="text-sm text-emerald-600 ml-2"></span></form>';
   }
-  /* -------------------------------------------------------
-   * wireEdit v3.5 — Validação StoreSchema + Audit Trail
-   * • Valida campos antes de enviar
-   * • Snapshot do estado anterior para trilha de auditoria
-   * • Feedback visual rico com erros específicos
-   * ----------------------------------------------------- */
   function wireEdit(s) {
     var f = $('#formEdit'); if (!f) return;
     f.addEventListener('submit', function (e) {
@@ -1438,29 +1023,11 @@
       var tagsArr = [];
       ['24h', 'plantao', 'madrugada'].forEach(function (t) { if (f.querySelector('[name=tag_' + t + ']') && f.querySelector('[name=tag_' + t + ']').checked) tagsArr.push(t); });
       ['24h', 'plantao', 'madrugada'].forEach(function (t) { delete obj['tag_' + t]; });
-
-      // 🛡️ Validação de schema
-      var validation = validateStore(obj);
-      var m = $('#editMsg');
-      if (!validation.ok) {
-        if (m) { m.textContent = '❌ ' + validation.errors[0]; m.className = 'text-sm ml-2 text-peao-600'; }
-        return;
-      }
-      obj = validation.data; // usa dados sanitizados
-
-      // 📸 Snapshot do estado anterior para audit
-      var beforeState = {};
-      Object.keys(obj).forEach(function(k) { if (s[k] !== undefined) beforeState[k] = s[k]; });
-
-      if (m) { m.textContent = 'Salvando…'; m.className = 'text-sm ml-2 text-silver-500'; }
-
-      aPatch('stores', s.id, obj, { before: beforeState }).then(function (ok) {
-        if (ok) aPatch('stores', s.id, { tags: tagsArr }, { before: { tags: s.tags } });
-        if (m) {
-          m.textContent = ok ? '✅ Salvo com sucesso!' : '❌ Erro ao salvar. Tente novamente.';
-          m.className = 'text-sm ml-2 ' + (ok ? 'text-emerald-600' : 'text-peao-600');
-        }
-        if (ok) setTimeout(function() { if (m) m.textContent = ''; }, 3000);
+      var m = $('#editMsg'); if(m){m.textContent='Salvando…';m.className='text-sm ml-2 text-silver-500';}
+      aPatch('stores', s.id, obj).then(function (ok) {
+        if (ok) aPatch('stores', s.id, { tags: tagsArr });
+        if (m) { m.textContent = ok ? '✅ Salvo com sucesso!' : '❌ Erro ao salvar'; m.className = 'text-sm ml-2 ' + (ok ? 'text-emerald-600' : 'text-peao-600'); }
+        if (ok) setTimeout(function(){ if(m) m.textContent=''; }, 3000);
       });
     });
   }
@@ -1498,7 +1065,8 @@
       if (window.L) { res(); return; }
       ['leaflet.css', 'MarkerCluster.css', 'MarkerCluster.Default.css'].forEach(function (f) { var l = document.createElement('link'); l.rel = 'stylesheet'; l.href = 'assets/vendor/' + f; document.head.appendChild(l); });
       var s = document.createElement('script'); s.src = 'assets/vendor/leaflet.js';
-      s.onload = function () { var m = document.createElement('script'); m.src = 'assets/vendor/leaflet.markercluster.js'; m.onload = function () { res(); }; m.onerror = function () { console.error('[AQUITEM] leaflet.markercluster.js falhou'); res(); }; document.head.appendChild(m)rror = function () { res(); };
+      s.onload = function () { var m = document.createElement('script'); m.src = 'assets/vendor/leaflet.markercluster.js'; m.onload = function () { res(); }; m.onerror = function () { res(); }; document.head.appendChild(m); };
+      s.onerror = function () { res(); };
       document.head.appendChild(s);
     });
   }
@@ -1509,9 +1077,7 @@
     var box = $('#mapaBox'); if (!box) return;
     Promise.all([Categories.list(), Stores.list()]).then(function (r) { renderMapaPage(box, r[0], r[1]); });
   }
-  /* renderMapaPage v3.5 — ErrorBoundary rígido */
   function renderMapaPage(box, cats, stores) {
-    try {
     var comCoords = stores.filter(function (s) { return s.lat && s.lng; });
     var chipsIds = ['all'].concat(cats.map(function (c) { return c.id; }));
     box.innerHTML = '<div class="flex flex-wrap gap-2 mb-4">' + chipsIds.map(function (cid) { var c = cid === 'all' ? { id: 'all', nome: 'Todas', emoji: '📍' } : cats.filter(function (x) { return x.id === cid; })[0]; return '<button data-fcat="' + cid + '" class="filt-btn px-3 py-1.5 rounded-full text-xs font-semibold bg-white ring-silver">' + (c.emoji || '') + ' ' + esc(c.nome) + '</button>'; }).join('') + '</div>'
@@ -1521,31 +1087,8 @@
       + '<p class="text-xs text-silver-500 mt-3">' + comCoords.length + ' de ' + stores.length + ' empresas com localização no mapa. Defina a localização no painel da empresa.</p>';
     var active = 'all';
     loadLeaflet().then(function () {
-      if (!window.L) {
-        var el = box.querySelector('#leaf');
-        if (el) {
-          el.innerHTML = '<div style="padding:24px;text-align:center;background:#f8fafc;border-radius:12px">'
-            + '<div style="font-size:32px;margin-bottom:12px">🗺️</div>'
-            + '<p style="color:#64748b;font-size:14px;margin-bottom:12px">Mapa temporariamente indisponível</p>'
-            + '<a href="https://www.google.com/maps/search/Barretos+SP" target="_blank" rel="noopener" '
-            + 'style="background:#1a56db;color:#fff;padding:8px 18px;border-radius:8px;text-decoration:none;font-size:13px;font-weight:600">'
-            + '📍 Ver no Google Maps</a>'
-            + '<p style="color:#94a3b8;font-size:12px;margin-top:12px">'
-            + comCoords.length + ' empresa(s) com localização cadastrada</p>'
-            + '</div>';
-        }
-        console.error('[AQUITEM] Leaflet não carregou — mapa indisponível');
-        return;
-      }
-      var map;
-      try {
-        map = L.map('leaf').setView(BARRETOS, 13);
-      } catch(mapErr) {
-        console.error('[AQUITEM] L.map erro:', mapErr);
-        var el2 = box.querySelector('#leaf');
-        if (el2) el2.innerHTML = '<div style="padding:20px;text-align:center;color:#64748b">⚠️ Erro ao inicializar mapa. <a href="https://www.google.com/maps/place/Barretos" target="_blank" style="color:#1a56db">Abrir Google Maps</a></div>';
-        return;
-      }
+      if (!window.L) { var el = box.querySelector('#leaf'); if (el) el.innerHTML = '<div class="p-6 text-sm text-silver-500">Não foi possível carregar o mapa.</div>'; return; }
+      var map = L.map('leaf').setView(BARRETOS, 13);
       L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 19, attribution: '© OpenStreetMap' }).addTo(map);
       var markers = (L.markerClusterGroup ? L.markerClusterGroup() : L.layerGroup()); markers.addTo(map);
       function apply() {
@@ -1592,7 +1135,7 @@
         }).catch(function(){});
     }
     loadLeaflet().then(function(){
-      if(!window.L){box.innerHTML='<div class="aquitem-map-error">Mapa indisponível agora. Use “Abrir no Google Maps” para conferir o endereço.</div>';var mlnk=box.querySelector('a'); if(mlnk&&s){mlnk.href='https://www.google.com/maps/search/?api=1&query='+encodeURIComponent([(s.endereco||''),(s.bairro||''),(s.cidade||'Barretos')].filter(Boolean).join(', '));} return;}
+      if(!window.L){box.innerHTML='<div class="aquitem-map-error">Mapa indisponível agora. Use “Abrir no Google Maps” para conferir o endereço.</div>';return;}
       try {
         mapObj=L.map('pickMap').setView((s.lat&&s.lng)?[s.lat,s.lng]:BARRETOS,15);
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:19,attribution:'© OpenStreetMap'}).addTo(mapObj);
