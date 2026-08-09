@@ -912,7 +912,6 @@
         whatsapp: wa,
         email: ($('#job_email').value||'').trim(),
         cidade: cityName,
-        city_slug: citySlug,
         status: 'ativo',
         plano: 'gratis',
         anunciante_tipo: 'empresa',
@@ -938,7 +937,6 @@
         preco: ($('#an_preco').value||'').trim(),
         whatsapp: wa,
         cidade: cityName,
-        city_slug: citySlug,
         status: 'ativo',
         plano: 'pro',
         anunciante_tipo: 'particular'
