@@ -2,6 +2,18 @@
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "cleanUrls": true,
   "trailingSlash": false,
+  "redirects": [
+    {
+      "source": "/barretos",
+      "destination": "/fundadores?cidade=barretos&utm_source=instagram&utm_medium=bio&utm_campaign=fundadoras_barretos",
+      "permanent": false
+    },
+    {
+      "source": "/fundadoras",
+      "destination": "/fundadores?cidade=barretos&utm_source=instagram&utm_medium=bio&utm_campaign=fundadoras_barretos",
+      "permanent": false
+    }
+  ],
   "headers": [
     {
       "source": "/(.*)",
