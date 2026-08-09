@@ -27,6 +27,21 @@
       "source": "/trabalhar",
       "destination": "/empregos.html?utm_source=facebook&utm_medium=grupo&utm_campaign=peao2026_trabalho",
       "permanent": false
+    },
+    {
+      "source": "/gramado",
+      "destination": "/assets/gramado-home.html?utm_source=facebook&utm_medium=grupo&utm_campaign=gramado_guia",
+      "permanent": false
+    },
+    {
+      "source": "/nataluz",
+      "destination": "/assets/gramado-natal-luz.html?utm_source=facebook&utm_medium=grupo&utm_campaign=gramado_natal_luz",
+      "permanent": false
+    },
+    {
+      "source": "/gramadoRS",
+      "destination": "/assets/gramado-home.html?utm_source=facebook&utm_medium=grupo&utm_campaign=gramado_guia",
+      "permanent": false
     }
   ],
   "headers": [
