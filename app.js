@@ -689,7 +689,7 @@
         var photos = r[0], offers = r[1], cats = r[2];
         el.innerHTML = storeProfile(s, photos, offers, cats, r[3]);
         setStoreSEO(s);
-        wireReview(s); wireHelpful('store'); wireAssinar();
+        wireReview(s); wireHelpful('store'); wireAssinar(); wireReivindicarStore(s);
         Stores.list().then(function (all) { var rel = all.filter(function (x) { return x.categoria === s.categoria && x.id !== s.id; }).slice(0, 4); var rd = $('#relatedStores'); if (rd && rel.length) rd.innerHTML = '<h3 class="font-display font-bold mb-3 mt-6">Você também pode gostar</h3><div class="grid grid-cols-2 md:grid-cols-4 gap-4">' + rel.map(function (x) { return storeCard(x, CATS); }).join('') + '</div>'; });
       });
     });
@@ -700,7 +700,7 @@
     var logo = s.logo_url ? '<img src="' + esc(s.logo_url) + '" alt="' + esc(s.nome) + '" class="w-20 h-20 rounded-2xl object-cover ring-4 ring-white shadow">' : '<div class="w-20 h-20 rounded-2xl bg-gradient-to-br from-navy-700 to-navy-500 grid place-items-center text-white text-2xl font-extrabold ring-4 ring-white shadow">' + esc(initials(s.nome)) + '</div>';
     var gal = photos.length ? '<div class="mt-6"><h3 class="font-display font-bold mb-3">Fotos</h3><div class="grid grid-cols-3 md:grid-cols-5 gap-3">' + photos.map(function (p) { return '<img src="' + esc(p.url) + '" alt="" class="w-full h-24 md:h-28 object-cover rounded-xl ring-silver" loading="lazy">'; }).join('') + '</div></div>' : '';
     var ofs = offers.length ? '<div class="mt-6"><h3 class="font-display font-bold mb-3">🔥 Ofertas ativas</h3><div class="grid sm:grid-cols-2 gap-3">' + offers.map(function (o) { return '<div class="rounded-2xl bg-silver-50 ring-silver p-4"><p class="font-display font-bold">' + esc(o.titulo) + '</p>' + (o.preco_atual ? '<p class="text-peao-500 font-extrabold">' + esc(o.preco_atual) + '</p>' : '') + (o.termino ? '<p class="text-[11px] text-silver-500">até ' + esc(formatDate(o.termino)) + '</p>' : '') + '</div>'; }).join('') + '</div></div>' : '';
-    var end = (s.endereco || s.bairro) ? '<p>📍 ' + esc([s.endereco, s.bairro, 'Barretos/SP'].filter(Boolean).join(' — ')) + '</p>' : '';
+    var end = (s.endereco || s.bairro) ? '<p>📍 ' + esc([s.endereco, s.bairro, (s.cidade || currentCityName())].filter(Boolean).join(' — ')) + '</p>' : '';
     var det = '';
     if (s.faixa_preco) det += '<span class="text-xs bg-silver-50 ring-silver px-2.5 py-1 rounded-full font-semibold">💰 ' + esc(s.faixa_preco) + '</span>';
     if (s.pagamento) det += '<span class="text-xs bg-silver-50 ring-silver px-2.5 py-1 rounded-full">💳 ' + esc(s.pagamento) + '</span>';
@@ -714,7 +714,158 @@
 
     var mapQ = encodeURIComponent([s.endereco, s.bairro, (s.cidade || currentCityName())].filter(Boolean).join(', '));
     var map = mapQ ? '<div class="mt-3 rounded-2xl overflow-hidden ring-silver"><iframe title="Mapa" class="w-full h-48" style="border:0" loading="lazy" src="https://www.google.com/maps?q=' + mapQ + '&output=embed"></iframe></div><a href="https://www.google.com/maps/dir/?api=1&destination=' + mapQ + '" target="_blank" rel="noopener noreferrer" onclick="window.ATA&&window.ATA.Metrics.log(\'click_mapa\',\'' + esc(s.id) + '\')" class="btn-shine inline-block mt-2 bg-navy-800 hover:bg-navy-700 text-white font-semibold px-4 py-2.5 rounded-xl text-sm">📍 Como chegar</a>' : '';
-    return '<div class="max-w-4xl mx-auto px-4 sm:px-6 py-6"><a href="javascript:history.back()" class="text-silver-500 text-sm hover:text-navy-700">← Voltar</a><div class="mt-3 bg-white rounded-3xl shadow-soft ring-silver overflow-hidden">' + capa + '<div class="p-6 -mt-12 relative">' + logo + '<div class="mt-3 flex items-center gap-2 flex-wrap"><span class="text-xs font-semibold text-peao-600 bg-peao-500/10 px-2 py-0.5 rounded">' + esc(catName(s.categoria, cats)) + '</span>' + (s.verificada ? '<span class="text-xs font-semibold text-emerald-700 bg-emerald-500/10 px-2 py-0.5 rounded">✓ Empresa verificada</span>' : '') + (s.city_lead_id ? '<span class="text-xs font-semibold text-amber-600 bg-amber-400/10 px-2 py-0.5 rounded">✦ Empresa Fundadora</span>' : (s.destaque ? '<span class="text-xs font-semibold text-peao-600 bg-peao-500/10 px-2 py-0.5 rounded">Destaque</span>' : '')) + '</div><h1 class="font-display text-2xl md:text-3xl font-extrabold mt-2">' + esc(s.nome) + '</h1>' + (s.descricao_curta ? '<p class="text-slate-600 mt-1">' + esc(s.descricao_curta) + '</p>' : '') + (s.descricao ? '<p class="text-slate-700 mt-3 leading-relaxed">' + esc(s.descricao) + '</p>' : '') + '<div class="mt-4 grid sm:grid-cols-2 gap-2 text-sm text-slate-700">' + (s.horario ? '<p>🕒 ' + esc(s.horario) + '</p>' : '') + (s.telefone ? '<p>☎️ ' + esc(s.telefone) + '</p>' : '') + end + '</div>' + (det ? '<div class="mt-4 flex flex-wrap gap-2">' + det + '</div>' : '') + map + '<div class="mt-5 flex flex-wrap gap-3"><a href="' + wa + '" target="_blank" rel="noopener noreferrer" onclick="window.ATA&&window.ATA.Metrics.log(\'click_whatsapp\',\'' + esc(s.id) + '\')" class="btn-shine bg-[#25D366] text-white font-bold px-5 py-3 rounded-xl">💬 Falar no WhatsApp</a><button onclick="navigator.share?navigator.share({title:\'' + esc(s.nome) + '\',url:location.href}):copy(location.href)" class="btn-shine glass-light text-navy-800 font-bold px-5 py-3 rounded-xl">🔗 Compartilhar</button></div></div></div>' + ofs + gal + ratingBlock(s, reviews) + ((s.plano === 'pro' || s.destaque || s.city_lead_id) ? '<div class="aquitem-pro-status">✦ Este perfil já possui visibilidade avançada no guia.</div>' : upsellCard('store', s.id, s.nome)) + '<a href="' + waLink('Den\u00fancia sobre: ' + s.nome) + '" target="_blank" rel="noopener noreferrer" class="block mt-4 text-center text-xs text-slate-400 hover:text-peao-600">🚩 Denunciar conteúdo incorreto</a></div>';
+
+    var reivindicarBanner = '<div class="bg-gradient-to-r from-navy-900 via-navy-800 to-navy-950 rounded-3xl p-6 ring-2 ring-amber-400/50 shadow-glow mt-6 border border-white/10 text-white">' +
+      '<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">' +
+        '<div>' +
+          '<span class="inline-block text-[11px] font-extrabold uppercase tracking-widest text-amber-400 bg-amber-400/10 px-3 py-1 rounded-full mb-2">✦ Espaço do Dono da Empresa</span>' +
+          '<h3 class="font-display font-extrabold text-xl text-white">É proprietário ou responsável por esta empresa?</h3>' +
+          '<p class="text-xs text-silver-300 mt-1 max-w-xl">Reivindique seu perfil gratuitamente para atualizar horários, WhatsApp, fotos, redes sociais ou destacar seu negócio para milhares de turistas e moradores.</p>' +
+        '</div>' +
+        '<button id="btnReivindicarStore" class="btn-shine shrink-0 bg-amber-400 hover:bg-amber-300 text-navy-950 font-extrabold text-sm px-6 py-3.5 rounded-xl shadow-lg transition transform hover:scale-105">' +
+          '✏️ Atualizar / Reivindicar Perfil →' +
+        '</button>' +
+      '</div>' +
+    '</div>';
+
+    return '<div class="max-w-4xl mx-auto px-4 sm:px-6 py-6"><a href="javascript:history.back()" class="text-silver-500 text-sm hover:text-navy-700">← Voltar</a><div class="mt-3 bg-white rounded-3xl shadow-soft ring-silver overflow-hidden">' + capa + '<div class="p-6 -mt-12 relative">' + logo + '<div class="mt-3 flex items-center gap-2 flex-wrap"><span class="text-xs font-semibold text-peao-600 bg-peao-500/10 px-2 py-0.5 rounded">' + esc(catName(s.categoria, cats)) + '</span>' + (s.verificada ? '<span class="text-xs font-semibold text-emerald-700 bg-emerald-500/10 px-2 py-0.5 rounded">✓ Empresa verificada</span>' : '') + (s.city_lead_id ? '<span class="text-xs font-semibold text-amber-600 bg-amber-400/10 px-2 py-0.5 rounded">✦ Empresa Fundadora</span>' : (s.destaque ? '<span class="text-xs font-semibold text-peao-600 bg-peao-500/10 px-2 py-0.5 rounded">Destaque</span>' : '')) + '</div><h1 class="font-display text-2xl md:text-3xl font-extrabold mt-2">' + esc(s.nome) + '</h1>' + (s.descricao_curta ? '<p class="text-slate-600 mt-1">' + esc(s.descricao_curta) + '</p>' : '') + (s.descricao ? '<p class="text-slate-700 mt-3 leading-relaxed">' + esc(s.descricao) + '</p>' : '') + '<div class="mt-4 grid sm:grid-cols-2 gap-2 text-sm text-slate-700">' + (s.horario ? '<p>🕒 ' + esc(s.horario) + '</p>' : '') + (s.telefone ? '<p>☎️ ' + esc(s.telefone) + '</p>' : '') + end + '</div>' + (det ? '<div class="mt-4 flex flex-wrap gap-2">' + det + '</div>' : '') + map + '<div class="mt-5 flex flex-wrap gap-3"><a href="' + wa + '" target="_blank" rel="noopener noreferrer" onclick="window.ATA&&window.ATA.Metrics.log(\'click_whatsapp\',\'' + esc(s.id) + '\')" class="btn-shine bg-[#25D366] text-white font-bold px-5 py-3 rounded-xl">💬 Falar no WhatsApp</a><button onclick="navigator.share?navigator.share({title:\'' + esc(s.nome) + '\',url:location.href}):copy(location.href)" class="btn-shine glass-light text-navy-800 font-bold px-5 py-3 rounded-xl">🔗 Compartilhar</button></div></div></div>' + ofs + gal + ratingBlock(s, reviews) + reivindicarBanner + ((s.plano === 'pro' || s.destaque || s.city_lead_id) ? '<div class="aquitem-pro-status mt-4">✦ Este perfil possui visibilidade destacada no guia.</div>' : upsellCard('store', s.id, s.nome)) + '<a href="' + waLink('Den\u00fancia sobre: ' + s.nome) + '" target="_blank" rel="noopener noreferrer" class="block mt-4 text-center text-xs text-slate-400 hover:text-peao-600">🚩 Denunciar conteúdo incorreto</a></div>';
+  }
+
+  function wireReivindicarStore(s) {
+    var btn = $('#btnReivindicarStore');
+    if (!btn) return;
+
+    btn.addEventListener('click', function () {
+      if ($('#modalReivindicar')) $('#modalReivindicar').remove();
+
+      var m = document.createElement('div');
+      m.id = 'modalReivindicar';
+      m.className = 'fixed inset-0 z-[100] bg-black/80 backdrop-blur-sm flex items-center justify-center p-4 overflow-y-auto';
+      m.innerHTML = '<div class="bg-navy-950 border border-silver-300/30 rounded-3xl p-6 sm:p-8 max-w-2xl w-full text-white shadow-2xl relative my-8">' +
+        '<button id="closeReivindicar" class="absolute top-5 right-5 text-silver-400 hover:text-white text-xl">✕</button>' +
+        '<span class="text-xs font-bold text-amber-400 uppercase tracking-wider bg-amber-400/10 px-3 py-1 rounded-full">Atualização de Perfil Comercial</span>' +
+        '<h2 class="font-display text-2xl font-extrabold mt-2 text-white">Reivindicar & Atualizar: ' + esc(s.nome) + '</h2>' +
+        '<p class="text-xs text-silver-300 mt-1">Preencha os dados oficiais da sua empresa. Os dados são enviados para nossa equipe e entram no ar imediatamente.</p>' +
+        '<form id="formReivindicar" class="mt-5 space-y-4">' +
+          '<div class="grid sm:grid-cols-2 gap-3">' +
+            '<div>' +
+              '<label class="block text-xs font-semibold text-silver-300 mb-1">WhatsApp para receber clientes *</label>' +
+              '<input name="whatsapp" value="' + esc(s.whatsapp || '') + '" placeholder="(17) 9XXXX-XXXX" required class="w-full px-3.5 py-2.5 rounded-xl bg-silver-50 text-navy-900 text-sm ring-silver outline-none">' +
+            '</div>' +
+            '<div>' +
+              '<label class="block text-xs font-semibold text-silver-300 mb-1">Telefone fixo</label>' +
+              '<input name="telefone" value="' + esc(s.telefone || '') + '" placeholder="(17) 332X-XXXX" class="w-full px-3.5 py-2.5 rounded-xl bg-silver-50 text-navy-900 text-sm ring-silver outline-none">' +
+            '</div>' +
+            '<div>' +
+              '<label class="block text-xs font-semibold text-silver-300 mb-1">Instagram (@da_sua_loja)</label>' +
+              '<input name="instagram" value="' + esc(s.instagram || '') + '" placeholder="@sualoja" class="w-full px-3.5 py-2.5 rounded-xl bg-silver-50 text-navy-900 text-sm ring-silver outline-none">' +
+            '</div>' +
+            '<div>' +
+              '<label class="block text-xs font-semibold text-silver-300 mb-1">Horário de funcionamento</label>' +
+              '<input name="horario" value="' + esc(s.horario || '') + '" placeholder="Ex.: Seg a Sex 08h às 18h | Sáb 08h às 13h" class="w-full px-3.5 py-2.5 rounded-xl bg-silver-50 text-navy-900 text-sm ring-silver outline-none">' +
+            '</div>' +
+            '<div>' +
+              '<label class="block text-xs font-semibold text-silver-300 mb-1">Bairro</label>' +
+              '<input name="bairro" value="' + esc(s.bairro || '') + '" class="w-full px-3.5 py-2.5 rounded-xl bg-silver-50 text-navy-900 text-sm ring-silver outline-none">' +
+            '</div>' +
+            '<div>' +
+              '<label class="block text-xs font-semibold text-silver-300 mb-1">Endereço (Rua, Av., nº)</label>' +
+              '<input name="endereco" value="' + esc(s.endereco || '') + '" class="w-full px-3.5 py-2.5 rounded-xl bg-silver-50 text-navy-900 text-sm ring-silver outline-none">' +
+            '</div>' +
+          '</div>' +
+          '<div>' +
+            '<label class="block text-xs font-semibold text-silver-300 mb-1">Descrição e diferenciais da empresa</label>' +
+            '<textarea name="descricao_curta" rows="2" placeholder="Conte o que sua empresa oferece, especialidades, etc." class="w-full px-3.5 py-2.5 rounded-xl bg-silver-50 text-navy-900 text-sm ring-silver outline-none">' + esc(s.descricao_curta || '') + '</textarea>' +
+          '</div>' +
+          '<div class="pt-2 border-t border-white/10">' +
+            '<label class="block text-xs font-bold text-amber-400 uppercase tracking-wide mb-2">Escolha seu Plano de Visibilidade</label>' +
+            '<div class="grid sm:grid-cols-3 gap-2.5">' +
+              '<label class="border border-white/10 bg-white/5 rounded-2xl p-3.5 cursor-pointer flex flex-col justify-between hover:bg-white/10 transition">' +
+                '<div>' +
+                  '<div class="flex items-center justify-between">' +
+                    '<span class="text-xs font-bold text-white">Plano Grátis</span>' +
+                    '<input type="radio" name="plano_escolhido" value="gratis" checked class="accent-peao-500">' +
+                  '</div>' +
+                  '<p class="text-[11px] text-silver-400 mt-1">Dados atualizados e WhatsApp no guia.</p>' +
+                '</div>' +
+                '<span class="text-xs font-extrabold text-white mt-2">R$ 0</span>' +
+              '</label>' +
+              '<label class="border-2 border-amber-400 bg-amber-400/10 rounded-2xl p-3.5 cursor-pointer flex flex-col justify-between hover:bg-amber-400/20 transition">' +
+                '<div>' +
+                  '<div class="flex items-center justify-between">' +
+                    '<span class="text-xs font-bold text-amber-300">⭐ Destaque</span>' +
+                    '<input type="radio" name="plano_escolhido" value="destaque" class="accent-peao-500">' +
+                  '</div>' +
+                  '<p class="text-[11px] text-silver-300 mt-1">Topo da categoria, selo ⭐, 10 fotos e 5 ofertas.</p>' +
+                '</div>' +
+                '<span class="text-xs font-extrabold text-amber-400 mt-2">R$ 79 / mês</span>' +
+              '</label>' +
+              '<label class="border border-white/10 bg-white/5 rounded-2xl p-3.5 cursor-pointer flex flex-col justify-between hover:bg-white/10 transition">' +
+                '<div>' +
+                  '<div class="flex items-center justify-between">' +
+                    '<span class="text-xs font-bold text-white">👑 Plano Pro</span>' +
+                    '<input type="radio" name="plano_escolhido" value="pro" class="accent-peao-500">' +
+                  '</div>' +
+                  '<p class="text-[11px] text-silver-400 mt-1">Topo absoluto, 20 fotos, ofertas ilimitadas e mapa.</p>' +
+                '</div>' +
+                '<span class="text-xs font-extrabold text-white mt-2">R$ 149 / mês</span>' +
+              '</label>' +
+            '</div>' +
+          '</div>' +
+          '<div class="pt-3 flex flex-col sm:flex-row items-center justify-between gap-3">' +
+            '<button type="submit" class="btn-shine w-full sm:w-auto bg-peao-500 hover:bg-peao-600 text-white font-bold px-8 py-3.5 rounded-xl shadow-redglow transition">' +
+              'Salvar Atualização →' +
+            '</button>' +
+            '<span id="reivindicarMsg" class="text-xs"></span>' +
+          '</div>' +
+        '</form>' +
+      '</div>';
+
+      document.body.appendChild(m);
+
+      $('#closeReivindicar').addEventListener('click', function () { m.remove(); });
+
+      var form = $('#formReivindicar');
+      form.addEventListener('submit', function (ev) {
+        ev.preventDefault();
+        var msg = $('#reivindicarMsg');
+        var fd = new FormData(form);
+        var subBtn = form.querySelector('button[type=submit]');
+        subBtn.disabled = true; subBtn.textContent = 'Salvando…';
+
+        var patchObj = {
+          whatsapp: fd.get('whatsapp'),
+          telefone: fd.get('telefone'),
+          instagram: fd.get('instagram'),
+          horario: fd.get('horario'),
+          bairro: fd.get('bairro'),
+          endereco: fd.get('endereco'),
+          descricao_curta: fd.get('descricao_curta')
+        };
+
+        var plano = fd.get('plano_escolhido') || 'gratis';
+
+        aPatch('stores', s.id, patchObj).then(function () {
+          msg.className = 'text-xs text-emerald-400';
+          msg.textContent = '✓ Dados salvos com sucesso!';
+
+          if (plano === 'destaque') {
+            setTimeout(function () { window.location.href = 'https://mpago.la/25UHZqr'; }, 1000);
+          } else if (plano === 'pro') {
+            setTimeout(function () { window.location.href = 'https://mpago.la/2HBxp5v'; }, 1000);
+          } else {
+            setTimeout(function () {
+              m.remove();
+              location.reload();
+            }, 1200);
+          }
+        }).catch(function (err) {
+          msg.className = 'text-xs text-peao-500';
+          msg.textContent = 'Erro ao salvar. Tente novamente.';
+          subBtn.disabled = false; subBtn.textContent = 'Salvar Atualização →';
+        });
+      });
+    });
   }
 
   function pageTurista() {
