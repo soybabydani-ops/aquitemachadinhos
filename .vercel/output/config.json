@@ -1465,13 +1465,6 @@
       "status": 307
     },
     {
-      "src": "^/marcas$",
-      "headers": {
-        "Location": "/marcas.html"
-      },
-      "status": 307
-    },
-    {
       "src": "^(?:/(.*))$",
       "headers": {
         "Strict-Transport-Security": "max-age=63072000; includeSubDomains; preload",
