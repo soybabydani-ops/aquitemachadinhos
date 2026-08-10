@@ -2,140 +2,211 @@
 <html lang="pt-BR">
 <head>
 <meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>AQUITEM — Escolha sua cidade | 29 Guias Locais no Brasil</title>
-<meta content="Escolha uma cidade e descubra empresas, vagas, experiências, serviços e achadinhos locais com a AQUITEM." name="description"/>
+<title>AQUITEM — 60 Cidades do Brasil | Polos Turísticos, Capitais & Interior</title>
+<meta content="Explore 60 cidades do Brasil no guia oficial AQUITEM: destinos turísticos, grandes capitais e polos regionais com comércio local, vagas de emprego e achadinhos." name="description"/>
 <link href="cidades.html" rel="canonical"/>
 <meta content="#081426" name="theme-color"/>
+<link href="assets/tailwind.css" rel="stylesheet"/>
+<link href="assets/styles.css" rel="stylesheet"/>
 <link href="assets/cidades.css" rel="stylesheet"/>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+.city-pill-btn {
+  padding: 10px 18px;
+  border-radius: 99px;
+  font-size: 13px;
+  font-weight: 700;
+  transition: all 0.2s ease;
+  cursor: pointer;
+  border: 1px solid rgba(255,255,255,0.15);
+  background: rgba(255,255,255,0.05);
+  color: #d7e0ed;
+}
+.city-pill-btn.active, .city-pill-btn:hover {
+  background: linear-gradient(135deg, #F5D77F, #D9AA42);
+  color: #07142B;
+  border-color: #F5D77F;
+  box-shadow: 0 8px 20px rgba(217,170,66,0.3);
+}
+.city-grid-card {
+  display: block;
+  text-decoration: none;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 20px;
+  padding: 20px;
+  transition: all 0.22s ease;
+  color: #0f172a;
+  position: relative;
+  overflow: hidden;
+}
+.city-grid-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 14px 30px rgba(0,0,0,0.1);
+  border-color: #D9AA42;
+}
+.city-badge-tag {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 800;
+  padding: 3px 8px;
+  border-radius: 20px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+.badge-turistico { background: rgba(217,170,66,0.15); color: #b37811; }
+.badge-capital { background: rgba(14,165,233,0.15); color: #0369a1; }
+.badge-interior { background: rgba(16,185,129,0.15); color: #047857; }
+</style>
 </head>
-<body>
+<body class="bg-silver-100 text-navy-900 min-h-screen flex flex-col">
+
 <header class="hero">
   <div class="nav">
     <div class="brand"><img src="assets/aquitem-symbol.png" alt="" class="brand-symbol">AQUITEM<small>AQUI TEM ACHADINHOS</small></div>
     <a href="index.html">← Início Nacional</a>
   </div>
   <div class="hero-in">
-    <div class="eyebrow">Rede Nacional · 29 Cidades</div>
+    <div class="eyebrow">Rede Nacional · 60 Cidades do Brasil</div>
     <h1>Escolha uma cidade<br/>para descobrir o melhor dela.</h1>
-    <p>Empresas, vagas, experiências, serviços e achadinhos para quem mora, visita ou empreende.</p>
+    <p>Explore destinos turísticos, grandes capitais e polos do interior com comércio verificado, vagas de emprego e achadinhos locais.</p>
     <a class="founder-link" href="fundadores.html">✦ Sua empresa quer abrir caminho? Conheça o programa Fundadoras</a>
   </div>
 </header>
 
-<main class="main">
-  <section class="intro">
-    <b>🌎 Uma rede em expansão com 29 destinos.</b> Cada cidade tem seu próprio guia, vagas de emprego, classificados e oportunidades para empresas locais. Escolha seu destino:
-  </section>
+<main class="main max-w-7xl mx-auto px-4 sm:px-6 w-full -mt-8 relative z-10 pb-16">
+  
+  <!-- Barra de Busca Instantânea de Cidades -->
+  <div class="bg-white rounded-3xl p-6 shadow-soft ring-silver mb-8">
+    <div class="flex flex-col md:flex-row items-center gap-4">
+      <div class="relative flex-1 w-full">
+        <span class="absolute inset-y-0 left-0 flex items-center pl-4 text-silver-400 text-lg pointer-events-none">🔍</span>
+        <input type="text" id="citySearchInput" placeholder="Buscar por cidade, estado (ex: SP, MG, RS, CE) ou atração..." class="w-full pl-11 pr-4 py-3.5 bg-silver-50 rounded-2xl ring-silver outline-none text-navy-900 placeholder:text-silver-400 text-sm focus:ring-2 focus:ring-navy-500 transition">
+      </div>
+      <div class="flex items-center gap-2 overflow-x-auto w-full md:w-auto pb-1 md:pb-0">
+        <button class="city-pill-btn active shrink-0" data-pillar="all">🇧🇷 Todas (60)</button>
+        <button class="city-pill-btn shrink-0" data-pillar="turistico">🌟 Polos Turísticos (22)</button>
+        <button class="city-pill-btn shrink-0" data-pillar="capital">🏙️ Grandes Capitais (19)</button>
+        <button class="city-pill-btn shrink-0" data-pillar="interior">🌾 Polos Regionais (19)</button>
+      </div>
+    </div>
+  </div>
 
-  <section aria-label="Cidades disponíveis" class="grid">
-    <!-- Sudeste -->
-    <a class="card" href="barretos-home.html"><span class="emoji">🤠</span><span class="arrow">→</span><h2>Barretos</h2><p>SP · Capital do Peão & Agro</p></a>
-    <a class="card" href="campos-home.html"><span class="emoji">❄️</span><span class="arrow">→</span><h2>Campos do Jordão</h2><p>SP · Suíça Brasileira & Serra</p></a>
-    <a class="card" href="buzios-home.html"><span class="emoji">☀️</span><span class="arrow">→</span><h2>Búzios</h2><p>RJ · Charme & Região dos Lagos</p></a>
-    <a class="card" href="paraty-home.html"><span class="emoji">⛵</span><span class="arrow">→</span><h2>Paraty</h2><p>RJ · Centro Histórico & Escunas</p></a>
-    <a class="card" href="uberlandia-home.html"><span class="emoji">🏢</span><span class="arrow">→</span><h2>Uberlândia</h2><p>MG · Triângulo Mineiro & Negócios</p></a>
-    <a class="card" href="ouro-preto-home.html"><span class="emoji">⛪</span><span class="arrow">→</span><h2>Ouro Preto</h2><p>MG · Barroco & Estrada Real</p></a>
-    <a class="card" href="vitoria-home.html"><span class="emoji">🦀</span><span class="arrow">→</span><h2>Vitória</h2><p>ES · Capital Capixaba & Moqueca</p></a>
+  <!-- Grid de Cidades Dinâmico e Filtrável -->
+  <div id="citiesGrid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+    
+    <!-- PILAR 1: POLOS TURÍSTICOS (22) -->
+    <a class="city-grid-card" href="barretos-home.html" data-pilar="turistico" data-name="barretos sp sao paulo peao rodeio"><div class="flex items-center justify-between"><span class="text-3xl">🤠</span><span class="city-badge-tag badge-turistico">🌟 Polo Turístico</span></div><h2 class="font-display font-extrabold text-lg mt-3">Barretos</h2><p class="text-xs text-silver-500 mt-1">SP · Capital do Peão & Agro</p></a>
+    <a class="city-grid-card" href="gramado-home.html" data-pilar="turistico" data-name="gramado rs serra gaucha natal luz"><div class="flex items-center justify-between"><span class="text-3xl">🎄</span><span class="city-badge-tag badge-turistico">🌟 Polo Turístico</span></div><h2 class="font-display font-extrabold text-lg mt-3">Gramado</h2><p class="text-xs text-silver-500 mt-1">RS · Serra Gaúcha & Natal Luz</p></a>
+    <a class="city-grid-card" href="campos-home.html" data-pilar="turistico" data-name="campos do jordao sp mantiqueira suica brasileira"><div class="flex items-center justify-between"><span class="text-3xl">❄️</span><span class="city-badge-tag badge-turistico">🌟 Polo Turístico</span></div><h2 class="font-display font-extrabold text-lg mt-3">Campos do Jordão</h2><p class="text-xs text-silver-500 mt-1">SP · Suíça Brasileira & Serra</p></a>
+    <a class="city-grid-card" href="buzios-home.html" data-pilar="turistico" data-name="buzios rj regiao dos lagos praias"><div class="flex items-center justify-between"><span class="text-3xl">☀️</span><span class="city-badge-tag badge-turistico">🌟 Polo Turístico</span></div><h2 class="font-display font-extrabold text-lg mt-3">Búzios</h2><p class="text-xs text-silver-500 mt-1">RJ · Charme & Região dos Lagos</p></a>
+    <a class="city-grid-card" href="paraty-home.html" data-pilar="turistico" data-name="paraty rj costa verde escunas centro historico"><div class="flex items-center justify-between"><span class="text-3xl">⛵</span><span class="city-badge-tag badge-turistico">🌟 Polo Turístico</span></div><h2 class="font-display font-extrabold text-lg mt-3">Paraty</h2><p class="text-xs text-silver-500 mt-1">RJ · Centro Histórico & Escunas</p></a>
+    <a class="city-grid-card" href="ouro-preto-home.html" data-pilar="turistico" data-name="ouro preto mg barroco unesco estrada real"><div class="flex items-center justify-between"><span class="text-3xl">⛪</span><span class="city-badge-tag badge-turistico">🌟 Polo Turístico</span></div><h2 class="font-display font-extrabold text-lg mt-3">Ouro Preto</h2><p class="text-xs text-silver-500 mt-1">MG · Barroco & Estrada Real</p></a>
+    <a class="city-grid-card" href="bonito-home.html" data-pilar="turistico" data-name="bonito ms ecoturismo flutuacao rios"><div class="flex items-center justify-between"><span class="text-3xl">🐟</span><span class="city-badge-tag badge-turistico">🌟 Polo Turístico</span></div><h2 class="font-display font-extrabold text-lg mt-3">Bonito</h2><p class="text-xs text-silver-500 mt-1">MS · Ecoturismo & Flutuação</p></a>
+    <a class="city-grid-card" href="jalapao-home.html" data-pilar="turistico" data-name="jalapao to tocantins fervedouros dunas douradas"><div class="flex items-center justify-between"><span class="text-3xl">🏜️</span><span class="city-badge-tag badge-turistico">🌟 Polo Turístico</span></div><h2 class="font-display font-extrabold text-lg mt-3">Jalapão</h2><p class="text-xs text-silver-500 mt-1">TO · Fervedouros & Dunas Douradas</p></a>
+    <a class="city-grid-card" href="chapada-guimaraes-home.html" data-pilar="turistico" data-name="chapada dos guimaraes mt paredoes veu de noiva"><div class="flex items-center justify-between"><span class="text-3xl">🧗</span><span class="city-badge-tag badge-turistico">🌟 Polo Turístico</span></div><h2 class="font-display font-extrabold text-lg mt-3">Chapada dos Guimarães</h2><p class="text-xs text-silver-500 mt-1">MT · Paredões & Véu de Noiva</p></a>
+    <a class="city-grid-card" href="caldasnovas-home.html" data-pilar="turistico" data-name="caldas novas go aguas termais resorts"><div class="flex items-center justify-between"><span class="text-3xl">♨️</span><span class="city-badge-tag badge-turistico">🌟 Polo Turístico</span></div><h2 class="font-display font-extrabold text-lg mt-3">Caldas Novas</h2><p class="text-xs text-silver-500 mt-1">GO · Águas Termais & Resorts</p></a>
+    <a class="city-grid-card" href="pirenopolis-home.html" data-pilar="turistico" data-name="pirenopolis go piri cavalhadas cachoeiras"><div class="flex items-center justify-between"><span class="text-3xl">🏰</span><span class="city-badge-tag badge-turistico">🌟 Polo Turístico</span></div><h2 class="font-display font-extrabold text-lg mt-3">Pirenópolis</h2><p class="text-xs text-silver-500 mt-1">GO · Cavalhadas & Cachoeiras</p></a>
+    <a class="city-grid-card" href="lencois-home.html" data-pilar="turistico" data-name="lencois ba chapada diamantina pai inacio"><div class="flex items-center justify-between"><span class="text-3xl">⛰️</span><span class="city-badge-tag badge-turistico">🌟 Polo Turístico</span></div><h2 class="font-display font-extrabold text-lg mt-3">Lençóis</h2><p class="text-xs text-silver-500 mt-1">BA · Chapada Diamantina & Aventura</p></a>
+    <a class="city-grid-card" href="porto-home.html" data-pilar="turistico" data-name="porto de galinhas pe piscinas naturais jangadas"><div class="flex items-center justify-between"><span class="text-3xl">🌊</span><span class="city-badge-tag badge-turistico">🌟 Polo Turístico</span></div><h2 class="font-display font-extrabold text-lg mt-3">Porto de Galinhas</h2><p class="text-xs text-silver-500 mt-1">PE · Piscinas Naturais & Jangadas</p></a>
+    <a class="city-grid-card" href="noronha-home.html" data-pilar="turistico" data-name="fernando de noronha pe sancho morro do pico golfinhos"><div class="flex items-center justify-between"><span class="text-3xl">🐬</span><span class="city-badge-tag badge-turistico">🌟 Polo Turístico</span></div><h2 class="font-display font-extrabold text-lg mt-3">Fernando de Noronha</h2><p class="text-xs text-silver-500 mt-1">PE · Paraíso Ecológico & Sancho</p></a>
+    <a class="city-grid-card" href="jericoacoara-home.html" data-pilar="turistico" data-name="jericoacoara ce jeri dunas kitesurf"><div class="flex items-center justify-between"><span class="text-3xl">🪁</span><span class="city-badge-tag badge-turistico">🌟 Polo Turístico</span></div><h2 class="font-display font-extrabold text-lg mt-3">Jericoacoara</h2><p class="text-xs text-silver-500 mt-1">CE · Dunas, Kitesurf & Pôr do Sol</p></a>
+    <a class="city-grid-card" href="alter-do-chao-home.html" data-pilar="turistico" data-name="alter do chao pa para caribe amazonico tapajos santarem"><div class="flex items-center justify-between"><span class="text-3xl">🏝️</span><span class="city-badge-tag badge-turistico">🌟 Polo Turístico</span></div><h2 class="font-display font-extrabold text-lg mt-3">Alter do Chão</h2><p class="text-xs text-silver-500 mt-1">PA · Caribe Amazônico & Tapajós</p></a>
+    <a class="city-grid-card" href="blumenau-home.html" data-pilar="turistico" data-name="blumenau sc oktoberfest vale europeu chopp"><div class="flex items-center justify-between"><span class="text-3xl">🍻</span><span class="city-badge-tag badge-turistico">🌟 Polo Turístico</span></div><h2 class="font-display font-extrabold text-lg mt-3">Blumenau</h2><p class="text-xs text-silver-500 mt-1">SC · Oktoberfest & Vale Europeu</p></a>
+    <a class="city-grid-card" href="florianopolis-home.html" data-pilar="turistico" data-name="florianopolis sc floripa ilha da magia praias"><div class="flex items-center justify-between"><span class="text-3xl">🏖️</span><span class="city-badge-tag badge-turistico">🌟 Polo Turístico</span></div><h2 class="font-display font-extrabold text-lg mt-3">Florianópolis</h2><p class="text-xs text-silver-500 mt-1">SC · Ilha da Magia & 42 Praias</p></a>
+    <a class="city-grid-card" href="balneario-camboriu-home.html" data-pilar="turistico" data-name="balneario camboriu sc dubai brasileira fg big wheel"><div class="flex items-center justify-between"><span class="text-3xl">🏙️</span><span class="city-badge-tag badge-turistico">🌟 Polo Turístico</span></div><h2 class="font-display font-extrabold text-lg mt-3">Balneário Camboriú</h2><p class="text-xs text-silver-500 mt-1">SC · Dubai Brasileira & Orla</p></a>
+    <a class="city-grid-card" href="foz-do-iguacu-home.html" data-pilar="turistico" data-name="foz do iguacu pr cataratas itaipu fronteira"><div class="flex items-center justify-between"><span class="text-3xl">🌊</span><span class="city-badge-tag badge-turistico">🌟 Polo Turístico</span></div><h2 class="font-display font-extrabold text-lg mt-3">Foz do Iguaçu</h2><p class="text-xs text-silver-500 mt-1">PR · Cataratas & Tríplice Fronteira</p></a>
+    <a class="city-grid-card" href="caruaru-home.html" data-pilar="turistico" data-name="caruaru pe sao joao feira alto do moura"><div class="flex items-center justify-between"><span class="text-3xl">🎶</span><span class="city-badge-tag badge-turistico">🌟 Polo Turístico</span></div><h2 class="font-display font-extrabold text-lg mt-3">Caruaru</h2><p class="text-xs text-silver-500 mt-1">PE · Capital do Forró & São João</p></a>
+    <a class="city-grid-card" href="natal-home.html" data-pilar="turistico" data-name="natal rn dunas genipabu ponta negra camarao"><div class="flex items-center justify-between"><span class="text-3xl">🐪</span><span class="city-badge-tag badge-turistico">🌟 Polo Turístico</span></div><h2 class="font-display font-extrabold text-lg mt-3">Natal</h2><p class="text-xs text-silver-500 mt-1">RN · Cidade do Sol & Genipabu</p></a>
 
-    <!-- Sul -->
-    <a class="card" href="curitiba-home.html"><span class="emoji">🌲</span><span class="arrow">→</span><h2>Curitiba</h2><p>PR · Capital Ecológica & Inovação</p></a>
-    <a class="card" href="foz-do-iguacu-home.html"><span class="emoji">🌊</span><span class="arrow">→</span><h2>Foz do Iguaçu</h2><p>PR · Cataratas & Tríplice Fronteira</p></a>
-    <a class="card" href="gramado-home.html"><span class="emoji">🎄</span><span class="arrow">→</span><h2>Gramado</h2><p>RS · Serra Gaúcha & Natal Luz</p></a>
-    <a class="card" href="florianopolis-home.html"><span class="emoji">🏖️</span><span class="arrow">→</span><h2>Florianópolis</h2><p>SC · Ilha da Magia & 42 Praias</p></a>
-    <a class="card" href="balneario-camboriu-home.html"><span class="emoji">🏙️</span><span class="arrow">→</span><h2>Balneário Camboriú</h2><p>SC · Dubai Brasileira & Orla</p></a>
-    <a class="card" href="blumenau-home.html"><span class="emoji">🍻</span><span class="arrow">→</span><h2>Blumenau</h2><p>SC · Oktoberfest & Vale Europeu</p></a>
+    <!-- PILAR 2: GRANDES CAPITAIS & METRÓPOLES (19) -->
+    <a class="city-grid-card" href="sao-paulo-home.html" data-pilar="capital" data-name="sao paulo sp capital paulista paulista faria lima jardins bixiga"><div class="flex items-center justify-between"><span class="text-3xl">🏙️</span><span class="city-badge-tag badge-capital">🏙️ Grande Capital</span></div><h2 class="font-display font-extrabold text-lg mt-3">São Paulo</h2><p class="text-xs text-silver-500 mt-1">SP · Maior Metrópole & Polo Financeiro</p></a>
+    <a class="city-grid-card" href="rio-de-janeiro-home.html" data-pilar="capital" data-name="rio de janeiro rj cidade maravilhosa copacabana ipanema pão de açucar"><div class="flex items-center justify-between"><span class="text-3xl">🏖️</span><span class="city-badge-tag badge-capital">🏙️ Grande Capital</span></div><h2 class="font-display font-extrabold text-lg mt-3">Rio de Janeiro</h2><p class="text-xs text-silver-500 mt-1">RJ · Cidade Maravilhosa & Negócios</p></a>
+    <a class="city-grid-card" href="belo-horizonte-home.html" data-pilar="capital" data-name="belo horizonte mg beaga savassi pampulha botecos"><div class="flex items-center justify-between"><span class="text-3xl">🔺</span><span class="city-badge-tag badge-capital">🏙️ Grande Capital</span></div><h2 class="font-display font-extrabold text-lg mt-3">Belo Horizonte</h2><p class="text-xs text-silver-500 mt-1">MG · Capital dos Botecos & Pampulha</p></a>
+    <a class="city-grid-card" href="brasilia-home.html" data-pilar="capital" data-name="brasilia df capital federal lago paranoa eixo monumental"><div class="flex items-center justify-between"><span class="text-3xl">🏛️</span><span class="city-badge-tag badge-capital">🏙️ Grande Capital</span></div><h2 class="font-display font-extrabold text-lg mt-3">Brasília</h2><p class="text-xs text-silver-500 mt-1">DF · Capital Federal & Centro de Decisões</p></a>
+    <a class="city-grid-card" href="curitiba-home.html" data-pilar="capital" data-name="curitiba pr capital ecologica jardim botanico batel"><div class="flex items-center justify-between"><span class="text-3xl">🌲</span><span class="city-badge-tag badge-capital">🏙️ Grande Capital</span></div><h2 class="font-display font-extrabold text-lg mt-3">Curitiba</h2><p class="text-xs text-silver-500 mt-1">PR · Capital Ecológica & Inovação</p></a>
+    <a class="city-grid-card" href="porto-alegre-home.html" data-pilar="capital" data-name="porto alegre rs poa orla guaiba moinhos de vento"><div class="flex items-center justify-between"><span class="text-3xl">🧉</span><span class="city-badge-tag badge-capital">🏙️ Grande Capital</span></div><h2 class="font-display font-extrabold text-lg mt-3">Porto Alegre</h2><p class="text-xs text-silver-500 mt-1">RS · Orla do Guaíba & Polo Tech</p></a>
+    <a class="city-grid-card" href="salvador-home.html" data-pilar="capital" data-name="salvador ba pelourinho barra rio vermelho axe"><div class="flex items-center justify-between"><span class="text-3xl">🥁</span><span class="city-badge-tag badge-capital">🏙️ Grande Capital</span></div><h2 class="font-display font-extrabold text-lg mt-3">Salvador</h2><p class="text-xs text-silver-500 mt-1">BA · Pelourinho, Axé & Gastronomia</p></a>
+    <a class="city-grid-card" href="recife-home.html" data-pilar="capital" data-name="recife pe boa viagem porto digital frevo marco zero"><div class="flex items-center justify-between"><span class="text-3xl">🎭</span><span class="city-badge-tag badge-capital">🏙️ Grande Capital</span></div><h2 class="font-display font-extrabold text-lg mt-3">Recife</h2><p class="text-xs text-silver-500 mt-1">PE · Veneza Brasileira & Porto Digital</p></a>
+    <a class="city-grid-card" href="fortaleza-home.html" data-pilar="capital" data-name="fortaleza ce terra da luz praia do futuro beira mar"><div class="flex items-center justify-between"><span class="text-3xl">☀️</span><span class="city-badge-tag badge-capital">🏙️ Grande Capital</span></div><h2 class="font-display font-extrabold text-lg mt-3">Fortaleza</h2><p class="text-xs text-silver-500 mt-1">CE · Terra da Luz & Beach Park</p></a>
+    <a class="city-grid-card" href="goiania-home.html" data-pilar="capital" data-name="goiania go marista bueno feira hippie polo de moda"><div class="flex items-center justify-between"><span class="text-3xl">🎸</span><span class="city-badge-tag badge-capital">🏙️ Grande Capital</span></div><h2 class="font-display font-extrabold text-lg mt-3">Goiânia</h2><p class="text-xs text-silver-500 mt-1">GO · Capital da Música & Polo de Moda</p></a>
+    <a class="city-grid-card" href="manaus-home.html" data-pilar="capital" data-name="manaus am capital da amazonia teatro amazonas pim"><div class="flex items-center justify-between"><span class="text-3xl">🐆</span><span class="city-badge-tag badge-capital">🏙️ Grande Capital</span></div><h2 class="font-display font-extrabold text-lg mt-3">Manaus</h2><p class="text-xs text-silver-500 mt-1">AM · Capital da Amazônia & Polo Industrial</p></a>
+    <a class="city-grid-card" href="belem-home.html" data-pilar="capital" data-name="belem pa para docas ver o peso cirio"><div class="flex items-center justify-between"><span class="text-3xl">🌿</span><span class="city-badge-tag badge-capital">🏙️ Grande Capital</span></div><h2 class="font-display font-extrabold text-lg mt-3">Belém</h2><p class="text-xs text-silver-500 mt-1">PA · Cidade das Mangueiras & Docas</p></a>
+    <a class="city-grid-card" href="cuiaba-home.html" data-pilar="capital" data-name="cuiaba mt agronegocio pantanal mojica"><div class="flex items-center justify-between"><span class="text-3xl">☀️</span><span class="city-badge-tag badge-capital">🏙️ Grande Capital</span></div><h2 class="font-display font-extrabold text-lg mt-3">Cuiabá</h2><p class="text-xs text-silver-500 mt-1">MT · Capital do Agronegócio & Pantanal</p></a>
+    <a class="city-grid-card" href="vitoria-home.html" data-pilar="capital" data-name="vitoria es capital capixaba moqueca camburi"><div class="flex items-center justify-between"><span class="text-3xl">🦀</span><span class="city-badge-tag badge-capital">🏙️ Grande Capital</span></div><h2 class="font-display font-extrabold text-lg mt-3">Vitória</h2><p class="text-xs text-silver-500 mt-1">ES · Capital Capixaba & Polo Portuário</p></a>
+    <a class="city-grid-card" href="campo-grande-home.html" data-pilar="capital" data-name="campo grande ms cidade morena soba pantanal"><div class="flex items-center justify-between"><span class="text-3xl">🌾</span><span class="city-badge-tag badge-capital">🏙️ Grande Capital</span></div><h2 class="font-display font-extrabold text-lg mt-3">Campo Grande</h2><p class="text-xs text-silver-500 mt-1">MS · Cidade Morena & Portal do Pantanal</p></a>
+    <a class="city-grid-card" href="sao-luis-home.html" data-pilar="capital" data-name="sao luis ma ilha do amor azulejos cuxa reggae"><div class="flex items-center justify-between"><span class="text-3xl">🏰</span><span class="city-badge-tag badge-capital">🏙️ Grande Capital</span></div><h2 class="font-display font-extrabold text-lg mt-3">São Luís</h2><p class="text-xs text-silver-500 mt-1">MA · Ilha do Amor & Azulejos</p></a>
+    <a class="city-grid-card" href="maceio-home.html" data-pilar="capital" data-name="maceio al pajucara ponta verde maragogi caribe"><div class="flex items-center justify-between"><span class="text-3xl">🌊</span><span class="city-badge-tag badge-capital">🏙️ Grande Capital</span></div><h2 class="font-display font-extrabold text-lg mt-3">Maceió</h2><p class="text-xs text-silver-500 mt-1">AL · Paraíso das Águas & Piscinas</p></a>
+    <a class="city-grid-card" href="joao-pessoa-home.html" data-pilar="capital" data-name="joao pessoa pb jampa tambau seixas"><div class="flex items-center justify-between"><span class="text-3xl">🌅</span><span class="city-badge-tag badge-capital">🏙️ Grande Capital</span></div><h2 class="font-display font-extrabold text-lg mt-3">João Pessoa</h2><p class="text-xs text-silver-500 mt-1">PB · Onde o Sol Nasce Primeiro</p></a>
+    <a class="city-grid-card" href="teresina-home.html" data-pilar="capital" data-name="teresina pi cidade verde polo medico poti"><div class="flex items-center justify-between"><span class="text-3xl">🌿</span><span class="city-badge-tag badge-capital">🏙️ Grande Capital</span></div><h2 class="font-display font-extrabold text-lg mt-3">Teresina</h2><p class="text-xs text-silver-500 mt-1">PI · Cidade Verde & Polo Médico</p></a>
 
-    <!-- Nordeste -->
-    <a class="card" href="salvador-home.html"><span class="emoji">🥁</span><span class="arrow">→</span><h2>Salvador</h2><p>BA · Pelourinho, Axé & Gastronomia</p></a>
-    <a class="card" href="lencois-home.html"><span class="emoji">⛰️</span><span class="arrow">→</span><h2>Lençóis</h2><p>BA · Chapada Diamantina & Aventura</p></a>
-    <a class="card" href="fortaleza-home.html"><span class="emoji">☀️</span><span class="arrow">→</span><h2>Fortaleza</h2><p>CE · Terra da Luz & Beach Park</p></a>
-    <a class="card" href="jericoacoara-home.html"><span class="emoji">🪁</span><span class="arrow">→</span><h2>Jericoacoara</h2><p>CE · Dunas, Kitesurf & Pôr do Sol</p></a>
-    <a class="card" href="natal-home.html"><span class="emoji">🐪</span><span class="arrow">→</span><h2>Natal</h2><p>RN · Cidade do Sol & Genipabu</p></a>
-    <a class="card" href="porto-home.html"><span class="emoji">🌊</span><span class="arrow">→</span><h2>Porto de Galinhas</h2><p>PE · Piscinas Naturais & Jangadas</p></a>
-    <a class="card" href="caruaru-home.html"><span class="emoji">🎶</span><span class="arrow">→</span><h2>Caruaru</h2><p>PE · Capital do Forró & São João</p></a>
-    <a class="card" href="noronha-home.html"><span class="emoji">🐬</span><span class="arrow">→</span><h2>Fernando de Noronha</h2><p>PE · Paraíso Ecológico & Sancho</p></a>
+    <!-- PILAR 3: POLOS REGIONAIS & INTERIOR (19) -->
+    <a class="city-grid-card" href="campinas-home.html" data-pilar="interior" data-name="campinas sp cambui unicamp viracopos metropole"><div class="flex items-center justify-between"><span class="text-3xl">⚡</span><span class="city-badge-tag badge-interior">🌾 Polo Regional</span></div><h2 class="font-display font-extrabold text-lg mt-3">Campinas</h2><p class="text-xs text-silver-500 mt-1">SP · Polo Tecnológico & Metrópole</p></a>
+    <a class="city-grid-card" href="ribeirao-preto-home.html" data-pilar="interior" data-name="ribeirao preto sp agrishow pinguim fiusa chopp"><div class="flex items-center justify-between"><span class="text-3xl">🍻</span><span class="city-badge-tag badge-interior">🌾 Polo Regional</span></div><h2 class="font-display font-extrabold text-lg mt-3">Ribeirão Preto</h2><p class="text-xs text-silver-500 mt-1">SP · Capital do Agronegócio & Chopp</p></a>
+    <a class="city-grid-card" href="sao-jose-do-rio-preto-home.html" data-pilar="interior" data-name="sao jose do rio preto sp rio preto redentora represa"><div class="flex items-center justify-between"><span class="text-3xl">🏥</span><span class="city-badge-tag badge-interior">🌾 Polo Regional</span></div><h2 class="font-display font-extrabold text-lg mt-3">São José do Rio Preto</h2><p class="text-xs text-silver-500 mt-1">SP · Polo de Saúde & Noroeste</p></a>
+    <a class="city-grid-card" href="santos-home.html" data-pilar="interior" data-name="santos sp gonzaga porto praia baixada santista"><div class="flex items-center justify-between"><span class="text-3xl">⚓</span><span class="city-badge-tag badge-interior">🌾 Polo Regional</span></div><h2 class="font-display font-extrabold text-lg mt-3">Santos</h2><p class="text-xs text-silver-500 mt-1">SP · Maior Porto da América Latina</p></a>
+    <a class="city-grid-card" href="sorocaba-home.html" data-pilar="interior" data-name="sorocaba sp campolim toyota parque tecnologico"><div class="flex items-center justify-between"><span class="text-3xl">🏭</span><span class="city-badge-tag badge-interior">🌾 Polo Regional</span></div><h2 class="font-display font-extrabold text-lg mt-3">Sorocaba</h2><p class="text-xs text-silver-500 mt-1">SP · Polo Industrial & Automotivo</p></a>
+    <a class="city-grid-card" href="piracicaba-home.html" data-pilar="interior" data-name="piracicaba sp rua do porto esalq rio piracicaba peixe"><div class="flex items-center justify-between"><span class="text-3xl">🐟</span><span class="city-badge-tag badge-interior">🌾 Polo Regional</span></div><h2 class="font-display font-extrabold text-lg mt-3">Piracicaba</h2><p class="text-xs text-silver-500 mt-1">SP · Rua do Porto & Bioenergia</p></a>
+    <a class="city-grid-card" href="franca-home.html" data-pilar="interior" data-name="franca sp capital do calcado basquete alta mogiana cafe"><div class="flex items-center justify-between"><span class="text-3xl">👞</span><span class="city-badge-tag badge-interior">🌾 Polo Regional</span></div><h2 class="font-display font-extrabold text-lg mt-3">Franca</h2><p class="text-xs text-silver-500 mt-1">SP · Capital do Calçado & Basquete</p></a>
+    <a class="city-grid-card" href="uberlandia-home.html" data-pilar="interior" data-name="uberlandia mg triangulo mineiro rondon pacheco negocios"><div class="flex items-center justify-between"><span class="text-3xl">🏢</span><span class="city-badge-tag badge-interior">🌾 Polo Regional</span></div><h2 class="font-display font-extrabold text-lg mt-3">Uberlândia</h2><p class="text-xs text-silver-500 mt-1">MG · Triângulo Mineiro & Negócios</p></a>
+    <a class="city-grid-card" href="juiz-de-fora-home.html" data-pilar="interior" data-name="juiz de fora mg jf halfeld ufjf zona da mata"><div class="flex items-center justify-between"><span class="text-3xl">⛰️</span><span class="city-badge-tag badge-interior">🌾 Polo Regional</span></div><h2 class="font-display font-extrabold text-lg mt-3">Juiz de Fora</h2><p class="text-xs text-silver-500 mt-1">MG · Manchester Mineira & UFJF</p></a>
+    <a class="city-grid-card" href="montes-claros-home.html" data-pilar="interior" data-name="montes claros mg moc carne de sol norte de minas farmaceutico"><div class="flex items-center justify-between"><span class="text-3xl">🌾</span><span class="city-badge-tag badge-interior">🌾 Polo Regional</span></div><h2 class="font-display font-extrabold text-lg mt-3">Montes Claros</h2><p class="text-xs text-silver-500 mt-1">MG · Capital do Norte de Minas</p></a>
+    <a class="city-grid-card" href="londrina-home.html" data-pilar="interior" data-name="londrina pr pequena londrina igapo palhano uel"><div class="flex items-center justify-between"><span class="text-3xl">🏙️</span><span class="city-badge-tag badge-interior">🌾 Polo Regional</span></div><h2 class="font-display font-extrabold text-lg mt-3">Londrina</h2><p class="text-xs text-silver-500 mt-1">PR · Pequena Londres & Agritech</p></a>
+    <a class="city-grid-card" href="maringa-home.html" data-pilar="interior" data-name="maringa pr cidade cancao catedral inga cooperativas"><div class="flex items-center justify-between"><span class="text-3xl">🌲</span><span class="city-badge-tag badge-interior">🌾 Polo Regional</span></div><h2 class="font-display font-extrabold text-lg mt-3">Maringá</h2><p class="text-xs text-silver-500 mt-1">PR · Cidade Canção & Qualidade de Vida</p></a>
+    <a class="city-grid-card" href="joinville-home.html" data-pilar="interior" data-name="joinville sc cidade da danca bolshoi metalmecanica"><div class="flex items-center justify-between"><span class="text-3xl">🩰</span><span class="city-badge-tag badge-interior">🌾 Polo Regional</span></div><h2 class="font-display font-extrabold text-lg mt-3">Joinville</h2><p class="text-xs text-silver-500 mt-1">SC · Capital da Dança & Polo Metalmecânico</p></a>
+    <a class="city-grid-card" href="caxias-do-sul-home.html" data-pilar="interior" data-name="caxias do sul rs festa da uva galeto serra gaucha marcopolo"><div class="flex items-center justify-between"><span class="text-3xl">🍇</span><span class="city-badge-tag badge-interior">🌾 Polo Regional</span></div><h2 class="font-display font-extrabold text-lg mt-3">Caxias do Sul</h2><p class="text-xs text-silver-500 mt-1">RS · Capital da Uva & Polo Industrial</p></a>
+    <a class="city-grid-card" href="feira-de-santana-home.html" data-pilar="interior" data-name="feira de santana ba princesa do sertao micareta entroncamento"><div class="flex items-center justify-between"><span class="text-3xl">🥁</span><span class="city-badge-tag badge-interior">🌾 Polo Regional</span></div><h2 class="font-display font-extrabold text-lg mt-3">Feira de Santana</h2><p class="text-xs text-silver-500 mt-1">BA · Princesa do Sertão & Logística</p></a>
+    <a class="city-grid-card" href="campina-grande-home.html" data-pilar="interior" data-name="campina grande pb parque do povo sao joao polo tech"><div class="flex items-center justify-between"><span class="text-3xl">🪗</span><span class="city-badge-tag badge-interior">🌾 Polo Regional</span></div><h2 class="font-display font-extrabold text-lg mt-3">Campina Grande</h2><p class="text-xs text-silver-500 mt-1">PB · Maior São João do Mundo & Tech</p></a>
+    <a class="city-grid-card" href="anapolis-home.html" data-pilar="interior" data-name="anapolis go daia farmaceutico jundiai polo goiano"><div class="flex items-center justify-between"><span class="text-3xl">💊</span><span class="city-badge-tag badge-interior">🌾 Polo Regional</span></div><h2 class="font-display font-extrabold text-lg mt-3">Anápolis</h2><p class="text-xs text-silver-500 mt-1">GO · Polo Farmacêutico & DAIA</p></a>
+    <a class="city-grid-card" href="rio-verde-home.html" data-pilar="interior" data-name="rio verde go graos agronegocio comigo soja milho"><div class="flex items-center justify-between"><span class="text-3xl">🌾</span><span class="city-badge-tag badge-interior">🌾 Polo Regional</span></div><h2 class="font-display font-extrabold text-lg mt-3">Rio Verde</h2><p class="text-xs text-silver-500 mt-1">GO · Capital dos Grãos & Agroindústria</p></a>
+    <a class="city-grid-card" href="aracaju-home.html" data-pilar="interior" data-name="aracaju se atalaia passarela do caranguejo sergipe"><div class="flex items-center justify-between"><span class="text-3xl">🦀</span><span class="city-badge-tag badge-interior">🌾 Polo Regional</span></div><h2 class="font-display font-extrabold text-lg mt-3">Aracaju</h2><p class="text-xs text-silver-500 mt-1">SE · Orla de Atalaia & Caranguejo</p></a>
 
-    <!-- Centro-Oeste -->
-    <a class="card" href="caldasnovas-home.html"><span class="emoji">♨️</span><span class="arrow">→</span><h2>Caldas Novas</h2><p>GO · Águas Termais & Resorts</p></a>
-    <a class="card" href="pirenopolis-home.html"><span class="emoji">🏰</span><span class="arrow">→</span><h2>Pirenópolis</h2><p>GO · Cavalhadas & Cachoeiras</p></a>
-    <a class="card" href="campo-grande-home.html"><span class="emoji">🌾</span><span class="arrow">→</span><h2>Campo Grande</h2><p>MS · Cidade Morena & Pantanal</p></a>
-    <a class="card" href="bonito-home.html"><span class="emoji">🐟</span><span class="arrow">→</span><h2>Bonito</h2><p>MS · Ecoturismo & Flutuação</p></a>
-    <a class="card" href="chapada-guimaraes-home.html"><span class="emoji">🧗</span><span class="arrow">→</span><h2>Chapada dos Guimarães</h2><p>MT · Paredões & Véu de Noiva</p></a>
-
-    <!-- Norte -->
-    <a class="card" href="manaus-home.html"><span class="emoji">🐆</span><span class="arrow">→</span><h2>Manaus</h2><p>AM · Capital da Amazônia & PIM</p></a>
-    <a class="card" href="alter-do-chao-home.html"><span class="emoji">🏝️</span><span class="arrow">→</span><h2>Alter do Chão</h2><p>PA · Caribe Amazônico & Tapajós</p></a>
-    <a class="card" href="jalapao-home.html"><span class="emoji">🏜️</span><span class="arrow">→</span><h2>Jalapão</h2><p>TO · Fervedouros & Dunas Douradas</p></a>
-  </section>
+  </div>
 </main>
 
-<footer class="foot">AQUITEM · Aqui Tem Achadinhos · <a href="mailto:contato@aquitemachadinhos.com.br">Contato</a></footer>
+<footer class="foot">AQUITEM · Aqui Tem Achadinhos · Rede Nacional de Guias Locais</footer>
 
-<!--- BOTÃO FLUTUANTE OFERTAS BRASIL - AQUITEM -->
-<style>
-.aquitem-telegram-float {
-  position: fixed;
-  bottom: 24px;
-  right: 24px;
-  z-index: 9999;
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  background: linear-gradient(135deg, #229ED9 0%, #0e7abf 100%);
-  color: white;
-  padding: 14px 22px;
-  border-radius: 50px;
-  text-decoration: none;
-  font-family: 'Inter', system-ui, -apple-system, sans-serif;
-  font-weight: 700;
-  font-size: 15px;
-  box-shadow: 0 8px 24px rgba(34,158,217,0.45), 0 2px 8px rgba(0,0,0,0.2);
-  animation: aquitem-pulse 2.5s infinite;
-  transition: all 0.3s ease;
-  border: 2px solid rgba(255,255,255,0.9);
-}
-.aquitem-telegram-float:hover {
-  transform: translateY(-3px) scale(1.03);
-  box-shadow: 0 12px 32px rgba(34,158,217,0.6), 0 4px 12px rgba(0,0,0,0.25);
-  background: linear-gradient(135deg, #2aa9e7 0%, #1490d9 100%);
-}
-.aquitem-telegram-float svg {
-  width: 26px;
-  height: 26px;
-  flex-shrink: 0;
-  background: white;
-  border-radius: 50%;
-  padding: 4px;
-}
-.aquitem-telegram-float span { line-height: 1; }
-.aquitem-telegram-badge {
-  background: #ff3b30;
-  color: white;
-  font-size: 11px;
-  font-weight: 800;
-  padding: 3px 7px;
-  border-radius: 20px;
-  margin-left: 2px;
-  animation: aquitem-blink 1.5s infinite;
-}
-@keyframes aquitem-pulse {
-  0%, 100% { box-shadow: 0 8px 24px rgba(34,158,217,0.45), 0 2px 8px rgba(0,0,0,0.2); }
-  50% { box-shadow: 0 8px 32px rgba(34,158,217,0.65), 0 4px 16px rgba(0,0,0,0.25); }
-}
-@keyframes aquitem-blink {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.7; }
-}
-@media (max-width: 480px) {
-  .aquitem-telegram-float {
-    bottom: 16px;
-    right: 16px;
-    padding: 12px 18px;
-    font-size: 14px;
+<script>
+// Filtro instantâneo por texto e pilar
+(function() {
+  const searchInput = document.getElementById('citySearchInput');
+  const pillBtns = document.querySelectorAll('.city-pill-btn');
+  const cards = document.querySelectorAll('.city-grid-card');
+  let currentPillar = 'all';
+
+  function filterCities() {
+    const query = (searchInput.value || '').toLowerCase().trim();
+
+    cards.forEach(card => {
+      const pilar = card.getAttribute('data-pilar');
+      const nameData = (card.getAttribute('data-name') || '').toLowerCase();
+      const textContent = card.textContent.toLowerCase();
+
+      const matchesPillar = (currentPillar === 'all' || pilar === currentPillar);
+      const matchesQuery = !query || nameData.includes(query) || textContent.includes(query);
+
+      if (matchesPillar && matchesQuery) {
+        card.style.display = 'block';
+      } else {
+        card.style.display = 'none';
+      }
+    });
   }
-  .aquitem-telegram-float .hide-mobile { display: none; }
-}
-</style>
+
+  pillBtns.forEach(btn => {
+    btn.addEventListener('click', function() {
+      pillBtns.forEach(b => b.classList.remove('active'));
+      this.classList.add('active');
+      currentPillar = this.getAttribute('data-pillar');
+      filterCities();
+    });
+  });
+
+  searchInput.addEventListener('input', filterCities);
+})();
+</script>
 
 <a href="https://t.me/ofertasbrasilz" target="_blank" rel="noopener" class="aquitem-telegram-float" aria-label="Entrar no grupo Ofertas Brasil no Telegram">
   <svg viewBox="0 0 24 24" fill="#229ED9" xmlns="http://www.w3.org/2000/svg">

@@ -442,6 +442,551 @@
       "source": "/guia-alter",
       "destination": "/alter-do-chao-home",
       "permanent": false
+    },
+    {
+      "source": "/guia-camposdojordao",
+      "destination": "/campos-home",
+      "permanent": false
+    },
+    {
+      "source": "/guia-ouropreto",
+      "destination": "/ouro-preto-home",
+      "permanent": false
+    },
+    {
+      "source": "/guia-chapada-guimaraes",
+      "destination": "/chapada-guimaraes-home",
+      "permanent": false
+    },
+    {
+      "source": "/guia-chapadaguimaraes",
+      "destination": "/chapada-guimaraes-home",
+      "permanent": false
+    },
+    {
+      "source": "/guia-piri",
+      "destination": "/pirenopolis-home",
+      "permanent": false
+    },
+    {
+      "source": "/guia-chapadadiamantina",
+      "destination": "/lencois-home",
+      "permanent": false
+    },
+    {
+      "source": "/guia-portodegalinhas",
+      "destination": "/porto-home",
+      "permanent": false
+    },
+    {
+      "source": "/guia-fernandodenoronha",
+      "destination": "/noronha-home",
+      "permanent": false
+    },
+    {
+      "source": "/guia-jeri",
+      "destination": "/jericoacoara-home",
+      "permanent": false
+    },
+    {
+      "source": "/guia-alter-do-chao",
+      "destination": "/alter-do-chao-home",
+      "permanent": false
+    },
+    {
+      "source": "/guia-alterdochao",
+      "destination": "/alter-do-chao-home",
+      "permanent": false
+    },
+    {
+      "source": "/guia-floripa",
+      "destination": "/florianopolis-home",
+      "permanent": false
+    },
+    {
+      "source": "/guia-balneario-camboriu",
+      "destination": "/balneario-camboriu-home",
+      "permanent": false
+    },
+    {
+      "source": "/guia-balneariocamboriu",
+      "destination": "/balneario-camboriu-home",
+      "permanent": false
+    },
+    {
+      "source": "/guia-foz-do-iguacu",
+      "destination": "/foz-do-iguacu-home",
+      "permanent": false
+    },
+    {
+      "source": "/guia-fozdoiguacu",
+      "destination": "/foz-do-iguacu-home",
+      "permanent": false
+    },
+    {
+      "source": "/sao-paulo",
+      "destination": "/sao-paulo-home",
+      "permanent": false
+    },
+    {
+      "source": "/guia-sao-paulo",
+      "destination": "/sao-paulo-home",
+      "permanent": false
+    },
+    {
+      "source": "/saopaulo",
+      "destination": "/sao-paulo-home",
+      "permanent": false
+    },
+    {
+      "source": "/guia-saopaulo",
+      "destination": "/sao-paulo-home",
+      "permanent": false
+    },
+    {
+      "source": "/rio-de-janeiro",
+      "destination": "/rio-de-janeiro-home",
+      "permanent": false
+    },
+    {
+      "source": "/guia-rio-de-janeiro",
+      "destination": "/rio-de-janeiro-home",
+      "permanent": false
+    },
+    {
+      "source": "/riodejaneiro",
+      "destination": "/rio-de-janeiro-home",
+      "permanent": false
+    },
+    {
+      "source": "/guia-riodejaneiro",
+      "destination": "/rio-de-janeiro-home",
+      "permanent": false
+    },
+    {
+      "source": "/belo-horizonte",
+      "destination": "/belo-horizonte-home",
+      "permanent": false
+    },
+    {
+      "source": "/guia-belo-horizonte",
+      "destination": "/belo-horizonte-home",
+      "permanent": false
+    },
+    {
+      "source": "/belohorizonte",
+      "destination": "/belo-horizonte-home",
+      "permanent": false
+    },
+    {
+      "source": "/guia-belohorizonte",
+      "destination": "/belo-horizonte-home",
+      "permanent": false
+    },
+    {
+      "source": "/beaga",
+      "destination": "/belo-horizonte-home",
+      "permanent": false
+    },
+    {
+      "source": "/guia-beaga",
+      "destination": "/belo-horizonte-home",
+      "permanent": false
+    },
+    {
+      "source": "/brasilia",
+      "destination": "/brasilia-home",
+      "permanent": false
+    },
+    {
+      "source": "/guia-brasilia",
+      "destination": "/brasilia-home",
+      "permanent": false
+    },
+    {
+      "source": "/porto-alegre",
+      "destination": "/porto-alegre-home",
+      "permanent": false
+    },
+    {
+      "source": "/guia-porto-alegre",
+      "destination": "/porto-alegre-home",
+      "permanent": false
+    },
+    {
+      "source": "/portoalegre",
+      "destination": "/porto-alegre-home",
+      "permanent": false
+    },
+    {
+      "source": "/guia-portoalegre",
+      "destination": "/porto-alegre-home",
+      "permanent": false
+    },
+    {
+      "source": "/recife",
+      "destination": "/recife-home",
+      "permanent": false
+    },
+    {
+      "source": "/guia-recife",
+      "destination": "/recife-home",
+      "permanent": false
+    },
+    {
+      "source": "/goiania",
+      "destination": "/goiania-home",
+      "permanent": false
+    },
+    {
+      "source": "/guia-goiania",
+      "destination": "/goiania-home",
+      "permanent": false
+    },
+    {
+      "source": "/belem",
+      "destination": "/belem-home",
+      "permanent": false
+    },
+    {
+      "source": "/guia-belem",
+      "destination": "/belem-home",
+      "permanent": false
+    },
+    {
+      "source": "/guia-campogrande",
+      "destination": "/campo-grande-home",
+      "permanent": false
+    },
+    {
+      "source": "/cuiaba",
+      "destination": "/cuiaba-home",
+      "permanent": false
+    },
+    {
+      "source": "/guia-cuiaba",
+      "destination": "/cuiaba-home",
+      "permanent": false
+    },
+    {
+      "source": "/sao-luis",
+      "destination": "/sao-luis-home",
+      "permanent": false
+    },
+    {
+      "source": "/guia-sao-luis",
+      "destination": "/sao-luis-home",
+      "permanent": false
+    },
+    {
+      "source": "/saoluis",
+      "destination": "/sao-luis-home",
+      "permanent": false
+    },
+    {
+      "source": "/guia-saoluis",
+      "destination": "/sao-luis-home",
+      "permanent": false
+    },
+    {
+      "source": "/maceio",
+      "destination": "/maceio-home",
+      "permanent": false
+    },
+    {
+      "source": "/guia-maceio",
+      "destination": "/maceio-home",
+      "permanent": false
+    },
+    {
+      "source": "/joao-pessoa",
+      "destination": "/joao-pessoa-home",
+      "permanent": false
+    },
+    {
+      "source": "/guia-joao-pessoa",
+      "destination": "/joao-pessoa-home",
+      "permanent": false
+    },
+    {
+      "source": "/joaopessoa",
+      "destination": "/joao-pessoa-home",
+      "permanent": false
+    },
+    {
+      "source": "/guia-joaopessoa",
+      "destination": "/joao-pessoa-home",
+      "permanent": false
+    },
+    {
+      "source": "/teresina",
+      "destination": "/teresina-home",
+      "permanent": false
+    },
+    {
+      "source": "/guia-teresina",
+      "destination": "/teresina-home",
+      "permanent": false
+    },
+    {
+      "source": "/aracaju",
+      "destination": "/aracaju-home",
+      "permanent": false
+    },
+    {
+      "source": "/guia-aracaju",
+      "destination": "/aracaju-home",
+      "permanent": false
+    },
+    {
+      "source": "/campinas",
+      "destination": "/campinas-home",
+      "permanent": false
+    },
+    {
+      "source": "/guia-campinas",
+      "destination": "/campinas-home",
+      "permanent": false
+    },
+    {
+      "source": "/ribeirao-preto",
+      "destination": "/ribeirao-preto-home",
+      "permanent": false
+    },
+    {
+      "source": "/guia-ribeirao-preto",
+      "destination": "/ribeirao-preto-home",
+      "permanent": false
+    },
+    {
+      "source": "/ribeiraopreto",
+      "destination": "/ribeirao-preto-home",
+      "permanent": false
+    },
+    {
+      "source": "/guia-ribeiraopreto",
+      "destination": "/ribeirao-preto-home",
+      "permanent": false
+    },
+    {
+      "source": "/sao-jose-do-rio-preto",
+      "destination": "/sao-jose-do-rio-preto-home",
+      "permanent": false
+    },
+    {
+      "source": "/guia-sao-jose-do-rio-preto",
+      "destination": "/sao-jose-do-rio-preto-home",
+      "permanent": false
+    },
+    {
+      "source": "/riopreto",
+      "destination": "/sao-jose-do-rio-preto-home",
+      "permanent": false
+    },
+    {
+      "source": "/guia-riopreto",
+      "destination": "/sao-jose-do-rio-preto-home",
+      "permanent": false
+    },
+    {
+      "source": "/santos",
+      "destination": "/santos-home",
+      "permanent": false
+    },
+    {
+      "source": "/guia-santos",
+      "destination": "/santos-home",
+      "permanent": false
+    },
+    {
+      "source": "/sorocaba",
+      "destination": "/sorocaba-home",
+      "permanent": false
+    },
+    {
+      "source": "/guia-sorocaba",
+      "destination": "/sorocaba-home",
+      "permanent": false
+    },
+    {
+      "source": "/piracicaba",
+      "destination": "/piracicaba-home",
+      "permanent": false
+    },
+    {
+      "source": "/guia-piracicaba",
+      "destination": "/piracicaba-home",
+      "permanent": false
+    },
+    {
+      "source": "/franca",
+      "destination": "/franca-home",
+      "permanent": false
+    },
+    {
+      "source": "/guia-franca",
+      "destination": "/franca-home",
+      "permanent": false
+    },
+    {
+      "source": "/juiz-de-fora",
+      "destination": "/juiz-de-fora-home",
+      "permanent": false
+    },
+    {
+      "source": "/guia-juiz-de-fora",
+      "destination": "/juiz-de-fora-home",
+      "permanent": false
+    },
+    {
+      "source": "/juizdefora",
+      "destination": "/juiz-de-fora-home",
+      "permanent": false
+    },
+    {
+      "source": "/guia-juizdefora",
+      "destination": "/juiz-de-fora-home",
+      "permanent": false
+    },
+    {
+      "source": "/montes-claros",
+      "destination": "/montes-claros-home",
+      "permanent": false
+    },
+    {
+      "source": "/guia-montes-claros",
+      "destination": "/montes-claros-home",
+      "permanent": false
+    },
+    {
+      "source": "/montesclaros",
+      "destination": "/montes-claros-home",
+      "permanent": false
+    },
+    {
+      "source": "/guia-montesclaros",
+      "destination": "/montes-claros-home",
+      "permanent": false
+    },
+    {
+      "source": "/londrina",
+      "destination": "/londrina-home",
+      "permanent": false
+    },
+    {
+      "source": "/guia-londrina",
+      "destination": "/londrina-home",
+      "permanent": false
+    },
+    {
+      "source": "/maringa",
+      "destination": "/maringa-home",
+      "permanent": false
+    },
+    {
+      "source": "/guia-maringa",
+      "destination": "/maringa-home",
+      "permanent": false
+    },
+    {
+      "source": "/joinville",
+      "destination": "/joinville-home",
+      "permanent": false
+    },
+    {
+      "source": "/guia-joinville",
+      "destination": "/joinville-home",
+      "permanent": false
+    },
+    {
+      "source": "/caxias-do-sul",
+      "destination": "/caxias-do-sul-home",
+      "permanent": false
+    },
+    {
+      "source": "/guia-caxias-do-sul",
+      "destination": "/caxias-do-sul-home",
+      "permanent": false
+    },
+    {
+      "source": "/caxiasdosul",
+      "destination": "/caxias-do-sul-home",
+      "permanent": false
+    },
+    {
+      "source": "/guia-caxiasdosul",
+      "destination": "/caxias-do-sul-home",
+      "permanent": false
+    },
+    {
+      "source": "/feira-de-santana",
+      "destination": "/feira-de-santana-home",
+      "permanent": false
+    },
+    {
+      "source": "/guia-feira-de-santana",
+      "destination": "/feira-de-santana-home",
+      "permanent": false
+    },
+    {
+      "source": "/feiradesantana",
+      "destination": "/feira-de-santana-home",
+      "permanent": false
+    },
+    {
+      "source": "/guia-feiradesantana",
+      "destination": "/feira-de-santana-home",
+      "permanent": false
+    },
+    {
+      "source": "/campina-grande",
+      "destination": "/campina-grande-home",
+      "permanent": false
+    },
+    {
+      "source": "/guia-campina-grande",
+      "destination": "/campina-grande-home",
+      "permanent": false
+    },
+    {
+      "source": "/campinagrande",
+      "destination": "/campina-grande-home",
+      "permanent": false
+    },
+    {
+      "source": "/guia-campinagrande",
+      "destination": "/campina-grande-home",
+      "permanent": false
+    },
+    {
+      "source": "/anapolis",
+      "destination": "/anapolis-home",
+      "permanent": false
+    },
+    {
+      "source": "/guia-anapolis",
+      "destination": "/anapolis-home",
+      "permanent": false
+    },
+    {
+      "source": "/rio-verde",
+      "destination": "/rio-verde-home",
+      "permanent": false
+    },
+    {
+      "source": "/guia-rio-verde",
+      "destination": "/rio-verde-home",
+      "permanent": false
+    },
+    {
+      "source": "/rioverde",
+      "destination": "/rio-verde-home",
+      "permanent": false
+    },
+    {
+      "source": "/guia-rioverde",
+      "destination": "/rio-verde-home",
+      "permanent": false
     }
   ],
   "headers": [
@@ -1165,6 +1710,626 @@
         }
       ],
       "destination": "/alter-do-chao-home.html"
+    },
+    {
+      "source": "/assets/(.*)",
+      "has": [
+        {
+          "type": "host",
+          "value": "saopaulo.aquitemachadinhos.com.br"
+        }
+      ],
+      "destination": "/assets/$1"
+    },
+    {
+      "source": "/",
+      "has": [
+        {
+          "type": "host",
+          "value": "saopaulo.aquitemachadinhos.com.br"
+        }
+      ],
+      "destination": "/sao-paulo-home.html"
+    },
+    {
+      "source": "/assets/(.*)",
+      "has": [
+        {
+          "type": "host",
+          "value": "riodejaneiro.aquitemachadinhos.com.br"
+        }
+      ],
+      "destination": "/assets/$1"
+    },
+    {
+      "source": "/",
+      "has": [
+        {
+          "type": "host",
+          "value": "riodejaneiro.aquitemachadinhos.com.br"
+        }
+      ],
+      "destination": "/rio-de-janeiro-home.html"
+    },
+    {
+      "source": "/assets/(.*)",
+      "has": [
+        {
+          "type": "host",
+          "value": "belohorizonte.aquitemachadinhos.com.br"
+        }
+      ],
+      "destination": "/assets/$1"
+    },
+    {
+      "source": "/",
+      "has": [
+        {
+          "type": "host",
+          "value": "belohorizonte.aquitemachadinhos.com.br"
+        }
+      ],
+      "destination": "/belo-horizonte-home.html"
+    },
+    {
+      "source": "/assets/(.*)",
+      "has": [
+        {
+          "type": "host",
+          "value": "brasilia.aquitemachadinhos.com.br"
+        }
+      ],
+      "destination": "/assets/$1"
+    },
+    {
+      "source": "/",
+      "has": [
+        {
+          "type": "host",
+          "value": "brasilia.aquitemachadinhos.com.br"
+        }
+      ],
+      "destination": "/brasilia-home.html"
+    },
+    {
+      "source": "/assets/(.*)",
+      "has": [
+        {
+          "type": "host",
+          "value": "portoalegre.aquitemachadinhos.com.br"
+        }
+      ],
+      "destination": "/assets/$1"
+    },
+    {
+      "source": "/",
+      "has": [
+        {
+          "type": "host",
+          "value": "portoalegre.aquitemachadinhos.com.br"
+        }
+      ],
+      "destination": "/porto-alegre-home.html"
+    },
+    {
+      "source": "/assets/(.*)",
+      "has": [
+        {
+          "type": "host",
+          "value": "recife.aquitemachadinhos.com.br"
+        }
+      ],
+      "destination": "/assets/$1"
+    },
+    {
+      "source": "/",
+      "has": [
+        {
+          "type": "host",
+          "value": "recife.aquitemachadinhos.com.br"
+        }
+      ],
+      "destination": "/recife-home.html"
+    },
+    {
+      "source": "/assets/(.*)",
+      "has": [
+        {
+          "type": "host",
+          "value": "goiania.aquitemachadinhos.com.br"
+        }
+      ],
+      "destination": "/assets/$1"
+    },
+    {
+      "source": "/",
+      "has": [
+        {
+          "type": "host",
+          "value": "goiania.aquitemachadinhos.com.br"
+        }
+      ],
+      "destination": "/goiania-home.html"
+    },
+    {
+      "source": "/assets/(.*)",
+      "has": [
+        {
+          "type": "host",
+          "value": "belem.aquitemachadinhos.com.br"
+        }
+      ],
+      "destination": "/assets/$1"
+    },
+    {
+      "source": "/",
+      "has": [
+        {
+          "type": "host",
+          "value": "belem.aquitemachadinhos.com.br"
+        }
+      ],
+      "destination": "/belem-home.html"
+    },
+    {
+      "source": "/assets/(.*)",
+      "has": [
+        {
+          "type": "host",
+          "value": "cuiaba.aquitemachadinhos.com.br"
+        }
+      ],
+      "destination": "/assets/$1"
+    },
+    {
+      "source": "/",
+      "has": [
+        {
+          "type": "host",
+          "value": "cuiaba.aquitemachadinhos.com.br"
+        }
+      ],
+      "destination": "/cuiaba-home.html"
+    },
+    {
+      "source": "/assets/(.*)",
+      "has": [
+        {
+          "type": "host",
+          "value": "saoluis.aquitemachadinhos.com.br"
+        }
+      ],
+      "destination": "/assets/$1"
+    },
+    {
+      "source": "/",
+      "has": [
+        {
+          "type": "host",
+          "value": "saoluis.aquitemachadinhos.com.br"
+        }
+      ],
+      "destination": "/sao-luis-home.html"
+    },
+    {
+      "source": "/assets/(.*)",
+      "has": [
+        {
+          "type": "host",
+          "value": "maceio.aquitemachadinhos.com.br"
+        }
+      ],
+      "destination": "/assets/$1"
+    },
+    {
+      "source": "/",
+      "has": [
+        {
+          "type": "host",
+          "value": "maceio.aquitemachadinhos.com.br"
+        }
+      ],
+      "destination": "/maceio-home.html"
+    },
+    {
+      "source": "/assets/(.*)",
+      "has": [
+        {
+          "type": "host",
+          "value": "joaopessoa.aquitemachadinhos.com.br"
+        }
+      ],
+      "destination": "/assets/$1"
+    },
+    {
+      "source": "/",
+      "has": [
+        {
+          "type": "host",
+          "value": "joaopessoa.aquitemachadinhos.com.br"
+        }
+      ],
+      "destination": "/joao-pessoa-home.html"
+    },
+    {
+      "source": "/assets/(.*)",
+      "has": [
+        {
+          "type": "host",
+          "value": "teresina.aquitemachadinhos.com.br"
+        }
+      ],
+      "destination": "/assets/$1"
+    },
+    {
+      "source": "/",
+      "has": [
+        {
+          "type": "host",
+          "value": "teresina.aquitemachadinhos.com.br"
+        }
+      ],
+      "destination": "/teresina-home.html"
+    },
+    {
+      "source": "/assets/(.*)",
+      "has": [
+        {
+          "type": "host",
+          "value": "aracaju.aquitemachadinhos.com.br"
+        }
+      ],
+      "destination": "/assets/$1"
+    },
+    {
+      "source": "/",
+      "has": [
+        {
+          "type": "host",
+          "value": "aracaju.aquitemachadinhos.com.br"
+        }
+      ],
+      "destination": "/aracaju-home.html"
+    },
+    {
+      "source": "/assets/(.*)",
+      "has": [
+        {
+          "type": "host",
+          "value": "campinas.aquitemachadinhos.com.br"
+        }
+      ],
+      "destination": "/assets/$1"
+    },
+    {
+      "source": "/",
+      "has": [
+        {
+          "type": "host",
+          "value": "campinas.aquitemachadinhos.com.br"
+        }
+      ],
+      "destination": "/campinas-home.html"
+    },
+    {
+      "source": "/assets/(.*)",
+      "has": [
+        {
+          "type": "host",
+          "value": "ribeiraopreto.aquitemachadinhos.com.br"
+        }
+      ],
+      "destination": "/assets/$1"
+    },
+    {
+      "source": "/",
+      "has": [
+        {
+          "type": "host",
+          "value": "ribeiraopreto.aquitemachadinhos.com.br"
+        }
+      ],
+      "destination": "/ribeirao-preto-home.html"
+    },
+    {
+      "source": "/assets/(.*)",
+      "has": [
+        {
+          "type": "host",
+          "value": "riopreto.aquitemachadinhos.com.br"
+        }
+      ],
+      "destination": "/assets/$1"
+    },
+    {
+      "source": "/",
+      "has": [
+        {
+          "type": "host",
+          "value": "riopreto.aquitemachadinhos.com.br"
+        }
+      ],
+      "destination": "/sao-jose-do-rio-preto-home.html"
+    },
+    {
+      "source": "/assets/(.*)",
+      "has": [
+        {
+          "type": "host",
+          "value": "santos.aquitemachadinhos.com.br"
+        }
+      ],
+      "destination": "/assets/$1"
+    },
+    {
+      "source": "/",
+      "has": [
+        {
+          "type": "host",
+          "value": "santos.aquitemachadinhos.com.br"
+        }
+      ],
+      "destination": "/santos-home.html"
+    },
+    {
+      "source": "/assets/(.*)",
+      "has": [
+        {
+          "type": "host",
+          "value": "sorocaba.aquitemachadinhos.com.br"
+        }
+      ],
+      "destination": "/assets/$1"
+    },
+    {
+      "source": "/",
+      "has": [
+        {
+          "type": "host",
+          "value": "sorocaba.aquitemachadinhos.com.br"
+        }
+      ],
+      "destination": "/sorocaba-home.html"
+    },
+    {
+      "source": "/assets/(.*)",
+      "has": [
+        {
+          "type": "host",
+          "value": "piracicaba.aquitemachadinhos.com.br"
+        }
+      ],
+      "destination": "/assets/$1"
+    },
+    {
+      "source": "/",
+      "has": [
+        {
+          "type": "host",
+          "value": "piracicaba.aquitemachadinhos.com.br"
+        }
+      ],
+      "destination": "/piracicaba-home.html"
+    },
+    {
+      "source": "/assets/(.*)",
+      "has": [
+        {
+          "type": "host",
+          "value": "franca.aquitemachadinhos.com.br"
+        }
+      ],
+      "destination": "/assets/$1"
+    },
+    {
+      "source": "/",
+      "has": [
+        {
+          "type": "host",
+          "value": "franca.aquitemachadinhos.com.br"
+        }
+      ],
+      "destination": "/franca-home.html"
+    },
+    {
+      "source": "/assets/(.*)",
+      "has": [
+        {
+          "type": "host",
+          "value": "juizdefora.aquitemachadinhos.com.br"
+        }
+      ],
+      "destination": "/assets/$1"
+    },
+    {
+      "source": "/",
+      "has": [
+        {
+          "type": "host",
+          "value": "juizdefora.aquitemachadinhos.com.br"
+        }
+      ],
+      "destination": "/juiz-de-fora-home.html"
+    },
+    {
+      "source": "/assets/(.*)",
+      "has": [
+        {
+          "type": "host",
+          "value": "montesclaros.aquitemachadinhos.com.br"
+        }
+      ],
+      "destination": "/assets/$1"
+    },
+    {
+      "source": "/",
+      "has": [
+        {
+          "type": "host",
+          "value": "montesclaros.aquitemachadinhos.com.br"
+        }
+      ],
+      "destination": "/montes-claros-home.html"
+    },
+    {
+      "source": "/assets/(.*)",
+      "has": [
+        {
+          "type": "host",
+          "value": "londrina.aquitemachadinhos.com.br"
+        }
+      ],
+      "destination": "/assets/$1"
+    },
+    {
+      "source": "/",
+      "has": [
+        {
+          "type": "host",
+          "value": "londrina.aquitemachadinhos.com.br"
+        }
+      ],
+      "destination": "/londrina-home.html"
+    },
+    {
+      "source": "/assets/(.*)",
+      "has": [
+        {
+          "type": "host",
+          "value": "maringa.aquitemachadinhos.com.br"
+        }
+      ],
+      "destination": "/assets/$1"
+    },
+    {
+      "source": "/",
+      "has": [
+        {
+          "type": "host",
+          "value": "maringa.aquitemachadinhos.com.br"
+        }
+      ],
+      "destination": "/maringa-home.html"
+    },
+    {
+      "source": "/assets/(.*)",
+      "has": [
+        {
+          "type": "host",
+          "value": "joinville.aquitemachadinhos.com.br"
+        }
+      ],
+      "destination": "/assets/$1"
+    },
+    {
+      "source": "/",
+      "has": [
+        {
+          "type": "host",
+          "value": "joinville.aquitemachadinhos.com.br"
+        }
+      ],
+      "destination": "/joinville-home.html"
+    },
+    {
+      "source": "/assets/(.*)",
+      "has": [
+        {
+          "type": "host",
+          "value": "caxiasdosul.aquitemachadinhos.com.br"
+        }
+      ],
+      "destination": "/assets/$1"
+    },
+    {
+      "source": "/",
+      "has": [
+        {
+          "type": "host",
+          "value": "caxiasdosul.aquitemachadinhos.com.br"
+        }
+      ],
+      "destination": "/caxias-do-sul-home.html"
+    },
+    {
+      "source": "/assets/(.*)",
+      "has": [
+        {
+          "type": "host",
+          "value": "feiradesantana.aquitemachadinhos.com.br"
+        }
+      ],
+      "destination": "/assets/$1"
+    },
+    {
+      "source": "/",
+      "has": [
+        {
+          "type": "host",
+          "value": "feiradesantana.aquitemachadinhos.com.br"
+        }
+      ],
+      "destination": "/feira-de-santana-home.html"
+    },
+    {
+      "source": "/assets/(.*)",
+      "has": [
+        {
+          "type": "host",
+          "value": "campinagrande.aquitemachadinhos.com.br"
+        }
+      ],
+      "destination": "/assets/$1"
+    },
+    {
+      "source": "/",
+      "has": [
+        {
+          "type": "host",
+          "value": "campinagrande.aquitemachadinhos.com.br"
+        }
+      ],
+      "destination": "/campina-grande-home.html"
+    },
+    {
+      "source": "/assets/(.*)",
+      "has": [
+        {
+          "type": "host",
+          "value": "anapolis.aquitemachadinhos.com.br"
+        }
+      ],
+      "destination": "/assets/$1"
+    },
+    {
+      "source": "/",
+      "has": [
+        {
+          "type": "host",
+          "value": "anapolis.aquitemachadinhos.com.br"
+        }
+      ],
+      "destination": "/anapolis-home.html"
+    },
+    {
+      "source": "/assets/(.*)",
+      "has": [
+        {
+          "type": "host",
+          "value": "rioverde.aquitemachadinhos.com.br"
+        }
+      ],
+      "destination": "/assets/$1"
+    },
+    {
+      "source": "/",
+      "has": [
+        {
+          "type": "host",
+          "value": "rioverde.aquitemachadinhos.com.br"
+        }
+      ],
+      "destination": "/rio-verde-home.html"
     }
   ]
 }

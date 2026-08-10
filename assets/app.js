@@ -98,7 +98,52 @@
     "jalapao": ["Jalapão","TO"],
     "lencois": ["Lençóis","BA"],
     "alter-do-chao": ["Alter do Chão","PA"],
-    "alterdochao": ["Alter do Chão","PA"]
+    "alterdochao": ["Alter do Chão","PA"],
+    "sao-paulo": ["São Paulo","SP"],
+    "saopaulo": ["São Paulo","SP"],
+    "rio-de-janeiro": ["Rio de Janeiro","RJ"],
+    "riodejaneiro": ["Rio de Janeiro","RJ"],
+    "belo-horizonte": ["Belo Horizonte","MG"],
+    "belohorizonte": ["Belo Horizonte","MG"],
+    "brasilia": ["Brasília","DF"],
+    "porto-alegre": ["Porto Alegre","RS"],
+    "portoalegre": ["Porto Alegre","RS"],
+    "recife": ["Recife","PE"],
+    "goiania": ["Goiânia","GO"],
+    "belem": ["Belém","PA"],
+    "cuiaba": ["Cuiabá","MT"],
+    "sao-luis": ["São Luís","MA"],
+    "saoluis": ["São Luís","MA"],
+    "maceio": ["Maceió","AL"],
+    "joao-pessoa": ["João Pessoa","PB"],
+    "joaopessoa": ["João Pessoa","PB"],
+    "teresina": ["Teresina","PI"],
+    "aracaju": ["Aracaju","SE"],
+    "campinas": ["Campinas","SP"],
+    "ribeirao-preto": ["Ribeirão Preto","SP"],
+    "ribeiraopreto": ["Ribeirão Preto","SP"],
+    "sao-jose-do-rio-preto": ["São José do Rio Preto","SP"],
+    "riopreto": ["São José do Rio Preto","SP"],
+    "santos": ["Santos","SP"],
+    "sorocaba": ["Sorocaba","SP"],
+    "piracicaba": ["Piracicaba","SP"],
+    "franca": ["Franca","SP"],
+    "juiz-de-fora": ["Juiz de Fora","MG"],
+    "juizdefora": ["Juiz de Fora","MG"],
+    "montes-claros": ["Montes Claros","MG"],
+    "montesclaros": ["Montes Claros","MG"],
+    "londrina": ["Londrina","PR"],
+    "maringa": ["Maringá","PR"],
+    "joinville": ["Joinville","SC"],
+    "caxias-do-sul": ["Caxias do Sul","RS"],
+    "caxiasdosul": ["Caxias do Sul","RS"],
+    "feira-de-santana": ["Feira de Santana","BA"],
+    "feiradesantana": ["Feira de Santana","BA"],
+    "campina-grande": ["Campina Grande","PB"],
+    "campinagrande": ["Campina Grande","PB"],
+    "anapolis": ["Anápolis","GO"],
+    "rio-verde": ["Rio Verde","GO"],
+    "rioverde": ["Rio Verde","GO"]
   };
 
   function parseSub() {
@@ -253,6 +298,51 @@
     lencois: 'lencois',
     'alter-do-chao': 'alter-do-chao',
     alterdochao: 'alter-do-chao',
+    'sao-paulo': 'sao-paulo',
+    saopaulo: 'sao-paulo',
+    'rio-de-janeiro': 'rio-de-janeiro',
+    riodejaneiro: 'rio-de-janeiro',
+    'belo-horizonte': 'belo-horizonte',
+    belohorizonte: 'belo-horizonte',
+    brasilia: 'brasilia',
+    'porto-alegre': 'porto-alegre',
+    portoalegre: 'porto-alegre',
+    recife: 'recife',
+    goiania: 'goiania',
+    belem: 'belem',
+    cuiaba: 'cuiaba',
+    'sao-luis': 'sao-luis',
+    saoluis: 'sao-luis',
+    maceio: 'maceio',
+    'joao-pessoa': 'joao-pessoa',
+    joaopessoa: 'joao-pessoa',
+    teresina: 'teresina',
+    aracaju: 'aracaju',
+    campinas: 'campinas',
+    'ribeirao-preto': 'ribeirao-preto',
+    ribeiraopreto: 'ribeirao-preto',
+    'sao-jose-do-rio-preto': 'sao-jose-do-rio-preto',
+    riopreto: 'sao-jose-do-rio-preto',
+    santos: 'santos',
+    sorocaba: 'sorocaba',
+    piracicaba: 'piracicaba',
+    franca: 'franca',
+    'juiz-de-fora': 'juiz-de-fora',
+    juizdefora: 'juiz-de-fora',
+    'montes-claros': 'montes-claros',
+    montesclaros: 'montes-claros',
+    londrina: 'londrina',
+    maringa: 'maringa',
+    joinville: 'joinville',
+    'caxias-do-sul': 'caxias-do-sul',
+    caxiasdosul: 'caxias-do-sul',
+    'feira-de-santana': 'feira-de-santana',
+    feiradesantana: 'feira-de-santana',
+    'campina-grande': 'campina-grande',
+    campinagrande: 'campina-grande',
+    anapolis: 'anapolis',
+    'rio-verde': 'rio-verde',
+    rioverde: 'rio-verde',
     classificados: 'nacional',
     nacional: 'nacional'
   };
@@ -286,6 +376,37 @@
     jalapao: 'Jalapão',
     lencois: 'Lençóis',
     'alter-do-chao': 'Alter do Chão',
+    'sao-paulo': 'São Paulo',
+    'rio-de-janeiro': 'Rio de Janeiro',
+    'belo-horizonte': 'Belo Horizonte',
+    brasilia: 'Brasília',
+    'porto-alegre': 'Porto Alegre',
+    recife: 'Recife',
+    goiania: 'Goiânia',
+    belem: 'Belém',
+    cuiaba: 'Cuiabá',
+    'sao-luis': 'São Luís',
+    maceio: 'Maceió',
+    'joao-pessoa': 'João Pessoa',
+    teresina: 'Teresina',
+    aracaju: 'Aracaju',
+    campinas: 'Campinas',
+    'ribeirao-preto': 'Ribeirão Preto',
+    'sao-jose-do-rio-preto': 'São José do Rio Preto',
+    santos: 'Santos',
+    sorocaba: 'Sorocaba',
+    piracicaba: 'Piracicaba',
+    franca: 'Franca',
+    'juiz-de-fora': 'Juiz de Fora',
+    'montes-claros': 'Montes Claros',
+    londrina: 'Londrina',
+    maringa: 'Maringá',
+    joinville: 'Joinville',
+    'caxias-do-sul': 'Caxias do Sul',
+    'feira-de-santana': 'Feira de Santana',
+    'campina-grande': 'Campina Grande',
+    anapolis: 'Anápolis',
+    'rio-verde': 'Rio Verde',
     nacional: 'Brasil Todo'
   };
   var CITY_UFS = {
@@ -318,6 +439,37 @@
     jalapao: 'TO',
     lencois: 'BA',
     'alter-do-chao': 'PA',
+    'sao-paulo': 'SP',
+    'rio-de-janeiro': 'RJ',
+    'belo-horizonte': 'MG',
+    brasilia: 'DF',
+    'porto-alegre': 'RS',
+    recife: 'PE',
+    goiania: 'GO',
+    belem: 'PA',
+    cuiaba: 'MT',
+    'sao-luis': 'MA',
+    maceio: 'AL',
+    'joao-pessoa': 'PB',
+    teresina: 'PI',
+    aracaju: 'SE',
+    campinas: 'SP',
+    'ribeirao-preto': 'SP',
+    'sao-jose-do-rio-preto': 'SP',
+    santos: 'SP',
+    sorocaba: 'SP',
+    piracicaba: 'SP',
+    franca: 'SP',
+    'juiz-de-fora': 'MG',
+    'montes-claros': 'MG',
+    londrina: 'PR',
+    maringa: 'PR',
+    joinville: 'SC',
+    'caxias-do-sul': 'RS',
+    'feira-de-santana': 'BA',
+    'campina-grande': 'PB',
+    anapolis: 'GO',
+    'rio-verde': 'GO',
     nacional: 'BR'
   };
   function getHostSubdomain() {
@@ -678,7 +830,27 @@
     var uf = CITY_UFS[s.city_slug] || (s.cidade === 'Barretos' ? 'SP' : (s.cidade === 'Gramado' ? 'RS' : (s.cidade === 'Uberlândia' ? 'MG' : (s.cidade === 'Florianópolis' ? 'SC' : (s.cidade === 'Salvador' ? 'BA' : 'SP')))));
     var cityLabel = s.cidade ? (s.cidade + (uf && uf !== 'BR' ? '/' + uf : '')) : '';
     var local = [s.bairro, cityLabel].filter(Boolean).join(' · ');
-    return '<a href="loja.html?id=' + encodeURIComponent(s.id) + '" class="aquitem-store-card"><div class="aquitem-store-head">' + logo + '<div class="min-w-0 flex-1"><h3 class="font-display font-bold text-base leading-snug">' + esc(s.nome) + '</h3><div class="aquitem-store-tags"><span>' + esc(category) + '</span>' + badge + '</div>' + (local ? '<p class="text-xs text-slate-500 mt-2 truncate">📍 ' + esc(local) + '</p>' : '') + (rating ? '<div class="mt-1">' + rating + '</div>' : '') + '</div></div><div class="aquitem-store-arrow">Ver perfil →</div></a>';
+    var waMsg = 'Olá! Vi a ' + s.nome + ' no Aqui Tem Achadinhos e gostaria de informações/fazer um pedido.';
+    var waDirect = s.whatsapp ? ('<a href="https://wa.me/' + digits(s.whatsapp) + '?text=' + encodeURIComponent(waMsg) + '" target="_blank" rel="noopener" class="text-[11px] font-bold text-white bg-[#25D366] hover:bg-[#20bd5a] px-2.5 py-1 rounded-lg flex items-center gap-1 transition shrink-0" onclick="event.stopPropagation();">💬 WhatsApp Direto</a>') : '';
+    var ifoodBtn = s.ifood_url ? ('<a href="' + esc(s.ifood_url) + '" target="_blank" rel="noopener" class="text-[11px] font-bold text-white bg-[#EA1D2C] hover:bg-[#d41825] px-2 py-1 rounded-lg flex items-center gap-1 transition shrink-0" onclick="event.stopPropagation();">🍔 iFood</a>') : '';
+
+    return '<div class="aquitem-store-card flex flex-col justify-between group">' +
+      '<a href="loja.html?id=' + encodeURIComponent(s.id) + '" class="block">' +
+        '<div class="aquitem-store-head">' +
+          logo +
+          '<div class="min-w-0 flex-1">' +
+            '<h3 class="font-display font-bold text-base leading-snug group-hover:text-amber-400 transition">' + esc(s.nome) + '</h3>' +
+            '<div class="aquitem-store-tags"><span>' + esc(category) + '</span>' + badge + '</div>' +
+            (local ? '<p class="text-xs text-slate-500 mt-2 truncate">📍 ' + esc(local) + '</p>' : '') +
+            (rating ? '<div class="mt-1">' + rating + '</div>' : '') +
+          '</div>' +
+        '</div>' +
+      '</a>' +
+      '<div class="mt-3 pt-3 border-t border-white/10 flex items-center justify-between gap-2 flex-wrap">' +
+        '<a href="loja.html?id=' + encodeURIComponent(s.id) + '" class="text-xs font-bold text-amber-400 hover:underline">Ver perfil →</a>' +
+        '<div class="flex items-center gap-1.5">' + ifoodBtn + waDirect + '</div>' +
+      '</div>' +
+    '</div>';
   }
 
   function offerCard(o) {
