@@ -268,6 +268,61 @@
       "has": [
         {
           "type": "host",
+          "value": "classificados.aquitemachadinhos.com.br"
+        }
+      ]
+    },
+    {
+      "src": "^/$",
+      "dest": "/classificados.html?host=$host",
+      "check": true,
+      "has": [
+        {
+          "type": "host",
+          "value": "classificados.aquitemachadinhos.com.br"
+        }
+      ]
+    },
+    {
+      "src": "^(?:/(.*))$",
+      "dest": "/$1?host=$host",
+      "check": true,
+      "has": [
+        {
+          "type": "host",
+          "value": "classificados.aquitemachadinhos.com.br"
+        }
+      ]
+    },
+    {
+      "src": "^/assets(?:/(.*))$",
+      "dest": "/assets/$1?host=$host",
+      "check": true,
+      "has": [
+        {
+          "type": "host",
+          "value": "nacional.aquitemachadinhos.com.br"
+        }
+      ]
+    },
+    {
+      "src": "^/$",
+      "dest": "/classificados.html?host=$host",
+      "check": true,
+      "has": [
+        {
+          "type": "host",
+          "value": "nacional.aquitemachadinhos.com.br"
+        }
+      ]
+    },
+    {
+      "src": "^/assets(?:/(.*))$",
+      "dest": "/assets/$1?host=$host",
+      "check": true,
+      "has": [
+        {
+          "type": "host",
           "value": "gramado.aquitemachadinhos.com.br"
         }
       ]
@@ -588,6 +643,9 @@
     "admin.html": {
       "path": "admin"
     },
+    "agro-campo.html": {
+      "path": "agro-campo"
+    },
     "animais.html": {
       "path": "animais"
     },
@@ -681,6 +739,9 @@
     "empregos.html": {
       "path": "empregos"
     },
+    "esportes-lazer.html": {
+      "path": "esportes-lazer"
+    },
     "eventos-peao.html": {
       "path": "eventos-peao"
     },
@@ -768,6 +829,9 @@
     "index.html": {
       "path": "index"
     },
+    "infantil-bebes.html": {
+      "path": "infantil-bebes"
+    },
     "jericoacoara-home.html": {
       "path": "jericoacoara-home"
     },
@@ -786,6 +850,9 @@
     "mapa.html": {
       "path": "mapa"
     },
+    "moda-beleza.html": {
+      "path": "moda-beleza"
+    },
     "motorista.html": {
       "path": "motorista"
     },
@@ -797,6 +864,9 @@
     },
     "nataluz.html": {
       "path": "nataluz"
+    },
+    "negocios-comercio.html": {
+      "path": "negocios-comercio"
     },
     "o-que-fazer-festa-do-peao-2026.html": {
       "path": "o-que-fazer-festa-do-peao-2026"
@@ -860,6 +930,9 @@
     },
     "termos.html": {
       "path": "termos"
+    },
+    "trocas-doacoes.html": {
+      "path": "trocas-doacoes"
     },
     "turista.html": {
       "path": "turista"

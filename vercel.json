@@ -191,6 +191,56 @@
       "has": [
         {
           "type": "host",
+          "value": "classificados.aquitemachadinhos.com.br"
+        }
+      ],
+      "destination": "/assets/$1"
+    },
+    {
+      "source": "/",
+      "has": [
+        {
+          "type": "host",
+          "value": "classificados.aquitemachadinhos.com.br"
+        }
+      ],
+      "destination": "/classificados.html"
+    },
+    {
+      "source": "/(.*)",
+      "has": [
+        {
+          "type": "host",
+          "value": "classificados.aquitemachadinhos.com.br"
+        }
+      ],
+      "destination": "/$1"
+    },
+    {
+      "source": "/assets/(.*)",
+      "has": [
+        {
+          "type": "host",
+          "value": "nacional.aquitemachadinhos.com.br"
+        }
+      ],
+      "destination": "/assets/$1"
+    },
+    {
+      "source": "/",
+      "has": [
+        {
+          "type": "host",
+          "value": "nacional.aquitemachadinhos.com.br"
+        }
+      ],
+      "destination": "/classificados.html"
+    },
+    {
+      "source": "/assets/(.*)",
+      "has": [
+        {
+          "type": "host",
           "value": "gramado.aquitemachadinhos.com.br"
         }
       ],

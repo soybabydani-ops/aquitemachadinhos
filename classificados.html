@@ -1,38 +1,258 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>Classificados de Barretos — Imóveis, Empregos, Veículos | Aqui Tem Achadinhos</title>
-<meta name="description" content="Classificados de Barretos/SP: imóveis para alugar (temporada e Festa do Peão), empregos, veículos e muito mais. Contato direto pelo WhatsApp. Anuncie grátis.">
-<link rel="manifest" href="manifest.webmanifest"><meta name="theme-color" content="#0B1E3F">
-<meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="apple-mobile-web-app-title" content="Achadinhos">
-<link rel="icon" type="image/svg+xml" href="logo.svg"><link rel="apple-touch-icon" href="icon-192.png">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Classificados & Anúncios — Imóveis, Veículos, Vagas, Serviços | Aqui Tem Achadinhos</title>
+<meta name="description" content="Super portal de classificados: Imóveis, veículos, vagas de emprego, serviços, eletrônicos, agro e produtos. Contato direto via WhatsApp em todas as cidades e no Brasil.">
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#0B1E3F">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Achadinhos">
+<link rel="icon" type="image/svg+xml" href="logo.svg">
+<link rel="apple-touch-icon" href="icon-192.png">
 <link rel="canonical" href="https://www.aquitemachadinhos.com.br/classificados">
-<meta property="og:type" content="website"><meta property="og:title" content="Classificados de Barretos — Aqui Tem Achadinhos">
-<meta property="og:description" content="Imóveis, empregos, veículos e mais em Barretos. Anuncie grátis no lançamento.">
+
+<!-- Open Graph / Redes Sociais -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="Classificados & Anúncios — Imóveis, Veículos, Vagas, Serviços | Aqui Tem">
+<meta property="og:description" content="Portal completo de classificados locais e nacionais. Encontre imóveis, veículos, vagas de emprego, serviços e eletrônicos. Contato direto no WhatsApp.">
 <meta property="og:image" content="https://www.aquitemachadinhos.com.br/assets/og-image.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<link rel="stylesheet" href="assets/tailwind.css"><link rel="stylesheet" href="assets/styles.css">
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+<!-- CSS e Fontes -->
+<link rel="stylesheet" href="assets/tailwind.css">
+<link rel="stylesheet" href="assets/styles.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
-<body data-page="classificados" class="bg-silver-100 text-navy-900">
+<body data-page="classificados" class="bg-silver-100 text-navy-900 min-h-screen flex flex-col">
 <div id="site-header"></div>
 
-<section class="navy-hero text-white relative overflow-hidden"><div class="absolute inset-0 dot-grid opacity-40"></div>
-  <div class="relative max-w-5xl mx-auto px-4 sm:px-6 py-12 md:py-16">
-    <span class="text-peao-400 font-bold uppercase text-xs tracking-[0.18em]">Classificados de Barretos</span>
-    <h1 class="font-display text-3xl md:text-5xl font-extrabold mt-2 text-chrome">Anuncie e encontre tudo em Barretos</h1>
-    <p class="text-silver-200 mt-3 max-w-2xl">Imóveis para alugar (temporada e Festa do Peão), empregos, veículos e mais. Contato direto no WhatsApp. <b>Cadastro grátis no lançamento.</b></p>
-    <div class="mt-6"><a href="cadastro-anuncio.html" class="btn-shine inline-block bg-peao-500 hover:bg-peao-600 text-white font-bold px-6 py-3 rounded-xl shadow-redglow">📢 Anunciar grátis</a></div>
+<!-- HERO PRINCIPAL -->
+<section class="navy-hero text-white relative overflow-hidden">
+  <div class="absolute inset-0 dot-grid opacity-40"></div>
+  <div class="relative max-w-7xl mx-auto px-4 sm:px-6 py-12 md:py-16">
+    <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-8">
+      <div class="max-w-3xl">
+        <div class="inline-flex items-center gap-2 bg-peao-500/20 text-peao-400 border border-peao-500/30 px-3.5 py-1 rounded-full text-xs font-bold uppercase tracking-wider mb-3">
+          <span>✨</span> Portal de Classificados & Oportunidades
+        </div>
+        <h1 id="classHeroTitle" class="font-display text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-chrome">
+          Compre, venda, contrate e encontre tudo em um só lugar.
+        </h1>
+        <p id="classHeroSubtitle" class="text-silver-200 text-base md:text-lg mt-3 leading-relaxed max-w-2xl">
+          Imóveis (aluguel, venda e temporada), veículos, vagas de emprego, banco de talentos, serviços profissionais, eletrônicos, agro e produtos. Contato 100% direto via WhatsApp.
+        </p>
+
+        <!-- CTAs Principais -->
+        <div class="flex flex-wrap items-center gap-3 mt-6">
+          <a href="cadastro-anuncio.html" class="btn-shine inline-flex items-center gap-2 bg-peao-500 hover:bg-peao-600 text-white font-bold px-6 py-3.5 rounded-xl shadow-redglow transition transform hover:-translate-y-0.5">
+            <span>📢</span> Publicar Anúncio Grátis
+          </a>
+          <a href="vagas.html" class="btn-shine inline-flex items-center gap-2 bg-white/10 hover:bg-white/20 text-white border border-white/20 font-bold px-6 py-3.5 rounded-xl transition transform hover:-translate-y-0.5">
+            <span>💼</span> Hub de Vagas & Talentos
+          </a>
+          <a href="#planos-anuncio" class="text-xs text-silver-400 hover:text-amber-300 font-semibold px-2 py-2 transition underline">
+            ⭐ Ver Planos de Destaque
+          </a>
+        </div>
+      </div>
+
+      <!-- Quick Highlights Card -->
+      <div class="bg-navy-900/90 border border-silver-300/20 rounded-3xl p-6 lg:max-w-xs shadow-2xl backdrop-blur-md shrink-0">
+        <h4 class="font-display font-bold text-white text-sm flex items-center gap-2 mb-3">
+          <span>🚀</span> Vantagens dos Classificados
+        </h4>
+        <ul class="space-y-2.5 text-xs text-silver-300">
+          <li class="flex items-center gap-2">
+            <span class="text-emerald-400 font-bold">✓</span> Contato direto no WhatsApp sem taxa
+          </li>
+          <li class="flex items-center gap-2">
+            <span class="text-emerald-400 font-bold">✓</span> Cadastro grátis para pessoa física e empresas
+          </li>
+          <li class="flex items-center gap-2">
+            <span class="text-emerald-400 font-bold">✓</span> Abrangência local em 13 cidades + Nacional
+          </li>
+          <li class="flex items-center gap-2">
+            <span class="text-emerald-400 font-bold">✓</span> Banco de talentos 100% livre para candidatos
+          </li>
+        </ul>
+        <div class="mt-4 pt-3 border-t border-white/10 flex items-center justify-between text-xs text-silver-400">
+          <span>Seguro & Rápido</span>
+          <span class="text-peao-400 font-bold">AQUITEM</span>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 
-<section class="max-w-7xl mx-auto px-4 sm:px-6 py-10">
-  <div id="classGrid"></div>
-</section>
+<!-- PAINEL PRINCIPAL DE CONTROLE E CATEGORIAS -->
+<main class="flex-1 max-w-7xl mx-auto px-4 sm:px-6 py-8 w-full">
+
+  <!-- Barra de Busca e Filtros Principais -->
+  <div class="mb-6 bg-white rounded-3xl shadow-soft ring-silver p-4 md:p-5 flex flex-col md:flex-row items-center gap-3">
+    
+    <!-- Busca por texto -->
+    <div class="relative flex-1 w-full">
+      <span class="absolute inset-y-0 left-0 flex items-center pl-3.5 text-silver-400 text-lg pointer-events-none">🔍</span>
+      <input type="text" id="classSearchInput" placeholder="O que você está procurando? (Ex.: Casa centro, Gol 1.6, Garçom, Celular...)" class="w-full pl-11 pr-4 py-3 bg-silver-50 rounded-2xl ring-silver outline-none text-navy-900 placeholder:text-silver-400 text-sm focus:ring-2 focus:ring-navy-500 transition">
+    </div>
+
+    <!-- Filtro de Cidades -->
+    <div class="flex items-center gap-2 w-full md:w-auto">
+      <select id="classCityFilter" class="w-full md:w-auto px-4 py-3 bg-silver-50 rounded-2xl ring-silver text-sm font-semibold outline-none focus:ring-2 focus:ring-navy-500 text-navy-900">
+        <option value="">🌐 Brasil Todo (Nacional / Todas)</option>
+        <option value="barretos" selected>Barretos · SP</option>
+        <option value="gramado">Gramado · RS</option>
+        <option value="blumenau">Blumenau · SC</option>
+        <option value="bonito">Bonito · MS</option>
+        <option value="buzios">Búzios · RJ</option>
+        <option value="campos">Campos do Jordão · SP</option>
+        <option value="caruaru">Caruaru · PE</option>
+        <option value="florianopolis">Florianópolis · SC</option>
+        <option value="jericoacoara">Jericoacoara · CE</option>
+        <option value="porto">Porto de Galinhas · PE</option>
+        <option value="salvador">Salvador · BA</option>
+        <option value="uberlandia">Uberlândia · MG</option>
+        <option value="caldasnovas">Caldas Novas · GO</option>
+      </select>
+
+      <!-- Ordenação -->
+      <select id="classSortFilter" class="w-full md:w-auto px-4 py-3 bg-silver-50 rounded-2xl ring-silver text-sm font-semibold outline-none focus:ring-2 focus:ring-navy-500 text-navy-900">
+        <option value="destaque">⭐ Destaques 1º</option>
+        <option value="recentes">Mais Recentes</option>
+        <option value="menor_preco">Menor Preço</option>
+        <option value="maior_preco">Maior Preço</option>
+      </select>
+    </div>
+  </div>
+
+  <!-- Grid / Carrossel de Categorias -->
+  <div class="mb-6">
+    <div class="flex items-center justify-between mb-3">
+      <h2 class="font-display font-bold text-lg text-white flex items-center gap-2">
+        <span>📂</span> Categorias de Classificados
+      </h2>
+      <span id="totalClassCount" class="text-xs font-semibold text-silver-400">Carregando anúncios...</span>
+    </div>
+    <div id="classCatsGrid" class="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8 gap-2.5">
+      <!-- Renderizado dinamicamente -->
+    </div>
+  </div>
+
+  <!-- Subfiltros / Chips Contextuais da Categoria Selecionada -->
+  <div id="classSubChips" class="flex flex-wrap items-center gap-2 mb-6">
+    <!-- Renderizado dinamicamente -->
+  </div>
+
+  <!-- Container de Resultados dos Anúncios -->
+  <section>
+    <div class="flex items-center justify-between mb-4">
+      <h3 id="classResultsHeader" class="font-display font-extrabold text-xl text-white">
+        🔥 Todos os Anúncios
+      </h3>
+      <a href="cadastro-anuncio.html" class="text-xs font-bold text-peao-400 hover:underline">
+        + Anunciar nesta categoria
+      </a>
+    </div>
+
+    <div id="classGridRoot" class="min-h-[350px]">
+      <!-- Cards renderizados dinamicamente -->
+    </div>
+  </section>
+
+  <!-- SEÇÃO DE PLANOS & DESTAQUE (PENSADA INTELIGENTEMENTE) -->
+  <section id="planos-anuncio" class="mt-16 pt-12 border-t border-white/10">
+    <div class="text-center max-w-2xl mx-auto mb-10">
+      <span class="text-peao-400 font-bold uppercase text-xs tracking-widest">Monetização & Visibilidade</span>
+      <h2 class="font-display text-3xl font-extrabold mt-1 text-white">Planos simples, transparentes e justos</h2>
+      <p class="text-silver-300 text-sm mt-2">
+        Gratuito para candidatos e quem está começando. Planos de alta conversão para empresas e anunciantes que precisam de resultados rápidos.
+      </p>
+    </div>
+
+    <div class="grid md:grid-cols-3 gap-6">
+      
+      <!-- Card 1: Candidatos / Básico -->
+      <div class="bg-white rounded-3xl p-6 ring-silver shadow-soft flex flex-col justify-between border border-white/5">
+        <div>
+          <div class="inline-block bg-emerald-500/20 text-emerald-300 px-3 py-1 rounded-full text-xs font-bold uppercase mb-3">
+            🙋 Pessoas Físicas & Candidatos
+          </div>
+          <h3 class="font-display font-bold text-2xl text-white">100% Gratuito</h3>
+          <p class="text-xs text-silver-400 mt-1">Para quem busca emprego ou quer desapegar de itens usados.</p>
+          <div class="mt-4 text-3xl font-extrabold text-white">R$ 0 <span class="text-xs text-silver-400 font-normal">/ para sempre</span></div>
+          
+          <ul class="mt-5 space-y-2.5 text-xs text-silver-300">
+            <li class="flex items-center gap-2"><span class="text-emerald-400 font-bold">✓</span> Cadastro de currículo e perfil profissional</li>
+            <li class="flex items-center gap-2"><span class="text-emerald-400 font-bold">✓</span> Até 3 fotos no anúncio</li>
+            <li class="flex items-center gap-2"><span class="text-emerald-400 font-bold">✓</span> Contato direto via WhatsApp</li>
+            <li class="flex items-center gap-2"><span class="text-emerald-400 font-bold">✓</span> Busca e filtros livres no portal</li>
+          </ul>
+        </div>
+        <a href="cadastro-anuncio.html?cat=vagas-candidato" class="btn-shine mt-6 w-full text-center bg-white/10 hover:bg-white/20 text-white font-bold py-3 rounded-xl border border-white/10 transition">
+          Cadastrar Perfil Grátis →
+        </a>
+      </div>
+
+      <!-- Card 2: Destaque Individual (O Mais Popular) -->
+      <div class="bg-gradient-to-b from-navy-800 to-navy-950 rounded-3xl p-6 ring-2 ring-peao-500 shadow-2xl flex flex-col justify-between relative transform md:-translate-y-2">
+        <div class="absolute -top-3.5 left-1/2 -translate-x-1/2 bg-peao-500 text-white font-extrabold text-[11px] uppercase tracking-wider px-3.5 py-1 rounded-full shadow-redglow">
+          ⭐ Mais Escolhido
+        </div>
+        <div>
+          <div class="inline-block bg-amber-400/20 text-amber-300 px-3 py-1 rounded-full text-xs font-bold uppercase mb-3">
+            ⭐ Anúncio Destaque
+          </div>
+          <h3 class="font-display font-bold text-2xl text-white">Impulsionar Anúncio</h3>
+          <p class="text-xs text-silver-400 mt-1">Ideal para imóveis, veículos, vagas urgentes e vendas rápidas.</p>
+          <div class="mt-4 text-3xl font-extrabold text-peao-400">R$ 19,90 <span class="text-xs text-silver-400 font-normal">/ mês (cancele quando quiser)</span></div>
+
+          <ul class="mt-5 space-y-2.5 text-xs text-silver-200">
+            <li class="flex items-center gap-2"><span class="text-peao-400 font-bold">✓</span> <b>Topo da categoria</b> nas buscas da cidade</li>
+            <li class="flex items-center gap-2"><span class="text-peao-400 font-bold">✓</span> Selo dourado ⭐ de <b>Destaque Exclusivo</b></li>
+            <li class="flex items-center gap-2"><span class="text-peao-400 font-bold">✓</span> Até <b>10 fotos em alta resolução</b></li>
+            <li class="flex items-center gap-2"><span class="text-peao-400 font-bold">✓</span> Mapa com pin exato e geolocalização</li>
+            <li class="flex items-center gap-2"><span class="text-peao-400 font-bold">✓</span> 5x mais cliques no WhatsApp</li>
+          </ul>
+        </div>
+        <a href="cadastro-anuncio.html" class="btn-shine mt-6 w-full text-center bg-peao-500 hover:bg-peao-600 text-white font-bold py-3.5 rounded-xl shadow-redglow transition">
+          Anunciar com Destaque →
+        </a>
+      </div>
+
+      <!-- Card 3: Empresas & Imobiliárias Pro -->
+      <div class="bg-white rounded-3xl p-6 ring-silver shadow-soft flex flex-col justify-between border border-white/5">
+        <div>
+          <div class="inline-block bg-blue-500/20 text-blue-300 px-3 py-1 rounded-full text-xs font-bold uppercase mb-3">
+            🏢 Empresas & Imobiliárias
+          </div>
+          <h3 class="font-display font-bold text-2xl text-white">Plano Pro Negócios</h3>
+          <p class="text-xs text-silver-400 mt-1">Para imobiliárias, garagens de veículos, lojas e recrutadores.</p>
+          <div class="mt-4 text-3xl font-extrabold text-white">R$ 79 <span class="text-xs text-silver-400 font-normal">/ mês</span></div>
+
+          <ul class="mt-5 space-y-2.5 text-xs text-silver-300">
+            <li class="flex items-center gap-2"><span class="text-emerald-400 font-bold">✓</span> Até <b>20 anúncios simultâneos</b></li>
+            <li class="flex items-center gap-2"><span class="text-emerald-400 font-bold">✓</span> <b>20 fotos por anúncio</b></li>
+            <li class="flex items-center gap-2"><span class="text-emerald-400 font-bold">✓</span> Selo de <b>Empresa Verificada</b></li>
+            <li class="flex items-center gap-2"><span class="text-emerald-400 font-bold">✓</span> Perfil com catálogo comercial no guia</li>
+            <li class="flex items-center gap-2"><span class="text-emerald-400 font-bold">✓</span> Suporte prioritário via WhatsApp</li>
+          </ul>
+        </div>
+        <a href="cadastro.html" class="btn-shine mt-6 w-full text-center bg-navy-800 hover:bg-navy-700 text-white font-bold py-3 rounded-xl border border-white/10 transition">
+          Cadastrar Empresa Pro →
+        </a>
+      </div>
+
+    </div>
+  </section>
+
+</main>
 
 <div id="site-footer"></div>
 <script src="assets/app.js"></script>

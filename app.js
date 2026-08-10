@@ -58,15 +58,30 @@
 /* === MOTOR MULTI-CIDADE (Aqui Tem) — v4 EXTERNO (compatível CSP) === */
 (function () {
   var CIDADES = {
-    "www": ["Barretos","SP"], "gramado": ["Gramado","RS"], "campos": ["Campos do Jordão","SP"],
-    "salvador": ["Salvador","BA"], "buzios": ["Búzios","RJ"], "uberlandia": ["Uberlândia","MG"], "caldasnovas": ["Caldas Novas","GO"], "florianopolis": ["Florianópolis","SC"],
-    "porto": ["Porto de Galinhas","PE"], "jericoacoara": ["Jericoacoara","CE"],
-    "caruaru": ["Caruaru","PE"], "blumenau": ["Blumenau","SC"], "bonito": ["Bonito","MS"]
+    "www": ["Barretos","SP"],
+    "classificados": ["Brasil Todo","BR"],
+    "nacional": ["Brasil Todo","BR"],
+    "gramado": ["Gramado","RS"],
+    "campos": ["Campos do Jordão","SP"],
+    "salvador": ["Salvador","BA"],
+    "buzios": ["Búzios","RJ"],
+    "uberlandia": ["Uberlândia","MG"],
+    "caldasnovas": ["Caldas Novas","GO"],
+    "florianopolis": ["Florianópolis","SC"],
+    "porto": ["Porto de Galinhas","PE"],
+    "jericoacoara": ["Jericoacoara","CE"],
+    "caruaru": ["Caruaru","PE"],
+    "blumenau": ["Blumenau","SC"],
+    "bonito": ["Bonito","MS"]
   };
   var partes = location.hostname.split(".");
   var sub = (partes[0] || "www").toLowerCase();
   if (sub === "www" || partes.length <= 2 || sub === "localhost") sub = "www";
-  if (sub !== "www" && (location.pathname === "/" || location.pathname === "/index.html")) { location.replace("/" + sub + "-home.html"); }
+  if ((sub === "classificados" || sub === "nacional") && (location.pathname === "/" || location.pathname === "/index.html")) {
+    location.replace("/classificados.html");
+  } else if (sub !== "www" && sub !== "classificados" && sub !== "nacional" && (location.pathname === "/" || location.pathname === "/index.html")) {
+    location.replace("/" + sub + "-home.html");
+  }
   var par = CIDADES[sub] || CIDADES["www"];
   var CIDADE = par[0], UF = par[1], CIDUP = CIDADE.toUpperCase();
   document.documentElement.setAttribute('data-aquitem-city', sub === 'www' ? 'barretos' : sub);
@@ -194,9 +209,54 @@
   var uuid = function () { return (crypto.randomUUID ? crypto.randomUUID() : 'id-' + Date.now() + '-' + Math.random().toString(36).slice(2)); };
   var waLink = function (msg) { return 'https://wa.me/' + CONFIG.whatsapp + '?text=' + encodeURIComponent(msg || 'Olá! Vim pelo Aqui Tem Achadinhos.'); };
   var formatDate = function (d) { try { return new Date(d + 'T00:00:00').toLocaleDateString('pt-BR'); } catch (e) { return d; } };
-  var CITY_HOSTS = { gramado:'gramado', blumenau:'blumenau', bonito:'bonito', buzios:'buzios', campos:'campos', caruaru:'caruaru', florianopolis:'florianopolis', jericoacoara:'jericoacoara', porto:'porto', salvador:'salvador' };
-  var CITY_NAMES = { barretos:'Barretos', gramado:'Gramado', blumenau:'Blumenau', bonito:'Bonito', buzios:'Búzios', campos:'Campos do Jordão', caruaru:'Caruaru', florianopolis:'Florianópolis', jericoacoara:'Jericoacoara', porto:'Porto de Galinhas', salvador:'Salvador', uberlandia:'Uberlândia', caldasnovas:'Caldas Novas' };
-  var CITY_UFS = { barretos:'SP', gramado:'RS', blumenau:'SC', bonito:'MS', buzios:'RJ', campos:'SP', caruaru:'PE', florianopolis:'SC', jericoacoara:'CE', porto:'PE', salvador:'BA' };
+  var CITY_HOSTS = {
+    gramado: 'gramado',
+    blumenau: 'blumenau',
+    bonito: 'bonito',
+    buzios: 'buzios',
+    campos: 'campos',
+    caruaru: 'caruaru',
+    florianopolis: 'florianopolis',
+    jericoacoara: 'jericoacoara',
+    porto: 'porto',
+    salvador: 'salvador',
+    uberlandia: 'uberlandia',
+    caldasnovas: 'caldasnovas',
+    classificados: 'nacional',
+    nacional: 'nacional'
+  };
+  var CITY_NAMES = {
+    barretos: 'Barretos',
+    gramado: 'Gramado',
+    blumenau: 'Blumenau',
+    bonito: 'Bonito',
+    buzios: 'Búzios',
+    campos: 'Campos do Jordão',
+    caruaru: 'Caruaru',
+    florianopolis: 'Florianópolis',
+    jericoacoara: 'Jericoacoara',
+    porto: 'Porto de Galinhas',
+    salvador: 'Salvador',
+    uberlandia: 'Uberlândia',
+    caldasnovas: 'Caldas Novas',
+    nacional: 'Brasil Todo'
+  };
+  var CITY_UFS = {
+    barretos: 'SP',
+    gramado: 'RS',
+    blumenau: 'SC',
+    bonito: 'MS',
+    buzios: 'RJ',
+    campos: 'SP',
+    caruaru: 'PE',
+    florianopolis: 'SC',
+    jericoacoara: 'CE',
+    porto: 'PE',
+    salvador: 'BA',
+    uberlandia: 'MG',
+    caldasnovas: 'GO',
+    nacional: 'BR'
+  };
   function currentCitySlug() { var h = (location.hostname.split('.')[0] || 'www').toLowerCase(); return CITY_HOSTS[h] || 'barretos'; }
   function currentCityName() { return CITY_NAMES[currentCitySlug()] || 'Barretos'; }
   function currentCityUF() { return CITY_UFS[currentCitySlug()] || 'SP'; }
@@ -1487,33 +1547,50 @@
   }
 
   /* ============================================================
-     CLASSIFICADOS E VAGAS — Multi-cidades
+     CLASSIFICADOS E VAGAS — Multi-cidades e Nacional (Ultra Completo)
      ============================================================ */
   var CLASSIFIED_CATS = [
-    { id: 'vagas-empresa', nome: 'Vaga de Empresa (Contratação)', emoji: '📢', slug: 'vagas' },
-    { id: 'vagas-candidato', nome: 'Candidato / Banco de Talentos', emoji: '🙋', slug: 'vagas' },
-    { id: 'vagas-nac-empresa', nome: 'Vaga Nacional / Remoto', emoji: '📣', slug: 'vagas' },
-    { id: 'vagas-nac-candidato', nome: 'Candidato Nacional / Remoto', emoji: '🔍', slug: 'vagas' },
-    { id: 'nacionais', nome: 'Classificados Nacionais', emoji: '🇧🇷', slug: 'classificados' },
-    { id: 'empregos', nome: 'Empregos & Vagas', emoji: '💼', slug: 'vagas' },
-    { id: 'imoveis', nome: 'Imóveis', emoji: '🏠', slug: 'imoveis' },
-    { id: 'veiculos', nome: 'Veículos', emoji: '🚗', slug: 'veiculos' },
-    { id: 'moveis-eletro', nome: 'Móveis e Eletro', emoji: '🛋️', slug: 'moveis-eletro' },
-    { id: 'eletronicos', nome: 'Eletrônicos', emoji: '📱', slug: 'eletronicos' },
-    { id: 'animais', nome: 'Animais e Pets', emoji: '🐾', slug: 'animais' },
-    { id: 'servicos', nome: 'Serviços', emoji: '🔧', slug: 'servicos' },
-    { id: 'eventos-peao', nome: 'Festa do Peão', emoji: '🤠', slug: 'eventos-peao' }
+    { id: 'imoveis', nome: 'Imóveis', emoji: '🏠', slug: 'imoveis', desc: 'Aluguel, Venda e Temporada' },
+    { id: 'veiculos', nome: 'Veículos & Náutica', emoji: '🚗', slug: 'veiculos', desc: 'Carros, Motos, Náutica e Máquinas' },
+    { id: 'vagas-empresa', nome: 'Vagas de Emprego', emoji: '📢', slug: 'vagas', desc: 'Empresas contratando' },
+    { id: 'vagas-candidato', nome: 'Banco de Talentos', emoji: '🙋', slug: 'vagas', desc: 'Candidatos e Profissionais (Grátis)' },
+    { id: 'servicos', nome: 'Serviços Profissionais', emoji: '🔧', slug: 'servicos', desc: 'Reformas, Aulas, Fretes e TI' },
+    { id: 'eletronicos', nome: 'Eletrônicos & Tech', emoji: '📱', slug: 'eletronicos', desc: 'Smartphones, PCs e Games' },
+    { id: 'moveis-eletro', nome: 'Móveis & Eletro', emoji: '🛋️', slug: 'moveis-eletro', desc: 'Para casa e escritório' },
+    { id: 'agro-campo', nome: 'Agro & Fazendas', emoji: '🌾', slug: 'agro-campo', desc: 'Gado, Tratores e Sítios' },
+    { id: 'moda-beleza', nome: 'Moda & Beleza', emoji: '👗', slug: 'moda-beleza', desc: 'Roupas, Calçados e Joias' },
+    { id: 'animais', nome: 'Animais & Pets', emoji: '🐾', slug: 'animais', desc: 'Adoção, Acessórios e Cuidados' },
+    { id: 'eventos-peao', nome: 'Eventos & Festas', emoji: '🤠', slug: 'eventos-peao', desc: 'Ingressos e Hospedagem' },
+    { id: 'infantil-bebes', nome: 'Infantil & Bebês', emoji: '🍼', slug: 'infantil-bebes', desc: 'Carrinhos, Berços e Brinquedos' },
+    { id: 'esportes-lazer', nome: 'Esportes & Lazer', emoji: '🏄', slug: 'esportes-lazer', desc: 'Bikes, Fitness e Camping' },
+    { id: 'negocios-comercio', nome: 'Negócios & Atacado', emoji: '💼', slug: 'negocios-comercio', desc: 'Pontos e Lotes' },
+    { id: 'trocas-doacoes', nome: 'Trocas & Doações', emoji: '🤝', slug: 'trocas-doacoes', desc: 'Escambo e Solidariedade' },
+    { id: 'nacionais', nome: 'Classificados Nacionais', emoji: '🇧🇷', slug: 'classificados', desc: 'Envio para todo o Brasil' },
+    { id: 'empregos', nome: 'Empregos (Geral)', emoji: '💼', slug: 'vagas', desc: 'Vagas em geral' },
+    { id: 'vagas-nac-empresa', nome: 'Vaga Nacional / Remoto', emoji: '📣', slug: 'vagas', desc: 'Oportunidades remotas' },
+    { id: 'vagas-nac-candidato', nome: 'Candidato Nacional / Remoto', emoji: '🔍', slug: 'vagas', desc: 'Trabalho remoto' }
   ];
   function catClassified(id, cats) { var c = (cats || CLASSIFIED_CATS).filter(function (x) { return x.id === id; })[0]; return c ? (c.emoji + ' ' + c.nome) : '📋 Anúncio'; }
   function catEmoji(id, cats) { var c = (cats || CLASSIFIED_CATS).filter(function (x) { return x.id === id; })[0]; return c ? (c.emoji || '📋') : '📋'; }
 
   /* Campos dinâmicos por categoria (vão pra coluna 'atributos' em JSON) */
   var LISTING_FIELDS = {
+    'imoveis': [
+      { k: 'subcategoria', label: 'Tipo de negócio', type: 'select', opts: [['alugar', 'Aluguel Residencial'], ['vender', 'Venda de Imóvel'], ['temporada', 'Temporada / Festa / Turismo'], ['quartos', 'Quartos / Repúblicas / Co-living'], ['terrenos', 'Terrenos & Lotes'], ['comercial', 'Ponto Comercial / Sala / Galpão'], ['sitios', 'Sítio / Chácara / Fazenda']] },
+      { k: 'quartos', label: 'Quartos', ph: 'Ex.: 2' }, { k: 'banheiros', label: 'Banheiros', ph: 'Ex.: 1' },
+      { k: 'vagas', label: 'Vagas de garagem', ph: 'Ex.: 1' }, { k: 'area', label: 'Área aproximada (m²)', ph: 'Ex.: 75' }
+    ],
+    'veiculos': [
+      { k: 'subcategoria', label: 'Tipo de veículo', type: 'select', opts: [['carros', 'Carro de Passeio'], ['motos', 'Moto / Ciclomotor'], ['caminhoes', 'Caminhão / Van / Utilitário'], ['nautica', 'Náutica (Barco / Lancha / Jet-ski)'], ['agricola', 'Trator / Máquina Agrícola'], ['pecas', 'Peças / Acessórios / Som'], ['outro', 'Outro Veículo']] },
+      { k: 'marca', label: 'Marca / Modelo', ph: 'Ex.: Honda Civic 2.0 / CG 160' },
+      { k: 'ano', label: 'Ano de Fabricação/Modelo', ph: 'Ex.: 2022' }, { k: 'km', label: 'Quilometragem (KM)', ph: 'Ex.: 42000' },
+      { k: 'cambio', label: 'Câmbio / Combustível', ph: 'Ex.: Automático / Flex' }
+    ],
     'vagas-empresa': [
-      { k: 'subcategoria', label: 'Tipo de contratação', type: 'select', opts: [['temporario', 'Temporário / Festa do Peão'], ['clt', 'CLT (Efetivo)'], ['freelancer', 'Freelancer / Diária'], ['estagio', 'Estágio'], ['pj', 'PJ'], ['trainee', 'Trainee'], ['aprendiz', 'Jovem Aprendiz'], ['home-office', 'Home Office / Remoto'], ['hibrido', 'Híbrido']] },
+      { k: 'subcategoria', label: 'Tipo de contratação', type: 'select', opts: [['temporario', 'Temporário / Festa do Peão / Eventos'], ['clt', 'CLT (Carteira Assinada)'], ['freelancer', 'Freelancer / Diária'], ['estagio', 'Estágio'], ['pj', 'PJ (Prestador de Serviço)'], ['trainee', 'Trainee'], ['aprendiz', 'Jovem Aprendiz'], ['home-office', 'Home Office / 100% Remoto'], ['hibrido', 'Híbrido']] },
       { k: 'cargo', label: 'Cargo / Função ofertada', ph: 'Ex.: Garçom, Cozinheiro, Atendente, Vendedor' },
-      { k: 'jornada', label: 'Horário / Escala', ph: 'Ex.: Seg a Sex 8h-18h ou Escala Noturna Festa' },
-      { k: 'requisitos', label: 'Requisitos / Experiência', ph: 'Ex.: Ensino Médio completo, experiência com atendimento' }
+      { k: 'jornada', label: 'Horário / Escala de trabalho', ph: 'Ex.: Seg a Sex 8h-18h ou Noturno Peão' },
+      { k: 'requisitos', label: 'Requisitos / Experiência', ph: 'Ex.: Ensino Médio, experiência com atendimento' }
     ],
     'vagas-candidato': [
       { k: 'subcategoria', label: 'Disponibilidade', type: 'select', opts: [['temporario', 'Procuro Temporário / Festa do Peão'], ['clt', 'Procuro CLT'], ['freelancer', 'Procuro Freelancer / Diárias'], ['estagio', 'Busco Estágio'], ['pj', 'Sou PJ'], ['home-office', 'Trabalho Remoto / Home Office'], ['viagens', 'Disponível para Viagens']] },
@@ -1521,39 +1598,62 @@
       { k: 'experiencia', label: 'Resumo das suas experiências', ph: 'Ex.: 3 anos em atendimento e vendas no comércio' },
       { k: 'escolaridade', label: 'Escolaridade / Cursos', ph: 'Ex.: Ensino Médio completo, Informática básica' }
     ],
+    'servicos': [
+      { k: 'subcategoria', label: 'Área do serviço', type: 'select', opts: [['reformas', 'Reformas, Pedreiro, Pintor, Construção'], ['eletrica', 'Eletricista, Encanador, Ar Condicionado'], ['fretes', 'Fretes, Carretos e Mudanças'], ['beleza', 'Beleza, Estética, Cabelo a domicílio'], ['ti', 'TI, Informática, Sites, Design'], ['eventos', 'Festas, Buffet, Churrasqueiro, Garçom'], ['aulas', 'Aulas particulares, Treinamentos, Personal'], ['faxina', 'Diarista, Limpeza residencial/comercial'], ['outro', 'Outros Serviços']] },
+      { k: 'tipo_servico', label: 'Especialidade / Detalhes', ph: 'Ex.: Pintura residencial e impermeabilização' },
+      { k: 'disponibilidade', label: 'Dias / Horários de atendimento', ph: 'Ex.: Seg a Sáb das 7h às 19h' }
+    ],
+    'eletronicos': [
+      { k: 'subcategoria', label: 'Tipo de eletrônico', type: 'select', opts: [['celulares', 'Smartphones / Celulares / Tablets'], ['computadores', 'Computadores / Notebooks / Monitores'], ['games', 'Consoles / Jogos / Acessórios Gamer'], ['tv-audio', 'TVs / Caixas de Som / Fones'], ['cameras', 'Câmeras / Drones / Acessórios'], ['outro', 'Outros Tech']] },
+      { k: 'estado', label: 'Condição do item', type: 'select', opts: [['novo', 'Novo / Lacrado'], ['semi', 'Seminovo (Excelente estado)'], ['usado', 'Usado (Funcionando perfeitamente)'], ['defeito', 'Com detalhe / Para peças']] },
+      { k: 'marca', label: 'Marca / Modelo / Capacidade', ph: 'Ex.: iPhone 14 Pro 128GB / Dell i7 16GB' }
+    ],
+    'moveis-eletro': [
+      { k: 'subcategoria', label: 'Ambiente / Tipo', type: 'select', opts: [['sala', 'Sala de Estar / Sofás / Racks'], ['quarto', 'Quarto / Camas / Guarda-roupas'], ['cozinha', 'Cozinha / Mesas / Armários'], ['eletrodomesticos', 'Geladeiras, Fogões, Máquinas de Lavar'], ['escritorio', 'Escritório / Mesas / Cadeiras Gamer'], ['decoracao', 'Decoração, Tapetes, Cortinas']] },
+      { k: 'estado', label: 'Condição', type: 'select', opts: [['novo', 'Novo'], ['semi', 'Seminovo'], ['usado', 'Usado']] }
+    ],
+    'agro-campo': [
+      { k: 'subcategoria', label: 'Segmento agro', type: 'select', opts: [['gado', 'Gado de Corte / Leite / Equinos'], ['tratores', 'Tratores, Colheitadeiras e Implementos'], ['insumos', 'Sementes, Fertilizantes e Rações'], ['fazendas', 'Sítios, Chácaras e Fazendas Rurais'], ['outro', 'Outros Produtos do Campo']] },
+      { k: 'detalhe_agro', label: 'Raça / Marca / Quantidade', ph: 'Ex.: Nelore PO / Massey Ferguson 4292 / 50 sacas' }
+    ],
+    'moda-beleza': [
+      { k: 'subcategoria', label: 'Tipo de item', type: 'select', opts: [['feminino', 'Roupas Femininas'], ['masculino', 'Roupas Masculinas'], ['calcados', 'Calçados e Tênis'], ['festas', 'Vestidos de Festa / Ternos'], ['bolsas', 'Bolsas, Malas e Mochilas'], ['joias', 'Joias, Relógios e Semijoias'], ['cosmeticos', 'Perfumes e Cosméticos']] },
+      { k: 'tamanho', label: 'Tamanho / Numeração', ph: 'Ex.: M / 38 / 42' }
+    ],
+    'animais': [
+      { k: 'subcategoria', label: 'Tipo', type: 'select', opts: [['adocao', 'Adoção Responsável'], ['acessorios', 'Acessórios, Gaiolas, Rações'], ['servicos-pet', 'Banho & Tosa, Hotelzinho Pet'], ['veterinario', 'Clínica Veterinária / Adestramento']] },
+      { k: 'especie', label: 'Espécie / Raça / Porte', ph: 'Ex.: Cão / Golden Retriever / Porte Grande' }
+    ],
+    'eventos-peao': [
+      { k: 'subcategoria', label: 'Tipo de oportunidade', type: 'select', opts: [['temporada', 'Aluguel Temporada / Hospedagem'], ['ingressos', 'Ingressos / Passaportes / Camarotes'], ['transporte', 'Vans, Transfers e Motoristas'], ['estruturas', 'Tendas, Som, Iluminação e Palcos'], ['servicos-evento', 'Segurança, Garçom, Barman, Churrasqueiro']] }
+    ],
+    'infantil-bebes': [
+      { k: 'subcategoria', label: 'Categoria infantil', type: 'select', opts: [['carrinhos', 'Carrinhos, Bebê Conforto e Cadeirinhas'], ['moveis-bebe', 'Berços, Cômodas e Móveis'], ['brinquedos', 'Brinquedos e Jogos Infantis'], ['roupas', 'Roupas e Calçados de Bebê/Criança'], ['enxoval', 'Enxoval e Acessórios']] }
+    ],
+    'esportes-lazer': [
+      { k: 'subcategoria', label: 'Modalidade', type: 'select', opts: [['bikes', 'Bicicletas e Acessórios'], ['fitness', 'Equipamentos Fitness / Musculação'], ['musica', 'Instrumentos Musicais / Áudio'], ['camping', 'Camping, Pesca e Ecoturismo'], ['surf-aquatico', 'Pranchas, Kite, Stand Up, Mergulho'], ['outro', 'Outros Esportes']] }
+    ],
+    'negocios-comercio': [
+      { k: 'subcategoria', label: 'Tipo de negócio', type: 'select', opts: [['pontos', 'Repasse de Ponto Comercial / Loja'], ['atacado', 'Lotes de Mercadorias no Atacado'], ['maquinas-comerciais', 'Máquinas para Indústria/Comércio'], ['franquias', 'Franquias e Oportunidades']] }
+    ],
+    'trocas-doacoes': [
+      { k: 'subcategoria', label: 'Tipo', type: 'select', opts: [['trocas', 'Trocas (Escambo de Produtos)'], ['doacoes', 'Doações Solidárias (Roupas, Móveis, Livros)']] }
+    ],
+    'nacionais': [
+      { k: 'subcategoria', label: 'Tipo de anúncio nacional', type: 'select', opts: [['produtos-envio', 'Produto físico com envio (Correios/Transportadora)'], ['remoto', 'Serviço Digital / Remoto (Atende todo o Brasil)'], ['parcerias', 'Parcerias / Oportunidades Nacionais']] }
+    ],
     'vagas-nac-empresa': [
       { k: 'subcategoria', label: 'Modalidade', type: 'select', opts: [['remoto', '100% Remoto / Home Office'], ['clt-nacional', 'CLT Nacional'], ['pj-nacional', 'PJ Nacional'], ['temporario-nac', 'Temporário Nacional']] },
-      { k: 'cargo', label: 'Cargo / Função', ph: 'Ex.: Desenvolvedor, Suporte, Vendas Remotas' },
-      { k: 'requisitos', label: 'Requisitos', ph: 'Ex.: Computador próprio, boa comunicação' }
+      { k: 'cargo', label: 'Cargo / Função', ph: 'Ex.: Desenvolvedor, Suporte, Vendas Remotas' }
     ],
     'vagas-nac-candidato': [
       { k: 'subcategoria', label: 'Pretensão', type: 'select', opts: [['remoto', 'Aceito Remoto / Home Office'], ['relocacao', 'Disponível para Relocação'], ['clt-qualquer', 'Busco CLT em qualquer cidade'], ['pj-qualquer', 'Busco PJ']] },
-      { k: 'funcao_desejada', label: 'Área pretendida', ph: 'Ex.: Marketing Digital, Programação, Atendimento' },
-      { k: 'experiencia', label: 'Experiência', ph: 'Ex.: 5 anos em projetos remotos' }
-    ],
-    'nacionais': [
-      { k: 'subcategoria', label: 'Tipo de oportunidade', type: 'select', opts: [['produtos', 'Produtos'], ['servicos', 'Serviços'], ['parcerias', 'Parcerias / Oportunidades'], ['cursos', 'Cursos e Treinamentos']] }
-    ],
-    'imoveis': [
-      { k: 'subcategoria', label: 'Tipo de negócio', type: 'select', opts: [['alugar', 'Alugar'], ['vender', 'Vender'], ['temporada', 'Temporada / Peão']] },
-      { k: 'quartos', label: 'Quartos', ph: 'Ex.: 2' }, { k: 'banheiros', label: 'Banheiros', ph: 'Ex.: 1' },
-      { k: 'vagas', label: 'Vagas', ph: 'Ex.: 1' }, { k: 'area', label: 'Área (m²)', ph: 'Ex.: 60' }
+      { k: 'funcao_desejada', label: 'Área pretendida', ph: 'Ex.: Marketing Digital, Programação, Atendimento' }
     ],
     'empregos': [
       { k: 'subcategoria', label: 'Contratação', type: 'select', opts: [['temporario', 'Temporário / Peão'], ['clt', 'CLT'], ['freelancer', 'Freelancer'], ['estagio', 'Estágio'], ['pj', 'PJ']] },
-      { k: 'salario', label: 'Salário', ph: 'Ex.: R$ 2.000 ou A combinar' },
-      { k: 'jornada', label: 'Jornada', ph: 'Ex.: Seg-Sex 8h-18h' }, { k: 'requisitos', label: 'Requisitos', ph: 'Ex.: Ensino médio completo' }
-    ],
-    'veiculos': [
-      { k: 'subcategoria', label: 'Tipo', type: 'select', opts: [['carros', 'Carro'], ['motos', 'Moto'], ['caminhoes', 'Caminhão'], ['outro', 'Outro']] },
-      { k: 'marca', label: 'Marca / Modelo', ph: 'Ex.: Honda CG 160' },
-      { k: 'ano', label: 'Ano', ph: 'Ex.: 2020' }, { k: 'km', label: 'KM', ph: 'Ex.: 25000' }
-    ],
-    'moveis-eletro': [{ k: 'estado', label: 'Estado', type: 'select', opts: [['novo', 'Novo'], ['usado', 'Usado'], ['semi', 'Semi-novo']] }],
-    'eletronicos': [{ k: 'estado', label: 'Estado', type: 'select', opts: [['novo', 'Novo'], ['usado', 'Usado'], ['semi', 'Semi-novo']] }],
-    'animais': [{ k: 'especie', label: 'Espécie', ph: 'Ex.: Cachorro' }],
-    'servicos': [{ k: 'tipo_servico', label: 'Tipo de serviço', ph: 'Ex.: Pedreiro' }],
-    'eventos-peao': [{ k: 'subcategoria', label: 'Tipo', type: 'select', opts: [['temporada', 'Aluguel temporada'], ['ingressos', 'Ingressos'], ['hospedagem', 'Hospedagem'], ['servico', 'Serviço']] }]
+      { k: 'salario', label: 'Salário', ph: 'Ex.: R$ 2.000 ou A combinar' }
+    ]
   };
 
   var Classifieds = {
@@ -1573,19 +1673,297 @@
   };
 
   function listingCard(l, cats) {
-    var capa = l.foto_capa_url ? '<img src="' + esc(l.foto_capa_url) + '" alt="' + esc(l.titulo) + '" class="h-36 w-full object-cover" loading="lazy">' : '<div class="h-36 w-full grid place-items-center text-4xl bg-gradient-to-br from-navy-700 to-navy-500">' + esc(catEmoji(l.categoria, cats)) + '</div>';
-    return '<a href="anuncio.html?id=' + encodeURIComponent(l.id) + '" class="card-hover bg-white rounded-2xl overflow-hidden shadow-soft ring-silver block"><div class="relative">' + capa + (l.destaque ? '<span class="absolute top-2 right-2 text-[10px] font-bold text-white bg-peao-500 px-1.5 py-0.5 rounded">⭐ Destaque</span>' : '') + (l.subcategoria === 'temporada' ? '<span class="absolute top-2 left-2 text-[10px] font-bold text-white bg-peao-600 px-1.5 py-0.5 rounded">🤠 Temporada</span>' : '') + '</div><div class="p-4"><div class="text-[10px] font-semibold text-silver-500 uppercase tracking-wide">' + esc(catClassified(l.categoria, cats)) + '</div><h3 class="font-display font-bold mt-1 truncate">' + esc(l.titulo) + '</h3>' + (l.preco ? '<p class="text-peao-500 font-extrabold">' + esc(l.preco) + '</p>' : '') + (l.bairro ? '<p class="text-xs text-silver-500">📍 ' + esc(l.bairro) + (l.cidade ? ' · ' + esc(l.cidade) : '') + '</p>' : '') + '</div></a>';
+    var capa = l.foto_capa_url
+      ? '<img src="' + esc(l.foto_capa_url) + '" alt="' + esc(l.titulo) + '" class="h-44 w-full object-cover group-hover:scale-105 transition duration-300" loading="lazy">'
+      : '<div class="h-44 w-full grid place-items-center text-5xl bg-gradient-to-br from-navy-800 to-navy-600">' + esc(catEmoji(l.categoria, cats)) + '</div>';
+
+    var cObj = (cats || CLASSIFIED_CATS).filter(function (x) { return x.id === l.categoria; })[0];
+    var catName = cObj ? (cObj.emoji + ' ' + cObj.nome) : '📋 Classificado';
+    var local = [l.bairro, l.cidade || 'Barretos'].filter(Boolean).join(' · ');
+
+    var waMsg = 'Olá! Vi seu anúncio "' + l.titulo + '" no Aqui Tem Achadinhos e tenho interesse.';
+    var wa = 'https://wa.me/' + (digits(l.whatsapp) || CONFIG.whatsapp) + '?text=' + encodeURIComponent(waMsg);
+
+    return '<div class="card-hover bg-white rounded-3xl overflow-hidden shadow-soft ring-silver flex flex-col justify-between group border border-white/5">' +
+      '<a href="anuncio.html?id=' + encodeURIComponent(l.id) + '" class="block">' +
+        '<div class="relative overflow-hidden">' +
+          capa +
+          (l.destaque ? '<span class="absolute top-2.5 right-2.5 text-[11px] font-extrabold text-amber-950 bg-amber-400 px-2 py-0.5 rounded-lg shadow-md flex items-center gap-1">⭐ Destaque</span>' : '') +
+          (l.subcategoria ? '<span class="absolute top-2.5 left-2.5 text-[10px] font-bold text-white bg-navy-950/80 backdrop-blur-sm px-2 py-0.5 rounded-lg border border-white/10">' + esc(l.subcategoria.toUpperCase()) + '</span>' : '') +
+        '</div>' +
+        '<div class="p-4">' +
+          '<div class="text-[10px] font-bold text-peao-400 uppercase tracking-wider">' + esc(catName) + '</div>' +
+          '<h3 class="font-display font-bold text-base mt-1 text-white group-hover:text-peao-400 transition line-clamp-2 leading-snug">' + esc(l.titulo) + '</h3>' +
+          (l.preco ? '<p class="text-emerald-400 font-extrabold text-lg mt-1.5">💰 ' + esc(l.preco) + '</p>' : '') +
+          (local ? '<p class="text-xs text-silver-400 mt-2 truncate">📍 ' + esc(local) + '</p>' : '') +
+        '</div>' +
+      '</a>' +
+      '<div class="px-4 pb-4 pt-1 flex items-center gap-2">' +
+        '<a href="' + wa + '" target="_blank" rel="noopener noreferrer" class="btn-shine flex-1 text-center bg-[#25D366] hover:bg-[#20ba59] text-white font-bold text-xs py-2.5 px-3 rounded-xl transition shadow-soft flex items-center justify-center gap-1.5">' +
+          '💬 WhatsApp' +
+        '</a>' +
+        '<a href="anuncio.html?id=' + encodeURIComponent(l.id) + '" class="text-xs font-semibold text-silver-400 hover:text-white px-2.5 py-2 rounded-xl bg-white/5 hover:bg-white/10 transition" title="Ver detalhes">' +
+          'Detalhes →' +
+        '</a>' +
+      '</div>' +
+    '</div>';
   }
 
   function pageClassificadosHub() {
-    var grid = $('#classGrid'); if (!grid) return; grid.innerHTML = loadingHTML();
-    Promise.all([Classifieds.cats(), Classifieds.list()]).then(function (r) {
-      var cats = r[0], all = r[1];
-      var catHtml = '<div class="grid grid-cols-2 sm:grid-cols-4 gap-4">' + cats.map(function (c) {
-        return '<a href="' + (c.slug || c.id) + '.html" class="card-hover bg-white rounded-2xl p-5 text-center shadow-soft ring-silver"><div class="text-4xl">' + esc(c.emoji || '📋') + '</div><div class="mt-2 font-display font-bold">' + esc(c.nome) + '</div></a>';
-      }).join('') + '</div>';
-      var rec = all.length ? '<h2 class="font-display text-xl font-extrabold mb-3 mt-10">🔥 Anúncios recentes</h2><div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">' + all.slice(0, 8).map(function (l) { return listingCard(l, cats); }).join('') + '</div>' : '<div class="mt-8">' + emptyState('Seja o primeiro a anunciar', 'Cadastre seu imóvel, vaga de emprego ou produto grátis. Principalmente agora na época da Festa do Peão!', true) + '</div>';
-      grid.innerHTML = catHtml + rec;
+    var gridRoot = $('#classGridRoot') || $('#classGrid');
+    var catsGrid = $('#classCatsGrid');
+    var subChipsBox = $('#classSubChips');
+    var totalCountEl = $('#totalClassCount');
+    var resHeader = $('#classResultsHeader');
+
+    if (!gridRoot) return;
+    gridRoot.innerHTML = loadingHTML();
+
+    var selectedCat = params().get('cat') || 'all';
+    var activeSub = '';
+    var searchQuery = '';
+    var selectedCity = $('#classCityFilter') ? $('#classCityFilter').value : (currentCitySlug() === 'nacional' ? '' : currentCitySlug());
+    var sortOrder = $('#classSortFilter') ? $('#classSortFilter').value : 'destaque';
+
+    var citySel = $('#classCityFilter');
+    if (citySel) {
+      var curSlug = currentCitySlug();
+      if (curSlug && curSlug !== 'nacional' && citySel.querySelector('option[value="' + curSlug + '"]')) {
+        citySel.value = curSlug;
+        selectedCity = curSlug;
+      }
+      citySel.addEventListener('change', function () {
+        selectedCity = this.value;
+        renderListings();
+      });
+    }
+
+    var sortSel = $('#classSortFilter');
+    if (sortSel) {
+      sortSel.addEventListener('change', function () {
+        sortOrder = this.value;
+        renderListings();
+      });
+    }
+
+    var sInp = $('#classSearchInput');
+    if (sInp) {
+      var timer = null;
+      sInp.addEventListener('input', function () {
+        clearTimeout(timer);
+        timer = setTimeout(function () {
+          searchQuery = (sInp.value || '').trim().toLowerCase();
+          renderListings();
+        }, 250);
+      });
+    }
+
+    Promise.all([
+      Classifieds.cats(),
+      apiGet('listings?select=*&status=eq.ativo&order=destaque.desc,criado_em.desc')
+    ]).then(function (res) {
+      var cats = res[0] || CLASSIFIED_CATS;
+      var all = res[1] || [];
+
+      if (totalCountEl) totalCountEl.textContent = all.length + (all.length === 1 ? ' anúncio ativo' : ' anúncios ativos');
+
+      var SUB_OPTS = {
+        'imoveis': [
+          { k: '', l: 'Todos Imóveis' }, { k: 'alugar', l: '🔑 Aluguel' }, { k: 'vender', l: '🏷️ Venda' },
+          { k: 'temporada', l: '🤠 Temporada / Peão' }, { k: 'quartos', l: '🛏️ Quartos / Repúblicas' },
+          { k: 'terrenos', l: '📐 Terrenos / Lotes' }, { k: 'comercial', l: '🏢 Salas & Galpões' }, { k: 'sitios', l: '🌳 Sítios / Chácaras' }
+        ],
+        'veiculos': [
+          { k: '', l: 'Todos Veículos' }, { k: 'carros', l: '🚗 Carros' }, { k: 'motos', l: '🏍️ Motos' },
+          { k: 'caminhoes', l: '🚚 Caminhões / Vans' }, { k: 'nautica', l: '🚤 Náutica / Jet' },
+          { k: 'agricola', l: '🚜 Tratores & Máquinas' }, { k: 'pecas', l: '⚙️ Peças & Acessórios' }
+        ],
+        'vagas-empresa': [
+          { k: '', l: 'Todas as Vagas' }, { k: 'temporario', l: '🤠 Temporário / Peão' }, { k: 'clt', l: '📋 CLT' },
+          { k: 'freelancer', l: '⚡ Freelancer' }, { k: 'estagio', l: '🎓 Estágio / Aprendiz' }, { k: 'pj', l: '🏢 PJ' }, { k: 'home-office', l: '💻 Remoto' }
+        ],
+        'vagas-candidato': [
+          { k: '', l: 'Todos os Candidatos' }, { k: 'temporario', l: '🤠 Disponível Peão' }, { k: 'clt', l: '💼 Busca CLT' },
+          { k: 'freelancer', l: '⚡ Freelancer' }, { k: 'estagio', l: '🎓 Estágio' }, { k: 'remoto', l: '💻 Remoto' }
+        ],
+        'servicos': [
+          { k: '', l: 'Todos Serviços' }, { k: 'reformas', l: '🔨 Reformas & Construção' }, { k: 'eletrica', l: '⚡ Elétrica & Ar' },
+          { k: 'fretes', l: '📦 Fretes & Mudanças' }, { k: 'beleza', l: '✂️ Beleza & Estética' }, { k: 'ti', l: '💻 TI & Design' },
+          { k: 'eventos', l: '🎉 Festas & Buffet' }, { k: 'aulas', l: '📚 Aulas & Cursos' }
+        ],
+        'eletronicos': [
+          { k: '', l: 'Todos Eletrônicos' }, { k: 'celulares', l: '📱 Smartphones' }, { k: 'computadores', l: '💻 PCs & Notebooks' },
+          { k: 'games', l: '🎮 Games & Consoles' }, { k: 'tv-audio', l: '📺 TVs & Som' }, { k: 'cameras', l: '📷 Câmeras & Drones' }
+        ],
+        'moveis-eletro': [
+          { k: '', l: 'Todos Móveis & Eletro' }, { k: 'sala', l: '🛋️ Sofás & Sala' }, { k: 'quarto', l: '🛏️ Camas & Armários' },
+          { k: 'eletrodomesticos', l: '🧊 Geladeiras & Fogões' }, { k: 'escritorio', l: '🪑 Escritório' }, { k: 'decoracao', l: '🖼️ Decoração' }
+        ],
+        'agro-campo': [
+          { k: '', l: 'Todo Agro' }, { k: 'gado', l: '🐂 Gado & Cavalos' }, { k: 'tratores', l: '🚜 Tratores & Implementos' },
+          { k: 'insumos', l: '🌱 Sementes & Insumos' }, { k: 'fazendas', l: '🌾 Sítios & Fazendas' }
+        ],
+        'moda-beleza': [
+          { k: '', l: 'Toda Moda' }, { k: 'feminino', l: '👗 Feminino' }, { k: 'masculino', l: '👔 Masculino' },
+          { k: 'calcados', l: '👟 Calçados' }, { k: 'festas', l: '✨ Vestidos de Festa' }, { k: 'joias', l: '💍 Joias & Semijoias' }
+        ],
+        'animais': [
+          { k: '', l: 'Todos Pets' }, { k: 'adocao', l: '🐶 Adoção' }, { k: 'acessorios', l: '🦴 Acessórios & Rações' },
+          { k: 'servicos-pet', l: '🛁 Banho & Tosa' }, { k: 'veterinario', l: '🩺 Veterinários' }
+        ],
+        'eventos-peao': [
+          { k: '', l: 'Todos Eventos' }, { k: 'ingressos', l: '🎟️ Ingressos & Camarotes' }, { k: 'hospedagem', l: '🏠 Hospedagem Peão' },
+          { k: 'transporte', l: '🚐 Transfers & Vans' }, { k: 'estruturas', l: '🎪 Tendas & Som' }
+        ],
+        'infantil-bebes': [
+          { k: '', l: 'Todo Infantil' }, { k: 'carrinhos', l: '🛒 Carrinhos & Cadeirinhas' }, { k: 'brinquedos', l: '🧸 Brinquedos' },
+          { k: 'roupas', l: '👶 Roupas & Calçados' }, { k: 'moveis-bebe', l: '🍼 Quarto de Bebê' }
+        ],
+        'esportes-lazer': [
+          { k: '', l: 'Todos Esportes' }, { k: 'bikes', l: '🚴 Bicicletas' }, { k: 'fitness', l: '🏋️ Academia & Fitness' },
+          { k: 'musica', l: '🎸 Instrumentos' }, { k: 'camping', l: '⛺ Camping & Pesca' }
+        ],
+        'negocios-comercio': [
+          { k: '', l: 'Todos Negócios' }, { k: 'pontos', l: '🏪 Pontos Comerciais' }, { k: 'atacado', l: '📦 Lotes no Atacado' },
+          { k: 'franquias', l: '🤝 Franquias & Parcerias' }
+        ],
+        'trocas-doacoes': [
+          { k: '', l: 'Tudo' }, { k: 'trocas', l: '🔄 Trocas (Escambo)' }, { k: 'doacoes', l: '🎁 Doações Solidárias' }
+        ],
+        'nacionais': [
+          { k: '', l: 'Todo Nacional' }, { k: 'produtos-envio', l: '📦 Envio Correios/Transportadora' }, { k: 'remoto', l: '💻 Serviços Remotos' }
+        ]
+      };
+
+      function renderCategoriesGrid() {
+        if (!catsGrid) return;
+        var allBtn = '<button data-cat-id="all" class="p-3 rounded-2xl text-center transition flex flex-col items-center justify-center ' + (selectedCat === 'all' ? 'bg-peao-500 text-white shadow-soft ring-1 ring-peao-400' : 'bg-white text-silver-300 ring-silver hover:bg-white/10') + '">' +
+          '<span class="text-2xl">📋</span>' +
+          '<span class="text-xs font-bold mt-1 line-clamp-1">Todos</span>' +
+          '<span class="text-[10px] opacity-75 mt-0.5">' + all.length + '</span>' +
+        '</button>';
+
+        var catsHtml = cats.map(function (c) {
+          var count = all.filter(function (l) { return l.categoria === c.id; }).length;
+          var isAct = selectedCat === c.id;
+          return '<button data-cat-id="' + esc(c.id) + '" class="p-3 rounded-2xl text-center transition flex flex-col items-center justify-center ' + (isAct ? 'bg-peao-500 text-white shadow-soft ring-1 ring-peao-400' : 'bg-white text-silver-300 ring-silver hover:bg-white/10') + '">' +
+            '<span class="text-2xl">' + (c.emoji || '📋') + '</span>' +
+            '<span class="text-xs font-bold mt-1 line-clamp-1">' + esc(c.nome) + '</span>' +
+            '<span class="text-[10px] opacity-75 mt-0.5">' + count + '</span>' +
+          '</button>';
+        }).join('');
+
+        catsGrid.innerHTML = allBtn + catsHtml;
+
+        catsGrid.querySelectorAll('[data-cat-id]').forEach(function (b) {
+          b.addEventListener('click', function () {
+            selectedCat = b.getAttribute('data-cat-id');
+            activeSub = '';
+            renderCategoriesGrid();
+            renderSubFilters();
+            renderListings();
+          });
+        });
+      }
+
+      function renderSubFilters() {
+        if (!subChipsBox) return;
+        if (selectedCat === 'all' || !SUB_OPTS[selectedCat]) {
+          subChipsBox.innerHTML = '';
+          return;
+        }
+        var opts = SUB_OPTS[selectedCat] || [];
+        subChipsBox.innerHTML = opts.map(function (o) {
+          var isAct = activeSub === o.k;
+          return '<button data-csub="' + esc(o.k) + '" class="px-3.5 py-1.5 rounded-full text-xs font-semibold transition ' + (isAct ? 'bg-navy-800 text-white ring-1 ring-peao-500' : 'bg-white text-silver-300 ring-silver hover:bg-white/10') + '">' + esc(o.l) + '</button>';
+        }).join('');
+
+        subChipsBox.querySelectorAll('[data-csub]').forEach(function (b) {
+          b.addEventListener('click', function () {
+            activeSub = b.getAttribute('data-csub');
+            renderSubFilters();
+            renderListings();
+          });
+        });
+      }
+
+      function renderListings() {
+        var filtered = all.slice();
+
+        if (selectedCat && selectedCat !== 'all') {
+          filtered = filtered.filter(function (l) { return l.categoria === selectedCat; });
+        }
+
+        if (selectedCity) {
+          filtered = filtered.filter(function (l) {
+            var cSlug = (l.city_slug || '').toLowerCase();
+            var cName = (l.cidade || '').toLowerCase();
+            return !l.city_slug || cSlug === selectedCity || cName === selectedCity || cName.indexOf(selectedCity) !== -1;
+          });
+        }
+
+        if (activeSub) {
+          filtered = filtered.filter(function (l) {
+            var sub = ((l.subcategoria || '') + ' ' + JSON.stringify(l.atributos || '')).toLowerCase();
+            return sub.indexOf(activeSub.toLowerCase()) !== -1;
+          });
+        }
+
+        if (searchQuery) {
+          filtered = filtered.filter(function (l) {
+            var text = [l.titulo, l.descricao, l.bairro, l.cidade, l.anunciante_nome, l.preco, JSON.stringify(l.atributos || '')].filter(Boolean).join(' ').toLowerCase();
+            return text.indexOf(searchQuery) !== -1;
+          });
+        }
+
+        if (sortOrder === 'destaque') {
+          filtered.sort(function (a, b) {
+            if (a.destaque && !b.destaque) return -1;
+            if (!a.destaque && b.destaque) return 1;
+            return new Date(b.criado_em || 0).getTime() - new Date(a.criado_em || 0).getTime();
+          });
+        } else if (sortOrder === 'recentes') {
+          filtered.sort(function (a, b) {
+            return new Date(b.criado_em || 0).getTime() - new Date(a.criado_em || 0).getTime();
+          });
+        } else if (sortOrder === 'menor_preco' || sortOrder === 'maior_preco') {
+          function extractNum(p) {
+            if (!p) return 0;
+            var clean = String(p).replace(/[^\d,.]/g, '').replace(',', '.');
+            return parseFloat(clean) || 0;
+          }
+          filtered.sort(function (a, b) {
+            var pa = extractNum(a.preco), pb = extractNum(b.preco);
+            return sortOrder === 'menor_preco' ? (pa - pb) : (pb - pa);
+          });
+        }
+
+        if (resHeader) {
+          var curCatObj = cats.filter(function(x){ return x.id === selectedCat; })[0];
+          var catLabel = curCatObj ? (curCatObj.emoji + ' ' + curCatObj.nome) : '🔥 Todos os Anúncios';
+          var cityLabel = selectedCity ? (' em ' + (CITY_NAMES[selectedCity] || selectedCity)) : ' (Nacional)';
+          resHeader.textContent = catLabel + cityLabel + ' (' + filtered.length + ')';
+        }
+
+        if (!filtered.length) {
+          var ctaLink = 'cadastro-anuncio.html' + (selectedCat !== 'all' ? '?cat=' + encodeURIComponent(selectedCat) : '');
+          gridRoot.innerHTML = '<div class="bg-white rounded-3xl p-10 text-center ring-silver shadow-soft max-w-xl mx-auto my-8">' +
+            '<div class="text-5xl mb-3">🏷️</div>' +
+            '<h3 class="font-display font-bold text-xl text-white">Nenhum anúncio encontrado</h3>' +
+            '<p class="text-silver-400 text-sm mt-2 leading-relaxed">Seja o primeiro a anunciar nesta categoria! Cadastro rápido, gratuito e com WhatsApp direto.</p>' +
+            '<a href="' + ctaLink + '" class="btn-shine inline-block mt-6 bg-peao-500 hover:bg-peao-600 text-white font-bold px-6 py-3 rounded-xl shadow-redglow">📢 Publicar Anúncio Grátis</a>' +
+          '</div>';
+          return;
+        }
+
+        gridRoot.innerHTML = '<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">' +
+          filtered.map(function (l) { return listingCard(l, cats); }).join('') +
+        '</div>';
+      }
+
+      renderCategoriesGrid();
+      renderSubFilters();
+      renderListings();
     });
   }
 
