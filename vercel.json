@@ -15,17 +15,22 @@
     },
     {
       "source": "/vagas",
-      "destination": "/empregos",
+      "destination": "/vagas.html",
       "permanent": false
     },
     {
       "source": "/peao",
-      "destination": "/empregos",
+      "destination": "/vagas.html",
       "permanent": false
     },
     {
       "source": "/trabalhar",
-      "destination": "/empregos",
+      "destination": "/vagas.html",
+      "permanent": false
+    },
+    {
+      "source": "/empregos",
+      "destination": "/vagas.html",
       "permanent": false
     },
     {
@@ -227,14 +232,184 @@
       "destination": "/gramado-o-que-fazer.html"
     },
     {
-      "source": "/(.*)",
+      "source": "/assets/(.*)",
       "has": [
         {
           "type": "host",
-          "value": "gramado.aquitemachadinhos.com.br"
+          "value": "blumenau.aquitemachadinhos.com.br"
         }
       ],
-      "destination": "/gramado-home.html"
+      "destination": "/assets/$1"
+    },
+    {
+      "source": "/",
+      "has": [
+        {
+          "type": "host",
+          "value": "blumenau.aquitemachadinhos.com.br"
+        }
+      ],
+      "destination": "/blumenau-home.html"
+    },
+    {
+      "source": "/assets/(.*)",
+      "has": [
+        {
+          "type": "host",
+          "value": "bonito.aquitemachadinhos.com.br"
+        }
+      ],
+      "destination": "/assets/$1"
+    },
+    {
+      "source": "/",
+      "has": [
+        {
+          "type": "host",
+          "value": "bonito.aquitemachadinhos.com.br"
+        }
+      ],
+      "destination": "/bonito-home.html"
+    },
+    {
+      "source": "/assets/(.*)",
+      "has": [
+        {
+          "type": "host",
+          "value": "buzios.aquitemachadinhos.com.br"
+        }
+      ],
+      "destination": "/assets/$1"
+    },
+    {
+      "source": "/",
+      "has": [
+        {
+          "type": "host",
+          "value": "buzios.aquitemachadinhos.com.br"
+        }
+      ],
+      "destination": "/buzios-home.html"
+    },
+    {
+      "source": "/assets/(.*)",
+      "has": [
+        {
+          "type": "host",
+          "value": "campos.aquitemachadinhos.com.br"
+        }
+      ],
+      "destination": "/assets/$1"
+    },
+    {
+      "source": "/",
+      "has": [
+        {
+          "type": "host",
+          "value": "campos.aquitemachadinhos.com.br"
+        }
+      ],
+      "destination": "/campos-home.html"
+    },
+    {
+      "source": "/assets/(.*)",
+      "has": [
+        {
+          "type": "host",
+          "value": "caruaru.aquitemachadinhos.com.br"
+        }
+      ],
+      "destination": "/assets/$1"
+    },
+    {
+      "source": "/",
+      "has": [
+        {
+          "type": "host",
+          "value": "caruaru.aquitemachadinhos.com.br"
+        }
+      ],
+      "destination": "/caruaru-home.html"
+    },
+    {
+      "source": "/assets/(.*)",
+      "has": [
+        {
+          "type": "host",
+          "value": "florianopolis.aquitemachadinhos.com.br"
+        }
+      ],
+      "destination": "/assets/$1"
+    },
+    {
+      "source": "/",
+      "has": [
+        {
+          "type": "host",
+          "value": "florianopolis.aquitemachadinhos.com.br"
+        }
+      ],
+      "destination": "/florianopolis-home.html"
+    },
+    {
+      "source": "/assets/(.*)",
+      "has": [
+        {
+          "type": "host",
+          "value": "jericoacoara.aquitemachadinhos.com.br"
+        }
+      ],
+      "destination": "/assets/$1"
+    },
+    {
+      "source": "/",
+      "has": [
+        {
+          "type": "host",
+          "value": "jericoacoara.aquitemachadinhos.com.br"
+        }
+      ],
+      "destination": "/jericoacoara-home.html"
+    },
+    {
+      "source": "/assets/(.*)",
+      "has": [
+        {
+          "type": "host",
+          "value": "porto.aquitemachadinhos.com.br"
+        }
+      ],
+      "destination": "/assets/$1"
+    },
+    {
+      "source": "/",
+      "has": [
+        {
+          "type": "host",
+          "value": "porto.aquitemachadinhos.com.br"
+        }
+      ],
+      "destination": "/porto-home.html"
+    },
+    {
+      "source": "/assets/(.*)",
+      "has": [
+        {
+          "type": "host",
+          "value": "salvador.aquitemachadinhos.com.br"
+        }
+      ],
+      "destination": "/assets/$1"
+    },
+    {
+      "source": "/",
+      "has": [
+        {
+          "type": "host",
+          "value": "salvador.aquitemachadinhos.com.br"
+        }
+      ],
+      "destination": "/salvador-home.html"
     },
     {
       "source": "/assets/(.*)",
@@ -257,16 +432,6 @@
       "destination": "/uberlandia-home.html"
     },
     {
-      "source": "/(.*)",
-      "has": [
-        {
-          "type": "host",
-          "value": "uberlandia.aquitemachadinhos.com.br"
-        }
-      ],
-      "destination": "/uberlandia-home.html"
-    },
-    {
       "source": "/assets/(.*)",
       "has": [
         {
@@ -278,16 +443,6 @@
     },
     {
       "source": "/",
-      "has": [
-        {
-          "type": "host",
-          "value": "caldasnovas.aquitemachadinhos.com.br"
-        }
-      ],
-      "destination": "/caldasnovas-home.html"
-    },
-    {
-      "source": "/(.*)",
       "has": [
         {
           "type": "host",

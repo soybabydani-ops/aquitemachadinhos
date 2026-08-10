@@ -361,10 +361,10 @@
   function cityRegistrationUrl() { var slug = currentCitySlug(); return slug === 'barretos' ? 'cadastro.html' : 'https://www.aquitemachadinhos.com.br/cadastro-cidade.html?cidade=' + encodeURIComponent(slug) + '&utm_source=site&utm_medium=header_cta&utm_campaign=expansao_' + encodeURIComponent(slug); }
   function headerHTML(active) {
     var city = currentCityName(), isBarretos = currentCitySlug() === 'barretos';
-    var it = [{ k: 'home', l: 'Início', h: 'index.html' }, { k: 'categoria', l: 'Categorias', h: 'categoria.html' }, { k: 'busca', l: '🔍 Buscar', h: 'busca.html' }, { k: 'ofertas', l: 'Ofertas', h: 'ofertas.html' }, { k: 'mapa', l: 'Mapa', h: 'mapa.html' }, { k: 'turista', l: 'Turista', h: 'turista.html' }, { k: 'classificados', l: 'Classificados', h: 'classificados.html' }, { k: 'anuncie', l: 'Para empresas', h: 'anuncie.html' }];
-    if (isBarretos) it.splice(5, 0, { k: 'guiapeao', l: 'Guia do Peão', h: 'guia-peao.html' });
-    var nav = it.filter(function (i) { return ['home','categoria','busca','ofertas','guiapeao'].indexOf(i.k) > -1; }).map(function (i) { return '<a href="' + i.h + '" class="' + (active === i.k ? 'text-white' : 'text-silver-200 hover:text-white') + ' transition">' + i.l + '</a>'; }).join('');
-    var mob = it.map(function (i) { return '<a href="' + i.h + '" class="py-2.5 px-3 rounded-lg hover:bg-white/5 ' + (active === i.k ? 'text-white' : '') + '">' + i.l + '</a>'; }).join('');
+    var it = [{ k: 'home', l: 'Início', h: 'index.html' }, { k: 'categoria', l: 'Categorias', h: 'categoria.html' }, { k: 'vagas', l: '💼 Vagas', h: 'vagas.html' }, { k: 'busca', l: '🔍 Buscar', h: 'busca.html' }, { k: 'ofertas', l: 'Ofertas', h: 'ofertas.html' }, { k: 'mapa', l: 'Mapa', h: 'mapa.html' }, { k: 'turista', l: 'Turista', h: 'turista.html' }, { k: 'classificados', l: 'Classificados', h: 'classificados.html' }, { k: 'anuncie', l: 'Para empresas', h: 'anuncie.html' }];
+    if (isBarretos) it.splice(6, 0, { k: 'guiapeao', l: 'Guia do Peão', h: 'guia-peao.html' });
+    var nav = it.filter(function (i) { return ['home','categoria','vagas','busca','ofertas','guiapeao'].indexOf(i.k) > -1; }).map(function (i) { return '<a href="' + i.h + '" class="' + (active === i.k ? 'text-white font-bold' : 'text-silver-200 hover:text-white') + ' transition">' + i.l + '</a>'; }).join('');
+    var mob = it.map(function (i) { return '<a href="' + i.h + '" class="py-2.5 px-3 rounded-lg hover:bg-white/5 ' + (active === i.k ? 'text-white font-bold' : '') + '">' + i.l + '</a>'; }).join('');
     return '<header class="sticky top-0 z-50 bg-navy-950/90 backdrop-blur border-b border-white/10"><div class="max-w-7xl mx-auto px-4 sm:px-6 aquitem-header flex items-center justify-between gap-3"><a href="index.html" class="flex items-center gap-2.5 shrink-0">' + LOGO + '<span class="leading-tight"><span class="block font-display font-extrabold aquitem-wordmark text-[15px] text-chrome">AQUITEM</span><span class="block text-[9px] text-peao-400 font-bold aquitem-submark">GUIAS LOCAIS · ' + esc(city.toUpperCase()) + '</span></span></a><nav class="hidden lg:flex items-center gap-7 text-sm font-medium">' + nav + '</nav><div class="flex items-center gap-2"><a href="' + cityRegistrationUrl() + '" class="hidden sm:inline-flex btn-shine bg-amber-400 hover:bg-amber-300 text-navy-950 text-sm font-extrabold px-4 py-2.5 rounded-xl transition">Cadastrar empresa</a><button id="menuBtn" class="lg:hidden w-10 h-10 grid place-items-center rounded-xl glass text-white" aria-label="Abrir menu"><svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button></div></div><div id="mobileMenu" class="hidden lg:hidden border-t border-white/10 bg-navy-950/95"><div class="px-4 py-3 flex flex-col gap-1 text-silver-200">' + mob + '<a href="' + cityRegistrationUrl() + '" class="mt-1 text-center bg-amber-400 text-navy-950 font-extrabold py-3 rounded-xl">Cadastrar empresa</a></div></div></header>';
   }
   function footerHTML() {
@@ -1437,7 +1437,7 @@
   function driverProfile(d, reviews) {
     var wa = 'https://wa.me/' + (digits(d.whatsapp) || CONFIG.whatsapp) + '?text=' + encodeURIComponent('Olá ' + d.nome + '! Vi seu perfil no Aqui Tem Achadinhos e preciso de uma corrida em Barretos.');
     var foto = d.foto_url ? '<img src="' + esc(d.foto_url) + '" alt="" class="w-24 h-24 rounded-3xl object-cover ring-4 ring-white shadow">' : '<div class="w-24 h-24 rounded-3xl bg-gradient-to-br from-navy-700 to-navy-500 grid place-items-center text-white text-4xl">🚗</div>';
-    return '<div class="max-w-3xl mx-auto px-4 sm:px-6 py-6"><a href="motoristas.html" class="text-silver-500 text-sm hover:text-navy-700">← Motoristas</a><div class="mt-3 bg-white rounded-3xl shadow-soft ring-silver p-6"><div class="flex items-center gap-4">' + foto + '<div><div class="flex items-center gap-2 flex-wrap"><span class="text-xs font-semibold text-peao-600 bg-peao-500/10 px-2 py-0.5 rounded">🚗 Motorista</span>' + (d.disponivel_agora ? '<span class="text-xs font-semibold text-emerald-700 bg-emerald-500/10 px-2 py-0.5 rounded">🟢 Disponível agora</span>' : '') + (d.verificada ? '<span class="text-xs font-semibold text-emerald-700 bg-emerald-500/10 px-2 py-0.5 rounded">✓ Verificado</span>' : '') + '</div><h1 class="font-display text-2xl md:text-3xl font-extrabold mt-1">' + esc(d.nome) + '</h1></div></div><div class="mt-4 grid sm:grid-cols-2 gap-2 text-sm text-slate-700">' + (d.tipo_veiculo ? '<p>🚙 Veículo: ' + esc(d.tipo_veiculo) + (d.lotacao ? ' · até ' + esc(d.lotacao) + ' pax' : '') + '</p>' : '') + (d.disponibilidade ? '<p>🕐 Disponibilidade: ' + esc(d.disponibilidade) + '</p>' : '') + (d.area ? '<p>🗺️ Atende: ' + esc(d.area) + '</p>' : '') + (d.bairro ? '<p>📍 Base: ' + esc(d.bairro) + '</p>' : '') + (d.telefone ? '<p>☎ ' + esc(d.telefone) + '</p>' : '') + '</div>' + (d.descricao ? '<p class="text-slate-700 mt-3 leading-relaxed">' + esc(d.descricao) + '</p>' : '') + (l.bairro || l.endereco ? '<div class="mt-3 rounded-2xl overflow-hidden ring-silver"><iframe title="Mapa" class="w-full h-48" style="border:0" loading="lazy" src="https://www.google.com/maps?q=' + encodeURIComponent([l.endereco, l.bairro, (l.cidade || 'Barretos')].filter(Boolean).join(', ')) + '&output=embed"></iframe></div>' : '')
+    return '<div class="max-w-3xl mx-auto px-4 sm:px-6 py-6"><a href="motoristas.html" class="text-silver-500 text-sm hover:text-navy-700">← Motoristas</a><div class="mt-3 bg-white rounded-3xl shadow-soft ring-silver p-6"><div class="flex items-center gap-4">' + foto + '<div><div class="flex items-center gap-2 flex-wrap"><span class="text-xs font-semibold text-peao-600 bg-peao-500/10 px-2 py-0.5 rounded">🚗 Motorista</span>' + (d.disponivel_agora ? '<span class="text-xs font-semibold text-emerald-700 bg-emerald-500/10 px-2 py-0.5 rounded">🟢 Disponível agora</span>' : '') + (d.verificada ? '<span class="text-xs font-semibold text-emerald-700 bg-emerald-500/10 px-2 py-0.5 rounded">✓ Verificado</span>' : '') + '</div><h1 class="font-display text-2xl md:text-3xl font-extrabold mt-1">' + esc(d.nome) + '</h1></div></div><div class="mt-4 grid sm:grid-cols-2 gap-2 text-sm text-slate-700">' + (d.tipo_veiculo ? '<p>🚙 Veículo: ' + esc(d.tipo_veiculo) + (d.lotacao ? ' · até ' + esc(d.lotacao) + ' pax' : '') + '</p>' : '') + (d.disponibilidade ? '<p>🕐 Disponibilidade: ' + esc(d.disponibilidade) + '</p>' : '') + (d.area ? '<p>🗺️ Atende: ' + esc(d.area) + '</p>' : '') + (d.bairro ? '<p>📍 Base: ' + esc(d.bairro) + '</p>' : '') + (d.telefone ? '<p>☎ ' + esc(d.telefone) + '</p>' : '') + '</div>' + (d.descricao ? '<p class="text-slate-700 mt-3 leading-relaxed">' + esc(d.descricao) + '</p>' : '') + (d.bairro || d.endereco ? '<div class="mt-3 rounded-2xl overflow-hidden ring-silver"><iframe title="Mapa" class="w-full h-48" style="border:0" loading="lazy" src="https://www.google.com/maps?q=' + encodeURIComponent([d.endereco, d.bairro, (d.cidade || 'Barretos')].filter(Boolean).join(', ')) + '&output=embed"></iframe></div>' : '')
       + '<div class="mt-5"><a href="' + wa + '" target="_blank" rel="noopener noreferrer" class="btn-shine bg-[#25D366] text-white font-bold px-5 py-3 rounded-xl">💬 Pedir corrida no WhatsApp</a></div><p class="text-[11px] text-slate-400 mt-3">O Aqui Tem Achadinhos é um diretório: conecta passageiro e motorista via WhatsApp. A corrida e o pagamento são combinados diretamente com o motorista.</p></div><div class="mt-6">' + ratingSummary(d, reviews) + driverReviewForm(d) + reviewList(reviews, 'driver') + upsellCard('driver', d.id, d.nome) + '<a href="' + waLink('Den\u00fancia sobre: ' + d.nome) + '" target="_blank" rel="noopener noreferrer" class="block mt-4 text-center text-xs text-slate-400 hover:text-peao-600">🚩 Denunciar conteúdo incorreto</a></div></div>';
   }
   function driverReviewForm(d) { return reviewForm(d, 'driver'); }
@@ -1487,26 +1487,60 @@
   }
 
   /* ============================================================
-     CLASSIFICADOS (Imoveis, Empregos, Veiculos, ...) — Barretos
+     CLASSIFICADOS E VAGAS — Multi-cidades
      ============================================================ */
   var CLASSIFIED_CATS = [
-    { id: 'imoveis', nome: 'Imóveis', emoji: '🏠', slug: 'imoveis' }, { id: 'empregos', nome: 'Empregos', emoji: '💼', slug: 'empregos' },
-    { id: 'veiculos', nome: 'Veículos', emoji: '🚗', slug: 'veiculos' }, { id: 'moveis-eletro', nome: 'Móveis e Eletro', emoji: '🛋️', slug: 'moveis-eletro' },
-    { id: 'eletronicos', nome: 'Eletrônicos', emoji: '📱', slug: 'eletronicos' }, { id: 'animais', nome: 'Animais e Pets', emoji: '🐾', slug: 'animais' },
-    { id: 'servicos', nome: 'Serviços', emoji: '🔧', slug: 'servicos' }, { id: 'eventos-peao', nome: 'Festa do Peão', emoji: '🤠', slug: 'eventos-peao' }
+    { id: 'vagas-empresa', nome: 'Vaga de Empresa (Contratação)', emoji: '📢', slug: 'vagas' },
+    { id: 'vagas-candidato', nome: 'Candidato / Banco de Talentos', emoji: '🙋', slug: 'vagas' },
+    { id: 'vagas-nac-empresa', nome: 'Vaga Nacional / Remoto', emoji: '📣', slug: 'vagas' },
+    { id: 'vagas-nac-candidato', nome: 'Candidato Nacional / Remoto', emoji: '🔍', slug: 'vagas' },
+    { id: 'nacionais', nome: 'Classificados Nacionais', emoji: '🇧🇷', slug: 'classificados' },
+    { id: 'empregos', nome: 'Empregos & Vagas', emoji: '💼', slug: 'vagas' },
+    { id: 'imoveis', nome: 'Imóveis', emoji: '🏠', slug: 'imoveis' },
+    { id: 'veiculos', nome: 'Veículos', emoji: '🚗', slug: 'veiculos' },
+    { id: 'moveis-eletro', nome: 'Móveis e Eletro', emoji: '🛋️', slug: 'moveis-eletro' },
+    { id: 'eletronicos', nome: 'Eletrônicos', emoji: '📱', slug: 'eletronicos' },
+    { id: 'animais', nome: 'Animais e Pets', emoji: '🐾', slug: 'animais' },
+    { id: 'servicos', nome: 'Serviços', emoji: '🔧', slug: 'servicos' },
+    { id: 'eventos-peao', nome: 'Festa do Peão', emoji: '🤠', slug: 'eventos-peao' }
   ];
   function catClassified(id, cats) { var c = (cats || CLASSIFIED_CATS).filter(function (x) { return x.id === id; })[0]; return c ? (c.emoji + ' ' + c.nome) : '📋 Anúncio'; }
   function catEmoji(id, cats) { var c = (cats || CLASSIFIED_CATS).filter(function (x) { return x.id === id; })[0]; return c ? (c.emoji || '📋') : '📋'; }
 
   /* Campos dinâmicos por categoria (vão pra coluna 'atributos' em JSON) */
   var LISTING_FIELDS = {
+    'vagas-empresa': [
+      { k: 'subcategoria', label: 'Tipo de contratação', type: 'select', opts: [['temporario', 'Temporário / Festa do Peão'], ['clt', 'CLT (Efetivo)'], ['freelancer', 'Freelancer / Diária'], ['estagio', 'Estágio'], ['pj', 'PJ'], ['trainee', 'Trainee'], ['aprendiz', 'Jovem Aprendiz'], ['home-office', 'Home Office / Remoto'], ['hibrido', 'Híbrido']] },
+      { k: 'cargo', label: 'Cargo / Função ofertada', ph: 'Ex.: Garçom, Cozinheiro, Atendente, Vendedor' },
+      { k: 'jornada', label: 'Horário / Escala', ph: 'Ex.: Seg a Sex 8h-18h ou Escala Noturna Festa' },
+      { k: 'requisitos', label: 'Requisitos / Experiência', ph: 'Ex.: Ensino Médio completo, experiência com atendimento' }
+    ],
+    'vagas-candidato': [
+      { k: 'subcategoria', label: 'Disponibilidade', type: 'select', opts: [['temporario', 'Procuro Temporário / Festa do Peão'], ['clt', 'Procuro CLT'], ['freelancer', 'Procuro Freelancer / Diárias'], ['estagio', 'Busco Estágio'], ['pj', 'Sou PJ'], ['home-office', 'Trabalho Remoto / Home Office'], ['viagens', 'Disponível para Viagens']] },
+      { k: 'funcao_desejada', label: 'Cargo / Área que procura', ph: 'Ex.: Atendente, Caixa, Garçom, Segurança, Cozinha' },
+      { k: 'experiencia', label: 'Resumo das suas experiências', ph: 'Ex.: 3 anos em atendimento e vendas no comércio' },
+      { k: 'escolaridade', label: 'Escolaridade / Cursos', ph: 'Ex.: Ensino Médio completo, Informática básica' }
+    ],
+    'vagas-nac-empresa': [
+      { k: 'subcategoria', label: 'Modalidade', type: 'select', opts: [['remoto', '100% Remoto / Home Office'], ['clt-nacional', 'CLT Nacional'], ['pj-nacional', 'PJ Nacional'], ['temporario-nac', 'Temporário Nacional']] },
+      { k: 'cargo', label: 'Cargo / Função', ph: 'Ex.: Desenvolvedor, Suporte, Vendas Remotas' },
+      { k: 'requisitos', label: 'Requisitos', ph: 'Ex.: Computador próprio, boa comunicação' }
+    ],
+    'vagas-nac-candidato': [
+      { k: 'subcategoria', label: 'Pretensão', type: 'select', opts: [['remoto', 'Aceito Remoto / Home Office'], ['relocacao', 'Disponível para Relocação'], ['clt-qualquer', 'Busco CLT em qualquer cidade'], ['pj-qualquer', 'Busco PJ']] },
+      { k: 'funcao_desejada', label: 'Área pretendida', ph: 'Ex.: Marketing Digital, Programação, Atendimento' },
+      { k: 'experiencia', label: 'Experiência', ph: 'Ex.: 5 anos em projetos remotos' }
+    ],
+    'nacionais': [
+      { k: 'subcategoria', label: 'Tipo de oportunidade', type: 'select', opts: [['produtos', 'Produtos'], ['servicos', 'Serviços'], ['parcerias', 'Parcerias / Oportunidades'], ['cursos', 'Cursos e Treinamentos']] }
+    ],
     'imoveis': [
       { k: 'subcategoria', label: 'Tipo de negócio', type: 'select', opts: [['alugar', 'Alugar'], ['vender', 'Vender'], ['temporada', 'Temporada / Peão']] },
       { k: 'quartos', label: 'Quartos', ph: 'Ex.: 2' }, { k: 'banheiros', label: 'Banheiros', ph: 'Ex.: 1' },
       { k: 'vagas', label: 'Vagas', ph: 'Ex.: 1' }, { k: 'area', label: 'Área (m²)', ph: 'Ex.: 60' }
     ],
     'empregos': [
-      { k: 'subcategoria', label: 'Contratação', type: 'select', opts: [['clt', 'CLT'], ['temporario', 'Temporário'], ['freelancer', 'Freelancer'], ['estagio', 'Estágio']] },
+      { k: 'subcategoria', label: 'Contratação', type: 'select', opts: [['temporario', 'Temporário / Peão'], ['clt', 'CLT'], ['freelancer', 'Freelancer'], ['estagio', 'Estágio'], ['pj', 'PJ']] },
       { k: 'salario', label: 'Salário', ph: 'Ex.: R$ 2.000 ou A combinar' },
       { k: 'jornada', label: 'Jornada', ph: 'Ex.: Seg-Sex 8h-18h' }, { k: 'requisitos', label: 'Requisitos', ph: 'Ex.: Ensino médio completo' }
     ],
@@ -1552,6 +1586,225 @@
       }).join('') + '</div>';
       var rec = all.length ? '<h2 class="font-display text-xl font-extrabold mb-3 mt-10">🔥 Anúncios recentes</h2><div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">' + all.slice(0, 8).map(function (l) { return listingCard(l, cats); }).join('') + '</div>' : '<div class="mt-8">' + emptyState('Seja o primeiro a anunciar', 'Cadastre seu imóvel, vaga de emprego ou produto grátis. Principalmente agora na época da Festa do Peão!', true) + '</div>';
       grid.innerHTML = catHtml + rec;
+    });
+  }
+
+  /* ============================================================
+     PÁGINA DEDICADA DE VAGAS E BANCO DE TALENTOS
+     ============================================================ */
+  function pageVagas() {
+    var root = $('#vagasRoot'); if (!root) return;
+    root.innerHTML = loadingHTML();
+
+    var currentTab = 'empresa';
+    var activeSub = '';
+    var searchQuery = '';
+    var selectedCity = $('#vagasCityFilter') ? $('#vagasCityFilter').value : 'barretos';
+
+    var citySel = $('#vagasCityFilter');
+    if (citySel) {
+      var curSlug = currentCitySlug();
+      if (curSlug && citySel.querySelector('option[value="' + curSlug + '"]')) {
+        citySel.value = curSlug;
+        selectedCity = curSlug;
+      }
+      citySel.addEventListener('change', function () {
+        selectedCity = this.value;
+        render();
+      });
+    }
+
+    var sInp = $('#vagasSearchInput');
+    if (sInp) {
+      var timer = null;
+      sInp.addEventListener('input', function () {
+        clearTimeout(timer);
+        timer = setTimeout(function () {
+          searchQuery = (sInp.value || '').trim().toLowerCase();
+          render();
+        }, 250);
+      });
+    }
+
+    document.querySelectorAll('[data-vagas-tab]').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        document.querySelectorAll('[data-vagas-tab]').forEach(function (b) {
+          b.classList.remove('bg-peao-500', 'text-white', 'shadow-soft');
+          b.classList.add('bg-white', 'text-silver-300', 'ring-silver');
+        });
+        btn.classList.remove('bg-white', 'text-silver-300', 'ring-silver');
+        btn.classList.add('bg-peao-500', 'text-white', 'shadow-soft');
+        currentTab = btn.getAttribute('data-vagas-tab');
+        activeSub = '';
+        renderSubFilters();
+        render();
+      });
+    });
+
+    Promise.all([
+      Classifieds.cats(),
+      apiGet('listings?select=*&status=eq.ativo&or=(categoria.eq.vagas-empresa,categoria.eq.vagas-candidato,categoria.eq.vagas-nac-empresa,categoria.eq.vagas-nac-candidato,categoria.eq.nacionais,categoria.eq.empregos)&order=destaque.desc,criado_em.desc')
+    ]).then(function (res) {
+      var cats = res[0];
+      var allListings = res[1] || [];
+
+      var cEmp = allListings.filter(function (l) { return l.categoria === 'vagas-empresa' || l.categoria === 'empregos'; }).length;
+      var cCand = allListings.filter(function (l) { return l.categoria === 'vagas-candidato'; }).length;
+      var cNac = allListings.filter(function (l) { return l.categoria === 'vagas-nac-empresa' || l.categoria === 'vagas-nac-candidato' || l.categoria === 'nacionais'; }).length;
+
+      var elEmp = $('#countVagasEmpresa'); if (elEmp) elEmp.textContent = cEmp;
+      var elCand = $('#countVagasCandidato'); if (elCand) elCand.textContent = cCand;
+      var elNac = $('#countVagasNac'); if (elNac) elNac.textContent = cNac;
+
+      function renderSubFilters() {
+        var subBox = $('#vagasSubFilters'); if (!subBox) return;
+        var subLabels = {
+          'empresa': [
+            { k: '', l: 'Todos' }, { k: 'temporario', l: '🤠 Temporário / Peão' }, { k: 'clt', l: '📋 CLT' },
+            { k: 'freelancer', l: '⚡ Freelancer / Diária' }, { k: 'estagio', l: '🎓 Estágio' },
+            { k: 'pj', l: '🏢 PJ' }, { k: 'home-office', l: '💻 Remoto / Home Office' }
+          ],
+          'candidato': [
+            { k: '', l: 'Todos os Candidatos' }, { k: 'temporario', l: '🤠 Disponível Peão' }, { k: 'clt', l: '💼 Busca CLT' },
+            { k: 'freelancer', l: '⚡ Freelancer' }, { k: 'estagio', l: '🎓 Estágio' }, { k: 'remoto', l: '💻 Home Office' }
+          ],
+          'nacional': [
+            { k: '', l: 'Todas as Oportunidades' }, { k: 'remoto', l: '💻 100% Remoto' }, { k: 'clt-nacional', l: '🇧🇷 CLT Nacional' },
+            { k: 'pj-nacional', l: '🏢 PJ Nacional' }
+          ],
+          'all': [
+            { k: '', l: 'Todos' }, { k: 'temporario', l: '🤠 Temporário' }, { k: 'clt', l: '📋 CLT' },
+            { k: 'freelancer', l: '⚡ Freelancer' }, { k: 'estagio', l: '🎓 Estágio' }
+          ]
+        };
+        var list = subLabels[currentTab] || subLabels['empresa'];
+        subBox.innerHTML = list.map(function (item) {
+          var isAct = activeSub === item.k;
+          return '<button data-vsub="' + esc(item.k) + '" class="px-3.5 py-1.5 rounded-full text-xs font-semibold transition ' + (isAct ? 'bg-navy-800 text-white ring-1 ring-peao-500' : 'bg-white text-silver-300 ring-silver hover:bg-white/10') + '">' + esc(item.l) + '</button>';
+        }).join('');
+        subBox.querySelectorAll('[data-vsub]').forEach(function (b) {
+          b.addEventListener('click', function () {
+            activeSub = b.getAttribute('data-vsub');
+            renderSubFilters();
+            render();
+          });
+        });
+      }
+
+      function vagaCardHTML(l) {
+        var isCandidate = l.categoria === 'vagas-candidato' || l.categoria === 'vagas-nac-candidato';
+        var isNational = l.categoria === 'vagas-nac-empresa' || l.categoria === 'vagas-nac-candidato' || l.categoria === 'nacionais';
+        
+        var waMsg = isCandidate
+          ? ('Olá ' + (l.anunciante_nome || '') + '! Vi seu perfil profissional ("' + l.titulo + '") no Aqui Tem Achadinhos e gostaria de conversar.')
+          : ('Olá! Vi a vaga de "' + l.titulo + '" no Aqui Tem Achadinhos e gostaria de me candidatar.');
+        var wa = 'https://wa.me/' + (digits(l.whatsapp) || CONFIG.whatsapp) + '?text=' + encodeURIComponent(waMsg);
+
+        var tagBadge = isCandidate
+          ? '<span class="px-2.5 py-1 rounded-md text-[11px] font-bold bg-purple-500/20 text-purple-300 border border-purple-500/30">🙋 Candidato</span>'
+          : '<span class="px-2.5 py-1 rounded-md text-[11px] font-bold bg-peao-500/20 text-peao-400 border border-peao-500/30">📢 Vaga Aberta</span>';
+
+        var modalidade = l.subcategoria || (l.atributos && l.atributos.subcategoria) || '';
+        var modBadge = modalidade ? '<span class="px-2.5 py-1 rounded-md text-[11px] font-semibold bg-white/10 text-silver-200">' + esc(modalidade.toUpperCase()) + '</span>' : '';
+        var destBadge = l.destaque ? '<span class="px-2.5 py-1 rounded-md text-[11px] font-bold bg-amber-400/20 text-amber-300 border border-amber-400/40">⭐ Destaque</span>' : '';
+        var nacBadge = isNational ? '<span class="px-2.5 py-1 rounded-md text-[11px] font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">🇧🇷 Nacional / Remoto</span>' : '';
+
+        var preco = l.preco ? '<div class="mt-2 text-sm font-extrabold text-emerald-400 flex items-center gap-1.5"><span>💰</span><span>' + esc(l.preco) + '</span></div>' : '';
+        var desc = l.descricao ? '<p class="text-xs text-silver-300 mt-2 line-clamp-3 leading-relaxed">' + esc(l.descricao) + '</p>' : '';
+        var anunciante = l.anunciante_nome ? '<span class="font-semibold text-white">' + esc(l.anunciante_nome) + '</span>' : '';
+        var local = [l.bairro, l.cidade || 'Barretos'].filter(Boolean).join(' · ');
+
+        var btnLabel = isCandidate ? '💬 Entrevistar no WhatsApp' : '💬 Candidatar-se via WhatsApp';
+        var btnBg = isCandidate ? 'bg-purple-600 hover:bg-purple-700' : 'bg-peao-500 hover:bg-peao-600';
+
+        return '<div class="bg-white rounded-2xl ring-silver shadow-soft p-5 flex flex-col justify-between card-hover border border-white/5 relative">' +
+          '<div>' +
+            '<div class="flex items-center gap-1.5 flex-wrap mb-2.5">' + tagBadge + modBadge + destBadge + nacBadge + '</div>' +
+            '<a href="anuncio.html?id=' + encodeURIComponent(l.id) + '" class="block group">' +
+              '<h3 class="font-display font-bold text-lg text-white group-hover:text-peao-400 transition leading-snug">' + esc(l.titulo) + '</h3>' +
+            '</a>' +
+            '<div class="text-xs text-silver-400 mt-1 flex items-center gap-2 flex-wrap">' +
+              (anunciante ? '<span>🏢 ' + anunciante + '</span>' : '') +
+              (local ? '<span>📍 ' + esc(local) + '</span>' : '') +
+            '</div>' +
+            preco + desc +
+          '</div>' +
+          '<div class="mt-5 pt-4 border-t border-white/10 flex items-center justify-between gap-3">' +
+            '<a href="' + wa + '" target="_blank" rel="noopener noreferrer" class="btn-shine flex-1 text-center text-xs font-bold text-white py-2.5 px-4 rounded-xl ' + btnBg + ' transition shadow-soft flex items-center justify-center gap-1.5">' +
+              btnLabel +
+            '</a>' +
+            '<a href="anuncio.html?id=' + encodeURIComponent(l.id) + '" class="text-xs font-semibold text-silver-400 hover:text-white px-2 py-2 transition" title="Ver detalhes">' +
+              'Detalhes →' +
+            '</a>' +
+          '</div>' +
+        '</div>';
+      }
+
+      function render() {
+        var filtered = allListings.slice();
+
+        if (currentTab === 'empresa') {
+          filtered = filtered.filter(function (l) { return l.categoria === 'vagas-empresa' || l.categoria === 'empregos'; });
+        } else if (currentTab === 'candidato') {
+          filtered = filtered.filter(function (l) { return l.categoria === 'vagas-candidato'; });
+        } else if (currentTab === 'nacional') {
+          filtered = filtered.filter(function (l) { return l.categoria === 'vagas-nac-empresa' || l.categoria === 'vagas-nac-candidato' || l.categoria === 'nacionais'; });
+        }
+
+        if (selectedCity && currentTab !== 'nacional') {
+          filtered = filtered.filter(function (l) {
+            var cSlug = (l.city_slug || '').toLowerCase();
+            var cName = (l.cidade || '').toLowerCase();
+            return !l.city_slug || cSlug === selectedCity || cName === selectedCity || cName.indexOf(selectedCity) !== -1;
+          });
+        }
+
+        if (activeSub) {
+          filtered = filtered.filter(function (l) {
+            var sub = ((l.subcategoria || '') + ' ' + JSON.stringify(l.atributos || '')).toLowerCase();
+            if (activeSub === 'temporario') return sub.indexOf('temp') !== -1 || sub.indexOf('peao') !== -1;
+            if (activeSub === 'clt') return sub.indexOf('clt') !== -1;
+            if (activeSub === 'freelancer') return sub.indexOf('free') !== -1 || sub.indexOf('diaria') !== -1;
+            if (activeSub === 'estagio') return sub.indexOf('estag') !== -1 || sub.indexOf('aprendiz') !== -1;
+            if (activeSub === 'pj') return sub.indexOf('pj') !== -1;
+            if (activeSub === 'home-office' || activeSub === 'remoto') return sub.indexOf('remoto') !== -1 || sub.indexOf('home') !== -1;
+            return sub.indexOf(activeSub) !== -1;
+          });
+        }
+
+        if (searchQuery) {
+          filtered = filtered.filter(function (l) {
+            var haystack = [l.titulo, l.descricao, l.anunciante_nome, l.bairro, l.cidade, l.preco, JSON.stringify(l.atributos || '')].filter(Boolean).join(' ').toLowerCase();
+            return haystack.indexOf(searchQuery) !== -1;
+          });
+        }
+
+        if (!filtered.length) {
+          var emptyTitle = currentTab === 'candidato'
+            ? 'Nenhum perfil de candidato encontrado'
+            : (currentTab === 'nacional' ? 'Nenhuma vaga nacional no momento' : 'Nenhuma vaga de emprego encontrada');
+          var emptyDesc = currentTab === 'candidato'
+            ? 'Seja o primeiro profissional a cadastrar seu perfil na cidade. É 100% grátis!'
+            : 'Sua empresa precisa de funcionários? Cadastre uma vaga gratuitamente agora!';
+          var ctaUrl = currentTab === 'candidato' ? 'cadastro-anuncio.html?cat=vagas-candidato' : 'cadastro-anuncio.html?cat=vagas-empresa';
+          var ctaText = currentTab === 'candidato' ? '🙋 Cadastrar meu Perfil Grátis' : '📢 Anunciar Vaga Grátis';
+
+          root.innerHTML = '<div class="bg-white rounded-3xl p-10 text-center ring-silver shadow-soft max-w-xl mx-auto my-8">' +
+            '<div class="text-5xl mb-3">💼</div>' +
+            '<h3 class="font-display font-bold text-xl text-white">' + esc(emptyTitle) + '</h3>' +
+            '<p class="text-silver-400 text-sm mt-2 leading-relaxed">' + esc(emptyDesc) + '</p>' +
+            '<a href="' + ctaUrl + '" class="btn-shine inline-block mt-6 bg-peao-500 hover:bg-peao-600 text-white font-bold px-6 py-3 rounded-xl shadow-redglow">' + esc(ctaText) + '</a>' +
+          '</div>';
+          return;
+        }
+
+        root.innerHTML = '<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">' +
+          filtered.map(vagaCardHTML).join('') +
+        '</div>';
+      }
+
+      renderSubFilters();
+      render();
     });
   }
 
@@ -1604,9 +1857,8 @@
     var form = $('#formAnuncio'); if (!form) return;
     var catSel = form.querySelector('[name=categoria]');
     var extra = $('#extraFields');
-    Classifieds.cats().then(function (cats) {
-      if (catSel) catSel.innerHTML = '<option value="">Selecione…</option>' + cats.map(function (c) { return '<option value="' + c.id + '">' + c.emoji + ' ' + esc(c.nome) + '</option>'; }).join('');
-    });
+    var preCat = params().get('cat');
+
     function renderExtra(cat) {
       if (!extra) return;
       var fields = LISTING_FIELDS[cat] || [];
@@ -1615,6 +1867,17 @@
         return '<div><label class="block text-sm font-semibold mb-1.5">' + esc(f.label) + '</label><input data-attr="' + esc(f.k) + '" type="text" placeholder="' + esc(f.ph || '') + '" class="w-full px-4 py-3 rounded-xl bg-silver-50 ring-silver outline-none focus:ring-2 focus:ring-navy-500"></div>';
       }).join('');
     }
+
+    Classifieds.cats().then(function (cats) {
+      if (catSel) {
+        catSel.innerHTML = '<option value="">Selecione…</option>' + cats.map(function (c) { return '<option value="' + c.id + '"' + (preCat === c.id ? ' selected' : '') + '>' + (c.emoji || '📋') + ' ' + esc(c.nome) + '</option>'; }).join('');
+        if (preCat) {
+          catSel.value = preCat;
+          renderExtra(preCat);
+        }
+      }
+    });
+
     if (catSel) catSel.addEventListener('change', function () { renderExtra(catSel.value); });
     var _pin = null;
     loadLeaflet().then(function () {
@@ -1780,7 +2043,7 @@
     injectLayout(); renderSocialProof(); initCountdown(); initCityParallax(); Metrics.log('pageview'); wireSearchAutocomplete(); renderRecent(); registerSW(); initAnalytics(); wireMP();
     document.addEventListener('click', function (e) { var b = e.target.closest('[data-fav]'); if (b) { e.preventDefault(); e.stopPropagation(); var added = toggleFav(b.getAttribute('data-fav')); b.innerHTML = added ? '❤️' : '🤍'; } });
     var p = document.body.dataset.page;
-    var ROUTES = { home: pageHome, categoria: pageCategoria, loja: pageLoja, ofertas: pageOfertas, busca: pageBusca, cadastro: pageCadastro, turista: pageTurista, login: pageLogin, admin: pageAdmin, painel: pagePainel, mapa: pageMapa, motoristas: pageMotoristas, motorista: pageMotorista, cadmotorista: pageCadastroMotorista, obrigado: pageObrigado, favoritos: pageFavoritos, classificados: pageClassificadosHub, listings: pageListings, anuncio: pageAnuncio, cadanuncio: pageCadastroAnuncio };
+    var ROUTES = { home: pageHome, categoria: pageCategoria, loja: pageLoja, ofertas: pageOfertas, busca: pageBusca, cadastro: pageCadastro, turista: pageTurista, login: pageLogin, admin: pageAdmin, painel: pagePainel, mapa: pageMapa, motoristas: pageMotoristas, motorista: pageMotorista, cadmotorista: pageCadastroMotorista, obrigado: pageObrigado, favoritos: pageFavoritos, classificados: pageClassificadosHub, listings: pageListings, vagas: pageVagas, empregos: pageVagas, anuncio: pageAnuncio, cadanuncio: pageCadastroAnuncio };
     if (ROUTES[p]) ROUTES[p]();
   });
 })();

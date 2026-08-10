@@ -1,0 +1,885 @@
+{
+  "version": 3,
+  "routes": [
+    {
+      "src": "^/(?:(.+)/)?index(?:\\.html)?/?$",
+      "headers": {
+        "Location": "/$1"
+      },
+      "status": 308
+    },
+    {
+      "src": "^/(.*)\\.html/?$",
+      "headers": {
+        "Location": "/$1"
+      },
+      "status": 308
+    },
+    {
+      "src": "^/(.*)/$",
+      "headers": {
+        "Location": "/$1"
+      },
+      "status": 308
+    },
+    {
+      "src": "^/barretos$",
+      "headers": {
+        "Location": "/fundadores?cidade=barretos&utm_source=instagram&utm_medium=bio&utm_campaign=fundadoras_barretos"
+      },
+      "status": 307
+    },
+    {
+      "src": "^/fundadoras$",
+      "headers": {
+        "Location": "/fundadores?cidade=barretos&utm_source=instagram&utm_medium=bio&utm_campaign=fundadoras_barretos"
+      },
+      "status": 307
+    },
+    {
+      "src": "^/vagas$",
+      "headers": {
+        "Location": "/vagas.html"
+      },
+      "status": 307
+    },
+    {
+      "src": "^/peao$",
+      "headers": {
+        "Location": "/vagas.html"
+      },
+      "status": 307
+    },
+    {
+      "src": "^/trabalhar$",
+      "headers": {
+        "Location": "/vagas.html"
+      },
+      "status": 307
+    },
+    {
+      "src": "^/empregos$",
+      "headers": {
+        "Location": "/vagas.html"
+      },
+      "status": 307
+    },
+    {
+      "src": "^/gramado$",
+      "headers": {
+        "Location": "/guia-gramado"
+      },
+      "status": 307
+    },
+    {
+      "src": "^/gramadoRS$",
+      "headers": {
+        "Location": "/guia-gramado"
+      },
+      "status": 307
+    },
+    {
+      "src": "^/nataluz$",
+      "headers": {
+        "Location": "/guia-nataluz"
+      },
+      "status": 307
+    },
+    {
+      "src": "^/buzios$",
+      "headers": {
+        "Location": "/guia-buzios"
+      },
+      "status": 307
+    },
+    {
+      "src": "^/veraobuzios$",
+      "headers": {
+        "Location": "/guia-buzios"
+      },
+      "status": 307
+    },
+    {
+      "src": "^/florianopolis$",
+      "headers": {
+        "Location": "/guia-florianopolis"
+      },
+      "status": 307
+    },
+    {
+      "src": "^/floripa$",
+      "headers": {
+        "Location": "/guia-florianopolis"
+      },
+      "status": 307
+    },
+    {
+      "src": "^/blumenau$",
+      "headers": {
+        "Location": "/guia-blumenau"
+      },
+      "status": 307
+    },
+    {
+      "src": "^/oktoberfest$",
+      "headers": {
+        "Location": "/guia-blumenau"
+      },
+      "status": 307
+    },
+    {
+      "src": "^/bonito$",
+      "headers": {
+        "Location": "/guia-bonito"
+      },
+      "status": 307
+    },
+    {
+      "src": "^/campos$",
+      "headers": {
+        "Location": "/guia-campos"
+      },
+      "status": 307
+    },
+    {
+      "src": "^/camposdojordao$",
+      "headers": {
+        "Location": "/guia-campos"
+      },
+      "status": 307
+    },
+    {
+      "src": "^/caruaru$",
+      "headers": {
+        "Location": "/guia-caruaru"
+      },
+      "status": 307
+    },
+    {
+      "src": "^/saojoaocaruaru$",
+      "headers": {
+        "Location": "/guia-caruaru"
+      },
+      "status": 307
+    },
+    {
+      "src": "^/jericoacoara$",
+      "headers": {
+        "Location": "/guia-jericoacoara"
+      },
+      "status": 307
+    },
+    {
+      "src": "^/jeri$",
+      "headers": {
+        "Location": "/guia-jericoacoara"
+      },
+      "status": 307
+    },
+    {
+      "src": "^/porto$",
+      "headers": {
+        "Location": "/guia-porto"
+      },
+      "status": 307
+    },
+    {
+      "src": "^/portodegalinhas$",
+      "headers": {
+        "Location": "/guia-porto"
+      },
+      "status": 307
+    },
+    {
+      "src": "^/salvador$",
+      "headers": {
+        "Location": "/guia-salvador"
+      },
+      "status": 307
+    },
+    {
+      "src": "^/carnavalsalvador$",
+      "headers": {
+        "Location": "/guia-salvador"
+      },
+      "status": 307
+    },
+    {
+      "src": "^/uberlandia$",
+      "headers": {
+        "Location": "/guia-uberlandia"
+      },
+      "status": 307
+    },
+    {
+      "src": "^/uberlandiamg$",
+      "headers": {
+        "Location": "/guia-uberlandia"
+      },
+      "status": 307
+    },
+    {
+      "src": "^/caldasnovas$",
+      "headers": {
+        "Location": "/guia-caldasnovas"
+      },
+      "status": 307
+    },
+    {
+      "src": "^/caldasnovasgo$",
+      "headers": {
+        "Location": "/guia-caldasnovas"
+      },
+      "status": 307
+    },
+    {
+      "src": "^/aguasquentes$",
+      "headers": {
+        "Location": "/guia-caldasnovas"
+      },
+      "status": 307
+    },
+    {
+      "src": "^(?:/(.*))$",
+      "headers": {
+        "Strict-Transport-Security": "max-age=63072000; includeSubDomains; preload",
+        "X-Content-Type-Options": "nosniff",
+        "Referrer-Policy": "strict-origin-when-cross-origin",
+        "X-Frame-Options": "DENY",
+        "Permissions-Policy": "camera=(), microphone=(), geolocation=(self), payment=()",
+        "Content-Security-Policy": "default-src 'self'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; object-src 'none'; upgrade-insecure-requests; script-src 'self'; style-src 'self' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://*.supabase.co https://viacep.com.br https://photon.komoot.io; frame-src https://www.google.com; manifest-src 'self'"
+      },
+      "continue": true
+    },
+    {
+      "src": "^/(api(?:.+)?)/index(?:\\.(?:js))?/?$",
+      "headers": {
+        "Location": "/$1"
+      },
+      "status": 308
+    },
+    {
+      "src": "^/api/(.+)(?:\\.(?:js))/?$",
+      "headers": {
+        "Location": "/api/$1"
+      },
+      "status": 308
+    },
+    {
+      "handle": "filesystem"
+    },
+    {
+      "src": "^/assets(?:/(.*))$",
+      "dest": "/assets/$1?host=$host",
+      "check": true,
+      "has": [
+        {
+          "type": "host",
+          "value": "gramado.aquitemachadinhos.com.br"
+        }
+      ]
+    },
+    {
+      "src": "^/$",
+      "dest": "/gramado-home.html?host=$host",
+      "check": true,
+      "has": [
+        {
+          "type": "host",
+          "value": "gramado.aquitemachadinhos.com.br"
+        }
+      ]
+    },
+    {
+      "src": "^/natal-luz-2026\\.html$",
+      "dest": "/gramado-natal-luz.html?host=$host",
+      "check": true,
+      "has": [
+        {
+          "type": "host",
+          "value": "gramado.aquitemachadinhos.com.br"
+        }
+      ]
+    },
+    {
+      "src": "^/o-que-fazer-em-gramado\\.html$",
+      "dest": "/gramado-o-que-fazer.html?host=$host",
+      "check": true,
+      "has": [
+        {
+          "type": "host",
+          "value": "gramado.aquitemachadinhos.com.br"
+        }
+      ]
+    },
+    {
+      "src": "^/assets(?:/(.*))$",
+      "dest": "/assets/$1?host=$host",
+      "check": true,
+      "has": [
+        {
+          "type": "host",
+          "value": "blumenau.aquitemachadinhos.com.br"
+        }
+      ]
+    },
+    {
+      "src": "^/$",
+      "dest": "/blumenau-home.html?host=$host",
+      "check": true,
+      "has": [
+        {
+          "type": "host",
+          "value": "blumenau.aquitemachadinhos.com.br"
+        }
+      ]
+    },
+    {
+      "src": "^/assets(?:/(.*))$",
+      "dest": "/assets/$1?host=$host",
+      "check": true,
+      "has": [
+        {
+          "type": "host",
+          "value": "bonito.aquitemachadinhos.com.br"
+        }
+      ]
+    },
+    {
+      "src": "^/$",
+      "dest": "/bonito-home.html?host=$host",
+      "check": true,
+      "has": [
+        {
+          "type": "host",
+          "value": "bonito.aquitemachadinhos.com.br"
+        }
+      ]
+    },
+    {
+      "src": "^/assets(?:/(.*))$",
+      "dest": "/assets/$1?host=$host",
+      "check": true,
+      "has": [
+        {
+          "type": "host",
+          "value": "buzios.aquitemachadinhos.com.br"
+        }
+      ]
+    },
+    {
+      "src": "^/$",
+      "dest": "/buzios-home.html?host=$host",
+      "check": true,
+      "has": [
+        {
+          "type": "host",
+          "value": "buzios.aquitemachadinhos.com.br"
+        }
+      ]
+    },
+    {
+      "src": "^/assets(?:/(.*))$",
+      "dest": "/assets/$1?host=$host",
+      "check": true,
+      "has": [
+        {
+          "type": "host",
+          "value": "campos.aquitemachadinhos.com.br"
+        }
+      ]
+    },
+    {
+      "src": "^/$",
+      "dest": "/campos-home.html?host=$host",
+      "check": true,
+      "has": [
+        {
+          "type": "host",
+          "value": "campos.aquitemachadinhos.com.br"
+        }
+      ]
+    },
+    {
+      "src": "^/assets(?:/(.*))$",
+      "dest": "/assets/$1?host=$host",
+      "check": true,
+      "has": [
+        {
+          "type": "host",
+          "value": "caruaru.aquitemachadinhos.com.br"
+        }
+      ]
+    },
+    {
+      "src": "^/$",
+      "dest": "/caruaru-home.html?host=$host",
+      "check": true,
+      "has": [
+        {
+          "type": "host",
+          "value": "caruaru.aquitemachadinhos.com.br"
+        }
+      ]
+    },
+    {
+      "src": "^/assets(?:/(.*))$",
+      "dest": "/assets/$1?host=$host",
+      "check": true,
+      "has": [
+        {
+          "type": "host",
+          "value": "florianopolis.aquitemachadinhos.com.br"
+        }
+      ]
+    },
+    {
+      "src": "^/$",
+      "dest": "/florianopolis-home.html?host=$host",
+      "check": true,
+      "has": [
+        {
+          "type": "host",
+          "value": "florianopolis.aquitemachadinhos.com.br"
+        }
+      ]
+    },
+    {
+      "src": "^/assets(?:/(.*))$",
+      "dest": "/assets/$1?host=$host",
+      "check": true,
+      "has": [
+        {
+          "type": "host",
+          "value": "jericoacoara.aquitemachadinhos.com.br"
+        }
+      ]
+    },
+    {
+      "src": "^/$",
+      "dest": "/jericoacoara-home.html?host=$host",
+      "check": true,
+      "has": [
+        {
+          "type": "host",
+          "value": "jericoacoara.aquitemachadinhos.com.br"
+        }
+      ]
+    },
+    {
+      "src": "^/assets(?:/(.*))$",
+      "dest": "/assets/$1?host=$host",
+      "check": true,
+      "has": [
+        {
+          "type": "host",
+          "value": "porto.aquitemachadinhos.com.br"
+        }
+      ]
+    },
+    {
+      "src": "^/$",
+      "dest": "/porto-home.html?host=$host",
+      "check": true,
+      "has": [
+        {
+          "type": "host",
+          "value": "porto.aquitemachadinhos.com.br"
+        }
+      ]
+    },
+    {
+      "src": "^/assets(?:/(.*))$",
+      "dest": "/assets/$1?host=$host",
+      "check": true,
+      "has": [
+        {
+          "type": "host",
+          "value": "salvador.aquitemachadinhos.com.br"
+        }
+      ]
+    },
+    {
+      "src": "^/$",
+      "dest": "/salvador-home.html?host=$host",
+      "check": true,
+      "has": [
+        {
+          "type": "host",
+          "value": "salvador.aquitemachadinhos.com.br"
+        }
+      ]
+    },
+    {
+      "src": "^/assets(?:/(.*))$",
+      "dest": "/assets/$1?host=$host",
+      "check": true,
+      "has": [
+        {
+          "type": "host",
+          "value": "uberlandia.aquitemachadinhos.com.br"
+        }
+      ]
+    },
+    {
+      "src": "^/$",
+      "dest": "/uberlandia-home.html?host=$host",
+      "check": true,
+      "has": [
+        {
+          "type": "host",
+          "value": "uberlandia.aquitemachadinhos.com.br"
+        }
+      ]
+    },
+    {
+      "src": "^/assets(?:/(.*))$",
+      "dest": "/assets/$1?host=$host",
+      "check": true,
+      "has": [
+        {
+          "type": "host",
+          "value": "caldasnovas.aquitemachadinhos.com.br"
+        }
+      ]
+    },
+    {
+      "src": "^/$",
+      "dest": "/caldasnovas-home.html?host=$host",
+      "check": true,
+      "has": [
+        {
+          "type": "host",
+          "value": "caldasnovas.aquitemachadinhos.com.br"
+        }
+      ]
+    },
+    {
+      "src": "^/api(/.*)?$",
+      "status": 404
+    },
+    {
+      "handle": "error"
+    },
+    {
+      "status": 404,
+      "src": "^(?!/api).*$",
+      "dest": "/404"
+    }
+  ],
+  "overrides": {
+    "assets/gramado-home.html": {
+      "path": "assets/gramado-home"
+    },
+    "assets/gramado-natal-luz.html": {
+      "path": "assets/gramado-natal-luz"
+    },
+    "assets/gramado-o-que-fazer.html": {
+      "path": "assets/gramado-o-que-fazer"
+    },
+    "assets/index.html": {
+      "path": "assets/index"
+    },
+    "assets/natal-luz-2026.html": {
+      "path": "assets/natal-luz-2026"
+    },
+    "assets/o-que-fazer-em-gramado.html": {
+      "path": "assets/o-que-fazer-em-gramado"
+    },
+    "docs/planCards.html": {
+      "path": "docs/planCards"
+    },
+    "404.html": {
+      "path": "404"
+    },
+    "admin.html": {
+      "path": "admin"
+    },
+    "animais.html": {
+      "path": "animais"
+    },
+    "anuncie.html": {
+      "path": "anuncie"
+    },
+    "anuncio.html": {
+      "path": "anuncio"
+    },
+    "blumenau-home.html": {
+      "path": "blumenau-home"
+    },
+    "blumenau-o-que-fazer.html": {
+      "path": "blumenau-o-que-fazer"
+    },
+    "blumenau-oktoberfest.html": {
+      "path": "blumenau-oktoberfest"
+    },
+    "bonito-ecoturismo.html": {
+      "path": "bonito-ecoturismo"
+    },
+    "bonito-home.html": {
+      "path": "bonito-home"
+    },
+    "bonito-o-que-fazer.html": {
+      "path": "bonito-o-que-fazer"
+    },
+    "busca.html": {
+      "path": "busca"
+    },
+    "buzios-home.html": {
+      "path": "buzios-home"
+    },
+    "buzios-o-que-fazer.html": {
+      "path": "buzios-o-que-fazer"
+    },
+    "buzios-verao.html": {
+      "path": "buzios-verao"
+    },
+    "cadastro-anuncio.html": {
+      "path": "cadastro-anuncio"
+    },
+    "cadastro-cidade.html": {
+      "path": "cadastro-cidade"
+    },
+    "cadastro-motorista.html": {
+      "path": "cadastro-motorista"
+    },
+    "cadastro.html": {
+      "path": "cadastro"
+    },
+    "caldasnovas-home.html": {
+      "path": "caldasnovas-home"
+    },
+    "campos-festival.html": {
+      "path": "campos-festival"
+    },
+    "campos-home.html": {
+      "path": "campos-home"
+    },
+    "campos-o-que-fazer.html": {
+      "path": "campos-o-que-fazer"
+    },
+    "caruaru-home.html": {
+      "path": "caruaru-home"
+    },
+    "caruaru-o-que-fazer.html": {
+      "path": "caruaru-o-que-fazer"
+    },
+    "caruaru-sao-joao.html": {
+      "path": "caruaru-sao-joao"
+    },
+    "categoria.html": {
+      "path": "categoria"
+    },
+    "cidades.html": {
+      "path": "cidades"
+    },
+    "classificados.html": {
+      "path": "classificados"
+    },
+    "como-chegar-parque-do-peao.html": {
+      "path": "como-chegar-parque-do-peao"
+    },
+    "contato.html": {
+      "path": "contato"
+    },
+    "eletronicos.html": {
+      "path": "eletronicos"
+    },
+    "empregos.html": {
+      "path": "empregos"
+    },
+    "eventos-peao.html": {
+      "path": "eventos-peao"
+    },
+    "faq.html": {
+      "path": "faq"
+    },
+    "farmacias-barretos.html": {
+      "path": "farmacias-barretos"
+    },
+    "farmacias-plantao-barretos.html": {
+      "path": "farmacias-plantao-barretos"
+    },
+    "favoritos.html": {
+      "path": "favoritos"
+    },
+    "florianopolis-home.html": {
+      "path": "florianopolis-home"
+    },
+    "florianopolis-o-que-fazer.html": {
+      "path": "florianopolis-o-que-fazer"
+    },
+    "florianopolis-praias.html": {
+      "path": "florianopolis-praias"
+    },
+    "fundadores.html": {
+      "path": "fundadores"
+    },
+    "gramado-home.html": {
+      "path": "gramado-home"
+    },
+    "gramado-natal-luz.html": {
+      "path": "gramado-natal-luz"
+    },
+    "gramado-o-que-fazer.html": {
+      "path": "gramado-o-que-fazer"
+    },
+    "gramado.html": {
+      "path": "gramado"
+    },
+    "guia-blumenau.html": {
+      "path": "guia-blumenau"
+    },
+    "guia-bonito.html": {
+      "path": "guia-bonito"
+    },
+    "guia-buzios.html": {
+      "path": "guia-buzios"
+    },
+    "guia-caldasnovas.html": {
+      "path": "guia-caldasnovas"
+    },
+    "guia-campos.html": {
+      "path": "guia-campos"
+    },
+    "guia-caruaru.html": {
+      "path": "guia-caruaru"
+    },
+    "guia-florianopolis.html": {
+      "path": "guia-florianopolis"
+    },
+    "guia-gramado.html": {
+      "path": "guia-gramado"
+    },
+    "guia-jericoacoara.html": {
+      "path": "guia-jericoacoara"
+    },
+    "guia-nataluz.html": {
+      "path": "guia-nataluz"
+    },
+    "guia-peao.html": {
+      "path": "guia-peao"
+    },
+    "guia-porto.html": {
+      "path": "guia-porto"
+    },
+    "guia-salvador.html": {
+      "path": "guia-salvador"
+    },
+    "guia-uberlandia.html": {
+      "path": "guia-uberlandia"
+    },
+    "imoveis.html": {
+      "path": "imoveis"
+    },
+    "index.html": {
+      "path": "index"
+    },
+    "jericoacoara-home.html": {
+      "path": "jericoacoara-home"
+    },
+    "jericoacoara-kite.html": {
+      "path": "jericoacoara-kite"
+    },
+    "jericoacoara-o-que-fazer.html": {
+      "path": "jericoacoara-o-que-fazer"
+    },
+    "login.html": {
+      "path": "login"
+    },
+    "loja.html": {
+      "path": "loja"
+    },
+    "mapa.html": {
+      "path": "mapa"
+    },
+    "motorista.html": {
+      "path": "motorista"
+    },
+    "motoristas.html": {
+      "path": "motoristas"
+    },
+    "moveis-eletro.html": {
+      "path": "moveis-eletro"
+    },
+    "nataluz.html": {
+      "path": "nataluz"
+    },
+    "o-que-fazer-festa-do-peao-2026.html": {
+      "path": "o-que-fazer-festa-do-peao-2026"
+    },
+    "o-que-fazer-festa-do-peao.html": {
+      "path": "o-que-fazer-festa-do-peao"
+    },
+    "obrigado.html": {
+      "path": "obrigado"
+    },
+    "ofertas.html": {
+      "path": "ofertas"
+    },
+    "onde-comer-barretos-madrugada.html": {
+      "path": "onde-comer-barretos-madrugada"
+    },
+    "onde-comer-barretos.html": {
+      "path": "onde-comer-barretos"
+    },
+    "onde-comer-festa-peao.html": {
+      "path": "onde-comer-festa-peao"
+    },
+    "onde-ficar-festa-peao.html": {
+      "path": "onde-ficar-festa-peao"
+    },
+    "painel.html": {
+      "path": "painel"
+    },
+    "politica-de-ofertas.html": {
+      "path": "politica-de-ofertas"
+    },
+    "politica-de-privacidade.html": {
+      "path": "politica-de-privacidade"
+    },
+    "porto-home.html": {
+      "path": "porto-home"
+    },
+    "porto-o-que-fazer.html": {
+      "path": "porto-o-que-fazer"
+    },
+    "porto-praias.html": {
+      "path": "porto-praias"
+    },
+    "programacao-71-festa-peao.html": {
+      "path": "programacao-71-festa-peao"
+    },
+    "salvador-carnaval.html": {
+      "path": "salvador-carnaval"
+    },
+    "salvador-home.html": {
+      "path": "salvador-home"
+    },
+    "salvador-o-que-fazer.html": {
+      "path": "salvador-o-que-fazer"
+    },
+    "servicos.html": {
+      "path": "servicos"
+    },
+    "sobre.html": {
+      "path": "sobre"
+    },
+    "termos.html": {
+      "path": "termos"
+    },
+    "turista.html": {
+      "path": "turista"
+    },
+    "uberlandia-home.html": {
+      "path": "uberlandia-home"
+    },
+    "vagas.html": {
+      "path": "vagas"
+    },
+    "veiculos.html": {
+      "path": "veiculos"
+    }
+  },
+  "crons": []
+}

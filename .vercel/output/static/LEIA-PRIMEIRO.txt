@@ -1,0 +1,30 @@
+AQUITEM — LAUNCH OPERATIONS
+
+Este é o pacote operacional de Fundadoras, priorização e automação segura.
+
+SUPABASE — execute nesta ordem:
+1. fundadores-schema.sql
+2. automacao-queue-schema.sql
+
+RAIZ DO GITHUB:
+- fundadores.html
+- cidades.html
+- anuncie.html
+- logo.svg
+
+PASTA assets:
+- app.js
+- fundadores.css
+- fundadores.js
+- cidades.css
+- aquitem-symbol.png
+
+MATERIAIS INTERNOS:
+- OPERACAO-GROWTH-AUTOMATIZADA.md
+- AUTOMACOES-INSTITUCIONAIS-AQUITEM.md
+- n8n-fundadoras-blueprint.json
+
+ARTE SOCIAL:
+- brand/card-empresas-fundadoras.png
+
+O n8n blueprint é documental e só deve ser ativado depois de criar e-mail institucional/WhatsApp Business. Nunca inclua credenciais ou service_role key no GitHub.

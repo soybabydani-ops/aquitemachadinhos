@@ -1,0 +1,16 @@
+{
+  "projectId": "prj_fTvjEkN7aXAV6lxPNXx96Mo36m5X",
+  "orgId": "team_ITRtcfYsLnPPI6mhqk6OfJbt",
+  "projectName": "aquitemachadinhos",
+  "settings": {
+    "createdAt": 1785533325968,
+    "framework": null,
+    "devCommand": null,
+    "installCommand": null,
+    "buildCommand": null,
+    "outputDirectory": null,
+    "rootDirectory": null,
+    "directoryListing": false,
+    "nodeVersion": "24.x"
+  }
+}

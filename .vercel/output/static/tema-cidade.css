@@ -1,0 +1,10 @@
+/* TEMA POR CIDADE — cores via CSS fixo por cidade ({slug}-tema.css) */
+.cidade-hero{position:relative;overflow:hidden;background:linear-gradient(180deg,rgba(6,15,39,.22) 0%,rgba(6,15,39,.55) 100%),linear-gradient(155deg,var(--accent) 0%,#060f27 70%)}
+.cidade-btn{background:var(--accent);color:#fff;transition:background .2s}
+.cidade-btn:hover{background:var(--accent-d)}
+.cidade-text{color:var(--accent)}
+.cidade-eyebrow{color:var(--accent)}
+.cidade-stat{color:var(--accent)}
+.cidade-chip{background:var(--accent-s);color:#0e1322}
+.cidade-card{transition:box-shadow .2s}
+.cidade-card:hover{box-shadow:0 18px 40px rgba(0,0,0,.18),inset 0 0 0 2px var(--accent-s)}

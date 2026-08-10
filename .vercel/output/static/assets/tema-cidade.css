@@ -1,0 +1,20 @@
+/* TEMA POR CIDADE — cores via CSS fixo por cidade ({slug}-tema.css) */
+.cidade-hero{position:relative;overflow:hidden;background:linear-gradient(180deg,rgba(6,15,39,.22) 0%,rgba(6,15,39,.55) 100%),linear-gradient(155deg,var(--accent) 0%,#060f27 70%)}
+.cidade-btn{background:var(--accent);color:#fff;transition:background .2s}
+.cidade-btn:hover{background:var(--accent-d)}
+.cidade-text{color:var(--accent)}
+.cidade-eyebrow{color:var(--accent)}
+.cidade-stat{color:var(--accent)}
+.cidade-chip{background:var(--accent-s);color:#0e1322}
+.cidade-card{transition:box-shadow .2s}
+.cidade-card:hover{box-shadow:0 18px 40px rgba(0,0,0,.18),inset 0 0 0 2px var(--accent-s)}
+
+/* AQUITEM city experience: depth, glass and subtle motion */
+.cidade-hero{isolation:isolate;min-height:420px;background:radial-gradient(620px 300px at 88% 8%,color-mix(in srgb,var(--accent) 42%,transparent),transparent 67%),linear-gradient(155deg,var(--accent) 0%,#081630 72%)}
+.cidade-hero:before{content:"";position:absolute;z-index:-1;width:430px;height:430px;right:-130px;top:36px;border:1px solid color-mix(in srgb,var(--accent-s) 72%,transparent);border-radius:50%;box-shadow:0 0 0 46px color-mix(in srgb,var(--accent) 9%,transparent),0 0 0 94px color-mix(in srgb,var(--accent) 6%,transparent);opacity:.85;animation:aquitem-float 9s ease-in-out infinite alternate}
+.cidade-hero:after{content:"";position:absolute;z-index:-1;left:-90px;bottom:-150px;width:530px;height:280px;border-radius:50%;background:radial-gradient(ellipse,color-mix(in srgb,var(--accent) 28%,transparent),transparent 70%);filter:blur(4px)}
+.cidade-hero>div{position:relative;z-index:1}.cidade-btn{box-shadow:0 13px 30px color-mix(in srgb,var(--accent) 35%,transparent)}.cidade-card{border:1px solid color-mix(in srgb,var(--accent-s) 18%,transparent);transform-style:preserve-3d}.cidade-card:hover{transform:translateY(-7px) rotateX(2deg);box-shadow:0 22px 46px rgba(0,0,0,.22),inset 0 0 0 2px var(--accent-s)}
+@keyframes aquitem-float{from{transform:translate3d(0,0,0) rotate(-5deg)}to{transform:translate3d(-18px,18px,0) rotate(5deg)}}
+@media(max-width:640px){.cidade-hero{min-height:360px}.cidade-hero:before{width:270px;height:270px;right:-92px;top:52px;box-shadow:0 0 0 30px color-mix(in srgb,var(--accent) 9%,transparent),0 0 0 60px color-mix(in srgb,var(--accent) 5%,transparent)}.cidade-card:hover{transform:none}}
+@media(prefers-reduced-motion:reduce){.cidade-hero:before{animation:none}.cidade-card:hover{transform:none}}
+.cidade-hero:before{transform:translate3d(var(--parallax-x,0),var(--parallax-y,0),0)}.cidade-hero:after{transform:translate3d(var(--parallax-x-soft,0),var(--parallax-y-soft,0),0)}
