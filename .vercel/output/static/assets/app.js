@@ -55,13 +55,13 @@
 })();
 /* === FIM BOTAO CTA === */
 
-/* === MOTOR MULTI-CIDADE (Aqui Tem) — v5 === */
+/* === MOTOR MULTI-CIDADE (Aqui Tem) — v5.1 === */
 (function () {
   var CIDADES = {
     "www": ["Brasil","BR"],
+    "nacional": ["Brasil","BR"],
+    "classificados": ["Brasil","BR"],
     "barretos": ["Barretos","SP"],
-    "classificados": ["Brasil Todo","BR"],
-    "nacional": ["Brasil Todo","BR"],
     "gramado": ["Gramado","RS"],
     "campos": ["Campos do Jordão","SP"],
     "salvador": ["Salvador","BA"],
@@ -100,9 +100,18 @@
     "alter-do-chao": ["Alter do Chão","PA"],
     "alterdochao": ["Alter do Chão","PA"]
   };
-  var partes = location.hostname.split(".");
-  var sub = (partes[0] || "www").toLowerCase();
-  if (sub === "www" || partes.length <= 2 || sub === "localhost") sub = "www";
+
+  function parseSub() {
+    var host = (location.hostname || '').toLowerCase();
+    if (host === 'localhost' || host === '127.0.0.1' || host.indexOf('vercel.app') !== -1) return 'www';
+    var p = host.split('.');
+    if (p.length === 3 && p[0] === 'aquitemachadinhos' && p[1] === 'com' && p[2] === 'br') return 'www';
+    if (p.length === 4 && p[1] === 'aquitemachadinhos' && p[2] === 'com' && p[3] === 'br') return p[0];
+    if (p.length <= 2) return 'www';
+    return p[0] || 'www';
+  }
+
+  var sub = parseSub();
   if ((sub === "classificados" || sub === "nacional") && (location.pathname === "/" || location.pathname === "/index.html")) {
     location.replace("/classificados.html");
   } else if (sub === "barretos" && (location.pathname === "/" || location.pathname === "/index.html")) {
@@ -311,9 +320,45 @@
     'alter-do-chao': 'PA',
     nacional: 'BR'
   };
-  function currentCitySlug() { var h = (location.hostname.split('.')[0] || 'www').toLowerCase(); return CITY_HOSTS[h] || 'barretos'; }
-  function currentCityName() { return CITY_NAMES[currentCitySlug()] || 'Barretos'; }
-  function currentCityUF() { return CITY_UFS[currentCitySlug()] || 'SP'; }
+  function getHostSubdomain() {
+    var host = (location.hostname || '').toLowerCase();
+    if (host === 'localhost' || host === '127.0.0.1' || host.indexOf('vercel.app') !== -1) return 'www';
+    var p = host.split('.');
+    if (p.length === 3 && p[0] === 'aquitemachadinhos' && p[1] === 'com' && p[2] === 'br') return 'www';
+    if (p.length === 4 && p[1] === 'aquitemachadinhos' && p[2] === 'com' && p[3] === 'br') return p[0];
+    if (p.length <= 2) return 'www';
+    return p[0] || 'www';
+  }
+
+  function currentCitySlug() {
+    var p = (document.body && document.body.getAttribute('data-page')) || '';
+    if (p && CITY_HOSTS[p] && p !== 'home' && p !== 'nacional' && p !== 'classificados' && p !== 'vagas' && p !== 'cidades' && p !== 'admin' && p !== 'painel' && p !== 'login' && p !== 'busca' && p !== 'sobre' && p !== 'contato' && p !== 'termos' && p !== 'anuncie' && p !== 'faq' && p !== '404') {
+      return CITY_HOSTS[p];
+    }
+    var sub = getHostSubdomain();
+    if (sub !== 'www' && sub !== 'nacional' && CITY_HOSTS[sub]) {
+      return CITY_HOSTS[sub];
+    }
+    var path = (location.pathname || '').toLowerCase();
+    for (var k in CITY_HOSTS) {
+      if (k !== 'nacional' && k !== 'classificados' && (path === '/' + k + '-home' || path === '/' + k + '-home.html' || path.indexOf('/' + k + '-home') !== -1)) {
+        return CITY_HOSTS[k];
+      }
+    }
+    return 'nacional';
+  }
+
+  function currentCityName() {
+    var slug = currentCitySlug();
+    if (slug === 'nacional' || slug === 'www') return 'Brasil';
+    return CITY_NAMES[slug] || 'Brasil';
+  }
+
+  function currentCityUF() {
+    var slug = currentCitySlug();
+    if (slug === 'nacional' || slug === 'www') return 'BR';
+    return CITY_UFS[slug] || 'BR';
+  }
   var showMsg = function (sel, txt, ok) { var e = $(sel); if (!e) return; e.className = 'msg ' + (ok ? 'msg-ok' : 'msg-err'); e.innerHTML = txt; };
 
   /* DATA LAYER */
@@ -456,15 +501,17 @@
   
   function setListingSEO(s) {
     try {
-      document.title = (s.nome || 'Empresa') + ' em Barretos — Aqui Tem Achadinhos';
+      var cLoc = s.cidade || currentCityName();
+      var uf = CITY_UFS[s.city_slug] || currentCityUF();
+      document.title = (s.nome || 'Empresa') + ' em ' + cLoc + ' · Aqui Tem Achadinhos';
       var md = document.querySelector('meta[name="description"]');
-      if (md) md.setAttribute('content', (s.descricao_curta || s.nome || '') + ' Veja endereço, horário e contato direto no WhatsApp em Barretos/SP.');
+      if (md) md.setAttribute('content', (s.descricao_curta || s.nome || '') + ' Veja endereço, horário e contato direto no WhatsApp em ' + cLoc + (uf && uf !== 'BR' ? '/' + uf : '') + '.');
       function setMeta(p, c) { var m = document.querySelector('meta[property="' + p + '"]'); if (!m) { m = document.createElement('meta'); m.setAttribute('property', p); document.head.appendChild(m); } m.setAttribute('content', c); }
-      setMeta('og:title', (s.nome || '') + ' em Barretos');
+      setMeta('og:title', (s.nome || '') + ' em ' + cLoc);
       setMeta('og:description', s.descricao_curta || s.nome || '');
       setMeta('og:url', location.href);
       var ld = document.createElement('script'); ld.type = 'application/ld+json';
-      ld.text = JSON.stringify({ "@context": "https://schema.org", "@type": "LocalBusiness", "name": s.nome || '', "description": s.descricao_curta || '', "image": s.capa || s.foto || '', "telephone": s.telefone || '', "url": location.href, "address": { "@type": "PostalAddress", "addressLocality": s.cidade || currentCityName(), "addressRegion": CITY_UFS[s.city_slug] || currentCityUF(), "addressCountry": "BR", "streetAddress": s.bairro || '' }, "priceRange": "$$" });
+      ld.text = JSON.stringify({ "@context": "https://schema.org", "@type": "LocalBusiness", "name": s.nome || '', "description": s.descricao_curta || '', "image": s.capa || s.foto || '', "telephone": s.telefone || '', "url": location.href, "address": { "@type": "PostalAddress", "addressLocality": cLoc, "addressRegion": uf, "addressCountry": "BR", "streetAddress": s.bairro || '' }, "priceRange": "$$" });
       document.head.appendChild(ld);
     } catch (e) {}
   }
@@ -472,20 +519,114 @@
 
   /* LAYOUT — identidade AQUITEM */
   var LOGO = '<img src="assets/aquitem-symbol.png" class="w-10 h-10 rounded-xl shadow-soft object-cover" alt="AQUITEM">';
-  function cityRegistrationUrl() { var slug = currentCitySlug(); return slug === 'barretos' ? 'cadastro.html' : 'https://www.aquitemachadinhos.com.br/cadastro-cidade.html?cidade=' + encodeURIComponent(slug) + '&utm_source=site&utm_medium=header_cta&utm_campaign=expansao_' + encodeURIComponent(slug); }
-  function headerHTML(active) {
-    var city = currentCityName(), isBarretos = currentCitySlug() === 'barretos';
-    var it = [{ k: 'home', l: 'Início', h: 'index.html' }, { k: 'categoria', l: 'Categorias', h: 'categoria.html' }, { k: 'vagas', l: '💼 Vagas', h: 'vagas.html' }, { k: 'busca', l: '🔍 Buscar', h: 'busca.html' }, { k: 'ofertas', l: 'Ofertas', h: 'ofertas.html' }, { k: 'mapa', l: 'Mapa', h: 'mapa.html' }, { k: 'turista', l: 'Turista', h: 'turista.html' }, { k: 'classificados', l: 'Classificados', h: 'classificados.html' }, { k: 'anuncie', l: 'Para empresas', h: 'anuncie.html' }];
-    if (isBarretos) it.splice(6, 0, { k: 'guiapeao', l: 'Guia do Peão', h: 'guia-peao.html' });
-    var nav = it.filter(function (i) { return ['home','categoria','vagas','busca','ofertas','guiapeao'].indexOf(i.k) > -1; }).map(function (i) { return '<a href="' + i.h + '" class="' + (active === i.k ? 'text-white font-bold' : 'text-silver-200 hover:text-white') + ' transition">' + i.l + '</a>'; }).join('');
-    var mob = it.map(function (i) { return '<a href="' + i.h + '" class="py-2.5 px-3 rounded-lg hover:bg-white/5 ' + (active === i.k ? 'text-white font-bold' : '') + '">' + i.l + '</a>'; }).join('');
-    return '<header class="sticky top-0 z-50 bg-navy-950/90 backdrop-blur border-b border-white/10"><div class="max-w-7xl mx-auto px-4 sm:px-6 aquitem-header flex items-center justify-between gap-3"><a href="index.html" class="flex items-center gap-2.5 shrink-0">' + LOGO + '<span class="leading-tight"><span class="block font-display font-extrabold aquitem-wordmark text-[15px] text-chrome">AQUITEM</span><span class="block text-[9px] text-peao-400 font-bold aquitem-submark">GUIAS LOCAIS · ' + esc(city.toUpperCase()) + '</span></span></a><nav class="hidden lg:flex items-center gap-7 text-sm font-medium">' + nav + '</nav><div class="flex items-center gap-2"><a href="' + cityRegistrationUrl() + '" class="hidden sm:inline-flex btn-shine bg-amber-400 hover:bg-amber-300 text-navy-950 text-sm font-extrabold px-4 py-2.5 rounded-xl transition">Cadastrar empresa</a><button id="menuBtn" class="lg:hidden w-10 h-10 grid place-items-center rounded-xl glass text-white" aria-label="Abrir menu"><svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button></div></div><div id="mobileMenu" class="hidden lg:hidden border-t border-white/10 bg-navy-950/95"><div class="px-4 py-3 flex flex-col gap-1 text-silver-200">' + mob + '<a href="' + cityRegistrationUrl() + '" class="mt-1 text-center bg-amber-400 text-navy-950 font-extrabold py-3 rounded-xl">Cadastrar empresa</a></div></div></header>';
+  function cityRegistrationUrl() {
+    var slug = currentCitySlug();
+    if (slug === 'nacional' || slug === 'www') return 'cadastro.html';
+    return slug === 'barretos' ? 'cadastro.html' : 'https://www.aquitemachadinhos.com.br/cadastro-cidade.html?cidade=' + encodeURIComponent(slug) + '&utm_source=site&utm_medium=header_cta&utm_campaign=expansao_' + encodeURIComponent(slug);
   }
+
+  function headerHTML(active) {
+    var slug = currentCitySlug();
+    var isNational = (slug === 'nacional' || slug === 'www');
+    var isBarretos = (slug === 'barretos');
+    var city = currentCityName();
+    var submark = isNational ? 'REDE NACIONAL · BRASIL' : ('GUIAS LOCAIS · ' + esc(city.toUpperCase()));
+
+    var it = [
+      { k: 'home', l: 'Início', h: 'index.html' },
+      { k: 'cidades', l: '🌎 29 Cidades', h: 'cidades.html' },
+      { k: 'classificados', l: '📋 Classificados', h: 'classificados.html' },
+      { k: 'vagas', l: '💼 Vagas', h: 'vagas.html' },
+      { k: 'categoria', l: 'Categorias', h: 'categoria.html' },
+      { k: 'busca', l: '🔍 Buscar', h: 'busca.html' },
+      { k: 'anuncie', l: 'Para empresas', h: 'anuncie.html' }
+    ];
+    if (isBarretos) it.splice(5, 0, { k: 'guiapeao', l: 'Guia do Peão', h: 'guia-peao.html' });
+
+    var nav = it.map(function (i) { return '<a href="' + i.h + '" class="' + (active === i.k ? 'text-white font-bold' : 'text-silver-200 hover:text-white') + ' transition">' + i.l + '</a>'; }).join('');
+    var mob = it.map(function (i) { return '<a href="' + i.h + '" class="py-2.5 px-3 rounded-lg hover:bg-white/5 ' + (active === i.k ? 'text-white font-bold' : '') + '">' + i.l + '</a>'; }).join('');
+    var regUrl = isNational ? 'cadastro.html' : cityRegistrationUrl();
+
+    return '<header class="sticky top-0 z-50 bg-navy-950/90 backdrop-blur border-b border-white/10">' +
+      '<div class="max-w-7xl mx-auto px-4 sm:px-6 aquitem-header flex items-center justify-between gap-3">' +
+        '<a href="index.html" class="flex items-center gap-2.5 shrink-0">' +
+          LOGO +
+          '<span class="leading-tight">' +
+            '<span class="block font-display font-extrabold aquitem-wordmark text-[15px] text-chrome">AQUITEM</span>' +
+            '<span class="block text-[9px] text-peao-400 font-bold aquitem-submark">' + submark + '</span>' +
+          '</span>' +
+        '</a>' +
+        '<nav class="hidden lg:flex items-center gap-7 text-sm font-medium">' + nav + '</nav>' +
+        '<div class="flex items-center gap-2">' +
+          '<a href="' + regUrl + '" class="hidden sm:inline-flex btn-shine bg-amber-400 hover:bg-amber-300 text-navy-950 text-sm font-extrabold px-4 py-2.5 rounded-xl transition">Cadastrar empresa</a>' +
+          '<button id="menuBtn" class="lg:hidden w-10 h-10 grid place-items-center rounded-xl glass text-white" aria-label="Abrir menu">' +
+            '<svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></svg>' +
+          '</button>' +
+        '</div>' +
+      '</div>' +
+      '<div id="mobileMenu" class="hidden lg:hidden border-t border-white/10 bg-navy-950/95">' +
+        '<div class="px-4 py-3 flex flex-col gap-1 text-silver-200">' +
+          mob +
+          '<a href="' + regUrl + '" class="mt-1 text-center bg-amber-400 text-navy-950 font-extrabold py-3 rounded-xl">Cadastrar empresa</a>' +
+        '</div>' +
+      '</div>' +
+    '</header>';
+  }
+
   function footerHTML() {
-    var city = currentCityName(), isBarretos = currentCitySlug() === 'barretos', register = cityRegistrationUrl();
-    var explore = '<a href="categoria.html" class="hover:text-white">Categorias</a><a href="ofertas.html" class="hover:text-white">Ofertas</a><a href="https://www.aquitemachadinhos.com.br/cidades.html" class="hover:text-white">Todas as cidades</a><a href="index.html#turista" class="hover:text-white">Guia do turista</a>';
+    var slug = currentCitySlug();
+    var isNational = (slug === 'nacional' || slug === 'www');
+    var isBarretos = (slug === 'barretos');
+    var city = currentCityName();
+    var register = isNational ? 'cadastro.html' : cityRegistrationUrl();
+    var footerDesc = isNational
+      ? 'Empresas, experiências, vagas e achadinhos nas principais cidades e polos turísticos do <b>Brasil</b>.'
+      : ('Empresas, experiências e achadinhos locais para quem mora, visita ou empreende em <b>' + esc(city) + '</b>.');
+    var explore = '<a href="cidades.html" class="hover:text-white">Todas as 29 cidades</a><a href="vagas.html" class="hover:text-white">Vagas de emprego</a><a href="classificados.html" class="hover:text-white">Classificados</a><a href="categoria.html" class="hover:text-white">Categorias</a><a href="ofertas.html" class="hover:text-white">Ofertas</a>';
     var legal = '<a href="sobre.html" class="hover:text-white">Sobre</a><a href="contato.html" class="hover:text-white">Contato</a><a href="faq.html" class="hover:text-white">Ajuda</a><a href="politica-de-privacidade.html" class="hover:text-white">Privacidade</a><a href="termos.html" class="hover:text-white">Termos</a><a href="politica-de-ofertas.html" class="hover:text-white">Política de ofertas</a>' + (isBarretos ? '<a href="guia-peao.html" class="hover:text-white">Festa do Peão</a>' : '');
-    return '<footer class="bg-navy-950 text-silver-300 border-t border-white/10"><div id="socialProof" class="border-b border-white/10"><div class="max-w-5xl mx-auto px-4 py-7 text-center text-silver-400 text-sm">Carregando números reais…</div></div><div class="max-w-7xl mx-auto px-5 sm:px-6 py-12 grid md:grid-cols-4 gap-9"><div class="md:col-span-2"><div class="flex items-center gap-3 mb-4">' + LOGO + '<span><span class="block font-display font-extrabold tracking-[.08em] text-chrome">AQUITEM</span><span class="block text-[10px] text-peao-400 font-bold tracking-[.14em]">AQUI TEM ACHADINHOS</span></span></div><p class="text-sm text-silver-400 max-w-sm leading-relaxed">Empresas, experiências e achadinhos locais para quem mora, visita ou empreende em <b>' + esc(city) + '</b>.</p><div class="flex gap-3 mt-5"><a href="' + waLink('Olá! Vim pela AQUITEM.') + '" target="_blank" rel="noopener noreferrer" class="w-10 h-10 grid place-items-center rounded-xl glass hover:bg-white/10 transition" aria-label="WhatsApp">💬</a><a href="' + CONFIG.instagram + '" target="_blank" rel="noopener noreferrer" class="w-10 h-10 grid place-items-center rounded-xl glass hover:bg-white/10 transition" aria-label="Instagram">📸</a></div></div><div><h4 class="text-white font-semibold mb-3 font-display">Explorar</h4><div class="aquitem-footer-nav text-sm text-silver-400">' + explore + '</div></div><div><h4 class="text-white font-semibold mb-3 font-display">Para empresas</h4><div class="aquitem-footer-nav text-sm text-silver-400"><a href="' + register + '" class="hover:text-white">Cadastrar empresa</a><a href="anuncie.html" class="hover:text-white">Planos e visibilidade</a><a href="' + waLink('Olá! Quero saber sobre anúncios na AQUITEM.') + '" target="_blank" rel="noopener noreferrer" class="hover:text-white">Falar no WhatsApp</a></div></div></div><div class="border-t border-white/10"><div class="max-w-7xl mx-auto px-5 sm:px-6 py-5 text-xs text-silver-400 aquitem-footer-links">' + legal + '</div><div class="max-w-7xl mx-auto px-5 sm:px-6 pb-6 text-xs text-silver-400 flex flex-col sm:flex-row justify-between gap-2"><span>© 2026 AQUITEM · Aqui Tem Achadinhos</span><span>Conteúdo pago é identificado como “Destaque”. ' + esc(city) + '/' + esc(currentCityUF()) + '</span></div></div></footer>';
+    var footerLocBadge = isNational ? 'Brasil' : (esc(city) + '/' + esc(currentCityUF()));
+
+    return '<footer class="bg-navy-950 text-silver-300 border-t border-white/10">' +
+      '<div id="socialProof" class="border-b border-white/10">' +
+        '<div class="max-w-5xl mx-auto px-4 py-7 text-center text-silver-400 text-sm">Carregando números reais…</div>' +
+      '</div>' +
+      '<div class="max-w-7xl mx-auto px-5 sm:px-6 py-12 grid md:grid-cols-4 gap-9">' +
+        '<div class="md:col-span-2">' +
+          '<div class="flex items-center gap-3 mb-4">' +
+            LOGO +
+            '<span>' +
+              '<span class="block font-display font-extrabold tracking-[.08em] text-chrome">AQUITEM</span>' +
+              '<span class="block text-[10px] text-peao-400 font-bold tracking-[.14em]">AQUI TEM ACHADINHOS</span>' +
+            '</span>' +
+          '</div>' +
+          '<p class="text-sm text-silver-400 max-w-sm leading-relaxed">' + footerDesc + '</p>' +
+          '<div class="flex gap-3 mt-5">' +
+            '<a href="' + waLink('Olá! Vim pela AQUITEM.') + '" target="_blank" rel="noopener noreferrer" class="w-10 h-10 grid place-items-center rounded-xl glass hover:bg-white/10 transition" aria-label="WhatsApp">💬</a>' +
+            '<a href="' + CONFIG.instagram + '" target="_blank" rel="noopener noreferrer" class="w-10 h-10 grid place-items-center rounded-xl glass hover:bg-white/10 transition" aria-label="Instagram">📸</a>' +
+            '<a href="https://t.me/ofertasbrasilz" target="_blank" rel="noopener noreferrer" class="w-10 h-10 grid place-items-center rounded-xl bg-[#229ED9]/20 hover:bg-[#229ED9]/40 border border-[#229ED9]/40 text-[#229ED9] transition" aria-label="Telegram">✈️</a>' +
+          '</div>' +
+        '</div>' +
+        '<div>' +
+          '<h4 class="text-white font-semibold mb-3 font-display">Explorar</h4>' +
+          '<div class="aquitem-footer-nav text-sm text-silver-400">' + explore + '</div>' +
+        '</div>' +
+        '<div>' +
+          '<h4 class="text-white font-semibold mb-3 font-display">Para empresas</h4>' +
+          '<div class="aquitem-footer-nav text-sm text-silver-400">' +
+            '<a href="' + register + '" class="hover:text-white">Cadastrar empresa</a>' +
+            '<a href="anuncie.html" class="hover:text-white">Planos e visibilidade</a>' +
+            '<a href="' + waLink('Olá! Quero saber sobre anúncios na AQUITEM.') + '" target="_blank" rel="noopener noreferrer" class="hover:text-white">Falar no WhatsApp</a>' +
+          '</div>' +
+        '</div>' +
+      '</div>' +
+      '<div class="border-t border-white/10">' +
+        '<div class="max-w-7xl mx-auto px-5 sm:px-6 py-5 text-xs text-silver-400 aquitem-footer-links">' + legal + '</div>' +
+        '<div class="max-w-7xl mx-auto px-5 sm:px-6 pb-6 text-xs text-silver-400 flex flex-col sm:flex-row justify-between gap-2">' +
+          '<span>© 2026 AQUITEM · Aqui Tem Achadinhos</span>' +
+          '<span>Conteúdo pago é identificado como “Destaque”. ' + footerLocBadge + '</span>' +
+        '</div>' +
+      '</div>' +
+    '</footer>';
   }
   function injectLayout() {
     var h = $('#site-header'); if (h) h.innerHTML = headerHTML(document.body.dataset.page || 'home');
@@ -548,9 +689,11 @@
 
   /* SEO para página da empresa */
   function setStoreSEO(s) {
-    document.title = s.nome + ' em Barretos · Aqui Tem Achadinhos';
-    setMeta('description', (s.descricao_curta || s.nome) + ' — ' + catName(s.categoria) + ' em Barretos. Contato direto pelo WhatsApp.');
-    var ld = { '@context': 'https://schema.org', '@type': 'LocalBusiness', name: s.nome, description: s.descricao_curta || s.descricao, address: { '@type': 'PostalAddress', addressLocality: (s.cidade || currentCityName()), addressRegion: CITY_UFS[s.city_slug] || currentCityUF(), streetAddress: s.endereco }, telephone: s.telefone, url: location.href };
+    var cLoc = s.cidade || currentCityName();
+    var uf = CITY_UFS[s.city_slug] || currentCityUF();
+    document.title = s.nome + ' em ' + cLoc + ' · Aqui Tem Achadinhos';
+    setMeta('description', (s.descricao_curta || s.nome) + ' — ' + catName(s.categoria) + ' em ' + cLoc + '. Contato direto pelo WhatsApp.');
+    var ld = { '@context': 'https://schema.org', '@type': 'LocalBusiness', name: s.nome, description: s.descricao_curta || s.descricao, address: { '@type': 'PostalAddress', addressLocality: cLoc, addressRegion: uf, streetAddress: s.endereco }, telephone: s.telefone, url: location.href };
     setJsonLd(ld);
   }
   function setMeta(name, content) { var m = document.querySelector('meta[name="' + name + '"]') || document.createElement('meta'); m.setAttribute('name', name); m.setAttribute('content', content); if (!m.parentNode) document.head.appendChild(m); }
@@ -595,7 +738,7 @@
     tipo = tipo || 'store';
     var lbl = tipo === 'driver' ? 'Avalie este motorista' : 'Avalie esta empresa';
     var ph = tipo === 'driver' ? 'Como foi a corrida? (opcional)' : 'Conte sua experiência (opcional)';
-    return '<form id="formReview" class="bg-white rounded-2xl ring-silver shadow-soft p-5 mb-4"><h3 class="font-display font-bold mb-3">' + lbl + '</h3><div id="starInput" class="flex gap-1 mb-3" data-val="0" role="radiogroup" aria-label="Sua nota de 1 a 5 estrelas">' + [1, 2, 3, 4, 5].map(function (i) { return '<span data-s="' + i + '" class="star cursor-pointer text-3xl text-silver-300 hover:text-amber-400 transition" role="button" tabindex="0" aria-label="' + i + ' estrela' + (i > 1 ? 's' : '') + '">★</span>'; }).join('') + '</div><div class="grid sm:grid-cols-2 gap-2 mb-2"><select name="perfil" class="px-3 py-2 rounded-lg bg-silver-50 ring-silver text-sm"><option value="">Sou um…</option><option value="cliente">Cliente</option><option value="morador">Morador de Barretos</option><option value="turista">Turista / visitante</option><option value="ex-funcionario">Ex-funcionário</option></select><input name="nome" placeholder="Seu nome (opcional)" class="px-3 py-2 rounded-lg bg-silver-50 ring-silver text-sm"></div><input name="titulo" placeholder="Título da avaliação (opcional)" class="w-full px-3 py-2 rounded-lg bg-silver-50 ring-silver text-sm mb-2"><textarea name="comentario" rows="3" placeholder="' + ph + '" class="w-full px-3 py-2 rounded-lg bg-silver-50 ring-silver text-sm mb-2"></textarea><button class="btn-shine bg-peao-500 hover:bg-peao-600 text-white font-bold px-5 py-2.5 rounded-xl">Enviar avaliação</button><span id="reviewMsg" class="text-sm ml-2"></span><p class="text-xs text-slate-400 mt-2">As avaliações passam por análise antes de serem publicadas.</p></form>';
+    return '<form id="formReview" class="bg-white rounded-2xl ring-silver shadow-soft p-5 mb-4"><h3 class="font-display font-bold mb-3">' + lbl + '</h3><div id="starInput" class="flex gap-1 mb-3" data-val="0" role="radiogroup" aria-label="Sua nota de 1 a 5 estrelas">' + [1, 2, 3, 4, 5].map(function (i) { return '<span data-s="' + i + '" class="star cursor-pointer text-3xl text-silver-300 hover:text-amber-400 transition" role="button" tabindex="0" aria-label="' + i + ' estrela' + (i > 1 ? 's' : '') + '">★</span>'; }).join('') + '</div><div class="grid sm:grid-cols-2 gap-2 mb-2"><select name="perfil" class="px-3 py-2 rounded-lg bg-silver-50 ring-silver text-sm"><option value="">Sou um…</option><option value="cliente">Cliente</option><option value="morador">Morador local</option><option value="turista">Turista / visitante</option><option value="ex-funcionario">Ex-funcionário</option></select><input name="nome" placeholder="Seu nome (opcional)" class="px-3 py-2 rounded-lg bg-silver-50 ring-silver text-sm"></div><input name="titulo" placeholder="Título da avaliação (opcional)" class="w-full px-3 py-2 rounded-lg bg-silver-50 ring-silver text-sm mb-2"><textarea name="comentario" rows="3" placeholder="' + ph + '" class="w-full px-3 py-2 rounded-lg bg-silver-50 ring-silver text-sm mb-2"></textarea><button class="btn-shine bg-peao-500 hover:bg-peao-600 text-white font-bold px-5 py-2.5 rounded-xl">Enviar avaliação</button><span id="reviewMsg" class="text-sm ml-2"></span><p class="text-xs text-slate-400 mt-2">As avaliações passam por análise antes de serem publicadas.</p></form>';
   }
   function ratingBlock(s, reviews) { reviews = reviews || []; return '<div class="mt-6">' + ratingSummary(s, reviews) + reviewForm(s) + reviewList(reviews) + '</div>'; }
   function wireHelpful(tipo) {
@@ -735,7 +878,7 @@
     var q = params().get('q') || '';
     var inp = $('#q'); if (inp) inp.value = q;
     if (tt) tt.textContent = q ? ('Resultados para "' + q + '"') : 'Busca';
-    if (!q) { l.innerHTML = emptyState('Digite algo para buscar', 'Use a busca para encontrar lojas, serviços e ofertas em Barretos.', false); return; }
+    if (!q) { l.innerHTML = emptyState('Digite algo para buscar', 'Use a busca para encontrar lojas, vagas e ofertas em ' + currentCityName() + ' ou no Brasil Todo.', false); return; }
     Promise.all([Categories.list(), Stores.search(q), Offers.search(q), Classifieds.search(q)]).then(function (r) {
       var cats = r[0], stores = r[1], offers = r[2], anuncios = r[3], html = ''; stores = sortByPlano(stores);
       if (anuncios.length) html += '<h2 class="font-display font-bold mb-3">📋 Anúncios (' + anuncios.length + ')</h2><div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-8">' + anuncios.map(function (a) { return listingCard(a, cats); }).join('') + '</div>';
