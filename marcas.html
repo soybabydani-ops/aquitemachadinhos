@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0, viewport-fit=cover" name="viewport"/>
+<title>Vitrine Nacional de Marcas — Aqui Tem Achadinhos</title>
+<meta content="Conheça as marcas que movem o Brasil: moda, agronegócio, gastronomia, turismo, tecnologia e indústria com acesso direto ao site oficial e WhatsApp." name="description"/>
+<link href="marcas.html" rel="canonical"/>
+<meta content="#081426" name="theme-color"/>
+<link href="assets/tailwind.css" rel="stylesheet"/>
+<link href="assets/styles.css" rel="stylesheet"/>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="AQUITEM">
+<meta property="og:title" content="Vitrine Nacional de Marcas — Aqui Tem Achadinhos">
+<meta property="og:description" content="Marcas oficiais em destaque para todo o Brasil. Conecte-se direto no site e WhatsApp.">
+<meta property="og:url" content="https://www.aquitemachadinhos.com.br/marcas">
+<meta property="og:image" content="https://www.aquitemachadinhos.com.br/assets/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<style>
+.brand-pill-btn {
+  padding: 10px 18px;
+  border-radius: 99px;
+  font-size: 13px;
+  font-weight: 700;
+  transition: all 0.2s ease;
+  cursor: pointer;
+  border: 1px solid rgba(255,255,255,0.18);
+  background: rgba(255,255,255,0.06);
+  color: #d7e0ed;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  white-space: nowrap;
+}
+.brand-pill-btn:hover {
+  background: rgba(255,255,255,0.15);
+  color: #ffffff;
+  border-color: rgba(245,215,127,0.5);
+}
+.brand-pill-btn.active {
+  background: linear-gradient(135deg, #F5D77F 0%, #D9AA42 100%) !important;
+  color: #07142B !important;
+  border-color: #F5D77F !important;
+  box-shadow: 0 6px 18px rgba(217,170,66,0.35);
+}
+.brand-card-v1 {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background: linear-gradient(145deg, #0e2448 0%, #0a1a35 100%);
+  border: 1px solid rgba(245,215,127,0.22);
+  border-radius: 24px;
+  padding: 24px;
+  color: #ffffff;
+  transition: all 0.25s ease;
+  box-shadow: 0 12px 30px rgba(0,0,0,0.25);
+  position: relative;
+}
+.brand-card-v1:hover {
+  transform: translateY(-4px);
+  border-color: rgba(245,215,127,0.7);
+  box-shadow: 0 18px 40px rgba(0,0,0,0.4), 0 0 25px rgba(217,170,66,0.25);
+}
+.plan-pricing-card {
+  background: linear-gradient(145deg, #0d2244 0%, #09172e 100%);
+  border: 1px solid rgba(245,215,127,0.25);
+  border-radius: 24px;
+  padding: 28px;
+  transition: all 0.25s ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.plan-pricing-card.featured {
+  border: 2px solid #F5D77F;
+  box-shadow: 0 0 35px rgba(217,170,66,0.25);
+  transform: scale(1.02);
+}
+</style>
+</head>
+<body data-page="marcas" class="bg-navy-950 text-white min-h-screen flex flex-col font-sans">
+<div id="site-header"></div>
+
+<!-- HERO DA VITRINE DE MARCAS -->
+<section class="relative overflow-hidden py-16 md:py-24 px-4 sm:px-6 text-center border-b border-white/10" style="background: radial-gradient(circle at 50% 10%, #1e3a5e 0%, #081426 65%, #050b15 100%);">
+  <div class="absolute inset-0 dot-grid opacity-35 pointer-events-none"></div>
+  <div class="max-w-4xl mx-auto relative z-10">
+    <div class="inline-flex items-center gap-2 bg-amber-400/10 border border-amber-400/30 px-4 py-1.5 rounded-full text-xs font-extrabold text-amber-400 mb-5">
+      <span>🏢</span> Vitrine Oficial de Grandes Marcas do Brasil
+    </div>
+    <h1 class="font-display text-3xl sm:text-5xl md:text-6xl font-extrabold text-chrome leading-[1.12]">
+      Onde as grandes marcas se destacam para todo o Brasil.
+    </h1>
+    <p class="text-silver-300 text-base sm:text-lg md:text-xl mt-4 max-w-2xl mx-auto leading-relaxed">
+      Conecte sua marca a milhões de consumidores, turistas e empresas. Visibilidade premium com presença na Home Nacional e link direto para o seu site e WhatsApp.
+    </p>
+    <div class="mt-8 flex flex-col sm:flex-row gap-3.5 justify-center">
+      <a href="#planos-marcas" class="btn-shine inline-flex items-center justify-center gap-2 bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 text-navy-950 px-7 py-3.5 rounded-xl font-extrabold text-sm shadow-lg transition transform hover:-translate-y-0.5">
+        <span>🚀</span> Cadastrar Minha Marca na Vitrine
+      </a>
+      <a href="#vitrine" class="btn-shine glass inline-flex items-center justify-center gap-2 text-white px-7 py-3.5 rounded-xl font-bold text-sm transition">
+        <span>🔎</span> Explorar Marcas
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- MAIN CONTENT -->
+<main class="flex-1 max-w-7xl mx-auto px-4 sm:px-6 w-full py-12" id="vitrine">
+  
+  <!-- BARRA DE FILTROS POR SEGMENTO -->
+  <div class="bg-navy-900/90 backdrop-blur-md rounded-3xl p-6 border border-white/10 shadow-2xl mb-10">
+    <div class="flex flex-col md:flex-row items-center justify-between gap-4">
+      <div class="flex flex-wrap items-center gap-2">
+        <span class="text-xs font-bold uppercase tracking-wider text-silver-400 mr-2">Segmento:</span>
+        <button class="brand-pill-btn active" data-cat="all">
+          <span>🔥</span> Todas as Marcas (<span id="totalBrandsCount">16</span>)
+        </button>
+        <button class="brand-pill-btn" data-cat="moda">
+          <span>👗</span> Moda & Couro
+        </button>
+        <button class="brand-pill-btn" data-cat="gastronomia">
+          <span>🍫</span> Gastronomia & Bebidas
+        </button>
+        <button class="brand-pill-btn" data-cat="turismo">
+          <span>🏨</span> Resorts & Turismo
+        </button>
+        <button class="brand-pill-btn" data-cat="agro">
+          <span>🌾</span> Agro & Indústria
+        </button>
+        <button class="brand-pill-btn" data-cat="tecnologia">
+          <span>💻</span> Tecnologia & Inovação
+        </button>
+      </div>
+
+      <div class="relative w-full md:w-72 shrink-0">
+        <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-silver-400 text-sm pointer-events-none">🔍</span>
+        <input type="text" id="brandSearchInput" placeholder="Buscar marca..." class="w-full pl-9 pr-3 py-2.5 bg-navy-950 rounded-xl border border-white/15 outline-none text-white text-xs placeholder:text-silver-400 focus:border-amber-400 transition">
+      </div>
+    </div>
+  </div>
+
+  <!-- GRID DE MARCAS EM DESTAQUE -->
+  <div id="brandsGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+    <div class="col-span-full text-center py-12 text-silver-400">Carregando marcas oficiais...</div>
+  </div>
+
+  <!-- SEÇÃO DE PLANOS PARA MARCAS -->
+  <section id="planos-marcas" class="mt-24 pt-16 border-t border-white/10">
+    <div class="text-center max-w-3xl mx-auto mb-12">
+      <span class="text-amber-400 font-bold uppercase text-xs tracking-widest">Planos Corporativos & Branding</span>
+      <h2 class="font-display text-3xl sm:text-4xl font-extrabold text-white mt-2">Destaque sua marca para o Brasil inteiro</h2>
+      <p class="text-silver-300 text-sm mt-3 leading-relaxed">
+        Exponha sua logomarca no portal nacional da AQUITEM, atraia clientes qualificados e fortaleça o posicionamento da sua empresa sem pagar comissões por venda.
+      </p>
+    </div>
+
+    <div class="grid md:grid-cols-3 gap-6 max-w-6xl mx-auto">
+      
+      <!-- PLANO 1: MARCA DESTAQUE -->
+      <div class="plan-pricing-card">
+        <div>
+          <span class="text-xs font-bold text-silver-400 uppercase tracking-wider">Presença Nacional</span>
+          <h3 class="font-display font-extrabold text-2xl text-white mt-1">Marca Destaque</h3>
+          <div class="mt-4 flex items-baseline gap-1">
+            <span class="text-3xl font-extrabold text-amber-400">R$ 99</span>
+            <span class="text-xs text-silver-400">/ mês</span>
+          </div>
+          <p class="text-xs text-silver-300 mt-3 leading-relaxed">Ideal para marcas regionais e fabricantes que desejam presença e autoridade no catálogo oficial.</p>
+          
+          <ul class="mt-6 space-y-3 text-xs text-silver-200">
+            <li class="flex items-center gap-2"><span class="text-emerald-400">✓</span> Logomarca em alta resolução na vitrine</li>
+            <li class="flex items-center gap-2"><span class="text-emerald-400">✓</span> Link direto para seu site oficial (DoFollow)</li>
+            <li class="flex items-center gap-2"><span class="text-emerald-400">✓</span> Botão direto para o WhatsApp de vendas</li>
+            <li class="flex items-center gap-2"><span class="text-emerald-400">✓</span> Selo de ✦ Marca Oficial Verificada</li>
+          </ul>
+        </div>
+
+        <a href="https://mpago.la/25UHZqr" target="_blank" rel="noopener" class="btn-shine w-full text-center mt-8 bg-white/10 hover:bg-white/20 text-white font-bold py-3.5 rounded-xl text-xs transition border border-white/20">
+          Assinar Plano Destaque →
+        </a>
+      </div>
+
+      <!-- PLANO 2: MARCA MASTER (HOME) -->
+      <div class="plan-pricing-card featured">
+        <div>
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-bold text-amber-400 uppercase tracking-wider">Mais Popular ⭐</span>
+            <span class="text-[10px] font-extrabold bg-amber-400 text-navy-950 px-2 py-0.5 rounded-full">Carrossel Home</span>
+          </div>
+          <h3 class="font-display font-extrabold text-2xl text-white mt-1">Marca Master</h3>
+          <div class="mt-4 flex items-baseline gap-1">
+            <span class="text-4xl font-extrabold text-amber-400">R$ 199</span>
+            <span class="text-xs text-silver-400">/ mês</span>
+          </div>
+          <p class="text-xs text-silver-200 mt-3 leading-relaxed">Máxima exposição com sua logomarca no Carrossel da Home Principal acessado por milhares de visitantes diários.</p>
+          
+          <ul class="mt-6 space-y-3 text-xs text-silver-200">
+            <li class="flex items-center gap-2"><span class="text-amber-400 font-bold">★</span> <b>Logo no Carrossel da Home Nacional</b></li>
+            <li class="flex items-center gap-2"><span class="text-emerald-400">✓</span> Tudo do plano Marca Destaque</li>
+            <li class="flex items-center gap-2"><span class="text-emerald-400">✓</span> Posição privilegiada no topo da categoria</li>
+            <li class="flex items-center gap-2"><span class="text-emerald-400">✓</span> Link direto para catálogo e e-commerce</li>
+            <li class="flex items-center gap-2"><span class="text-emerald-400">✓</span> Relatório trimestral de cliques e visualizações</li>
+          </ul>
+        </div>
+
+        <a href="https://mpago.la/2HBxp5v" target="_blank" rel="noopener" class="btn-shine w-full text-center mt-8 bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 text-navy-950 font-extrabold py-3.5 rounded-xl text-xs shadow-lg transition">
+          Assinar Plano Master (Home) →
+        </a>
+      </div>
+
+      <!-- PLANO 3: PATROCINADOR DIAMANTE -->
+      <div class="plan-pricing-card">
+        <div>
+          <span class="text-xs font-bold text-silver-400 uppercase tracking-wider">Exclusividade Total</span>
+          <h3 class="font-display font-extrabold text-2xl text-white mt-1">Patrocinador Diamante</h3>
+          <div class="mt-4 flex items-baseline gap-1">
+            <span class="text-3xl font-extrabold text-amber-400">R$ 349</span>
+            <span class="text-xs text-silver-400">/ mês</span>
+          </div>
+          <p class="text-xs text-silver-300 mt-3 leading-relaxed">Presença em grande estilo na Home, no topo da Vitrine de Marcas e nos guias de cidades estratégicas.</p>
+          
+          <ul class="mt-6 space-y-3 text-xs text-silver-200">
+            <li class="flex items-center gap-2"><span class="text-amber-400 font-bold">★</span> <b>Destaque Fixo no Topo do Portal</b></li>
+            <li class="flex items-center gap-2"><span class="text-emerald-400">✓</span> Presença no Carrossel da Home Nacional</li>
+            <li class="flex items-center gap-2"><span class="text-emerald-400">✓</span> Exibição nos guias de cidades do seu estado</li>
+            <li class="flex items-center gap-2"><span class="text-emerald-400">✓</span> Banner institucional e suporte prioritário</li>
+          </ul>
+        </div>
+
+        <a href="https://mpago.la/2HBxp5v" target="_blank" rel="noopener" class="btn-shine w-full text-center mt-8 bg-white/10 hover:bg-white/20 text-white font-bold py-3.5 rounded-xl text-xs transition border border-white/20">
+          Assinar Patrocinador Diamante →
+        </a>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<div id="site-footer"></div>
+
+<!-- MOTOR JS DE MARCAS -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  var grid = document.getElementById('brandsGrid');
+  var pillBtns = document.querySelectorAll('.brand-pill-btn');
+  var searchInp = document.getElementById('brandSearchInput');
+  var totalCount = document.getElementById('totalBrandsCount');
+
+  var allBrands = [];
+  var currentCat = 'all';
+  var searchQuery = '';
+
+  function renderBrands() {
+    var filtered = allBrands.slice();
+
+    if (currentCat !== 'all') {
+      filtered = filtered.filter(function(b) {
+        return b.categoria === currentCat;
+      });
+    }
+
+    if (searchQuery) {
+      filtered = filtered.filter(function(b) {
+        var str = [b.nome, b.descricao_curta, b.cidade, b.uf, b.categoria].filter(Boolean).join(' ').toLowerCase();
+        return str.indexOf(searchQuery) !== -1;
+      });
+    }
+
+    if (totalCount) totalCount.textContent = allBrands.length;
+
+    if (!filtered.length) {
+      grid.innerHTML = '<div class="col-span-full bg-navy-900 rounded-3xl p-12 text-center border border-white/10"><div class="text-5xl mb-3">🏢</div><h3 class="font-display font-bold text-xl text-white">Nenhuma marca encontrada nesta categoria</h3><p class="text-silver-400 text-sm mt-2">Deseja cadastrar sua marca para aparecer aqui? Cadastre agora mesmo!</p><a href="#planos-marcas" class="btn-shine inline-block mt-5 bg-amber-400 hover:bg-amber-300 text-navy-950 font-extrabold px-6 py-3 rounded-xl text-xs">🚀 Cadastrar Minha Marca</a></div>';
+      return;
+    }
+
+    grid.innerHTML = filtered.map(function(b) {
+      var logoHtml = b.logo_url
+        ? '<img src="' + b.logo_url + '" alt="Logo ' + b.nome + '" class="w-14 h-14 rounded-2xl object-cover border border-white/15">'
+        : '<div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-amber-400 to-amber-600 text-navy-950 font-display font-extrabold text-xl grid place-items-center shadow-lg">' + b.nome.slice(0, 2).toUpperCase() + '</div>';
+
+      var badgePlano = (b.plano === 'diamante' || b.plano === 'master')
+        ? '<span class="text-[10px] font-extrabold text-amber-950 bg-amber-400 px-2.5 py-0.5 rounded-full flex items-center gap-1 shadow-sm">✦ Oficial</span>'
+        : '';
+
+      var siteBtn = b.site_url
+        ? '<a href="' + b.site_url + '" target="_blank" rel="noopener" class="text-xs font-bold text-amber-400 hover:underline flex items-center gap-1">Visitar Site ↗</a>'
+        : '<span class="text-xs text-silver-400">Marca Verificada</span>';
+
+      var waBtn = b.whatsapp
+        ? '<a href="https://wa.me/' + b.whatsapp.replace(/\\D/g, '') + '?text=' + encodeURIComponent('Olá! Vi a ' + b.nome + ' na Vitrine Nacional de Marcas da AQUITEM e gostaria de atendimento.') + '" target="_blank" rel="noopener" class="text-xs font-bold text-white bg-[#25D366] hover:bg-[#20bd5a] px-3 py-1.5 rounded-xl transition flex items-center gap-1">💬 WhatsApp</a>'
+        : '';
+
+      return '<div class="brand-card-v1">' +
+        '<div>' +
+          '<div class="flex items-start justify-between gap-3 mb-4">' +
+            logoHtml +
+            badgePlano +
+          '</div>' +
+          '<h3 class="font-display font-extrabold text-xl text-white">' + b.nome + '</h3>' +
+          '<div class="text-[11px] text-silver-400 font-semibold mt-1">📍 ' + (b.cidade ? b.cidade + '/' + b.uf : 'Brasil') + ' · <span class="capitalize text-amber-400/80">' + b.categoria + '</span></div>' +
+          '<p class="text-xs text-silver-300 mt-3 line-clamp-3 leading-relaxed">' + (b.descricao_curta || 'Marca consolidada no mercado nacional.') + '</p>' +
+        '</div>' +
+        '<div class="mt-6 pt-4 border-t border-white/10 flex items-center justify-between gap-2">' +
+          siteBtn +
+          waBtn +
+        '</div>' +
+      '</div>';
+    }).join('');
+  }
+
+  // Fetch Brands from Supabase
+  fetch('https://efvuzxdhsirpvxclgdfg.supabase.co/rest/v1/brands?status=eq.ativo&order=ordem.asc,criado_em.desc', {
+    headers: {
+      apikey: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVmdnV6eGRoc2lycHZ4Y2xnZGZnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODU1MDM1OTEsImV4cCI6MjEwMTA3OTU5MX0.nPVBBKO_W9-tAccFRv7ajnllxTXvkqbsVsYecDqyeQc',
+      Authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVmdnV6eGRoc2lycHZ4Y2xnZGZnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODU1MDM1OTEsImV4cCI6MjEwMTA3OTU5MX0.nPVBBKO_W9-tAccFRv7ajnllxTXvkqbsVsYecDqyeQc'
+    }
+  }).then(function(r){ return r.json(); }).then(function(brands) {
+    allBrands = brands || [];
+    renderBrands();
+  }).catch(function(err) {
+    console.error('Error loading brands:', err);
+    grid.innerHTML = '<div class="col-span-full text-center py-12 text-silver-400">Erro ao carregar vitrine de marcas.</div>';
+  });
+
+  pillBtns.forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      pillBtns.forEach(function(b){ b.classList.remove('active'); });
+      btn.classList.add('active');
+      currentCat = btn.getAttribute('data-cat') || 'all';
+      renderBrands();
+    });
+  });
+
+  if (searchInp) {
+    searchInp.addEventListener('input', function() {
+      searchQuery = (searchInp.value || '').trim().toLowerCase();
+      renderBrands();
+    });
+  }
+});
+</script>
+
+<a href="https://t.me/ofertasbrasilz" target="_blank" rel="noopener" class="aquitem-telegram-float" aria-label="Entrar no grupo Ofertas Brasil no Telegram">
+  <svg viewBox="0 0 24 24" fill="#229ED9" xmlns="http://www.w3.org/2000/svg">
+    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 0 0-.05-.18c-.06-.05-.15-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.41-1.08.4-.36 0-1.04-.2-1.55-.37-.63-.2-1.12-.31-1.08-.66.02-.18.27-.36.74-.55 2.92-1.27 4.86-2.11 5.83-2.51 2.78-1.16 3.35-1.36 3.73-1.36.08 0 .27.02.39.12.1.08.13.19.14.27-.01.06.01.24 0 .38z"/>
+  </svg>
+  <span>🎁 Ofertas Brasil <span class="hide-mobile">no Telegram</span></span>
+  <span class="aquitem-telegram-badge">AO VIVO</span>
+</a>
+
+<script src="assets/app.js"></script>
+</body>
+</html>

@@ -157,7 +157,7 @@
   }
 
   var sub = parseSub();
-  if ((sub === "classificados" || sub === "nacional") && (location.pathname === "/" || location.pathname === "/index.html")) {
+  if ((sub === "marcas") && (location.pathname === "/" || location.pathname === "/index.html")) { location.replace("/marcas.html"); } else if ((sub === "classificados" || sub === "nacional") && (location.pathname === "/" || location.pathname === "/index.html")) {
     location.replace("/classificados.html");
   } else if (sub === "barretos" && (location.pathname === "/" || location.pathname === "/index.html")) {
     location.replace("/barretos-home.html");
@@ -686,7 +686,8 @@
 
     var it = [
       { k: 'home', l: 'Início', h: 'index.html' },
-      { k: 'cidades', l: '🌎 29 Cidades', h: 'cidades.html' },
+      { k: 'cidades', l: '🌎 Cidades', h: 'cidades.html' },
+      { k: 'marcas', l: '🏢 Marcas', h: 'marcas.html' },
       { k: 'classificados', l: '📋 Classificados', h: 'classificados.html' },
       { k: 'vagas', l: '💼 Vagas', h: 'vagas.html' },
       { k: 'categoria', l: 'Categorias', h: 'categoria.html' },
@@ -734,7 +735,7 @@
     var footerDesc = isNational
       ? 'Empresas, experiências, vagas e achadinhos nas principais cidades e polos turísticos do <b>Brasil</b>.'
       : ('Empresas, experiências e achadinhos locais para quem mora, visita ou empreende em <b>' + esc(city) + '</b>.');
-    var explore = '<a href="cidades.html" class="hover:text-white">Todas as 29 cidades</a><a href="vagas.html" class="hover:text-white">Vagas de emprego</a><a href="classificados.html" class="hover:text-white">Classificados</a><a href="categoria.html" class="hover:text-white">Categorias</a><a href="ofertas.html" class="hover:text-white">Ofertas</a>';
+    var explore = '<a href="cidades.html" class="hover:text-white">Todas as cidades</a><a href="marcas.html" class="hover:text-white">Vitrine de Marcas</a><a href="vagas.html" class="hover:text-white">Vagas de emprego</a><a href="classificados.html" class="hover:text-white">Classificados</a><a href="categoria.html" class="hover:text-white">Categorias</a><a href="ofertas.html" class="hover:text-white">Ofertas</a>';
     var legal = '<a href="sobre.html" class="hover:text-white">Sobre</a><a href="contato.html" class="hover:text-white">Contato</a><a href="faq.html" class="hover:text-white">Ajuda</a><a href="politica-de-privacidade.html" class="hover:text-white">Privacidade</a><a href="termos.html" class="hover:text-white">Termos</a><a href="politica-de-ofertas.html" class="hover:text-white">Política de ofertas</a>' + (isBarretos ? '<a href="guia-peao.html" class="hover:text-white">Festa do Peão</a>' : '');
     var footerLocBadge = isNational ? 'Brasil' : (esc(city) + '/' + esc(currentCityUF()));
 

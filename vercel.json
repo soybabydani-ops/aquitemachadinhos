@@ -1032,6 +1032,11 @@
       "source": "/guia-guaira",
       "destination": "/guaira-home",
       "permanent": false
+    },
+    {
+      "source": "/marcas",
+      "destination": "/marcas.html",
+      "permanent": false
     }
   ],
   "headers": [
@@ -2455,6 +2460,36 @@
         }
       ],
       "destination": "/guaira-home.html"
+    },
+    {
+      "source": "/assets/(.*)",
+      "has": [
+        {
+          "type": "host",
+          "value": "marcas.aquitemachadinhos.com.br"
+        }
+      ],
+      "destination": "/assets/$1"
+    },
+    {
+      "source": "/",
+      "has": [
+        {
+          "type": "host",
+          "value": "marcas.aquitemachadinhos.com.br"
+        }
+      ],
+      "destination": "/marcas.html"
+    },
+    {
+      "source": "/(.*)",
+      "has": [
+        {
+          "type": "host",
+          "value": "marcas.aquitemachadinhos.com.br"
+        }
+      ],
+      "destination": "/$1"
     }
   ]
 }
