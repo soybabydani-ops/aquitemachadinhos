@@ -781,6 +781,7 @@
     '</footer>';
   }
   function injectLayout() {
+    initCityAutocomplete();
     var h = $('#site-header'); if (h) h.innerHTML = headerHTML(document.body.dataset.page || 'home');
     var f = $('#site-footer'); if (f) f.innerHTML = footerHTML();
     var b = $('#menuBtn'), m = $('#mobileMenu');
@@ -800,6 +801,74 @@
       tg.innerHTML = '<svg viewBox="0 0 24 24" fill="#229ED9" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 0 0-.05-.18c-.06-.05-.15-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.41-1.08.4-.36 0-1.04-.2-1.55-.37-.63-.2-1.12-.31-1.08-.66.02-.18.27-.36.74-.55 2.92-1.27 4.86-2.11 5.83-2.51 2.78-1.16 3.35-1.36 3.73-1.36.08 0 .27.02.39.12.1.08.13.19.14.27-.01.06.01.24 0 .38z"/></svg><span>🎁 Ofertas Brasil <span class="hide-mobile">no Telegram</span></span><span class="aquitem-telegram-badge">AO VIVO</span>';
       document.body.appendChild(tg);
     }
+  }
+
+  
+  /* === ENGINE AUTOCOMPLETE INTELIGENTE MULTI-CIDADE (AQUITEM BRASIL) === */
+  function initCityAutocomplete() {
+    var searchInputs = document.querySelectorAll('#citySearchInput, #heroCitySearch, #q, input[name=q], #classSearchInput, #vagasSearchInput');
+    if (!searchInputs.length) return;
+
+    var cityList = Object.keys(CITY_NAMES).filter(function(k){ return k !== 'nacional'; }).map(function(k){
+      var name = CITY_NAMES[k];
+      var uf = CITY_UFS[k] || 'BR';
+      return { slug: k, name: name, uf: uf, url: k === 'barretos' ? 'barretos-home.html' : (k + '-home.html') };
+    });
+
+    searchInputs.forEach(function(inp) {
+      if (inp.getAttribute('data-has-autocomplete')) return;
+      inp.setAttribute('data-has-autocomplete', 'true');
+
+      var wrapper = inp.parentElement;
+      if (!wrapper) return;
+      if (getComputedStyle(wrapper).position === 'static') {
+        wrapper.style.position = 'relative';
+      }
+
+      var drop = document.createElement('div');
+      drop.className = 'aquitem-autocomplete-box hidden';
+      drop.style.cssText = 'position:absolute;top:100%;left:0;right:0;margin-top:6px;background:#0B1E3F;border:1px solid rgba(245,215,127,0.3);border-radius:16px;box-shadow:0 18px 40px rgba(0,0,0,0.5);z-index:99999;max-height:280px;overflow-y:auto;padding:6px;backdrop-blur:10px;';
+      wrapper.appendChild(drop);
+
+      inp.addEventListener('input', function() {
+        var q = (inp.value || '').toLowerCase().trim();
+        if (q.length < 2) {
+          drop.classList.add('hidden');
+          drop.innerHTML = '';
+          return;
+        }
+
+        var matches = cityList.filter(function(c) {
+          return c.name.toLowerCase().indexOf(q) !== -1 || c.slug.toLowerCase().indexOf(q) !== -1 || c.uf.toLowerCase() === q;
+        }).slice(0, 8);
+
+        if (!matches.length) {
+          drop.classList.add('hidden');
+          drop.innerHTML = '';
+          return;
+        }
+
+        var html = matches.map(function(c) {
+          return '<a href="' + c.url + '" class="flex items-center justify-between p-3 rounded-xl hover:bg-white/10 text-white transition text-xs font-semibold" style="text-decoration:none;">' +
+            '<div class="flex items-center gap-2.5">' +
+              '<span class="text-base">📍</span>' +
+              '<span>' + esc(c.name) + '</span>' +
+              '<span class="text-[10px] font-extrabold text-amber-400 bg-amber-400/10 px-2 py-0.5 rounded-full">' + esc(c.uf) + '</span>' +
+            '</div>' +
+            '<span class="text-silver-400 text-[11px]">Ver guia →</span>' +
+          '</a>';
+        }).join('');
+
+        drop.innerHTML = html;
+        drop.classList.remove('hidden');
+      });
+
+      document.addEventListener('click', function(e) {
+        if (!wrapper.contains(e.target)) {
+          drop.classList.add('hidden');
+        }
+      });
+    });
   }
 
   /* CITY PARALLAX — leve, progressivo e desligável */
