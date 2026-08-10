@@ -55,7 +55,7 @@
 })();
 /* === FIM BOTAO CTA === */
 
-/* === MOTOR MULTI-CIDADE (Aqui Tem) — v4 EXTERNO (compatível CSP) === */
+/* === MOTOR MULTI-CIDADE (Aqui Tem) — v5 === */
 (function () {
   var CIDADES = {
     "www": ["Brasil","BR"],
@@ -86,41 +86,9 @@
     location.replace("/" + sub + "-home.html");
   }
   var par = CIDADES[sub] || CIDADES["www"];
-  var CIDADE = par[0], UF = par[1], CIDUP = CIDADE.toUpperCase();
-  document.documentElement.setAttribute('data-aquitem-city', sub === 'www' ? 'barretos' : sub);
-  window.CIDADE = { nome: CIDADE, uf: UF, slug: (sub === 'www' ? 'barretos' : sub) };
-  function temCidade(s) { return s && (s.indexOf("Barretos") !== -1 || s.indexOf("BARRETOS") !== -1 || s.indexOf("barretos") !== -1); }
-  function trocaTexto(s) {
-    return s.split("BARRETOS/SP").join(CIDUP + "/" + UF)
-            .split("BARRETOS").join(CIDUP)
-            .split("Barretos/SP").join(CIDADE + "/" + UF)
-            .split("Barretos, SP").join(CIDADE + ", " + UF)
-            .split("Barretos · SP").join(CIDADE + " · " + UF)
-            .split("Barretos").join(CIDADE)
-            .split("barretos").join(CIDADE.toLowerCase());
-  }
-  function percorre(no) {
-    if (no.nodeType === 3) {
-      if (temCidade(no.nodeValue)) no.nodeValue = trocaTexto(no.nodeValue);
-    } else if (no.nodeType === 1 && no.tagName !== "SCRIPT" && no.tagName !== "STYLE") {
-      var f = no.childNodes, i;
-      for (i = 0; i < f.length; i++) percorre(f[i]);
-    }
-  }
-  var rodando = false;
-  function aplicar() {
-    if (rodando) return; rodando = true;
-    try {
-      if (document.body) percorre(document.body);
-      if (temCidade(document.title)) document.title = trocaTexto(document.title);
-      var dbg = document.getElementById("__dbg"); if (dbg) dbg.remove();
-    } catch (e) {} rodando = false;
-  }
-  if (document.body) aplicar();
-  document.addEventListener("DOMContentLoaded", aplicar);
-  window.addEventListener("load", aplicar);
-  setTimeout(aplicar, 150); setTimeout(aplicar, 600); setTimeout(aplicar, 1500);
-  setTimeout(aplicar, 3000);
+  var CIDADE = par[0], UF = par[1];
+  document.documentElement.setAttribute('data-aquitem-city', sub);
+  window.CIDADE = { nome: CIDADE, uf: UF, slug: sub };
 })();
 /* === FIM MOTOR MULTI-CIDADE === */
 
@@ -474,8 +442,10 @@
     var category = catName(s.categoria, cats);
     var rating = Number(s.rating_count || 0) > 0 ? '<span class="text-[11px] text-amber-600 font-semibold">' + ratingMini(s) + '</span>' : '';
     var badge = s.city_lead_id ? '<span class="aquitem-store-badge">✦ Fundadora</span>' : (s.destaque ? '<span class="aquitem-store-badge">✦ Em destaque</span>' : '');
-    var local = s.bairro ? '📍 ' + esc(s.bairro) : (s.cidade ? '📍 ' + esc(s.cidade) : '');
-    return '<a href="loja.html?id=' + encodeURIComponent(s.id) + '" class="aquitem-store-card"><div class="aquitem-store-head">' + logo + '<div class="min-w-0 flex-1"><h3 class="font-display font-bold text-base leading-snug">' + esc(s.nome) + '</h3><div class="aquitem-store-tags"><span>' + esc(category) + '</span>' + badge + '</div>' + (local ? '<p class="text-xs text-slate-500 mt-2 truncate">' + local + '</p>' : '') + (rating ? '<div class="mt-1">' + rating + '</div>' : '') + '</div></div><div class="aquitem-store-arrow">Ver perfil →</div></a>';
+    var uf = CITY_UFS[s.city_slug] || (s.cidade === 'Barretos' ? 'SP' : (s.cidade === 'Gramado' ? 'RS' : (s.cidade === 'Uberlândia' ? 'MG' : (s.cidade === 'Florianópolis' ? 'SC' : (s.cidade === 'Salvador' ? 'BA' : 'SP')))));
+    var cityLabel = s.cidade ? (s.cidade + (uf && uf !== 'BR' ? '/' + uf : '')) : '';
+    var local = [s.bairro, cityLabel].filter(Boolean).join(' · ');
+    return '<a href="loja.html?id=' + encodeURIComponent(s.id) + '" class="aquitem-store-card"><div class="aquitem-store-head">' + logo + '<div class="min-w-0 flex-1"><h3 class="font-display font-bold text-base leading-snug">' + esc(s.nome) + '</h3><div class="aquitem-store-tags"><span>' + esc(category) + '</span>' + badge + '</div>' + (local ? '<p class="text-xs text-slate-500 mt-2 truncate">📍 ' + esc(local) + '</p>' : '') + (rating ? '<div class="mt-1">' + rating + '</div>' : '') + '</div></div><div class="aquitem-store-arrow">Ver perfil →</div></a>';
   }
 
   function offerCard(o) {
@@ -704,7 +674,9 @@
     var logo = s.logo_url ? '<img src="' + esc(s.logo_url) + '" alt="' + esc(s.nome) + '" class="w-20 h-20 rounded-2xl object-cover ring-4 ring-white shadow">' : '<div class="w-20 h-20 rounded-2xl bg-gradient-to-br from-navy-700 to-navy-500 grid place-items-center text-white text-2xl font-extrabold ring-4 ring-white shadow">' + esc(initials(s.nome)) + '</div>';
     var gal = photos.length ? '<div class="mt-6"><h3 class="font-display font-bold mb-3">Fotos</h3><div class="grid grid-cols-3 md:grid-cols-5 gap-3">' + photos.map(function (p) { return '<img src="' + esc(p.url) + '" alt="" class="w-full h-24 md:h-28 object-cover rounded-xl ring-silver" loading="lazy">'; }).join('') + '</div></div>' : '';
     var ofs = offers.length ? '<div class="mt-6"><h3 class="font-display font-bold mb-3">🔥 Ofertas ativas</h3><div class="grid sm:grid-cols-2 gap-3">' + offers.map(function (o) { return '<div class="rounded-2xl bg-silver-50 ring-silver p-4"><p class="font-display font-bold">' + esc(o.titulo) + '</p>' + (o.preco_atual ? '<p class="text-peao-500 font-extrabold">' + esc(o.preco_atual) + '</p>' : '') + (o.termino ? '<p class="text-[11px] text-silver-500">até ' + esc(formatDate(o.termino)) + '</p>' : '') + '</div>'; }).join('') + '</div></div>' : '';
-    var end = (s.endereco || s.bairro) ? '<p>📍 ' + esc([s.endereco, s.bairro, (s.cidade || currentCityName())].filter(Boolean).join(' — ')) + '</p>' : '';
+    var uf = CITY_UFS[s.city_slug] || (s.cidade === 'Barretos' ? 'SP' : (s.cidade === 'Gramado' ? 'RS' : (s.cidade === 'Uberlândia' ? 'MG' : (s.cidade === 'Florianópolis' ? 'SC' : (s.cidade === 'Salvador' ? 'BA' : 'SP')))));
+    var cityLabel = (s.cidade || currentCityName()) + (uf && uf !== 'BR' ? '/' + uf : '') + ' · Brasil';
+    var end = '<p>📍 <b>Local:</b> ' + esc([s.endereco, s.bairro, cityLabel].filter(Boolean).join(' — ')) + '</p>';
     var det = '';
     if (s.faixa_preco) det += '<span class="text-xs bg-silver-50 ring-silver px-2.5 py-1 rounded-full font-semibold">💰 ' + esc(s.faixa_preco) + '</span>';
     if (s.pagamento) det += '<span class="text-xs bg-silver-50 ring-silver px-2.5 py-1 rounded-full">💳 ' + esc(s.pagamento) + '</span>';
@@ -2211,7 +2183,10 @@
 
     var cObj = (cats || CLASSIFIED_CATS).filter(function (x) { return x.id === l.categoria; })[0];
     var catName = cObj ? (cObj.emoji + ' ' + cObj.nome) : '📋 Classificado';
-    var local = [l.bairro, l.cidade || 'Barretos'].filter(Boolean).join(' · ');
+    var isNational = l.categoria === 'vagas-nac-empresa' || l.categoria === 'vagas-nac-candidato' || l.categoria === 'nacionais' || l.city_slug === 'nacional';
+    var uf = CITY_UFS[l.city_slug] || (l.cidade === 'Barretos' ? 'SP' : (l.cidade === 'Gramado' ? 'RS' : (l.cidade === 'Uberlândia' ? 'MG' : (l.cidade === 'Florianópolis' ? 'SC' : (l.cidade === 'Salvador' ? 'BA' : 'SP')))));
+    var cityLabel = (l.cidade || 'Barretos') + (uf && uf !== 'BR' ? '/' + uf : '');
+    var local = isNational ? '🌐 Brasil Todo (Nacional / Remoto)' : ([l.bairro, cityLabel].filter(Boolean).join(' · '));
 
     var waMsg = 'Olá! Vi seu anúncio "' + l.titulo + '" no Aqui Tem Achadinhos e tenho interesse.';
     var wa = 'https://wa.me/' + (digits(l.whatsapp) || CONFIG.whatsapp) + '?text=' + encodeURIComponent(waMsg);
@@ -2622,7 +2597,11 @@
         var preco = l.preco ? '<div class="mt-2 text-sm font-extrabold text-emerald-400 flex items-center gap-1.5"><span>💰</span><span>' + esc(l.preco) + '</span></div>' : '';
         var desc = l.descricao ? '<p class="text-xs text-silver-300 mt-2 line-clamp-3 leading-relaxed">' + esc(l.descricao) + '</p>' : '';
         var anunciante = l.anunciante_nome ? '<span class="font-semibold text-white">' + esc(l.anunciante_nome) + '</span>' : '';
-        var local = [l.bairro, l.cidade || 'Barretos'].filter(Boolean).join(' · ');
+
+        var isNational = l.categoria === 'vagas-nac-empresa' || l.categoria === 'vagas-nac-candidato' || l.categoria === 'nacionais' || l.city_slug === 'nacional';
+        var uf = CITY_UFS[l.city_slug] || (l.cidade === 'Barretos' ? 'SP' : (l.cidade === 'Gramado' ? 'RS' : (l.cidade === 'Uberlândia' ? 'MG' : (l.cidade === 'Florianópolis' ? 'SC' : (l.cidade === 'Salvador' ? 'BA' : 'SP')))));
+        var cityLabel = (l.cidade || 'Barretos') + (uf && uf !== 'BR' ? '/' + uf : '');
+        var local = isNational ? '🌐 Brasil Todo (Remoto)' : ([l.bairro, cityLabel].filter(Boolean).join(' · '));
 
         var btnLabel = isCandidate ? '💬 Entrevistar no WhatsApp' : '💬 Candidatar-se via WhatsApp';
         var btnBg = isCandidate ? 'bg-purple-600 hover:bg-purple-700' : 'bg-peao-500 hover:bg-peao-600';
@@ -2741,12 +2720,19 @@
   }
 
   function listingProfile(l, photos, cats) {
-    var wa = 'https://wa.me/' + (digits(l.whatsapp) || CONFIG.whatsapp) + '?text=' + encodeURIComponent('Olá! Vi seu anúncio "' + l.titulo + '" no Aqui Tem Achadinhos e tenho interesse.');
+    var waMsg = 'Olá! Vi seu anúncio "' + l.titulo + '" no Aqui Tem Achadinhos e tenho interesse.';
+    var wa = 'https://wa.me/' + (digits(l.whatsapp) || CONFIG.whatsapp) + '?text=' + encodeURIComponent(waMsg);
     var capa = l.foto_capa_url ? '<div class="h-48 md:h-64 bg-cover bg-center" style="background-image:url(' + esc(l.foto_capa_url) + ')"></div>' : '<div class="h-48 md:h-64 grid place-items-center text-6xl navy-hero">' + esc(catEmoji(l.categoria, cats)) + '</div>';
     var attrs = l.atributos || {};
     var attrRows = Object.keys(attrs).filter(function (k) { return k !== 'subcategoria'; }).map(function (k) { return '<span class="text-xs bg-silver-50 ring-silver px-2 py-1 rounded"><b>' + esc(k) + ':</b> ' + esc(attrs[k]) + '</span>'; }).join('');
     var gal = photos.length ? '<div class="mt-4 grid grid-cols-3 md:grid-cols-5 gap-3">' + photos.map(function (p) { return '<img src="' + esc(p.url) + '" class="w-full h-24 md:h-28 object-cover rounded-xl ring-silver" loading="lazy">'; }).join('') + '</div>' : '';
-    return '<div class="max-w-4xl mx-auto px-4 sm:px-6 py-6"><a href="javascript:history.back()" class="text-silver-500 text-sm hover:text-navy-700">← Voltar</a><div class="mt-3 bg-white rounded-3xl shadow-soft ring-silver overflow-hidden">' + capa + '<div class="p-6"><div class="flex items-center gap-2 flex-wrap"><span class="text-xs font-semibold text-peao-600 bg-peao-500/10 px-2 py-0.5 rounded">' + esc(catClassified(l.categoria, cats)) + '</span>' + (l.subcategoria ? '<span class="text-xs font-semibold text-navy-700 bg-silver-100 px-2 py-0.5 rounded">' + esc(l.subcategoria) + '</span>' : '') + (l.destaque ? '<span class="text-xs font-semibold text-peao-600 bg-peao-500/10 px-2 py-0.5 rounded">⭐ Destaque</span>' : '') + '</div><h1 class="font-display text-2xl md:text-3xl font-extrabold mt-2">' + esc(l.titulo) + '</h1>' + (l.preco ? '<p class="text-2xl font-extrabold text-peao-500 mt-1">' + esc(l.preco) + '</p>' : '') + (l.descricao ? '<p class="text-slate-700 mt-3 leading-relaxed whitespace-pre-line">' + esc(l.descricao) + '</p>' : '') + (attrRows ? '<div class="mt-4 flex flex-wrap gap-2">' + attrRows + '</div>' : '') + '<div class="mt-4 text-sm text-slate-700 space-y-0.5">' + (l.bairro || l.endereco ? '<p>📍 ' + esc([l.endereco, l.bairro, l.cidade || 'Barretos'].filter(Boolean).join(' — ')) + '</p>' : '') + (l.anunciante_nome ? '<p>👤 ' + esc(l.anunciante_nome) + '</p>' : '') + '</div><div class="mt-5"><a href="' + wa + '" target="_blank" rel="noopener noreferrer" class="btn-shine bg-[#25D366] text-white font-bold px-5 py-3 rounded-xl">💬 Tenho interesse (WhatsApp)</a></div></div></div>' + gal + '<div class="bg-silver-50 ring-silver rounded-xl p-4 mt-4"><p class="text-sm font-semibold text-slate-700">⭐ Quer aparecer no topo?</p><p class="text-xs text-slate-500 mt-1 mb-3">Destaque seu anúncio por <b>R$ 19,90/mês</b>: aparece primeiro nos resultados e ganha o selo ⭐. Ativação automática após o pagamento; cancele quando quiser.</p><input data-email type="email" placeholder="Seu melhor e-mail" class="w-full px-4 py-2.5 rounded-xl text-navy-900 mb-3"><button data-assinar="listing:' + esc(l.id) + ':destaque" class="btn-shine bg-peao-500 hover:bg-peao-600 text-white font-bold text-sm px-4 py-3 rounded-xl w-full">⭐ Impulsionar anúncio — R$ 19,90/mês</button><p class="text-[11px] text-slate-400 mt-2 text-center">Pagamento seguro via Mercado Pago</p></div><a href="' + waLink('Sou o dono do anúncio ' + l.titulo + ' e quero reivindicar (adicionar meu WhatsApp).') + '" target="_blank" rel="noopener noreferrer" class="block text-center text-xs font-semibold text-peao-600 hover:underline mt-2">🙋 Sou o dono — reivindicar anúncio</a><a href="' + waLink('Denúncia sobre o anúncio: ' + l.titulo) + '" target="_blank" rel="noopener noreferrer" class="block mt-4 text-center text-xs text-slate-400 hover:text-peao-600">🚩 Denunciar conteúdo incorreto</a></div>';
+
+    var isNational = l.categoria === 'vagas-nac-empresa' || l.categoria === 'vagas-nac-candidato' || l.categoria === 'nacionais' || l.city_slug === 'nacional';
+    var uf = CITY_UFS[l.city_slug] || (l.cidade === 'Barretos' ? 'SP' : (l.cidade === 'Gramado' ? 'RS' : (l.cidade === 'Uberlândia' ? 'MG' : (l.cidade === 'Florianópolis' ? 'SC' : (l.cidade === 'Salvador' ? 'BA' : 'SP')))));
+    var cityLabel = isNational ? '🌐 Oportunidade Nacional / 100% Remoto (Brasil)' : (esc(l.cidade || 'Barretos') + (uf && uf !== 'BR' ? '/' + uf : '') + ' · Brasil');
+    var locString = [l.endereco, l.bairro, cityLabel].filter(Boolean).join(' — ');
+
+    return '<div class="max-w-4xl mx-auto px-4 sm:px-6 py-6"><a href="javascript:history.back()" class="text-silver-500 text-sm hover:text-navy-700">← Voltar</a><div class="mt-3 bg-white rounded-3xl shadow-soft ring-silver overflow-hidden">' + capa + '<div class="p-6"><div class="flex items-center gap-2 flex-wrap"><span class="text-xs font-semibold text-peao-600 bg-peao-500/10 px-2 py-0.5 rounded">' + esc(catClassified(l.categoria, cats)) + '</span>' + (l.subcategoria ? '<span class="text-xs font-semibold text-navy-700 bg-silver-100 px-2 py-0.5 rounded">' + esc(l.subcategoria) + '</span>' : '') + (l.destaque ? '<span class="text-xs font-semibold text-peao-600 bg-peao-500/10 px-2 py-0.5 rounded">⭐ Destaque</span>' : '') + '</div><h1 class="font-display text-2xl md:text-3xl font-extrabold mt-2">' + esc(l.titulo) + '</h1>' + (l.preco ? '<p class="text-2xl font-extrabold text-peao-500 mt-1">' + esc(l.preco) + '</p>' : '') + (l.descricao ? '<p class="text-slate-700 mt-3 leading-relaxed whitespace-pre-line">' + esc(l.descricao) + '</p>' : '') + (attrRows ? '<div class="mt-4 flex flex-wrap gap-2">' + attrRows + '</div>' : '') + '<div class="mt-4 text-sm text-slate-700 space-y-1"><p>📍 <b>Local:</b> ' + locString + '</p>' + (l.anunciante_nome ? '<p>👤 <b>Anunciante:</b> ' + esc(l.anunciante_nome) + '</p>' : '') + '</div><div class="mt-5"><a href="' + wa + '" target="_blank" rel="noopener noreferrer" class="btn-shine bg-[#25D366] text-white font-bold px-5 py-3 rounded-xl">💬 Tenho interesse (WhatsApp)</a></div></div></div>' + gal + '<div class="bg-silver-50 ring-silver rounded-xl p-4 mt-4"><p class="text-sm font-semibold text-slate-700">⭐ Quer aparecer no topo?</p><p class="text-xs text-slate-500 mt-1 mb-3">Destaque seu anúncio por <b>R$ 19,90/mês</b>: aparece primeiro nos resultados e ganha o selo ⭐. Ativação automática após o pagamento; cancele quando quiser.</p><input data-email type="email" placeholder="Seu melhor e-mail" class="w-full px-4 py-2.5 rounded-xl text-navy-900 mb-3"><button data-assinar="listing:' + esc(l.id) + ':destaque" class="btn-shine bg-peao-500 hover:bg-peao-600 text-white font-bold text-sm px-4 py-3 rounded-xl w-full">⭐ Impulsionar anúncio — R$ 19,90/mês</button><p class="text-[11px] text-slate-400 mt-2 text-center">Pagamento seguro via Mercado Pago</p></div><a href="' + waLink('Sou o dono do anúncio ' + l.titulo + ' e quero reivindicar (adicionar meu WhatsApp).') + '" target="_blank" rel="noopener noreferrer" class="block text-center text-xs font-semibold text-peao-600 hover:underline mt-2">🙋 Sou o dono — reivindicar anúncio</a><a href="' + waLink('Denúncia sobre o anúncio: ' + l.titulo) + '" target="_blank" rel="noopener noreferrer" class="block mt-4 text-center text-xs text-slate-400 hover:text-peao-600">🚩 Denunciar conteúdo incorreto</a></div>';
   }
 
   function pageAnuncio() {
@@ -2757,8 +2743,10 @@
       Classifieds.photos(l.id).then(function (photos) {
         el.innerHTML = listingProfile(l, photos, CLASSIFIED_CATS);
         wireAssinar();
-        document.title = l.titulo + ' — Barretos · Aqui Tem Achadinhos';
-        setMeta('description', (l.descricao_curta || l.titulo) + ' — ' + catClassified(l.categoria) + ' em Barretos.');
+        var uf = CITY_UFS[l.city_slug] || (l.cidade === 'Barretos' ? 'SP' : (l.cidade === 'Gramado' ? 'RS' : 'SP'));
+        var cityTitle = (l.cidade || 'Barretos') + (uf && uf !== 'BR' ? '/' + uf : '');
+        document.title = l.titulo + ' — ' + cityTitle + ' · Aqui Tem Achadinhos';
+        setMeta('description', (l.descricao_curta || l.titulo) + ' — ' + catClassified(l.categoria) + ' em ' + cityTitle + '.');
       });
     });
   }
@@ -2851,14 +2839,21 @@
     var box = $('#socialProof'); if (!box) return;
     var slug = currentCitySlug(), city = currentCityName(), uf = currentCityUF();
     function cnt(p) { return fetch(B(p), { headers: H({ Prefer: 'count=exact' }) }).then(function (r) { var cr = (r.headers.get('content-range') || '').split('/'); return parseInt(cr[1], 10) || 0; }).catch(function () { return 0; }); }
-    var cityText = encodeURIComponent(city);
-    Promise.all([cnt('stores?select=id&status=eq.ativo&city_slug=eq.' + encodeURIComponent(slug)), cnt('listings?select=id&status=eq.ativo&cidade=ilike.' + cityText), cnt('drivers?select=id&status=eq.ativo&city_slug=eq.' + encodeURIComponent(slug))]).then(function (r) {
-      var stats = [['🏢', r[0], 'empresas em ' + city], ['🏠', r[1], 'anúncios em ' + city], ['🚗', r[2], 'motoristas em ' + city]].filter(function (x) { return x[1] > 0; });
+
+    var isNacional = slug === 'nacional' || slug === 'www' || city === 'Brasil';
+    var pStores = isNacional ? 'stores?select=id&status=eq.ativo' : ('stores?select=id&status=eq.ativo&city_slug=eq.' + encodeURIComponent(slug));
+    var pListings = isNacional ? 'listings?select=id&status=eq.ativo' : ('listings?select=id&status=eq.ativo&or=(city_slug.eq.' + encodeURIComponent(slug) + ',cidade.ilike.*' + encodeURIComponent(city) + '*)');
+    var pDrivers = isNacional ? 'drivers?select=id&status=eq.ativo' : ('drivers?select=id&status=eq.ativo&city_slug=eq.' + encodeURIComponent(slug));
+
+    Promise.all([cnt(pStores), cnt(pListings), cnt(pDrivers)]).then(function (r) {
+      var labelCity = isNacional ? 'no Brasil' : ('em ' + city + (uf && uf !== 'BR' ? '/' + uf : ''));
+      var stats = [['🏢', r[0], 'empresas ' + labelCity], ['🏷️', r[1], 'anúncios e vagas ' + labelCity], ['🚗', r[2], 'motoristas conectados']].filter(function (x) { return x[1] > 0; });
       var total = r[0] + r[1] + r[2];
       var grid = stats.map(function (x) { return '<div><div class="text-3xl">' + x[0] + '</div><div class="font-display text-2xl md:text-3xl font-extrabold text-chrome">' + x[1] + '</div><div class="text-xs text-silver-400 mt-0.5">' + esc(x[2]) + '</div></div>'; }).join('');
       var cols = stats.length >= 3 ? 'grid-cols-3' : (stats.length === 2 ? 'grid-cols-2' : 'grid-cols-1');
       var register = cityRegistrationUrl();
-      box.innerHTML = total > 0 ? '<div class="max-w-5xl mx-auto px-4 py-8"><div class="grid ' + cols + ' gap-5 text-center">' + grid + '</div><p class="text-center text-xs text-silver-500 mt-5">✦ Números reais, ao vivo · ' + esc(city) + '/' + esc(uf) + '</p></div>' : '<div class="max-w-5xl mx-auto px-4 py-8 text-center text-silver-400 text-sm">Conectando ' + esc(city) + ' — <a href="' + register + '" class="text-peao-400 font-semibold underline">cadastre sua empresa</a></div>';
+      var caption = isNacional ? '✦ Números reais, ao vivo · Brasil' : ('✦ Números reais, ao vivo · ' + esc(city) + '/' + esc(uf));
+      box.innerHTML = total > 0 ? '<div class="max-w-5xl mx-auto px-4 py-8"><div class="grid ' + cols + ' gap-5 text-center">' + grid + '</div><p class="text-center text-xs text-silver-500 mt-5">' + caption + '</p></div>' : '<div class="max-w-5xl mx-auto px-4 py-8 text-center text-silver-400 text-sm">Conectando ' + (isNacional ? 'o Brasil' : esc(city)) + ' — <a href="' + register + '" class="text-peao-400 font-semibold underline">cadastre sua empresa</a></div>';
     });
   }
 
