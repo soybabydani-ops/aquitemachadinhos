@@ -217,6 +217,231 @@
       "source": "/guia-caldasnovas",
       "destination": "/caldasnovas-home",
       "permanent": false
+    },
+    {
+      "source": "/manaus",
+      "destination": "/manaus-home",
+      "permanent": false
+    },
+    {
+      "source": "/guia-manaus",
+      "destination": "/manaus-home",
+      "permanent": false
+    },
+    {
+      "source": "/curitiba",
+      "destination": "/curitiba-home",
+      "permanent": false
+    },
+    {
+      "source": "/guia-curitiba",
+      "destination": "/curitiba-home",
+      "permanent": false
+    },
+    {
+      "source": "/foz",
+      "destination": "/foz-do-iguacu-home",
+      "permanent": false
+    },
+    {
+      "source": "/foz-do-iguacu",
+      "destination": "/foz-do-iguacu-home",
+      "permanent": false
+    },
+    {
+      "source": "/fozdoiguacu",
+      "destination": "/foz-do-iguacu-home",
+      "permanent": false
+    },
+    {
+      "source": "/cataratas",
+      "destination": "/foz-do-iguacu-home",
+      "permanent": false
+    },
+    {
+      "source": "/guia-foz",
+      "destination": "/foz-do-iguacu-home",
+      "permanent": false
+    },
+    {
+      "source": "/balneario",
+      "destination": "/balneario-camboriu-home",
+      "permanent": false
+    },
+    {
+      "source": "/balneario-camboriu",
+      "destination": "/balneario-camboriu-home",
+      "permanent": false
+    },
+    {
+      "source": "/balneariocamboriu",
+      "destination": "/balneario-camboriu-home",
+      "permanent": false
+    },
+    {
+      "source": "/guia-balneario",
+      "destination": "/balneario-camboriu-home",
+      "permanent": false
+    },
+    {
+      "source": "/fortaleza",
+      "destination": "/fortaleza-home",
+      "permanent": false
+    },
+    {
+      "source": "/guia-fortaleza",
+      "destination": "/fortaleza-home",
+      "permanent": false
+    },
+    {
+      "source": "/natal",
+      "destination": "/natal-home",
+      "permanent": false
+    },
+    {
+      "source": "/guia-natal",
+      "destination": "/natal-home",
+      "permanent": false
+    },
+    {
+      "source": "/noronha",
+      "destination": "/noronha-home",
+      "permanent": false
+    },
+    {
+      "source": "/fernandodenoronha",
+      "destination": "/noronha-home",
+      "permanent": false
+    },
+    {
+      "source": "/guia-noronha",
+      "destination": "/noronha-home",
+      "permanent": false
+    },
+    {
+      "source": "/ouro-preto",
+      "destination": "/ouro-preto-home",
+      "permanent": false
+    },
+    {
+      "source": "/ouropreto",
+      "destination": "/ouro-preto-home",
+      "permanent": false
+    },
+    {
+      "source": "/guia-ouro-preto",
+      "destination": "/ouro-preto-home",
+      "permanent": false
+    },
+    {
+      "source": "/paraty",
+      "destination": "/paraty-home",
+      "permanent": false
+    },
+    {
+      "source": "/guia-paraty",
+      "destination": "/paraty-home",
+      "permanent": false
+    },
+    {
+      "source": "/pirenopolis",
+      "destination": "/pirenopolis-home",
+      "permanent": false
+    },
+    {
+      "source": "/piri",
+      "destination": "/pirenopolis-home",
+      "permanent": false
+    },
+    {
+      "source": "/guia-pirenopolis",
+      "destination": "/pirenopolis-home",
+      "permanent": false
+    },
+    {
+      "source": "/vitoria",
+      "destination": "/vitoria-home",
+      "permanent": false
+    },
+    {
+      "source": "/vitoriaes",
+      "destination": "/vitoria-home",
+      "permanent": false
+    },
+    {
+      "source": "/guia-vitoria",
+      "destination": "/vitoria-home",
+      "permanent": false
+    },
+    {
+      "source": "/campo-grande",
+      "destination": "/campo-grande-home",
+      "permanent": false
+    },
+    {
+      "source": "/campogrande",
+      "destination": "/campo-grande-home",
+      "permanent": false
+    },
+    {
+      "source": "/guia-campo-grande",
+      "destination": "/campo-grande-home",
+      "permanent": false
+    },
+    {
+      "source": "/chapada-guimaraes",
+      "destination": "/chapada-guimaraes-home",
+      "permanent": false
+    },
+    {
+      "source": "/chapadaguimaraes",
+      "destination": "/chapada-guimaraes-home",
+      "permanent": false
+    },
+    {
+      "source": "/guia-chapada",
+      "destination": "/chapada-guimaraes-home",
+      "permanent": false
+    },
+    {
+      "source": "/jalapao",
+      "destination": "/jalapao-home",
+      "permanent": false
+    },
+    {
+      "source": "/guia-jalapao",
+      "destination": "/jalapao-home",
+      "permanent": false
+    },
+    {
+      "source": "/lencois",
+      "destination": "/lencois-home",
+      "permanent": false
+    },
+    {
+      "source": "/chapadadiamantina",
+      "destination": "/lencois-home",
+      "permanent": false
+    },
+    {
+      "source": "/guia-lencois",
+      "destination": "/lencois-home",
+      "permanent": false
+    },
+    {
+      "source": "/alter-do-chao",
+      "destination": "/alter-do-chao-home",
+      "permanent": false
+    },
+    {
+      "source": "/alterdochao",
+      "destination": "/alter-do-chao-home",
+      "permanent": false
+    },
+    {
+      "source": "/guia-alter",
+      "destination": "/alter-do-chao-home",
+      "permanent": false
     }
   ],
   "headers": [
@@ -580,6 +805,366 @@
         }
       ],
       "destination": "/caldasnovas-home.html"
+    },
+    {
+      "source": "/assets/(.*)",
+      "has": [
+        {
+          "type": "host",
+          "value": "manaus.aquitemachadinhos.com.br"
+        }
+      ],
+      "destination": "/assets/$1"
+    },
+    {
+      "source": "/",
+      "has": [
+        {
+          "type": "host",
+          "value": "manaus.aquitemachadinhos.com.br"
+        }
+      ],
+      "destination": "/manaus-home.html"
+    },
+    {
+      "source": "/assets/(.*)",
+      "has": [
+        {
+          "type": "host",
+          "value": "curitiba.aquitemachadinhos.com.br"
+        }
+      ],
+      "destination": "/assets/$1"
+    },
+    {
+      "source": "/",
+      "has": [
+        {
+          "type": "host",
+          "value": "curitiba.aquitemachadinhos.com.br"
+        }
+      ],
+      "destination": "/curitiba-home.html"
+    },
+    {
+      "source": "/assets/(.*)",
+      "has": [
+        {
+          "type": "host",
+          "value": "foz.aquitemachadinhos.com.br"
+        }
+      ],
+      "destination": "/assets/$1"
+    },
+    {
+      "source": "/",
+      "has": [
+        {
+          "type": "host",
+          "value": "foz.aquitemachadinhos.com.br"
+        }
+      ],
+      "destination": "/foz-do-iguacu-home.html"
+    },
+    {
+      "source": "/assets/(.*)",
+      "has": [
+        {
+          "type": "host",
+          "value": "fozdoiguacu.aquitemachadinhos.com.br"
+        }
+      ],
+      "destination": "/assets/$1"
+    },
+    {
+      "source": "/",
+      "has": [
+        {
+          "type": "host",
+          "value": "fozdoiguacu.aquitemachadinhos.com.br"
+        }
+      ],
+      "destination": "/foz-do-iguacu-home.html"
+    },
+    {
+      "source": "/assets/(.*)",
+      "has": [
+        {
+          "type": "host",
+          "value": "balneario.aquitemachadinhos.com.br"
+        }
+      ],
+      "destination": "/assets/$1"
+    },
+    {
+      "source": "/",
+      "has": [
+        {
+          "type": "host",
+          "value": "balneario.aquitemachadinhos.com.br"
+        }
+      ],
+      "destination": "/balneario-camboriu-home.html"
+    },
+    {
+      "source": "/assets/(.*)",
+      "has": [
+        {
+          "type": "host",
+          "value": "balneariocamboriu.aquitemachadinhos.com.br"
+        }
+      ],
+      "destination": "/assets/$1"
+    },
+    {
+      "source": "/",
+      "has": [
+        {
+          "type": "host",
+          "value": "balneariocamboriu.aquitemachadinhos.com.br"
+        }
+      ],
+      "destination": "/balneario-camboriu-home.html"
+    },
+    {
+      "source": "/assets/(.*)",
+      "has": [
+        {
+          "type": "host",
+          "value": "fortaleza.aquitemachadinhos.com.br"
+        }
+      ],
+      "destination": "/assets/$1"
+    },
+    {
+      "source": "/",
+      "has": [
+        {
+          "type": "host",
+          "value": "fortaleza.aquitemachadinhos.com.br"
+        }
+      ],
+      "destination": "/fortaleza-home.html"
+    },
+    {
+      "source": "/assets/(.*)",
+      "has": [
+        {
+          "type": "host",
+          "value": "natal.aquitemachadinhos.com.br"
+        }
+      ],
+      "destination": "/assets/$1"
+    },
+    {
+      "source": "/",
+      "has": [
+        {
+          "type": "host",
+          "value": "natal.aquitemachadinhos.com.br"
+        }
+      ],
+      "destination": "/natal-home.html"
+    },
+    {
+      "source": "/assets/(.*)",
+      "has": [
+        {
+          "type": "host",
+          "value": "noronha.aquitemachadinhos.com.br"
+        }
+      ],
+      "destination": "/assets/$1"
+    },
+    {
+      "source": "/",
+      "has": [
+        {
+          "type": "host",
+          "value": "noronha.aquitemachadinhos.com.br"
+        }
+      ],
+      "destination": "/noronha-home.html"
+    },
+    {
+      "source": "/assets/(.*)",
+      "has": [
+        {
+          "type": "host",
+          "value": "ouropreto.aquitemachadinhos.com.br"
+        }
+      ],
+      "destination": "/assets/$1"
+    },
+    {
+      "source": "/",
+      "has": [
+        {
+          "type": "host",
+          "value": "ouropreto.aquitemachadinhos.com.br"
+        }
+      ],
+      "destination": "/ouro-preto-home.html"
+    },
+    {
+      "source": "/assets/(.*)",
+      "has": [
+        {
+          "type": "host",
+          "value": "paraty.aquitemachadinhos.com.br"
+        }
+      ],
+      "destination": "/assets/$1"
+    },
+    {
+      "source": "/",
+      "has": [
+        {
+          "type": "host",
+          "value": "paraty.aquitemachadinhos.com.br"
+        }
+      ],
+      "destination": "/paraty-home.html"
+    },
+    {
+      "source": "/assets/(.*)",
+      "has": [
+        {
+          "type": "host",
+          "value": "pirenopolis.aquitemachadinhos.com.br"
+        }
+      ],
+      "destination": "/assets/$1"
+    },
+    {
+      "source": "/",
+      "has": [
+        {
+          "type": "host",
+          "value": "pirenopolis.aquitemachadinhos.com.br"
+        }
+      ],
+      "destination": "/pirenopolis-home.html"
+    },
+    {
+      "source": "/assets/(.*)",
+      "has": [
+        {
+          "type": "host",
+          "value": "vitoria.aquitemachadinhos.com.br"
+        }
+      ],
+      "destination": "/assets/$1"
+    },
+    {
+      "source": "/",
+      "has": [
+        {
+          "type": "host",
+          "value": "vitoria.aquitemachadinhos.com.br"
+        }
+      ],
+      "destination": "/vitoria-home.html"
+    },
+    {
+      "source": "/assets/(.*)",
+      "has": [
+        {
+          "type": "host",
+          "value": "campogrande.aquitemachadinhos.com.br"
+        }
+      ],
+      "destination": "/assets/$1"
+    },
+    {
+      "source": "/",
+      "has": [
+        {
+          "type": "host",
+          "value": "campogrande.aquitemachadinhos.com.br"
+        }
+      ],
+      "destination": "/campo-grande-home.html"
+    },
+    {
+      "source": "/assets/(.*)",
+      "has": [
+        {
+          "type": "host",
+          "value": "chapadaguimaraes.aquitemachadinhos.com.br"
+        }
+      ],
+      "destination": "/assets/$1"
+    },
+    {
+      "source": "/",
+      "has": [
+        {
+          "type": "host",
+          "value": "chapadaguimaraes.aquitemachadinhos.com.br"
+        }
+      ],
+      "destination": "/chapada-guimaraes-home.html"
+    },
+    {
+      "source": "/assets/(.*)",
+      "has": [
+        {
+          "type": "host",
+          "value": "jalapao.aquitemachadinhos.com.br"
+        }
+      ],
+      "destination": "/assets/$1"
+    },
+    {
+      "source": "/",
+      "has": [
+        {
+          "type": "host",
+          "value": "jalapao.aquitemachadinhos.com.br"
+        }
+      ],
+      "destination": "/jalapao-home.html"
+    },
+    {
+      "source": "/assets/(.*)",
+      "has": [
+        {
+          "type": "host",
+          "value": "lencois.aquitemachadinhos.com.br"
+        }
+      ],
+      "destination": "/assets/$1"
+    },
+    {
+      "source": "/",
+      "has": [
+        {
+          "type": "host",
+          "value": "lencois.aquitemachadinhos.com.br"
+        }
+      ],
+      "destination": "/lencois-home.html"
+    },
+    {
+      "source": "/assets/(.*)",
+      "has": [
+        {
+          "type": "host",
+          "value": "alterdochao.aquitemachadinhos.com.br"
+        }
+      ],
+      "destination": "/assets/$1"
+    },
+    {
+      "source": "/",
+      "has": [
+        {
+          "type": "host",
+          "value": "alterdochao.aquitemachadinhos.com.br"
+        }
+      ],
+      "destination": "/alter-do-chao-home.html"
     }
   ]
 }
