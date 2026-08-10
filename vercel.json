@@ -14,23 +14,18 @@
       "permanent": false
     },
     {
-      "source": "/vagas",
-      "destination": "/vagas.html",
-      "permanent": false
-    },
-    {
       "source": "/peao",
-      "destination": "/vagas.html",
+      "destination": "/vagas",
       "permanent": false
     },
     {
       "source": "/trabalhar",
-      "destination": "/vagas.html",
+      "destination": "/vagas",
       "permanent": false
     },
     {
       "source": "/empregos",
-      "destination": "/vagas.html",
+      "destination": "/vagas",
       "permanent": false
     },
     {
@@ -339,7 +334,7 @@
           "value": "florianopolis.aquitemachadinhos.com.br"
         }
       ],
-      "destination": "/assets/$1"
+      "destination": "/florianopolis-home.html"
     },
     {
       "source": "/",

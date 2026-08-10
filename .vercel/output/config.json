@@ -37,30 +37,23 @@
       "status": 307
     },
     {
-      "src": "^/vagas$",
-      "headers": {
-        "Location": "/vagas.html"
-      },
-      "status": 307
-    },
-    {
       "src": "^/peao$",
       "headers": {
-        "Location": "/vagas.html"
+        "Location": "/vagas"
       },
       "status": 307
     },
     {
       "src": "^/trabalhar$",
       "headers": {
-        "Location": "/vagas.html"
+        "Location": "/vagas"
       },
       "status": 307
     },
     {
       "src": "^/empregos$",
       "headers": {
-        "Location": "/vagas.html"
+        "Location": "/vagas"
       },
       "status": 307
     },
@@ -424,7 +417,7 @@
     },
     {
       "src": "^/assets(?:/(.*))$",
-      "dest": "/assets/$1?host=$host",
+      "dest": "/florianopolis-home.html?host=$host",
       "check": true,
       "has": [
         {
