@@ -2055,25 +2055,22 @@
      CLASSIFICADOS E VAGAS — Multi-cidades e Nacional (Ultra Completo)
      ============================================================ */
   var CLASSIFIED_CATS = [
-    { id: 'imoveis', nome: 'Imóveis', emoji: '🏠', slug: 'imoveis', desc: 'Aluguel, Venda e Temporada' },
-    { id: 'veiculos', nome: 'Veículos & Náutica', emoji: '🚗', slug: 'veiculos', desc: 'Carros, Motos, Náutica e Máquinas' },
     { id: 'vagas-empresa', nome: 'Vagas de Emprego', emoji: '📢', slug: 'vagas', desc: 'Empresas contratando' },
     { id: 'vagas-candidato', nome: 'Banco de Talentos', emoji: '🙋', slug: 'vagas', desc: 'Candidatos e Profissionais (Grátis)' },
+    { id: 'imoveis', nome: 'Imóveis', emoji: '🏠', slug: 'imoveis', desc: 'Aluguel, Venda e Temporada' },
+    { id: 'veiculos', nome: 'Veículos & Náutica', emoji: '🚗', slug: 'veiculos', desc: 'Carros, Motos, Náutica e Máquinas' },
     { id: 'servicos', nome: 'Serviços Profissionais', emoji: '🔧', slug: 'servicos', desc: 'Reformas, Aulas, Fretes e TI' },
     { id: 'eletronicos', nome: 'Eletrônicos & Tech', emoji: '📱', slug: 'eletronicos', desc: 'Smartphones, PCs e Games' },
-    { id: 'moveis-eletro', nome: 'Móveis & Eletro', emoji: '🛋️', slug: 'moveis-eletro', desc: 'Para casa e escritório' },
     { id: 'agro-campo', nome: 'Agro & Fazendas', emoji: '🌾', slug: 'agro-campo', desc: 'Gado, Tratores e Sítios' },
     { id: 'moda-beleza', nome: 'Moda & Beleza', emoji: '👗', slug: 'moda-beleza', desc: 'Roupas, Calçados e Joias' },
     { id: 'animais', nome: 'Animais & Pets', emoji: '🐾', slug: 'animais', desc: 'Adoção, Acessórios e Cuidados' },
-    { id: 'eventos-peao', nome: 'Eventos & Festas', emoji: '🤠', slug: 'eventos-peao', desc: 'Ingressos e Hospedagem' },
-    { id: 'infantil-bebes', nome: 'Infantil & Bebês', emoji: '🍼', slug: 'infantil-bebes', desc: 'Carrinhos, Berços e Brinquedos' },
     { id: 'esportes-lazer', nome: 'Esportes & Lazer', emoji: '🏄', slug: 'esportes-lazer', desc: 'Bikes, Fitness e Camping' },
-    { id: 'negocios-comercio', nome: 'Negócios & Atacado', emoji: '💼', slug: 'negocios-comercio', desc: 'Pontos e Lotes' },
+    { id: 'moveis-eletro', nome: 'Móveis & Eletro', emoji: '🛋️', slug: 'moveis-eletro', desc: 'Para casa e escritório' },
+    { id: 'eventos-peao', nome: 'Festas & Turismo', emoji: '🤠', slug: 'eventos-peao', desc: 'Ingressos e Hospedagem' },
     { id: 'trocas-doacoes', nome: 'Trocas & Doações', emoji: '🤝', slug: 'trocas-doacoes', desc: 'Escambo e Solidariedade' },
-    { id: 'nacionais', nome: 'Classificados Nacionais', emoji: '🇧🇷', slug: 'classificados', desc: 'Envio para todo o Brasil' },
-    { id: 'empregos', nome: 'Empregos (Geral)', emoji: '💼', slug: 'vagas', desc: 'Vagas em geral' },
-    { id: 'vagas-nac-empresa', nome: 'Vaga Nacional / Remoto', emoji: '📣', slug: 'vagas', desc: 'Oportunidades remotas' },
-    { id: 'vagas-nac-candidato', nome: 'Candidato Nacional / Remoto', emoji: '🔍', slug: 'vagas', desc: 'Trabalho remoto' }
+    { id: 'infantil-bebes', nome: 'Infantil & Bebês', emoji: '🍼', slug: 'infantil-bebes', desc: 'Carrinhos, Berços e Brinquedos' },
+    { id: 'negocios-comercio', nome: 'Negócios & Atacado', emoji: '💼', slug: 'negocios-comercio', desc: 'Pontos e Lotes' },
+    { id: 'nacionais', nome: 'Nacional / Remoto', emoji: '🇧🇷', slug: 'classificados', desc: 'Envio para todo o Brasil' }
   ];
   function catClassified(id, cats) { var c = (cats || CLASSIFIED_CATS).filter(function (x) { return x.id === id; })[0]; return c ? (c.emoji + ' ' + c.nome) : '📋 Anúncio'; }
   function catEmoji(id, cats) { var c = (cats || CLASSIFIED_CATS).filter(function (x) { return x.id === id; })[0]; return c ? (c.emoji || '📋') : '📋'; }
@@ -2266,12 +2263,9 @@
       });
     }
 
-    Promise.all([
-      Classifieds.cats(),
-      apiGet('listings?select=*&status=eq.ativo&order=destaque.desc,criado_em.desc')
-    ]).then(function (res) {
-      var cats = res[0] || CLASSIFIED_CATS;
-      var all = res[1] || [];
+    apiGet('listings?select=*&status=eq.ativo&order=destaque.desc,criado_em.desc').then(function (all) {
+      all = all || [];
+      var cats = CLASSIFIED_CATS;
 
       if (totalCountEl) totalCountEl.textContent = all.length + (all.length === 1 ? ' anúncio ativo' : ' anúncios ativos');
 
@@ -2288,7 +2282,7 @@
         ],
         'vagas-empresa': [
           { k: '', l: 'Todas as Vagas' }, { k: 'temporario', l: '🤠 Temporário / Peão' }, { k: 'clt', l: '📋 CLT' },
-          { k: 'freelancer', l: '⚡ Freelancer' }, { k: 'estagio', l: '🎓 Estágio / Aprendiz' }, { k: 'pj', l: '🏢 PJ' }, { k: 'home-office', l: '💻 Remoto' }
+          { k: 'freelancer', l: '⚡ Freelancer' }, { k: 'estagio', l: '🎓 Estágio / Aprendiz' }, { k: 'pj', l: '🏢 PJ' }, { k: 'home-office', l: '💻 100% Remoto' }
         ],
         'vagas-candidato': [
           { k: '', l: 'Todos os Candidatos' }, { k: 'temporario', l: '🤠 Disponível Peão' }, { k: 'clt', l: '💼 Busca CLT' },
@@ -2339,9 +2333,17 @@
           { k: '', l: 'Tudo' }, { k: 'trocas', l: '🔄 Trocas (Escambo)' }, { k: 'doacoes', l: '🎁 Doações Solidárias' }
         ],
         'nacionais': [
-          { k: '', l: 'Todo Nacional' }, { k: 'produtos-envio', l: '📦 Envio Correios/Transportadora' }, { k: 'remoto', l: '💻 Serviços Remotos' }
+          { k: '', l: 'Todo Nacional' }, { k: 'home-office', l: '💻 Vagas 100% Remotas' }, { k: 'produtos-envio', l: '📦 Envio p/ Todo Brasil' }
         ]
       };
+
+      function getCatCount(catId) {
+        if (catId === 'all') return all.length;
+        if (catId === 'vagas-empresa') return all.filter(function (l) { return l.categoria === 'vagas-empresa' || l.categoria === 'empregos'; }).length;
+        if (catId === 'vagas-candidato') return all.filter(function (l) { return l.categoria === 'vagas-candidato'; }).length;
+        if (catId === 'nacionais') return all.filter(function (l) { return l.city_slug === 'nacional' || l.categoria === 'nacionais' || l.cidade === 'Brasil Todo' || l.subcategoria === 'home-office'; }).length;
+        return all.filter(function (l) { return l.categoria === catId; }).length;
+      }
 
       function renderCategoriesGrid() {
         if (!catsGrid) return;
@@ -2352,7 +2354,7 @@
         '</button>';
 
         var catsHtml = cats.map(function (c) {
-          var count = all.filter(function (l) { return l.categoria === c.id; }).length;
+          var count = getCatCount(c.id);
           var isAct = selectedCat === c.id;
           return '<button data-cat-id="' + esc(c.id) + '" class="p-3 rounded-2xl text-center transition flex flex-col items-center justify-center ' + (isAct ? 'bg-peao-500 text-white shadow-soft ring-1 ring-peao-400' : 'bg-white text-silver-300 ring-silver hover:bg-white/10') + '">' +
             '<span class="text-2xl">' + (c.emoji || '📋') + '</span>' +
@@ -2398,15 +2400,19 @@
       function renderListings() {
         var filtered = all.slice();
 
-        if (selectedCat && selectedCat !== 'all') {
+        if (selectedCat === 'nacionais') {
+          filtered = filtered.filter(function (l) { return l.city_slug === 'nacional' || l.categoria === 'nacionais' || l.cidade === 'Brasil Todo' || l.subcategoria === 'home-office'; });
+        } else if (selectedCat === 'vagas-empresa') {
+          filtered = filtered.filter(function (l) { return l.categoria === 'vagas-empresa' || l.categoria === 'empregos'; });
+        } else if (selectedCat !== 'all') {
           filtered = filtered.filter(function (l) { return l.categoria === selectedCat; });
         }
 
-        if (selectedCity) {
+        if (selectedCity && selectedCat !== 'nacionais') {
           filtered = filtered.filter(function (l) {
             var cSlug = (l.city_slug || '').toLowerCase();
             var cName = (l.cidade || '').toLowerCase();
-            return !l.city_slug || cSlug === selectedCity || cName === selectedCity || cName.indexOf(selectedCity) !== -1;
+            return !l.city_slug || cSlug === selectedCity || cName.indexOf(selectedCity) !== -1 || cSlug === 'nacional' || cName === 'brasil todo';
           });
         }
 
@@ -2447,15 +2453,20 @@
         }
 
         if (resHeader) {
-          var curCatObj = cats.filter(function(x){ return x.id === selectedCat; })[0];
-          var catLabel = curCatObj ? (curCatObj.emoji + ' ' + curCatObj.nome) : '🔥 Todos os Anúncios';
-          var cityLabel = selectedCity ? (' em ' + (CITY_NAMES[selectedCity] || selectedCity)) : ' (Nacional)';
-          resHeader.textContent = catLabel + cityLabel + ' (' + filtered.length + ')';
+          var curCatObj = CLASSIFIED_CATS.filter(function(x){ return x.id === selectedCat; })[0];
+          if (selectedCat === 'all') {
+            resHeader.textContent = selectedCity ? ('🔥 Todos os Anúncios em ' + (CITY_NAMES[selectedCity] || selectedCity) + ' (' + filtered.length + ')') : ('🔥 Todos os Anúncios no Brasil (' + filtered.length + ')');
+          } else if (selectedCat === 'nacionais') {
+            resHeader.textContent = '🇧🇷 Oportunidades Nacionais & Remotas (' + filtered.length + ')';
+          } else {
+            var catTitle = curCatObj ? (curCatObj.emoji + ' ' + curCatObj.nome) : 'Anúncios';
+            resHeader.textContent = selectedCity ? (catTitle + ' em ' + (CITY_NAMES[selectedCity] || selectedCity) + ' (' + filtered.length + ')') : (catTitle + ' no Brasil Todo (' + filtered.length + ')');
+          }
         }
 
         if (!filtered.length) {
           var ctaLink = 'cadastro-anuncio.html' + (selectedCat !== 'all' ? '?cat=' + encodeURIComponent(selectedCat) : '');
-          gridRoot.innerHTML = '<div class="bg-white rounded-3xl p-10 text-center ring-silver shadow-soft max-w-xl mx-auto my-8">' +
+          gridRoot.innerHTML = '<div class="bg-white rounded-3xl p-10 text-center ring-silver shadow-soft max-w-xl mx-auto my-8 border border-white/5">' +
             '<div class="text-5xl mb-3">🏷️</div>' +
             '<h3 class="font-display font-bold text-xl text-white">Nenhum anúncio encontrado</h3>' +
             '<p class="text-silver-400 text-sm mt-2 leading-relaxed">Seja o primeiro a anunciar nesta categoria! Cadastro rápido, gratuito e com WhatsApp direto.</p>' +
