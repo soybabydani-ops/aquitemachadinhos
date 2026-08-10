@@ -1053,116 +1053,473 @@
 
   function renderAdmin(root, stores, offers, met, reviews, drivers, listings, cityLeads, automationQueue) {
     cityLeads = cityLeads || []; automationQueue = automationQueue || [];
-    var pend = stores.filter(function (s) { return s.status === 'pendente'; });
-    var stats = '<div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">' + statCard('🏢', stores.length, 'Empresas') + statCard('⏳', pend.length, 'Pendentes') + statCard('✅', countBy(stores, 'status', 'ativo'), 'Ativas') + statCard('🔥', countBy(offers, 'status', 'ativa'), 'Ofertas ativas') + statCard('📊', countBy(met, 'tipo', 'pageview'), 'Visitas ao site') + statCard('👁️', countBy(met, 'tipo', 'view'), 'Visualizações') + statCard('💬', countBy(met, 'tipo', 'click_whatsapp'), 'Cliques WhatsApp') + statCard('📍', countBy(met, 'tipo', 'click_mapa'), 'Cliques mapa') + statCard('🚗', (drivers||[]).length, 'Motoristas') + statCard('🟢', countBy(drivers||[], 'disponivel_agora', true), 'Motoristas online') + statCard('📋', (listings||[]).length, 'Anúncios') + statCard('🌎', cityLeads.length, 'Leads por cidade') + statCard('🆕', countBy(cityLeads, 'status', 'novo'), 'Leads novos') + statCard('⚙️', countBy(automationQueue, 'status', 'pending'), 'Automações pendentes') + '</div>';
-    var growthHtml = growthSnapshot(cityLeads);
-    var leadsHtml = cityLeads.length ? '<h2 class="font-display text-xl font-extrabold mb-3">🌎 Leads por cidade (' + cityLeads.length + ')</h2><p class="text-sm text-silver-500 mb-3">Interesses recebidos pelos formulários das cidades. Atualize a etapa após cada contato.</p><div class="space-y-3 mb-8">' + cityLeads.map(leadAdminRow).join('') + '</div>' : '<div class="bg-white rounded-2xl ring-silver shadow-soft p-5 text-silver-500 text-sm mb-8">Nenhum lead de cidade ainda. Os próximos cadastros aparecerão aqui.</div>';
-    var pendHtml = pend.length ? '<h2 class="font-display text-xl font-extrabold mb-3">⏳ Aguardando aprovação</h2><div class="space-y-3 mb-8">' + pend.map(function (s) { return adminRow(s, true); }).join('') + '</div>' : '<div class="bg-white rounded-2xl ring-silver shadow-soft p-5 text-silver-500 text-sm mb-8">Nenhuma empresa pendente. 🎉</div>';
-    var revPend = (reviews || []).filter(function (rv) { return rv.status === 'pendente'; });
-    var revHtml = revPend.length ? '<h2 class="font-display text-xl font-extrabold mb-3 mt-8">⭐ Avaliações aguardando análise</h2><div class="space-y-3 mb-8">' + revPend.map(function (rv) { var st = (stores.filter(function (x) { return x.id === rv.store_id; })[0] || {}).nome || '—'; return '<div class="bg-white rounded-2xl ring-silver shadow-soft p-4 flex items-center gap-3"><div class="flex-1 min-w-0"><p class="text-sm"><b>' + esc(rv.nota) + '★</b> — ' + esc(st) + (rv.nome ? ' · ' + esc(rv.nome) : '') + '</p><p class="text-xs text-slate-500 truncate">' + esc(rv.comentario || 'Sem comentário') + '</p></div><button data-rev-ap="' + esc(rv.id) + '" class="text-xs font-bold text-white bg-emerald-600 px-3 py-1.5 rounded-lg">Aprovar</button><button data-rev-rj="' + esc(rv.id) + '" class="text-xs font-bold text-peao-600 bg-peao-500/10 px-3 py-1.5 rounded-lg">Rejeitar</button></div>'; }).join('') + '</div>' : '';
-    var driHtml = (drivers && drivers.length) ? '<h2 class="font-display text-xl font-extrabold mb-3 mt-8">🚗 Motoristas</h2><div class="space-y-3 mb-8">' + drivers.map(driverAdminRow).join('') + '</div>' : '';
-    var lstAll = listings || [];
-    var lstHtml = lstAll.length ? '<h2 class="font-display text-xl font-extrabold mb-3 mt-8">📋 Anúncios (' + lstAll.length + ')</h2><div class="space-y-3 mb-8">' + lstAll.map(function (l) {
-      var btns = '';
-      if (l.status === 'pendente') { btns = '<button data-lst-ap="' + esc(l.id) + '" class="text-xs font-bold text-white bg-emerald-600 px-3 py-1.5 rounded-lg">Aprovar</button><button data-lst-rj="' + esc(l.id) + '" class="text-xs font-bold text-peao-600 bg-peao-500/10 px-3 py-1.5 rounded-lg">Rejeitar</button>'; }
-      else { btns = '<button data-lst-dest="' + esc(l.id) + '" data-st="' + (l.destaque ? 0 : 1) + '" class="text-xs font-semibold text-navy-700 hover:underline">' + (l.destaque ? 'Tirar destaque' : 'Destacar') + '</button>' + (l.status === 'ativo' ? '<button data-lst-end="' + esc(l.id) + '" class="text-xs font-semibold text-amber-700 hover:underline">Encerrar (vendido/alugado)</button>' : '<button data-lst-act="' + esc(l.id) + '" class="text-xs font-semibold text-emerald-700 hover:underline">Reativar</button>') + '<button data-lst-del="' + esc(l.id) + '" class="text-xs font-semibold text-peao-600 hover:underline">Excluir</button>'; }
-      return '<div class="bg-white rounded-2xl ring-silver shadow-soft p-4 flex items-center gap-3"><div class="flex-1 min-w-0"><a href="anuncio.html?id=' + encodeURIComponent(l.id) + '" class="font-display font-bold truncate block hover:underline">' + esc(catEmoji(l.categoria)) + ' ' + esc(l.titulo) + '</a><p class="text-xs text-silver-500">' + esc(catClassified(l.categoria)) + (l.preco ? ' · ' + esc(l.preco) : '') + (l.bairro ? ' · ' + esc(l.bairro) : '') + ' · <span class="font-semibold">' + esc(l.status) + '</span>' + (l.destaque ? ' · ⭐' : '') + '</p></div><div class="flex items-center gap-2 shrink-0 flex-wrap justify-end">' + btns + '</div></div>';
-    }).join('') + '</div>' : '';
-    var allHtml = '<h2 class="font-display text-xl font-extrabold mb-3">Todas as empresas</h2><div class="space-y-3">' + stores.map(function (s) { return adminRow(s, false); }).join('') + '</div>';
-    root.innerHTML = '<div class="flex items-center justify-between mb-6"><h1 class="font-display text-2xl md:text-3xl font-extrabold">Painel administrativo</h1><button id="btnCsv" class="text-sm font-semibold text-navy-700 hover:underline">⬇ Exportar CSV</button>' + (cityLeads.filter(function(x){return x.status==='perdido';}).length ? '<button id="btnCleanLost" class="text-sm font-semibold text-peao-600 hover:underline">Limpar testes/perdidos</button>' : '') + '<a href="painel.html" class="text-sm font-semibold text-emerald-600 hover:underline ml-4">✏️ Editar lojas →</a><button id="btnLogout" class="text-sm font-semibold text-peao-600 hover:underline ml-4">Sair</button></div><div class="mb-6"><div class="flex flex-wrap gap-2 mb-2"><button id="btnAddStore" class="btn-shine bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-4 py-2.5 rounded-xl text-sm">🏢 Cadastrar empresa</button><button id="btnAddJob" class="btn-shine bg-blue-600 hover:bg-blue-700 text-white font-bold px-4 py-2.5 rounded-xl text-sm">💼 Publicar vaga grátis</button><button id="btnAddAnuncio" class="btn-shine bg-purple-600 hover:bg-purple-700 text-white font-bold px-4 py-2.5 rounded-xl text-sm">📋 Criar anúncio</button></div><div id="addStoreForm" class="hidden mt-4 bg-white rounded-2xl ring-silver shadow-soft p-5 space-y-3"><h3 class="font-display font-bold">Cadastro rápido · admin</h3><p class="text-xs text-slate-500">Só você vê isso. A empresa entra ATIVA, com o plano que você escolher (Pro = tudo liberado, sem cobrança).</p><input id="as_nome" placeholder="Nome da empresa *" class="w-full px-3 py-2 rounded-lg bg-silver-50 ring-silver"><select id="as_cat" class="w-full px-3 py-2 rounded-lg bg-silver-50 ring-silver"></select><input id="as_cep" placeholder="CEP (preenche automático)" class="w-full px-3 py-2 rounded-lg bg-silver-50 ring-silver"><input id="as_end" placeholder="Rua, Av., número" class="w-full px-3 py-2 rounded-lg bg-silver-50 ring-silver"><div class="aquitem-admin-address"><input id="as_address_search" placeholder="Buscar endereço por nome"><button id="as_address_btn" type="button">Buscar</button><div id="as_address_results" class="aquitem-address-results"></div></div><div class="grid grid-cols-2 gap-2"><input id="as_wa" placeholder="WhatsApp" class="px-3 py-2 rounded-lg bg-silver-50 ring-silver"><input id="as_tel" placeholder="Telefone" class="px-3 py-2 rounded-lg bg-silver-50 ring-silver"></div><input id="as_bairro" placeholder="Bairro" class="w-full px-3 py-2 rounded-lg bg-silver-50 ring-silver"><input id="as_desc" placeholder="Descrição curta" class="w-full px-3 py-2 rounded-lg bg-silver-50 ring-silver"><div class="grid grid-cols-2 gap-2"><input id="as_instagram" placeholder="@instagram (sem @)" class="px-3 py-2 rounded-lg bg-silver-50 ring-silver"><input id="as_site" placeholder="Site (opcional)" class="px-3 py-2 rounded-lg bg-silver-50 ring-silver"></div><input id="as_horario" placeholder="Horário ex: Seg-Sex 08h-18h" class="w-full px-3 py-2 rounded-lg bg-silver-50 ring-silver"><select id="as_city" class="w-full px-3 py-2 rounded-lg bg-silver-50 ring-silver"><option value="barretos">Barretos · SP</option><option value="gramado">Gramado · RS</option><option value="blumenau">Blumenau · SC</option><option value="bonito">Bonito · MS</option><option value="buzios">Búzios · RJ</option><option value="campos">Campos do Jordão · SP</option><option value="caruaru">Caruaru · PE</option><option value="florianopolis">Florianópolis · SC</option><option value="jericoacoara">Jericoacoara · CE</option><option value="porto">Porto de Galinhas · PE</option><option value="salvador">Salvador · BA</option><option value="uberlandia">Uberlândia · MG</option><option value="caldasnovas">Caldas Novas · GO</option></select><div class="grid grid-cols-2 gap-2 items-center"><select id="as_plano" class="px-3 py-2 rounded-lg bg-silver-50 ring-silver"><option value="pro">Pro (tudo liberado)</option><option value="destaque">Destaque</option><option value="gratis">Grátis</option></select><label class="flex items-center gap-2 text-sm"><input id="as_destaque" type="checkbox" checked class="w-4 h-4 accent-peao-500"> Destacar (topo + selo)</label></div><button id="as_submit" class="btn-shine bg-peao-500 hover:bg-peao-600 text-white font-bold px-5 py-2.5 rounded-xl w-full">Cadastrar e publicar agora</button><span id="as_msg" class="text-sm"></span></div></div><div id="addJobForm" class="hidden mt-4 bg-white rounded-2xl ring-silver shadow-soft p-5 space-y-3"><h3 class="font-display font-bold text-blue-700">💼 Publicar vaga de emprego — gratuito</h3><p class="text-xs text-slate-500">A vaga entra publicada imediatamente. Aparece em aquitemachadinhos.com.br/empregos.</p><input id="job_titulo" placeholder="Título da vaga ex: Garçom para Festa do Peão *" class="w-full px-3 py-2 rounded-lg bg-silver-50 ring-silver"><input id="job_empresa" placeholder="Nome da empresa *" class="w-full px-3 py-2 rounded-lg bg-silver-50 ring-silver"><div class="grid grid-cols-2 gap-2"><select id="job_tipo" class="px-3 py-2 rounded-lg bg-silver-50 ring-silver"><option value="temporario">Temporário</option><option value="clt">CLT</option><option value="freelancer">Freelancer</option><option value="estagio">Estágio</option></select><input id="job_salario" placeholder="Salário ex: R$ 1.800" class="px-3 py-2 rounded-lg bg-silver-50 ring-silver"></div><textarea id="job_desc" rows="3" placeholder="Descrição da vaga e requisitos" class="w-full px-3 py-2 rounded-lg bg-silver-50 ring-silver resize-none"></textarea><div class="grid grid-cols-2 gap-2"><input id="job_wa" placeholder="WhatsApp para contato *" class="px-3 py-2 rounded-lg bg-silver-50 ring-silver"><input id="job_email" placeholder="E-mail (opcional)" class="px-3 py-2 rounded-lg bg-silver-50 ring-silver"></div><select id="job_city" class="w-full px-3 py-2 rounded-lg bg-silver-50 ring-silver"><option value="barretos">Barretos · SP</option><option value="gramado">Gramado · RS</option><option value="blumenau">Blumenau · SC</option><option value="bonito">Bonito · MS</option><option value="buzios">Búzios · RJ</option><option value="campos">Campos do Jordão · SP</option><option value="caruaru">Caruaru · PE</option><option value="florianopolis">Florianópolis · SC</option><option value="jericoacoara">Jericoacoara · CE</option><option value="porto">Porto de Galinhas · PE</option><option value="salvador">Salvador · BA</option><option value="uberlandia">Uberlândia · MG</option><option value="caldasnovas">Caldas Novas · GO</option></select><input id="job_expira" type="date" class="w-full px-3 py-2 rounded-lg bg-silver-50 ring-silver"><button id="job_submit" class="btn-shine bg-blue-600 hover:bg-blue-700 text-white font-bold px-5 py-2.5 rounded-xl w-full">Publicar vaga agora</button><span id="job_msg" class="text-sm"></span></div><div id="addAnuncioForm" class="hidden mt-4 bg-white rounded-2xl ring-silver shadow-soft p-5 space-y-3"><h3 class="font-display font-bold text-purple-700">📋 Criar anúncio classificado</h3><p class="text-xs text-slate-500">Imóveis, veículos, serviços, empregos. Entra publicado imediatamente.</p><select id="an_cat" class="w-full px-3 py-2 rounded-lg bg-silver-50 ring-silver"></select><input id="an_titulo" placeholder="Título do anúncio *" class="w-full px-3 py-2 rounded-lg bg-silver-50 ring-silver"><textarea id="an_desc" rows="3" placeholder="Descrição do anúncio" class="w-full px-3 py-2 rounded-lg bg-silver-50 ring-silver resize-none"></textarea><div class="grid grid-cols-2 gap-2"><input id="an_preco" placeholder="Preço ex: R$ 1.500" class="px-3 py-2 rounded-lg bg-silver-50 ring-silver"><input id="an_wa" placeholder="WhatsApp *" class="px-3 py-2 rounded-lg bg-silver-50 ring-silver"></div><input id="an_anunciante" placeholder="Nome do anunciante *" class="w-full px-3 py-2 rounded-lg bg-silver-50 ring-silver"><select id="an_city" class="w-full px-3 py-2 rounded-lg bg-silver-50 ring-silver"><option value="barretos">Barretos · SP</option><option value="gramado">Gramado · RS</option><option value="blumenau">Blumenau · SC</option><option value="bonito">Bonito · MS</option><option value="buzios">Búzios · RJ</option><option value="campos">Campos do Jordão · SP</option><option value="caruaru">Caruaru · PE</option><option value="florianopolis">Florianópolis · SC</option><option value="jericoacoara">Jericoacoara · CE</option><option value="porto">Porto de Galinhas · PE</option><option value="salvador">Salvador · BA</option><option value="uberlandia">Uberlândia · MG</option><option value="caldasnovas">Caldas Novas · GO</option></select><button id="an_submit" class="btn-shine bg-purple-600 hover:bg-purple-700 text-white font-bold px-5 py-2.5 rounded-xl w-full">Criar anúncio agora</button><span id="an_msg" class="text-sm"></span></div><div id="leadConvertRoot"></div>' + stats + growthHtml + leadsHtml + pendHtml + revHtml + driHtml + lstHtml + allHtml;
-    $('#btnLogout').addEventListener('click', AUTH.logout);
-    var btnAdd = $('#btnAddStore'); if (btnAdd) btnAdd.addEventListener('click', function () { var f = $('#addStoreForm'); if (f) f.classList.toggle('hidden'); var sel = $('#as_cat'); if (sel && !sel.getAttribute('data-f')) { sel.setAttribute('data-f', '1'); sel.innerHTML = '<option value="">Categoria…</option>' + CATS.map(function (c) { return '<option value="' + c.id + '">' + c.emoji + ' ' + c.nome + '</option>'; }).join(''); } });
-    setupAddressLookup('#as_address_search','#as_address_btn','#as_address_results',function(v){['endereco','bairro','cep'].forEach(function(k){var el=$('#as_'+(k==='endereco'?'end':k));if(el&&v[k])el.value=v[k];}); var city=Object.keys(CITY_NAMES).filter(function(k){return CITY_NAMES[k].toLowerCase()===(v.cidade||'').toLowerCase();})[0]; if(city&&$('#as_city'))$('#as_city').value=city; if($('#as_lat'))$('#as_lat').value=v.lat; if($('#as_lng'))$('#as_lng').value=v.lng;});
-    var asSub = $('#as_submit'); if (asSub) asSub.addEventListener('click', function () { var msg = $('#as_msg'); var nome = $('#as_nome').value.trim(); var cat = $('#as_cat').value; if (!nome || !cat) { msg.className = 'text-sm text-peao-600'; msg.textContent = 'Preencha nome e categoria.'; return; } var adminCitySlug = $('#as_city').value || 'barretos'; var adminCityName = CITY_NAMES[adminCitySlug] || 'Barretos'; asSub.disabled = true; asSub.textContent = 'Cadastrando…'; aPost('stores', { nome: nome, categoria: cat, endereco: $('#as_end').value.trim(), whatsapp: ($('#as_wa').value||'').trim(), telefone: ($('#as_tel').value||'').trim(), bairro: ($('#as_bairro').value||'').trim(), descricao_curta: ($('#as_desc').value||'').trim(), instagram: ($('#as_instagram') ? $('#as_instagram').value.trim().replace('@','') : ''), site: ($('#as_site') ? $('#as_site').value.trim() : ''), horario: ($('#as_horario') ? $('#as_horario').value.trim() : ''), cidade: adminCityName, city_slug: adminCitySlug, status: 'pendente', aceite_termos: true, autorizacao_contato: true }).then(function (arr) { var cr = arr && arr[0]; if (!cr) { msg.className = 'text-sm text-peao-600'; msg.textContent = 'Erro ao cadastrar.'; asSub.disabled = false; asSub.textContent = 'Cadastrar e publicar agora'; return; } aPatch('stores', cr.id, { status: 'ativo', plano: $('#as_plano').value, destaque: $('#as_destaque').checked }).then(function () { msg.className = 'text-sm text-emerald-600'; msg.textContent = '✓ Cadastrada e publicada!'; pageAdmin(); }); }); });
+    listings = listings || []; drivers = drivers || []; reviews = reviews || []; offers = offers || [];
+    stores = stores || [];
 
-    // -- Botao + vaga
-    var btnAddJob = $('#btnAddJob'); if (btnAddJob) btnAddJob.addEventListener('click', function () { var f = $('#addJobForm'); if (f) { f.classList.toggle('hidden'); if (document.getElementById('addStoreForm')) document.getElementById('addStoreForm').classList.add('hidden'); if (document.getElementById('addAnuncioForm')) document.getElementById('addAnuncioForm').classList.add('hidden'); } });
-    // -- Botao + anuncio
-    var btnAddAnuncio = $('#btnAddAnuncio'); if (btnAddAnuncio) btnAddAnuncio.addEventListener('click', function () { var f = $('#addAnuncioForm'); if (f) { f.classList.toggle('hidden'); if (document.getElementById('addStoreForm')) document.getElementById('addStoreForm').classList.add('hidden'); if (document.getElementById('addJobForm')) document.getElementById('addJobForm').classList.add('hidden'); var sel = $('#an_cat'); if (sel && !sel.getAttribute('data-filled')) { sel.setAttribute('data-filled','1'); sel.innerHTML = '<option value="">Categoria...</option><option value="empregos">💼 Empregos</option><option value="imoveis">🏠 Imóveis</option><option value="veiculos">🚗 Veículos</option><option value="servicos">🔧 Serviços</option><option value="animais">🐾 Animais</option><option value="eletrônicos">📱 Eletrônicos</option><option value="outros">📦 Outros</option>'; } } });
-    // -- Submit vaga
-    var jobSub = $('#job_submit'); if (jobSub) jobSub.addEventListener('click', function () {
-      var msg = $('#job_msg');
-      var titulo = ($('#job_titulo').value||'').trim();
-      var empresa = ($('#job_empresa').value||'').trim();
-      var wa = ($('#job_wa').value||'').trim();
-      if (!titulo || !empresa || !wa) { msg.className='text-sm text-peao-600'; msg.textContent='Preencha titulo, empresa e WhatsApp.'; return; }
-      jobSub.disabled=true; jobSub.textContent='Publicando...';
-      var citySlug = $('#job_city').value || 'barretos';
-      var cityName = CITY_NAMES[citySlug] || 'Barretos';
-      var expira = $('#job_expira').value || null;
-      aAdminRpc('admin_insert_listing', { p_data: {
-        titulo: titulo,
-        anunciante_nome: empresa,
-        categoria: 'empregos',
-        subcategoria: $('#job_tipo').value || 'temporario',
-        descricao: ($('#job_desc').value||'').trim(),
-        preco: ($('#job_salario').value||'').trim(),
-        whatsapp: wa,
-        email: ($('#job_email').value||'').trim(),
-        cidade: cityName,
-        city_slug: citySlug,
-        status: 'ativo',
-        plano: 'gratis',
-        anunciante_tipo: 'empresa',
-        expira_em: expira
-      }}).then(function(cr){ if(!cr){msg.className='text-sm text-peao-600';msg.textContent='Erro ao publicar. Verifique os campos e tente novamente.';jobSub.disabled=false;jobSub.textContent='Publicar vaga agora';return;} msg.className='text-sm text-emerald-600';msg.textContent='Vaga publicada em '+cityName+'! Aparece em /empregos.'; jobSub.textContent='Publicar vaga agora'; jobSub.disabled=false; setTimeout(pageAdmin,1500); }).catch(function(e){ msg.className='text-sm text-peao-600'; msg.textContent='Erro: '+(e.message||e); jobSub.disabled=false; jobSub.textContent='Publicar vaga agora'; });
-    });
-    // -- Submit anuncio
-    var anSub = $('#an_submit'); if (anSub) anSub.addEventListener('click', function () {
-      var msg = $('#an_msg');
-      var titulo = ($('#an_titulo').value||'').trim();
-      var anunciante = ($('#an_anunciante').value||'').trim();
-      var wa = ($('#an_wa').value||'').trim();
-      var cat = $('#an_cat').value;
-      if (!titulo || !anunciante || !wa || !cat) { msg.className='text-sm text-peao-600'; msg.textContent='Preencha todos os campos obrigatorios.'; return; }
-      anSub.disabled=true; anSub.textContent='Criando...';
-      var citySlug = $('#an_city').value || 'barretos';
-      var cityName = CITY_NAMES[citySlug] || 'Barretos';
-      aAdminRpc('admin_insert_listing', { p_data: {
-        titulo: titulo,
-        anunciante_nome: anunciante,
-        categoria: cat,
-        descricao: ($('#an_desc').value||'').trim(),
-        preco: ($('#an_preco').value||'').trim(),
-        whatsapp: wa,
-        cidade: cityName,
-        city_slug: citySlug,
-        status: 'ativo',
-        plano: 'pro',
-        anunciante_tipo: 'particular'
-      }}).then(function(cr){ if(!cr){msg.className='text-sm text-peao-600';msg.textContent='Erro.';anSub.disabled=false;anSub.textContent='Criar anuncio agora';return;} msg.className='text-sm text-emerald-600';msg.textContent='Anuncio publicado em '+cityName+'!'; anSub.textContent='Criar anuncio agora'; anSub.disabled=false; setTimeout(pageAdmin,1500); }).catch(function(e){ msg.className='text-sm text-peao-600'; msg.textContent='Erro: '+(e.message||e); anSub.disabled=false; anSub.textContent='Criar anuncio agora'; });
-    });
-    var btnCsv = $('#btnCsv'); if (btnCsv) btnCsv.addEventListener('click', function () { exportCSV(stores); });
-    var btnCleanLost = $('#btnCleanLost'); if (btnCleanLost) btnCleanLost.addEventListener('click', function () { if (!confirm('Excluir permanentemente todos os leads marcados como perdido?')) return; fetch(B('city_leads?status=eq.perdido'), { method:'DELETE', headers:aH() }).then(function(){ pageAdmin(); }); });
-    root.querySelectorAll('[data-lead-delete]').forEach(function (b) { b.addEventListener('click', function () { if (!confirm('Excluir permanentemente o lead '+b.getAttribute('data-lead-name')+'?')) return; fetch(B('city_leads?id=eq.'+encodeURIComponent(b.getAttribute('data-lead-delete'))),{method:'DELETE',headers:aH()}).then(function(){pageAdmin();}); }); });
-    root.querySelectorAll('[data-store-delete]').forEach(function (b) { b.addEventListener('click', function () { if (!confirm('Excluir permanentemente a empresa '+b.getAttribute('data-store-name')+'? Fotos e ofertas também serão removidas.')) return; fetch(B('stores?id=eq.'+encodeURIComponent(b.getAttribute('data-store-delete'))),{method:'DELETE',headers:aH()}).then(function(){pageAdmin();}); }); });
-    root.querySelectorAll('[data-act]').forEach(function (btn) {
-      btn.addEventListener('click', function () {
-        var id = btn.getAttribute('data-id'), act = btn.getAttribute('data-act'), patch = {};
-        if (act === 'aprovar') patch.status = 'ativo';
-        if (act === 'rejeitar') patch.status = 'rejeitado';
-        if (act === 'destaque-on') patch.destaque = true;
-        if (act === 'destaque-off') patch.destaque = false;
-        aPatch('stores', id, patch).then(function () { pageAdmin(); });
+    var currentAdminTab = 'stores'; // 'stores' | 'listings' | 'jobs' | 'drivers' | 'reviews' | 'leads'
+    var adminCity = '';
+
+    function getFilteredStores() {
+      if (!adminCity) return stores;
+      return stores.filter(function (s) { return (s.city_slug || '').toLowerCase() === adminCity || (s.cidade || '').toLowerCase().indexOf(adminCity) !== -1; });
+    }
+
+    function getFilteredListings() {
+      var regular = listings.filter(function (l) { return l.categoria !== 'vagas-empresa' && l.categoria !== 'vagas-candidato' && l.categoria !== 'vagas-nac-empresa' && l.categoria !== 'vagas-nac-candidato' && l.categoria !== 'empregos'; });
+      if (!adminCity) return regular;
+      return regular.filter(function (l) { return (l.city_slug || '').toLowerCase() === adminCity || (l.cidade || '').toLowerCase().indexOf(adminCity) !== -1; });
+    }
+
+    function getFilteredJobs() {
+      var jobs = listings.filter(function (l) { return l.categoria === 'vagas-empresa' || l.categoria === 'vagas-candidato' || l.categoria === 'vagas-nac-empresa' || l.categoria === 'vagas-nac-candidato' || l.categoria === 'empregos'; });
+      if (!adminCity) return jobs;
+      return jobs.filter(function (l) { return (l.city_slug || '').toLowerCase() === adminCity || (l.cidade || '').toLowerCase().indexOf(adminCity) !== -1; });
+    }
+
+    function getFilteredDrivers() {
+      if (!adminCity) return drivers;
+      return drivers.filter(function (d) { return (d.city_slug || '').toLowerCase() === adminCity || (d.cidade || '').toLowerCase().indexOf(adminCity) !== -1; });
+    }
+
+    function getFilteredLeads() {
+      if (!adminCity) return cityLeads;
+      return cityLeads.filter(function (ld) { return (ld.city_slug || '').toLowerCase() === adminCity; });
+    }
+
+    function renderAdminView() {
+      var fStores = getFilteredStores();
+      var fListings = getFilteredListings();
+      var fJobs = getFilteredJobs();
+      var fDrivers = getFilteredDrivers();
+      var fLeads = getFilteredLeads();
+      var fReviews = reviews;
+
+      var pendStores = fStores.filter(function (s) { return s.status === 'pendente'; });
+      var pendListings = fListings.filter(function (l) { return l.status === 'pendente'; });
+      var pendJobs = fJobs.filter(function (j) { return j.status === 'pendente'; });
+      var pendReviews = fReviews.filter(function (r) { return r.status === 'pendente'; });
+
+      // Stats Dashboard
+      var stats = '<div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-3 mb-6">' +
+        statCard('🏢', fStores.length, 'Empresas (' + pendStores.length + ' pend.)') +
+        statCard('📋', fListings.length, 'Classificados (' + pendListings.length + ' pend.)') +
+        statCard('💼', fJobs.length, 'Vagas & Talentos (' + pendJobs.length + ' pend.)') +
+        statCard('🚗', fDrivers.length, 'Motoristas') +
+        statCard('⭐', fReviews.length, 'Avaliações (' + pendReviews.length + ' pend.)') +
+        statCard('🌎', fLeads.length, 'Leads de Expansão') +
+      '</div>';
+
+      // City Filter Dropdown
+      var cityOptions = '<option value="">📍 Todas as Cidades (Nacional)</option>' +
+        Object.keys(CITY_NAMES).filter(function(k){ return k !== 'nacional'; }).map(function(k){
+          return '<option value="' + k + '"' + (adminCity === k ? ' selected' : '') + '>' + esc(CITY_NAMES[k]) + '</option>';
+        }).join('');
+
+      var topBar = '<div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 mb-6 bg-white rounded-2xl p-4 ring-silver shadow-soft">' +
+        '<div class="flex items-center gap-3 w-full md:w-auto">' +
+          '<span class="text-xs font-bold uppercase text-silver-400">Filtrar Cidade:</span>' +
+          '<select id="admCitySel" class="px-3 py-2 rounded-xl bg-silver-50 ring-silver text-xs font-semibold outline-none text-navy-900">' + cityOptions + '</select>' +
+        '</div>' +
+        '<div class="flex flex-wrap items-center gap-2 w-full md:w-auto justify-end">' +
+          '<button id="btnAddStore" class="btn-shine bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-3.5 py-2 rounded-xl text-xs">🏢 + Cadastrar Empresa</button>' +
+          '<button id="btnAddJob" class="btn-shine bg-blue-600 hover:bg-blue-700 text-white font-bold px-3.5 py-2 rounded-xl text-xs">💼 + Publicar Vaga</button>' +
+          '<button id="btnAddAnuncio" class="btn-shine bg-purple-600 hover:bg-purple-700 text-white font-bold px-3.5 py-2 rounded-xl text-xs">📋 + Criar Anúncio</button>' +
+          '<button id="btnCsv" class="text-xs font-bold text-silver-400 hover:text-white px-3 py-2 rounded-xl bg-white/5">⬇ CSV</button>' +
+          '<button id="btnLogout" class="text-xs font-bold text-peao-500 hover:text-peao-400 px-3 py-2 rounded-xl bg-peao-500/10">Sair</button>' +
+        '</div>' +
+      '</div>';
+
+      // Admin Tabs
+      var tabs = '<div class="flex flex-wrap items-center gap-2 mb-6 border-b border-white/10 pb-3">' +
+        '<button data-adm-tab="stores" class="px-4 py-2 rounded-xl text-xs font-bold transition ' + (currentAdminTab === 'stores' ? 'bg-peao-500 text-white shadow-soft' : 'bg-white text-silver-300 ring-silver hover:text-white') + '">🏢 Empresas (' + fStores.length + ')' + (pendStores.length ? ' <span class="bg-amber-400 text-amber-950 px-1.5 py-0.2 rounded-full font-extrabold text-[10px]">' + pendStores.length + '</span>' : '') + '</button>' +
+        '<button data-adm-tab="listings" class="px-4 py-2 rounded-xl text-xs font-bold transition ' + (currentAdminTab === 'listings' ? 'bg-peao-500 text-white shadow-soft' : 'bg-white text-silver-300 ring-silver hover:text-white') + '">📋 Classificados (' + fListings.length + ')' + (pendListings.length ? ' <span class="bg-amber-400 text-amber-950 px-1.5 py-0.2 rounded-full font-extrabold text-[10px]">' + pendListings.length + '</span>' : '') + '</button>' +
+        '<button data-adm-tab="jobs" class="px-4 py-2 rounded-xl text-xs font-bold transition ' + (currentAdminTab === 'jobs' ? 'bg-peao-500 text-white shadow-soft' : 'bg-white text-silver-300 ring-silver hover:text-white') + '">💼 Vagas & Recrutamento (' + fJobs.length + ')' + (pendJobs.length ? ' <span class="bg-amber-400 text-amber-950 px-1.5 py-0.2 rounded-full font-extrabold text-[10px]">' + pendJobs.length + '</span>' : '') + '</button>' +
+        '<button data-adm-tab="drivers" class="px-4 py-2 rounded-xl text-xs font-bold transition ' + (currentAdminTab === 'drivers' ? 'bg-peao-500 text-white shadow-soft' : 'bg-white text-silver-300 ring-silver hover:text-white') + '">🚗 Motoristas (' + fDrivers.length + ')</button>' +
+        '<button data-adm-tab="reviews" class="px-4 py-2 rounded-xl text-xs font-bold transition ' + (currentAdminTab === 'reviews' ? 'bg-peao-500 text-white shadow-soft' : 'bg-white text-silver-300 ring-silver hover:text-white') + '">⭐ Avaliações (' + fReviews.length + ')' + (pendReviews.length ? ' <span class="bg-amber-400 text-amber-950 px-1.5 py-0.2 rounded-full font-extrabold text-[10px]">' + pendReviews.length + '</span>' : '') + '</button>' +
+        '<button data-adm-tab="leads" class="px-4 py-2 rounded-xl text-xs font-bold transition ' + (currentAdminTab === 'leads' ? 'bg-peao-500 text-white shadow-soft' : 'bg-white text-silver-300 ring-silver hover:text-white') + '">🌎 Leads de Expansão (' + fLeads.length + ')</button>' +
+      '</div>';
+
+      // Forms Sections
+      var formsHtml = '<div id="addStoreForm" class="hidden mb-6 bg-white rounded-3xl ring-silver shadow-soft p-6 space-y-4">' +
+        '<h3 class="font-display font-bold text-lg text-white flex items-center gap-2"><span>🏢</span> Cadastrar Empresa Rápida (Admin)</h3>' +
+        '<p class="text-xs text-silver-400">A empresa entra ativa diretamente no guia da cidade escolhida.</p>' +
+        '<div class="grid sm:grid-cols-2 gap-3">' +
+          '<input id="as_nome" placeholder="Nome da empresa *" class="px-4 py-2.5 rounded-xl bg-silver-50 ring-silver text-navy-900 text-sm">' +
+          '<select id="as_cat" class="px-4 py-2.5 rounded-xl bg-silver-50 ring-silver text-navy-900 text-sm">' + CATS.map(function(c){ return '<option value="' + c.id + '">' + c.emoji + ' ' + esc(c.nome) + '</option>'; }).join('') + '</select>' +
+          '<input id="as_wa" placeholder="WhatsApp (DDD + Número) *" class="px-4 py-2.5 rounded-xl bg-silver-50 ring-silver text-navy-900 text-sm">' +
+          '<input id="as_tel" placeholder="Telefone fixo" class="px-4 py-2.5 rounded-xl bg-silver-50 ring-silver text-navy-900 text-sm">' +
+          '<input id="as_bairro" placeholder="Bairro" class="px-4 py-2.5 rounded-xl bg-silver-50 ring-silver text-navy-900 text-sm">' +
+          '<input id="as_end" placeholder="Endereço (Rua, nº)" class="px-4 py-2.5 rounded-xl bg-silver-50 ring-silver text-navy-900 text-sm">' +
+          '<select id="as_city" class="px-4 py-2.5 rounded-xl bg-silver-50 ring-silver text-navy-900 text-sm">' + Object.keys(CITY_NAMES).filter(function(k){ return k !== 'nacional'; }).map(function(k){ return '<option value="' + k + '">' + esc(CITY_NAMES[k]) + '</option>'; }).join('') + '</select>' +
+          '<select id="as_plano" class="px-4 py-2.5 rounded-xl bg-silver-50 ring-silver text-navy-900 text-sm"><option value="pro">Plano Pro (R$ 149 / Ilimitado)</option><option value="destaque">Plano Destaque (R$ 79)</option><option value="gratis">Plano Grátis</option></select>' +
+        '</div>' +
+        '<textarea id="as_desc" rows="2" placeholder="Descrição curta da empresa" class="w-full px-4 py-2.5 rounded-xl bg-silver-50 ring-silver text-navy-900 text-sm"></textarea>' +
+        '<div class="flex items-center justify-between">' +
+          '<label class="flex items-center gap-2 text-xs text-silver-300 font-semibold"><input id="as_destaque" type="checkbox" checked class="w-4 h-4 accent-peao-500"> Ativar com selo ⭐ Destaque</label>' +
+          '<button id="as_submit" class="btn-shine bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-6 py-2.5 rounded-xl text-xs">Publicar Empresa Agora →</button>' +
+        '</div>' +
+        '<span id="as_msg" class="text-xs"></span>' +
+      '</div>' +
+      '<div id="addJobForm" class="hidden mb-6 bg-white rounded-3xl ring-silver shadow-soft p-6 space-y-4">' +
+        '<h3 class="font-display font-bold text-lg text-white flex items-center gap-2"><span>💼</span> Publicar Vaga de Emprego ou Perfil</h3>' +
+        '<div class="grid sm:grid-cols-2 gap-3">' +
+          '<select id="job_cat" class="px-4 py-2.5 rounded-xl bg-silver-50 ring-silver text-navy-900 text-sm"><option value="vagas-empresa">📢 Empresa anunciando vaga</option><option value="vagas-candidato">🙋 Candidato buscando oportunidade</option><option value="vagas-nac-empresa">📣 Vaga Nacional / Remoto</option></select>' +
+          '<input id="job_titulo" placeholder="Título da vaga ou cargo desejado *" class="px-4 py-2.5 rounded-xl bg-silver-50 ring-silver text-navy-900 text-sm">' +
+          '<input id="job_empresa" placeholder="Nome da empresa ou do candidato *" class="px-4 py-2.5 rounded-xl bg-silver-50 ring-silver text-navy-900 text-sm">' +
+          '<select id="job_tipo" class="px-4 py-2.5 rounded-xl bg-silver-50 ring-silver text-navy-900 text-sm"><option value="temporario">🤠 Temporário / Festa do Peão</option><option value="clt">📋 CLT (Efetivo)</option><option value="freelancer">⚡ Freelancer / Diária</option><option value="estagio">🎓 Estágio</option><option value="pj">🏢 PJ</option><option value="home-office">💻 Home Office / Remoto</option></select>' +
+          '<input id="job_salario" placeholder="Salário / Diária (Ex.: R$ 2.500 ou R$ 180/dia)" class="px-4 py-2.5 rounded-xl bg-silver-50 ring-silver text-navy-900 text-sm">' +
+          '<input id="job_wa" placeholder="WhatsApp para contato *" class="px-4 py-2.5 rounded-xl bg-silver-50 ring-silver text-navy-900 text-sm">' +
+          '<select id="job_city" class="px-4 py-2.5 rounded-xl bg-silver-50 ring-silver text-navy-900 text-sm">' + Object.keys(CITY_NAMES).map(function(k){ return '<option value="' + k + '">' + esc(CITY_NAMES[k]) + '</option>'; }).join('') + '</select>' +
+          '<input id="job_email" placeholder="E-mail de contato (opcional)" class="px-4 py-2.5 rounded-xl bg-silver-50 ring-silver text-navy-900 text-sm">' +
+        '</div>' +
+        '<textarea id="job_desc" rows="2" placeholder="Requisitos, jornada e detalhes da vaga..." class="w-full px-4 py-2.5 rounded-xl bg-silver-50 ring-silver text-navy-900 text-sm"></textarea>' +
+        '<div class="flex items-center justify-between">' +
+          '<label class="flex items-center gap-2 text-xs text-silver-300 font-semibold"><input id="job_destaque" type="checkbox" checked class="w-4 h-4 accent-peao-500"> Publicar com selo ⭐ Destaque</label>' +
+          '<button id="job_submit" class="btn-shine bg-blue-600 hover:bg-blue-700 text-white font-bold px-6 py-2.5 rounded-xl text-xs">Publicar Vaga Agora →</button>' +
+        '</div>' +
+        '<span id="job_msg" class="text-xs"></span>' +
+      '</div>' +
+      '<div id="addAnuncioForm" class="hidden mb-6 bg-white rounded-3xl ring-silver shadow-soft p-6 space-y-4">' +
+        '<h3 class="font-display font-bold text-lg text-white flex items-center gap-2"><span>📋</span> Criar Anúncio Classificado (Admin)</h3>' +
+        '<div class="grid sm:grid-cols-2 gap-3">' +
+          '<select id="an_cat" class="px-4 py-2.5 rounded-xl bg-silver-50 ring-silver text-navy-900 text-sm">' + CLASSIFIED_CATS.map(function(c){ return '<option value="' + c.id + '">' + (c.emoji || '📋') + ' ' + esc(c.nome) + '</option>'; }).join('') + '</select>' +
+          '<input id="an_titulo" placeholder="Título do anúncio *" class="px-4 py-2.5 rounded-xl bg-silver-50 ring-silver text-navy-900 text-sm">' +
+          '<input id="an_preco" placeholder="Preço / Valor (Ex.: R$ 1.500 / A combinar)" class="px-4 py-2.5 rounded-xl bg-silver-50 ring-silver text-navy-900 text-sm">' +
+          '<input id="an_anunciante" placeholder="Nome do anunciante *" class="px-4 py-2.5 rounded-xl bg-silver-50 ring-silver text-navy-900 text-sm">' +
+          '<input id="an_wa" placeholder="WhatsApp para contato *" class="px-4 py-2.5 rounded-xl bg-silver-50 ring-silver text-navy-900 text-sm">' +
+          '<select id="an_city" class="px-4 py-2.5 rounded-xl bg-silver-50 ring-silver text-navy-900 text-sm">' + Object.keys(CITY_NAMES).map(function(k){ return '<option value="' + k + '">' + esc(CITY_NAMES[k]) + '</option>'; }).join('') + '</select>' +
+        '</div>' +
+        '<textarea id="an_desc" rows="2" placeholder="Descrição completa do anúncio..." class="w-full px-4 py-2.5 rounded-xl bg-silver-50 ring-silver text-navy-900 text-sm"></textarea>' +
+        '<div class="flex items-center justify-between">' +
+          '<label class="flex items-center gap-2 text-xs text-silver-300 font-semibold"><input id="an_destaque" type="checkbox" checked class="w-4 h-4 accent-peao-500"> Publicar com selo ⭐ Destaque</label>' +
+          '<button id="an_submit" class="btn-shine bg-purple-600 hover:bg-purple-700 text-white font-bold px-6 py-2.5 rounded-xl text-xs">Criar Anúncio Agora →</button>' +
+        '</div>' +
+        '<span id="an_msg" class="text-xs"></span>' +
+      '</div>';
+
+      // Tab Content Rendering
+      var tabContent = '';
+      if (currentAdminTab === 'stores') {
+        tabContent = '<div class="space-y-4">' +
+          (pendStores.length ? '<h3 class="font-display font-bold text-lg text-amber-400">⏳ Empresas Aguardando Aprovação (' + pendStores.length + ')</h3><div class="space-y-3">' + pendStores.map(function(s){ return adminRow(s, true); }).join('') + '</div>' : '') +
+          '<h3 class="font-display font-bold text-lg text-white mt-6">Todas as Empresas (' + fStores.length + ')</h3>' +
+          (fStores.length ? '<div class="space-y-3">' + fStores.map(function(s){ return adminRow(s, false); }).join('') + '</div>' : '<p class="text-silver-500 text-sm">Nenhuma empresa encontrada para esta cidade.</p>') +
+        '</div>';
+      } else if (currentAdminTab === 'listings') {
+        tabContent = '<div class="space-y-4">' +
+          (pendListings.length ? '<h3 class="font-display font-bold text-lg text-amber-400">⏳ Classificados Aguardando Aprovação (' + pendListings.length + ')</h3><div class="space-y-3">' + pendListings.map(function(l){ return adminListingRow(l); }).join('') + '</div>' : '') +
+          '<h3 class="font-display font-bold text-lg text-white mt-6">Todos os Classificados (' + fListings.length + ')</h3>' +
+          (fListings.length ? '<div class="space-y-3">' + fListings.map(function(l){ return adminListingRow(l); }).join('') + '</div>' : '<p class="text-silver-500 text-sm">Nenhum classificado encontrado.</p>') +
+        '</div>';
+      } else if (currentAdminTab === 'jobs') {
+        tabContent = '<div class="space-y-4">' +
+          (pendJobs.length ? '<h3 class="font-display font-bold text-lg text-amber-400">⏳ Vagas & Talentos Aguardando Aprovação (' + pendJobs.length + ')</h3><div class="space-y-3">' + pendJobs.map(function(j){ return adminListingRow(j); }).join('') + '</div>' : '') +
+          '<h3 class="font-display font-bold text-lg text-white mt-6">Todas as Vagas & Banco de Talentos (' + fJobs.length + ')</h3>' +
+          (fJobs.length ? '<div class="space-y-3">' + fJobs.map(function(j){ return adminListingRow(j); }).join('') + '</div>' : '<p class="text-silver-500 text-sm">Nenhuma vaga encontrada.</p>') +
+        '</div>';
+      } else if (currentAdminTab === 'drivers') {
+        tabContent = '<div class="space-y-4">' +
+          '<h3 class="font-display font-bold text-lg text-white">Motoristas Cadastrados (' + fDrivers.length + ')</h3>' +
+          (fDrivers.length ? '<div class="space-y-3">' + fDrivers.map(driverAdminRow).join('') + '</div>' : '<p class="text-silver-500 text-sm">Nenhum motorista cadastrado.</p>') +
+        '</div>';
+      } else if (currentAdminTab === 'reviews') {
+        tabContent = '<div class="space-y-4">' +
+          '<h3 class="font-display font-bold text-lg text-white">Avaliações (' + fReviews.length + ')</h3>' +
+          (fReviews.length ? '<div class="space-y-3">' + fReviews.map(function(rv){
+            var st = (stores.filter(function (x) { return x.id === rv.store_id; })[0] || {}).nome || '—';
+            return '<div class="bg-white rounded-2xl ring-silver shadow-soft p-4 flex items-center justify-between gap-3">' +
+              '<div class="flex-1 min-w-0"><p class="text-sm"><b>' + esc(rv.nota) + '★</b> — ' + esc(st) + (rv.nome ? ' · ' + esc(rv.nome) : '') + ' · <span class="font-semibold ' + (rv.status === 'ativo' ? 'text-emerald-400' : 'text-amber-400') + '">' + esc(rv.status) + '</span></p><p class="text-xs text-silver-400 truncate mt-0.5">' + esc(rv.comentario || 'Sem comentário') + '</p></div>' +
+              '<div class="flex items-center gap-2">' +
+                (rv.status !== 'ativo' ? '<button data-rev-ap="' + esc(rv.id) + '" class="text-xs font-bold text-white bg-emerald-600 px-3 py-1.5 rounded-lg">Aprovar</button>' : '') +
+                (rv.status !== 'rejeitado' ? '<button data-rev-rj="' + esc(rv.id) + '" class="text-xs font-bold text-peao-600 bg-peao-500/10 px-3 py-1.5 rounded-lg">Rejeitar</button>' : '') +
+              '</div>' +
+            '</div>';
+          }).join('') : '<p class="text-silver-500 text-sm">Nenhuma avaliação encontrada.</p>') +
+        '</div>';
+      } else if (currentAdminTab === 'leads') {
+        tabContent = '<div class="space-y-4">' +
+          growthHtml +
+          '<h3 class="font-display font-bold text-lg text-white">Leads por Cidade (' + fLeads.length + ')</h3>' +
+          (fLeads.length ? '<div class="space-y-3">' + fLeads.map(leadAdminRow).join('') + '</div>' : '<p class="text-silver-500 text-sm">Nenhum lead registrado.</p>') +
+        '</div>';
+      }
+
+      root.innerHTML = '<div class="flex items-center justify-between mb-4"><h1 class="font-display text-2xl md:text-3xl font-extrabold text-white">Painel Administrativo AQUITEM</h1></div>' +
+        stats + topBar + formsHtml + tabs + '<div id="leadConvertRoot"></div>' + tabContent;
+
+      wireAdminEvents(root, stores, listings, cityLeads);
+    }
+
+    function adminListingRow(l) {
+      var wa = String(l.whatsapp || '').replace(/\D/g, '');
+      var cObj = CLASSIFIED_CATS.filter(function(x){ return x.id === l.categoria; })[0];
+      var catName = cObj ? (cObj.emoji + ' ' + cObj.nome) : l.categoria;
+      var isVaga = l.categoria.startsWith('vagas') || l.categoria === 'empregos';
+      var statusColor = l.status === 'ativo' ? 'text-emerald-400' : (l.status === 'pendente' ? 'text-amber-400' : 'text-silver-500');
+
+      return '<div class="bg-white rounded-2xl ring-silver shadow-soft p-4 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 border border-white/5">' +
+        '<div class="flex-1 min-w-0">' +
+          '<div class="flex items-center gap-2 flex-wrap mb-1">' +
+            '<span class="text-[10px] font-bold text-peao-400 uppercase tracking-wider bg-peao-500/10 px-2 py-0.5 rounded">' + esc(catName) + '</span>' +
+            (l.subcategoria ? '<span class="text-[10px] font-semibold text-silver-300 bg-white/10 px-2 py-0.5 rounded">' + esc(l.subcategoria.toUpperCase()) + '</span>' : '') +
+            (l.destaque ? '<span class="text-[10px] font-bold text-amber-300 bg-amber-400/20 px-2 py-0.5 rounded">⭐ Destaque</span>' : '') +
+            '<span class="text-xs font-semibold ' + statusColor + '">' + esc(l.status.toUpperCase()) + '</span>' +
+          '</div>' +
+          '<a href="anuncio.html?id=' + encodeURIComponent(l.id) + '" class="font-display font-bold text-white text-base hover:text-peao-400 block truncate">' + esc(l.titulo) + '</a>' +
+          '<p class="text-xs text-silver-400 mt-1">' + (l.anunciante_nome ? '👤 ' + esc(l.anunciante_nome) + ' · ' : '') + '📍 ' + esc([l.bairro, l.cidade || 'Barretos'].filter(Boolean).join(' · ')) + (l.preco ? ' · 💰 <b class="text-emerald-400">' + esc(l.preco) + '</b>' : '') + '</p>' +
+        '</div>' +
+        '<div class="flex items-center gap-2 flex-wrap justify-end shrink-0 pt-2 sm:pt-0 border-t sm:border-t-0 border-white/10">' +
+          (l.status !== 'ativo' ? '<button data-lst-ap="' + esc(l.id) + '" class="text-xs font-bold text-white bg-emerald-600 hover:bg-emerald-700 px-3 py-1.5 rounded-lg">✓ Aprovar</button>' : '') +
+          (l.status === 'pendente' ? '<button data-lst-rj="' + esc(l.id) + '" class="text-xs font-bold text-peao-500 bg-peao-500/10 hover:bg-peao-500/20 px-3 py-1.5 rounded-lg">Rejeitar</button>' : '') +
+          '<button data-lst-dest="' + esc(l.id) + '" data-st="' + (l.destaque ? 0 : 1) + '" class="text-xs font-semibold ' + (l.destaque ? 'text-amber-400' : 'text-silver-300 hover:text-white') + ' bg-white/5 px-2.5 py-1.5 rounded-lg">' + (l.destaque ? '⭐ Com Destaque' : '☆ Destacar') + '</button>' +
+          (l.status === 'ativo' ? '<button data-lst-end="' + esc(l.id) + '" class="text-xs font-semibold text-silver-400 hover:text-white bg-white/5 px-2.5 py-1.5 rounded-lg">🔒 Encerrar</button>' : (l.status === 'encerrado' ? '<button data-lst-act="' + esc(l.id) + '" class="text-xs font-semibold text-emerald-400 bg-emerald-500/10 px-2.5 py-1.5 rounded-lg">Reativar</button>' : '')) +
+          (wa ? '<a href="https://wa.me/' + esc(wa) + '" target="_blank" rel="noopener noreferrer" class="text-xs font-bold text-white bg-[#25D366] px-2.5 py-1.5 rounded-lg">WhatsApp</a>' : '') +
+          '<button data-lst-del="' + esc(l.id) + '" class="text-xs font-semibold text-peao-500 hover:text-peao-400 px-2 py-1.5">🗑️</button>' +
+        '</div>' +
+      '</div>';
+    }
+
+    function wireAdminEvents(container, storesList, listingsList, leadsList) {
+      $('#btnLogout').addEventListener('click', AUTH.logout);
+
+      var cityFilterSel = $('#admCitySel');
+      if (cityFilterSel) {
+        cityFilterSel.addEventListener('change', function () {
+          adminCity = this.value;
+          renderAdminView();
+        });
+      }
+
+      container.querySelectorAll('[data-adm-tab]').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          currentAdminTab = btn.getAttribute('data-adm-tab');
+          renderAdminView();
+        });
       });
-    });
-    root.querySelectorAll('select[data-plano-id]').forEach(function (sel) {
-      sel.addEventListener('change', function () { aAdminRpc('admin_set_store_plano', { p_store_id: sel.getAttribute('data-plano-id'), p_plano: sel.value }); });
-    });
-    root.querySelectorAll('[data-rev-ap]').forEach(function (b) { b.addEventListener('click', function () { aAdminRpc('admin_set_review_status', { p_review_id: b.getAttribute('data-rev-ap'), p_status: 'ativo' }).then(function(){ pageAdmin(); }); }); });
-    root.querySelectorAll('[data-rev-rj]').forEach(function (b) { b.addEventListener('click', function () { aAdminRpc('admin_set_review_status', { p_review_id: b.getAttribute('data-rev-rj'), p_status: 'rejeitado' }).then(function(){ pageAdmin(); }); }); });
-    root.querySelectorAll('[data-dap]').forEach(function (b) { b.addEventListener('click', function () { aAdminRpc('admin_set_driver_status', { p_driver_id: b.getAttribute('data-dap'), p_status: 'ativo' }).then(function(){ pageAdmin(); }); }); });
-    root.querySelectorAll('[data-ddis]').forEach(function (b) { b.addEventListener('click', function () { aPatch('drivers', b.getAttribute('data-ddis'), { disponivel_agora: b.getAttribute('data-st') === '1' }).then(function () { pageAdmin(); }); }); });
-    root.querySelectorAll('[data-ddest]').forEach(function (b) { b.addEventListener('click', function () { aPatch('drivers', b.getAttribute('data-ddest'), { destaque: b.getAttribute('data-st') === '1' }).then(function () { pageAdmin(); }); }); });
-    root.querySelectorAll('select[data-dplano-id]').forEach(function (sel) { sel.addEventListener('change', function () { aPatch('drivers', sel.getAttribute('data-dplano-id'), { plano: sel.value }).then(function () {}); }); });
-    root.querySelectorAll('[data-lst-ap]').forEach(function (b) { b.addEventListener('click', function () { aAdminRpc('admin_set_listing_status', { p_listing_id: b.getAttribute('data-lst-ap'), p_status: 'ativo' }).then(function(){ pageAdmin(); }); }); });
-    root.querySelectorAll('[data-lst-rj]').forEach(function (b) { b.addEventListener('click', function () { aAdminRpc('admin_set_listing_status', { p_listing_id: b.getAttribute('data-lst-rj'), p_status: 'rejeitado' }).then(function(){ pageAdmin(); }); }); });
-    root.querySelectorAll('[data-lst-dest]').forEach(function (b) { b.addEventListener('click', function () { aPatch('listings', b.getAttribute('data-lst-dest'), { destaque: b.getAttribute('data-st') === '1' }).then(function () { pageAdmin(); }); }); });
-    root.querySelectorAll('[data-lst-end]').forEach(function (b) { b.addEventListener('click', function () { if (confirm('Marcar como vendido/alugado? O anúncio some das listagens.')) aPatch('listings', b.getAttribute('data-lst-end'), { status: 'encerrado' }).then(function () { pageAdmin(); }); }); });
-    root.querySelectorAll('[data-lst-act]').forEach(function (b) { b.addEventListener('click', function () { aPatch('listings', b.getAttribute('data-lst-act'), { status: 'ativo' }).then(function () { pageAdmin(); }); }); });
-    root.querySelectorAll('[data-lst-del]').forEach(function (b) { b.addEventListener('click', function () { if (confirm('Excluir este anúncio permanentemente?')) fetch(B('listings?id=eq.' + encodeURIComponent(b.getAttribute('data-lst-del'))), { method: 'DELETE', headers: aH() }).then(function () { pageAdmin(); }); }); });
-    root.querySelectorAll('[data-lead-convert]').forEach(function (btn) { btn.addEventListener('click', function () { var lead = cityLeads.filter(function(x){ return x.id === btn.getAttribute('data-lead-convert'); })[0]; var box = $('#leadConvertRoot'); if (!lead || !box) return; box.innerHTML = leadConvertForm(lead); window.scrollTo(0, 0); var close = $('#closeLeadConvert'); if (close) close.addEventListener('click', function(){ box.innerHTML=''; }); var form = $('#leadConvertForm'); if (form) form.addEventListener('submit', function(e){ e.preventDefault(); var msg=$('#leadConvertMsg'), fd=new FormData(form), citySlug=fd.get('city_slug'), nome=String(fd.get('nome')||'').trim(), categoria=fd.get('categoria'); if(!nome || !categoria){ msg.textContent='Preencha nome e categoria.'; msg.className='sm:col-span-2 text-sm text-red-200'; return; } var submit=form.querySelector('[type=submit]') || form.querySelector('button'); if(!submit){ msg.textContent='Botão de publicação não encontrado.'; msg.className='sm:col-span-2 text-sm text-red-200'; return; } submit.disabled=true; submit.textContent='Publicando…'; var obj={ p_lead_id:fd.get('lead_id'), p_nome:nome, p_categoria:categoria, p_plano:fd.get('plano')||'gratis', p_destaque:fd.get('destaque') === 'on', p_whatsapp:String(fd.get('whatsapp')||'').trim(), p_responsavel:String(fd.get('responsavel')||'').trim(), p_descricao_curta:String(fd.get('descricao_curta')||'').trim() }; convertLead(obj).then(function(){ msg.textContent='✓ Empresa publicada em '+(CITY_NAMES[citySlug]||citySlug)+'!'; msg.className='sm:col-span-2 text-sm text-emerald-200'; setTimeout(pageAdmin,800); }).catch(function(err){ msg.textContent=err.message||'Erro ao publicar.'; msg.className='sm:col-span-2 text-sm text-red-200'; submit.disabled=false; submit.textContent='Revisar e publicar empresa →'; }); }); }); });
-    root.querySelectorAll('select[data-lead-status]').forEach(function (sel) { sel.addEventListener('change', function () { aAdminRpc('admin_set_lead_status', { p_lead_id: sel.getAttribute('data-lead-status'), p_status: sel.value }).then(function(){ pageAdmin(); }); }); });
+
+      // Toggle Forms
+      var btnAddStore = $('#btnAddStore');
+      if (btnAddStore) btnAddStore.addEventListener('click', function () {
+        var f = $('#addStoreForm'); if (f) f.classList.toggle('hidden');
+        if ($('#addJobForm')) $('#addJobForm').classList.add('hidden');
+        if ($('#addAnuncioForm')) $('#addAnuncioForm').classList.add('hidden');
+      });
+
+      var btnAddJob = $('#btnAddJob');
+      if (btnAddJob) btnAddJob.addEventListener('click', function () {
+        var f = $('#addJobForm'); if (f) f.classList.toggle('hidden');
+        if ($('#addStoreForm')) $('#addStoreForm').classList.add('hidden');
+        if ($('#addAnuncioForm')) $('#addAnuncioForm').classList.add('hidden');
+      });
+
+      var btnAddAnuncio = $('#btnAddAnuncio');
+      if (btnAddAnuncio) btnAddAnuncio.addEventListener('click', function () {
+        var f = $('#addAnuncioForm'); if (f) f.classList.toggle('hidden');
+        if ($('#addStoreForm')) $('#addStoreForm').classList.add('hidden');
+        if ($('#addJobForm')) $('#addJobForm').classList.add('hidden');
+      });
+
+      // Submit Store
+      var asSub = $('#as_submit');
+      if (asSub) asSub.addEventListener('click', function () {
+        var msg = $('#as_msg'); var nome = ($('#as_nome').value||'').trim(); var cat = $('#as_cat').value;
+        if (!nome || !cat) { msg.className = 'text-xs text-peao-500'; msg.textContent = 'Preencha o nome e a categoria.'; return; }
+        var cSlug = $('#as_city').value || 'barretos';
+        var cName = CITY_NAMES[cSlug] || 'Barretos';
+        asSub.disabled = true; asSub.textContent = 'Cadastrando…';
+        aPost('stores', {
+          nome: nome, categoria: cat, endereco: ($('#as_end').value||'').trim(),
+          whatsapp: ($('#as_wa').value||'').trim(), telefone: ($('#as_tel').value||'').trim(),
+          bairro: ($('#as_bairro').value||'').trim(), descricao_curta: ($('#as_desc').value||'').trim(),
+          cidade: cName, city_slug: cSlug, status: 'pendente', aceite_termos: true, autorizacao_contato: true
+        }).then(function (arr) {
+          var cr = arr && arr[0];
+          if (!cr) { msg.className = 'text-xs text-peao-500'; msg.textContent = 'Erro ao cadastrar.'; asSub.disabled = false; asSub.textContent = 'Publicar Empresa Agora →'; return; }
+          aPatch('stores', cr.id, { status: 'ativo', plano: $('#as_plano').value, destaque: $('#as_destaque').checked }).then(function () {
+            msg.className = 'text-xs text-emerald-400'; msg.textContent = '✓ Empresa cadastrada e publicada!'; pageAdmin();
+          });
+        });
+      });
+
+      // Submit Job
+      var jobSub = $('#job_submit');
+      if (jobSub) jobSub.addEventListener('click', function () {
+        var msg = $('#job_msg');
+        var titulo = ($('#job_titulo').value||'').trim();
+        var empresa = ($('#job_empresa').value||'').trim();
+        var wa = ($('#job_wa').value||'').trim();
+        var cat = $('#job_cat').value || 'vagas-empresa';
+        if (!titulo || !empresa || !wa) { msg.className = 'text-xs text-peao-500'; msg.textContent = 'Preencha título, anunciante e WhatsApp.'; return; }
+        jobSub.disabled = true; jobSub.textContent = 'Publicando…';
+        var cSlug = $('#job_city').value || 'barretos';
+        var cName = CITY_NAMES[cSlug] || 'Barretos';
+        aAdminRpc('admin_insert_listing', { p_data: {
+          titulo: titulo,
+          anunciante_nome: empresa,
+          categoria: cat,
+          subcategoria: $('#job_tipo').value || 'temporario',
+          descricao: ($('#job_desc').value||'').trim(),
+          preco: ($('#job_salario').value||'').trim(),
+          whatsapp: wa,
+          email: ($('#job_email').value||'').trim(),
+          cidade: cName,
+          city_slug: cSlug,
+          status: 'ativo',
+          plano: $('#job_destaque').checked ? 'destaque' : 'gratis',
+          destaque: $('#job_destaque').checked,
+          anunciante_tipo: cat === 'vagas-candidato' ? 'candidato' : 'empresa'
+        }}).then(function (cr) {
+          if (!cr) { msg.className = 'text-xs text-peao-500'; msg.textContent = 'Erro ao publicar.'; jobSub.disabled = false; jobSub.textContent = 'Publicar Vaga Agora →'; return; }
+          // Ativa se inserido como pendente
+          if (cr.id) { aAdminRpc('admin_set_listing_status', { p_listing_id: cr.id, p_status: 'ativo' }); }
+          msg.className = 'text-xs text-emerald-400'; msg.textContent = '✓ Vaga publicada com sucesso!'; setTimeout(pageAdmin, 1000);
+        }).catch(function (e) {
+          msg.className = 'text-xs text-peao-500'; msg.textContent = 'Erro: ' + (e.message || e); jobSub.disabled = false;
+        });
+      });
+
+      // Submit Classified
+      var anSub = $('#an_submit');
+      if (anSub) anSub.addEventListener('click', function () {
+        var msg = $('#an_msg');
+        var titulo = ($('#an_titulo').value||'').trim();
+        var anunciante = ($('#an_anunciante').value||'').trim();
+        var wa = ($('#an_wa').value||'').trim();
+        var cat = $('#an_cat').value;
+        if (!titulo || !anunciante || !wa || !cat) { msg.className = 'text-xs text-peao-500'; msg.textContent = 'Preencha todos os campos obrigatórios.'; return; }
+        anSub.disabled = true; anSub.textContent = 'Publicando…';
+        var cSlug = $('#an_city').value || 'barretos';
+        var cName = CITY_NAMES[cSlug] || 'Barretos';
+        aAdminRpc('admin_insert_listing', { p_data: {
+          titulo: titulo,
+          anunciante_nome: anunciante,
+          categoria: cat,
+          descricao: ($('#an_desc').value||'').trim(),
+          preco: ($('#an_preco').value||'').trim(),
+          whatsapp: wa,
+          cidade: cName,
+          city_slug: cSlug,
+          status: 'ativo',
+          plano: $('#an_destaque').checked ? 'destaque' : 'gratis',
+          destaque: $('#an_destaque').checked,
+          anunciante_tipo: 'particular'
+        }}).then(function (cr) {
+          if (!cr) { msg.className = 'text-xs text-peao-500'; msg.textContent = 'Erro ao criar anúncio.'; anSub.disabled = false; anSub.textContent = 'Criar Anúncio Agora →'; return; }
+          if (cr.id) { aAdminRpc('admin_set_listing_status', { p_listing_id: cr.id, p_status: 'ativo' }); }
+          msg.className = 'text-xs text-emerald-400'; msg.textContent = '✓ Anúncio publicado em ' + cName + '!'; setTimeout(pageAdmin, 1000);
+        }).catch(function (e) {
+          msg.className = 'text-xs text-peao-500'; msg.textContent = 'Erro: ' + (e.message || e); anSub.disabled = false;
+        });
+      });
+
+      // CSV Export
+      var btnCsv = $('#btnCsv');
+      if (btnCsv) btnCsv.addEventListener('click', function () { exportCSV(storesList); });
+
+      // Actions on Stores
+      container.querySelectorAll('[data-act]').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          var id = btn.getAttribute('data-id'), act = btn.getAttribute('data-act'), patch = {};
+          if (act === 'aprovar') patch.status = 'ativo';
+          if (act === 'rejeitar') patch.status = 'rejeitado';
+          if (act === 'destaque-on') patch.destaque = true;
+          if (act === 'destaque-off') patch.destaque = false;
+          aPatch('stores', id, patch).then(function () { pageAdmin(); });
+        });
+      });
+
+      container.querySelectorAll('select[data-plano-id]').forEach(function (sel) {
+        sel.addEventListener('change', function () { aAdminRpc('admin_set_store_plano', { p_store_id: sel.getAttribute('data-plano-id'), p_plano: sel.value }); });
+      });
+
+      container.querySelectorAll('[data-store-delete]').forEach(function (b) {
+        b.addEventListener('click', function () {
+          if (!confirm('Excluir permanentemente a empresa ' + b.getAttribute('data-store-name') + '? Fotos e ofertas também serão removidas.')) return;
+          fetch(B('stores?id=eq.' + encodeURIComponent(b.getAttribute('data-store-delete'))), { method: 'DELETE', headers: aH() }).then(function () { pageAdmin(); });
+        });
+      });
+
+      // Actions on Listings & Jobs
+      container.querySelectorAll('[data-lst-ap]').forEach(function (b) {
+        b.addEventListener('click', function () { aAdminRpc('admin_set_listing_status', { p_listing_id: b.getAttribute('data-lst-ap'), p_status: 'ativo' }).then(function () { pageAdmin(); }); });
+      });
+      container.querySelectorAll('[data-lst-rj]').forEach(function (b) {
+        b.addEventListener('click', function () { aAdminRpc('admin_set_listing_status', { p_listing_id: b.getAttribute('data-lst-rj'), p_status: 'rejeitado' }).then(function () { pageAdmin(); }); });
+      });
+      container.querySelectorAll('[data-lst-dest]').forEach(function (b) {
+        b.addEventListener('click', function () { aPatch('listings', b.getAttribute('data-lst-dest'), { destaque: b.getAttribute('data-st') === '1' }).then(function () { pageAdmin(); }); });
+      });
+      container.querySelectorAll('[data-lst-end]').forEach(function (b) {
+        b.addEventListener('click', function () { if (confirm('Marcar como encerrado/vendido/preenchido?')) aAdminRpc('admin_set_listing_status', { p_listing_id: b.getAttribute('data-lst-end'), p_status: 'encerrado' }).then(function () { pageAdmin(); }); });
+      });
+      container.querySelectorAll('[data-lst-act]').forEach(function (b) {
+        b.addEventListener('click', function () { aAdminRpc('admin_set_listing_status', { p_listing_id: b.getAttribute('data-lst-act'), p_status: 'ativo' }).then(function () { pageAdmin(); }); });
+      });
+      container.querySelectorAll('[data-lst-del]').forEach(function (b) {
+        b.addEventListener('click', function () {
+          if (confirm('Excluir este anúncio/vaga permanentemente?')) fetch(B('listings?id=eq.' + encodeURIComponent(b.getAttribute('data-lst-del'))), { method: 'DELETE', headers: aH() }).then(function () { pageAdmin(); });
+        });
+      });
+
+      // Actions on Reviews
+      container.querySelectorAll('[data-rev-ap]').forEach(function (b) {
+        b.addEventListener('click', function () { aAdminRpc('admin_set_review_status', { p_review_id: b.getAttribute('data-rev-ap'), p_status: 'ativo' }).then(function () { pageAdmin(); }); });
+      });
+      container.querySelectorAll('[data-rev-rj]').forEach(function (b) {
+        b.addEventListener('click', function () { aAdminRpc('admin_set_review_status', { p_review_id: b.getAttribute('data-rev-rj'), p_status: 'rejeitado' }).then(function () { pageAdmin(); }); });
+      });
+
+      // Actions on Drivers
+      container.querySelectorAll('[data-dap]').forEach(function (b) {
+        b.addEventListener('click', function () { aAdminRpc('admin_set_driver_status', { p_driver_id: b.getAttribute('data-dap'), p_status: 'ativo' }).then(function () { pageAdmin(); }); });
+      });
+      container.querySelectorAll('[data-ddis]').forEach(function (b) {
+        b.addEventListener('click', function () { aPatch('drivers', b.getAttribute('data-ddis'), { disponivel_agora: b.getAttribute('data-st') === '1' }).then(function () { pageAdmin(); }); });
+      });
+      container.querySelectorAll('[data-ddest]').forEach(function (b) {
+        b.addEventListener('click', function () { aPatch('drivers', b.getAttribute('data-ddest'), { destaque: b.getAttribute('data-st') === '1' }).then(function () { pageAdmin(); }); });
+      });
+      container.querySelectorAll('select[data-dplano-id]').forEach(function (sel) {
+        sel.addEventListener('change', function () { aPatch('drivers', sel.getAttribute('data-dplano-id'), { plano: sel.value }).then(function () {}); });
+      });
+
+      // Actions on Leads
+      container.querySelectorAll('[data-lead-delete]').forEach(function (b) {
+        b.addEventListener('click', function () { if (!confirm('Excluir permanentemente o lead ' + b.getAttribute('data-lead-name') + '?')) return; fetch(B('city_leads?id=eq.' + encodeURIComponent(b.getAttribute('data-lead-delete'))), { method: 'DELETE', headers: aH() }).then(function () { pageAdmin(); }); });
+      });
+      container.querySelectorAll('select[data-lead-status]').forEach(function (sel) {
+        sel.addEventListener('change', function () { aAdminRpc('admin_set_lead_status', { p_lead_id: sel.getAttribute('data-lead-status'), p_status: sel.value }).then(function () { pageAdmin(); }); });
+      });
+      container.querySelectorAll('[data-lead-convert]').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          var lead = leadsList.filter(function(x){ return x.id === btn.getAttribute('data-lead-convert'); })[0];
+          var box = $('#leadConvertRoot'); if (!lead || !box) return;
+          box.innerHTML = leadConvertForm(lead);
+          window.scrollTo(0, 0);
+          var close = $('#closeLeadConvert'); if (close) close.addEventListener('click', function(){ box.innerHTML = ''; });
+          var form = $('#leadConvertForm');
+          if (form) form.addEventListener('submit', function(e){
+            e.preventDefault(); var msg = $('#leadConvertMsg'), fd = new FormData(form), cSlug = fd.get('city_slug'), nome = String(fd.get('nome')||'').trim(), cat = fd.get('categoria');
+            if (!nome || !cat) { msg.textContent = 'Preencha nome e categoria.'; msg.className = 'sm:col-span-2 text-xs text-peao-400'; return; }
+            var subBtn = form.querySelector('button[type=submit]'); if (subBtn) { subBtn.disabled = true; subBtn.textContent = 'Publicando…'; }
+            convertLead({
+              p_lead_id: fd.get('lead_id'), p_nome: nome, p_categoria: cat,
+              p_plano: fd.get('plano')||'gratis', p_destaque: fd.get('destaque') === 'on',
+              p_whatsapp: String(fd.get('whatsapp')||'').trim(), p_responsavel: String(fd.get('responsavel')||'').trim(),
+              p_descricao_curta: String(fd.get('descricao_curta')||'').trim()
+            }).then(function(){
+              msg.textContent = '✓ Empresa publicada com sucesso!'; msg.className = 'sm:col-span-2 text-xs text-emerald-400';
+              setTimeout(pageAdmin, 800);
+            }).catch(function(err){
+              msg.textContent = err.message || 'Erro ao publicar.'; msg.className = 'sm:col-span-2 text-xs text-peao-400';
+              if (subBtn) { subBtn.disabled = false; subBtn.textContent = 'Revisar e publicar empresa →'; }
+            });
+          });
+        });
+      });
+    }
+
+    renderAdminView();
   }
 
   var LojistaAuth = {
@@ -1438,11 +1795,31 @@
   }
 
   function assinarPlano(entity, id, plan, email) {
-    if (!CONFIG.mp.autoUrl) { alert('Pagamento automático ainda não configurado.'); return; }
-    fetch(CONFIG.mp.autoUrl, { method: 'POST', headers: { 'Content-Type': 'application/json', apikey: CONFIG.supabase.anonKey, Authorization: 'Bearer ' + CONFIG.supabase.anonKey }, body: JSON.stringify({ entity: entity, id: id, plan: plan, email: email }) })
-      .then(function (r) { return r.json(); })
-      .then(function (j) { if (j.init_point) window.location.href = j.init_point; else alert(j.error || 'Erro ao gerar pagamento'); })
-      .catch(function () { alert('Erro de conexão.'); });
+    var fallbackLinks = {
+      'store:destaque': 'https://mpago.la/25UHZqr',
+      'store:pro': 'https://mpago.la/2HBxp5v',
+      'driver:destaque': 'https://mpago.la/2ZSErEf',
+      'driver:pro': 'https://mpago.la/11BbdJs',
+      'listing:destaque': 'https://mpago.la/25UHZqr'
+    };
+    var directLink = fallbackLinks[entity + ':' + plan] || fallbackLinks['store:destaque'];
+
+    fetch('/api/upgrade-checkout', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ entity: entity, id: id, plan: plan, email: email })
+    }).then(function (r) {
+      if (!r.ok) throw new Error('status ' + r.status);
+      return r.json();
+    }).then(function (j) {
+      if (j && j.init_point) {
+        window.location.href = j.init_point;
+      } else {
+        window.location.href = directLink;
+      }
+    }).catch(function () {
+      window.location.href = directLink;
+    });
   }
   function wireAssinar() {
     document.querySelectorAll('[data-assinar]').forEach(function (b) {
