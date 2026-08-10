@@ -127,6 +127,31 @@
       "source": "/carnavalsalvador",
       "destination": "/guia-salvador",
       "permanent": false
+    },
+    {
+      "source": "/uberlandia",
+      "destination": "/guia-uberlandia",
+      "permanent": false
+    },
+    {
+      "source": "/uberlandiamg",
+      "destination": "/guia-uberlandia",
+      "permanent": false
+    },
+    {
+      "source": "/caldasnovas",
+      "destination": "/guia-caldasnovas",
+      "permanent": false
+    },
+    {
+      "source": "/caldasnovasgo",
+      "destination": "/guia-caldasnovas",
+      "permanent": false
+    },
+    {
+      "source": "/aguasquentes",
+      "destination": "/guia-caldasnovas",
+      "permanent": false
     }
   ],
   "headers": [
@@ -210,6 +235,66 @@
         }
       ],
       "destination": "/gramado-home.html"
+    },
+    {
+      "source": "/assets/(.*)",
+      "has": [
+        {
+          "type": "host",
+          "value": "uberlandia.aquitemachadinhos.com.br"
+        }
+      ],
+      "destination": "/assets/$1"
+    },
+    {
+      "source": "/",
+      "has": [
+        {
+          "type": "host",
+          "value": "uberlandia.aquitemachadinhos.com.br"
+        }
+      ],
+      "destination": "/uberlandia-home.html"
+    },
+    {
+      "source": "/(.*)",
+      "has": [
+        {
+          "type": "host",
+          "value": "uberlandia.aquitemachadinhos.com.br"
+        }
+      ],
+      "destination": "/uberlandia-home.html"
+    },
+    {
+      "source": "/assets/(.*)",
+      "has": [
+        {
+          "type": "host",
+          "value": "caldasnovas.aquitemachadinhos.com.br"
+        }
+      ],
+      "destination": "/assets/$1"
+    },
+    {
+      "source": "/",
+      "has": [
+        {
+          "type": "host",
+          "value": "caldasnovas.aquitemachadinhos.com.br"
+        }
+      ],
+      "destination": "/caldasnovas-home.html"
+    },
+    {
+      "source": "/(.*)",
+      "has": [
+        {
+          "type": "host",
+          "value": "caldasnovas.aquitemachadinhos.com.br"
+        }
+      ],
+      "destination": "/caldasnovas-home.html"
     }
   ]
 }
