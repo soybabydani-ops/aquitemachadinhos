@@ -987,6 +987,51 @@
       "source": "/guia-rioverde",
       "destination": "/rio-verde-home",
       "permanent": false
+    },
+    {
+      "source": "/bebedouro",
+      "destination": "/bebedouro-home",
+      "permanent": false
+    },
+    {
+      "source": "/guia-bebedouro",
+      "destination": "/bebedouro-home",
+      "permanent": false
+    },
+    {
+      "source": "/colombia",
+      "destination": "/colombia-home",
+      "permanent": false
+    },
+    {
+      "source": "/guia-colombia",
+      "destination": "/colombia-home",
+      "permanent": false
+    },
+    {
+      "source": "/olimpia",
+      "destination": "/olimpia-home",
+      "permanent": false
+    },
+    {
+      "source": "/thermas",
+      "destination": "/olimpia-home",
+      "permanent": false
+    },
+    {
+      "source": "/guia-olimpia",
+      "destination": "/olimpia-home",
+      "permanent": false
+    },
+    {
+      "source": "/guaira",
+      "destination": "/guaira-home",
+      "permanent": false
+    },
+    {
+      "source": "/guia-guaira",
+      "destination": "/guaira-home",
+      "permanent": false
     }
   ],
   "headers": [
@@ -2330,6 +2375,86 @@
         }
       ],
       "destination": "/rio-verde-home.html"
+    },
+    {
+      "source": "/assets/(.*)",
+      "has": [
+        {
+          "type": "host",
+          "value": "bebedouro.aquitemachadinhos.com.br"
+        }
+      ],
+      "destination": "/assets/$1"
+    },
+    {
+      "source": "/",
+      "has": [
+        {
+          "type": "host",
+          "value": "bebedouro.aquitemachadinhos.com.br"
+        }
+      ],
+      "destination": "/bebedouro-home.html"
+    },
+    {
+      "source": "/assets/(.*)",
+      "has": [
+        {
+          "type": "host",
+          "value": "colombia.aquitemachadinhos.com.br"
+        }
+      ],
+      "destination": "/assets/$1"
+    },
+    {
+      "source": "/",
+      "has": [
+        {
+          "type": "host",
+          "value": "colombia.aquitemachadinhos.com.br"
+        }
+      ],
+      "destination": "/colombia-home.html"
+    },
+    {
+      "source": "/assets/(.*)",
+      "has": [
+        {
+          "type": "host",
+          "value": "olimpia.aquitemachadinhos.com.br"
+        }
+      ],
+      "destination": "/assets/$1"
+    },
+    {
+      "source": "/",
+      "has": [
+        {
+          "type": "host",
+          "value": "olimpia.aquitemachadinhos.com.br"
+        }
+      ],
+      "destination": "/olimpia-home.html"
+    },
+    {
+      "source": "/assets/(.*)",
+      "has": [
+        {
+          "type": "host",
+          "value": "guaira.aquitemachadinhos.com.br"
+        }
+      ],
+      "destination": "/assets/$1"
+    },
+    {
+      "source": "/",
+      "has": [
+        {
+          "type": "host",
+          "value": "guaira.aquitemachadinhos.com.br"
+        }
+      ],
+      "destination": "/guaira-home.html"
     }
   ]
 }

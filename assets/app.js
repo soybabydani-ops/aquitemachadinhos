@@ -804,69 +804,117 @@
   }
 
   
-  /* === ENGINE AUTOCOMPLETE INTELIGENTE MULTI-CIDADE (AQUITEM BRASIL) === */
+  /* === ENGINE AUTOCOMPLETE INTELIGENTE MULTI-CIDADE (5.571 CIDADES DO BRASIL - IBGE) === */
+  var _ALL_BRAZIL_CITIES = null;
+
+  function loadAllBrazilCities() {
+    if (_ALL_BRAZIL_CITIES) return Promise.resolve(_ALL_BRAZIL_CITIES);
+    return fetch('assets/cidades-brasil.json').then(function(r){ return r.json(); }).then(function(data) {
+      _ALL_BRAZIL_CITIES = [];
+      for (var slug in data) {
+        var item = data[slug];
+        _ALL_BRAZIL_CITIES.push({
+          slug: slug,
+          name: item[0],
+          uf: item[1],
+          pilar: item[2] || 'interior'
+        });
+      }
+      return _ALL_BRAZIL_CITIES;
+    }).catch(function() {
+      _ALL_BRAZIL_CITIES = Object.keys(CITY_NAMES).filter(function(k){ return k !== 'nacional'; }).map(function(k){
+        return { slug: k, name: CITY_NAMES[k], uf: CITY_UFS[k] || 'BR', pilar: 'interior' };
+      });
+      return _ALL_BRAZIL_CITIES;
+    });
+  }
+
   function initCityAutocomplete() {
     var searchInputs = document.querySelectorAll('#citySearchInput, #heroCitySearch, #q, input[name=q], #classSearchInput, #vagasSearchInput');
     if (!searchInputs.length) return;
 
-    var cityList = Object.keys(CITY_NAMES).filter(function(k){ return k !== 'nacional'; }).map(function(k){
-      var name = CITY_NAMES[k];
-      var uf = CITY_UFS[k] || 'BR';
-      return { slug: k, name: name, uf: uf, url: k === 'barretos' ? 'barretos-home.html' : (k + '-home.html') };
-    });
+    loadAllBrazilCities().then(function(cityList) {
+      searchInputs.forEach(function(inp) {
+        if (inp.getAttribute('data-has-autocomplete')) return;
+        inp.setAttribute('data-has-autocomplete', 'true');
 
-    searchInputs.forEach(function(inp) {
-      if (inp.getAttribute('data-has-autocomplete')) return;
-      inp.setAttribute('data-has-autocomplete', 'true');
-
-      var wrapper = inp.parentElement;
-      if (!wrapper) return;
-      if (getComputedStyle(wrapper).position === 'static') {
-        wrapper.style.position = 'relative';
-      }
-
-      var drop = document.createElement('div');
-      drop.className = 'aquitem-autocomplete-box hidden';
-      drop.style.cssText = 'position:absolute;top:100%;left:0;right:0;margin-top:6px;background:#0B1E3F;border:1px solid rgba(245,215,127,0.3);border-radius:16px;box-shadow:0 18px 40px rgba(0,0,0,0.5);z-index:99999;max-height:280px;overflow-y:auto;padding:6px;backdrop-blur:10px;';
-      wrapper.appendChild(drop);
-
-      inp.addEventListener('input', function() {
-        var q = (inp.value || '').toLowerCase().trim();
-        if (q.length < 2) {
-          drop.classList.add('hidden');
-          drop.innerHTML = '';
-          return;
+        var wrapper = inp.parentElement;
+        if (!wrapper) return;
+        if (getComputedStyle(wrapper).position === 'static') {
+          wrapper.style.position = 'relative';
         }
 
-        var matches = cityList.filter(function(c) {
-          return c.name.toLowerCase().indexOf(q) !== -1 || c.slug.toLowerCase().indexOf(q) !== -1 || c.uf.toLowerCase() === q;
-        }).slice(0, 8);
+        var drop = document.createElement('div');
+        drop.className = 'aquitem-autocomplete-box hidden';
+        drop.style.cssText = 'position:absolute;top:100%;left:0;right:0;margin-top:6px;background:#0B1E3F;border:1px solid rgba(245,215,127,0.35);border-radius:18px;box-shadow:0 20px 45px rgba(0,0,0,0.6);z-index:99999;max-height:300px;overflow-y:auto;padding:8px;backdrop-blur:12px;';
+        wrapper.appendChild(drop);
 
-        if (!matches.length) {
-          drop.classList.add('hidden');
-          drop.innerHTML = '';
-          return;
-        }
+        inp.addEventListener('input', function() {
+          var q = (inp.value || '').toLowerCase().trim();
+          if (q.length < 2) {
+            drop.classList.add('hidden');
+            drop.innerHTML = '';
+            return;
+          }
 
-        var html = matches.map(function(c) {
-          return '<a href="' + c.url + '" class="flex items-center justify-between p-3 rounded-xl hover:bg-white/10 text-white transition text-xs font-semibold" style="text-decoration:none;">' +
-            '<div class="flex items-center gap-2.5">' +
-              '<span class="text-base">📍</span>' +
-              '<span>' + esc(c.name) + '</span>' +
-              '<span class="text-[10px] font-extrabold text-amber-400 bg-amber-400/10 px-2 py-0.5 rounded-full">' + esc(c.uf) + '</span>' +
-            '</div>' +
-            '<span class="text-silver-400 text-[11px]">Ver guia →</span>' +
-          '</a>';
-        }).join('');
+          var matches = cityList.filter(function(c) {
+            return c.name.toLowerCase().indexOf(q) !== -1 || c.slug.toLowerCase().indexOf(q) !== -1 || (q.length === 2 && c.uf.toLowerCase() === q);
+          }).slice(0, 10);
 
-        drop.innerHTML = html;
-        drop.classList.remove('hidden');
-      });
+          if (!matches.length) {
+            drop.classList.add('hidden');
+            drop.innerHTML = '';
+            return;
+          }
 
-      document.addEventListener('click', function(e) {
-        if (!wrapper.contains(e.target)) {
-          drop.classList.add('hidden');
-        }
+          var staticHomes = {
+            'barretos': 'barretos-home.html', 'gramado': 'gramado-home.html', 'campos': 'campos-home.html',
+            'buzios': 'buzios-home.html', 'paraty': 'paraty-home.html', 'ouro-preto': 'ouro-preto-home.html',
+            'bonito': 'bonito-home.html', 'jalapao': 'jalapao-home.html', 'chapada-guimaraes': 'chapada-guimaraes-home.html',
+            'caldasnovas': 'caldasnovas-home.html', 'pirenopolis': 'pirenopolis-home.html', 'lencois': 'lencois-home.html',
+            'porto': 'porto-home.html', 'noronha': 'noronha-home.html', 'jericoacoara': 'jericoacoara-home.html',
+            'alter-do-chao': 'alter-do-chao-home.html', 'blumenau': 'blumenau-home.html', 'florianopolis': 'florianopolis-home.html',
+            'balneario-camboriu': 'balneario-camboriu-home.html', 'foz-do-iguacu': 'foz-do-iguacu-home.html', 'caruaru': 'caruaru-home.html',
+            'natal': 'natal-home.html', 'sao-paulo': 'sao-paulo-home.html', 'rio-de-janeiro': 'rio-de-janeiro-home.html',
+            'belo-horizonte': 'belo-horizonte-home.html', 'brasilia': 'brasilia-home.html', 'curitiba': 'curitiba-home.html',
+            'porto-alegre': 'porto-alegre-home.html', 'salvador': 'salvador-home.html', 'recife': 'recife-home.html',
+            'fortaleza': 'fortaleza-home.html', 'goiania': 'goiania-home.html', 'manaus': 'manaus-home.html',
+            'belem': 'belem-home.html', 'vitoria': 'vitoria-home.html', 'campo-grande': 'campo-grande-home.html',
+            'cuiaba': 'cuiaba-home.html', 'sao-luis': 'sao-luis-home.html', 'maceio': 'maceio-home.html',
+            'joao-pessoa': 'joao-pessoa-home.html', 'teresina': 'teresina-home.html', 'aracaju': 'aracaju-home.html',
+            'campinas': 'campinas-home.html', 'ribeirao-preto': 'ribeirao-preto-home.html', 'sao-jose-do-rio-preto': 'sao-jose-do-rio-preto-home.html',
+            'santos': 'santos-home.html', 'sorocaba': 'sorocaba-home.html', 'piracicaba': 'piracicaba-home.html',
+            'franca': 'franca-home.html', 'juiz-de-fora': 'juiz-de-fora-home.html', 'montes-claros': 'montes-claros-home.html',
+            'londrina': 'londrina-home.html', 'maringa': 'maringa-home.html', 'joinville': 'joinville-home.html',
+            'caxias-do-sul': 'caxias-do-sul-home.html', 'feira-de-santana': 'feira-de-santana-home.html',
+            'campina-grande': 'campina-grande-home.html', 'anapolis': 'anapolis-home.html', 'rio-verde': 'rio-verde-home.html',
+            'bebedouro': 'bebedouro-home.html', 'colombia': 'colombia-home.html', 'olimpia': 'olimpia-home.html',
+            'guaira': 'guaira-home.html'
+          };
+
+          var html = matches.map(function(c) {
+            var targetUrl = staticHomes[c.slug] || ('guia.html?cidade=' + encodeURIComponent(c.slug));
+            var badgeText = c.pilar === 'turistico' ? '🌟 Turístico' : (c.pilar === 'capital' ? '🏙️ Capital' : '🌾 Regional');
+            return '<a href="' + targetUrl + '" class="flex items-center justify-between p-3 rounded-xl hover:bg-white/10 text-white transition text-xs font-semibold" style="text-decoration:none;">' +
+              '<div class="flex items-center gap-2.5">' +
+                '<span class="text-base">📍</span>' +
+                '<span>' + esc(c.name) + '</span>' +
+                '<span class="text-[10px] font-extrabold text-amber-400 bg-amber-400/10 px-2 py-0.5 rounded-full">' + esc(c.uf) + '</span>' +
+                '<span class="text-[9px] text-silver-400 hidden sm:inline">' + badgeText + '</span>' +
+              '</div>' +
+              '<span class="text-amber-400 text-xs font-bold flex items-center gap-1">Ver guia <span>→</span></span>' +
+            '</a>';
+          }).join('');
+
+          drop.innerHTML = html;
+          drop.classList.remove('hidden');
+        });
+
+        document.addEventListener('click', function(e) {
+          if (!wrapper.contains(e.target)) {
+            drop.classList.add('hidden');
+          }
+        });
       });
     });
   }
