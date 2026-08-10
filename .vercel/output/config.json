@@ -67,175 +67,259 @@
     {
       "src": "^/gramado$",
       "headers": {
-        "Location": "/guia-gramado"
+        "Location": "/gramado-home"
       },
       "status": 307
     },
     {
       "src": "^/gramadoRS$",
       "headers": {
-        "Location": "/guia-gramado"
+        "Location": "/gramado-home"
+      },
+      "status": 307
+    },
+    {
+      "src": "^/guia-gramado$",
+      "headers": {
+        "Location": "/gramado-home"
       },
       "status": 307
     },
     {
       "src": "^/nataluz$",
       "headers": {
-        "Location": "/guia-nataluz"
+        "Location": "/gramado-natal-luz"
       },
       "status": 307
     },
     {
       "src": "^/buzios$",
       "headers": {
-        "Location": "/guia-buzios"
+        "Location": "/buzios-home"
       },
       "status": 307
     },
     {
       "src": "^/veraobuzios$",
       "headers": {
-        "Location": "/guia-buzios"
+        "Location": "/buzios-home"
+      },
+      "status": 307
+    },
+    {
+      "src": "^/guia-buzios$",
+      "headers": {
+        "Location": "/buzios-home"
       },
       "status": 307
     },
     {
       "src": "^/florianopolis$",
       "headers": {
-        "Location": "/guia-florianopolis"
+        "Location": "/florianopolis-home"
       },
       "status": 307
     },
     {
       "src": "^/floripa$",
       "headers": {
-        "Location": "/guia-florianopolis"
+        "Location": "/florianopolis-home"
+      },
+      "status": 307
+    },
+    {
+      "src": "^/guia-florianopolis$",
+      "headers": {
+        "Location": "/florianopolis-home"
       },
       "status": 307
     },
     {
       "src": "^/blumenau$",
       "headers": {
-        "Location": "/guia-blumenau"
+        "Location": "/blumenau-home"
       },
       "status": 307
     },
     {
       "src": "^/oktoberfest$",
       "headers": {
-        "Location": "/guia-blumenau"
+        "Location": "/blumenau-oktoberfest"
+      },
+      "status": 307
+    },
+    {
+      "src": "^/guia-blumenau$",
+      "headers": {
+        "Location": "/blumenau-home"
       },
       "status": 307
     },
     {
       "src": "^/bonito$",
       "headers": {
-        "Location": "/guia-bonito"
+        "Location": "/bonito-home"
+      },
+      "status": 307
+    },
+    {
+      "src": "^/guia-bonito$",
+      "headers": {
+        "Location": "/bonito-home"
       },
       "status": 307
     },
     {
       "src": "^/campos$",
       "headers": {
-        "Location": "/guia-campos"
+        "Location": "/campos-home"
       },
       "status": 307
     },
     {
       "src": "^/camposdojordao$",
       "headers": {
-        "Location": "/guia-campos"
+        "Location": "/campos-home"
+      },
+      "status": 307
+    },
+    {
+      "src": "^/guia-campos$",
+      "headers": {
+        "Location": "/campos-home"
       },
       "status": 307
     },
     {
       "src": "^/caruaru$",
       "headers": {
-        "Location": "/guia-caruaru"
+        "Location": "/caruaru-home"
       },
       "status": 307
     },
     {
       "src": "^/saojoaocaruaru$",
       "headers": {
-        "Location": "/guia-caruaru"
+        "Location": "/caruaru-sao-joao"
+      },
+      "status": 307
+    },
+    {
+      "src": "^/guia-caruaru$",
+      "headers": {
+        "Location": "/caruaru-home"
       },
       "status": 307
     },
     {
       "src": "^/jericoacoara$",
       "headers": {
-        "Location": "/guia-jericoacoara"
+        "Location": "/jericoacoara-home"
       },
       "status": 307
     },
     {
       "src": "^/jeri$",
       "headers": {
-        "Location": "/guia-jericoacoara"
+        "Location": "/jericoacoara-home"
+      },
+      "status": 307
+    },
+    {
+      "src": "^/guia-jericoacoara$",
+      "headers": {
+        "Location": "/jericoacoara-home"
       },
       "status": 307
     },
     {
       "src": "^/porto$",
       "headers": {
-        "Location": "/guia-porto"
+        "Location": "/porto-home"
       },
       "status": 307
     },
     {
       "src": "^/portodegalinhas$",
       "headers": {
-        "Location": "/guia-porto"
+        "Location": "/porto-home"
+      },
+      "status": 307
+    },
+    {
+      "src": "^/guia-porto$",
+      "headers": {
+        "Location": "/porto-home"
       },
       "status": 307
     },
     {
       "src": "^/salvador$",
       "headers": {
-        "Location": "/guia-salvador"
+        "Location": "/salvador-home"
       },
       "status": 307
     },
     {
       "src": "^/carnavalsalvador$",
       "headers": {
-        "Location": "/guia-salvador"
+        "Location": "/salvador-carnaval"
+      },
+      "status": 307
+    },
+    {
+      "src": "^/guia-salvador$",
+      "headers": {
+        "Location": "/salvador-home"
       },
       "status": 307
     },
     {
       "src": "^/uberlandia$",
       "headers": {
-        "Location": "/guia-uberlandia"
+        "Location": "/uberlandia-home"
       },
       "status": 307
     },
     {
       "src": "^/uberlandiamg$",
       "headers": {
-        "Location": "/guia-uberlandia"
+        "Location": "/uberlandia-home"
+      },
+      "status": 307
+    },
+    {
+      "src": "^/guia-uberlandia$",
+      "headers": {
+        "Location": "/uberlandia-home"
       },
       "status": 307
     },
     {
       "src": "^/caldasnovas$",
       "headers": {
-        "Location": "/guia-caldasnovas"
+        "Location": "/caldasnovas-home"
       },
       "status": 307
     },
     {
       "src": "^/caldasnovasgo$",
       "headers": {
-        "Location": "/guia-caldasnovas"
+        "Location": "/caldasnovas-home"
       },
       "status": 307
     },
     {
       "src": "^/aguasquentes$",
       "headers": {
-        "Location": "/guia-caldasnovas"
+        "Location": "/caldasnovas-home"
+      },
+      "status": 307
+    },
+    {
+      "src": "^/guia-caldasnovas$",
+      "headers": {
+        "Location": "/caldasnovas-home"
       },
       "status": 307
     },
@@ -501,7 +585,7 @@
     },
     {
       "src": "^/assets(?:/(.*))$",
-      "dest": "/florianopolis-home.html?host=$host",
+      "dest": "/assets/$1?host=$host",
       "check": true,
       "has": [
         {

@@ -35,127 +35,187 @@
     },
     {
       "source": "/gramado",
-      "destination": "/guia-gramado",
+      "destination": "/gramado-home",
       "permanent": false
     },
     {
       "source": "/gramadoRS",
-      "destination": "/guia-gramado",
+      "destination": "/gramado-home",
+      "permanent": false
+    },
+    {
+      "source": "/guia-gramado",
+      "destination": "/gramado-home",
       "permanent": false
     },
     {
       "source": "/nataluz",
-      "destination": "/guia-nataluz",
+      "destination": "/gramado-natal-luz",
       "permanent": false
     },
     {
       "source": "/buzios",
-      "destination": "/guia-buzios",
+      "destination": "/buzios-home",
       "permanent": false
     },
     {
       "source": "/veraobuzios",
-      "destination": "/guia-buzios",
+      "destination": "/buzios-home",
+      "permanent": false
+    },
+    {
+      "source": "/guia-buzios",
+      "destination": "/buzios-home",
       "permanent": false
     },
     {
       "source": "/florianopolis",
-      "destination": "/guia-florianopolis",
+      "destination": "/florianopolis-home",
       "permanent": false
     },
     {
       "source": "/floripa",
-      "destination": "/guia-florianopolis",
+      "destination": "/florianopolis-home",
+      "permanent": false
+    },
+    {
+      "source": "/guia-florianopolis",
+      "destination": "/florianopolis-home",
       "permanent": false
     },
     {
       "source": "/blumenau",
-      "destination": "/guia-blumenau",
+      "destination": "/blumenau-home",
       "permanent": false
     },
     {
       "source": "/oktoberfest",
-      "destination": "/guia-blumenau",
+      "destination": "/blumenau-oktoberfest",
+      "permanent": false
+    },
+    {
+      "source": "/guia-blumenau",
+      "destination": "/blumenau-home",
       "permanent": false
     },
     {
       "source": "/bonito",
-      "destination": "/guia-bonito",
+      "destination": "/bonito-home",
+      "permanent": false
+    },
+    {
+      "source": "/guia-bonito",
+      "destination": "/bonito-home",
       "permanent": false
     },
     {
       "source": "/campos",
-      "destination": "/guia-campos",
+      "destination": "/campos-home",
       "permanent": false
     },
     {
       "source": "/camposdojordao",
-      "destination": "/guia-campos",
+      "destination": "/campos-home",
+      "permanent": false
+    },
+    {
+      "source": "/guia-campos",
+      "destination": "/campos-home",
       "permanent": false
     },
     {
       "source": "/caruaru",
-      "destination": "/guia-caruaru",
+      "destination": "/caruaru-home",
       "permanent": false
     },
     {
       "source": "/saojoaocaruaru",
-      "destination": "/guia-caruaru",
+      "destination": "/caruaru-sao-joao",
+      "permanent": false
+    },
+    {
+      "source": "/guia-caruaru",
+      "destination": "/caruaru-home",
       "permanent": false
     },
     {
       "source": "/jericoacoara",
-      "destination": "/guia-jericoacoara",
+      "destination": "/jericoacoara-home",
       "permanent": false
     },
     {
       "source": "/jeri",
-      "destination": "/guia-jericoacoara",
+      "destination": "/jericoacoara-home",
+      "permanent": false
+    },
+    {
+      "source": "/guia-jericoacoara",
+      "destination": "/jericoacoara-home",
       "permanent": false
     },
     {
       "source": "/porto",
-      "destination": "/guia-porto",
+      "destination": "/porto-home",
       "permanent": false
     },
     {
       "source": "/portodegalinhas",
-      "destination": "/guia-porto",
+      "destination": "/porto-home",
+      "permanent": false
+    },
+    {
+      "source": "/guia-porto",
+      "destination": "/porto-home",
       "permanent": false
     },
     {
       "source": "/salvador",
-      "destination": "/guia-salvador",
+      "destination": "/salvador-home",
       "permanent": false
     },
     {
       "source": "/carnavalsalvador",
-      "destination": "/guia-salvador",
+      "destination": "/salvador-carnaval",
+      "permanent": false
+    },
+    {
+      "source": "/guia-salvador",
+      "destination": "/salvador-home",
       "permanent": false
     },
     {
       "source": "/uberlandia",
-      "destination": "/guia-uberlandia",
+      "destination": "/uberlandia-home",
       "permanent": false
     },
     {
       "source": "/uberlandiamg",
-      "destination": "/guia-uberlandia",
+      "destination": "/uberlandia-home",
+      "permanent": false
+    },
+    {
+      "source": "/guia-uberlandia",
+      "destination": "/uberlandia-home",
       "permanent": false
     },
     {
       "source": "/caldasnovas",
-      "destination": "/guia-caldasnovas",
+      "destination": "/caldasnovas-home",
       "permanent": false
     },
     {
       "source": "/caldasnovasgo",
-      "destination": "/guia-caldasnovas",
+      "destination": "/caldasnovas-home",
       "permanent": false
     },
     {
       "source": "/aguasquentes",
-      "destination": "/guia-caldasnovas",
+      "destination": "/caldasnovas-home",
+      "permanent": false
+    },
+    {
+      "source": "/guia-caldasnovas",
+      "destination": "/caldasnovas-home",
       "permanent": false
     }
   ],
@@ -409,7 +469,7 @@
           "value": "florianopolis.aquitemachadinhos.com.br"
         }
       ],
-      "destination": "/florianopolis-home.html"
+      "destination": "/assets/$1"
     },
     {
       "source": "/",
