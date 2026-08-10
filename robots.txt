@@ -1,4 +1,5 @@
 User-agent: *
 Allow: /
 
+Sitemap: https://www.aquitemachadinhos.com.br/sitemap.xml
 Sitemap: https://aquitemachadinhos.com.br/sitemap.xml
