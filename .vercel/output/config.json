@@ -324,6 +324,321 @@
       "status": 307
     },
     {
+      "src": "^/manaus$",
+      "headers": {
+        "Location": "/manaus-home"
+      },
+      "status": 307
+    },
+    {
+      "src": "^/guia-manaus$",
+      "headers": {
+        "Location": "/manaus-home"
+      },
+      "status": 307
+    },
+    {
+      "src": "^/curitiba$",
+      "headers": {
+        "Location": "/curitiba-home"
+      },
+      "status": 307
+    },
+    {
+      "src": "^/guia-curitiba$",
+      "headers": {
+        "Location": "/curitiba-home"
+      },
+      "status": 307
+    },
+    {
+      "src": "^/foz$",
+      "headers": {
+        "Location": "/foz-do-iguacu-home"
+      },
+      "status": 307
+    },
+    {
+      "src": "^/foz-do-iguacu$",
+      "headers": {
+        "Location": "/foz-do-iguacu-home"
+      },
+      "status": 307
+    },
+    {
+      "src": "^/fozdoiguacu$",
+      "headers": {
+        "Location": "/foz-do-iguacu-home"
+      },
+      "status": 307
+    },
+    {
+      "src": "^/cataratas$",
+      "headers": {
+        "Location": "/foz-do-iguacu-home"
+      },
+      "status": 307
+    },
+    {
+      "src": "^/guia-foz$",
+      "headers": {
+        "Location": "/foz-do-iguacu-home"
+      },
+      "status": 307
+    },
+    {
+      "src": "^/balneario$",
+      "headers": {
+        "Location": "/balneario-camboriu-home"
+      },
+      "status": 307
+    },
+    {
+      "src": "^/balneario-camboriu$",
+      "headers": {
+        "Location": "/balneario-camboriu-home"
+      },
+      "status": 307
+    },
+    {
+      "src": "^/balneariocamboriu$",
+      "headers": {
+        "Location": "/balneario-camboriu-home"
+      },
+      "status": 307
+    },
+    {
+      "src": "^/guia-balneario$",
+      "headers": {
+        "Location": "/balneario-camboriu-home"
+      },
+      "status": 307
+    },
+    {
+      "src": "^/fortaleza$",
+      "headers": {
+        "Location": "/fortaleza-home"
+      },
+      "status": 307
+    },
+    {
+      "src": "^/guia-fortaleza$",
+      "headers": {
+        "Location": "/fortaleza-home"
+      },
+      "status": 307
+    },
+    {
+      "src": "^/natal$",
+      "headers": {
+        "Location": "/natal-home"
+      },
+      "status": 307
+    },
+    {
+      "src": "^/guia-natal$",
+      "headers": {
+        "Location": "/natal-home"
+      },
+      "status": 307
+    },
+    {
+      "src": "^/noronha$",
+      "headers": {
+        "Location": "/noronha-home"
+      },
+      "status": 307
+    },
+    {
+      "src": "^/fernandodenoronha$",
+      "headers": {
+        "Location": "/noronha-home"
+      },
+      "status": 307
+    },
+    {
+      "src": "^/guia-noronha$",
+      "headers": {
+        "Location": "/noronha-home"
+      },
+      "status": 307
+    },
+    {
+      "src": "^/ouro-preto$",
+      "headers": {
+        "Location": "/ouro-preto-home"
+      },
+      "status": 307
+    },
+    {
+      "src": "^/ouropreto$",
+      "headers": {
+        "Location": "/ouro-preto-home"
+      },
+      "status": 307
+    },
+    {
+      "src": "^/guia-ouro-preto$",
+      "headers": {
+        "Location": "/ouro-preto-home"
+      },
+      "status": 307
+    },
+    {
+      "src": "^/paraty$",
+      "headers": {
+        "Location": "/paraty-home"
+      },
+      "status": 307
+    },
+    {
+      "src": "^/guia-paraty$",
+      "headers": {
+        "Location": "/paraty-home"
+      },
+      "status": 307
+    },
+    {
+      "src": "^/pirenopolis$",
+      "headers": {
+        "Location": "/pirenopolis-home"
+      },
+      "status": 307
+    },
+    {
+      "src": "^/piri$",
+      "headers": {
+        "Location": "/pirenopolis-home"
+      },
+      "status": 307
+    },
+    {
+      "src": "^/guia-pirenopolis$",
+      "headers": {
+        "Location": "/pirenopolis-home"
+      },
+      "status": 307
+    },
+    {
+      "src": "^/vitoria$",
+      "headers": {
+        "Location": "/vitoria-home"
+      },
+      "status": 307
+    },
+    {
+      "src": "^/vitoriaes$",
+      "headers": {
+        "Location": "/vitoria-home"
+      },
+      "status": 307
+    },
+    {
+      "src": "^/guia-vitoria$",
+      "headers": {
+        "Location": "/vitoria-home"
+      },
+      "status": 307
+    },
+    {
+      "src": "^/campo-grande$",
+      "headers": {
+        "Location": "/campo-grande-home"
+      },
+      "status": 307
+    },
+    {
+      "src": "^/campogrande$",
+      "headers": {
+        "Location": "/campo-grande-home"
+      },
+      "status": 307
+    },
+    {
+      "src": "^/guia-campo-grande$",
+      "headers": {
+        "Location": "/campo-grande-home"
+      },
+      "status": 307
+    },
+    {
+      "src": "^/chapada-guimaraes$",
+      "headers": {
+        "Location": "/chapada-guimaraes-home"
+      },
+      "status": 307
+    },
+    {
+      "src": "^/chapadaguimaraes$",
+      "headers": {
+        "Location": "/chapada-guimaraes-home"
+      },
+      "status": 307
+    },
+    {
+      "src": "^/guia-chapada$",
+      "headers": {
+        "Location": "/chapada-guimaraes-home"
+      },
+      "status": 307
+    },
+    {
+      "src": "^/jalapao$",
+      "headers": {
+        "Location": "/jalapao-home"
+      },
+      "status": 307
+    },
+    {
+      "src": "^/guia-jalapao$",
+      "headers": {
+        "Location": "/jalapao-home"
+      },
+      "status": 307
+    },
+    {
+      "src": "^/lencois$",
+      "headers": {
+        "Location": "/lencois-home"
+      },
+      "status": 307
+    },
+    {
+      "src": "^/chapadadiamantina$",
+      "headers": {
+        "Location": "/lencois-home"
+      },
+      "status": 307
+    },
+    {
+      "src": "^/guia-lencois$",
+      "headers": {
+        "Location": "/lencois-home"
+      },
+      "status": 307
+    },
+    {
+      "src": "^/alter-do-chao$",
+      "headers": {
+        "Location": "/alter-do-chao-home"
+      },
+      "status": 307
+    },
+    {
+      "src": "^/alterdochao$",
+      "headers": {
+        "Location": "/alter-do-chao-home"
+      },
+      "status": 307
+    },
+    {
+      "src": "^/guia-alter$",
+      "headers": {
+        "Location": "/alter-do-chao-home"
+      },
+      "status": 307
+    },
+    {
       "src": "^(?:/(.*))$",
       "headers": {
         "Strict-Transport-Security": "max-age=63072000; includeSubDomains; preload",
@@ -716,6 +1031,402 @@
       ]
     },
     {
+      "src": "^/assets(?:/(.*))$",
+      "dest": "/assets/$1?host=$host",
+      "check": true,
+      "has": [
+        {
+          "type": "host",
+          "value": "manaus.aquitemachadinhos.com.br"
+        }
+      ]
+    },
+    {
+      "src": "^/$",
+      "dest": "/manaus-home.html?host=$host",
+      "check": true,
+      "has": [
+        {
+          "type": "host",
+          "value": "manaus.aquitemachadinhos.com.br"
+        }
+      ]
+    },
+    {
+      "src": "^/assets(?:/(.*))$",
+      "dest": "/assets/$1?host=$host",
+      "check": true,
+      "has": [
+        {
+          "type": "host",
+          "value": "curitiba.aquitemachadinhos.com.br"
+        }
+      ]
+    },
+    {
+      "src": "^/$",
+      "dest": "/curitiba-home.html?host=$host",
+      "check": true,
+      "has": [
+        {
+          "type": "host",
+          "value": "curitiba.aquitemachadinhos.com.br"
+        }
+      ]
+    },
+    {
+      "src": "^/assets(?:/(.*))$",
+      "dest": "/assets/$1?host=$host",
+      "check": true,
+      "has": [
+        {
+          "type": "host",
+          "value": "foz.aquitemachadinhos.com.br"
+        }
+      ]
+    },
+    {
+      "src": "^/$",
+      "dest": "/foz-do-iguacu-home.html?host=$host",
+      "check": true,
+      "has": [
+        {
+          "type": "host",
+          "value": "foz.aquitemachadinhos.com.br"
+        }
+      ]
+    },
+    {
+      "src": "^/assets(?:/(.*))$",
+      "dest": "/assets/$1?host=$host",
+      "check": true,
+      "has": [
+        {
+          "type": "host",
+          "value": "fozdoiguacu.aquitemachadinhos.com.br"
+        }
+      ]
+    },
+    {
+      "src": "^/$",
+      "dest": "/foz-do-iguacu-home.html?host=$host",
+      "check": true,
+      "has": [
+        {
+          "type": "host",
+          "value": "fozdoiguacu.aquitemachadinhos.com.br"
+        }
+      ]
+    },
+    {
+      "src": "^/assets(?:/(.*))$",
+      "dest": "/assets/$1?host=$host",
+      "check": true,
+      "has": [
+        {
+          "type": "host",
+          "value": "balneario.aquitemachadinhos.com.br"
+        }
+      ]
+    },
+    {
+      "src": "^/$",
+      "dest": "/balneario-camboriu-home.html?host=$host",
+      "check": true,
+      "has": [
+        {
+          "type": "host",
+          "value": "balneario.aquitemachadinhos.com.br"
+        }
+      ]
+    },
+    {
+      "src": "^/assets(?:/(.*))$",
+      "dest": "/assets/$1?host=$host",
+      "check": true,
+      "has": [
+        {
+          "type": "host",
+          "value": "balneariocamboriu.aquitemachadinhos.com.br"
+        }
+      ]
+    },
+    {
+      "src": "^/$",
+      "dest": "/balneario-camboriu-home.html?host=$host",
+      "check": true,
+      "has": [
+        {
+          "type": "host",
+          "value": "balneariocamboriu.aquitemachadinhos.com.br"
+        }
+      ]
+    },
+    {
+      "src": "^/assets(?:/(.*))$",
+      "dest": "/assets/$1?host=$host",
+      "check": true,
+      "has": [
+        {
+          "type": "host",
+          "value": "fortaleza.aquitemachadinhos.com.br"
+        }
+      ]
+    },
+    {
+      "src": "^/$",
+      "dest": "/fortaleza-home.html?host=$host",
+      "check": true,
+      "has": [
+        {
+          "type": "host",
+          "value": "fortaleza.aquitemachadinhos.com.br"
+        }
+      ]
+    },
+    {
+      "src": "^/assets(?:/(.*))$",
+      "dest": "/assets/$1?host=$host",
+      "check": true,
+      "has": [
+        {
+          "type": "host",
+          "value": "natal.aquitemachadinhos.com.br"
+        }
+      ]
+    },
+    {
+      "src": "^/$",
+      "dest": "/natal-home.html?host=$host",
+      "check": true,
+      "has": [
+        {
+          "type": "host",
+          "value": "natal.aquitemachadinhos.com.br"
+        }
+      ]
+    },
+    {
+      "src": "^/assets(?:/(.*))$",
+      "dest": "/assets/$1?host=$host",
+      "check": true,
+      "has": [
+        {
+          "type": "host",
+          "value": "noronha.aquitemachadinhos.com.br"
+        }
+      ]
+    },
+    {
+      "src": "^/$",
+      "dest": "/noronha-home.html?host=$host",
+      "check": true,
+      "has": [
+        {
+          "type": "host",
+          "value": "noronha.aquitemachadinhos.com.br"
+        }
+      ]
+    },
+    {
+      "src": "^/assets(?:/(.*))$",
+      "dest": "/assets/$1?host=$host",
+      "check": true,
+      "has": [
+        {
+          "type": "host",
+          "value": "ouropreto.aquitemachadinhos.com.br"
+        }
+      ]
+    },
+    {
+      "src": "^/$",
+      "dest": "/ouro-preto-home.html?host=$host",
+      "check": true,
+      "has": [
+        {
+          "type": "host",
+          "value": "ouropreto.aquitemachadinhos.com.br"
+        }
+      ]
+    },
+    {
+      "src": "^/assets(?:/(.*))$",
+      "dest": "/assets/$1?host=$host",
+      "check": true,
+      "has": [
+        {
+          "type": "host",
+          "value": "paraty.aquitemachadinhos.com.br"
+        }
+      ]
+    },
+    {
+      "src": "^/$",
+      "dest": "/paraty-home.html?host=$host",
+      "check": true,
+      "has": [
+        {
+          "type": "host",
+          "value": "paraty.aquitemachadinhos.com.br"
+        }
+      ]
+    },
+    {
+      "src": "^/assets(?:/(.*))$",
+      "dest": "/assets/$1?host=$host",
+      "check": true,
+      "has": [
+        {
+          "type": "host",
+          "value": "pirenopolis.aquitemachadinhos.com.br"
+        }
+      ]
+    },
+    {
+      "src": "^/$",
+      "dest": "/pirenopolis-home.html?host=$host",
+      "check": true,
+      "has": [
+        {
+          "type": "host",
+          "value": "pirenopolis.aquitemachadinhos.com.br"
+        }
+      ]
+    },
+    {
+      "src": "^/assets(?:/(.*))$",
+      "dest": "/assets/$1?host=$host",
+      "check": true,
+      "has": [
+        {
+          "type": "host",
+          "value": "vitoria.aquitemachadinhos.com.br"
+        }
+      ]
+    },
+    {
+      "src": "^/$",
+      "dest": "/vitoria-home.html?host=$host",
+      "check": true,
+      "has": [
+        {
+          "type": "host",
+          "value": "vitoria.aquitemachadinhos.com.br"
+        }
+      ]
+    },
+    {
+      "src": "^/assets(?:/(.*))$",
+      "dest": "/assets/$1?host=$host",
+      "check": true,
+      "has": [
+        {
+          "type": "host",
+          "value": "campogrande.aquitemachadinhos.com.br"
+        }
+      ]
+    },
+    {
+      "src": "^/$",
+      "dest": "/campo-grande-home.html?host=$host",
+      "check": true,
+      "has": [
+        {
+          "type": "host",
+          "value": "campogrande.aquitemachadinhos.com.br"
+        }
+      ]
+    },
+    {
+      "src": "^/assets(?:/(.*))$",
+      "dest": "/assets/$1?host=$host",
+      "check": true,
+      "has": [
+        {
+          "type": "host",
+          "value": "chapadaguimaraes.aquitemachadinhos.com.br"
+        }
+      ]
+    },
+    {
+      "src": "^/$",
+      "dest": "/chapada-guimaraes-home.html?host=$host",
+      "check": true,
+      "has": [
+        {
+          "type": "host",
+          "value": "chapadaguimaraes.aquitemachadinhos.com.br"
+        }
+      ]
+    },
+    {
+      "src": "^/assets(?:/(.*))$",
+      "dest": "/assets/$1?host=$host",
+      "check": true,
+      "has": [
+        {
+          "type": "host",
+          "value": "jalapao.aquitemachadinhos.com.br"
+        }
+      ]
+    },
+    {
+      "src": "^/$",
+      "dest": "/jalapao-home.html?host=$host",
+      "check": true,
+      "has": [
+        {
+          "type": "host",
+          "value": "jalapao.aquitemachadinhos.com.br"
+        }
+      ]
+    },
+    {
+      "src": "^/assets(?:/(.*))$",
+      "dest": "/assets/$1?host=$host",
+      "check": true,
+      "has": [
+        {
+          "type": "host",
+          "value": "lencois.aquitemachadinhos.com.br"
+        }
+      ]
+    },
+    {
+      "src": "^/$",
+      "dest": "/lencois-home.html?host=$host",
+      "check": true,
+      "has": [
+        {
+          "type": "host",
+          "value": "lencois.aquitemachadinhos.com.br"
+        }
+      ]
+    },
+    {
+      "src": "^/assets(?:/(.*))$",
+      "dest": "/assets/$1?host=$host",
+      "check": true,
+      "has": [
+        {
+          "type": "host",
+          "value": "alterdochao.aquitemachadinhos.com.br"
+        }
+      ]
+    },
+    {
+      "src": "^/$",
+      "dest": "/alter-do-chao-home.html?host=$host",
+      "check": true,
+      "has": [
+        {
+          "type": "host",
+          "value": "alterdochao.aquitemachadinhos.com.br"
+        }
+      ]
+    },
+    {
       "src": "^/api(/.*)?$",
       "status": 404
     },
@@ -759,6 +1470,9 @@
     "agro-campo.html": {
       "path": "agro-campo"
     },
+    "alter-do-chao-home.html": {
+      "path": "alter-do-chao-home"
+    },
     "animais.html": {
       "path": "animais"
     },
@@ -767,6 +1481,9 @@
     },
     "anuncio.html": {
       "path": "anuncio"
+    },
+    "balneario-camboriu-home.html": {
+      "path": "balneario-camboriu-home"
     },
     "barretos-home.html": {
       "path": "barretos-home"
@@ -816,6 +1533,9 @@
     "caldasnovas-home.html": {
       "path": "caldasnovas-home"
     },
+    "campo-grande-home.html": {
+      "path": "campo-grande-home"
+    },
     "campos-festival.html": {
       "path": "campos-festival"
     },
@@ -837,6 +1557,9 @@
     "categoria.html": {
       "path": "categoria"
     },
+    "chapada-guimaraes-home.html": {
+      "path": "chapada-guimaraes-home"
+    },
     "cidades.html": {
       "path": "cidades"
     },
@@ -848,6 +1571,9 @@
     },
     "contato.html": {
       "path": "contato"
+    },
+    "curitiba-home.html": {
+      "path": "curitiba-home"
     },
     "eletronicos.html": {
       "path": "eletronicos"
@@ -881,6 +1607,12 @@
     },
     "florianopolis-praias.html": {
       "path": "florianopolis-praias"
+    },
+    "fortaleza-home.html": {
+      "path": "fortaleza-home"
+    },
+    "foz-do-iguacu-home.html": {
+      "path": "foz-do-iguacu-home"
     },
     "fundadores.html": {
       "path": "fundadores"
@@ -948,6 +1680,9 @@
     "infantil-bebes.html": {
       "path": "infantil-bebes"
     },
+    "jalapao-home.html": {
+      "path": "jalapao-home"
+    },
     "jericoacoara-home.html": {
       "path": "jericoacoara-home"
     },
@@ -957,11 +1692,17 @@
     "jericoacoara-o-que-fazer.html": {
       "path": "jericoacoara-o-que-fazer"
     },
+    "lencois-home.html": {
+      "path": "lencois-home"
+    },
     "login.html": {
       "path": "login"
     },
     "loja.html": {
       "path": "loja"
+    },
+    "manaus-home.html": {
+      "path": "manaus-home"
     },
     "mapa.html": {
       "path": "mapa"
@@ -978,11 +1719,17 @@
     "moveis-eletro.html": {
       "path": "moveis-eletro"
     },
+    "natal-home.html": {
+      "path": "natal-home"
+    },
     "nataluz.html": {
       "path": "nataluz"
     },
     "negocios-comercio.html": {
       "path": "negocios-comercio"
+    },
+    "noronha-home.html": {
+      "path": "noronha-home"
     },
     "o-que-fazer-festa-do-peao-2026.html": {
       "path": "o-que-fazer-festa-do-peao-2026"
@@ -1008,8 +1755,17 @@
     "onde-ficar-festa-peao.html": {
       "path": "onde-ficar-festa-peao"
     },
+    "ouro-preto-home.html": {
+      "path": "ouro-preto-home"
+    },
     "painel.html": {
       "path": "painel"
+    },
+    "paraty-home.html": {
+      "path": "paraty-home"
+    },
+    "pirenopolis-home.html": {
+      "path": "pirenopolis-home"
     },
     "politica-de-ofertas.html": {
       "path": "politica-de-ofertas"
@@ -1061,6 +1817,9 @@
     },
     "veiculos.html": {
       "path": "veiculos"
+    },
+    "vitoria-home.html": {
+      "path": "vitoria-home"
     }
   },
   "crons": []

@@ -73,7 +73,32 @@
     "jericoacoara": ["Jericoacoara","CE"],
     "caruaru": ["Caruaru","PE"],
     "blumenau": ["Blumenau","SC"],
-    "bonito": ["Bonito","MS"]
+    "bonito": ["Bonito","MS"],
+    "manaus": ["Manaus","AM"],
+    "curitiba": ["Curitiba","PR"],
+    "foz": ["Foz do Iguaçu","PR"],
+    "foz-do-iguacu": ["Foz do Iguaçu","PR"],
+    "fozdoiguacu": ["Foz do Iguaçu","PR"],
+    "balneario": ["Balneário Camboriú","SC"],
+    "balneario-camboriu": ["Balneário Camboriú","SC"],
+    "balneariocamboriu": ["Balneário Camboriú","SC"],
+    "fortaleza": ["Fortaleza","CE"],
+    "natal": ["Natal","RN"],
+    "noronha": ["Fernando de Noronha","PE"],
+    "fernandodenoronha": ["Fernando de Noronha","PE"],
+    "ouro-preto": ["Ouro Preto","MG"],
+    "ouropreto": ["Ouro Preto","MG"],
+    "paraty": ["Paraty","RJ"],
+    "pirenopolis": ["Pirenópolis","GO"],
+    "vitoria": ["Vitória","ES"],
+    "campo-grande": ["Campo Grande","MS"],
+    "campogrande": ["Campo Grande","MS"],
+    "chapada-guimaraes": ["Chapada dos Guimarães","MT"],
+    "chapadadosguimaraes": ["Chapada dos Guimarães","MT"],
+    "jalapao": ["Jalapão","TO"],
+    "lencois": ["Lençóis","BA"],
+    "alter-do-chao": ["Alter do Chão","PA"],
+    "alterdochao": ["Alter do Chão","PA"]
   };
   var partes = location.hostname.split(".");
   var sub = (partes[0] || "www").toLowerCase();
@@ -194,6 +219,31 @@
     salvador: 'salvador',
     uberlandia: 'uberlandia',
     caldasnovas: 'caldasnovas',
+    manaus: 'manaus',
+    curitiba: 'curitiba',
+    foz: 'foz-do-iguacu',
+    'foz-do-iguacu': 'foz-do-iguacu',
+    fozdoiguacu: 'foz-do-iguacu',
+    balneario: 'balneario-camboriu',
+    'balneario-camboriu': 'balneario-camboriu',
+    balneariocamboriu: 'balneario-camboriu',
+    fortaleza: 'fortaleza',
+    natal: 'natal',
+    noronha: 'noronha',
+    fernandodenoronha: 'noronha',
+    'ouro-preto': 'ouro-preto',
+    ouropreto: 'ouro-preto',
+    paraty: 'paraty',
+    pirenopolis: 'pirenopolis',
+    vitoria: 'vitoria',
+    'campo-grande': 'campo-grande',
+    campogrande: 'campo-grande',
+    'chapada-guimaraes': 'chapada-guimaraes',
+    chapadadosguimaraes: 'chapada-guimaraes',
+    jalapao: 'jalapao',
+    lencois: 'lencois',
+    'alter-do-chao': 'alter-do-chao',
+    alterdochao: 'alter-do-chao',
     classificados: 'nacional',
     nacional: 'nacional'
   };
@@ -211,6 +261,22 @@
     salvador: 'Salvador',
     uberlandia: 'Uberlândia',
     caldasnovas: 'Caldas Novas',
+    manaus: 'Manaus',
+    curitiba: 'Curitiba',
+    'foz-do-iguacu': 'Foz do Iguaçu',
+    'balneario-camboriu': 'Balneário Camboriú',
+    fortaleza: 'Fortaleza',
+    natal: 'Natal',
+    noronha: 'Fernando de Noronha',
+    'ouro-preto': 'Ouro Preto',
+    paraty: 'Paraty',
+    pirenopolis: 'Pirenópolis',
+    vitoria: 'Vitória',
+    'campo-grande': 'Campo Grande',
+    'chapada-guimaraes': 'Chapada dos Guimarães',
+    jalapao: 'Jalapão',
+    lencois: 'Lençóis',
+    'alter-do-chao': 'Alter do Chão',
     nacional: 'Brasil Todo'
   };
   var CITY_UFS = {
@@ -227,6 +293,22 @@
     salvador: 'BA',
     uberlandia: 'MG',
     caldasnovas: 'GO',
+    manaus: 'AM',
+    curitiba: 'PR',
+    'foz-do-iguacu': 'PR',
+    'balneario-camboriu': 'SC',
+    fortaleza: 'CE',
+    natal: 'RN',
+    noronha: 'PE',
+    'ouro-preto': 'MG',
+    paraty: 'RJ',
+    pirenopolis: 'GO',
+    vitoria: 'ES',
+    'campo-grande': 'MS',
+    'chapada-guimaraes': 'MT',
+    jalapao: 'TO',
+    lencois: 'BA',
+    'alter-do-chao': 'PA',
     nacional: 'BR'
   };
   function currentCitySlug() { var h = (location.hostname.split('.')[0] || 'www').toLowerCase(); return CITY_HOSTS[h] || 'barretos'; }
@@ -412,9 +494,19 @@
     if (b && m) { b.addEventListener('click', function () { m.classList.toggle('hidden'); }); m.querySelectorAll('a').forEach(function (a) { a.addEventListener('click', function () { m.classList.add('hidden'); }); }); }
     var pageSurface = document.body && document.body.getAttribute('data-page');
     var isAdminSurface = document.body && ['admin','painel','login'].indexOf(pageSurface) !== -1;
-    var landingPages = ['home','gramado','blumenau','bonito','buzios','campos','caruaru','florianopolis','jericoacoara','porto','salvador'];
+    var landingPages = ['home','barretos','gramado','blumenau','bonito','buzios','campos','caruaru','florianopolis','jericoacoara','porto','salvador','uberlandia','caldasnovas','manaus','curitiba','foz-do-iguacu','balneario-camboriu','fortaleza','natal','noronha','ouro-preto','paraty','pirenopolis','vitoria','campo-grande','chapada-guimaraes','jalapao','lencois','alter-do-chao'];
     var allowFloatingWa = landingPages.indexOf(pageSurface) !== -1;
-    if (!isAdminSurface && allowFloatingWa && !$('#ataFloatingWa')) { var a = document.createElement('a'); a.id = 'ataFloatingWa'; a.href = waLink('Olá! Vim pela AQUITEM.'); a.target = '_blank'; a.rel = 'noopener noreferrer'; a.className = 'fixed bottom-5 right-5 z-50 w-14 h-14 rounded-full bg-[#25D366] text-white grid place-items-center shadow-2xl hover:scale-105 transition'; a.setAttribute('aria-label', 'WhatsApp'); a.innerHTML = '💬'; document.body.appendChild(a); }
+    if (!isAdminSurface && allowFloatingWa && !$('#ataFloatingWa')) { var a = document.createElement('a'); a.id = 'ataFloatingWa'; a.href = waLink('Olá! Vim pela AQUITEM.'); a.target = '_blank'; a.rel = 'noopener noreferrer'; a.className = 'fixed bottom-5 left-5 z-50 w-14 h-14 rounded-full bg-[#25D366] text-white grid place-items-center shadow-2xl hover:scale-105 transition'; a.setAttribute('aria-label', 'WhatsApp'); a.innerHTML = '💬'; document.body.appendChild(a); }
+    if (!isAdminSurface && !$('.aquitem-telegram-float')) {
+      var tg = document.createElement('a');
+      tg.href = 'https://t.me/ofertasbrasilz';
+      tg.target = '_blank';
+      tg.rel = 'noopener';
+      tg.className = 'aquitem-telegram-float';
+      tg.setAttribute('aria-label', 'Entrar no grupo Ofertas Brasil no Telegram');
+      tg.innerHTML = '<svg viewBox="0 0 24 24" fill="#229ED9" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 0 0-.05-.18c-.06-.05-.15-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.41-1.08.4-.36 0-1.04-.2-1.55-.37-.63-.2-1.12-.31-1.08-.66.02-.18.27-.36.74-.55 2.92-1.27 4.86-2.11 5.83-2.51 2.78-1.16 3.35-1.36 3.73-1.36.08 0 .27.02.39.12.1.08.13.19.14.27-.01.06.01.24 0 .38z"/></svg><span>🎁 Ofertas Brasil <span class="hide-mobile">no Telegram</span></span><span class="aquitem-telegram-badge">AO VIVO</span>';
+      document.body.appendChild(tg);
+    }
   }
 
   /* CITY PARALLAX — leve, progressivo e desligável */
@@ -1121,8 +1213,7 @@
     return '<div class="bg-white rounded-2xl ring-silver shadow-soft p-4 flex items-center gap-3"><div class="shrink-0">' + foto + '</div><div class="flex-1 min-w-0"><a href="motorista.html?id=' + encodeURIComponent(d.id) + '" class="font-display font-bold truncate block hover:underline">' + esc(d.nome) + '</a><p class="text-xs text-silver-500">' + esc(d.tipo_veiculo || '') + (d.disponibilidade ? ' · ' + esc(d.disponibilidade) : '') + ' · <span class="' + sc + ' font-semibold">' + esc(d.status) + '</span>' + (d.disponivel_agora ? ' · 🟢' : '') + '</p></div><div class="flex items-center gap-2 shrink-0 flex-wrap justify-end">' + (d.status !== 'ativo' ? '<button data-dap="' + esc(d.id) + '" class="text-xs font-bold text-white bg-emerald-600 px-3 py-1.5 rounded-lg">Aprovar</button>' : '') + '<button data-ddis="' + esc(d.id) + '" data-st="' + (d.disponivel_agora ? 0 : 1) + '" class="text-xs font-semibold text-navy-700 hover:underline">' + (d.disponivel_agora ? 'Offline' : 'Disponível') + '</button>' + planoSel + '<button data-ddest="' + esc(d.id) + '" data-st="' + (d.destaque ? 0 : 1) + '" class="text-xs font-semibold text-slate-600 hover:underline">' + (d.destaque ? 'Tirar destaque' : 'Destacar') + '</button></div></div>';
   }
   function leadAdminRow(lead) {
-    var cityNames = {barretos:'Barretos',gramado:'Gramado',blumenau:'Blumenau',bonito:'Bonito',buzios:'Búzios',campos:'Campos do Jordão',caruaru:'Caruaru',florianopolis:'Florianópolis',jericoacoara:'Jericoacoara',porto:'Porto de Galinhas',salvador:'Salvador'};
-    var city = cityNames[lead.city_slug] || String(lead.city_slug || '—').replace(/(^|_)([a-z])/g, function(_, a, b){ return (a ? ' ' : '') + b.toUpperCase(); });
+    var city = CITY_NAMES[lead.city_slug] || String(lead.city_slug || '—').replace(/(^|_)([a-z])/g, function(_, a, b){ return (a ? ' ' : '') + b.toUpperCase(); });
     var status = lead.status || 'novo';
     var opts = ['novo','contatado','qualificado','cadastro_enviado','ativo','perdido'].map(function(x){ return '<option value="' + x + '"' + (x === status ? ' selected' : '') + '>' + x.replace('_',' ') + '</option>'; }).join('');
     var wa = String(lead.whatsapp || '').replace(/\D/g, '');
