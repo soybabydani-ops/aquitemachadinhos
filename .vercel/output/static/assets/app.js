@@ -2737,6 +2737,9 @@
     '</div>';
   }
 
+  /* ============================================================
+     SUPER PORTAL DE CLASSIFICADOS NACIONAL (AQUITEM BRASIL)
+     ============================================================ */
   function pageClassificadosHub() {
     var gridRoot = $('#classGridRoot') || $('#classGrid');
     var catsGrid = $('#classCatsGrid');
@@ -2750,24 +2753,29 @@
     var selectedCat = params().get('cat') || 'all';
     var activeSub = '';
     var searchQuery = '';
-    var selectedCity = $('#classCityFilter') ? $('#classCityFilter').value : (currentCitySlug() === 'nacional' ? '' : currentCitySlug());
-    var sortOrder = $('#classSortFilter') ? $('#classSortFilter').value : 'destaque';
+    var selectedCity = '';
+    var sortOrder = 'destaque';
+    var allListings = [];
+    var cats = CLASSIFIED_CATS;
 
+    var pCity = params().get('cidade') || params().get('c') || '';
     var citySel = $('#classCityFilter');
     if (citySel) {
-      var curSlug = currentCitySlug();
-      if (curSlug && curSlug !== 'nacional' && citySel.querySelector('option[value="' + curSlug + '"]')) {
-        citySel.value = curSlug;
-        selectedCity = curSlug;
+      if (pCity && citySel.querySelector('option[value="' + pCity + '"]')) {
+        citySel.value = pCity;
+        selectedCity = pCity;
+      } else {
+        selectedCity = citySel.value || '';
       }
       citySel.addEventListener('change', function () {
-        selectedCity = this.value;
+        selectedCity = this.value || '';
         renderListings();
       });
     }
 
     var sortSel = $('#classSortFilter');
     if (sortSel) {
+      sortOrder = sortSel.value || 'destaque';
       sortSel.addEventListener('change', function () {
         sortOrder = this.value;
         renderListings();
@@ -2782,235 +2790,196 @@
         timer = setTimeout(function () {
           searchQuery = (sInp.value || '').trim().toLowerCase();
           renderListings();
-        }, 250);
+        }, 200);
       });
     }
 
-    apiGet('listings?select=*&status=eq.ativo&order=destaque.desc,criado_em.desc').then(function (all) {
-      all = all || [];
-      var cats = CLASSIFIED_CATS;
+    var SUB_OPTS = {
+      'imoveis': [
+        { k: '', l: 'Todos Imóveis' }, { k: 'alugar', l: '🔑 Aluguel' }, { k: 'vender', l: '🏷️ Venda' },
+        { k: 'temporada', l: '🤠 Temporada / Peão' }, { k: 'quartos', l: '🛏️ Quartos / Repúblicas' },
+        { k: 'terrenos', l: '📐 Terrenos / Lotes' }, { k: 'comercial', l: '🏢 Salas & Galpões' }, { k: 'sitios', l: '🌳 Sítios / Chácaras' }
+      ],
+      'veiculos': [
+        { k: '', l: 'Todos Veículos' }, { k: 'carros', l: '🚗 Carros' }, { k: 'motos', l: '🏍️ Motos' },
+        { k: 'caminhoes', l: '🚚 Caminhões / Vans' }, { k: 'nautica', l: '🚤 Náutica / Jet' },
+        { k: 'agricola', l: '🚜 Tratores & Máquinas' }, { k: 'pecas', l: '⚙️ Peças & Acessórios' }
+      ],
+      'vagas-empresa': [
+        { k: '', l: 'Todas as Vagas' }, { k: 'temporario', l: '🤠 Temporário / Peão' }, { k: 'clt', l: '📋 CLT' },
+        { k: 'freelancer', l: '⚡ Freelancer' }, { k: 'estagio', l: '🎓 Estágio / Aprendiz' }, { k: 'pj', l: '🏢 PJ' }, { k: 'home-office', l: '💻 100% Remoto' }
+      ],
+      'vagas-candidato': [
+        { k: '', l: 'Todos os Candidatos' }, { k: 'temporario', l: '🤠 Disponível Peão' }, { k: 'clt', l: '💼 Busca CLT' },
+        { k: 'freelancer', l: '⚡ Freelancer' }, { k: 'estagio', l: '🎓 Estágio' }, { k: 'remoto', l: '💻 Remoto' }
+      ],
+      'servicos': [
+        { k: '', l: 'Todos Serviços' }, { k: 'reformas', l: '🔨 Reformas & Construção' }, { k: 'eletrica', l: '⚡ Elétrica & Ar' },
+        { k: 'fretes', l: '📦 Fretes & Mudanças' }, { k: 'beleza', l: '✂️ Beleza & Estética' }, { k: 'ti', l: '💻 TI & Design' },
+        { k: 'eventos', l: '🎉 Festas & Buffet' }, { k: 'aulas', l: '📚 Aulas & Cursos' }
+      ],
+      'eletronicos': [
+        { k: '', l: 'Todos Eletrônicos' }, { k: 'celulares', l: '📱 Smartphones' }, { k: 'computadores', l: '💻 PCs & Notebooks' },
+        { k: 'games', l: '🎮 Games & Consoles' }, { k: 'tv-audio', l: '📺 TVs & Áudio' }
+      ],
+      'moda-beleza': [
+        { k: '', l: 'Toda Moda' }, { k: 'country', l: '🤠 Country & Botas' }, { k: 'feminino', l: '👗 Feminino' },
+        { k: 'masculino', l: '👔 Masculino' }, { k: 'calcados', l: '👟 Calçados' }, { k: 'acessorios', l: '👜 Bolsas & Joias' }
+      ],
+      'moveis-eletro': [
+        { k: '', l: 'Todos Móveis' }, { k: 'sala', l: '🛋️ Sala & Sofás' }, { k: 'quarto', l: '🛏️ Quartos & Camas' },
+        { k: 'cozinha', l: '🍳 Eletrodomésticos' }, { k: 'decoracao', l: '🖼️ Decoração' }
+      ],
+      'agro-campo': [
+        { k: '', l: 'Todo o Agro' }, { k: 'gado', l: '🐂 Gado & Bovinos' }, { k: 'equinos', l: '🐎 Cavalos' },
+        { k: 'tratores', l: '🚜 Tratores & Implementos' }, { k: 'fazendas', l: '🌾 Sítios & Fazendas' }, { k: 'insumos', l: '🌱 Sementes & Adubos' }
+      ]
+    };
 
-      if (totalCountEl) totalCountEl.textContent = all.length + (all.length === 1 ? ' anúncio ativo' : ' anúncios ativos');
-
-      var SUB_OPTS = {
-        'imoveis': [
-          { k: '', l: 'Todos Imóveis' }, { k: 'alugar', l: '🔑 Aluguel' }, { k: 'vender', l: '🏷️ Venda' },
-          { k: 'temporada', l: '🤠 Temporada / Peão' }, { k: 'quartos', l: '🛏️ Quartos / Repúblicas' },
-          { k: 'terrenos', l: '📐 Terrenos / Lotes' }, { k: 'comercial', l: '🏢 Salas & Galpões' }, { k: 'sitios', l: '🌳 Sítios / Chácaras' }
-        ],
-        'veiculos': [
-          { k: '', l: 'Todos Veículos' }, { k: 'carros', l: '🚗 Carros' }, { k: 'motos', l: '🏍️ Motos' },
-          { k: 'caminhoes', l: '🚚 Caminhões / Vans' }, { k: 'nautica', l: '🚤 Náutica / Jet' },
-          { k: 'agricola', l: '🚜 Tratores & Máquinas' }, { k: 'pecas', l: '⚙️ Peças & Acessórios' }
-        ],
-        'vagas-empresa': [
-          { k: '', l: 'Todas as Vagas' }, { k: 'temporario', l: '🤠 Temporário / Peão' }, { k: 'clt', l: '📋 CLT' },
-          { k: 'freelancer', l: '⚡ Freelancer' }, { k: 'estagio', l: '🎓 Estágio / Aprendiz' }, { k: 'pj', l: '🏢 PJ' }, { k: 'home-office', l: '💻 100% Remoto' }
-        ],
-        'vagas-candidato': [
-          { k: '', l: 'Todos os Candidatos' }, { k: 'temporario', l: '🤠 Disponível Peão' }, { k: 'clt', l: '💼 Busca CLT' },
-          { k: 'freelancer', l: '⚡ Freelancer' }, { k: 'estagio', l: '🎓 Estágio' }, { k: 'remoto', l: '💻 Remoto' }
-        ],
-        'servicos': [
-          { k: '', l: 'Todos Serviços' }, { k: 'reformas', l: '🔨 Reformas & Construção' }, { k: 'eletrica', l: '⚡ Elétrica & Ar' },
-          { k: 'fretes', l: '📦 Fretes & Mudanças' }, { k: 'beleza', l: '✂️ Beleza & Estética' }, { k: 'ti', l: '💻 TI & Design' },
-          { k: 'eventos', l: '🎉 Festas & Buffet' }, { k: 'aulas', l: '📚 Aulas & Cursos' }
-        ],
-        'eletronicos': [
-          { k: '', l: 'Todos Eletrônicos' }, { k: 'celulares', l: '📱 Smartphones' }, { k: 'computadores', l: '💻 PCs & Notebooks' },
-          { k: 'games', l: '🎮 Games & Consoles' }, { k: 'tv-audio', l: '📺 TVs & Som' }, { k: 'cameras', l: '📷 Câmeras & Drones' }
-        ],
-        'moveis-eletro': [
-          { k: '', l: 'Todos Móveis & Eletro' }, { k: 'sala', l: '🛋️ Sofás & Sala' }, { k: 'quarto', l: '🛏️ Camas & Armários' },
-          { k: 'eletrodomesticos', l: '🧊 Geladeiras & Fogões' }, { k: 'escritorio', l: '🪑 Escritório' }, { k: 'decoracao', l: '🖼️ Decoração' }
-        ],
-        'agro-campo': [
-          { k: '', l: 'Todo Agro' }, { k: 'gado', l: '🐂 Gado & Cavalos' }, { k: 'tratores', l: '🚜 Tratores & Implementos' },
-          { k: 'insumos', l: '🌱 Sementes & Insumos' }, { k: 'fazendas', l: '🌾 Sítios & Fazendas' }
-        ],
-        'moda-beleza': [
-          { k: '', l: 'Toda Moda' }, { k: 'feminino', l: '👗 Feminino' }, { k: 'masculino', l: '👔 Masculino' },
-          { k: 'calcados', l: '👟 Calçados' }, { k: 'festas', l: '✨ Vestidos de Festa' }, { k: 'joias', l: '💍 Joias & Semijoias' }
-        ],
-        'animais': [
-          { k: '', l: 'Todos Pets' }, { k: 'adocao', l: '🐶 Adoção' }, { k: 'acessorios', l: '🦴 Acessórios & Rações' },
-          { k: 'servicos-pet', l: '🛁 Banho & Tosa' }, { k: 'veterinario', l: '🩺 Veterinários' }
-        ],
-        'eventos-peao': [
-          { k: '', l: 'Todos Eventos' }, { k: 'ingressos', l: '🎟️ Ingressos & Camarotes' }, { k: 'hospedagem', l: '🏠 Hospedagem Peão' },
-          { k: 'transporte', l: '🚐 Transfers & Vans' }, { k: 'estruturas', l: '🎪 Tendas & Som' }
-        ],
-        'infantil-bebes': [
-          { k: '', l: 'Todo Infantil' }, { k: 'carrinhos', l: '🛒 Carrinhos & Cadeirinhas' }, { k: 'brinquedos', l: '🧸 Brinquedos' },
-          { k: 'roupas', l: '👶 Roupas & Calçados' }, { k: 'moveis-bebe', l: '🍼 Quarto de Bebê' }
-        ],
-        'esportes-lazer': [
-          { k: '', l: 'Todos Esportes' }, { k: 'bikes', l: '🚴 Bicicletas' }, { k: 'fitness', l: '🏋️ Academia & Fitness' },
-          { k: 'musica', l: '🎸 Instrumentos' }, { k: 'camping', l: '⛺ Camping & Pesca' }
-        ],
-        'negocios-comercio': [
-          { k: '', l: 'Todos Negócios' }, { k: 'pontos', l: '🏪 Pontos Comerciais' }, { k: 'atacado', l: '📦 Lotes no Atacado' },
-          { k: 'franquias', l: '🤝 Franquias & Parcerias' }
-        ],
-        'trocas-doacoes': [
-          { k: '', l: 'Tudo' }, { k: 'trocas', l: '🔄 Trocas (Escambo)' }, { k: 'doacoes', l: '🎁 Doações Solidárias' }
-        ],
-        'nacionais': [
-          { k: '', l: 'Todo Nacional' }, { k: 'home-office', l: '💻 Vagas 100% Remotas' }, { k: 'produtos-envio', l: '📦 Envio p/ Todo Brasil' }
-        ]
-      };
-
-      function getCatCount(catId) {
-        if (catId === 'all') return all.length;
-        if (catId === 'vagas-empresa') return all.filter(function (l) { return l.categoria === 'vagas-empresa' || l.categoria === 'empregos'; }).length;
-        if (catId === 'vagas-candidato') return all.filter(function (l) { return l.categoria === 'vagas-candidato'; }).length;
-        if (catId === 'nacionais') return all.filter(function (l) { return l.city_slug === 'nacional' || l.categoria === 'nacionais' || l.cidade === 'Brasil Todo' || l.subcategoria === 'home-office'; }).length;
-        return all.filter(function (l) { return l.categoria === catId; }).length;
+    function renderSubChips() {
+      if (!subChipsBox) return;
+      var opts = SUB_OPTS[selectedCat] || [];
+      if (!opts.length || selectedCat === 'all' || selectedCat === 'nacionais') {
+        subChipsBox.innerHTML = '';
+        subChipsBox.classList.add('hidden');
+        return;
       }
+      subChipsBox.classList.remove('hidden');
+      subChipsBox.innerHTML = opts.map(function (o) {
+        var isAct = activeSub === o.k;
+        return '<button type="button" data-sub-chip="' + esc(o.k) + '" class="px-3.5 py-1.5 rounded-full text-xs font-semibold transition ' + (isAct ? 'bg-peao-500 text-white shadow-soft' : 'bg-white text-silver-300 ring-silver hover:bg-white/10') + '">' + esc(o.l) + '</button>';
+      }).join('');
 
-      function renderCategoriesGrid() {
-        if (!catsGrid) return;
-        var allBtn = '<button data-cat-id="all" class="p-3 rounded-2xl text-center transition flex flex-col items-center justify-center ' + (selectedCat === 'all' ? 'bg-peao-500 text-white shadow-soft ring-1 ring-peao-400' : 'bg-white text-silver-300 ring-silver hover:bg-white/10') + '">' +
-          '<span class="text-2xl">📋</span>' +
-          '<span class="text-xs font-bold mt-1 line-clamp-1">Todos</span>' +
-          '<span class="text-[10px] opacity-75 mt-0.5">' + all.length + '</span>' +
-        '</button>';
-
-        var catsHtml = cats.map(function (c) {
-          var count = getCatCount(c.id);
-          var isAct = selectedCat === c.id;
-          return '<button data-cat-id="' + esc(c.id) + '" class="p-3 rounded-2xl text-center transition flex flex-col items-center justify-center ' + (isAct ? 'bg-peao-500 text-white shadow-soft ring-1 ring-peao-400' : 'bg-white text-silver-300 ring-silver hover:bg-white/10') + '">' +
-            '<span class="text-2xl">' + (c.emoji || '📋') + '</span>' +
-            '<span class="text-xs font-bold mt-1 line-clamp-1">' + esc(c.nome) + '</span>' +
-            '<span class="text-[10px] opacity-75 mt-0.5">' + count + '</span>' +
-          '</button>';
-        }).join('');
-
-        catsGrid.innerHTML = allBtn + catsHtml;
-
-        catsGrid.querySelectorAll('[data-cat-id]').forEach(function (b) {
-          b.addEventListener('click', function () {
-            selectedCat = b.getAttribute('data-cat-id');
-            activeSub = '';
-            renderCategoriesGrid();
-            renderSubFilters();
-            renderListings();
-          });
+      subChipsBox.querySelectorAll('[data-sub-chip]').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          activeSub = btn.getAttribute('data-sub-chip') || '';
+          renderSubChips();
+          renderListings();
         });
-      }
+      });
+    }
 
-      function renderSubFilters() {
-        if (!subChipsBox) return;
-        if (selectedCat === 'all' || !SUB_OPTS[selectedCat]) {
-          subChipsBox.innerHTML = '';
-          return;
-        }
-        var opts = SUB_OPTS[selectedCat] || [];
-        subChipsBox.innerHTML = opts.map(function (o) {
-          var isAct = activeSub === o.k;
-          return '<button data-csub="' + esc(o.k) + '" class="px-3.5 py-1.5 rounded-full text-xs font-semibold transition ' + (isAct ? 'bg-navy-800 text-white ring-1 ring-peao-500' : 'bg-white text-silver-300 ring-silver hover:bg-white/10') + '">' + esc(o.l) + '</button>';
-        }).join('');
+    function renderCatPills() {
+      if (!catsGrid) return;
+      var pillAll = '<button type="button" data-class-cat="all" class="class-cat-btn px-4 py-2 rounded-2xl text-xs font-bold transition shrink-0 flex items-center gap-1.5 ' + (selectedCat === 'all' ? 'bg-peao-500 text-white shadow-soft' : 'bg-white text-silver-300 ring-silver hover:bg-white/10') + '"><span>🔥</span> Todos (' + allListings.length + ')</button>';
+      
+      var pills = cats.map(function (c) {
+        var cnt = allListings.filter(function (l) {
+          if (c.id === 'vagas-empresa') return l.categoria === 'vagas-empresa' || l.categoria === 'empregos';
+          if (c.id === 'vagas-candidato') return l.categoria === 'vagas-candidato';
+          if (c.id === 'nacionais') return l.categoria === 'vagas-nac-empresa' || l.categoria === 'vagas-nac-candidato' || l.categoria === 'nacionais' || l.city_slug === 'nacional';
+          return l.categoria === c.id;
+        }).length;
+        var isSel = selectedCat === c.id;
+        return '<button type="button" data-class-cat="' + esc(c.id) + '" class="class-cat-btn px-4 py-2 rounded-2xl text-xs font-bold transition shrink-0 flex items-center gap-1.5 ' + (isSel ? 'bg-peao-500 text-white shadow-soft' : 'bg-white text-silver-300 ring-silver hover:bg-white/10') + '"><span>' + c.emoji + '</span> ' + esc(c.nome) + ' <span class="opacity-75 text-[10px]">(' + cnt + ')</span></button>';
+      }).join('');
 
-        subChipsBox.querySelectorAll('[data-csub]').forEach(function (b) {
-          b.addEventListener('click', function () {
-            activeSub = b.getAttribute('data-csub');
-            renderSubFilters();
-            renderListings();
-          });
-        });
-      }
+      catsGrid.innerHTML = pillAll + pills;
 
-      function renderListings() {
-        var filtered = all.slice();
+      catsGrid.querySelectorAll('[data-class-cat]').forEach(function (btn) {
+        btn.onclick = function (e) {
+          e.preventDefault();
+          selectedCat = btn.getAttribute('data-class-cat') || 'all';
+          activeSub = '';
+          renderCatPills();
+          renderSubChips();
+          renderListings();
+        };
+      });
+    }
 
+    function renderListings() {
+      var filtered = allListings.slice();
+
+      if (selectedCat !== 'all') {
         if (selectedCat === 'nacionais') {
-          filtered = filtered.filter(function (l) { return l.city_slug === 'nacional' || l.categoria === 'nacionais' || l.cidade === 'Brasil Todo' || l.subcategoria === 'home-office'; });
+          filtered = filtered.filter(function (l) { return l.categoria === 'vagas-nac-empresa' || l.categoria === 'vagas-nac-candidato' || l.categoria === 'nacionais' || l.city_slug === 'nacional'; });
         } else if (selectedCat === 'vagas-empresa') {
           filtered = filtered.filter(function (l) { return l.categoria === 'vagas-empresa' || l.categoria === 'empregos'; });
-        } else if (selectedCat !== 'all') {
+        } else {
           filtered = filtered.filter(function (l) { return l.categoria === selectedCat; });
         }
-
-        if (selectedCity && selectedCat !== 'nacionais') {
-          filtered = filtered.filter(function (l) {
-            var cSlug = (l.city_slug || '').toLowerCase();
-            var cName = (l.cidade || '').toLowerCase();
-            return !l.city_slug || cSlug === selectedCity || cName.indexOf(selectedCity) !== -1 || cSlug === 'nacional' || cName === 'brasil todo';
-          });
-        }
-
-        if (activeSub) {
-          filtered = filtered.filter(function (l) {
-            var sub = ((l.subcategoria || '') + ' ' + JSON.stringify(l.atributos || '')).toLowerCase();
-            return sub.indexOf(activeSub.toLowerCase()) !== -1;
-          });
-        }
-
-        if (searchQuery) {
-          filtered = filtered.filter(function (l) {
-            var text = [l.titulo, l.descricao, l.bairro, l.cidade, l.anunciante_nome, l.preco, JSON.stringify(l.atributos || '')].filter(Boolean).join(' ').toLowerCase();
-            return text.indexOf(searchQuery) !== -1;
-          });
-        }
-
-        if (sortOrder === 'destaque') {
-          filtered.sort(function (a, b) {
-            if (a.destaque && !b.destaque) return -1;
-            if (!a.destaque && b.destaque) return 1;
-            return new Date(b.criado_em || 0).getTime() - new Date(a.criado_em || 0).getTime();
-          });
-        } else if (sortOrder === 'recentes') {
-          filtered.sort(function (a, b) {
-            return new Date(b.criado_em || 0).getTime() - new Date(a.criado_em || 0).getTime();
-          });
-        } else if (sortOrder === 'menor_preco' || sortOrder === 'maior_preco') {
-          function extractNum(p) {
-            if (!p) return 0;
-            var clean = String(p).replace(/[^\d,.]/g, '').replace(',', '.');
-            return parseFloat(clean) || 0;
-          }
-          filtered.sort(function (a, b) {
-            var pa = extractNum(a.preco), pb = extractNum(b.preco);
-            return sortOrder === 'menor_preco' ? (pa - pb) : (pb - pa);
-          });
-        }
-
-        if (resHeader) {
-          var curCatObj = CLASSIFIED_CATS.filter(function(x){ return x.id === selectedCat; })[0];
-          if (selectedCat === 'all') {
-            resHeader.textContent = selectedCity ? ('🔥 Todos os Anúncios em ' + (CITY_NAMES[selectedCity] || selectedCity) + ' (' + filtered.length + ')') : ('🔥 Todos os Anúncios no Brasil (' + filtered.length + ')');
-          } else if (selectedCat === 'nacionais') {
-            resHeader.textContent = '🇧🇷 Oportunidades Nacionais & Remotas (' + filtered.length + ')';
-          } else {
-            var catTitle = curCatObj ? (curCatObj.emoji + ' ' + curCatObj.nome) : 'Anúncios';
-            resHeader.textContent = selectedCity ? (catTitle + ' em ' + (CITY_NAMES[selectedCity] || selectedCity) + ' (' + filtered.length + ')') : (catTitle + ' no Brasil Todo (' + filtered.length + ')');
-          }
-        }
-
-        if (!filtered.length) {
-          var ctaLink = 'cadastro-anuncio.html' + (selectedCat !== 'all' ? '?cat=' + encodeURIComponent(selectedCat) : '');
-          gridRoot.innerHTML = '<div class="bg-white rounded-3xl p-10 text-center ring-silver shadow-soft max-w-xl mx-auto my-8 border border-white/5">' +
-            '<div class="text-5xl mb-3">🏷️</div>' +
-            '<h3 class="font-display font-bold text-xl text-white">Nenhum anúncio encontrado</h3>' +
-            '<p class="text-silver-400 text-sm mt-2 leading-relaxed">Seja o primeiro a anunciar nesta categoria! Cadastro rápido, gratuito e com WhatsApp direto.</p>' +
-            '<a href="' + ctaLink + '" class="btn-shine inline-block mt-6 bg-peao-500 hover:bg-peao-600 text-white font-bold px-6 py-3 rounded-xl shadow-redglow">📢 Publicar Anúncio Grátis</a>' +
-          '</div>';
-          return;
-        }
-
-        gridRoot.innerHTML = '<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">' +
-          filtered.map(function (l) { return listingCard(l, cats); }).join('') +
-        '</div>';
       }
 
-      renderCategoriesGrid();
-      renderSubFilters();
+      if (selectedCity && selectedCat !== 'nacionais') {
+        filtered = filtered.filter(function (l) {
+          var cSlug = (l.city_slug || '').toLowerCase();
+          var cName = (l.cidade || '').toLowerCase();
+          var sel = selectedCity.toLowerCase();
+          return cSlug === sel || cName === sel || cName.indexOf(sel) !== -1 || l.city_slug === 'nacional';
+        });
+      }
+
+      if (activeSub) {
+        filtered = filtered.filter(function (l) {
+          var sub = ((l.subcategoria || '') + ' ' + JSON.stringify(l.atributos || '')).toLowerCase();
+          return sub.indexOf(activeSub) !== -1;
+        });
+      }
+
+      if (searchQuery) {
+        filtered = filtered.filter(function (l) {
+          var haystack = [l.titulo, l.descricao, l.anunciante_nome, l.bairro, l.cidade, l.preco, JSON.stringify(l.atributos || '')].filter(Boolean).join(' ').toLowerCase();
+          return haystack.indexOf(searchQuery) !== -1;
+        });
+      }
+
+      if (sortOrder === 'destaque') {
+        filtered.sort(function (a, b) { return (b.destaque ? 1 : 0) - (a.destaque ? 1 : 0); });
+      } else if (sortOrder === 'recentes') {
+        filtered.sort(function (a, b) { return new Date(b.criado_em || 0) - new Date(a.criado_em || 0); });
+      } else if (sortOrder === 'menor_preco') {
+        filtered.sort(function (a, b) {
+          var pa = parseFloat(String(a.preco || '').replace(/[^0-9,.]/g, '').replace(',', '.')) || 0;
+          var pb = parseFloat(String(b.preco || '').replace(/[^0-9,.]/g, '').replace(',', '.')) || 0;
+          return pa - pb;
+        });
+      } else if (sortOrder === 'maior_preco') {
+        filtered.sort(function (a, b) {
+          var pa = parseFloat(String(a.preco || '').replace(/[^0-9,.]/g, '').replace(',', '.')) || 0;
+          var pb = parseFloat(String(b.preco || '').replace(/[^0-9,.]/g, '').replace(',', '.')) || 0;
+          return pb - pa;
+        });
+      }
+
+      if (resHeader) {
+        var catObj = cats.filter(function (x) { return x.id === selectedCat; })[0];
+        var catTitle = catObj ? (catObj.emoji + ' ' + catObj.nome) : '🔥 Todos os Anúncios';
+        var cDisplay = selectedCity ? (CITY_NAMES[selectedCity] || selectedCity) : 'Brasil Todo';
+        resHeader.textContent = catTitle + ' em ' + cDisplay + ' (' + filtered.length + ')';
+      }
+
+      if (!filtered.length) {
+        gridRoot.innerHTML = '<div class="col-span-full bg-white rounded-3xl p-10 text-center ring-silver shadow-soft max-w-xl mx-auto my-8">' +
+          '<div class="text-5xl mb-3">🔍</div>' +
+          '<h3 class="font-display font-bold text-xl text-white">Nenhum anúncio encontrado</h3>' +
+          '<p class="text-silver-400 text-sm mt-2">Seja o primeiro a anunciar nesta categoria! Cadastro rápido e gratuito.</p>' +
+          '<a href="cadastro-anuncio.html' + (selectedCat !== 'all' ? '?cat=' + encodeURIComponent(selectedCat) : '') + '" class="btn-shine inline-block mt-6 bg-peao-500 hover:bg-peao-600 text-white font-bold px-6 py-3 rounded-xl shadow-redglow">📢 Criar Anúncio Grátis</a>' +
+        '</div>';
+        return;
+      }
+
+      gridRoot.innerHTML = filtered.map(function (l) { return listingCard(l, cats); }).join('');
+    }
+
+    apiGet('listings?select=*&status=eq.ativo&order=destaque.desc,criado_em.desc').then(function (all) {
+      allListings = all || [];
+      cats = CLASSIFIED_CATS;
+      if (totalCountEl) totalCountEl.textContent = allListings.length + ' anúncios ativos';
+      renderCatPills();
+      renderSubChips();
       renderListings();
+    }).catch(function (err) {
+      console.error('[Classificados Load Error]:', err);
+      gridRoot.innerHTML = '<div class="col-span-full text-center py-12 text-silver-400">Erro ao carregar anúncios. <button onclick="location.reload()" class="underline text-amber-400">Tentar novamente</button></div>';
     });
   }
 
   /* ============================================================
      PÁGINA DEDICADA DE VAGAS E BANCO DE TALENTOS
+     ============================================================ */
+  /* ============================================================
+     HUB DE VAGAS & RECRUTAMENTO NACIONAL (AQUITEM BRASIL)
      ============================================================ */
   function pageVagas() {
     var root = $('#vagasRoot'); if (!root) return;
@@ -3019,17 +2988,27 @@
     var currentTab = 'empresa';
     var activeSub = '';
     var searchQuery = '';
-    var selectedCity = $('#vagasCityFilter') ? $('#vagasCityFilter').value : 'barretos';
+    var selectedCity = '';
+    var allListings = [];
+    var cats = CLASSIFIED_CATS;
+
+    // Check URL parameters (?cidade=... or ?tab=... or ?q=...)
+    var pCity = params().get('cidade') || params().get('c') || '';
+    var pTab = params().get('tab') || '';
+    if (pTab && ['empresa','candidato','nacional','all'].indexOf(pTab) !== -1) {
+      currentTab = pTab;
+    }
 
     var citySel = $('#vagasCityFilter');
     if (citySel) {
-      var curSlug = currentCitySlug();
-      if (curSlug && citySel.querySelector('option[value="' + curSlug + '"]')) {
-        citySel.value = curSlug;
-        selectedCity = curSlug;
+      if (pCity && citySel.querySelector('option[value="' + pCity + '"]')) {
+        citySel.value = pCity;
+        selectedCity = pCity;
+      } else {
+        selectedCity = citySel.value || '';
       }
       citySel.addEventListener('change', function () {
-        selectedCity = this.value;
+        selectedCity = this.value || '';
         render();
       });
     }
@@ -3042,193 +3021,212 @@
         timer = setTimeout(function () {
           searchQuery = (sInp.value || '').trim().toLowerCase();
           render();
-        }, 250);
+        }, 200);
       });
     }
 
-    document.querySelectorAll('[data-vagas-tab]').forEach(function (btn) {
-      btn.addEventListener('click', function () {
-        document.querySelectorAll('[data-vagas-tab]').forEach(function (b) {
-          b.classList.remove('bg-peao-500', 'text-white', 'shadow-soft');
-          b.classList.add('bg-white', 'text-silver-300', 'ring-silver');
+    function renderSubFilters() {
+      var subBox = $('#vagasSubFilters'); if (!subBox) return;
+      var subLabels = {
+        'empresa': [
+          { k: '', l: 'Todos' }, { k: 'temporario', l: '🤠 Temporário / Peão' }, { k: 'clt', l: '📋 CLT' },
+          { k: 'freelancer', l: '⚡ Freelancer / Diária' }, { k: 'estagio', l: '🎓 Estágio' },
+          { k: 'pj', l: '🏢 PJ' }, { k: 'home-office', l: '💻 Remoto / Home Office' }
+        ],
+        'candidato': [
+          { k: '', l: 'Todos os Candidatos' }, { k: 'temporario', l: '🤠 Disponível Peão' }, { k: 'clt', l: '💼 Busca CLT' },
+          { k: 'freelancer', l: '⚡ Freelancer' }, { k: 'estagio', l: '🎓 Estágio' }, { k: 'remoto', l: '💻 Home Office' }
+        ],
+        'nacional': [
+          { k: '', l: 'Todas as Oportunidades' }, { k: 'remoto', l: '💻 100% Remoto' }, { k: 'clt-nacional', l: '🇧🇷 CLT Nacional' },
+          { k: 'pj-nacional', l: '🏢 PJ Nacional' }
+        ],
+        'all': [
+          { k: '', l: 'Todos' }, { k: 'temporario', l: '🤠 Temporário' }, { k: 'clt', l: '📋 CLT' },
+          { k: 'freelancer', l: '⚡ Freelancer' }, { k: 'estagio', l: '🎓 Estágio' }
+        ]
+      };
+      var list = subLabels[currentTab] || subLabels['empresa'];
+      subBox.innerHTML = list.map(function (item) {
+        var isAct = activeSub === item.k;
+        return '<button type="button" data-vsub="' + esc(item.k) + '" class="px-3.5 py-1.5 rounded-full text-xs font-semibold transition ' + (isAct ? 'bg-navy-800 text-white ring-1 ring-peao-500 shadow-sm' : 'bg-white text-silver-300 ring-silver hover:bg-white/10') + '">' + esc(item.l) + '</button>';
+      }).join('');
+      subBox.querySelectorAll('[data-vsub]').forEach(function (b) {
+        b.addEventListener('click', function () {
+          activeSub = b.getAttribute('data-vsub') || '';
+          renderSubFilters();
+          render();
         });
-        btn.classList.remove('bg-white', 'text-silver-300', 'ring-silver');
-        btn.classList.add('bg-peao-500', 'text-white', 'shadow-soft');
-        currentTab = btn.getAttribute('data-vagas-tab');
-        activeSub = '';
-        renderSubFilters();
-        render();
       });
-    });
+    }
+
+    function wireTabButtons() {
+      document.querySelectorAll('[data-vagas-tab]').forEach(function (btn) {
+        var tabId = btn.getAttribute('data-vagas-tab');
+        if (tabId === currentTab) {
+          btn.classList.remove('bg-white', 'text-silver-300', 'ring-silver');
+          btn.classList.add('bg-peao-500', 'text-white', 'shadow-soft');
+        } else {
+          btn.classList.remove('bg-peao-500', 'text-white', 'shadow-soft');
+          btn.classList.add('bg-white', 'text-silver-300', 'ring-silver');
+        }
+        btn.onclick = function (e) {
+          e.preventDefault();
+          document.querySelectorAll('[data-vagas-tab]').forEach(function (b) {
+            b.classList.remove('bg-peao-500', 'text-white', 'shadow-soft');
+            b.classList.add('bg-white', 'text-silver-300', 'ring-silver');
+          });
+          btn.classList.remove('bg-white', 'text-silver-300', 'ring-silver');
+          btn.classList.add('bg-peao-500', 'text-white', 'shadow-soft');
+          currentTab = btn.getAttribute('data-vagas-tab') || 'empresa';
+          activeSub = '';
+          renderSubFilters();
+          render();
+        };
+      });
+    }
+
+    function vagaCardHTML(l) {
+      var isCandidate = l.categoria === 'vagas-candidato' || l.categoria === 'vagas-nac-candidato';
+      var isNational = l.categoria === 'vagas-nac-empresa' || l.categoria === 'vagas-nac-candidato' || l.categoria === 'nacionais' || l.city_slug === 'nacional';
+      
+      var waMsg = isCandidate
+        ? ('Olá ' + (l.anunciante_nome || '') + '! Vi seu perfil profissional ("' + l.titulo + '") no Aqui Tem Achadinhos e gostaria de conversar.')
+        : ('Olá! Vi a vaga de "' + l.titulo + '" no Aqui Tem Achadinhos e gostaria de me candidatar.');
+      var wa = 'https://wa.me/' + (digits(l.whatsapp) || CONFIG.whatsapp) + '?text=' + encodeURIComponent(waMsg);
+
+      var tagBadge = isCandidate
+        ? '<span class="px-2.5 py-1 rounded-md text-[11px] font-bold bg-purple-500/20 text-purple-300 border border-purple-500/30 mr-1.5">🙋 Candidato</span>'
+        : '<span class="px-2.5 py-1 rounded-md text-[11px] font-bold bg-peao-500/20 text-peao-400 border border-peao-500/30 mr-1.5">📢 Vaga Aberta</span>';
+
+      var modalidade = l.subcategoria || (l.atributos && l.atributos.subcategoria) || '';
+      var modBadge = modalidade ? ('<span class="px-2.5 py-1 rounded-md text-[11px] font-semibold bg-white/10 text-silver-200 mr-1.5">' + esc(modalidade.toUpperCase()) + '</span>') : '';
+      var destBadge = l.destaque ? '<span class="px-2.5 py-1 rounded-md text-[11px] font-bold bg-amber-400/20 text-amber-300 border border-amber-400/40 mr-1.5">⭐ Destaque</span>' : '';
+      var nacBadge = isNational ? '<span class="px-2.5 py-1 rounded-md text-[11px] font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">🇧🇷 Nacional / Remoto</span>' : '';
+
+      var preco = l.preco ? '<div class="mt-2 text-sm font-extrabold text-emerald-400 flex items-center gap-1.5"><span>💰</span><span>' + esc(l.preco) + '</span></div>' : '';
+      var desc = l.descricao ? '<p class="text-xs text-silver-300 mt-2 line-clamp-3 leading-relaxed">' + esc(l.descricao) + '</p>' : '';
+      var anunciante = l.anunciante_nome ? '<span class="font-semibold text-white">' + esc(l.anunciante_nome) + '</span>' : '';
+
+      var uf = CITY_UFS[l.city_slug] || (l.cidade === 'Barretos' ? 'SP' : (l.cidade === 'Gramado' ? 'RS' : (l.cidade === 'Uberlândia' ? 'MG' : (l.cidade === 'Florianópolis' ? 'SC' : (l.cidade === 'Salvador' ? 'BA' : 'SP')))));
+      var cityLabel = (l.cidade || 'Barretos') + (uf && uf !== 'BR' ? '/' + uf : '');
+      var local = isNational ? '🌐 Brasil Todo (Remoto)' : ([l.bairro, cityLabel].filter(Boolean).join(' · '));
+
+      var btnLabel = isCandidate ? '💬 Entrevistar no WhatsApp' : '💬 Candidatar-se via WhatsApp';
+      var btnBg = isCandidate ? 'bg-purple-600 hover:bg-purple-700' : 'bg-peao-500 hover:bg-peao-600';
+
+      return '<div class="bg-white rounded-2xl ring-silver shadow-soft p-5 flex flex-col justify-between card-hover border border-white/5 relative">' +
+        '<div>' +
+          '<div class="flex items-center gap-1.5 flex-wrap mb-2.5">' + tagBadge + modBadge + destBadge + nacBadge + '</div>' +
+          '<a href="anuncio.html?id=' + encodeURIComponent(l.id) + '" class="block group">' +
+            '<h3 class="font-display font-bold text-lg text-white group-hover:text-peao-400 transition leading-snug">' + esc(l.titulo) + '</h3>' +
+          '</a>' +
+          '<div class="text-xs text-silver-400 mt-1 flex items-center gap-2 flex-wrap">' +
+            (anunciante ? '<span>🏢 ' + anunciante + '</span>' : '') +
+            (local ? '<span>📍 ' + esc(local) + '</span>' : '') +
+          '</div>' +
+          preco + desc +
+        '</div>' +
+        '<div class="mt-5 pt-4 border-t border-white/10 flex items-center justify-between gap-3">' +
+          '<a href="' + wa + '" target="_blank" rel="noopener noreferrer" class="btn-shine flex-1 text-center text-xs font-bold text-white py-2.5 px-4 rounded-xl ' + btnBg + ' transition shadow-soft flex items-center justify-center gap-1.5">' +
+            btnLabel +
+          '</a>' +
+          '<a href="anuncio.html?id=' + encodeURIComponent(l.id) + '" class="text-xs font-semibold text-silver-400 hover:text-white px-2 py-2 transition" title="Ver detalhes">' +
+            'Detalhes →' +
+          '</a>' +
+        '</div>' +
+      '</div>';
+    }
+
+    function render() {
+      var filtered = allListings.slice();
+
+      if (currentTab === 'empresa') {
+        filtered = filtered.filter(function (l) { return l.categoria === 'vagas-empresa' || l.categoria === 'empregos'; });
+      } else if (currentTab === 'candidato') {
+        filtered = filtered.filter(function (l) { return l.categoria === 'vagas-candidato'; });
+      } else if (currentTab === 'nacional') {
+        filtered = filtered.filter(function (l) { return l.categoria === 'vagas-nac-empresa' || l.categoria === 'vagas-nac-candidato' || l.categoria === 'nacionais' || l.city_slug === 'nacional'; });
+      }
+
+      if (selectedCity && currentTab !== 'nacional') {
+        filtered = filtered.filter(function (l) {
+          var cSlug = (l.city_slug || '').toLowerCase();
+          var cName = (l.cidade || '').toLowerCase();
+          var sel = selectedCity.toLowerCase();
+          return cSlug === sel || cName === sel || cName.indexOf(sel) !== -1 || l.city_slug === 'nacional';
+        });
+      }
+
+      if (activeSub) {
+        filtered = filtered.filter(function (l) {
+          var sub = ((l.subcategoria || '') + ' ' + JSON.stringify(l.atributos || '')).toLowerCase();
+          if (activeSub === 'temporario') return sub.indexOf('temp') !== -1 || sub.indexOf('peao') !== -1;
+          if (activeSub === 'clt') return sub.indexOf('clt') !== -1;
+          if (activeSub === 'freelancer') return sub.indexOf('free') !== -1 || sub.indexOf('diaria') !== -1;
+          if (activeSub === 'estagio') return sub.indexOf('estag') !== -1 || sub.indexOf('aprendiz') !== -1;
+          if (activeSub === 'pj') return sub.indexOf('pj') !== -1;
+          if (activeSub === 'home-office' || activeSub === 'remoto') return sub.indexOf('remoto') !== -1 || sub.indexOf('home') !== -1;
+          return sub.indexOf(activeSub) !== -1;
+        });
+      }
+
+      if (searchQuery) {
+        filtered = filtered.filter(function (l) {
+          var haystack = [l.titulo, l.descricao, l.anunciante_nome, l.bairro, l.cidade, l.preco, JSON.stringify(l.atributos || '')].filter(Boolean).join(' ').toLowerCase();
+          return haystack.indexOf(searchQuery) !== -1;
+        });
+      }
+
+      if (!filtered.length) {
+        var emptyTitle = currentTab === 'candidato'
+          ? 'Nenhum perfil de candidato encontrado'
+          : (currentTab === 'nacional' ? 'Nenhuma vaga nacional no momento' : 'Nenhuma vaga de emprego encontrada');
+        var emptyDesc = currentTab === 'candidato'
+          ? 'Seja o primeiro profissional a cadastrar seu perfil na cidade. É 100% grátis!'
+          : 'Sua empresa precisa de funcionários? Cadastre uma vaga gratuitamente agora!';
+        var ctaUrl = currentTab === 'candidato' ? 'cadastro-anuncio.html?cat=vagas-candidato' : 'cadastro-anuncio.html?cat=vagas-empresa';
+        var ctaText = currentTab === 'candidato' ? '🙋 Cadastrar meu Perfil Grátis' : '📢 Anunciar Vaga Grátis';
+
+        root.innerHTML = '<div class="bg-white rounded-3xl p-10 text-center ring-silver shadow-soft max-w-xl mx-auto my-8">' +
+          '<div class="text-5xl mb-3">💼</div>' +
+          '<h3 class="font-display font-bold text-xl text-white">' + esc(emptyTitle) + '</h3>' +
+          '<p class="text-silver-400 text-sm mt-2 leading-relaxed">' + esc(emptyDesc) + '</p>' +
+          '<a href="' + ctaUrl + '" class="btn-shine inline-block mt-6 bg-peao-500 hover:bg-peao-600 text-white font-bold px-6 py-3 rounded-xl shadow-redglow">' + esc(ctaText) + '</a>' +
+        '</div>';
+        return;
+      }
+
+      root.innerHTML = '<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">' +
+        filtered.map(vagaCardHTML).join('') +
+      '</div>';
+    }
+
+    // Initial load
+    wireTabButtons();
+    renderSubFilters();
 
     Promise.all([
       Classifieds.cats(),
       apiGet('listings?select=*&status=eq.ativo&or=(categoria.eq.vagas-empresa,categoria.eq.vagas-candidato,categoria.eq.vagas-nac-empresa,categoria.eq.vagas-nac-candidato,categoria.eq.nacionais,categoria.eq.empregos)&order=destaque.desc,criado_em.desc')
     ]).then(function (res) {
-      var cats = res[0];
-      var allListings = res[1] || [];
+      cats = res[0] || CLASSIFIED_CATS;
+      allListings = res[1] || [];
 
       var cEmp = allListings.filter(function (l) { return l.categoria === 'vagas-empresa' || l.categoria === 'empregos'; }).length;
       var cCand = allListings.filter(function (l) { return l.categoria === 'vagas-candidato'; }).length;
-      var cNac = allListings.filter(function (l) { return l.categoria === 'vagas-nac-empresa' || l.categoria === 'vagas-nac-candidato' || l.categoria === 'nacionais'; }).length;
+      var cNac = allListings.filter(function (l) { return l.categoria === 'vagas-nac-empresa' || l.categoria === 'vagas-nac-candidato' || l.categoria === 'nacionais' || l.city_slug === 'nacional'; }).length;
 
       var elEmp = $('#countVagasEmpresa'); if (elEmp) elEmp.textContent = cEmp;
       var elCand = $('#countVagasCandidato'); if (elCand) elCand.textContent = cCand;
       var elNac = $('#countVagasNac'); if (elNac) elNac.textContent = cNac;
 
-      function renderSubFilters() {
-        var subBox = $('#vagasSubFilters'); if (!subBox) return;
-        var subLabels = {
-          'empresa': [
-            { k: '', l: 'Todos' }, { k: 'temporario', l: '🤠 Temporário / Peão' }, { k: 'clt', l: '📋 CLT' },
-            { k: 'freelancer', l: '⚡ Freelancer / Diária' }, { k: 'estagio', l: '🎓 Estágio' },
-            { k: 'pj', l: '🏢 PJ' }, { k: 'home-office', l: '💻 Remoto / Home Office' }
-          ],
-          'candidato': [
-            { k: '', l: 'Todos os Candidatos' }, { k: 'temporario', l: '🤠 Disponível Peão' }, { k: 'clt', l: '💼 Busca CLT' },
-            { k: 'freelancer', l: '⚡ Freelancer' }, { k: 'estagio', l: '🎓 Estágio' }, { k: 'remoto', l: '💻 Home Office' }
-          ],
-          'nacional': [
-            { k: '', l: 'Todas as Oportunidades' }, { k: 'remoto', l: '💻 100% Remoto' }, { k: 'clt-nacional', l: '🇧🇷 CLT Nacional' },
-            { k: 'pj-nacional', l: '🏢 PJ Nacional' }
-          ],
-          'all': [
-            { k: '', l: 'Todos' }, { k: 'temporario', l: '🤠 Temporário' }, { k: 'clt', l: '📋 CLT' },
-            { k: 'freelancer', l: '⚡ Freelancer' }, { k: 'estagio', l: '🎓 Estágio' }
-          ]
-        };
-        var list = subLabels[currentTab] || subLabels['empresa'];
-        subBox.innerHTML = list.map(function (item) {
-          var isAct = activeSub === item.k;
-          return '<button data-vsub="' + esc(item.k) + '" class="px-3.5 py-1.5 rounded-full text-xs font-semibold transition ' + (isAct ? 'bg-navy-800 text-white ring-1 ring-peao-500' : 'bg-white text-silver-300 ring-silver hover:bg-white/10') + '">' + esc(item.l) + '</button>';
-        }).join('');
-        subBox.querySelectorAll('[data-vsub]').forEach(function (b) {
-          b.addEventListener('click', function () {
-            activeSub = b.getAttribute('data-vsub');
-            renderSubFilters();
-            render();
-          });
-        });
-      }
-
-      function vagaCardHTML(l) {
-        var isCandidate = l.categoria === 'vagas-candidato' || l.categoria === 'vagas-nac-candidato';
-        var isNational = l.categoria === 'vagas-nac-empresa' || l.categoria === 'vagas-nac-candidato' || l.categoria === 'nacionais';
-        
-        var waMsg = isCandidate
-          ? ('Olá ' + (l.anunciante_nome || '') + '! Vi seu perfil profissional ("' + l.titulo + '") no Aqui Tem Achadinhos e gostaria de conversar.')
-          : ('Olá! Vi a vaga de "' + l.titulo + '" no Aqui Tem Achadinhos e gostaria de me candidatar.');
-        var wa = 'https://wa.me/' + (digits(l.whatsapp) || CONFIG.whatsapp) + '?text=' + encodeURIComponent(waMsg);
-
-        var tagBadge = isCandidate
-          ? '<span class="px-2.5 py-1 rounded-md text-[11px] font-bold bg-purple-500/20 text-purple-300 border border-purple-500/30">🙋 Candidato</span>'
-          : '<span class="px-2.5 py-1 rounded-md text-[11px] font-bold bg-peao-500/20 text-peao-400 border border-peao-500/30">📢 Vaga Aberta</span>';
-
-        var modalidade = l.subcategoria || (l.atributos && l.atributos.subcategoria) || '';
-        var modBadge = modalidade ? '<span class="px-2.5 py-1 rounded-md text-[11px] font-semibold bg-white/10 text-silver-200">' + esc(modalidade.toUpperCase()) + '</span>' : '';
-        var destBadge = l.destaque ? '<span class="px-2.5 py-1 rounded-md text-[11px] font-bold bg-amber-400/20 text-amber-300 border border-amber-400/40">⭐ Destaque</span>' : '';
-        var nacBadge = isNational ? '<span class="px-2.5 py-1 rounded-md text-[11px] font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">🇧🇷 Nacional / Remoto</span>' : '';
-
-        var preco = l.preco ? '<div class="mt-2 text-sm font-extrabold text-emerald-400 flex items-center gap-1.5"><span>💰</span><span>' + esc(l.preco) + '</span></div>' : '';
-        var desc = l.descricao ? '<p class="text-xs text-silver-300 mt-2 line-clamp-3 leading-relaxed">' + esc(l.descricao) + '</p>' : '';
-        var anunciante = l.anunciante_nome ? '<span class="font-semibold text-white">' + esc(l.anunciante_nome) + '</span>' : '';
-
-        var isNational = l.categoria === 'vagas-nac-empresa' || l.categoria === 'vagas-nac-candidato' || l.categoria === 'nacionais' || l.city_slug === 'nacional';
-        var uf = CITY_UFS[l.city_slug] || (l.cidade === 'Barretos' ? 'SP' : (l.cidade === 'Gramado' ? 'RS' : (l.cidade === 'Uberlândia' ? 'MG' : (l.cidade === 'Florianópolis' ? 'SC' : (l.cidade === 'Salvador' ? 'BA' : 'SP')))));
-        var cityLabel = (l.cidade || 'Barretos') + (uf && uf !== 'BR' ? '/' + uf : '');
-        var local = isNational ? '🌐 Brasil Todo (Remoto)' : ([l.bairro, cityLabel].filter(Boolean).join(' · '));
-
-        var btnLabel = isCandidate ? '💬 Entrevistar no WhatsApp' : '💬 Candidatar-se via WhatsApp';
-        var btnBg = isCandidate ? 'bg-purple-600 hover:bg-purple-700' : 'bg-peao-500 hover:bg-peao-600';
-
-        return '<div class="bg-white rounded-2xl ring-silver shadow-soft p-5 flex flex-col justify-between card-hover border border-white/5 relative">' +
-          '<div>' +
-            '<div class="flex items-center gap-1.5 flex-wrap mb-2.5">' + tagBadge + modBadge + destBadge + nacBadge + '</div>' +
-            '<a href="anuncio.html?id=' + encodeURIComponent(l.id) + '" class="block group">' +
-              '<h3 class="font-display font-bold text-lg text-white group-hover:text-peao-400 transition leading-snug">' + esc(l.titulo) + '</h3>' +
-            '</a>' +
-            '<div class="text-xs text-silver-400 mt-1 flex items-center gap-2 flex-wrap">' +
-              (anunciante ? '<span>🏢 ' + anunciante + '</span>' : '') +
-              (local ? '<span>📍 ' + esc(local) + '</span>' : '') +
-            '</div>' +
-            preco + desc +
-          '</div>' +
-          '<div class="mt-5 pt-4 border-t border-white/10 flex items-center justify-between gap-3">' +
-            '<a href="' + wa + '" target="_blank" rel="noopener noreferrer" class="btn-shine flex-1 text-center text-xs font-bold text-white py-2.5 px-4 rounded-xl ' + btnBg + ' transition shadow-soft flex items-center justify-center gap-1.5">' +
-              btnLabel +
-            '</a>' +
-            '<a href="anuncio.html?id=' + encodeURIComponent(l.id) + '" class="text-xs font-semibold text-silver-400 hover:text-white px-2 py-2 transition" title="Ver detalhes">' +
-              'Detalhes →' +
-            '</a>' +
-          '</div>' +
-        '</div>';
-      }
-
-      function render() {
-        var filtered = allListings.slice();
-
-        if (currentTab === 'empresa') {
-          filtered = filtered.filter(function (l) { return l.categoria === 'vagas-empresa' || l.categoria === 'empregos'; });
-        } else if (currentTab === 'candidato') {
-          filtered = filtered.filter(function (l) { return l.categoria === 'vagas-candidato'; });
-        } else if (currentTab === 'nacional') {
-          filtered = filtered.filter(function (l) { return l.categoria === 'vagas-nac-empresa' || l.categoria === 'vagas-nac-candidato' || l.categoria === 'nacionais'; });
-        }
-
-        if (selectedCity && currentTab !== 'nacional') {
-          filtered = filtered.filter(function (l) {
-            var cSlug = (l.city_slug || '').toLowerCase();
-            var cName = (l.cidade || '').toLowerCase();
-            return !l.city_slug || cSlug === selectedCity || cName === selectedCity || cName.indexOf(selectedCity) !== -1;
-          });
-        }
-
-        if (activeSub) {
-          filtered = filtered.filter(function (l) {
-            var sub = ((l.subcategoria || '') + ' ' + JSON.stringify(l.atributos || '')).toLowerCase();
-            if (activeSub === 'temporario') return sub.indexOf('temp') !== -1 || sub.indexOf('peao') !== -1;
-            if (activeSub === 'clt') return sub.indexOf('clt') !== -1;
-            if (activeSub === 'freelancer') return sub.indexOf('free') !== -1 || sub.indexOf('diaria') !== -1;
-            if (activeSub === 'estagio') return sub.indexOf('estag') !== -1 || sub.indexOf('aprendiz') !== -1;
-            if (activeSub === 'pj') return sub.indexOf('pj') !== -1;
-            if (activeSub === 'home-office' || activeSub === 'remoto') return sub.indexOf('remoto') !== -1 || sub.indexOf('home') !== -1;
-            return sub.indexOf(activeSub) !== -1;
-          });
-        }
-
-        if (searchQuery) {
-          filtered = filtered.filter(function (l) {
-            var haystack = [l.titulo, l.descricao, l.anunciante_nome, l.bairro, l.cidade, l.preco, JSON.stringify(l.atributos || '')].filter(Boolean).join(' ').toLowerCase();
-            return haystack.indexOf(searchQuery) !== -1;
-          });
-        }
-
-        if (!filtered.length) {
-          var emptyTitle = currentTab === 'candidato'
-            ? 'Nenhum perfil de candidato encontrado'
-            : (currentTab === 'nacional' ? 'Nenhuma vaga nacional no momento' : 'Nenhuma vaga de emprego encontrada');
-          var emptyDesc = currentTab === 'candidato'
-            ? 'Seja o primeiro profissional a cadastrar seu perfil na cidade. É 100% grátis!'
-            : 'Sua empresa precisa de funcionários? Cadastre uma vaga gratuitamente agora!';
-          var ctaUrl = currentTab === 'candidato' ? 'cadastro-anuncio.html?cat=vagas-candidato' : 'cadastro-anuncio.html?cat=vagas-empresa';
-          var ctaText = currentTab === 'candidato' ? '🙋 Cadastrar meu Perfil Grátis' : '📢 Anunciar Vaga Grátis';
-
-          root.innerHTML = '<div class="bg-white rounded-3xl p-10 text-center ring-silver shadow-soft max-w-xl mx-auto my-8">' +
-            '<div class="text-5xl mb-3">💼</div>' +
-            '<h3 class="font-display font-bold text-xl text-white">' + esc(emptyTitle) + '</h3>' +
-            '<p class="text-silver-400 text-sm mt-2 leading-relaxed">' + esc(emptyDesc) + '</p>' +
-            '<a href="' + ctaUrl + '" class="btn-shine inline-block mt-6 bg-peao-500 hover:bg-peao-600 text-white font-bold px-6 py-3 rounded-xl shadow-redglow">' + esc(ctaText) + '</a>' +
-          '</div>';
-          return;
-        }
-
-        root.innerHTML = '<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">' +
-          filtered.map(vagaCardHTML).join('') +
-        '</div>';
-      }
-
+      wireTabButtons();
       renderSubFilters();
       render();
+    }).catch(function(err) {
+      console.error('[Vagas Load Error]:', err);
+      root.innerHTML = '<div class="text-center py-12 text-silver-400">Erro ao carregar vagas. <button onclick="location.reload()" class="underline text-amber-400">Tentar novamente</button></div>';
     });
   }
 
