@@ -5,7 +5,12 @@
   "redirects": [
     {
       "source": "/barretos",
-      "destination": "/fundadores?cidade=barretos&utm_source=instagram&utm_medium=bio&utm_campaign=fundadoras_barretos",
+      "destination": "/barretos-home",
+      "permanent": false
+    },
+    {
+      "source": "/guia-barretos",
+      "destination": "/barretos-home",
       "permanent": false
     },
     {
@@ -186,6 +191,26 @@
     }
   ],
   "rewrites": [
+    {
+      "source": "/assets/(.*)",
+      "has": [
+        {
+          "type": "host",
+          "value": "barretos.aquitemachadinhos.com.br"
+        }
+      ],
+      "destination": "/assets/$1"
+    },
+    {
+      "source": "/",
+      "has": [
+        {
+          "type": "host",
+          "value": "barretos.aquitemachadinhos.com.br"
+        }
+      ],
+      "destination": "/barretos-home.html"
+    },
     {
       "source": "/assets/(.*)",
       "has": [

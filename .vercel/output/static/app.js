@@ -58,7 +58,8 @@
 /* === MOTOR MULTI-CIDADE (Aqui Tem) — v4 EXTERNO (compatível CSP) === */
 (function () {
   var CIDADES = {
-    "www": ["Barretos","SP"],
+    "www": ["Brasil","BR"],
+    "barretos": ["Barretos","SP"],
     "classificados": ["Brasil Todo","BR"],
     "nacional": ["Brasil Todo","BR"],
     "gramado": ["Gramado","RS"],
@@ -79,7 +80,9 @@
   if (sub === "www" || partes.length <= 2 || sub === "localhost") sub = "www";
   if ((sub === "classificados" || sub === "nacional") && (location.pathname === "/" || location.pathname === "/index.html")) {
     location.replace("/classificados.html");
-  } else if (sub !== "www" && sub !== "classificados" && sub !== "nacional" && (location.pathname === "/" || location.pathname === "/index.html")) {
+  } else if (sub === "barretos" && (location.pathname === "/" || location.pathname === "/index.html")) {
+    location.replace("/barretos-home.html");
+  } else if (sub !== "www" && sub !== "classificados" && sub !== "nacional" && sub !== "barretos" && (location.pathname === "/" || location.pathname === "/index.html")) {
     location.replace("/" + sub + "-home.html");
   }
   var par = CIDADES[sub] || CIDADES["www"];
@@ -210,6 +213,7 @@
   var waLink = function (msg) { return 'https://wa.me/' + CONFIG.whatsapp + '?text=' + encodeURIComponent(msg || 'Olá! Vim pelo Aqui Tem Achadinhos.'); };
   var formatDate = function (d) { try { return new Date(d + 'T00:00:00').toLocaleDateString('pt-BR'); } catch (e) { return d; } };
   var CITY_HOSTS = {
+    barretos: 'barretos',
     gramado: 'gramado',
     blumenau: 'blumenau',
     bonito: 'bonito',

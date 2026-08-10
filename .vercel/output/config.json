@@ -25,7 +25,14 @@
     {
       "src": "^/barretos$",
       "headers": {
-        "Location": "/fundadores?cidade=barretos&utm_source=instagram&utm_medium=bio&utm_campaign=fundadoras_barretos"
+        "Location": "/barretos-home"
+      },
+      "status": 307
+    },
+    {
+      "src": "^/guia-barretos$",
+      "headers": {
+        "Location": "/barretos-home"
       },
       "status": 307
     },
@@ -260,6 +267,28 @@
     },
     {
       "handle": "filesystem"
+    },
+    {
+      "src": "^/assets(?:/(.*))$",
+      "dest": "/assets/$1?host=$host",
+      "check": true,
+      "has": [
+        {
+          "type": "host",
+          "value": "barretos.aquitemachadinhos.com.br"
+        }
+      ]
+    },
+    {
+      "src": "^/$",
+      "dest": "/barretos-home.html?host=$host",
+      "check": true,
+      "has": [
+        {
+          "type": "host",
+          "value": "barretos.aquitemachadinhos.com.br"
+        }
+      ]
     },
     {
       "src": "^/assets(?:/(.*))$",
@@ -654,6 +683,9 @@
     },
     "anuncio.html": {
       "path": "anuncio"
+    },
+    "barretos-home.html": {
+      "path": "barretos-home"
     },
     "blumenau-home.html": {
       "path": "blumenau-home"
