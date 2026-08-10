@@ -1402,6 +1402,69 @@
       "status": 307
     },
     {
+      "src": "^/bebedouro$",
+      "headers": {
+        "Location": "/bebedouro-home"
+      },
+      "status": 307
+    },
+    {
+      "src": "^/guia-bebedouro$",
+      "headers": {
+        "Location": "/bebedouro-home"
+      },
+      "status": 307
+    },
+    {
+      "src": "^/colombia$",
+      "headers": {
+        "Location": "/colombia-home"
+      },
+      "status": 307
+    },
+    {
+      "src": "^/guia-colombia$",
+      "headers": {
+        "Location": "/colombia-home"
+      },
+      "status": 307
+    },
+    {
+      "src": "^/olimpia$",
+      "headers": {
+        "Location": "/olimpia-home"
+      },
+      "status": 307
+    },
+    {
+      "src": "^/thermas$",
+      "headers": {
+        "Location": "/olimpia-home"
+      },
+      "status": 307
+    },
+    {
+      "src": "^/guia-olimpia$",
+      "headers": {
+        "Location": "/olimpia-home"
+      },
+      "status": 307
+    },
+    {
+      "src": "^/guaira$",
+      "headers": {
+        "Location": "/guaira-home"
+      },
+      "status": 307
+    },
+    {
+      "src": "^/guia-guaira$",
+      "headers": {
+        "Location": "/guaira-home"
+      },
+      "status": 307
+    },
+    {
       "src": "^(?:/(.*))$",
       "headers": {
         "Strict-Transport-Security": "max-age=63072000; includeSubDomains; preload",
@@ -2872,6 +2935,94 @@
       ]
     },
     {
+      "src": "^/assets(?:/(.*))$",
+      "dest": "/assets/$1?host=$host",
+      "check": true,
+      "has": [
+        {
+          "type": "host",
+          "value": "bebedouro.aquitemachadinhos.com.br"
+        }
+      ]
+    },
+    {
+      "src": "^/$",
+      "dest": "/bebedouro-home.html?host=$host",
+      "check": true,
+      "has": [
+        {
+          "type": "host",
+          "value": "bebedouro.aquitemachadinhos.com.br"
+        }
+      ]
+    },
+    {
+      "src": "^/assets(?:/(.*))$",
+      "dest": "/assets/$1?host=$host",
+      "check": true,
+      "has": [
+        {
+          "type": "host",
+          "value": "colombia.aquitemachadinhos.com.br"
+        }
+      ]
+    },
+    {
+      "src": "^/$",
+      "dest": "/colombia-home.html?host=$host",
+      "check": true,
+      "has": [
+        {
+          "type": "host",
+          "value": "colombia.aquitemachadinhos.com.br"
+        }
+      ]
+    },
+    {
+      "src": "^/assets(?:/(.*))$",
+      "dest": "/assets/$1?host=$host",
+      "check": true,
+      "has": [
+        {
+          "type": "host",
+          "value": "olimpia.aquitemachadinhos.com.br"
+        }
+      ]
+    },
+    {
+      "src": "^/$",
+      "dest": "/olimpia-home.html?host=$host",
+      "check": true,
+      "has": [
+        {
+          "type": "host",
+          "value": "olimpia.aquitemachadinhos.com.br"
+        }
+      ]
+    },
+    {
+      "src": "^/assets(?:/(.*))$",
+      "dest": "/assets/$1?host=$host",
+      "check": true,
+      "has": [
+        {
+          "type": "host",
+          "value": "guaira.aquitemachadinhos.com.br"
+        }
+      ]
+    },
+    {
+      "src": "^/$",
+      "dest": "/guaira-home.html?host=$host",
+      "check": true,
+      "has": [
+        {
+          "type": "host",
+          "value": "guaira.aquitemachadinhos.com.br"
+        }
+      ]
+    },
+    {
       "src": "^/api(/.*)?$",
       "status": 404
     },
@@ -2938,6 +3089,9 @@
     },
     "barretos-home.html": {
       "path": "barretos-home"
+    },
+    "bebedouro-home.html": {
+      "path": "bebedouro-home"
     },
     "belem-home.html": {
       "path": "belem-home"
@@ -3029,11 +3183,17 @@
     "chapada-guimaraes-home.html": {
       "path": "chapada-guimaraes-home"
     },
+    "cidade.html": {
+      "path": "cidade"
+    },
     "cidades.html": {
       "path": "cidades"
     },
     "classificados.html": {
       "path": "classificados"
+    },
+    "colombia-home.html": {
+      "path": "colombia-home"
     },
     "como-chegar-parque-do-peao.html": {
       "path": "como-chegar-parque-do-peao"
@@ -3110,6 +3270,9 @@
     "gramado.html": {
       "path": "gramado"
     },
+    "guaira-home.html": {
+      "path": "guaira-home"
+    },
     "guia-blumenau.html": {
       "path": "guia-blumenau"
     },
@@ -3151,6 +3314,9 @@
     },
     "guia-uberlandia.html": {
       "path": "guia-uberlandia"
+    },
+    "guia.html": {
+      "path": "guia"
     },
     "imoveis.html": {
       "path": "imoveis"
@@ -3244,6 +3410,9 @@
     },
     "ofertas.html": {
       "path": "ofertas"
+    },
+    "olimpia-home.html": {
+      "path": "olimpia-home"
     },
     "onde-comer-barretos-madrugada.html": {
       "path": "onde-comer-barretos-madrugada"
