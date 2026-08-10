@@ -1465,6 +1465,13 @@
       "status": 307
     },
     {
+      "src": "^/marcas$",
+      "headers": {
+        "Location": "/marcas.html"
+      },
+      "status": 307
+    },
+    {
       "src": "^(?:/(.*))$",
       "headers": {
         "Strict-Transport-Security": "max-age=63072000; includeSubDomains; preload",
@@ -3023,6 +3030,39 @@
       ]
     },
     {
+      "src": "^/assets(?:/(.*))$",
+      "dest": "/assets/$1?host=$host",
+      "check": true,
+      "has": [
+        {
+          "type": "host",
+          "value": "marcas.aquitemachadinhos.com.br"
+        }
+      ]
+    },
+    {
+      "src": "^/$",
+      "dest": "/marcas.html?host=$host",
+      "check": true,
+      "has": [
+        {
+          "type": "host",
+          "value": "marcas.aquitemachadinhos.com.br"
+        }
+      ]
+    },
+    {
+      "src": "^(?:/(.*))$",
+      "dest": "/$1?host=$host",
+      "check": true,
+      "has": [
+        {
+          "type": "host",
+          "value": "marcas.aquitemachadinhos.com.br"
+        }
+      ]
+    },
+    {
       "src": "^/api(/.*)?$",
       "status": 404
     },
@@ -3368,6 +3408,9 @@
     },
     "mapa.html": {
       "path": "mapa"
+    },
+    "marcas.html": {
+      "path": "marcas"
     },
     "maringa-home.html": {
       "path": "maringa-home"

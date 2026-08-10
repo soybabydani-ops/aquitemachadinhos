@@ -1032,11 +1032,6 @@
       "source": "/guia-guaira",
       "destination": "/guaira-home",
       "permanent": false
-    },
-    {
-      "source": "/marcas",
-      "destination": "/marcas.html",
-      "permanent": false
     }
   ],
   "headers": [
