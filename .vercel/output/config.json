@@ -3493,6 +3493,15 @@
     "paraty-home.html": {
       "path": "paraty-home"
     },
+    "passagens-onibus-sp-barretos-2026.html": {
+      "path": "passagens-onibus-sp-barretos-2026"
+    },
+    "passagens-rio-barretos-festa-peao.html": {
+      "path": "passagens-rio-barretos-festa-peao"
+    },
+    "passagens-sp-gramado-natal-luz.html": {
+      "path": "passagens-sp-gramado-natal-luz"
+    },
     "piracicaba-home.html": {
       "path": "piracicaba-home"
     },
@@ -3582,6 +3591,9 @@
     },
     "veiculos.html": {
       "path": "veiculos"
+    },
+    "viagens.html": {
+      "path": "viagens"
     },
     "vitoria-home.html": {
       "path": "vitoria-home"
