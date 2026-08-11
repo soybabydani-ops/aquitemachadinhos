@@ -6,9 +6,7 @@
     "/home/user/.npm/_npx/69f9afb961c37556/node_modules/.bin/vc",
     "build",
     "--prod",
-    "--token",
-    "REDACTED",
-    "--yes"
+    "--token=REDACTED"
   ],
   "cliVersion": "58.9.1",
   "detectedFramework": {
@@ -20,7 +18,47 @@
       "requirePath": "/home/user/.npm/_npx/69f9afb961c37556/node_modules/@vercel/node/dist/index",
       "apiVersion": 3,
       "use": "@vercel/node",
+      "src": "api/distribute-media.js",
+      "config": {
+        "zeroConfig": true
+      }
+    },
+    {
+      "require": "@vercel/node",
+      "requirePath": "/home/user/.npm/_npx/69f9afb961c37556/node_modules/@vercel/node/dist/index",
+      "apiVersion": 3,
+      "use": "@vercel/node",
+      "src": "api/empresas.js",
+      "config": {
+        "zeroConfig": true
+      }
+    },
+    {
+      "require": "@vercel/node",
+      "requirePath": "/home/user/.npm/_npx/69f9afb961c37556/node_modules/@vercel/node/dist/index",
+      "apiVersion": 3,
+      "use": "@vercel/node",
       "src": "api/founder-confirmation.js",
+      "config": {
+        "zeroConfig": true
+      }
+    },
+    {
+      "require": "@vercel/node",
+      "requirePath": "/home/user/.npm/_npx/69f9afb961c37556/node_modules/@vercel/node/dist/index",
+      "apiVersion": 3,
+      "use": "@vercel/node",
+      "src": "api/google-index.js",
+      "config": {
+        "zeroConfig": true
+      }
+    },
+    {
+      "require": "@vercel/node",
+      "requirePath": "/home/user/.npm/_npx/69f9afb961c37556/node_modules/@vercel/node/dist/index",
+      "apiVersion": 3,
+      "use": "@vercel/node",
+      "src": "api/link-equity.js",
       "config": {
         "zeroConfig": true
       }
@@ -40,7 +78,57 @@
       "requirePath": "/home/user/.npm/_npx/69f9afb961c37556/node_modules/@vercel/node/dist/index",
       "apiVersion": 3,
       "use": "@vercel/node",
+      "src": "api/og.js",
+      "config": {
+        "zeroConfig": true
+      }
+    },
+    {
+      "require": "@vercel/node",
+      "requirePath": "/home/user/.npm/_npx/69f9afb961c37556/node_modules/@vercel/node/dist/index",
+      "apiVersion": 3,
+      "use": "@vercel/node",
+      "src": "api/seo-page.js",
+      "config": {
+        "zeroConfig": true
+      }
+    },
+    {
+      "require": "@vercel/node",
+      "requirePath": "/home/user/.npm/_npx/69f9afb961c37556/node_modules/@vercel/node/dist/index",
+      "apiVersion": 3,
+      "use": "@vercel/node",
+      "src": "api/sitemap.js",
+      "config": {
+        "zeroConfig": true
+      }
+    },
+    {
+      "require": "@vercel/node",
+      "requirePath": "/home/user/.npm/_npx/69f9afb961c37556/node_modules/@vercel/node/dist/index",
+      "apiVersion": 3,
+      "use": "@vercel/node",
       "src": "api/upgrade-checkout.js",
+      "config": {
+        "zeroConfig": true
+      }
+    },
+    {
+      "require": "@vercel/node",
+      "requirePath": "/home/user/.npm/_npx/69f9afb961c37556/node_modules/@vercel/node/dist/index",
+      "apiVersion": 3,
+      "use": "@vercel/node",
+      "src": "api/vagas.js",
+      "config": {
+        "zeroConfig": true
+      }
+    },
+    {
+      "require": "@vercel/node",
+      "requirePath": "/home/user/.npm/_npx/69f9afb961c37556/node_modules/@vercel/node/dist/index",
+      "apiVersion": 3,
+      "use": "@vercel/node",
+      "src": "api/widget.js",
       "config": {
         "zeroConfig": true
       }
