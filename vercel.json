@@ -1090,7 +1090,7 @@
           "value": "barretos.aquitemachadinhos.com.br"
         }
       ],
-      "destination": "/-home"
+      "destination": "/barretos-home.html"
     },
     {
       "source": "/assets/(.*)",
@@ -1160,7 +1160,7 @@
           "value": "gramado.aquitemachadinhos.com.br"
         }
       ],
-      "destination": "/-home"
+      "destination": "/classificados-home.html"
     },
     {
       "source": "/natal-luz-2026.html",
@@ -1200,7 +1200,7 @@
           "value": "blumenau.aquitemachadinhos.com.br"
         }
       ],
-      "destination": "/-home"
+      "destination": "/gramado-home.html"
     },
     {
       "source": "/assets/(.*)",
@@ -1220,7 +1220,7 @@
           "value": "bonito.aquitemachadinhos.com.br"
         }
       ],
-      "destination": "/-home"
+      "destination": "/bonito-home.html"
     },
     {
       "source": "/assets/(.*)",
@@ -1240,7 +1240,7 @@
           "value": "buzios.aquitemachadinhos.com.br"
         }
       ],
-      "destination": "/-home"
+      "destination": "/buzios-home.html"
     },
     {
       "source": "/assets/(.*)",
@@ -1260,7 +1260,7 @@
           "value": "campos.aquitemachadinhos.com.br"
         }
       ],
-      "destination": "/-home"
+      "destination": "/campos-home.html"
     },
     {
       "source": "/assets/(.*)",
@@ -1280,7 +1280,7 @@
           "value": "caruaru.aquitemachadinhos.com.br"
         }
       ],
-      "destination": "/-home"
+      "destination": "/caruaru-home.html"
     },
     {
       "source": "/assets/(.*)",
@@ -1300,7 +1300,7 @@
           "value": "florianopolis.aquitemachadinhos.com.br"
         }
       ],
-      "destination": "/-home"
+      "destination": "/florianopolis-home.html"
     },
     {
       "source": "/assets/(.*)",
@@ -1320,7 +1320,7 @@
           "value": "jericoacoara.aquitemachadinhos.com.br"
         }
       ],
-      "destination": "/-home"
+      "destination": "/jericoacoara-home.html"
     },
     {
       "source": "/assets/(.*)",
@@ -1340,7 +1340,7 @@
           "value": "porto.aquitemachadinhos.com.br"
         }
       ],
-      "destination": "/-home"
+      "destination": "/porto-home.html"
     },
     {
       "source": "/assets/(.*)",
@@ -1360,7 +1360,7 @@
           "value": "salvador.aquitemachadinhos.com.br"
         }
       ],
-      "destination": "/-home"
+      "destination": "/salvador-home.html"
     },
     {
       "source": "/assets/(.*)",
@@ -1380,7 +1380,7 @@
           "value": "uberlandia.aquitemachadinhos.com.br"
         }
       ],
-      "destination": "/-home"
+      "destination": "/uberlandia-home.html"
     },
     {
       "source": "/assets/(.*)",
@@ -1400,7 +1400,7 @@
           "value": "caldasnovas.aquitemachadinhos.com.br"
         }
       ],
-      "destination": "/-home"
+      "destination": "/caldasnovas-home.html"
     },
     {
       "source": "/assets/(.*)",
@@ -1420,7 +1420,7 @@
           "value": "manaus.aquitemachadinhos.com.br"
         }
       ],
-      "destination": "/-home"
+      "destination": "/manaus-home.html"
     },
     {
       "source": "/assets/(.*)",
@@ -1440,7 +1440,7 @@
           "value": "curitiba.aquitemachadinhos.com.br"
         }
       ],
-      "destination": "/-home"
+      "destination": "/curitiba-home.html"
     },
     {
       "source": "/assets/(.*)",
@@ -1460,7 +1460,7 @@
           "value": "foz.aquitemachadinhos.com.br"
         }
       ],
-      "destination": "/-home"
+      "destination": "/foz-home.html"
     },
     {
       "source": "/assets/(.*)",
@@ -1480,7 +1480,7 @@
           "value": "fozdoiguacu.aquitemachadinhos.com.br"
         }
       ],
-      "destination": "/-home"
+      "destination": "/foz-do-iguacu-home.html"
     },
     {
       "source": "/assets/(.*)",
@@ -1500,7 +1500,7 @@
           "value": "balneario.aquitemachadinhos.com.br"
         }
       ],
-      "destination": "/-home"
+      "destination": "/balneario-home.html"
     },
     {
       "source": "/assets/(.*)",
@@ -1520,7 +1520,7 @@
           "value": "balneariocamboriu.aquitemachadinhos.com.br"
         }
       ],
-      "destination": "/-home"
+      "destination": "/balneario-camboriu-home.html"
     },
     {
       "source": "/assets/(.*)",
@@ -1540,7 +1540,7 @@
           "value": "fortaleza.aquitemachadinhos.com.br"
         }
       ],
-      "destination": "/-home"
+      "destination": "/fortaleza-home.html"
     },
     {
       "source": "/assets/(.*)",
@@ -1560,7 +1560,7 @@
           "value": "natal.aquitemachadinhos.com.br"
         }
       ],
-      "destination": "/-home"
+      "destination": "/natal-home.html"
     },
     {
       "source": "/assets/(.*)",
@@ -1580,7 +1580,7 @@
           "value": "noronha.aquitemachadinhos.com.br"
         }
       ],
-      "destination": "/-home"
+      "destination": "/noronha-home.html"
     },
     {
       "source": "/assets/(.*)",
@@ -1600,7 +1600,7 @@
           "value": "ouropreto.aquitemachadinhos.com.br"
         }
       ],
-      "destination": "/-home"
+      "destination": "/ouropreto-home.html"
     },
     {
       "source": "/assets/(.*)",
@@ -1620,7 +1620,7 @@
           "value": "paraty.aquitemachadinhos.com.br"
         }
       ],
-      "destination": "/-home"
+      "destination": "/paraty-home.html"
     },
     {
       "source": "/assets/(.*)",
@@ -1640,7 +1640,7 @@
           "value": "pirenopolis.aquitemachadinhos.com.br"
         }
       ],
-      "destination": "/-home"
+      "destination": "/pirenopolis-home.html"
     },
     {
       "source": "/assets/(.*)",
@@ -1660,7 +1660,7 @@
           "value": "vitoria.aquitemachadinhos.com.br"
         }
       ],
-      "destination": "/-home"
+      "destination": "/vitoria-home.html"
     },
     {
       "source": "/assets/(.*)",
@@ -1680,7 +1680,7 @@
           "value": "campogrande.aquitemachadinhos.com.br"
         }
       ],
-      "destination": "/-home"
+      "destination": "/campogrande-home.html"
     },
     {
       "source": "/assets/(.*)",
@@ -1700,7 +1700,7 @@
           "value": "chapadaguimaraes.aquitemachadinhos.com.br"
         }
       ],
-      "destination": "/-home"
+      "destination": "/chapadaguimaraes-home.html"
     },
     {
       "source": "/assets/(.*)",
@@ -1720,7 +1720,7 @@
           "value": "jalapao.aquitemachadinhos.com.br"
         }
       ],
-      "destination": "/-home"
+      "destination": "/jalapao-home.html"
     },
     {
       "source": "/assets/(.*)",
@@ -1740,7 +1740,7 @@
           "value": "lencois.aquitemachadinhos.com.br"
         }
       ],
-      "destination": "/-home"
+      "destination": "/lencois-home.html"
     },
     {
       "source": "/assets/(.*)",
@@ -1760,7 +1760,7 @@
           "value": "alterdochao.aquitemachadinhos.com.br"
         }
       ],
-      "destination": "/-home"
+      "destination": "/alter-do-chao-home.html"
     },
     {
       "source": "/assets/(.*)",
@@ -1780,7 +1780,7 @@
           "value": "saopaulo.aquitemachadinhos.com.br"
         }
       ],
-      "destination": "/-home"
+      "destination": "/sao-paulo-home.html"
     },
     {
       "source": "/assets/(.*)",
@@ -1800,7 +1800,7 @@
           "value": "riodejaneiro.aquitemachadinhos.com.br"
         }
       ],
-      "destination": "/-home"
+      "destination": "/rio-de-janeiro-home.html"
     },
     {
       "source": "/assets/(.*)",
@@ -1820,7 +1820,7 @@
           "value": "belohorizonte.aquitemachadinhos.com.br"
         }
       ],
-      "destination": "/-home"
+      "destination": "/belo-horizonte-home.html"
     },
     {
       "source": "/assets/(.*)",
@@ -1840,7 +1840,7 @@
           "value": "brasilia.aquitemachadinhos.com.br"
         }
       ],
-      "destination": "/-home"
+      "destination": "/brasilia-home.html"
     },
     {
       "source": "/assets/(.*)",
@@ -1860,7 +1860,7 @@
           "value": "portoalegre.aquitemachadinhos.com.br"
         }
       ],
-      "destination": "/-home"
+      "destination": "/porto-alegre-home.html"
     },
     {
       "source": "/assets/(.*)",
@@ -1880,7 +1880,7 @@
           "value": "recife.aquitemachadinhos.com.br"
         }
       ],
-      "destination": "/-home"
+      "destination": "/recife-home.html"
     },
     {
       "source": "/assets/(.*)",
@@ -1900,7 +1900,7 @@
           "value": "goiania.aquitemachadinhos.com.br"
         }
       ],
-      "destination": "/-home"
+      "destination": "/goiania-home.html"
     },
     {
       "source": "/assets/(.*)",
@@ -1920,7 +1920,7 @@
           "value": "belem.aquitemachadinhos.com.br"
         }
       ],
-      "destination": "/-home"
+      "destination": "/belem-home.html"
     },
     {
       "source": "/assets/(.*)",
@@ -1940,7 +1940,7 @@
           "value": "cuiaba.aquitemachadinhos.com.br"
         }
       ],
-      "destination": "/-home"
+      "destination": "/cuiaba-home.html"
     },
     {
       "source": "/assets/(.*)",
@@ -1960,7 +1960,7 @@
           "value": "saoluis.aquitemachadinhos.com.br"
         }
       ],
-      "destination": "/-home"
+      "destination": "/saoluis-home.html"
     },
     {
       "source": "/assets/(.*)",
@@ -1980,7 +1980,7 @@
           "value": "maceio.aquitemachadinhos.com.br"
         }
       ],
-      "destination": "/-home"
+      "destination": "/maceio-home.html"
     },
     {
       "source": "/assets/(.*)",
@@ -2000,7 +2000,7 @@
           "value": "joaopessoa.aquitemachadinhos.com.br"
         }
       ],
-      "destination": "/-home"
+      "destination": "/joaopessoa-home.html"
     },
     {
       "source": "/assets/(.*)",
@@ -2020,7 +2020,7 @@
           "value": "teresina.aquitemachadinhos.com.br"
         }
       ],
-      "destination": "/-home"
+      "destination": "/teresina-home.html"
     },
     {
       "source": "/assets/(.*)",
@@ -2040,7 +2040,7 @@
           "value": "aracaju.aquitemachadinhos.com.br"
         }
       ],
-      "destination": "/-home"
+      "destination": "/aracaju-home.html"
     },
     {
       "source": "/assets/(.*)",
@@ -2060,7 +2060,7 @@
           "value": "campinas.aquitemachadinhos.com.br"
         }
       ],
-      "destination": "/-home"
+      "destination": "/campinas-home.html"
     },
     {
       "source": "/assets/(.*)",
@@ -2080,7 +2080,7 @@
           "value": "ribeiraopreto.aquitemachadinhos.com.br"
         }
       ],
-      "destination": "/-home"
+      "destination": "/ribeiraopreto-home.html"
     },
     {
       "source": "/assets/(.*)",
@@ -2100,7 +2100,7 @@
           "value": "riopreto.aquitemachadinhos.com.br"
         }
       ],
-      "destination": "/-home"
+      "destination": "/riopreto-home.html"
     },
     {
       "source": "/assets/(.*)",
@@ -2120,7 +2120,7 @@
           "value": "santos.aquitemachadinhos.com.br"
         }
       ],
-      "destination": "/-home"
+      "destination": "/santos-home.html"
     },
     {
       "source": "/assets/(.*)",
@@ -2140,7 +2140,7 @@
           "value": "sorocaba.aquitemachadinhos.com.br"
         }
       ],
-      "destination": "/-home"
+      "destination": "/sorocaba-home.html"
     },
     {
       "source": "/assets/(.*)",
@@ -2160,7 +2160,7 @@
           "value": "piracicaba.aquitemachadinhos.com.br"
         }
       ],
-      "destination": "/-home"
+      "destination": "/piracicaba-home.html"
     },
     {
       "source": "/assets/(.*)",
@@ -2180,7 +2180,7 @@
           "value": "franca.aquitemachadinhos.com.br"
         }
       ],
-      "destination": "/-home"
+      "destination": "/franca-home.html"
     },
     {
       "source": "/assets/(.*)",
@@ -2200,7 +2200,7 @@
           "value": "juizdefora.aquitemachadinhos.com.br"
         }
       ],
-      "destination": "/-home"
+      "destination": "/juizdefora-home.html"
     },
     {
       "source": "/assets/(.*)",
@@ -2220,7 +2220,7 @@
           "value": "montesclaros.aquitemachadinhos.com.br"
         }
       ],
-      "destination": "/-home"
+      "destination": "/montesclaros-home.html"
     },
     {
       "source": "/assets/(.*)",
@@ -2240,7 +2240,7 @@
           "value": "londrina.aquitemachadinhos.com.br"
         }
       ],
-      "destination": "/-home"
+      "destination": "/londrina-home.html"
     },
     {
       "source": "/assets/(.*)",
@@ -2260,7 +2260,7 @@
           "value": "maringa.aquitemachadinhos.com.br"
         }
       ],
-      "destination": "/-home"
+      "destination": "/maringa-home.html"
     },
     {
       "source": "/assets/(.*)",
@@ -2280,7 +2280,7 @@
           "value": "joinville.aquitemachadinhos.com.br"
         }
       ],
-      "destination": "/-home"
+      "destination": "/joinville-home.html"
     },
     {
       "source": "/assets/(.*)",
@@ -2300,7 +2300,7 @@
           "value": "caxiasdosul.aquitemachadinhos.com.br"
         }
       ],
-      "destination": "/-home"
+      "destination": "/caxiasdosul-home.html"
     },
     {
       "source": "/assets/(.*)",
@@ -2320,7 +2320,7 @@
           "value": "feiradesantana.aquitemachadinhos.com.br"
         }
       ],
-      "destination": "/-home"
+      "destination": "/feiradesantana-home.html"
     },
     {
       "source": "/assets/(.*)",
@@ -2340,7 +2340,7 @@
           "value": "campinagrande.aquitemachadinhos.com.br"
         }
       ],
-      "destination": "/-home"
+      "destination": "/campinagrande-home.html"
     },
     {
       "source": "/assets/(.*)",
@@ -2360,7 +2360,7 @@
           "value": "anapolis.aquitemachadinhos.com.br"
         }
       ],
-      "destination": "/-home"
+      "destination": "/anapolis-home.html"
     },
     {
       "source": "/assets/(.*)",
@@ -2380,7 +2380,7 @@
           "value": "rioverde.aquitemachadinhos.com.br"
         }
       ],
-      "destination": "/-home"
+      "destination": "/rioverde-home.html"
     },
     {
       "source": "/assets/(.*)",
@@ -2400,7 +2400,7 @@
           "value": "bebedouro.aquitemachadinhos.com.br"
         }
       ],
-      "destination": "/-home"
+      "destination": "/bebedouro-home.html"
     },
     {
       "source": "/assets/(.*)",
@@ -2420,7 +2420,7 @@
           "value": "colombia.aquitemachadinhos.com.br"
         }
       ],
-      "destination": "/-home"
+      "destination": "/colombia-home.html"
     },
     {
       "source": "/assets/(.*)",
@@ -2440,7 +2440,7 @@
           "value": "olimpia.aquitemachadinhos.com.br"
         }
       ],
-      "destination": "/-home"
+      "destination": "/olimpia-home.html"
     },
     {
       "source": "/assets/(.*)",
@@ -2460,7 +2460,7 @@
           "value": "guaira.aquitemachadinhos.com.br"
         }
       ],
-      "destination": "/-home"
+      "destination": "/guaira-home.html"
     },
     {
       "source": "/assets/(.*)",
