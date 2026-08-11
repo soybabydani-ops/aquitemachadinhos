@@ -2483,11 +2483,31 @@
       "destination": "/marcas.html"
     },
     {
+      "source": "/assets/(.*)",
+      "has": [
+        {
+          "type": "host",
+          "value": "(?<subdomain>[a-z0-9-]+)\\.aquitemachadinhos\\.com\\.br"
+        }
+      ],
+      "destination": "/assets/$1"
+    },
+    {
+      "source": "/",
+      "has": [
+        {
+          "type": "host",
+          "value": "(?<subdomain>[a-z0-9-]+)\\.aquitemachadinhos\\.com\\.br"
+        }
+      ],
+      "destination": "/cidade.html?cidade=:subdomain"
+    },
+    {
       "source": "/(.*)",
       "has": [
         {
           "type": "host",
-          "value": "marcas.aquitemachadinhos.com.br"
+          "value": "(?<subdomain>[a-z0-9-]+)\\.aquitemachadinhos\\.com\\.br"
         }
       ],
       "destination": "/$1"

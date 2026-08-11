@@ -3045,13 +3045,35 @@
       ]
     },
     {
-      "src": "^(?:/(.*))$",
-      "dest": "/$1?host=$host",
+      "src": "^/assets(?:/(.*))$",
+      "dest": "/assets/$1?subdomain=$subdomain&host=$host",
       "check": true,
       "has": [
         {
           "type": "host",
-          "value": "marcas.aquitemachadinhos.com.br"
+          "value": "(?<subdomain>[a-z0-9-]+)\\.aquitemachadinhos\\.com\\.br"
+        }
+      ]
+    },
+    {
+      "src": "^/$",
+      "dest": "/cidade.html?cidade=$subdomain&subdomain=$subdomain&host=$host",
+      "check": true,
+      "has": [
+        {
+          "type": "host",
+          "value": "(?<subdomain>[a-z0-9-]+)\\.aquitemachadinhos\\.com\\.br"
+        }
+      ]
+    },
+    {
+      "src": "^(?:/(.*))$",
+      "dest": "/$1?subdomain=$subdomain&host=$host",
+      "check": true,
+      "has": [
+        {
+          "type": "host",
+          "value": "(?<subdomain>[a-z0-9-]+)\\.aquitemachadinhos\\.com\\.br"
         }
       ]
     },
