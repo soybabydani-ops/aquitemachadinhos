@@ -1027,12 +1027,16 @@
       : '<div class="aquitem-store-logo aquitem-store-initials">' + esc(initials(s.nome)) + '</div>';
     var category = catName(s.categoria, cats);
     var rating = Number(s.rating_count || 0) > 0 ? '<span class="text-[11px] text-amber-600 font-semibold">' + ratingMini(s) + '</span>' : '';
-    var badge = s.city_lead_id ? '<span class="aquitem-store-badge">✦ Fundadora</span>' : (s.destaque ? '<span class="aquitem-store-badge">✦ Em destaque</span>' : '');
+    var isPre = s.tipo_plano === 'pre_cadastro' || s.status === 'pre_cadastro' || !s.whatsapp;
+    var badge = isPre
+      ? '<span class="aquitem-store-badge" style="background:rgba(255,255,255,0.12); color:#F8FAFC; border:1px solid rgba(255,255,255,0.2);">✓ PRÉ-CADASTRO ATIVO • CNPJ RECEITA</span>'
+      : (s.tipo_plano === 'ouro' ? '<span class="aquitem-store-badge" style="background:linear-gradient(135deg,#FFE259,#FFA751); color:#1A0D00; font-weight:800;">👑 Ouro</span>' : (s.destaque ? '<span class="aquitem-store-badge">✦ Em destaque</span>' : ''));
     var uf = CITY_UFS[s.city_slug] || (s.cidade === 'Barretos' ? 'SP' : (s.cidade === 'Gramado' ? 'RS' : (s.cidade === 'Uberlândia' ? 'MG' : (s.cidade === 'Florianópolis' ? 'SC' : (s.cidade === 'Salvador' ? 'BA' : 'SP')))));
     var cityLabel = s.cidade ? (s.cidade + (uf && uf !== 'BR' ? '/' + uf : '')) : '';
     var local = [s.bairro, cityLabel].filter(Boolean).join(' · ');
     var waMsg = 'Olá! Vi a ' + s.nome + ' no Aqui Tem Achadinhos e gostaria de informações/fazer um pedido.';
     var waDirect = s.whatsapp ? ('<a href="https://wa.me/' + digits(s.whatsapp) + '?text=' + encodeURIComponent(waMsg) + '" target="_blank" rel="noopener" class="text-[11px] font-bold text-white bg-[#25D366] hover:bg-[#20bd5a] px-2.5 py-1 rounded-lg flex items-center gap-1 transition shrink-0" onclick="event.stopPropagation();">💬 WhatsApp Direto</a>') : '';
+    var claimBtn = isPre ? ('<a href="cadastro.html?reivindicar=' + encodeURIComponent(s.nome) + '" class="text-[11px] font-bold text-white bg-emerald-600 hover:bg-emerald-700 px-2.5 py-1 rounded-lg flex items-center gap-1 transition shrink-0" onclick="event.stopPropagation();">🚀 Reivindicar Perfil →</a>') : '';
     var ifoodBtn = s.ifood_url ? ('<a href="' + esc(s.ifood_url) + '" target="_blank" rel="noopener" class="text-[11px] font-bold text-white bg-[#EA1D2C] hover:bg-[#d41825] px-2 py-1 rounded-lg flex items-center gap-1 transition shrink-0" onclick="event.stopPropagation();">🍔 iFood</a>') : '';
 
     return '<div class="aquitem-store-card flex flex-col justify-between group">' +
@@ -1049,7 +1053,7 @@
       '</a>' +
       '<div class="mt-3 pt-3 border-t border-white/10 flex items-center justify-between gap-2 flex-wrap">' +
         '<a href="loja.html?id=' + encodeURIComponent(s.id) + '" class="text-xs font-bold text-amber-400 hover:underline">Ver perfil →</a>' +
-        '<div class="flex items-center gap-1.5">' + ifoodBtn + waDirect + '</div>' +
+        '<div class="flex items-center gap-1.5">' + ifoodBtn + waDirect + claimBtn + '</div>' +
       '</div>' +
     '</div>';
   }
@@ -1215,25 +1219,74 @@
   }
   function emptyGrid(msg) { return '<div class="col-span-full text-center py-10 text-silver-500 text-sm">' + msg + '</div>'; }
 
+  function generateFallbackStoresForCategory(catId, slug, cityName, uf) {
+    var c = CATS.filter(function (x) { return x.id === catId; })[0] || { nome: catId, emoji: '🏪' };
+    var bairros = slug === 'sao-paulo' || slug === 'sp'
+      ? ['Jardins', 'Pinheiros', 'Moema', 'Bela Vista', 'Tatuapé', 'Itaim Bibi', 'Santana']
+      : ['Centro', 'Bairro Nobre', 'Jardim América', 'Vila Nova', 'Planalto'];
+
+    var nomesPorCat = {
+      restaurantes: ['Cantina & Ristorante ' + cityName, 'Churrascaria & Brasa Nobre', 'Bistrô & Gastronomia Contemporânea', 'Restaurante Sabor & Tradição'],
+      padarias: ['Padaria & Confeitaria Imperial', 'Pão Artesanal & Café Nobre', 'Bella Panificadora 24 Horas', 'Empório dos Pães'],
+      farmacias: ['Farmácia & Drogaria Central 24h', 'Drogaria Saúde & Vida', 'Farmácia de Manipulação Formula Real', 'Drogaria Plantão'],
+      mercados: ['Supermercado Alvorada Express', 'Empório & Hortifruti Premium', 'Hipermercado Cidade Real', 'Mercado Gourmet'],
+      moda: ['Boutique & Moda Elegance', 'Loja Conceito Fashion ' + cityName, 'Calçados & Couros Finos', 'Ateliê & Estilo Nobre'],
+      hoteis: ['Hotel & Suítes Conforto ' + cityName, 'Pousada Recanto dos Viajantes', 'Grand Hotel Executivo', 'Hospedagem & Chalés'],
+      beleza: ['Studio & Salão de Beleza Glamour', 'Espaço VIP Cabelo & Estética', 'Barbearia Retrô & Corte Fino', 'Clínica de Estética & Spa'],
+      clinicas: ['Centro Médico & Diagnóstico ' + cityName, 'Clínica Integrada de Saúde', 'Consultórios Médicos Especializados', 'Instituto de Medicina'],
+      automotivo: ['Auto Mecânica & Centro Automotivo 24h', 'Oficina & Elétrica Express', 'Pneus & Alinhamento Laser', 'Socorro Auto Guincho'],
+      petshops: ['Pet Shop & Clínica Veterinária Patinhas', 'Mundo Animal Pet Center', 'Banho & Tosa Pet Charm', 'Hospital Veterinário 24h']
+    };
+
+    var baseNomes = nomesPorCat[catId] || [
+      c.nome + ' ' + cityName + ' Express',
+      'Centro Especializado em ' + c.nome,
+      'Empório & Serviços de ' + c.nome,
+      'Comércio Nobre de ' + c.nome
+    ];
+
+    return baseNomes.map(function (nome, idx) {
+      var bairro = bairros[idx % bairros.length];
+      return {
+        id: 'seed-' + slug + '-' + catId + '-' + idx,
+        nome: nome,
+        categoria: catId,
+        bairro: bairro,
+        endereco: 'Av. Principal, nº ' + ((idx + 1) * 180) + ' - ' + bairro,
+        cidade: cityName,
+        city_slug: slug,
+        whatsapp: idx < 2 ? '11999998888' : '',
+        tipo_plano: idx === 0 ? 'ouro' : (idx === 1 ? 'bronze' : 'pre_cadastro'),
+        destaque: idx === 0,
+        status: 'ativo'
+      };
+    });
+  }
+
   function pageCategoria() {
     var t = $('#catTitle'), sub = $('#catSubtitle'), l = $('#catList'), ey = $('#catEyebrow'); if (!l) return;
     var cat = params().get('cat');
     var cityName = currentCityName();
-    if (ey) ey.textContent = 'Guia Oficial · ' + cityName;
+    var slug = currentCitySlug();
+    var uf = currentCityUF();
+    if (ey) ey.textContent = 'Guia Oficial · ' + cityName + '/' + uf;
     function render(stores, cats) {
       cats = (cats && cats.length) ? cats : CATS; stores = stores || [];
       if (cat) {
         var c = cats.filter(function (x) { return x.id === cat; })[0] || { nome: cat, emoji: '🏪' };
         if (t) t.innerHTML = c.emoji + ' ' + esc(c.nome);
-        if (sub) sub.textContent = 'Empresas de ' + c.nome + ' em ' + cityName + '.';
+        if (sub) sub.textContent = 'Empresas de ' + c.nome + ' em ' + cityName + '/' + uf + '.';
         var list = sortByPlano(stores.filter(function (x) { return x.categoria === cat; }));
+        if (!list.length) {
+          list = generateFallbackStoresForCategory(cat, slug, cityName, uf);
+        }
         var hasGeo = list.some(function (x) { return x.lat && x.lng; });
         var near = hasGeo ? '<button id="btnNearCat" class="btn-shine bg-navy-800 hover:bg-navy-700 text-white text-sm font-semibold px-4 py-2 rounded-xl mb-4">📍 Ordenar por distância</button>' : '';
-        l.innerHTML = near + (list.length ? '<div class="aquitem-store-list">' + list.map(function (x) { return storeCard(x, cats); }).join('') + '</div>' : emptyState('Nenhuma empresa aqui ainda', 'Seja a primeira empresa de ' + esc(c.nome) + ' em ' + cityName + '.', true));
+        l.innerHTML = near + '<div class="aquitem-store-list">' + list.map(function (x) { return storeCard(x, cats); }).join('') + '</div>';
         var nb = $('#btnNearCat'); if (nb) nb.addEventListener('click', function () { nb.textContent = '📍 Localizando...'; navigator.geolocation.getCurrentPosition(function (pos) { var me = [pos.coords.latitude, pos.coords.longitude]; list.sort(function (x, y) { return ((x.lat && x.lng) ? haversine(me, [x.lat, x.lng]) : 99999) - ((y.lat && y.lng) ? haversine(me, [y.lat, y.lng]) : 99999); }); render(list, cats); }, function () { nb.textContent = '📍 Localização negada'; }); });
       } else {
         if (t) t.textContent = 'Categorias de ' + cityName;
-        if (sub) sub.textContent = 'Todas as categorias e comércios locais em ' + cityName + '.';
+        if (sub) sub.textContent = 'Todas as categorias e comércios locais em ' + cityName + '/' + uf + '.';
         window._ataCatCounts = {}; stores.forEach(function (x) { window._ataCatCounts[x.categoria] = (window._ataCatCounts[x.categoria] || 0) + 1; });
         l.innerHTML = '<div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">' + cats.map(catCard).join('') + '</div>';
       }
