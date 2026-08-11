@@ -3,7 +3,7 @@
   "target": "production",
   "argv": [
     "/usr/bin/node",
-    "/home/user/.npm/_npx/69f9afb961c37556/node_modules/.bin/vc",
+    "/home/user/.npm/_npx/7d2828e2bd6720ce/node_modules/.bin/vc",
     "build",
     "--prod",
     "--token",
@@ -17,7 +17,7 @@
   "builds": [
     {
       "require": "@vercel/node",
-      "requirePath": "/home/user/.npm/_npx/69f9afb961c37556/node_modules/@vercel/node/dist/index",
+      "requirePath": "/home/user/.npm/_npx/7d2828e2bd6720ce/node_modules/@vercel/node/dist/index",
       "apiVersion": 3,
       "use": "@vercel/node",
       "src": "api/cron-autopilot.js",
@@ -27,7 +27,7 @@
     },
     {
       "require": "@vercel/node",
-      "requirePath": "/home/user/.npm/_npx/69f9afb961c37556/node_modules/@vercel/node/dist/index",
+      "requirePath": "/home/user/.npm/_npx/7d2828e2bd6720ce/node_modules/@vercel/node/dist/index",
       "apiVersion": 3,
       "use": "@vercel/node",
       "src": "api/distribute-media.js",
@@ -37,7 +37,7 @@
     },
     {
       "require": "@vercel/node",
-      "requirePath": "/home/user/.npm/_npx/69f9afb961c37556/node_modules/@vercel/node/dist/index",
+      "requirePath": "/home/user/.npm/_npx/7d2828e2bd6720ce/node_modules/@vercel/node/dist/index",
       "apiVersion": 3,
       "use": "@vercel/node",
       "src": "api/empresas.js",
@@ -47,7 +47,7 @@
     },
     {
       "require": "@vercel/node",
-      "requirePath": "/home/user/.npm/_npx/69f9afb961c37556/node_modules/@vercel/node/dist/index",
+      "requirePath": "/home/user/.npm/_npx/7d2828e2bd6720ce/node_modules/@vercel/node/dist/index",
       "apiVersion": 3,
       "use": "@vercel/node",
       "src": "api/google-index.js",
@@ -57,7 +57,7 @@
     },
     {
       "require": "@vercel/node",
-      "requirePath": "/home/user/.npm/_npx/69f9afb961c37556/node_modules/@vercel/node/dist/index",
+      "requirePath": "/home/user/.npm/_npx/7d2828e2bd6720ce/node_modules/@vercel/node/dist/index",
       "apiVersion": 3,
       "use": "@vercel/node",
       "src": "api/link-equity.js",
@@ -67,7 +67,7 @@
     },
     {
       "require": "@vercel/node",
-      "requirePath": "/home/user/.npm/_npx/69f9afb961c37556/node_modules/@vercel/node/dist/index",
+      "requirePath": "/home/user/.npm/_npx/7d2828e2bd6720ce/node_modules/@vercel/node/dist/index",
       "apiVersion": 3,
       "use": "@vercel/node",
       "src": "api/mercadopago-webhook.js",
@@ -77,7 +77,7 @@
     },
     {
       "require": "@vercel/node",
-      "requirePath": "/home/user/.npm/_npx/69f9afb961c37556/node_modules/@vercel/node/dist/index",
+      "requirePath": "/home/user/.npm/_npx/7d2828e2bd6720ce/node_modules/@vercel/node/dist/index",
       "apiVersion": 3,
       "use": "@vercel/node",
       "src": "api/og.js",
@@ -87,7 +87,7 @@
     },
     {
       "require": "@vercel/node",
-      "requirePath": "/home/user/.npm/_npx/69f9afb961c37556/node_modules/@vercel/node/dist/index",
+      "requirePath": "/home/user/.npm/_npx/7d2828e2bd6720ce/node_modules/@vercel/node/dist/index",
       "apiVersion": 3,
       "use": "@vercel/node",
       "src": "api/seo-page.js",
@@ -97,7 +97,7 @@
     },
     {
       "require": "@vercel/node",
-      "requirePath": "/home/user/.npm/_npx/69f9afb961c37556/node_modules/@vercel/node/dist/index",
+      "requirePath": "/home/user/.npm/_npx/7d2828e2bd6720ce/node_modules/@vercel/node/dist/index",
       "apiVersion": 3,
       "use": "@vercel/node",
       "src": "api/sitemap.js",
@@ -107,7 +107,7 @@
     },
     {
       "require": "@vercel/node",
-      "requirePath": "/home/user/.npm/_npx/69f9afb961c37556/node_modules/@vercel/node/dist/index",
+      "requirePath": "/home/user/.npm/_npx/7d2828e2bd6720ce/node_modules/@vercel/node/dist/index",
       "apiVersion": 3,
       "use": "@vercel/node",
       "src": "api/upgrade-checkout.js",
@@ -117,7 +117,7 @@
     },
     {
       "require": "@vercel/node",
-      "requirePath": "/home/user/.npm/_npx/69f9afb961c37556/node_modules/@vercel/node/dist/index",
+      "requirePath": "/home/user/.npm/_npx/7d2828e2bd6720ce/node_modules/@vercel/node/dist/index",
       "apiVersion": 3,
       "use": "@vercel/node",
       "src": "api/vagas.js",
@@ -127,7 +127,7 @@
     },
     {
       "require": "@vercel/node",
-      "requirePath": "/home/user/.npm/_npx/69f9afb961c37556/node_modules/@vercel/node/dist/index",
+      "requirePath": "/home/user/.npm/_npx/7d2828e2bd6720ce/node_modules/@vercel/node/dist/index",
       "apiVersion": 3,
       "use": "@vercel/node",
       "src": "api/widget.js",
