@@ -367,11 +367,19 @@
     anapolis: 'anapolis',
     'rio-verde': 'rio-verde',
     rioverde: 'rio-verde',
+    colombia: 'colombia',
+    bebedouro: 'bebedouro',
+    olimpia: 'olimpia',
+    guaira: 'guaira',
     classificados: 'nacional',
     nacional: 'nacional'
   };
   var CITY_NAMES = {
     barretos: 'Barretos',
+    colombia: 'Colômbia',
+    bebedouro: 'Bebedouro',
+    olimpia: 'Olímpia',
+    guaira: 'Guaíra',
     gramado: 'Gramado',
     blumenau: 'Blumenau',
     bonito: 'Bonito',
@@ -431,10 +439,14 @@
     'campina-grande': 'Campina Grande',
     anapolis: 'Anápolis',
     'rio-verde': 'Rio Verde',
-    nacional: 'Brasil Todo'
+    nacional: 'Brasil'
   };
   var CITY_UFS = {
     barretos: 'SP',
+    colombia: 'SP',
+    bebedouro: 'SP',
+    olimpia: 'SP',
+    guaira: 'SP',
     gramado: 'RS',
     blumenau: 'SC',
     bonito: 'MS',
@@ -1029,11 +1041,14 @@
   /* CARDS */
   function catName(id, cats) { var c = (cats || CATS).filter(function (x) { return x.id === id; })[0]; return c ? (c.emoji + ' ' + c.nome) : '🏪 Loja'; }
   function catCard(c) {
+    var slug = currentCitySlug();
+    var isNac = slug === 'nacional' || slug === 'www';
+    var cityParam = isNac ? '' : ('&cidade=' + encodeURIComponent(slug));
     var cnt = window._ataCatCounts && window._ataCatCounts[c.id] ? window._ataCatCounts[c.id] : 0;
     var descText = cnt > 0
       ? ('<span class="inline-block mt-1 text-[10px] font-bold text-peao-600 bg-peao-500/10 px-2 py-0.5 rounded-full">' + cnt + (cnt === 1 ? ' empresa' : ' empresas') + '</span>')
       : ('<div class="text-xs text-silver-400 mt-1 font-semibold">' + esc(c.desc || 'Comércio & Serviços Locais') + '</div>');
-    return '<a href="categoria.html?cat=' + c.id + '" class="card-hover bg-white rounded-2xl p-5 text-center shadow-soft ring-silver relative"><div class="text-4xl">' + (c.emoji || '🏢') + '</div><div class="mt-2 font-display font-bold text-white">' + esc(c.nome) + '</div>' + descText + '</a>';
+    return '<a href="categoria.html?cat=' + c.id + cityParam + '" class="card-hover bg-white rounded-2xl p-5 text-center shadow-soft ring-silver relative"><div class="text-4xl">' + (c.emoji || '🏢') + '</div><div class="mt-2 font-display font-bold text-white">' + esc(c.nome) + '</div>' + descText + '</a>';
   }
   function storeCard(s, cats) {
     var logo = s.logo_url
@@ -1045,8 +1060,10 @@
     var badge = isPre
       ? '<span class="aquitem-store-badge" style="background:rgba(255,255,255,0.12); color:#F8FAFC; border:1px solid rgba(255,255,255,0.2);">✓ PRÉ-CADASTRO ATIVO • CNPJ RECEITA</span>'
       : (s.tipo_plano === 'ouro' ? '<span class="aquitem-store-badge" style="background:linear-gradient(135deg,#FFE259,#FFA751); color:#1A0D00; font-weight:800;">👑 Ouro</span>' : (s.destaque ? '<span class="aquitem-store-badge">✦ Em destaque</span>' : ''));
-    var uf = CITY_UFS[s.city_slug] || (s.cidade === 'Barretos' ? 'SP' : (s.cidade === 'Gramado' ? 'RS' : (s.cidade === 'Uberlândia' ? 'MG' : (s.cidade === 'Florianópolis' ? 'SC' : (s.cidade === 'Salvador' ? 'BA' : 'SP')))));
-    var cityLabel = s.cidade ? (s.cidade + (uf && uf !== 'BR' ? '/' + uf : '')) : '';
+    var citySlug = s.city_slug || currentCitySlug();
+    var uf = s.uf || CITY_UFS[citySlug] || currentCityUF();
+    var cityName = s.cidade && s.cidade !== 'Brasil' ? s.cidade : (CITY_NAMES[citySlug] || currentCityName());
+    var cityLabel = cityName && cityName !== 'Brasil' ? (cityName + (uf && uf !== 'BR' ? '/' + uf : '')) : '';
     var local = [s.bairro, cityLabel].filter(Boolean).join(' · ');
     var waMsg = 'Olá! Vi a ' + s.nome + ' no Aqui Tem Achadinhos e gostaria de informações/fazer um pedido.';
     var waDirect = s.whatsapp ? ('<a href="https://wa.me/' + digits(s.whatsapp) + '?text=' + encodeURIComponent(waMsg) + '" target="_blank" rel="noopener" class="text-[11px] font-bold text-white bg-[#25D366] hover:bg-[#20bd5a] px-2.5 py-1 rounded-lg flex items-center gap-1 transition shrink-0" onclick="event.stopPropagation();">💬 WhatsApp Direto</a>') : '';
@@ -1235,25 +1252,28 @@
 
   function generateFallbackStoresForCategory(catId, slug, cityName, uf) {
     var c = CATS.filter(function (x) { return x.id === catId; })[0] || { nome: catId, emoji: '🏪' };
+    var isNac = slug === 'nacional' || slug === 'www' || cityName === 'Brasil';
+    var targetCity = isNac ? 'São Paulo' : cityName;
+    var targetUF = isNac ? 'SP' : (uf && uf !== 'BR' ? uf : (CITY_UFS[slug] || 'SP'));
     var bairros = slug === 'sao-paulo' || slug === 'sp'
       ? ['Jardins', 'Pinheiros', 'Moema', 'Bela Vista', 'Tatuapé', 'Itaim Bibi', 'Santana']
       : ['Centro', 'Bairro Nobre', 'Jardim América', 'Vila Nova', 'Planalto'];
 
     var nomesPorCat = {
-      restaurantes: ['Cantina & Ristorante ' + cityName, 'Churrascaria & Brasa Nobre', 'Bistrô & Gastronomia Contemporânea', 'Restaurante Sabor & Tradição'],
-      padarias: ['Padaria & Confeitaria Imperial', 'Pão Artesanal & Café Nobre', 'Bella Panificadora 24 Horas', 'Empório dos Pães'],
-      farmacias: ['Farmácia & Drogaria Central 24h', 'Drogaria Saúde & Vida', 'Farmácia de Manipulação Formula Real', 'Drogaria Plantão'],
-      mercados: ['Supermercado Alvorada Express', 'Empório & Hortifruti Premium', 'Hipermercado Cidade Real', 'Mercado Gourmet'],
-      moda: ['Boutique & Moda Elegance', 'Loja Conceito Fashion ' + cityName, 'Calçados & Couros Finos', 'Ateliê & Estilo Nobre'],
-      hoteis: ['Hotel & Suítes Conforto ' + cityName, 'Pousada Recanto dos Viajantes', 'Grand Hotel Executivo', 'Hospedagem & Chalés'],
-      beleza: ['Studio & Salão de Beleza Glamour', 'Espaço VIP Cabelo & Estética', 'Barbearia Retrô & Corte Fino', 'Clínica de Estética & Spa'],
-      clinicas: ['Centro Médico & Diagnóstico ' + cityName, 'Clínica Integrada de Saúde', 'Consultórios Médicos Especializados', 'Instituto de Medicina'],
-      automotivo: ['Auto Mecânica & Centro Automotivo 24h', 'Oficina & Elétrica Express', 'Pneus & Alinhamento Laser', 'Socorro Auto Guincho'],
-      petshops: ['Pet Shop & Clínica Veterinária Patinhas', 'Mundo Animal Pet Center', 'Banho & Tosa Pet Charm', 'Hospital Veterinário 24h']
+      restaurantes: ['Cantina & Ristorante ' + targetCity, 'Churrascaria & Brasa Nobre ' + targetCity, 'Bistrô & Gastronomia Contemporânea', 'Restaurante Sabor & Tradição'],
+      padarias: ['Padaria & Confeitaria ' + targetCity, 'Pão Artesanal & Café Nobre', 'Bella Panificadora 24 Horas', 'Empório dos Pães'],
+      farmacias: ['Farmácia & Drogaria Central ' + targetCity, 'Drogaria Saúde & Vida 24h', 'Farmácia de Manipulação ' + targetCity, 'Drogaria Plantão'],
+      mercados: ['Supermercado ' + targetCity + ' Express', 'Empório & Hortifruti ' + targetCity, 'Hipermercado ' + targetCity + ' Real', 'Mercado Gourmet'],
+      moda: ['Boutique & Moda Elegance ' + targetCity, 'Loja Conceito Fashion ' + targetCity, 'Calçados & Couros Finos', 'Ateliê & Estilo Nobre'],
+      hoteis: ['Hotel & Suítes Conforto ' + targetCity, 'Pousada Recanto ' + targetCity, 'Grand Hotel Executivo', 'Hospedagem & Chalés'],
+      beleza: ['Studio & Salão de Beleza ' + targetCity, 'Espaço VIP Cabelo & Estética', 'Barbearia Retrô & Corte Fino', 'Clínica de Estética & Spa'],
+      clinicas: ['Centro Médico & Diagnóstico ' + targetCity, 'Clínica Integrada de Saúde', 'Consultórios Médicos Especializados', 'Instituto de Medicina'],
+      automotivo: ['Auto Mecânica & Centro Automotivo ' + targetCity, 'Oficina & Elétrica Express', 'Pneus & Alinhamento Laser', 'Socorro Auto Guincho'],
+      petshops: ['Pet Shop & Clínica Veterinária ' + targetCity, 'Mundo Animal Pet Center', 'Banho & Tosa Pet Charm', 'Hospital Veterinário 24h']
     };
 
     var baseNomes = nomesPorCat[catId] || [
-      c.nome + ' ' + cityName + ' Express',
+      c.nome + ' ' + targetCity + ' Express',
       'Centro Especializado em ' + c.nome,
       'Empório & Serviços de ' + c.nome,
       'Comércio Nobre de ' + c.nome
@@ -1266,8 +1286,9 @@
         nome: nome,
         categoria: catId,
         bairro: bairro,
-        endereco: 'Av. Principal, nº ' + ((idx + 1) * 180) + ' - ' + bairro,
-        cidade: cityName,
+        endereco: 'Av. Principal, nº ' + ((idx + 1) * 180) + ' - ' + bairro + ', ' + targetCity + '/' + targetUF,
+        cidade: targetCity,
+        uf: targetUF,
         city_slug: slug,
         whatsapp: idx < 2 ? '11999998888' : '',
         tipo_plano: idx === 0 ? 'ouro' : (idx === 1 ? 'bronze' : 'pre_cadastro'),

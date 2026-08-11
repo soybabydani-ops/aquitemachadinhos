@@ -1506,7 +1506,7 @@
     },
     {
       "src": "^/$",
-      "dest": "/-home?host=$host",
+      "dest": "/barretos-home.html?host=$host",
       "check": true,
       "has": [
         {
@@ -1583,7 +1583,7 @@
     },
     {
       "src": "^/$",
-      "dest": "/-home?host=$host",
+      "dest": "/classificados-home.html?host=$host",
       "check": true,
       "has": [
         {
@@ -1627,7 +1627,7 @@
     },
     {
       "src": "^/$",
-      "dest": "/-home?host=$host",
+      "dest": "/gramado-home.html?host=$host",
       "check": true,
       "has": [
         {
@@ -1649,7 +1649,7 @@
     },
     {
       "src": "^/$",
-      "dest": "/-home?host=$host",
+      "dest": "/bonito-home.html?host=$host",
       "check": true,
       "has": [
         {
@@ -1671,7 +1671,7 @@
     },
     {
       "src": "^/$",
-      "dest": "/-home?host=$host",
+      "dest": "/buzios-home.html?host=$host",
       "check": true,
       "has": [
         {
@@ -1693,7 +1693,7 @@
     },
     {
       "src": "^/$",
-      "dest": "/-home?host=$host",
+      "dest": "/campos-home.html?host=$host",
       "check": true,
       "has": [
         {
@@ -1715,7 +1715,7 @@
     },
     {
       "src": "^/$",
-      "dest": "/-home?host=$host",
+      "dest": "/caruaru-home.html?host=$host",
       "check": true,
       "has": [
         {
@@ -1737,7 +1737,7 @@
     },
     {
       "src": "^/$",
-      "dest": "/-home?host=$host",
+      "dest": "/florianopolis-home.html?host=$host",
       "check": true,
       "has": [
         {
@@ -1759,7 +1759,7 @@
     },
     {
       "src": "^/$",
-      "dest": "/-home?host=$host",
+      "dest": "/jericoacoara-home.html?host=$host",
       "check": true,
       "has": [
         {
@@ -1781,7 +1781,7 @@
     },
     {
       "src": "^/$",
-      "dest": "/-home?host=$host",
+      "dest": "/porto-home.html?host=$host",
       "check": true,
       "has": [
         {
@@ -1803,7 +1803,7 @@
     },
     {
       "src": "^/$",
-      "dest": "/-home?host=$host",
+      "dest": "/salvador-home.html?host=$host",
       "check": true,
       "has": [
         {
@@ -1825,7 +1825,7 @@
     },
     {
       "src": "^/$",
-      "dest": "/-home?host=$host",
+      "dest": "/uberlandia-home.html?host=$host",
       "check": true,
       "has": [
         {
@@ -1847,7 +1847,7 @@
     },
     {
       "src": "^/$",
-      "dest": "/-home?host=$host",
+      "dest": "/caldasnovas-home.html?host=$host",
       "check": true,
       "has": [
         {
@@ -1869,7 +1869,7 @@
     },
     {
       "src": "^/$",
-      "dest": "/-home?host=$host",
+      "dest": "/manaus-home.html?host=$host",
       "check": true,
       "has": [
         {
@@ -1891,7 +1891,7 @@
     },
     {
       "src": "^/$",
-      "dest": "/-home?host=$host",
+      "dest": "/curitiba-home.html?host=$host",
       "check": true,
       "has": [
         {
@@ -1913,7 +1913,7 @@
     },
     {
       "src": "^/$",
-      "dest": "/-home?host=$host",
+      "dest": "/foz-home.html?host=$host",
       "check": true,
       "has": [
         {
@@ -1935,7 +1935,7 @@
     },
     {
       "src": "^/$",
-      "dest": "/-home?host=$host",
+      "dest": "/foz-do-iguacu-home.html?host=$host",
       "check": true,
       "has": [
         {
@@ -1957,7 +1957,7 @@
     },
     {
       "src": "^/$",
-      "dest": "/-home?host=$host",
+      "dest": "/balneario-home.html?host=$host",
       "check": true,
       "has": [
         {
@@ -1979,7 +1979,7 @@
     },
     {
       "src": "^/$",
-      "dest": "/-home?host=$host",
+      "dest": "/balneario-camboriu-home.html?host=$host",
       "check": true,
       "has": [
         {
@@ -2001,7 +2001,7 @@
     },
     {
       "src": "^/$",
-      "dest": "/-home?host=$host",
+      "dest": "/fortaleza-home.html?host=$host",
       "check": true,
       "has": [
         {
@@ -2023,7 +2023,7 @@
     },
     {
       "src": "^/$",
-      "dest": "/-home?host=$host",
+      "dest": "/natal-home.html?host=$host",
       "check": true,
       "has": [
         {
@@ -2045,7 +2045,7 @@
     },
     {
       "src": "^/$",
-      "dest": "/-home?host=$host",
+      "dest": "/noronha-home.html?host=$host",
       "check": true,
       "has": [
         {
@@ -2067,7 +2067,7 @@
     },
     {
       "src": "^/$",
-      "dest": "/-home?host=$host",
+      "dest": "/ouropreto-home.html?host=$host",
       "check": true,
       "has": [
         {
@@ -2089,7 +2089,7 @@
     },
     {
       "src": "^/$",
-      "dest": "/-home?host=$host",
+      "dest": "/paraty-home.html?host=$host",
       "check": true,
       "has": [
         {
@@ -2111,7 +2111,7 @@
     },
     {
       "src": "^/$",
-      "dest": "/-home?host=$host",
+      "dest": "/pirenopolis-home.html?host=$host",
       "check": true,
       "has": [
         {
@@ -2133,7 +2133,7 @@
     },
     {
       "src": "^/$",
-      "dest": "/-home?host=$host",
+      "dest": "/vitoria-home.html?host=$host",
       "check": true,
       "has": [
         {
@@ -2155,7 +2155,7 @@
     },
     {
       "src": "^/$",
-      "dest": "/-home?host=$host",
+      "dest": "/campogrande-home.html?host=$host",
       "check": true,
       "has": [
         {
@@ -2177,7 +2177,7 @@
     },
     {
       "src": "^/$",
-      "dest": "/-home?host=$host",
+      "dest": "/chapadaguimaraes-home.html?host=$host",
       "check": true,
       "has": [
         {
@@ -2199,7 +2199,7 @@
     },
     {
       "src": "^/$",
-      "dest": "/-home?host=$host",
+      "dest": "/jalapao-home.html?host=$host",
       "check": true,
       "has": [
         {
@@ -2221,7 +2221,7 @@
     },
     {
       "src": "^/$",
-      "dest": "/-home?host=$host",
+      "dest": "/lencois-home.html?host=$host",
       "check": true,
       "has": [
         {
@@ -2243,7 +2243,7 @@
     },
     {
       "src": "^/$",
-      "dest": "/-home?host=$host",
+      "dest": "/alter-do-chao-home.html?host=$host",
       "check": true,
       "has": [
         {
@@ -2265,7 +2265,7 @@
     },
     {
       "src": "^/$",
-      "dest": "/-home?host=$host",
+      "dest": "/sao-paulo-home.html?host=$host",
       "check": true,
       "has": [
         {
@@ -2287,7 +2287,7 @@
     },
     {
       "src": "^/$",
-      "dest": "/-home?host=$host",
+      "dest": "/rio-de-janeiro-home.html?host=$host",
       "check": true,
       "has": [
         {
@@ -2309,7 +2309,7 @@
     },
     {
       "src": "^/$",
-      "dest": "/-home?host=$host",
+      "dest": "/belo-horizonte-home.html?host=$host",
       "check": true,
       "has": [
         {
@@ -2331,7 +2331,7 @@
     },
     {
       "src": "^/$",
-      "dest": "/-home?host=$host",
+      "dest": "/brasilia-home.html?host=$host",
       "check": true,
       "has": [
         {
@@ -2353,7 +2353,7 @@
     },
     {
       "src": "^/$",
-      "dest": "/-home?host=$host",
+      "dest": "/porto-alegre-home.html?host=$host",
       "check": true,
       "has": [
         {
@@ -2375,7 +2375,7 @@
     },
     {
       "src": "^/$",
-      "dest": "/-home?host=$host",
+      "dest": "/recife-home.html?host=$host",
       "check": true,
       "has": [
         {
@@ -2397,7 +2397,7 @@
     },
     {
       "src": "^/$",
-      "dest": "/-home?host=$host",
+      "dest": "/goiania-home.html?host=$host",
       "check": true,
       "has": [
         {
@@ -2419,7 +2419,7 @@
     },
     {
       "src": "^/$",
-      "dest": "/-home?host=$host",
+      "dest": "/belem-home.html?host=$host",
       "check": true,
       "has": [
         {
@@ -2441,7 +2441,7 @@
     },
     {
       "src": "^/$",
-      "dest": "/-home?host=$host",
+      "dest": "/cuiaba-home.html?host=$host",
       "check": true,
       "has": [
         {
@@ -2463,7 +2463,7 @@
     },
     {
       "src": "^/$",
-      "dest": "/-home?host=$host",
+      "dest": "/saoluis-home.html?host=$host",
       "check": true,
       "has": [
         {
@@ -2485,7 +2485,7 @@
     },
     {
       "src": "^/$",
-      "dest": "/-home?host=$host",
+      "dest": "/maceio-home.html?host=$host",
       "check": true,
       "has": [
         {
@@ -2507,7 +2507,7 @@
     },
     {
       "src": "^/$",
-      "dest": "/-home?host=$host",
+      "dest": "/joaopessoa-home.html?host=$host",
       "check": true,
       "has": [
         {
@@ -2529,7 +2529,7 @@
     },
     {
       "src": "^/$",
-      "dest": "/-home?host=$host",
+      "dest": "/teresina-home.html?host=$host",
       "check": true,
       "has": [
         {
@@ -2551,7 +2551,7 @@
     },
     {
       "src": "^/$",
-      "dest": "/-home?host=$host",
+      "dest": "/aracaju-home.html?host=$host",
       "check": true,
       "has": [
         {
@@ -2573,7 +2573,7 @@
     },
     {
       "src": "^/$",
-      "dest": "/-home?host=$host",
+      "dest": "/campinas-home.html?host=$host",
       "check": true,
       "has": [
         {
@@ -2595,7 +2595,7 @@
     },
     {
       "src": "^/$",
-      "dest": "/-home?host=$host",
+      "dest": "/ribeiraopreto-home.html?host=$host",
       "check": true,
       "has": [
         {
@@ -2617,7 +2617,7 @@
     },
     {
       "src": "^/$",
-      "dest": "/-home?host=$host",
+      "dest": "/riopreto-home.html?host=$host",
       "check": true,
       "has": [
         {
@@ -2639,7 +2639,7 @@
     },
     {
       "src": "^/$",
-      "dest": "/-home?host=$host",
+      "dest": "/santos-home.html?host=$host",
       "check": true,
       "has": [
         {
@@ -2661,7 +2661,7 @@
     },
     {
       "src": "^/$",
-      "dest": "/-home?host=$host",
+      "dest": "/sorocaba-home.html?host=$host",
       "check": true,
       "has": [
         {
@@ -2683,7 +2683,7 @@
     },
     {
       "src": "^/$",
-      "dest": "/-home?host=$host",
+      "dest": "/piracicaba-home.html?host=$host",
       "check": true,
       "has": [
         {
@@ -2705,7 +2705,7 @@
     },
     {
       "src": "^/$",
-      "dest": "/-home?host=$host",
+      "dest": "/franca-home.html?host=$host",
       "check": true,
       "has": [
         {
@@ -2727,7 +2727,7 @@
     },
     {
       "src": "^/$",
-      "dest": "/-home?host=$host",
+      "dest": "/juizdefora-home.html?host=$host",
       "check": true,
       "has": [
         {
@@ -2749,7 +2749,7 @@
     },
     {
       "src": "^/$",
-      "dest": "/-home?host=$host",
+      "dest": "/montesclaros-home.html?host=$host",
       "check": true,
       "has": [
         {
@@ -2771,7 +2771,7 @@
     },
     {
       "src": "^/$",
-      "dest": "/-home?host=$host",
+      "dest": "/londrina-home.html?host=$host",
       "check": true,
       "has": [
         {
@@ -2793,7 +2793,7 @@
     },
     {
       "src": "^/$",
-      "dest": "/-home?host=$host",
+      "dest": "/maringa-home.html?host=$host",
       "check": true,
       "has": [
         {
@@ -2815,7 +2815,7 @@
     },
     {
       "src": "^/$",
-      "dest": "/-home?host=$host",
+      "dest": "/joinville-home.html?host=$host",
       "check": true,
       "has": [
         {
@@ -2837,7 +2837,7 @@
     },
     {
       "src": "^/$",
-      "dest": "/-home?host=$host",
+      "dest": "/caxiasdosul-home.html?host=$host",
       "check": true,
       "has": [
         {
@@ -2859,7 +2859,7 @@
     },
     {
       "src": "^/$",
-      "dest": "/-home?host=$host",
+      "dest": "/feiradesantana-home.html?host=$host",
       "check": true,
       "has": [
         {
@@ -2881,7 +2881,7 @@
     },
     {
       "src": "^/$",
-      "dest": "/-home?host=$host",
+      "dest": "/campinagrande-home.html?host=$host",
       "check": true,
       "has": [
         {
@@ -2903,7 +2903,7 @@
     },
     {
       "src": "^/$",
-      "dest": "/-home?host=$host",
+      "dest": "/anapolis-home.html?host=$host",
       "check": true,
       "has": [
         {
@@ -2925,7 +2925,7 @@
     },
     {
       "src": "^/$",
-      "dest": "/-home?host=$host",
+      "dest": "/rioverde-home.html?host=$host",
       "check": true,
       "has": [
         {
@@ -2947,7 +2947,7 @@
     },
     {
       "src": "^/$",
-      "dest": "/-home?host=$host",
+      "dest": "/bebedouro-home.html?host=$host",
       "check": true,
       "has": [
         {
@@ -2969,7 +2969,7 @@
     },
     {
       "src": "^/$",
-      "dest": "/-home?host=$host",
+      "dest": "/colombia-home.html?host=$host",
       "check": true,
       "has": [
         {
@@ -2991,7 +2991,7 @@
     },
     {
       "src": "^/$",
-      "dest": "/-home?host=$host",
+      "dest": "/olimpia-home.html?host=$host",
       "check": true,
       "has": [
         {
@@ -3013,7 +3013,7 @@
     },
     {
       "src": "^/$",
-      "dest": "/-home?host=$host",
+      "dest": "/guaira-home.html?host=$host",
       "check": true,
       "has": [
         {
