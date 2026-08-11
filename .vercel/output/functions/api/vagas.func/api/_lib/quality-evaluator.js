@@ -31,8 +31,10 @@ const TAXONOMY_MAP = {
 function sanitizeText(str) {
   if (!str) return '';
   return String(str)
-    .replace(/<[^>]*>?/gm, '') // Remove HTML tags
-    .replace(/['"`;]/g, '')    // Remove caracteres perigosos
+    .replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, '') // Remove scripts
+    .replace(/<style\b[^<]*(?:(?!<\/style>)<[^<]*)*<\/style>/gi, '')   // Remove styles
+    .replace(/<[^>]*>?/gm, '')                                          // Remove HTML tags
+    .replace(/['"`;]/g, '')                                             // Remove caracteres perigosos
     .trim();
 }
 
@@ -46,7 +48,12 @@ function toTitleCase(str) {
  */
 function validateAndCleanWhatsApp(rawPhone) {
   if (!rawPhone) return { valid: false, phone: '' };
-  const digits = String(rawPhone).replace(/\D/g, '');
+  let digits = String(rawPhone).replace(/\D/g, '');
+
+  // Se vier com o DDI 55 na frente (+55 17 99264-1746 -> 13 dígitos)
+  if (digits.startsWith('55') && (digits.length === 12 || digits.length === 13)) {
+    digits = digits.slice(2);
+  }
 
   // Validação: Formatos aceitos (10 ou 11 dígitos com DDD válido entre 11 e 99)
   if (digits.length === 10 || digits.length === 11) {

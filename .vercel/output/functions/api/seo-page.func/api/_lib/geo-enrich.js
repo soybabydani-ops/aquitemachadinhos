@@ -86,10 +86,23 @@ const GEO_HUBS = {
 };
 
 /**
+ * Normaliza e auto-corrige qualquer formato de slug/cidade
+ */
+function normalizeSlug(raw) {
+  if (!raw) return 'barretos';
+  return String(raw)
+    .toLowerCase()
+    .normalize('NFD').replace(/[\u0300-\u036f]/g, '') // Remove acentos
+    .replace(/[^a-z0-9]+/g, '-')                      // Converte espaços e símbolos em hífen
+    .replace(/-sp$|-rj$|-mg$|-rs$|-pr$|-sc$|-go$|-ba$|-ce$|-pe$|-am$|-pa$|-df$/i, '') // Remove sufixo de estado se colado
+    .replace(/^-+|-+$/g, '');                         // Remove hífens nas bordas
+}
+
+/**
  * Encontra ou gera dinamicamente dados socioeconômicos do município
  */
 function getGeoData(citySlug, cityName = '', uf = 'SP') {
-  const normalizedSlug = (citySlug || '').toLowerCase().replace(/[^a-z0-9-]/g, '');
+  const normalizedSlug = normalizeSlug(citySlug);
 
   if (GEO_HUBS[normalizedSlug]) {
     return GEO_HUBS[normalizedSlug];
@@ -101,6 +114,7 @@ function getGeoData(citySlug, cityName = '', uf = 'SP') {
   return {
     nome: cleanName,
     uf: cleanUF,
+    slug: normalizedSlug,
     populacao: 45000,
     pib_per_capita: 'R$ 38.000',
     bioma: 'Bioma Brasileiro Predominante',
@@ -169,6 +183,7 @@ function generateAntiThinContent(options) {
 
 module.exports = {
   GEO_HUBS,
+  normalizeSlug,
   getGeoData,
   generateAntiThinContent
 };

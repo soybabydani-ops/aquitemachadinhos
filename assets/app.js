@@ -1,3 +1,27 @@
+/* === AQUITEM SELF-HEALING & AUTONOMOUS AUTO-CORRECTION ENGINE === */
+(function() {
+  'use strict';
+  // 1. Auto-Cura de Imagens Quebradas
+  document.addEventListener('error', function(e) {
+    var t = e.target;
+    if (t && t.tagName === 'IMG' && !t.getAttribute('data-healed')) {
+      t.setAttribute('data-healed', 'true');
+      var alt = t.getAttribute('alt') || 'AQUITEM';
+      var initial = alt.charAt(0).toUpperCase() || 'A';
+      var svg = '<svg xmlns="http://www.w3.org/2000/svg" width="300" height="200" viewBox="0 0 300 200"><rect width="300" height="200" fill="#0A1D3D"/><circle cx="150" cy="100" r="48" fill="rgba(217,170,66,0.2)" stroke="#D9AA42" stroke-width="2"/><text x="150" y="112" font-family="sans-serif" font-size="36" font-weight="900" fill="#F5D77F" text-anchor="middle">' + initial + '</text><text x="150" y="165" font-family="sans-serif" font-size="12" font-weight="700" fill="rgba(255,255,255,0.7)" text-anchor="middle">AQUITEM OFICIAL</text></svg>';
+      t.src = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svg);
+    }
+  }, true);
+
+  // 2. Isolamento Global de Erros (Zero-Crash Guard)
+  window.addEventListener('error', function(e) {
+    if (e && e.message && (e.message.indexOf('ResizeObserver') !== -1 || e.message.indexOf('Script error') !== -1 || e.message.indexOf('Extension') !== -1)) {
+      e.preventDefault(); return true;
+    }
+  });
+  window.addEventListener('unhandledrejection', function(e) { e.preventDefault(); });
+})();
+
 /* === BOTAO CTA "Quero mais clientes" (Aqui Tem Achadinhos) === */
 (function(){
   function criarCTA(){
