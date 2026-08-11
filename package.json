@@ -1,0 +1,23 @@
+{
+  "name": "aquitemachadinhos",
+  "version": "9.5.0",
+  "description": "Super Portal Nacional de Guias Locais, Vagas e Classificados no Brasil",
+  "main": "app.js",
+  "scripts": {
+    "test": "node tests/audit.js",
+    "build": "echo 'Build complete'"
+  },
+  "keywords": [
+    "guia-local",
+    "vagas-de-emprego",
+    "classificados",
+    "brasil",
+    "programmatic-seo"
+  ],
+  "author": "AQUITEM",
+  "license": "UNLICENSED",
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "dependencies": {}
+}
