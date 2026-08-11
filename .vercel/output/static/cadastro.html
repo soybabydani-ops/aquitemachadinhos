@@ -96,14 +96,19 @@
     </div>
   </form>
 
-  <!-- SUCESSO -->
+  <!-- SUCESSO / AUTO-APROVAÇÃO INSTANTÂNEA -->
   <div id="cadOk" class="hidden bg-white rounded-3xl shadow-soft ring-silver p-8 text-center mt-2">
-    <div class="text-5xl">✅</div>
-    <h2 class="font-display text-2xl font-extrabold mt-3">Cadastro enviado!</h2>
-    <p class="text-slate-600 mt-2">Sua empresa foi registrada como <b>pendente</b>. Após a aprovação, ela entra no guia de Barretos. Se estiver entre os 50 primeiros cadastros aprovados, receberá o destaque gratuito por 90 dias.</p>
+    <div class="text-5xl">🎉</div>
+    <div class="inline-flex items-center gap-2 px-3.5 py-1 bg-emerald-500/10 text-emerald-600 rounded-full text-xs font-black uppercase mt-3">✨ Avaliação IA: Aprovado com Sucesso</div>
+    <h2 class="font-display text-2xl font-extrabold mt-2 text-navy-900">Sua empresa já está no ar!</h2>
+    <p class="text-slate-600 mt-2 max-w-lg mx-auto">Seu cadastro foi validado pelos critérios de conformidade e <b>aprovado automaticamente</b>. O perfil da sua empresa já está ativo, com <b>selo de destaque gratuito</b> e enviado para indexação no Google.</p>
+    <div id="liveStoreBox" class="my-5 p-4 rounded-2xl bg-slate-50 border border-slate-200 max-w-md mx-auto text-left">
+      <p class="text-xs text-slate-500 font-bold mb-1">🔗 Link da sua vitrine oficial:</p>
+      <a id="linkSuaLoja" href="index.html" class="text-peao-600 font-bold text-sm break-all underline" target="_blank">Acessar minha página ao vivo ↗</a>
+    </div>
     <div class="mt-5 flex flex-col sm:flex-row gap-3 justify-center">
-      <a href="index.html" class="btn-shine bg-navy-800 hover:bg-navy-700 text-white font-bold px-6 py-3 rounded-xl">Voltar ao início</a>
-      <a href="https://wa.me/5517992641746?text=Acabei%20de%20cadastrar%20minha%20empresa%20e%20gostaria%20da%20aprovação" target="_blank" rel="noopener noreferrer" class="btn-shine bg-[#25D366] text-white font-bold px-6 py-3 rounded-xl">💬 Avisar aprovação</a>
+      <a id="btnVerLoja" href="index.html" class="btn-shine bg-peao-500 hover:bg-peao-600 text-white font-bold px-6 py-3 rounded-xl shadow-redglow">Ver minha página ao vivo →</a>
+      <a id="btnShareWa" href="https://wa.me/?text=Confira%20nossa%20empresa%20no%20guia%20oficial%20Aqui%20Tem%20Achadinhos!" target="_blank" rel="noopener noreferrer" class="btn-shine bg-[#25D366] text-white font-bold px-6 py-3 rounded-xl">📲 Compartilhar no WhatsApp</a>
     </div>
   </div>
 </section>

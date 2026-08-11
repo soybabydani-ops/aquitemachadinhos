@@ -619,7 +619,28 @@
       if (isRemote()) { var t = encodeURIComponent(q); return apiGet('stores?select=*&status=eq.ativo&city_slug=eq.' + encodeURIComponent(currentCitySlug()) + '&or=(nome.ilike.*' + t + '*,descricao.ilike.*' + t + '*,bairro.ilike.*' + t + '*,subcategoria.ilike.*' + t + '*)'); }
       return Stores.list().then(function (a) { var ql = q.toLowerCase(); return a.filter(function (s) { return JSON.stringify(s).toLowerCase().indexOf(ql) !== -1; }); });
     },
-    create: function (obj) { obj.id = uuid(); obj.status = 'pendente'; obj.city_slug = obj.city_slug || currentCitySlug(); obj.cidade = obj.cidade || currentCityName(); obj.criado_em = new Date().toISOString(); return apiPost('stores', obj).then(function (ok) { return ok ? obj : null; }); }
+    create: function (obj) {
+      obj.id = obj.id || uuid();
+      obj.status = 'ativo';
+      obj.status_aprovacao = 'aprovado';
+      obj.destaque = true;
+      obj.city_slug = obj.city_slug || currentCitySlug();
+      obj.cidade = obj.cidade || currentCityName();
+      obj.criado_em = new Date().toISOString();
+      return fetch('/api/empresas', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(obj)
+      })
+      .then(function(r) { return r.json(); })
+      .then(function(res) {
+        if (res && res.success && res.store) return res.store;
+        return apiPost('stores', obj).then(function (ok) { return ok ? obj : null; });
+      })
+      .catch(function() {
+        return apiPost('stores', obj).then(function (ok) { return ok ? obj : null; });
+      });
+    }
   };
   var Offers = {
     listActive: function () {
@@ -1503,8 +1524,18 @@
       }).then(function (created) {
         Metrics.log('cadastro_concluido', created.id);
         form.classList.add('hidden');
-        $('#cadOk').classList.remove('hidden');
-        try { window.open(waLink('Cadastro enviado: ' + fd.nome + ' (' + fd.categoria + '). Já aprovou?'), '_blank'); } catch (e) {}
+        var cadOk = $('#cadOk');
+        if (cadOk) cadOk.classList.remove('hidden');
+        var liveLink = 'loja.html?id=' + (created.id || '');
+        var linkEl = $('#linkSuaLoja');
+        if (linkEl) { linkEl.href = liveLink; linkEl.textContent = window.location.origin + '/' + liveLink; }
+        var btnVer = $('#btnVerLoja');
+        if (btnVer) btnVer.href = liveLink;
+        var btnShare = $('#btnShareWa');
+        if (btnShare) {
+          var shareText = 'Confira nossa página oficial no Aqui Tem Achadinhos: ' + window.location.origin + '/' + liveLink;
+          btnShare.href = 'https://wa.me/?text=' + encodeURIComponent(shareText);
+        }
         window.scrollTo(0, 0);
       }).catch(function (err) {
         showMsg('#msg', '❌ Não foi possível enviar. Verifique sua internet e tente novamente. (' + (err && err.message ? err.message : 'erro') + ')', false);
@@ -2694,7 +2725,27 @@
       return apiGet('listings?select=*&or=(id.eq.' + encodeURIComponent(key) + ',slug.eq.' + encodeURIComponent(key) + ')&status=eq.ativo').then(function (a) { return a[0] || null; });
     },
     photos: function (lid) { if (isRemote()) return apiGet('listings_photos?select=id,url&listing_id=eq.' + encodeURIComponent(lid) + '&order=criado_em.asc'); return Promise.resolve([]); },
-    create: function (obj) { obj.id = uuid(); obj.status = 'pendente'; obj.criado_em = new Date().toISOString(); return apiPost('listings', obj).then(function (ok) { return ok ? obj : null; }); },
+    create: function (obj) {
+      obj.id = obj.id || uuid();
+      obj.status = 'ativo';
+      obj.destaque = true;
+      obj.city_slug = obj.city_slug || currentCitySlug();
+      obj.cidade = obj.cidade || currentCityName();
+      obj.criado_em = new Date().toISOString();
+      return fetch('/api/vagas', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(obj)
+      })
+      .then(function(r) { return r.json(); })
+      .then(function(res) {
+        if (res && res.success && res.listing) return res.listing;
+        return apiPost('listings', obj).then(function (ok) { return ok ? obj : null; });
+      })
+      .catch(function() {
+        return apiPost('listings', obj).then(function (ok) { return ok ? obj : null; });
+      });
+    },
     search: function (q) { q = (q || '').trim(); if (!q) return Classifieds.list(); if (!isRemote()) return Promise.resolve([]); var t = encodeURIComponent(q); return apiGet('listings?select=*&status=eq.ativo&or=(titulo.ilike.*' + t + '*,descricao.ilike.*' + t + '*,bairro.ilike.*' + t + '*,subcategoria.ilike.*' + t + '*)&order=destaque.desc,criado_em.desc'); }
   };
 

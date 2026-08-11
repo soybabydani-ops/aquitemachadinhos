@@ -274,6 +274,81 @@ async function runTests() {
     assert(false, `Erro no endpoint /api/cron-autopilot: ${err.message}`);
   }
 
+  // ----------------------------------------------------
+  // TESTE 11: AI Quality, Compliance & Anti-Spam Evaluator
+  // ----------------------------------------------------
+  console.log('\n🤖 [11/12] Testando api/_lib/quality-evaluator.js...');
+  try {
+    const { evaluateStore, evaluateListing } = require('../api/_lib/quality-evaluator');
+
+    // Teste de Loja Válida
+    const storeEval = evaluateStore({
+      nome: 'Pizzaria Bella Napoli',
+      whatsapp: '(17) 99264-1746',
+      cidade: 'Barretos',
+      descricao: 'A melhor pizza artesanal de Barretos com forno a lenha e entrega rápida.'
+    });
+
+    assert(storeEval.approved === true, 'Empresa válida aprovada automaticamente');
+    assert(storeEval.score >= 80, `Quality Score alto atingido: ${storeEval.score}/100`);
+    assert(storeEval.data.categoria === 'gastronomia', 'Classificador Semântico identificou categoria: gastronomia');
+    assert(storeEval.data.subcategoria === 'Pizzaria', 'Classificador Semântico identificou subcategoria: Pizzaria');
+    assert(storeEval.data.whatsapp_utm_link.includes('wa.me'), 'Gerador de WhatsApp Lead Attribution com UTM ativo');
+
+    // Teste de Anti-Spam (Cassino / Bet / Golpe)
+    const spamEval = evaluateStore({
+      nome: 'Ganhe no Cassino e Jogo do Tigrinho',
+      whatsapp: '11999999999',
+      cidade: 'São Paulo',
+      descricao: 'Dinheiro facil com robo da roleta e cassino online.'
+    });
+    assert(spamEval.approved === false, 'Motor Anti-Spam bloqueou anúncio malicioso/jogo com sucesso');
+  } catch (err) {
+    assert(false, `Erro no Quality Evaluator: ${err.message}`);
+  }
+
+  // ----------------------------------------------------
+  // TESTE 12: Auto-Aprovação em Tempo Real (POST /api/empresas & POST /api/vagas)
+  // ----------------------------------------------------
+  console.log('\n⚡ [12/12] Testando POST /api/empresas & POST /api/vagas...');
+  try {
+    const empresasHandler = require('../api/empresas');
+    const vagasHandler = require('../api/vagas');
+
+    // Teste POST Empresa
+    const { req: reqEmp, res: resEmp } = createMockReqRes({
+      method: 'POST',
+      body: {
+        nome: 'Padaria e Confeitaria Central',
+        whatsapp: '17992641746',
+        cidade: 'Barretos',
+        descricao: 'Pães artesanais, bolos e café colonial fresquinho todos os dias.'
+      }
+    });
+    await empresasHandler(reqEmp, resEmp);
+    assert(resEmp.statusCode === 201, 'POST /api/empresas retornou HTTP 201 Created');
+    assert(resEmp.body && resEmp.body.auto_approved === true, 'Empresa auto-aprovada na hora');
+    assert(resEmp.body.live_url.includes('loja.html?id='), 'Live URL gerada e retornada com sucesso');
+
+    // Teste POST Vaga
+    const { req: reqVaga, res: resVaga } = createMockReqRes({
+      method: 'POST',
+      body: {
+        titulo: 'Atendente de Balcão e Caixa',
+        whatsapp: '17992641746',
+        cidade: 'Barretos',
+        descricao: 'Vaga para atendimento ao cliente e suporte no balcão. CLT integral.',
+        salario: 'R$ 2.100,00'
+      }
+    });
+    await vagasHandler(reqVaga, resVaga);
+    assert(resVaga.statusCode === 201, 'POST /api/vagas retornou HTTP 201 Created');
+    assert(resVaga.body && resVaga.body.auto_approved === true, 'Vaga auto-aprovada na hora');
+    assert(resVaga.body.live_url.includes('anuncio.html?id='), 'Live URL da vaga retornada com sucesso');
+  } catch (err) {
+    assert(false, `Erro no teste de POST /api/empresas e /api/vagas: ${err.message}`);
+  }
+
   console.log('\n====================================================');
   console.log(`📊 RESULTADO DOS TESTES: ${passed} PASSOU | ${failed} FALHOU`);
   console.log('====================================================');

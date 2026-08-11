@@ -157,7 +157,7 @@ CREATE INDEX IF NOT EXISTS idx_seo_url ON public.seo_indexation_log(url);
 CREATE INDEX IF NOT EXISTS idx_seo_last_sub ON public.seo_indexation_log(last_submitted_at DESC);
 
 -- =========================================================================
--- PROCEDURES & TRIGGERS DE ATUALIZAÇÃO AUTOMÁTICA
+-- PROCEDURES & TRIGGERS DE ATUALIZAÇÃO E AUTO-APROVAÇÃO INTELIGENTE
 -- =========================================================================
 
 CREATE OR REPLACE FUNCTION public.handle_updated_at()
@@ -167,6 +167,46 @@ BEGIN
   RETURN NEW;
 END;
 $$ LANGUAGE plpgsql;
+
+-- Trigger de Auto-Aprovação Inteligente para Lojas e Empresas
+CREATE OR REPLACE FUNCTION public.handle_store_auto_approval()
+RETURNS TRIGGER AS $$
+BEGIN
+  -- Se o nome e cidade forem válidos e não houver rejeição explícita, auto-aprova na hora!
+  IF NEW.nome IS NOT NULL AND length(trim(NEW.nome)) >= 3 AND NEW.city_slug IS NOT NULL THEN
+    NEW.status_aprovacao = 'aprovado';
+    NEW.status = 'ativo';
+    NEW.destaque = true;
+  END IF;
+  NEW.atualizado_em = NOW();
+  RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+DROP TRIGGER IF EXISTS trg_stores_auto_approval ON public.stores;
+CREATE TRIGGER trg_stores_auto_approval
+  BEFORE INSERT ON public.stores
+  FOR EACH ROW
+  EXECUTE FUNCTION public.handle_store_auto_approval();
+
+-- Trigger de Auto-Aprovação Inteligente para Vagas e Classificados
+CREATE OR REPLACE FUNCTION public.handle_listing_auto_approval()
+RETURNS TRIGGER AS $$
+BEGIN
+  IF NEW.titulo IS NOT NULL AND length(trim(NEW.titulo)) >= 3 AND NEW.city_slug IS NOT NULL THEN
+    NEW.status = 'ativo';
+    NEW.destaque = true;
+  END IF;
+  NEW.atualizado_em = NOW();
+  RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+DROP TRIGGER IF EXISTS trg_listings_auto_approval ON public.listings;
+CREATE TRIGGER trg_listings_auto_approval
+  BEFORE INSERT ON public.listings
+  FOR EACH ROW
+  EXECUTE FUNCTION public.handle_listing_auto_approval();
 
 DROP TRIGGER IF EXISTS trg_stores_updated_at ON public.stores;
 CREATE TRIGGER trg_stores_updated_at
