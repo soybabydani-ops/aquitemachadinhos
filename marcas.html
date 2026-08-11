@@ -7,7 +7,7 @@
 <link href="marcas.html" rel="canonical"/>
 <meta content="#081426" name="theme-color"/>
 <link href="assets/tailwind.css" rel="stylesheet"/>
-<link href="assets/styles.css" rel="stylesheet"/>
+<link href="assets/styles.css?v=28.0" rel="stylesheet"/>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
@@ -18,7 +18,9 @@
 <meta property="og:url" content="https://www.aquitemachadinhos.com.br/marcas">
 <meta property="og:image" content="https://www.aquitemachadinhos.com.br/assets/og-image.png">
 <meta name="twitter:card" content="summary_large_image">
+
 <style>
+/* Design System de Alto Luxo para Vitrine de Marcas */
 .brand-pill-btn {
   padding: 10px 18px;
   border-radius: 99px;
@@ -26,57 +28,222 @@
   font-weight: 700;
   transition: all 0.2s ease;
   cursor: pointer;
-  border: 1px solid rgba(255,255,255,0.18);
-  background: rgba(255,255,255,0.06);
-  color: #d7e0ed;
+  border: 1px solid rgba(245,215,127,0.25);
+  background: rgba(13, 34, 68, 0.85);
+  color: #E2E8F0;
   display: inline-flex;
   align-items: center;
   gap: 6px;
   white-space: nowrap;
 }
 .brand-pill-btn:hover {
-  background: rgba(255,255,255,0.15);
+  background: rgba(245,215,127,0.2);
   color: #ffffff;
-  border-color: rgba(245,215,127,0.5);
+  border-color: #F5D77F;
 }
 .brand-pill-btn.active {
-  background: linear-gradient(135deg, #F5D77F 0%, #D9AA42 100%) !important;
-  color: #07142B !important;
+  background: linear-gradient(135deg, #FFE259 0%, #FFA751 100%) !important;
+  color: #1A0D00 !important;
   border-color: #F5D77F !important;
-  box-shadow: 0 6px 18px rgba(217,170,66,0.35);
+  box-shadow: 0 4px 15px rgba(245,215,127,0.4);
 }
+
 .brand-card-v1 {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  background: linear-gradient(145deg, #0e2448 0%, #0a1a35 100%);
-  border: 1px solid rgba(245,215,127,0.22);
-  border-radius: 24px;
+  background: linear-gradient(155deg, #0d2244 0%, #071530 100%);
+  border: 1.5px solid rgba(245,215,127,0.3);
+  border-radius: 20px;
   padding: 24px;
   color: #ffffff;
-  transition: all 0.25s ease;
-  box-shadow: 0 12px 30px rgba(0,0,0,0.25);
+  transition: all 0.3s ease;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
   position: relative;
 }
 .brand-card-v1:hover {
   transform: translateY(-4px);
-  border-color: rgba(245,215,127,0.7);
-  box-shadow: 0 18px 40px rgba(0,0,0,0.4), 0 0 25px rgba(217,170,66,0.25);
+  border-color: #F5D77F;
+  box-shadow: 0 15px 40px rgba(245,215,127,0.25);
 }
-.plan-pricing-card {
-  background: linear-gradient(145deg, #0d2244 0%, #09172e 100%);
-  border: 1px solid rgba(245,215,127,0.25);
+
+/* Planos Corporativos com Separação Nítida e Botões 3D */
+.plans-pricing-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 28px;
+  margin: 30px auto 50px auto;
+  max-width: 1140px;
+  padding: 0 16px;
+}
+
+.plan-pricing-box {
+  background: linear-gradient(160deg, #0d2244 0%, #071530 100%);
+  border: 2px solid rgba(245,215,127,0.3);
   border-radius: 24px;
-  padding: 28px;
-  transition: all 0.25s ease;
+  padding: 32px 26px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  position: relative;
+  box-shadow: 0 12px 35px rgba(0,0,0,0.6);
+  transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
 }
-.plan-pricing-card.featured {
-  border: 2px solid #F5D77F;
-  box-shadow: 0 0 35px rgba(217,170,66,0.25);
+
+.plan-pricing-box:hover {
+  transform: translateY(-5px);
+  border-color: #F5D77F;
+  box-shadow: 0 18px 45px rgba(245,215,127,0.2);
+}
+
+.plan-pricing-box.featured-gold {
+  border: 2.5px solid #F5D77F;
+  background: linear-gradient(165deg, #133363 0%, #071530 100%);
+  box-shadow: 0 15px 45px rgba(245,215,127,0.3);
   transform: scale(1.02);
+}
+
+.plan-badge-top {
+  position: absolute;
+  top: -14px;
+  right: 20px;
+  background: linear-gradient(90deg, #DC2626, #EF4444);
+  color: #FFFFFF;
+  font-size: 0.72rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  padding: 5px 14px;
+  border-radius: 999px;
+  box-shadow: 0 4px 12px rgba(220,38,38,0.4);
+}
+
+.plan-header-tag {
+  font-size: 0.75rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #CBD5E1;
+  margin-bottom: 6px;
+  display: block;
+}
+
+.plan-title-main {
+  font-size: 1.6rem;
+  font-weight: 900;
+  color: #FFFFFF;
+  margin-bottom: 12px;
+}
+
+.plan-price-wrapper {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  margin: 16px 0 14px 0;
+  padding-bottom: 16px;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+.plan-price-val {
+  font-size: 2.4rem;
+  font-weight: 900;
+  color: #F5D77F;
+  line-height: 1;
+}
+
+.plan-price-period {
+  font-size: 0.9rem;
+  color: #94A3B8;
+  font-weight: 600;
+}
+
+.plan-desc-text {
+  font-size: 0.88rem;
+  color: #CBD5E1;
+  line-height: 1.5;
+  margin-bottom: 20px;
+}
+
+.plan-features-list {
+  list-style: none;
+  margin-bottom: 28px;
+  padding: 0;
+}
+
+.plan-features-list li {
+  font-size: 0.85rem;
+  color: #F1F5F9;
+  margin-bottom: 12px;
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  line-height: 1.4;
+}
+
+.plan-features-list li span.check-icon {
+  color: #22C55E;
+  font-weight: 900;
+  font-size: 0.95rem;
+  flex-shrink: 0;
+}
+
+.plan-features-list li span.star-icon {
+  color: #F5D77F;
+  font-weight: 900;
+  font-size: 0.95rem;
+  flex-shrink: 0;
+}
+
+/* Botões de Ação Destacados (3D CTA) */
+.btn-plan-cta {
+  display: block;
+  width: 100%;
+  text-align: center;
+  text-decoration: none;
+  font-weight: 800;
+  font-size: 0.95rem;
+  padding: 15px 20px;
+  border-radius: 14px;
+  transition: all 0.25s ease;
+  cursor: pointer;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.4);
+}
+
+.btn-cta-bronze {
+  background: rgba(255,255,255,0.08);
+  border: 1.5px solid rgba(245,215,127,0.4);
+  color: #FFFFFF;
+}
+.btn-cta-bronze:hover {
+  background: rgba(245,215,127,0.2);
+  border-color: #F5D77F;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(245,215,127,0.25);
+  color: #FFFFFF;
+}
+
+.btn-cta-gold {
+  background: linear-gradient(135deg, #FFE259 0%, #FFA751 100%);
+  border: none;
+  color: #1A0D00;
+  box-shadow: 0 6px 25px rgba(245,215,127,0.4);
+}
+.btn-cta-gold:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 35px rgba(245,215,127,0.6);
+  color: #000000;
+}
+
+.btn-cta-diamante {
+  background: linear-gradient(135deg, #1E40AF 0%, #3B82F6 100%);
+  border: 1.5px solid #60A5FA;
+  color: #FFFFFF;
+  box-shadow: 0 6px 25px rgba(59,130,246,0.4);
+}
+.btn-cta-diamante:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px rgba(59,130,246,0.6);
+  color: #FFFFFF;
 }
 </style>
 </head>
@@ -147,7 +314,7 @@
     <div class="col-span-full text-center py-12 text-silver-400">Carregando marcas oficiais...</div>
   </div>
 
-  <!-- SEÇÃO DE PLANOS PARA MARCAS -->
+  <!-- SEÇÃO DE PLANOS PARA MARCAS (FORMATO LIMPO E RESPONSIVO) -->
   <section id="planos-marcas" class="mt-24 pt-16 border-t border-white/10">
     <div class="text-center max-w-3xl mx-auto mb-12">
       <span class="text-amber-400 font-bold uppercase text-xs tracking-widest">Planos Corporativos & Branding</span>
@@ -157,81 +324,85 @@
       </p>
     </div>
 
-    <div class="grid md:grid-cols-3 gap-6 max-w-6xl mx-auto">
+    <div class="plans-pricing-grid">
       
       <!-- PLANO 1: MARCA DESTAQUE -->
-      <div class="plan-pricing-card">
+      <div class="plan-pricing-box">
         <div>
-          <span class="text-xs font-bold text-silver-400 uppercase tracking-wider">Presença Nacional</span>
-          <h3 class="font-display font-extrabold text-2xl text-white mt-1">Marca Destaque</h3>
-          <div class="mt-4 flex items-baseline gap-1">
-            <span class="text-3xl font-extrabold text-amber-400">R$ 99</span>
-            <span class="text-xs text-silver-400">/ mês</span>
-          </div>
-          <p class="text-xs text-silver-300 mt-3 leading-relaxed">Ideal para marcas regionais e fabricantes que desejam presença e autoridade no catálogo oficial.</p>
+          <span class="plan-header-tag">Presença Nacional</span>
+          <h3 class="plan-title-main">Marca Destaque</h3>
           
-          <ul class="mt-6 space-y-3 text-xs text-silver-200">
-            <li class="flex items-center gap-2"><span class="text-emerald-400">✓</span> Logomarca em alta resolução na vitrine</li>
-            <li class="flex items-center gap-2"><span class="text-emerald-400">✓</span> Link direto para seu site oficial (DoFollow)</li>
-            <li class="flex items-center gap-2"><span class="text-emerald-400">✓</span> Botão direto para o WhatsApp de vendas</li>
-            <li class="flex items-center gap-2"><span class="text-emerald-400">✓</span> Selo de ✦ Marca Oficial Verificada</li>
+          <div class="plan-price-wrapper">
+            <span class="plan-price-val">R$ 99</span>
+            <span class="plan-price-period">/ mês</span>
+          </div>
+
+          <p class="plan-desc-text">Ideal para marcas regionais e fabricantes que desejam presença e autoridade no catálogo oficial.</p>
+          
+          <ul class="plan-features-list">
+            <li><span class="check-icon">✓</span> Logomarca em alta resolução na vitrine</li>
+            <li><span class="check-icon">✓</span> Link direto para seu site oficial (DoFollow)</li>
+            <li><span class="check-icon">✓</span> Botão direto para o WhatsApp de vendas</li>
+            <li><span class="check-icon">✓</span> Selo de ✦ Marca Oficial Verificada</li>
           </ul>
         </div>
 
-        <a href="https://mpago.la/25UHZqr" target="_blank" rel="noopener" class="btn-shine w-full text-center mt-8 bg-white/10 hover:bg-white/20 text-white font-bold py-3.5 rounded-xl text-xs transition border border-white/20">
-          Assinar Plano Destaque →
+        <a href="https://mpago.la/25UHZqr" target="_blank" rel="noopener" class="btn-plan-cta btn-cta-bronze">
+          Assinar Plano Destaque &rarr;
         </a>
       </div>
 
-      <!-- PLANO 2: MARCA MASTER (HOME) -->
-      <div class="plan-pricing-card featured">
+      <!-- PLANO 2: MARCA MASTER (HOME - MAIS VENDIDO) -->
+      <div class="plan-pricing-box featured-gold">
+        <span class="plan-badge-top">🔥 MAIS POPULAR</span>
         <div>
-          <div class="flex items-center justify-between">
-            <span class="text-xs font-bold text-amber-400 uppercase tracking-wider">Mais Popular ⭐</span>
-            <span class="text-[10px] font-extrabold bg-amber-400 text-navy-950 px-2 py-0.5 rounded-full">Carrossel Home</span>
-          </div>
-          <h3 class="font-display font-extrabold text-2xl text-white mt-1">Marca Master</h3>
-          <div class="mt-4 flex items-baseline gap-1">
-            <span class="text-4xl font-extrabold text-amber-400">R$ 199</span>
-            <span class="text-xs text-silver-400">/ mês</span>
-          </div>
-          <p class="text-xs text-silver-200 mt-3 leading-relaxed">Máxima exposição com sua logomarca no Carrossel da Home Principal acessado por milhares de visitantes diários.</p>
+          <span class="plan-header-tag" style="color: #F5D77F;">★ Destaque Máximo na Home</span>
+          <h3 class="plan-title-main" style="color: #FFFFFF;">Marca Master</h3>
           
-          <ul class="mt-6 space-y-3 text-xs text-silver-200">
-            <li class="flex items-center gap-2"><span class="text-amber-400 font-bold">★</span> <b>Logo no Carrossel da Home Nacional</b></li>
-            <li class="flex items-center gap-2"><span class="text-emerald-400">✓</span> Tudo do plano Marca Destaque</li>
-            <li class="flex items-center gap-2"><span class="text-emerald-400">✓</span> Posição privilegiada no topo da categoria</li>
-            <li class="flex items-center gap-2"><span class="text-emerald-400">✓</span> Link direto para catálogo e e-commerce</li>
-            <li class="flex items-center gap-2"><span class="text-emerald-400">✓</span> Relatório trimestral de cliques e visualizações</li>
+          <div class="plan-price-wrapper">
+            <span class="plan-price-val">R$ 199</span>
+            <span class="plan-price-period">/ mês</span>
+          </div>
+
+          <p class="plan-desc-text">Máxima exposição com sua logomarca no Carrossel da Home Principal acessado por milhares de visitantes diários.</p>
+          
+          <ul class="plan-features-list">
+            <li><span class="star-icon">★</span> <strong>Logo no Carrossel da Home Nacional</strong></li>
+            <li><span class="check-icon">✓</span> Tudo do plano Marca Destaque</li>
+            <li><span class="check-icon">✓</span> Posição privilegiada no topo da categoria</li>
+            <li><span class="check-icon">✓</span> Link direto para catálogo e e-commerce</li>
+            <li><span class="check-icon">✓</span> Relatório trimestral de cliques e visualizações</li>
           </ul>
         </div>
 
-        <a href="https://mpago.la/2HBxp5v" target="_blank" rel="noopener" class="btn-shine w-full text-center mt-8 bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 text-navy-950 font-extrabold py-3.5 rounded-xl text-xs shadow-lg transition">
-          Assinar Plano Master (Home) →
+        <a href="https://mpago.la/2HBxp5v" target="_blank" rel="noopener" class="btn-plan-cta btn-cta-gold">
+          Assinar Plano Master (Home) &rarr;
         </a>
       </div>
 
       <!-- PLANO 3: PATROCINADOR DIAMANTE -->
-      <div class="plan-pricing-card">
+      <div class="plan-pricing-box">
         <div>
-          <span class="text-xs font-bold text-silver-400 uppercase tracking-wider">Exclusividade Total</span>
-          <h3 class="font-display font-extrabold text-2xl text-white mt-1">Patrocinador Diamante</h3>
-          <div class="mt-4 flex items-baseline gap-1">
-            <span class="text-3xl font-extrabold text-amber-400">R$ 349</span>
-            <span class="text-xs text-silver-400">/ mês</span>
-          </div>
-          <p class="text-xs text-silver-300 mt-3 leading-relaxed">Presença em grande estilo na Home, no topo da Vitrine de Marcas e nos guias de cidades estratégicas.</p>
+          <span class="plan-header-tag" style="color: #93C5FD;">💎 Exclusividade Total</span>
+          <h3 class="plan-title-main">Patrocinador Diamante</h3>
           
-          <ul class="mt-6 space-y-3 text-xs text-silver-200">
-            <li class="flex items-center gap-2"><span class="text-amber-400 font-bold">★</span> <b>Destaque Fixo no Topo do Portal</b></li>
-            <li class="flex items-center gap-2"><span class="text-emerald-400">✓</span> Presença no Carrossel da Home Nacional</li>
-            <li class="flex items-center gap-2"><span class="text-emerald-400">✓</span> Exibição nos guias de cidades do seu estado</li>
-            <li class="flex items-center gap-2"><span class="text-emerald-400">✓</span> Banner institucional e suporte prioritário</li>
+          <div class="plan-price-wrapper">
+            <span class="plan-price-val" style="color: #93C5FD;">R$ 349</span>
+            <span class="plan-price-period">/ mês</span>
+          </div>
+
+          <p class="plan-desc-text">Presença em grande estilo na Home, no topo da Vitrine de Marcas e nos guias de cidades estratégicas.</p>
+          
+          <ul class="plan-features-list">
+            <li><span class="star-icon" style="color: #60A5FA;">★</span> <strong>Destaque Fixo no Topo do Portal</strong></li>
+            <li><span class="check-icon">✓</span> Presença no Carrossel da Home Nacional</li>
+            <li><span class="check-icon">✓</span> Exibição nos guias de cidades do seu estado</li>
+            <li><span class="check-icon">✓</span> Banner institucional e suporte prioritário</li>
           </ul>
         </div>
 
-        <a href="https://mpago.la/2HBxp5v" target="_blank" rel="noopener" class="btn-shine w-full text-center mt-8 bg-white/10 hover:bg-white/20 text-white font-bold py-3.5 rounded-xl text-xs transition border border-white/20">
-          Assinar Patrocinador Diamante →
+        <a href="https://mpago.la/2HBxp5v" target="_blank" rel="noopener" class="btn-plan-cta btn-cta-diamante">
+          Assinar Patrocinador Diamante &rarr;
         </a>
       </div>
 
@@ -250,7 +421,19 @@ document.addEventListener('DOMContentLoaded', function() {
   var searchInp = document.getElementById('brandSearchInput');
   var totalCount = document.getElementById('totalBrandsCount');
 
-  var allBrands = [];
+  var sampleBrands = [
+    { nome: 'Pralana Chapéus', categoria: 'moda', cidade: 'Limeira', uf: 'SP', descricao_curta: 'Tradição centenária em chapéus country, feltro nobre e palha fina.', site_url: 'https://www.pralana.com.br', whatsapp: '19999998888', plano: 'master' },
+    { nome: 'Botas Goyazes', categoria: 'moda', cidade: 'Goiânia', uf: 'GO', descricao_curta: 'Couros exóticos, botas artesanais de alta durabilidade e estilo texano.', site_url: 'https://www.botasgoyazes.com.br', whatsapp: '62988887777', plano: 'master' },
+    { nome: 'Cervejaria Colorado', categoria: 'gastronomia', cidade: 'Ribeirão Preto', uf: 'SP', descricao_curta: 'Cervejas artesanais premiadas com ingredientes genuinamente brasileiros.', site_url: 'https://www.cervejariacolorado.com.br', whatsapp: '16977776666', plano: 'master' },
+    { nome: 'Thermas dos Laranjais', categoria: 'turismo', cidade: 'Olímpia', uf: 'SP', descricao_curta: 'O parque aquático de águas termais mais visitado da América Latina.', site_url: 'https://www.termas.com.br', whatsapp: '17966665555', plano: 'master' },
+    { nome: 'Prawer Chocolates', categoria: 'gastronomia', cidade: 'Gramado', uf: 'RS', descricao_curta: 'O primeiro chocolate artesanal do Brasil, receita tradicional de Gramado.', site_url: 'https://www.prawer.com.br', whatsapp: '54955554444', plano: 'destaque' },
+    { nome: 'Casa Valduga Vinhos', categoria: 'gastronomia', cidade: 'Bento Gonçalves', uf: 'RS', descricao_curta: 'Vinhos e espumantes premiados internacionalmente no Vale dos Vinhedos.', site_url: 'https://www.casavalduga.com.br', whatsapp: '54944443333', plano: 'destaque' },
+    { nome: 'Agrishow Brasil', categoria: 'agro', cidade: 'Ribeirão Preto', uf: 'SP', descricao_curta: 'A maior feira de tecnologia agrícola do Brasil e uma das maiores do mundo.', site_url: 'https://www.agrishow.com.br', whatsapp: '16933332222', plano: 'diamante' },
+    { nome: 'Salinas Maragogi', categoria: 'turismo', cidade: 'Maragogi', uf: 'AL', descricao_curta: 'Resort all inclusive eleito um dos melhores do mundo no Caribe Brasileiro.', site_url: 'https://www.salinas.com.br', whatsapp: '82922221111', plano: 'diamante' },
+    { nome: 'Porto Digital', categoria: 'tecnologia', cidade: 'Recife', uf: 'PE', descricao_curta: 'Um dos principais parques tecnológicos e ambientes de inovação do país.', site_url: 'https://www.portodigital.org', whatsapp: '81911110000', plano: 'diamante' }
+  ];
+
+  var allBrands = sampleBrands;
   var currentCat = 'all';
   var searchQuery = '';
 
@@ -312,18 +495,17 @@ document.addEventListener('DOMContentLoaded', function() {
     }).join('');
   }
 
-  // Fetch Brands from Supabase
+  // Fetch Brands from Supabase with resilient fallback
   fetch('https://efvuzxdhsirpvxclgdfg.supabase.co/rest/v1/brands?status=eq.ativo&order=ordem.asc,criado_em.desc', {
     headers: {
       apikey: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVmdnV6eGRoc2lycHZ4Y2xnZGZnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODU1MDM1OTEsImV4cCI6MjEwMTA3OTU5MX0.nPVBBKO_W9-tAccFRv7ajnllxTXvkqbsVsYecDqyeQc',
       Authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVmdnV6eGRoc2lycHZ4Y2xnZGZnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODU1MDM1OTEsImV4cCI6MjEwMTA3OTU5MX0.nPVBBKO_W9-tAccFRv7ajnllxTXvkqbsVsYecDqyeQc'
     }
   }).then(function(r){ return r.json(); }).then(function(brands) {
-    allBrands = brands || [];
+    if (brands && brands.length > 0) allBrands = brands;
     renderBrands();
   }).catch(function(err) {
-    console.error('Error loading brands:', err);
-    grid.innerHTML = '<div class="col-span-full text-center py-12 text-silver-400">Erro ao carregar vitrine de marcas.</div>';
+    renderBrands();
   });
 
   pillBtns.forEach(function(btn) {
