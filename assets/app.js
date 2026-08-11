@@ -1274,8 +1274,9 @@
       cats = (cats && cats.length) ? cats : CATS; stores = stores || [];
       if (cat) {
         var c = cats.filter(function (x) { return x.id === cat; })[0] || { nome: cat, emoji: '🏪' };
+        document.title = (c.nome || cat) + ' em ' + cityName + ' · Aqui Tem Achadinhos';
         if (t) t.innerHTML = c.emoji + ' ' + esc(c.nome);
-        if (sub) sub.textContent = 'Empresas de ' + c.nome + ' em ' + cityName + '/' + uf + '.';
+        if (sub) sub.textContent = 'Empresas e comércios de ' + c.nome + ' em ' + cityName + '/' + uf + '.';
         var list = sortByPlano(stores.filter(function (x) { return x.categoria === cat; }));
         if (!list.length) {
           list = generateFallbackStoresForCategory(cat, slug, cityName, uf);
