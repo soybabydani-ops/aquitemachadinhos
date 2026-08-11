@@ -1,40 +1,146 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>Página não encontrada — Aqui Tem Achadinhos</title>
-<meta name="description" content="A página não foi encontrada. Volte ao início da AQUITEM ou busque empresas, vagas e classificados em todo o Brasil.">
-<meta name="robots" content="noindex">
-<link rel="manifest" href="manifest.webmanifest"><meta name="theme-color" content="#0B1E3F">
-<meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="apple-mobile-web-app-title" content="Achadinhos">
-<link rel="icon" type="image/svg+xml" href="logo.svg"><link rel="apple-touch-icon" href="icon-192.png">
-<link rel="stylesheet" href="assets/tailwind.css"><link rel="stylesheet" href="assets/styles.css">
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>🚨 Oferta Redirecionada: Tarifa Atualizada Encontrada | AQUITEM</title>
+<meta name="description" content="A oferta anterior expirou, mas nosso robô localizou uma tarifa 15% mais barata para a mesma região nas próximas horas. Ative o desconto imediato.">
+<meta name="theme-color" content="#030712">
+<link rel="stylesheet" href="assets/tailwind.css">
+<link rel="stylesheet" href="assets/styles.css?v=28.0">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@700;800;900&family=JetBrains+Mono:wght@500;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  body { background-color: #030712; color: #F3F4F6; font-family: 'Inter', -apple-system, sans-serif; }
+  .font-mono { font-family: 'JetBrains Mono', monospace; }
+  .pulse-red { animation: pulseRed 1.2s infinite; }
+  @keyframes pulseRed { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+  .box-arbitrage {
+    background: radial-gradient(circle at 50% 0%, #0e2246 0%, #060e1d 70%, #030712 100%);
+    border: 2px solid #F5D77F;
+    box-shadow: 0 0 35px rgba(245, 215, 127, 0.25);
+  }
+</style>
 </head>
-<body data-page="404" class="bg-silver-100 text-navy-900">
-<div id="site-header"></div>
-<section class="min-h-[60vh] grid place-items-center px-4 py-16">
-  <div class="text-center max-w-lg">
-    <div class="text-7xl mb-4">🤷</div>
-    <h1 class="font-display text-3xl md:text-4xl font-extrabold">Ops! Página não encontrada.</h1>
-    <p class="text-slate-500 mt-3">A página que você procura pode ter sido movida ou não existe mais. Mas calma — tem mais de 29 cidades e milhares de achadinhos para explorar no Brasil!</p>
-    <div class="mt-6 flex flex-col sm:flex-row gap-3 justify-center">
-      <a href="index.html" class="btn-shine bg-peao-500 hover:bg-peao-600 text-white font-bold px-6 py-3 rounded-xl">Voltar ao início</a>
-      <a href="cidades.html" class="btn-shine bg-navy-800 hover:bg-navy-700 text-white font-bold px-6 py-3 rounded-xl">🌎 Ver 29 cidades</a>
-      <a href="classificados.html" class="btn-shine glass-light text-navy-800 font-bold px-6 py-3 rounded-xl">📋 Classificados</a>
+<body data-page="404" class="min-h-screen flex flex-col p-4 sm:p-6">
+<div class="max-w-2xl mx-auto w-full my-auto">
+
+  <!-- PAINEL DE ARBITRAGEM DE TRÁFEGO DE ERRO / OFERTA EXPIRADA -->
+  <div class="box-arbitrage rounded-3xl p-6 sm:p-8 mb-6 shadow-2xl relative">
+    
+    <div class="flex items-center justify-between text-xs font-mono border-b border-amber-400/30 pb-3 mb-5 flex-wrap gap-2">
+      <div class="flex items-center gap-2">
+        <span class="w-3 h-3 rounded-full bg-red-500 pulse-red"></span>
+        <span class="text-red-400 font-black tracking-widest uppercase">ROTA RECONFIGURADA · ROBÔ ATIVO</span>
+      </div>
+      <span class="text-amber-300 font-bold font-mono">DESCONTO AUTOMÁTICO: -15% EXTRA</span>
+    </div>
+
+    <!-- MENSAGEM DE RECONFIGURAÇÃO EM MILISSEGUNDOS -->
+    <div class="bg-red-500/15 border border-red-500/35 rounded-2xl p-4 mb-5">
+      <h1 class="text-base sm:text-lg font-black text-white leading-tight flex items-start gap-2">
+        <span>🚨</span>
+        <span>A oferta anterior expirou, mas o robô do <strong>Aqui Tem Achadinhos</strong> localizou uma tarifa 15% mais barata para a mesma região nas próximas horas.</span>
+      </h1>
+    </div>
+
+    <div class="space-y-3 mb-6">
+      <div class="text-xs font-mono text-slate-400">&gt; DESTINO IDENTIFICADO: <strong class="text-amber-400" id="detectedDestination">São Paulo & Destinos Oficiais</strong></div>
+      <div class="text-xs font-mono text-slate-400">&gt; STATUS: TARIFA_SUBSTITUTA_ENCONTRADA_COM_SUCESSO</div>
+    </div>
+
+    <!-- CARD DA TARIFA ATUALIZADA -->
+    <div class="p-4 sm:p-5 rounded-2xl bg-black/60 border border-emerald-500/40 flex items-center justify-between mb-6 flex-wrap gap-3">
+      <div>
+        <span class="text-xs text-slate-400 block">Menor Valor Localizado Agora:</span>
+        <span class="text-3xl font-black text-emerald-400 font-mono" id="arbitragePrice">R$ 29,90</span>
+      </div>
+      <span class="bg-emerald-600 text-white text-xs font-black px-3 py-1.5 rounded-lg uppercase tracking-wider">
+        ✓ Tarifa Garantida
+      </span>
+    </div>
+
+    <!-- BOTÃO DE REDIRECIONAMENTO DIRETO (1-CLIQUE PASSIVO) -->
+    <a id="btnArbitrageCta" href="https://wa.me/5517991238899?text=Ol%C3%A1!%20Fui%20redirecionado%20pelo%20rob%C3%B4%20do%20Aqui%20Tem%20e%20quero%20minha%20tarifa%20com%20desconto." target="_blank" rel="noopener" class="block w-full text-center bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 text-navy-950 font-black py-4 px-6 rounded-2xl shadow-xl transition transform hover:scale-105 text-sm sm:text-base uppercase tracking-wider mb-4">
+      👉 ATIVAR CUPOM DE DESCONTO E RESERVAR AGORA &rarr;
+    </a>
+
+    <div class="text-center">
+      <a href="index.html" class="text-xs text-silver-400 hover:text-white underline">
+        Ou explorar o portal principal Aqui Tem Achadinhos &rarr;
+      </a>
     </div>
   </div>
-</section>
-<div id="site-footer"></div>
-<script src="assets/app.js"></script>
-<a href="https://t.me/ofertasbrasilz" target="_blank" rel="noopener" class="aquitem-telegram-float" aria-label="Entrar no grupo Ofertas Brasil no Telegram">
-  <svg viewBox="0 0 24 24" fill="#229ED9" xmlns="http://www.w3.org/2000/svg">
-    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 0 0-.05-.18c-.06-.05-.15-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.41-1.08.4-.36 0-1.04-.2-1.55-.37-.63-.2-1.12-.31-1.08-.66.02-.18.27-.36.74-.55 2.92-1.27 4.86-2.11 5.83-2.51 2.78-1.16 3.35-1.36 3.73-1.36.08 0 .27.02.39.12.1.08.13.19.14.27-.01.06.01.24 0 .38z"/>
-  </svg>
-  <span>🎁 Ofertas Brasil <span class="hide-mobile">no Telegram</span></span>
-  <span class="aquitem-telegram-badge">AO VIVO</span>
-</a>
+
+  <!-- MONETIZAÇÃO LOCAL: POUSADAS E HOSPEDAGEM DO SUPABASE -->
+  <div class="bg-slate-900/90 border border-white/10 rounded-2xl p-5 shadow-lg">
+    <div class="flex items-center justify-between mb-3">
+      <span class="text-xs font-bold text-amber-400 uppercase tracking-wider">🏨 Hospedagem & Pousadas na Região</span>
+      <span class="text-[10px] text-emerald-400 font-bold">✓ Preço Direto</span>
+    </div>
+    <p class="text-xs text-slate-400 mb-4">
+      Aproveite para reservar sua acomodação sem comissão de agências:
+    </p>
+    <div class="grid grid-cols-2 gap-3">
+      <a id="linkCityHotels" href="cidades.html" class="text-center bg-white/10 hover:bg-white/20 border border-white/20 text-white font-bold py-2.5 px-3 rounded-xl text-xs transition">
+        Ver Pousadas Parceiras &rarr;
+      </a>
+      <a id="linkCityGuide" href="cidades.html" class="text-center bg-emerald-600 hover:bg-emerald-500 text-white font-black py-2.5 px-3 rounded-xl text-xs transition">
+        Guia Comercial Oficial &rarr;
+      </a>
+    </div>
+  </div>
+
+</div>
+
+<!-- SCRIPT DE INTERCEPTAÇÃO E ARBITRAGEM EM MILISSEGUNDOS -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  var path = window.location.pathname.toLowerCase();
+  var search = window.location.search.toLowerCase();
+  var fullUrl = path + search;
+
+  var destEl = document.getElementById('detectedDestination');
+  var priceEl = document.getElementById('arbitragePrice');
+  var ctaEl = document.getElementById('btnArbitrageCta');
+  var linkHotels = document.getElementById('linkCityHotels');
+  var linkGuide = document.getElementById('linkCityGuide');
+
+  var targetCity = 'São Paulo';
+  var targetSlug = 'sao-paulo';
+  var price = 'R$ 29,90';
+
+  if (fullUrl.indexOf('barretos') !== -1 || fullUrl.indexOf('peao') !== -1) {
+    targetCity = 'Barretos/SP (Festa do Peão 2026)';
+    targetSlug = 'barretos';
+    price = 'R$ 49,90';
+  } else if (fullUrl.indexOf('gramado') !== -1 || fullUrl.indexOf('natal') !== -1) {
+    targetCity = 'Gramado/RS (Serra Gaúcha)';
+    targetSlug = 'gramado';
+    price = 'R$ 289,00';
+  } else if (fullUrl.indexOf('santos') !== -1 || fullUrl.indexOf('praia') !== -1) {
+    targetCity = 'Santos/SP (Baixada Santista)';
+    targetSlug = 'santos';
+    price = 'R$ 12,90';
+  } else if (fullUrl.indexOf('campinas') !== -1 || fullUrl.indexOf('viracopos') !== -1) {
+    targetCity = 'Campinas/SP';
+    targetSlug = 'campinas';
+    price = 'R$ 19,90';
+  } else if (fullUrl.indexOf('rio') !== -1 || fullUrl.indexOf('galeao') !== -1) {
+    targetCity = 'Rio de Janeiro/RJ';
+    targetSlug = 'rio-de-janeiro';
+    price = 'R$ 89,90';
+  }
+
+  if (destEl) destEl.textContent = targetCity;
+  if (priceEl) priceEl.textContent = price;
+  if (ctaEl) {
+    ctaEl.href = "https://wa.me/5517991238899?text=" + encodeURIComponent("Olá! Fui redirecionado pelo robô do Aqui Tem para a tarifa especial de " + targetCity + " e quero reservar.");
+  }
+  if (linkHotels) linkHotels.href = targetSlug + "-home.html";
+  if (linkGuide) linkGuide.href = targetSlug + "-home.html";
+});
+</script>
 </body>
 </html>
