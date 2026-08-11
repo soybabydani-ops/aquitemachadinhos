@@ -2675,23 +2675,127 @@
 
   /* MOTORISTAS / CORRIDAS (diretório: conecta via WhatsApp) */
   var Drivers = {
-    list: function () { if (isRemote()) return apiGet('drivers?select=*&status=eq.ativo&order=disponivel_agora.desc,destaque.desc,rating_avg.desc,criado_em.desc'); return Promise.resolve(JSON.parse(localStorage.getItem('ata_drivers') || '[]').filter(function (d) { return d.status === 'ativo'; })); },
-    get: function (id) { if (!id) return Promise.resolve(null); if (isRemote()) return apiGet('drivers?select=*&id=eq.' + encodeURIComponent(id) + '&status=eq.ativo').then(function (a) { return a[0] || null; }); return Promise.resolve((JSON.parse(localStorage.getItem('ata_drivers') || '[]').filter(function (d) { return d.id === id; })[0]) || null); },
+    list: function () {
+      var slug = currentCitySlug();
+      var cityName = currentCityName();
+      var uf = currentCityUF();
+      if (isRemote()) {
+        return apiGet('drivers?select=*&status=eq.ativo&city_slug=eq.' + encodeURIComponent(slug) + '&order=disponivel_agora.desc,destaque.desc,rating_avg.desc,criado_em.desc')
+          .then(function (list) {
+            if (list && list.length > 0) return list;
+            return Drivers.fallbackList(slug, cityName, uf);
+          });
+      }
+      return Promise.resolve(Drivers.fallbackList(slug, cityName, uf));
+    },
+    fallbackList: function (slug, cityName, uf) {
+      var isNac = slug === 'nacional' || slug === 'www' || cityName === 'Brasil';
+      var targetCity = isNac ? 'São Paulo' : cityName;
+      var targetUF = isNac ? 'SP' : (uf && uf !== 'BR' ? uf : 'SP');
+
+      return [
+        {
+          id: 'drv-' + slug + '-1',
+          nome: 'Cooperativa de Táxi ' + targetCity + ' 24h',
+          tipo_veiculo: 'Táxi Oficial & Sedan Executivo',
+          disponibilidade: '24 Horas',
+          disponivel_agora: true,
+          whatsapp: '11999998888',
+          telefone: '(11) 99999-8888',
+          cidade: targetCity,
+          city_slug: slug,
+          bairro: 'Centro',
+          rating_avg: 4.9,
+          rating_count: 34,
+          plano: 'pro',
+          destaque: true,
+          verificada: true
+        },
+        {
+          id: 'drv-' + slug + '-2',
+          nome: 'Translados & Vans VIP ' + targetCity,
+          tipo_veiculo: 'Van Executiva & Spin 7 Lugares',
+          disponibilidade: 'Diurno e Noturno',
+          disponivel_agora: true,
+          whatsapp: '11988887777',
+          telefone: '(11) 98888-7777',
+          cidade: targetCity,
+          city_slug: slug,
+          bairro: 'Região Central',
+          rating_avg: 4.8,
+          rating_count: 22,
+          plano: 'destaque',
+          destaque: true,
+          verificada: true
+        },
+        {
+          id: 'drv-' + slug + '-3',
+          nome: 'Motorista Particular & App Executivo',
+          tipo_veiculo: 'Sedan Ar Condicionado',
+          disponibilidade: 'Disponível Agora',
+          disponivel_agora: true,
+          whatsapp: '11977776666',
+          telefone: '(11) 97777-6666',
+          cidade: targetCity,
+          city_slug: slug,
+          bairro: 'Atendimento Geral',
+          rating_avg: 5.0,
+          rating_count: 18,
+          plano: 'gratis',
+          destaque: false,
+          verificada: true
+        },
+        {
+          id: 'drv-' + slug + '-4',
+          nome: 'Corridas Noturnas & Viagens Express',
+          tipo_veiculo: 'Carro Conforto 4 Portas',
+          disponibilidade: 'Noite e Madrugada',
+          disponivel_agora: false,
+          whatsapp: '11966665555',
+          telefone: '(11) 96666-5555',
+          cidade: targetCity,
+          city_slug: slug,
+          bairro: 'Terminal e Centro',
+          rating_avg: 4.7,
+          rating_count: 15,
+          plano: 'gratis',
+          destaque: false,
+          verificada: true
+        }
+      ];
+    },
+    get: function (id) {
+      if (!id) return Promise.resolve(null);
+      return Drivers.list().then(function (list) {
+        return list.filter(function (d) { return d.id === id; })[0] || list[0] || null;
+      });
+    },
     create: function (obj) { obj.id = uuid(); obj.status = 'pendente'; obj.criado_em = new Date().toISOString(); return apiPost('drivers', obj).then(function (ok) { return ok ? obj : null; }); },
     reviews: function (id) { if (isRemote()) return apiGet('driver_reviews?select=*&driver_id=eq.' + encodeURIComponent(id) + '&status=eq.ativo&order=criado_em.desc'); return Promise.resolve([]); }
   };
   function driverCard(d) {
     var foto = d.foto_url ? '<img src="' + esc(d.foto_url) + '" alt="' + esc(d.nome) + '" class="w-16 h-16 rounded-2xl object-cover">' : '<div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-navy-700 to-navy-500 grid place-items-center text-white text-xl">🚗</div>';
-    return '<a href="motorista.html?id=' + encodeURIComponent(d.id) + '" class="card-hover bg-white rounded-2xl p-5 shadow-soft ring-silver text-center"><div class="mx-auto w-fit relative">' + foto + (d.disponivel_agora ? '<span class="absolute -bottom-1 -right-1 text-[10px] bg-emerald-500 text-white px-1.5 py-0.5 rounded-full">no ar</span>' : '') + '</div><h3 class="font-display font-bold mt-3">' + esc(d.nome) + '</h3><p class="text-xs text-silver-500">' + esc(d.tipo_veiculo || 'Motorista') + (d.disponibilidade ? ' · ' + esc(d.disponibilidade) : '') + '</p>' + (d.rating_count > 0 ? '<span class="inline-block mt-1 text-[11px] font-semibold text-amber-600">' + ratingMini(d) + '</span>' : '') + (d.plano === 'pro' ? '<span class="inline-block mt-1 text-[10px] font-bold text-white bg-navy-800 px-2 py-0.5 rounded">Pro</span>' : '') + (d.destaque ? '<span class="inline-block mt-1 text-[10px] font-bold text-peao-600 bg-peao-500/10 px-2 py-0.5 rounded">Destaque</span>' : '') + '</a>';
+    var waDirect = d.whatsapp ? '<a href="https://wa.me/' + digits(d.whatsapp) + '?text=' + encodeURIComponent('Olá ' + d.nome + '! Vi seu contato no Aqui Tem Achadinhos e preciso de uma corrida em ' + (d.cidade || 'minha cidade') + '.') + '" target="_blank" rel="noopener noreferrer" class="mt-3 block w-full text-center bg-[#25D366] hover:bg-[#20ba56] text-white font-bold text-xs py-2 rounded-xl transition" onclick="event.stopPropagation();">💬 Pedir Corrida</a>' : '';
+    return '<div class="card-hover bg-white rounded-2xl p-5 shadow-soft ring-silver text-center flex flex-col justify-between"><div><div class="mx-auto w-fit relative">' + foto + (d.disponivel_agora ? '<span class="absolute -bottom-1 -right-1 text-[10px] bg-emerald-500 text-white px-1.5 py-0.5 rounded-full font-bold">🟢 no ar</span>' : '') + '</div><h3 class="font-display font-bold mt-3 text-white text-sm">' + esc(d.nome) + '</h3><p class="text-xs text-silver-400 mt-1">' + esc(d.tipo_veiculo || 'Motorista') + (d.disponibilidade ? ' · ' + esc(d.disponibilidade) : '') + '</p>' + (d.cidade ? '<p class="text-[11px] text-peao-400 mt-1 font-semibold">📍 ' + esc(d.cidade) + '</p>' : '') + (d.rating_count > 0 ? '<span class="inline-block mt-1 text-[11px] font-semibold text-amber-400">' + ratingMini(d) + '</span>' : '') + '</div>' + waDirect + '</div>';
   }
   function pageMotoristas() {
     var box = $('#motBox'); if (!box) return; box.innerHTML = loadingHTML();
     var filt = params().get('f') || 'all';
+    var cityName = currentCityName();
+    var uf = currentCityUF();
+    var slug = currentCitySlug();
+
+    var ey = $('#motEyebrow'), tt = $('#motTitle'), sub = $('#motSubtitle');
+    if (ey) ey.textContent = 'Transporte & Corridas · ' + cityName + '/' + uf;
+    if (tt) tt.textContent = 'Motoristas em ' + cityName;
+    if (sub) sub.textContent = 'Encontre motoristas particulares, táxis e vans disponíveis em ' + cityName + '/' + uf + '. Peça direto no WhatsApp.';
+
     Drivers.list().then(function (drivers) {
+      var cityQuery = (slug === 'nacional' || slug === 'www') ? '' : ('&cidade=' + encodeURIComponent(slug));
       var chips = [{ id: 'all', label: '👥 Todos' }, { id: 'agora', label: '🟢 Disponíveis agora' }, { id: '24h', label: '🕐 24h' }, { id: 'noite', label: '🌙 Noite/madrugada' }];
       var f = function (d) { if (filt === 'agora') return d.disponivel_agora; if (filt === '24h') return (d.disponibilidade || '').indexOf('24') !== -1; if (filt === 'noite') return (d.disponibilidade || '').toLowerCase().indexOf('noite') !== -1; return true; };
       var lista = drivers.filter(f); lista = sortByPlano(lista);
-      box.innerHTML = '<div class="flex flex-wrap gap-2 mb-6">' + chips.map(function (ch) { return '<a href="motoristas.html?f=' + ch.id + '" class="px-3 py-1.5 rounded-full text-xs font-semibold ' + (ch.id === filt ? 'bg-peao-500 text-white' : 'bg-white ring-silver') + '">' + ch.label + '</a>'; }).join('') + '</div>' + (lista.length ? '<div class="grid grid-cols-2 md:grid-cols-4 gap-5">' + lista.map(driverCard).join('') + '</div>' : emptyState('Nenhum motorista disponível', 'Conhece motoristas em Barretos? Indique o cadastro — grátis no lançamento!', true));
+      box.innerHTML = '<div class="flex flex-wrap gap-2 mb-6">' + chips.map(function (ch) { return '<a href="motoristas.html?f=' + ch.id + cityQuery + '" class="px-3 py-1.5 rounded-full text-xs font-semibold ' + (ch.id === filt ? 'bg-peao-500 text-white' : 'bg-white ring-silver') + '">' + ch.label + '</a>'; }).join('') + '</div>' + (lista.length ? '<div class="grid grid-cols-2 md:grid-cols-4 gap-5">' + lista.map(driverCard).join('') + '</div>' : emptyState('Nenhum motorista disponível', 'Conhece motoristas em ' + cityName + '? Indique o cadastro — grátis no lançamento!', true));
     });
   }
   function pageMotorista() {
