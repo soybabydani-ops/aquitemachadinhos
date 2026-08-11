@@ -2785,6 +2785,7 @@
     var uf = currentCityUF();
     var slug = currentCitySlug();
 
+    document.title = 'Motoristas e Corridas em ' + cityName + ' · Aqui Tem Achadinhos';
     var ey = $('#motEyebrow'), tt = $('#motTitle'), sub = $('#motSubtitle');
     if (ey) ey.textContent = 'Transporte & Corridas · ' + cityName + '/' + uf;
     if (tt) tt.textContent = 'Motoristas em ' + cityName;
