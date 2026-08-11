@@ -3613,6 +3613,9 @@
     "onde-ficar-festa-peao.html": {
       "path": "onde-ficar-festa-peao"
     },
+    "onibus-barra-funda-campinas-barata.html": {
+      "path": "onibus-barra-funda-campinas-barata"
+    },
     "ouro-preto-home.html": {
       "path": "ouro-preto-home"
     },
@@ -3624,6 +3627,18 @@
     },
     "passagem-bug-barretos.html": {
       "path": "passagem-bug-barretos"
+    },
+    "passagem-jabaquara-santos-madrugada.html": {
+      "path": "passagem-jabaquara-santos-madrugada"
+    },
+    "passagen-de-onibus-para-sampa.html": {
+      "path": "passagen-de-onibus-para-sampa"
+    },
+    "passagen-onibus-barretos-festa-do-peao.html": {
+      "path": "passagen-onibus-barretos-festa-do-peao"
+    },
+    "passagens-aereas-congonas-santos-dumont.html": {
+      "path": "passagens-aereas-congonas-santos-dumont"
     },
     "passagens-onibus-sp-barretos-2026.html": {
       "path": "passagens-onibus-sp-barretos-2026"
@@ -3672,6 +3687,9 @@
     },
     "rio-verde-home.html": {
       "path": "rio-verde-home"
+    },
+    "rodoaria-do-tiete-passagens.html": {
+      "path": "rodoaria-do-tiete-passagens"
     },
     "salvador-carnaval.html": {
       "path": "salvador-carnaval"
@@ -3732,6 +3750,9 @@
     },
     "vitoria-home.html": {
       "path": "vitoria-home"
+    },
+    "voos-baratos-guarulos-rio.html": {
+      "path": "voos-baratos-guarulos-rio"
     }
   },
   "crons": [
