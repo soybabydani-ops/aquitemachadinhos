@@ -1,5 +1,5 @@
 {
-  "handler": "api/founder-confirmation.js",
+  "handler": "api/cron-autopilot.js",
   "runtime": "nodejs24.x",
   "architecture": "x86_64",
   "environment": {},

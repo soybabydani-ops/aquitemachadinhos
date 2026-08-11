@@ -3565,5 +3565,10 @@
       "path": "vitoria-home"
     }
   },
-  "crons": []
+  "crons": [
+    {
+      "path": "/api/cron-autopilot",
+      "schedule": "0 4 * * *"
+    }
+  ]
 }

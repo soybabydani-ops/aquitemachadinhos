@@ -257,6 +257,23 @@ async function runTests() {
     assert(false, `Erro no endpoint /api/sitemap: ${err.message}`);
   }
 
+  // ----------------------------------------------------
+  // TESTE 10: 24/7 Autopilot Machine (/api/cron-autopilot.js)
+  // ----------------------------------------------------
+  console.log('\n⏱️ [10/10] Testando api/cron-autopilot.js...');
+  try {
+    const cronHandler = require('../api/cron-autopilot');
+    const { req, res } = createMockReqRes({ query: { secret: 'aquitem-cron-autopilot-2026' } });
+    await cronHandler(req, res);
+
+    assert(res.statusCode === 200, 'Status HTTP 200 retornado pelo Autopilot');
+    assert(res.body && res.body.success === true, 'Autopilot executou ciclo com sucesso');
+    assert(res.body.report && res.body.report.tasks_executed.length >= 4, 'Executou 4 tarefas automatizadas no ciclo');
+    assert(res.body.report.metrics.total_cities >= 5581, 'Telemetria confirmou 5.581 cidades ativas no Supabase');
+  } catch (err) {
+    assert(false, `Erro no endpoint /api/cron-autopilot: ${err.message}`);
+  }
+
   console.log('\n====================================================');
   console.log(`📊 RESULTADO DOS TESTES: ${passed} PASSOU | ${failed} FALHOU`);
   console.log('====================================================');
