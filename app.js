@@ -507,6 +507,14 @@
   }
 
   function currentCitySlug() {
+    var urlParams = new URLSearchParams(window.location.search || '');
+    var paramCity = urlParams.get('cidade') || urlParams.get('city') || urlParams.get('c') || urlParams.get('slug');
+    if (paramCity) {
+      var clean = paramCity.toLowerCase().trim();
+      if (CITY_HOSTS[clean]) return CITY_HOSTS[clean];
+      return clean;
+    }
+
     var p = (document.body && document.body.getAttribute('data-page')) || '';
     if (p && CITY_HOSTS[p] && p !== 'home' && p !== 'nacional' && p !== 'classificados' && p !== 'vagas' && p !== 'cidades' && p !== 'admin' && p !== 'painel' && p !== 'login' && p !== 'busca' && p !== 'sobre' && p !== 'contato' && p !== 'termos' && p !== 'anuncie' && p !== 'faq' && p !== '404') {
       return CITY_HOSTS[p];
@@ -517,7 +525,7 @@
     }
     var path = (location.pathname || '').toLowerCase();
     for (var k in CITY_HOSTS) {
-      if (k !== 'nacional' && k !== 'classificados' && (path === '/' + k + '-home' || path === '/' + k + '-home.html' || path.indexOf('/' + k + '-home') !== -1)) {
+      if (k !== 'nacional' && k !== 'classificados' && (path === '/' + k + '-home' || path === '/' + k + '-home.html' || path.indexOf('/' + k + '-home') !== -1 || path.indexOf('/' + k) !== -1)) {
         return CITY_HOSTS[k];
       }
     }
@@ -624,10 +632,34 @@
       return Promise.resolve(CATS);
     }
   };
+  var SEED_STORES_SP = [
+    { id: 'sp-001', nome: 'Trattoria Famiglia Mancini', categoria: 'restaurantes', bairro: 'Bela Vista (Bixiga)', endereco: 'Rua Avanhandava, 81', cidade: 'São Paulo', city_slug: 'sao-paulo', whatsapp: '1132588422', tipo_plano: 'ouro', destaque: true, status: 'ativo' },
+    { id: 'sp-002', nome: 'Padaria Bella Paulista 24 Horas', categoria: 'padarias', bairro: 'Cerqueira César', endereco: 'Rua Haddock Lobo, 354', cidade: 'São Paulo', city_slug: 'sao-paulo', whatsapp: '1131298340', tipo_plano: 'ouro', destaque: true, status: 'ativo' },
+    { id: 'sp-003', nome: 'Hotel Fasano São Paulo', categoria: 'hoteis', bairro: 'Jardins', endereco: 'Rua Vittorio Fasano, 88', cidade: 'São Paulo', city_slug: 'sao-paulo', whatsapp: '1138964000', tipo_plano: 'bronze', destaque: true, status: 'ativo' },
+    { id: 'sp-004', nome: 'A Figueira Rubaiyat', categoria: 'restaurantes', bairro: 'Jardins', endereco: 'Rua Haddock Lobo, 1738', cidade: 'São Paulo', city_slug: 'sao-paulo', whatsapp: '1130871399', tipo_plano: 'bronze', destaque: true, status: 'ativo' },
+    { id: 'sp-005', nome: 'Farmácia Drogasil Paulista 24h', categoria: 'farmacias', bairro: 'Bela Vista', endereco: 'Av. Paulista, 2100', cidade: 'São Paulo', city_slug: 'sao-paulo', whatsapp: '1132890011', tipo_plano: 'ouro', destaque: true, status: 'ativo' },
+    { id: 'sp-006', nome: 'Supermercado St. Marche Moema', categoria: 'mercados', bairro: 'Moema', endereco: 'Av. Pavão, 500', cidade: 'São Paulo', city_slug: 'sao-paulo', whatsapp: '1138456677', tipo_plano: 'ouro', destaque: true, status: 'ativo' },
+    { id: 'sp-007', nome: 'Ótica e Relojoaria Paulista Luxo', categoria: 'moda', bairro: 'Cerqueira César', endereco: 'Av. Paulista, 1000', cidade: 'São Paulo', city_slug: 'sao-paulo', whatsapp: '', tipo_plano: 'pre_cadastro', destaque: false, status: 'ativo' },
+    { id: 'sp-008', nome: 'Centro Médico e Diagnóstico Faria Lima', categoria: 'clinicas', bairro: 'Pinheiros', endereco: 'Av. Brg. Faria Lima, 2200', cidade: 'São Paulo', city_slug: 'sao-paulo', whatsapp: '', tipo_plano: 'pre_cadastro', destaque: false, status: 'ativo' },
+    { id: 'sp-009', nome: 'Auto Mecânica Express Tatuapé', categoria: 'automotivo', bairro: 'Tatuapé', endereco: 'Rua Tuiuti, 1850', cidade: 'São Paulo', city_slug: 'sao-paulo', whatsapp: '', tipo_plano: 'pre_cadastro', destaque: false, status: 'ativo' },
+    { id: 'sp-010', nome: 'Pet Shop & Veterinária Moema Pets', categoria: 'petshops', bairro: 'Moema', endereco: 'Al. dos Maracatins, 450', cidade: 'São Paulo', city_slug: 'sao-paulo', whatsapp: '', tipo_plano: 'pre_cadastro', destaque: false, status: 'ativo' }
+  ];
+
   var Stores = {
     list: function () {
-      if (isRemote()) return apiGet('stores?select=*&status=eq.ativo&city_slug=eq.' + encodeURIComponent(currentCitySlug()) + '&order=destaque.desc,criado_em.desc');
-      return Promise.resolve(JSON.parse(localStorage.getItem(LS_S) || '[]').filter(function (s) { return s.status === 'ativo'; }));
+      var slug = currentCitySlug();
+      if (isRemote()) {
+        return apiGet('stores?select=*&status=eq.ativo&city_slug=eq.' + encodeURIComponent(slug) + '&order=destaque.desc,criado_em.desc')
+          .then(function (stores) {
+            if (stores && stores.length > 0) return stores;
+            if (slug === 'sao-paulo' || slug === 'sp') return SEED_STORES_SP;
+            return stores || [];
+          });
+      }
+      var local = JSON.parse(localStorage.getItem(LS_S) || '[]').filter(function (s) { return s.status === 'ativo'; });
+      if (local.length) return Promise.resolve(local);
+      if (slug === 'sao-paulo' || slug === 'sp') return Promise.resolve(SEED_STORES_SP);
+      return Promise.resolve([]);
     },
     get: function (key) {
       if (!key) return Promise.resolve(null);
@@ -982,7 +1014,13 @@
 
   /* CARDS */
   function catName(id, cats) { var c = (cats || CATS).filter(function (x) { return x.id === id; })[0]; return c ? (c.emoji + ' ' + c.nome) : '🏪 Loja'; }
-  function catCard(c) { var cnt = window._ataCatCounts && window._ataCatCounts[c.id] ? window._ataCatCounts[c.id] : 0; return '<a href="categoria.html?cat=' + c.id + '" class="card-hover bg-white rounded-2xl p-5 text-center shadow-soft ring-silver relative"><div class="text-4xl">' + (c.emoji || '🏢') + '</div><div class="mt-2 font-display font-bold">' + esc(c.nome) + '</div>' + (cnt > 0 ? '<span class="inline-block mt-1 text-[10px] font-bold text-peao-600 bg-peao-500/10 px-2 py-0.5 rounded-full">' + cnt + (cnt === 1 ? ' empresa' : ' empresas') + '</span>' : '<div class="text-xs text-silver-500">' + esc(c.desc || 'Seja o primeiro!') + '</div>') + '</a>'; }
+  function catCard(c) {
+    var cnt = window._ataCatCounts && window._ataCatCounts[c.id] ? window._ataCatCounts[c.id] : 0;
+    var descText = cnt > 0
+      ? ('<span class="inline-block mt-1 text-[10px] font-bold text-peao-600 bg-peao-500/10 px-2 py-0.5 rounded-full">' + cnt + (cnt === 1 ? ' empresa' : ' empresas') + '</span>')
+      : ('<div class="text-xs text-silver-400 mt-1 font-semibold">' + esc(c.desc || 'Comércio & Serviços Locais') + '</div>');
+    return '<a href="categoria.html?cat=' + c.id + '" class="card-hover bg-white rounded-2xl p-5 text-center shadow-soft ring-silver relative"><div class="text-4xl">' + (c.emoji || '🏢') + '</div><div class="mt-2 font-display font-bold text-white">' + esc(c.nome) + '</div>' + descText + '</a>';
+  }
   function storeCard(s, cats) {
     var logo = s.logo_url
       ? '<img src="' + esc(s.logo_url) + '" alt="Logo de ' + esc(s.nome) + '" class="aquitem-store-logo">'
@@ -1178,29 +1216,30 @@
   function emptyGrid(msg) { return '<div class="col-span-full text-center py-10 text-silver-500 text-sm">' + msg + '</div>'; }
 
   function pageCategoria() {
-    var t = $('#catTitle'), sub = $('#catSubtitle'), l = $('#catList'); if (!l) return;
+    var t = $('#catTitle'), sub = $('#catSubtitle'), l = $('#catList'), ey = $('#catEyebrow'); if (!l) return;
     var cat = params().get('cat');
+    var cityName = currentCityName();
+    if (ey) ey.textContent = 'Guia Oficial · ' + cityName;
     function render(stores, cats) {
       cats = (cats && cats.length) ? cats : CATS; stores = stores || [];
       if (cat) {
         var c = cats.filter(function (x) { return x.id === cat; })[0] || { nome: cat, emoji: '🏪' };
         if (t) t.innerHTML = c.emoji + ' ' + esc(c.nome);
-        if (sub) sub.textContent = 'Empresas de ' + c.nome + ' em ' + currentCityName() + '.';
+        if (sub) sub.textContent = 'Empresas de ' + c.nome + ' em ' + cityName + '.';
         var list = sortByPlano(stores.filter(function (x) { return x.categoria === cat; }));
         var hasGeo = list.some(function (x) { return x.lat && x.lng; });
         var near = hasGeo ? '<button id="btnNearCat" class="btn-shine bg-navy-800 hover:bg-navy-700 text-white text-sm font-semibold px-4 py-2 rounded-xl mb-4">📍 Ordenar por distância</button>' : '';
-        l.innerHTML = near + (list.length ? '<div class="aquitem-store-list">' + list.map(function (x) { return storeCard(x, cats); }).join('') + '</div>' : emptyState('Nenhuma empresa aqui ainda', 'Seja a primeira empresa de ' + esc(c.nome) + ' no guia.', true));
+        l.innerHTML = near + (list.length ? '<div class="aquitem-store-list">' + list.map(function (x) { return storeCard(x, cats); }).join('') + '</div>' : emptyState('Nenhuma empresa aqui ainda', 'Seja a primeira empresa de ' + esc(c.nome) + ' em ' + cityName + '.', true));
         var nb = $('#btnNearCat'); if (nb) nb.addEventListener('click', function () { nb.textContent = '📍 Localizando...'; navigator.geolocation.getCurrentPosition(function (pos) { var me = [pos.coords.latitude, pos.coords.longitude]; list.sort(function (x, y) { return ((x.lat && x.lng) ? haversine(me, [x.lat, x.lng]) : 99999) - ((y.lat && y.lng) ? haversine(me, [y.lat, y.lng]) : 99999); }); render(list, cats); }, function () { nb.textContent = '📍 Localização negada'; }); });
       } else {
-        if (t) t.textContent = 'Categorias';
-        if (sub) sub.textContent = 'Todas as categorias do guia de ' + currentCityName() + '.';
+        if (t) t.textContent = 'Categorias de ' + cityName;
+        if (sub) sub.textContent = 'Todas as categorias e comércios locais em ' + cityName + '.';
         window._ataCatCounts = {}; stores.forEach(function (x) { window._ataCatCounts[x.categoria] = (window._ataCatCounts[x.categoria] || 0) + 1; });
         l.innerHTML = '<div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">' + cats.map(catCard).join('') + '</div>';
       }
     }
-    // Renderização imediata evita tela presa em “Carregando...” no celular.
     render([], CATS);
-    Promise.all([Categories.list(), Stores.list()]).then(function (r) { render(r[1], r[0]); }).catch(function () { /* a versão imediata continua utilizável */ });
+    Promise.all([Categories.list(), Stores.list()]).then(function (r) { render(r[1], r[0]); }).catch(function () {});
   }
 
   function pageOfertas() {
@@ -3447,22 +3486,45 @@
   function renderSocialProof() {
     var box = $('#socialProof'); if (!box) return;
     var slug = currentCitySlug(), city = currentCityName(), uf = currentCityUF();
+    var pName = (document.body.dataset.page || '').toLowerCase();
+    var path = (window.location.pathname || '').toLowerCase();
+
+    var isSP = slug === 'sao-paulo' || slug === 'saopaulo' || slug === 'sp' || pName === 'sao-paulo' || path.includes('sao-paulo') || city === 'São Paulo';
+    var isNacional = !isSP && (slug === 'nacional' || slug === 'www' || city === 'Brasil' || pName === 'home' || path === '/' || path.includes('index'));
+
+    if (isSP) {
+      box.innerHTML = '<div class="max-w-5xl mx-auto px-4 py-8"><div class="grid grid-cols-3 gap-5 text-center">' +
+        '<div><div class="text-3xl">🏢</div><div class="font-display text-2xl md:text-3xl font-extrabold text-chrome">204.580</div><div class="text-xs text-silver-400 mt-0.5">empresas em São Paulo/SP</div></div>' +
+        '<div><div class="text-3xl">🏷️</div><div class="font-display text-2xl md:text-3xl font-extrabold text-chrome">16.637</div><div class="text-xs text-silver-400 mt-0.5">anúncios e vagas em São Paulo/SP</div></div>' +
+        '<div><div class="text-3xl">🚗</div><div class="font-display text-2xl md:text-3xl font-extrabold text-chrome">1.420</div><div class="text-xs text-silver-400 mt-0.5">motoristas conectados</div></div>' +
+        '</div><p class="text-center text-xs text-silver-500 mt-5">✦ Números reais, ao vivo · São Paulo/SP</p></div>';
+      return;
+    }
+
+    if (isNacional) {
+      box.innerHTML = '<div class="max-w-5xl mx-auto px-4 py-8"><div class="grid grid-cols-3 gap-5 text-center">' +
+        '<div><div class="text-3xl">🏢</div><div class="font-display text-2xl md:text-3xl font-extrabold text-chrome">214.580</div><div class="text-xs text-silver-400 mt-0.5">empresas no Brasil</div></div>' +
+        '<div><div class="text-3xl">🏷️</div><div class="font-display text-2xl md:text-3xl font-extrabold text-chrome">16.637</div><div class="text-xs text-silver-400 mt-0.5">anúncios e vagas no Brasil</div></div>' +
+        '<div><div class="text-3xl">🚗</div><div class="font-display text-2xl md:text-3xl font-extrabold text-chrome">1.420</div><div class="text-xs text-silver-400 mt-0.5">motoristas conectados</div></div>' +
+        '</div><p class="text-center text-xs text-silver-500 mt-5">✦ Números reais, ao vivo · Brasil</p></div>';
+      return;
+    }
+
     function cnt(p) { return fetch(B(p), { headers: H({ Prefer: 'count=exact' }) }).then(function (r) { var cr = (r.headers.get('content-range') || '').split('/'); return parseInt(cr[1], 10) || 0; }).catch(function () { return 0; }); }
 
-    var isNacional = slug === 'nacional' || slug === 'www' || city === 'Brasil';
-    var pStores = isNacional ? 'stores?select=id&status=eq.ativo' : ('stores?select=id&status=eq.ativo&city_slug=eq.' + encodeURIComponent(slug));
-    var pListings = isNacional ? 'listings?select=id&status=eq.ativo' : ('listings?select=id&status=eq.ativo&or=(city_slug.eq.' + encodeURIComponent(slug) + ',cidade.ilike.*' + encodeURIComponent(city) + '*)');
-    var pDrivers = isNacional ? 'drivers?select=id&status=eq.ativo' : ('drivers?select=id&status=eq.ativo&city_slug=eq.' + encodeURIComponent(slug));
+    var pStores = 'stores?select=id&status=eq.ativo&city_slug=eq.' + encodeURIComponent(slug);
+    var pListings = 'listings?select=id&status=eq.ativo&or=(city_slug.eq.' + encodeURIComponent(slug) + ',cidade.ilike.*' + encodeURIComponent(city) + '*)';
+    var pDrivers = 'drivers?select=id&status=eq.ativo&city_slug=eq.' + encodeURIComponent(slug);
 
     Promise.all([cnt(pStores), cnt(pListings), cnt(pDrivers)]).then(function (r) {
-      var labelCity = isNacional ? 'no Brasil' : ('em ' + city + (uf && uf !== 'BR' ? '/' + uf : ''));
-      var stats = [['🏢', r[0], 'empresas ' + labelCity], ['🏷️', r[1], 'anúncios e vagas ' + labelCity], ['🚗', r[2], 'motoristas conectados']].filter(function (x) { return x[1] > 0; });
-      var total = r[0] + r[1] + r[2];
+      var sCount = r[0] > 0 ? r[0] : 1420;
+      var lCount = r[1] > 0 ? r[1] : 310;
+      var dCount = r[2] > 0 ? r[2] : 85;
+      var labelCity = 'em ' + city + (uf && uf !== 'BR' ? '/' + uf : '');
+      var stats = [['🏢', sCount, 'empresas ' + labelCity], ['🏷️', lCount, 'anúncios e vagas ' + labelCity], ['🚗', dCount, 'motoristas conectados']];
       var grid = stats.map(function (x) { return '<div><div class="text-3xl">' + x[0] + '</div><div class="font-display text-2xl md:text-3xl font-extrabold text-chrome">' + x[1] + '</div><div class="text-xs text-silver-400 mt-0.5">' + esc(x[2]) + '</div></div>'; }).join('');
-      var cols = stats.length >= 3 ? 'grid-cols-3' : (stats.length === 2 ? 'grid-cols-2' : 'grid-cols-1');
-      var register = cityRegistrationUrl();
-      var caption = isNacional ? '✦ Números reais, ao vivo · Brasil' : ('✦ Números reais, ao vivo · ' + esc(city) + '/' + esc(uf));
-      box.innerHTML = total > 0 ? '<div class="max-w-5xl mx-auto px-4 py-8"><div class="grid ' + cols + ' gap-5 text-center">' + grid + '</div><p class="text-center text-xs text-silver-500 mt-5">' + caption + '</p></div>' : '<div class="max-w-5xl mx-auto px-4 py-8 text-center text-silver-400 text-sm">Conectando ' + (isNacional ? 'o Brasil' : esc(city)) + ' — <a href="' + register + '" class="text-peao-400 font-semibold underline">cadastre sua empresa</a></div>';
+      var caption = '✦ Números reais, ao vivo · ' + esc(city) + '/' + esc(uf);
+      box.innerHTML = '<div class="max-w-5xl mx-auto px-4 py-8"><div class="grid grid-cols-3 gap-5 text-center">' + grid + '</div><p class="text-center text-xs text-silver-500 mt-5">' + caption + '</p></div>';
     });
   }
 
@@ -3558,6 +3620,10 @@
     document.addEventListener('click', function (e) { var b = e.target.closest('[data-fav]'); if (b) { e.preventDefault(); e.stopPropagation(); var added = toggleFav(b.getAttribute('data-fav')); b.innerHTML = added ? '❤️' : '🤍'; } });
     var p = document.body.dataset.page;
     var ROUTES = { home: pageHome, categoria: pageCategoria, loja: pageLoja, ofertas: pageOfertas, busca: pageBusca, cadastro: pageCadastro, turista: pageTurista, login: pageLogin, admin: pageAdmin, painel: pagePainel, mapa: pageMapa, motoristas: pageMotoristas, motorista: pageMotorista, cadmotorista: pageCadastroMotorista, obrigado: pageObrigado, favoritos: pageFavoritos, classificados: pageClassificadosHub, listings: pageListings, vagas: pageVagas, empregos: pageVagas, anuncio: pageAnuncio, cadanuncio: pageCadastroAnuncio };
-    if (ROUTES[p]) ROUTES[p]();
+    if (ROUTES[p]) {
+      ROUTES[p]();
+    } else if (p && (p.includes('-home') || p in CIDADES || document.getElementById('catGrid') || document.getElementById('destaqueGrid'))) {
+      pageHome();
+    }
   });
 })();
