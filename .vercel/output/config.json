@@ -3493,6 +3493,9 @@
     "paraty-home.html": {
       "path": "paraty-home"
     },
+    "passagem-bug-barretos.html": {
+      "path": "passagem-bug-barretos"
+    },
     "passagens-onibus-sp-barretos-2026.html": {
       "path": "passagens-onibus-sp-barretos-2026"
     },
@@ -3561,6 +3564,9 @@
     },
     "sao-paulo-home.html": {
       "path": "sao-paulo-home"
+    },
+    "scanner-tarifas-ocultas.html": {
+      "path": "scanner-tarifas-ocultas"
     },
     "servicos.html": {
       "path": "servicos"
