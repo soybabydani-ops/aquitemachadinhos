@@ -320,19 +320,37 @@
       <button type="button" class="barretos-filter-btn active" data-filter="todos">
         <span>🌟</span> Todas as Categorias
       </button>
-      <a href="barretos-home.html#motoristas" class="barretos-filter-btn" data-filter="motoristas">
+      <button type="button" class="barretos-filter-btn" data-filter="motoristas">
         <span>🚐</span> Motoristas & Translados
-      </a>
-      <a href="barretos-home.html#pousadas" class="barretos-filter-btn" data-filter="pousadas">
+      </button>
+      <button type="button" class="barretos-filter-btn" data-filter="pousadas">
         <span>🏨</span> Pousadas & Hotéis
-      </a>
-      <a href="barretos-home.html#onde-comer" class="barretos-filter-btn" data-filter="onde-comer">
+      </button>
+      <button type="button" class="barretos-filter-btn" data-filter="onde-comer">
         <span>🥩</span> Onde Comer
-      </a>
-      <a href="vagas.html" class="barretos-filter-btn" data-filter="vagas-temporarias">
+      </button>
+      <button type="button" class="barretos-filter-btn" data-filter="vagas-temporarias">
         <span>💼</span> Vagas Temporárias
-      </a>
+      </button>
     </div>
+
+    <!-- Container Reativo de Resultados em Tempo Real -->
+    <div id="barretos-results-wrapper" style="margin-top: 24px; padding-top: 20px; border-top: 1px solid rgba(255, 167, 81, 0.3);">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; flex-wrap: wrap; gap: 8px;">
+        <div id="barretos-filter-status" style="font-size: 0.95rem; font-weight: 800; color: #FFE0B2;">
+          📍 Exibindo todos os estabelecimentos e serviços em Barretos/SP
+        </div>
+        <span style="font-size: 0.8rem; color: #F5D77F; font-weight: 700;">
+          ⚡ Contato Direto no WhatsApp
+        </span>
+      </div>
+
+      <!-- Vitrine onde os cartões são injetados instantaneamente -->
+      <div class="stores-grid" id="stores-container">
+        <!-- Renderizado dinamicamente via assets/beneficios-planos-v22.js -->
+      </div>
+    </div>
+
   </div>
 </section>
 

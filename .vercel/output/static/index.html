@@ -28,10 +28,103 @@
 
 <!-- CSS e Fontes -->
 <link rel="stylesheet" href="assets/tailwind.css">
-<link rel="stylesheet" href="assets/styles.css">
+<link rel="stylesheet" href="assets/styles.css?v=28.0">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<!-- Estilos Críticos Embutidos Anti-Regressão / Anti-Cache -->
+<style id="global-luxury-carousel-styles">
+  /* <!-- INÍCIO DO CARROSSEL LUXUOSO - NÃO TOCAR --> */
+  .aquitem-luxury-carousel-wrapper {
+    width: 100%;
+    overflow: hidden;
+    padding: 24px 0;
+    position: relative;
+    background: radial-gradient(ellipse at center, rgba(13, 34, 68, 0.6) 0%, rgba(6, 14, 29, 0.9) 100%);
+    border-top: 1px solid rgba(245, 215, 127, 0.2);
+    border-bottom: 1px solid rgba(245, 215, 127, 0.2);
+    margin: 10px 0 25px 0;
+  }
+  .aquitem-luxury-carousel-wrapper::before,
+  .aquitem-luxury-carousel-wrapper::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    width: 80px;
+    height: 100%;
+    z-index: 2;
+    pointer-events: none;
+  }
+  .aquitem-luxury-carousel-wrapper::before {
+    left: 0;
+    background: linear-gradient(90deg, #060e1d 0%, transparent 100%);
+  }
+  .aquitem-luxury-carousel-wrapper::after {
+    right: 0;
+    background: linear-gradient(270deg, #060e1d 0%, transparent 100%);
+  }
+  .aquitem-luxury-carousel-track {
+    display: flex;
+    gap: 16px;
+    width: max-content;
+    animation: luxuryMarqueeScroll 35s linear infinite;
+  }
+  .aquitem-luxury-carousel-track:hover {
+    animation-play-state: paused;
+  }
+  @keyframes luxuryMarqueeScroll {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+  .aquitem-luxury-item {
+    flex: 0 0 250px;
+    background: linear-gradient(145deg, #0d2244 0%, #061124 100%);
+    border: 1.5px solid #F5D77F;
+    border-radius: 14px;
+    padding: 14px 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-align: left;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4), inset 0 0 10px rgba(245, 215, 127, 0.08);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+    text-decoration: none;
+  }
+  .aquitem-luxury-item:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 30px rgba(245, 215, 127, 0.3);
+  }
+  .aquitem-luxury-badge-initials {
+    flex: 0 0 40px;
+    height: 40px;
+    background: linear-gradient(135deg, #FFE259 0%, #FFA751 100%);
+    color: #1A0D00;
+    font-weight: 900;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(245, 215, 127, 0.3);
+  }
+  .aquitem-luxury-item-name {
+    font-weight: 800;
+    font-size: 0.9rem;
+    color: #FFFFFF;
+    margin-bottom: 2px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .aquitem-luxury-item-category {
+    font-size: 0.75rem;
+    color: #F5D77F;
+    font-weight: 600;
+  }
+  /* <!-- FIM DO CARROSSEL LUXUOSO - NÃO TOCAR --> */
+</style>
 </head>
 <body data-page="home" class="bg-silver-100 text-navy-900 min-h-screen flex flex-col">
 <div id="site-header"></div>
@@ -86,7 +179,7 @@
 </section>
 
 <!-- CARROSSEL DE GRANDES MARCAS DO BRASIL (VITRINE NACIONAL) -->
-<section class="bg-navy-900/60 border-y border-white/10 py-7 w-full overflow-hidden">
+<section class="bg-navy-900/80 border-y border-amber-400/20 py-7 w-full overflow-hidden">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 mb-3.5 flex items-center justify-between gap-3 flex-wrap">
     <div class="flex items-center gap-2">
       <span class="text-amber-400 text-base font-extrabold">🏢</span>
@@ -97,47 +190,147 @@
     </a>
   </div>
 
-  <div class="relative w-full overflow-x-auto pb-2 scrollbar-none">
-    <div class="flex items-center gap-4 px-4 sm:px-6 min-w-max">
-      <a href="marcas.html" class="inline-flex items-center gap-3 bg-white/5 hover:bg-white/10 border border-white/10 px-4 py-2.5 rounded-2xl transition group">
-        <span class="w-8 h-8 rounded-xl bg-gradient-to-br from-amber-400 to-amber-600 text-navy-950 font-display font-extrabold text-xs grid place-items-center shadow-md">PR</span>
-        <div><span class="font-display font-bold text-xs text-white group-hover:text-amber-400 block">Pralana Chapéus</span><span class="text-[10px] text-silver-400">Moda & Tradição · SP</span></div>
+  <!-- INÍCIO DO CARROSSEL LUXUOSO - NÃO TOCAR -->
+  <section class="aquitem-luxury-carousel-wrapper" aria-label="Carrossel de Grandes Marcas no Brasil">
+    <div class="aquitem-luxury-carousel-track">
+      <!-- Pralana Chapéus -->
+      <a href="marcas.html" class="aquitem-luxury-item">
+        <div class="aquitem-luxury-badge-initials">PR</div>
+        <div style="overflow: hidden;">
+          <div class="aquitem-luxury-item-name">Pralana Chapéus</div>
+          <div class="aquitem-luxury-item-category">Moda & Tradição · SP</div>
+        </div>
       </a>
-      <a href="marcas.html" class="inline-flex items-center gap-3 bg-white/5 hover:bg-white/10 border border-white/10 px-4 py-2.5 rounded-2xl transition group">
-        <span class="w-8 h-8 rounded-xl bg-gradient-to-br from-amber-400 to-amber-600 text-navy-950 font-display font-extrabold text-xs grid place-items-center shadow-md">BG</span>
-        <div><span class="font-display font-bold text-xs text-white group-hover:text-amber-400 block">Botas Goyazes</span><span class="text-[10px] text-silver-400">Couros Nobres · SP</span></div>
+      <!-- Botas Goyazes -->
+      <a href="marcas.html" class="aquitem-luxury-item">
+        <div class="aquitem-luxury-badge-initials">BG</div>
+        <div style="overflow: hidden;">
+          <div class="aquitem-luxury-item-name">Botas Goyazes</div>
+          <div class="aquitem-luxury-item-category">Couros Nobres · SP</div>
+        </div>
       </a>
-      <a href="marcas.html" class="inline-flex items-center gap-3 bg-white/5 hover:bg-white/10 border border-white/10 px-4 py-2.5 rounded-2xl transition group">
-        <span class="w-8 h-8 rounded-xl bg-gradient-to-br from-amber-400 to-amber-600 text-navy-950 font-display font-extrabold text-xs grid place-items-center shadow-md">CO</span>
-        <div><span class="font-display font-bold text-xs text-white group-hover:text-amber-400 block">Cervejaria Colorado</span><span class="text-[10px] text-silver-400">Cerveja Artesanal · SP</span></div>
+      <!-- Cervejaria Colorado -->
+      <a href="marcas.html" class="aquitem-luxury-item">
+        <div class="aquitem-luxury-badge-initials">CO</div>
+        <div style="overflow: hidden;">
+          <div class="aquitem-luxury-item-name">Cervejaria Colorado</div>
+          <div class="aquitem-luxury-item-category">Cerveja Artesanal · SP</div>
+        </div>
       </a>
-      <a href="marcas.html" class="inline-flex items-center gap-3 bg-white/5 hover:bg-white/10 border border-white/10 px-4 py-2.5 rounded-2xl transition group">
-        <span class="w-8 h-8 rounded-xl bg-gradient-to-br from-amber-400 to-amber-600 text-navy-950 font-display font-extrabold text-xs grid place-items-center shadow-md">TL</span>
-        <div><span class="font-display font-bold text-xs text-white group-hover:text-amber-400 block">Thermas dos Laranjais</span><span class="text-[10px] text-silver-400">Parque Aquático · SP</span></div>
+      <!-- Thermas dos Laranjais -->
+      <a href="marcas.html" class="aquitem-luxury-item">
+        <div class="aquitem-luxury-badge-initials">TL</div>
+        <div style="overflow: hidden;">
+          <div class="aquitem-luxury-item-name">Thermas dos Laranjais</div>
+          <div class="aquitem-luxury-item-category">Parque Aquático · SP</div>
+        </div>
       </a>
-      <a href="marcas.html" class="inline-flex items-center gap-3 bg-white/5 hover:bg-white/10 border border-white/10 px-4 py-2.5 rounded-2xl transition group">
-        <span class="w-8 h-8 rounded-xl bg-gradient-to-br from-amber-400 to-amber-600 text-navy-950 font-display font-extrabold text-xs grid place-items-center shadow-md">PW</span>
-        <div><span class="font-display font-bold text-xs text-white group-hover:text-amber-400 block">Prawer Chocolates</span><span class="text-[10px] text-silver-400">Serra Gaúcha · RS</span></div>
+      <!-- Prawer Chocolates -->
+      <a href="marcas.html" class="aquitem-luxury-item">
+        <div class="aquitem-luxury-badge-initials">PW</div>
+        <div style="overflow: hidden;">
+          <div class="aquitem-luxury-item-name">Prawer Chocolates</div>
+          <div class="aquitem-luxury-item-category">Serra Gaúcha · RS</div>
+        </div>
       </a>
-      <a href="marcas.html" class="inline-flex items-center gap-3 bg-white/5 hover:bg-white/10 border border-white/10 px-4 py-2.5 rounded-2xl transition group">
-        <span class="w-8 h-8 rounded-xl bg-gradient-to-br from-amber-400 to-amber-600 text-navy-950 font-display font-extrabold text-xs grid place-items-center shadow-md">CV</span>
-        <div><span class="font-display font-bold text-xs text-white group-hover:text-amber-400 block">Casa Valduga Vinhos</span><span class="text-[10px] text-silver-400">Vale dos Vinhedos · RS</span></div>
+      <!-- Casa Valduga Vinhos -->
+      <a href="marcas.html" class="aquitem-luxury-item">
+        <div class="aquitem-luxury-badge-initials">CV</div>
+        <div style="overflow: hidden;">
+          <div class="aquitem-luxury-item-name">Casa Valduga Vinhos</div>
+          <div class="aquitem-luxury-item-category">Vale dos Vinhedos · RS</div>
+        </div>
       </a>
-      <a href="marcas.html" class="inline-flex items-center gap-3 bg-white/5 hover:bg-white/10 border border-white/10 px-4 py-2.5 rounded-2xl transition group">
-        <span class="w-8 h-8 rounded-xl bg-gradient-to-br from-amber-400 to-amber-600 text-navy-950 font-display font-extrabold text-xs grid place-items-center shadow-md">AG</span>
-        <div><span class="font-display font-bold text-xs text-white group-hover:text-amber-400 block">Agrishow Brasil</span><span class="text-[10px] text-silver-400">Tecnologia Agro · SP</span></div>
+      <!-- Agrishow Brasil -->
+      <a href="marcas.html" class="aquitem-luxury-item">
+        <div class="aquitem-luxury-badge-initials">AG</div>
+        <div style="overflow: hidden;">
+          <div class="aquitem-luxury-item-name">Agrishow Brasil</div>
+          <div class="aquitem-luxury-item-category">Tecnologia Agro · SP</div>
+        </div>
       </a>
-      <a href="marcas.html" class="inline-flex items-center gap-3 bg-white/5 hover:bg-white/10 border border-white/10 px-4 py-2.5 rounded-2xl transition group">
-        <span class="w-8 h-8 rounded-xl bg-gradient-to-br from-amber-400 to-amber-600 text-navy-950 font-display font-extrabold text-xs grid place-items-center shadow-md">SM</span>
-        <div><span class="font-display font-bold text-xs text-white group-hover:text-amber-400 block">Salinas Maragogi</span><span class="text-[10px] text-silver-400">Resort All Inclusive · AL</span></div>
+      <!-- Salinas Maragogi -->
+      <a href="marcas.html" class="aquitem-luxury-item">
+        <div class="aquitem-luxury-badge-initials">SM</div>
+        <div style="overflow: hidden;">
+          <div class="aquitem-luxury-item-name">Salinas Maragogi</div>
+          <div class="aquitem-luxury-item-category">Resort All Inclusive · AL</div>
+        </div>
       </a>
-      <a href="marcas.html" class="inline-flex items-center gap-3 bg-white/5 hover:bg-white/10 border border-white/10 px-4 py-2.5 rounded-2xl transition group">
-        <span class="w-8 h-8 rounded-xl bg-gradient-to-br from-amber-400 to-amber-600 text-navy-950 font-display font-extrabold text-xs grid place-items-center shadow-md">PD</span>
-        <div><span class="font-display font-bold text-xs text-white group-hover:text-amber-400 block">Porto Digital</span><span class="text-[10px] text-silver-400">Polo Tecnológico · PE</span></div>
+      <!-- Porto Digital -->
+      <a href="marcas.html" class="aquitem-luxury-item">
+        <div class="aquitem-luxury-badge-initials">PD</div>
+        <div style="overflow: hidden;">
+          <div class="aquitem-luxury-item-name">Porto Digital</div>
+          <div class="aquitem-luxury-item-category">Polo Tecnológico · PE</div>
+        </div>
       </a>
-      <a href="marcas.html" class="inline-flex items-center gap-3 bg-amber-400/10 hover:bg-amber-400/20 border border-amber-400/30 px-4 py-2.5 rounded-2xl transition group">
-        <span class="w-8 h-8 rounded-xl bg-amber-400 text-navy-950 font-extrabold text-sm grid place-items-center shadow-md">+</span>
-        <div><span class="font-display font-bold text-xs text-amber-300 group-hover:text-white block">Sua Marca Aqui</span><span class="text-[10px] text-amber-400/80">Planos de Visibilidade →</span></div>
+      <!-- Duplicata para Rolagem Contínua Perfeita (Infinite Marquee) -->
+      <a href="marcas.html" class="aquitem-luxury-item">
+        <div class="aquitem-luxury-badge-initials">PR</div>
+        <div style="overflow: hidden;">
+          <div class="aquitem-luxury-item-name">Pralana Chapéus</div>
+          <div class="aquitem-luxury-item-category">Moda & Tradição · SP</div>
+        </div>
+      </a>
+      <a href="marcas.html" class="aquitem-luxury-item">
+        <div class="aquitem-luxury-badge-initials">BG</div>
+        <div style="overflow: hidden;">
+          <div class="aquitem-luxury-item-name">Botas Goyazes</div>
+          <div class="aquitem-luxury-item-category">Couros Nobres · SP</div>
+        </div>
+      </a>
+      <a href="marcas.html" class="aquitem-luxury-item">
+        <div class="aquitem-luxury-badge-initials">CO</div>
+        <div style="overflow: hidden;">
+          <div class="aquitem-luxury-item-name">Cervejaria Colorado</div>
+          <div class="aquitem-luxury-item-category">Cerveja Artesanal · SP</div>
+        </div>
+      </a>
+      <a href="marcas.html" class="aquitem-luxury-item">
+        <div class="aquitem-luxury-badge-initials">TL</div>
+        <div style="overflow: hidden;">
+          <div class="aquitem-luxury-item-name">Thermas dos Laranjais</div>
+          <div class="aquitem-luxury-item-category">Parque Aquático · SP</div>
+        </div>
+      </a>
+    </div>
+  </section>
+  <!-- FIM DO CARROSSEL LUXUOSO - NÃO TOCAR -->
+</section>
+
+<!-- BANNER TEMÁTICO DE BARRETOS 2026 (v27.0) -->
+<section class="max-w-7xl mx-auto px-4 sm:px-6 my-8 w-full">
+  <div class="banner-barretos-container" id="banner-barretos-2026">
+    <div class="banner-barretos-header">
+      <div>
+        <span class="banner-barretos-badge">🤠 PICO DE AGOSTO 2026 · FESTA DO PEÃO</span>
+        <h2 class="banner-barretos-title">Guia Oficial & Serviços Rápidos de Barretos/SP</h2>
+        <p class="banner-barretos-subtitle">
+          Encontre motoristas, vagas de hospedagem, gastronomia e empregos temporários em tempo real.
+        </p>
+      </div>
+      <a href="barretos-home.html" class="btn-shine inline-flex items-center gap-2 bg-amber-400 text-navy-950 font-extrabold px-6 py-3 rounded-xl text-sm shadow-lg transition">
+        Ver Polo Barretos Completo →
+      </a>
+    </div>
+
+    <!-- Atalhos de Filtragem no Frontend (State-Only / Zero Reload) -->
+    <div class="banner-barretos-filters" id="barretos-filter-buttons">
+      <button type="button" class="barretos-filter-btn active" data-filter="todos">
+        <span>🌟</span> Todas as Categorias
+      </button>
+      <a href="barretos-home.html#motoristas" class="barretos-filter-btn" data-filter="motoristas">
+        <span>🚐</span> Motoristas & Translados
+      </a>
+      <a href="barretos-home.html#pousadas" class="barretos-filter-btn" data-filter="pousadas">
+        <span>🏨</span> Pousadas & Hotéis
+      </a>
+      <a href="barretos-home.html#onde-comer" class="barretos-filter-btn" data-filter="onde-comer">
+        <span>🥩</span> Onde Comer
+      </a>
+      <a href="vagas.html" class="barretos-filter-btn" data-filter="vagas-temporarias">
+        <span>💼</span> Vagas Temporárias
       </a>
     </div>
   </div>
@@ -406,7 +599,11 @@
 </section>
 
 <div id="site-footer"></div>
-<script src="assets/app.js"></script>
+<script src="assets/supabase-client.js?v=28.0"></script>
+<script src="assets/banner-barretos-v27.js?v=28.0"></script>
+<script src="assets/beneficios-planos-v22.js?v=28.0"></script>
+<script src="assets/painel-bloqueio-planos-v25.js?v=28.0"></script>
+<script src="assets/app.js?v=28.0"></script>
 <a href="https://t.me/ofertasbrasilz" target="_blank" rel="noopener" class="aquitem-telegram-float" aria-label="Entrar no grupo Ofertas Brasil no Telegram">
   <svg viewBox="0 0 24 24" fill="#229ED9" xmlns="http://www.w3.org/2000/svg">
     <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 0 0-.05-.18c-.06-.05-.15-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.41-1.08.4-.36 0-1.04-.2-1.55-.37-.63-.2-1.12-.31-1.08-.66.02-.18.27-.36.74-.55 2.92-1.27 4.86-2.11 5.83-2.51 2.78-1.16 3.35-1.36 3.73-1.36.08 0 .27.02.39.12.1.08.13.19.14.27-.01.06.01.24 0 .38z"/>

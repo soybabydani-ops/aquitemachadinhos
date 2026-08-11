@@ -6,136 +6,15 @@
 (function(window) {
   'use strict';
 
-  // Base inicial rica de Barretos (Festa do Peão 2026)
-  const INITIAL_BARRETOS_STORES = [
-    {
-      id: 'sp-bar-001',
-      nome_fantasia: 'Churrascaria Barretos Gourmet & Costelaria',
-      razao_social: 'Churrascaria Barretos Gourmet LTDA',
-      categoria: 'Onde Comer / Churrascaria & Restaurante',
-      ramo: 'onde comer',
-      endereco: 'Av. 43, nº 1420 - Centro, Barretos/SP',
-      cidade: 'Barretos',
-      cidade_slug: 'barretos',
-      tipo_plano: 'ouro',
-      whatsapp_contato: '(17) 99781-4500',
-      destaque: true
-    },
-    {
-      id: 'sp-bar-002',
-      nome_fantasia: 'Pousada Recanto dos Peões & Chalés',
-      razao_social: 'Recanto dos Peões Hospedagem ME',
-      categoria: 'Pousadas / Hospedagem & Chalés',
-      ramo: 'pousadas',
-      endereco: 'Rodovia Faria Lima, Km 428, Barretos/SP',
-      cidade: 'Barretos',
-      cidade_slug: 'barretos',
-      tipo_plano: 'ouro',
-      whatsapp_contato: '(17) 99655-2211',
-      destaque: true
-    },
-    {
-      id: 'sp-bar-003',
-      nome_fantasia: 'Vans & Translados Barretos VIP Express',
-      razao_social: 'VIP Express Transportes LTDA',
-      categoria: 'Motoristas / Translados & Vans Executivas',
-      ramo: 'motoristas',
-      endereco: 'Rua 20, nº 880 - Bairro América, Barretos/SP',
-      cidade: 'Barretos',
-      cidade_slug: 'barretos',
-      tipo_plano: 'ouro',
-      whatsapp_contato: '(17) 99123-8899',
-      destaque: true
-    },
-    {
-      id: 'sp-bar-004',
-      nome_fantasia: 'Cooperativa de Táxi & Motoristas 24h Barretos',
-      razao_social: 'Cooperativa Táxi Barretos',
-      categoria: 'Motoristas / Táxi & Aplicativo 24h',
-      ramo: 'motoristas',
-      endereco: 'Terminal Rodoviário - Box 04, Barretos/SP',
-      cidade: 'Barretos',
-      cidade_slug: 'barretos',
-      tipo_plano: 'bronze',
-      whatsapp_contato: '(17) 98111-3344',
-      destaque: false
-    },
-    {
-      id: 'sp-bar-005',
-      nome_fantasia: 'Hotel & Suítes Conforto Peão 2026',
-      razao_social: 'Conforto Peão Hospedagem LTDA',
-      categoria: 'Pousadas / Hotel & Hospedagem',
-      ramo: 'pousadas',
-      endereco: 'Av. 21, nº 650 - Centro, Barretos/SP',
-      cidade: 'Barretos',
-      cidade_slug: 'barretos',
-      tipo_plano: 'bronze',
-      whatsapp_contato: '(17) 98822-7711',
-      destaque: false
-    },
-    {
-      id: 'sp-bar-006',
-      nome_fantasia: 'Restaurante & Fogão a Lenha Tropeiro da Serra',
-      razao_social: 'Tropeiro Barretos Alimentação ME',
-      categoria: 'Onde Comer / Gastronomia Típica',
-      ramo: 'onde comer',
-      endereco: 'Via das Comitivas, nº 310, Barretos/SP',
-      cidade: 'Barretos',
-      cidade_slug: 'barretos',
-      tipo_plano: 'bronze',
-      whatsapp_contato: '(17) 99234-5678',
-      destaque: false
-    },
-    {
-      id: 'sp-bar-007',
-      nome_fantasia: 'Agência de Vagas Temporárias Arena Peão 2026',
-      razao_social: 'Barretos Empregos & RH ME',
-      categoria: 'Vagas Temporárias / Barman, Segurança e Apoio',
-      ramo: 'vagas temporarias',
-      endereco: 'Rua 18, nº 1100 - Centro, Barretos/SP',
-      cidade: 'Barretos',
-      cidade_slug: 'barretos',
-      tipo_plano: 'pre_cadastro',
-      whatsapp_contato: '',
-      destaque: false
-    },
-    {
-      id: 'sp-bar-008',
-      nome_fantasia: 'Auto Elétrica e Guincho 24h Barretos',
-      razao_social: 'Trevo Socorro Automotivo LTDA',
-      categoria: 'Serviços Automotivos / Socorro 24h',
-      ramo: 'servicos',
-      endereco: 'Av. Pedro Vicentini, nº 200, Barretos/SP',
-      cidade: 'Barretos',
-      cidade_slug: 'barretos',
-      tipo_plano: 'pre_cadastro',
-      whatsapp_contato: '',
-      destaque: false
-    },
-    {
-      id: 'sp-bar-009',
-      nome_fantasia: 'Camping & Chalés Rancho do Boiadeiro',
-      razao_social: 'Rancho Rodeio Camping ME',
-      categoria: 'Pousadas / Camping & Acomodações Rurais',
-      ramo: 'pousadas',
-      endereco: 'Estrada Municipal BRT-010, Km 4, Barretos/SP',
-      cidade: 'Barretos',
-      cidade_slug: 'barretos',
-      tipo_plano: 'pre_cadastro',
-      whatsapp_contato: '',
-      destaque: false
-    }
-  ];
-
   const StoreRenderer = {
-    allStores: INITIAL_BARRETOS_STORES,
-    filteredStores: INITIAL_BARRETOS_STORES,
+    allStores: [],
+    filteredStores: [],
     containerSelector: '#stores-container',
     cidadeAtual: 'Barretos',
     cidadeSlug: 'barretos',
 
     init: function(stores, containerSelector, cidadeInfo) {
-      if (Array.isArray(stores) && stores.length > 0) {
+      if (Array.isArray(stores)) {
         this.allStores = [...stores];
         this.filteredStores = [...stores];
       }
@@ -146,27 +25,16 @@
       }
 
       this.render();
-      console.log(`✅ [StoreRenderer v22.0] Inicializado com ${this.allStores.length} estabelecimentos.`);
+      console.log(`✅ [StoreRenderer v22.0] Inicializado com ${this.allStores.length} empresas.`);
     },
 
     setStores: function(stores) {
-      if (Array.isArray(stores) && stores.length > 0) {
-        this.allStores = [...stores];
-        this.filteredStores = [...stores];
-        this.render();
-      }
+      this.allStores = Array.isArray(stores) ? [...stores] : [];
+      this.filteredStores = [...this.allStores];
+      this.render();
     },
 
     filterBySpecialCategory: function(filterKey, allowedCategories) {
-      const statusEl = document.getElementById('barretos-filter-status');
-      const labelMap = {
-        'todos': 'Exibindo todos os estabelecimentos e serviços em Barretos/SP',
-        'motoristas': 'Exibindo Motoristas, Vans e Translados em Barretos/SP',
-        'pousadas': 'Exibindo Pousadas, Hotéis e Chalés em Barretos/SP',
-        'onde-comer': 'Exibindo Restaurantes, Churrascarias e Onde Comer em Barretos/SP',
-        'vagas-temporarias': 'Exibindo Vagas e Empregos Temporários Festa do Peão 2026'
-      };
-
       if (!filterKey || filterKey === 'todos' || !allowedCategories || allowedCategories.length === 0) {
         this.filteredStores = [...this.allStores];
       } else {
@@ -180,18 +48,7 @@
           });
         });
       }
-
-      if (statusEl) {
-        statusEl.innerHTML = `📍 <strong>${labelMap[filterKey] || 'Resultados Filtrados'}</strong> (${this.filteredStores.length} disponíveis)`;
-      }
-
       this.render();
-
-      // Scroll suave para visualização do resultado no celular
-      const container = document.querySelector(this.containerSelector);
-      if (container && typeof container.scrollIntoView === 'function') {
-        container.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-      }
     },
 
     sortStoresByPlan: function(stores) {
@@ -261,7 +118,7 @@
         actionHTML = `
           <div style="margin-top: 14px; padding-top: 12px; border-top: 1px solid rgba(255, 255, 255, 0.1);">
             <div style="font-size: 0.85rem; color: #94A3B8; margin-bottom: 4px;">
-              📞 WhatsApp: <strong style="color: #F8FAFC;">${phoneFormatted}</strong>
+              📞 WhatsApp / Contato: <strong style="color: #F8FAFC;">${phoneFormatted}</strong>
             </div>
             <a href="${waLink}" target="_blank" rel="noopener" class="btn-whatsapp-direct" style="width: 100%;">
               <span>💬</span> Chamar no WhatsApp
@@ -279,14 +136,14 @@
         actionHTML = `
           <div style="margin-top: 14px; padding-top: 12px; border-top: 1px solid rgba(255, 255, 255, 0.1);">
             <div style="font-size: 0.82rem; color: #64748B; font-style: italic;">
-              🔒 Telefone e WhatsApp ocultos pelo modo gratuito
+              🔒 Telefone e WhatsApp ocultos pelo modo institucional gratuito
             </div>
             <div class="aquitem-badge-lead-urgente" onclick="window.StoreRenderer.triggerLockModal('${encodedStore}')">
               <span>🔥</span>
-              <span>Há 1 cliente aguardando orçamento de <strong>${categoria}</strong> nesta cidade. Clique para liberar</span>
+              <span>Há 1 cliente aguardando orçamento de <strong>${categoria}</strong> nesta cidade. Clique aqui para ativar o plano e liberar</span>
             </div>
             <button type="button" class="btn-desbloquear-leads" style="width: 100%;" onclick="window.StoreRenderer.triggerLockModal('${encodedStore}')">
-              🚀 Reivindicar e Liberar Leads →
+              🚀 Reivindicar Perfil e Liberar Leads →
             </button>
           </div>
         `;
@@ -296,7 +153,7 @@
         <div class="${cardClass}" data-store-id="${store.id || ''}" data-plan="${plano}">
           <div>
             ${badgeHTML}
-            <h3 style="font-size: 1.15rem; font-weight: 800; color: #FFFFFF; margin-bottom: 4px;">
+            <h3 style="font-size: 1.2rem; font-weight: 800; color: #FFFFFF; margin-bottom: 4px;">
               ${nome}
             </h3>
             <div style="font-size: 0.85rem; color: ${isOuro ? '#F5D77F' : '#94A3B8'}; font-weight: 600; margin-bottom: 8px;">
@@ -320,10 +177,10 @@
 
       if (!this.filteredStores || this.filteredStores.length === 0) {
         container.innerHTML = `
-          <div style="grid-column: 1 / -1; text-align: center; padding: 40px 20px; background: rgba(7, 21, 48, 0.5); border-radius: 12px; border: 1px dashed rgba(255, 255, 255, 0.2);">
-            <p style="color: #94A3B8; font-size: 1rem;">Nenhum estabelecimento encontrado nesta categoria no momento.</p>
+          <div style="grid-column: 1 / -1; text-align: center; padding: 40px; background: rgba(7, 21, 48, 0.5); border-radius: 12px; border: 1px dashed rgba(255, 255, 255, 0.2);">
+            <p style="color: #94A3B8; font-size: 1.1rem;">Nenhuma empresa encontrada com os filtros selecionados.</p>
             <button onclick="window.BarretosBanner.applyFilter('todos')" class="barretos-filter-btn active" style="margin-top: 16px;">
-              Limpar Filtro e Exibir Todos
+              Limpar Filtro e Exibir Todas
             </button>
           </div>
         `;
@@ -346,12 +203,6 @@
       }
     }
   };
-
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', () => StoreRenderer.init());
-  } else {
-    StoreRenderer.init();
-  }
 
   window.StoreRenderer = StoreRenderer;
   window.filterStoresState = function(filterKey, allowedCategories) {

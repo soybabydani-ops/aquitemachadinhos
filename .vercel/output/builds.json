@@ -6,9 +6,11 @@
     "/home/user/.npm/_npx/69f9afb961c37556/node_modules/.bin/vc",
     "build",
     "--prod",
-    "--token=REDACTED"
+    "--token",
+    "REDACTED",
+    "--yes"
   ],
-  "cliVersion": "58.9.1",
+  "cliVersion": "58.9.3",
   "detectedFramework": {
     "status": "skipped"
   },

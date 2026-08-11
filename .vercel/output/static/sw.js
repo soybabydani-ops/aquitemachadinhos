@@ -1,56 +1,45 @@
-// Service Worker — AQUITEM (v24 — correção DEFINITIVA de cache)
-// O que mudou: (1) nova versão v23, (2) skipWaiting + clients.claim = atualiza IMEDIATAMENTE,
-// (3) apaga TODOS os caches velhos (v22 e anteriores) na ativação, (4) HTML sempre fresco (network-first).
-const CACHE = 'aquitem-v24';
-const ASSETS = [
-  './', './index.html', './cadastro.html', './cadastro-motorista.html', './categoria.html',
-  './loja.html', './ofertas.html', './busca.html', './turista.html', './anuncie.html',
-  './motoristas.html', './motorista.html', './painel.html', './admin.html', './login.html',
-  './sobre.html', './contato.html', './faq.html', './politica-de-privacidade.html',
-  './termos.html', './politica-de-ofertas.html', './obrigado.html', './favoritos.html', './404.html',
-  './mapa.html', './classificados.html', './imoveis.html', './empregos.html', './veiculos.html',
-  './moveis-eletro.html', './eletronicos.html', './animais.html', './servicos.html', './eventos-peao.html',
-  './anuncio.html', './cadastro-anuncio.html', './guia-peao.html', './o-que-fazer-festa-do-peao.html', './onde-comer-barretos.html',
-  './assets/styles.css', './assets/premium.css', './assets/tema-cidade.css', './assets/tailwind.css', './assets/app.js', './assets/aquitem-orbit.js', './assets/aquitem-symbol.png', './assets/og-image.png', './assets/three.min.js', './assets/peao-hero.jpg',
-  './assets/vendor/leaflet.js', './assets/vendor/leaflet.markercluster.js',
-  './assets/vendor/leaflet.css', './assets/vendor/MarkerCluster.css', './assets/vendor/MarkerCluster.Default.css',
-  './manifest.webmanifest', './logo.svg', './icon-192.png', './icon-512.png'
+/**
+ * SERVICE WORKER v28.0 - AQUI TEM ACHADINHOS
+ * Limpeza automática de caches legados e ativação imediata (skipWaiting)
+ */
+
+const CACHE_NAME = 'aquitem-v28.0-live';
+const ASSETS_TO_CACHE = [
+  '/',
+  '/index.html',
+  '/assets/styles.css?v=28.0',
+  '/assets/tailwind.css',
+  '/assets/supabase-client.js?v=28.0',
+  '/assets/banner-barretos-v27.js?v=28.0',
+  '/assets/beneficios-planos-v22.js?v=28.0',
+  '/assets/painel-bloqueio-planos-v25.js?v=28.0',
+  '/assets/app.js?v=28.0'
 ];
 
-// INSTALL — skipWaiting: a versão nova assume IMEDIATAMENTE (não espera fechar abas)
-self.addEventListener('install', (e) => {
+self.addEventListener('install', (event) => {
   self.skipWaiting();
-  e.waitUntil(
-    caches.open(CACHE).then((c) => c.addAll(ASSETS).catch(() => {}))
+  event.waitUntil(
+    caches.open(CACHE_NAME).then((cache) => cache.addAll(ASSETS_TO_CACHE))
   );
 });
 
-// ACTIVATE — apaga TODOS os caches antigos (v22 etc.) e assume as abas abertas
-self.addEventListener('activate', (e) => {
-  e.waitUntil(
-    caches.keys()
-      .then((keys) => Promise.all(keys.filter((k) => k !== CACHE).map((k) => caches.delete(k))))
-      .then(() => self.clients.claim())
+self.addEventListener('activate', (event) => {
+  event.waitUntil(
+    caches.keys().then((cacheNames) => {
+      return Promise.all(
+        cacheNames.map((name) => {
+          if (name !== CACHE_NAME) {
+            console.log('[SW v28.0] Purgando cache legado:', name);
+            return caches.delete(name);
+          }
+        })
+      );
+    }).then(() => self.clients.claim())
   );
 });
 
-// FETCH — network-first: HTML sempre fresco do servidor; só usa cache se offline
-self.addEventListener('fetch', (e) => {
-  if (e.request.method !== 'GET') return;
-  const u = new URL(e.request.url);
-  if (u.origin !== self.location.origin) return;
-
-  e.respondWith(
-    fetch(e.request)
-      .then((r) => {
-        if (r.ok) {
-          const cp = r.clone();
-          caches.open(CACHE).then((c) => c.put(e.request, cp)).catch(() => {});
-        }
-        return r;
-      })
-      .catch(() =>
-        caches.match(e.request).then((c) => c || caches.match('./index.html')).then((c) => c || new Response('', { status: 200, headers: { 'Content-Type': 'text/html' } }))
-      )
+self.addEventListener('fetch', (event) => {
+  event.respondWith(
+    fetch(event.request).catch(() => caches.match(event.request))
   );
 });
