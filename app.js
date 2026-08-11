@@ -535,13 +535,27 @@
   function currentCityName() {
     var slug = currentCitySlug();
     if (slug === 'nacional' || slug === 'www') return 'Brasil';
-    return CITY_NAMES[slug] || 'Brasil';
+    if (CITY_NAMES[slug]) return CITY_NAMES[slug];
+    if (window.CIDADES_BRASIL_DB && window.CIDADES_BRASIL_DB[slug]) {
+      return window.CIDADES_BRASIL_DB[slug][0];
+    }
+    return slug.split('-').map(function (w) {
+      if (['de', 'da', 'do', 'dos', 'das', 'e'].indexOf(w) !== -1) return w;
+      return w.charAt(0).toUpperCase() + w.slice(1);
+    }).join(' ');
   }
 
   function currentCityUF() {
     var slug = currentCitySlug();
     if (slug === 'nacional' || slug === 'www') return 'BR';
-    return CITY_UFS[slug] || 'BR';
+    if (CITY_UFS[slug]) return CITY_UFS[slug];
+    if (window.CIDADES_BRASIL_DB && window.CIDADES_BRASIL_DB[slug]) {
+      return window.CIDADES_BRASIL_DB[slug][1];
+    }
+    var urlParams = new URLSearchParams(window.location.search || '');
+    var paramUF = urlParams.get('uf') || urlParams.get('estado');
+    if (paramUF) return paramUF.toUpperCase();
+    return 'BR';
   }
   var showMsg = function (sel, txt, ok) { var e = $(sel); if (!e) return; e.className = 'msg ' + (ok ? 'msg-ok' : 'msg-err'); e.innerHTML = txt; };
 
