@@ -20,7 +20,6 @@
 <meta name="twitter:card" content="summary_large_image">
 
 <style>
-/* Design System de Alto Luxo para Vitrine de Marcas */
 .brand-pill-btn {
   padding: 10px 18px;
   border-radius: 99px;
@@ -66,246 +65,59 @@
   border-color: #F5D77F;
   box-shadow: 0 15px 40px rgba(245,215,127,0.25);
 }
-
-/* Planos Corporativos com Separação Nítida e Botões 3D */
-.plans-pricing-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 28px;
-  margin: 30px auto 50px auto;
-  max-width: 1140px;
-  padding: 0 16px;
-}
-
-.plan-pricing-box {
-  background: linear-gradient(160deg, #0d2244 0%, #071530 100%);
-  border: 2px solid rgba(245,215,127,0.3);
-  border-radius: 24px;
-  padding: 32px 26px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  position: relative;
-  box-shadow: 0 12px 35px rgba(0,0,0,0.6);
-  transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
-}
-
-.plan-pricing-box:hover {
-  transform: translateY(-5px);
-  border-color: #F5D77F;
-  box-shadow: 0 18px 45px rgba(245,215,127,0.2);
-}
-
-.plan-pricing-box.featured-gold {
-  border: 2.5px solid #F5D77F;
-  background: linear-gradient(165deg, #133363 0%, #071530 100%);
-  box-shadow: 0 15px 45px rgba(245,215,127,0.3);
-  transform: scale(1.02);
-}
-
-.plan-badge-top {
-  position: absolute;
-  top: -14px;
-  right: 20px;
-  background: linear-gradient(90deg, #DC2626, #EF4444);
-  color: #FFFFFF;
-  font-size: 0.72rem;
-  font-weight: 900;
-  text-transform: uppercase;
-  letter-spacing: 0.8px;
-  padding: 5px 14px;
-  border-radius: 999px;
-  box-shadow: 0 4px 12px rgba(220,38,38,0.4);
-}
-
-.plan-header-tag {
-  font-size: 0.75rem;
-  font-weight: 800;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  color: #CBD5E1;
-  margin-bottom: 6px;
-  display: block;
-}
-
-.plan-title-main {
-  font-size: 1.6rem;
-  font-weight: 900;
-  color: #FFFFFF;
-  margin-bottom: 12px;
-}
-
-.plan-price-wrapper {
-  display: flex;
-  align-items: baseline;
-  gap: 6px;
-  margin: 16px 0 14px 0;
-  padding-bottom: 16px;
-  border-bottom: 1px solid rgba(255,255,255,0.1);
-}
-
-.plan-price-val {
-  font-size: 2.4rem;
-  font-weight: 900;
-  color: #F5D77F;
-  line-height: 1;
-}
-
-.plan-price-period {
-  font-size: 0.9rem;
-  color: #94A3B8;
-  font-weight: 600;
-}
-
-.plan-desc-text {
-  font-size: 0.88rem;
-  color: #CBD5E1;
-  line-height: 1.5;
-  margin-bottom: 20px;
-}
-
-.plan-features-list {
-  list-style: none;
-  margin-bottom: 28px;
-  padding: 0;
-}
-
-.plan-features-list li {
-  font-size: 0.85rem;
-  color: #F1F5F9;
-  margin-bottom: 12px;
-  display: flex;
-  align-items: flex-start;
-  gap: 10px;
-  line-height: 1.4;
-}
-
-.plan-features-list li span.check-icon {
-  color: #22C55E;
-  font-weight: 900;
-  font-size: 0.95rem;
-  flex-shrink: 0;
-}
-
-.plan-features-list li span.star-icon {
-  color: #F5D77F;
-  font-weight: 900;
-  font-size: 0.95rem;
-  flex-shrink: 0;
-}
-
-/* Botões de Ação Destacados (3D CTA) */
-.btn-plan-cta {
-  display: block;
-  width: 100%;
-  text-align: center;
-  text-decoration: none;
-  font-weight: 800;
-  font-size: 0.95rem;
-  padding: 15px 20px;
-  border-radius: 14px;
-  transition: all 0.25s ease;
-  cursor: pointer;
-  box-shadow: 0 6px 20px rgba(0,0,0,0.4);
-}
-
-.btn-cta-bronze {
-  background: rgba(255,255,255,0.08);
-  border: 1.5px solid rgba(245,215,127,0.4);
-  color: #FFFFFF;
-}
-.btn-cta-bronze:hover {
-  background: rgba(245,215,127,0.2);
-  border-color: #F5D77F;
-  transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(245,215,127,0.25);
-  color: #FFFFFF;
-}
-
-.btn-cta-gold {
-  background: linear-gradient(135deg, #FFE259 0%, #FFA751 100%);
-  border: none;
-  color: #1A0D00;
-  box-shadow: 0 6px 25px rgba(245,215,127,0.4);
-}
-.btn-cta-gold:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 10px 35px rgba(245,215,127,0.6);
-  color: #000000;
-}
-
-.btn-cta-diamante {
-  background: linear-gradient(135deg, #1E40AF 0%, #3B82F6 100%);
-  border: 1.5px solid #60A5FA;
-  color: #FFFFFF;
-  box-shadow: 0 6px 25px rgba(59,130,246,0.4);
-}
-.btn-cta-diamante:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 10px 30px rgba(59,130,246,0.6);
-  color: #FFFFFF;
-}
 </style>
 </head>
-<body data-page="marcas" class="bg-navy-950 text-white min-h-screen flex flex-col font-sans">
+<body data-page="marcas" style="background-color: #060e1d; color: #F8FAFC; min-height: 100vh; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;">
 <div id="site-header"></div>
 
 <!-- HERO DA VITRINE DE MARCAS -->
-<section class="relative overflow-hidden py-16 md:py-24 px-4 sm:px-6 text-center border-b border-white/10" style="background: radial-gradient(circle at 50% 10%, #1e3a5e 0%, #081426 65%, #050b15 100%);">
-  <div class="absolute inset-0 dot-grid opacity-35 pointer-events-none"></div>
-  <div class="max-w-4xl mx-auto relative z-10">
-    <div class="inline-flex items-center gap-2 bg-amber-400/10 border border-amber-400/30 px-4 py-1.5 rounded-full text-xs font-extrabold text-amber-400 mb-5">
-      <span>🏢</span> Vitrine Oficial de Grandes Marcas do Brasil
+<section style="background: radial-gradient(circle at 50% 10%, #1e3a5e 0%, #081426 65%, #050b15 100%); padding: 60px 16px; text-align: center; border-bottom: 1px solid rgba(255,255,255,0.1);">
+  <div style="max-width: 800px; margin: 0 auto;">
+    <div style="display: inline-inline-flex; background: rgba(245, 215, 127, 0.15); border: 1px solid rgba(245, 215, 127, 0.35); padding: 6px 16px; border-radius: 999px; font-size: 0.8rem; font-weight: 800; color: #F5D77F; margin-bottom: 16px; text-transform: uppercase;">
+      🏢 Vitrine Oficial de Grandes Marcas do Brasil
     </div>
-    <h1 class="font-display text-3xl sm:text-5xl md:text-6xl font-extrabold text-chrome leading-[1.12]">
+    <h1 style="font-size: 2.2rem; font-weight: 900; color: #FFFFFF; line-height: 1.2; margin: 12px 0;">
       Onde as grandes marcas se destacam para todo o Brasil.
     </h1>
-    <p class="text-silver-300 text-base sm:text-lg md:text-xl mt-4 max-w-2xl mx-auto leading-relaxed">
+    <p style="color: #CBD5E1; font-size: 1rem; line-height: 1.5; margin-bottom: 24px;">
       Conecte sua marca a milhões de consumidores, turistas e empresas. Visibilidade premium com presença na Home Nacional e link direto para o seu site e WhatsApp.
     </p>
-    <div class="mt-8 flex flex-col sm:flex-row gap-3.5 justify-center">
-      <a href="#planos-marcas" class="btn-shine inline-flex items-center justify-center gap-2 bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 text-navy-950 px-7 py-3.5 rounded-xl font-extrabold text-sm shadow-lg transition transform hover:-translate-y-0.5">
-        <span>🚀</span> Cadastrar Minha Marca na Vitrine
+    <div style="display: flex; flex-direction: column; gap: 12px; max-width: 380px; margin: 0 auto;">
+      <a href="#planos-marcas" style="display: block; background: linear-gradient(135deg, #FFE259 0%, #FFA751 100%); color: #1A0D00; padding: 14px 20px; border-radius: 12px; font-weight: 800; text-decoration: none; font-size: 0.95rem; box-shadow: 0 6px 20px rgba(245, 215, 127, 0.4);">
+        🚀 Cadastrar Minha Marca na Vitrine
       </a>
-      <a href="#vitrine" class="btn-shine glass inline-flex items-center justify-center gap-2 text-white px-7 py-3.5 rounded-xl font-bold text-sm transition">
-        <span>🔎</span> Explorar Marcas
+      <a href="#vitrine" style="display: block; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); color: #FFFFFF; padding: 14px 20px; border-radius: 12px; font-weight: 700; text-decoration: none; font-size: 0.95rem;">
+        🔎 Explorar Marcas
       </a>
     </div>
   </div>
 </section>
 
 <!-- MAIN CONTENT -->
-<main class="flex-1 max-w-7xl mx-auto px-4 sm:px-6 w-full py-12" id="vitrine">
+<main style="max-width: 1200px; margin: 0 auto; padding: 40px 16px;" id="vitrine">
   
   <!-- BARRA DE FILTROS POR SEGMENTO -->
-  <div class="bg-navy-900/90 backdrop-blur-md rounded-3xl p-6 border border-white/10 shadow-2xl mb-10">
-    <div class="flex flex-col md:flex-row items-center justify-between gap-4">
-      <div class="flex flex-wrap items-center gap-2">
-        <span class="text-xs font-bold uppercase tracking-wider text-silver-400 mr-2">Segmento:</span>
-        <button class="brand-pill-btn active" data-cat="all">
-          <span>🔥</span> Todas as Marcas (<span id="totalBrandsCount">16</span>)
-        </button>
-        <button class="brand-pill-btn" data-cat="moda">
-          <span>👗</span> Moda & Couro
-        </button>
-        <button class="brand-pill-btn" data-cat="gastronomia">
-          <span>🍫</span> Gastronomia & Bebidas
-        </button>
-        <button class="brand-pill-btn" data-cat="turismo">
-          <span>🏨</span> Resorts & Turismo
-        </button>
-        <button class="brand-pill-btn" data-cat="agro">
-          <span>🌾</span> Agro & Indústria
-        </button>
-        <button class="brand-pill-btn" data-cat="tecnologia">
-          <span>💻</span> Tecnologia & Inovação
-        </button>
-      </div>
-
-      <div class="relative w-full md:w-72 shrink-0">
-        <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-silver-400 text-sm pointer-events-none">🔍</span>
-        <input type="text" id="brandSearchInput" placeholder="Buscar marca..." class="w-full pl-9 pr-3 py-2.5 bg-navy-950 rounded-xl border border-white/15 outline-none text-white text-xs placeholder:text-silver-400 focus:border-amber-400 transition">
-      </div>
+  <div style="background: rgba(13, 34, 68, 0.9); border: 1px solid rgba(245, 215, 127, 0.25); border-radius: 20px; padding: 20px; margin-bottom: 30px; box-shadow: 0 10px 30px rgba(0,0,0,0.5);">
+    <div style="display: flex; flex-wrap: wrap; gap: 10px; align-items: center;">
+      <span style="font-size: 0.8rem; font-weight: 800; color: #94A3B8; text-transform: uppercase;">Segmento:</span>
+      <button class="brand-pill-btn active" data-cat="all">
+        <span>🔥</span> Todas as Marcas (<span id="totalBrandsCount">9</span>)
+      </button>
+      <button class="brand-pill-btn" data-cat="moda">
+        <span>👗</span> Moda & Couro
+      </button>
+      <button class="brand-pill-btn" data-cat="gastronomia">
+        <span>🍫</span> Gastronomia & Bebidas
+      </button>
+      <button class="brand-pill-btn" data-cat="turismo">
+        <span>🏨</span> Resorts & Turismo
+      </button>
+      <button class="brand-pill-btn" data-cat="agro">
+        <span>🌾</span> Agro & Indústria
+      </button>
+      <button class="brand-pill-btn" data-cat="tecnologia">
+        <span>💻</span> Tecnologia & Inovação
+      </button>
     </div>
   </div>
 
@@ -314,95 +126,145 @@
     <div class="col-span-full text-center py-12 text-silver-400">Carregando marcas oficiais...</div>
   </div>
 
-  <!-- SEÇÃO DE PLANOS PARA MARCAS (FORMATO LIMPO E RESPONSIVO) -->
-  <section id="planos-marcas" class="mt-24 pt-16 border-t border-white/10">
-    <div class="text-center max-w-3xl mx-auto mb-12">
-      <span class="text-amber-400 font-bold uppercase text-xs tracking-widest">Planos Corporativos & Branding</span>
-      <h2 class="font-display text-3xl sm:text-4xl font-extrabold text-white mt-2">Destaque sua marca para o Brasil inteiro</h2>
-      <p class="text-silver-300 text-sm mt-3 leading-relaxed">
+  <!-- ==========================================================================
+       SEÇÃO DE PLANOS CORPORATIVOS (CARDS LUXUOSOS 100% INLINE & BLINDADOS)
+       ========================================================================== -->
+  <section id="planos-marcas" style="margin-top: 60px; padding-top: 40px; border-top: 1px solid rgba(245, 215, 127, 0.25);">
+    
+    <div style="text-align: center; max-width: 700px; margin: 0 auto 36px auto;">
+      <span style="background: rgba(245, 215, 127, 0.15); border: 1px solid rgba(245, 215, 127, 0.3); color: #F5D77F; font-size: 0.75rem; font-weight: 800; text-transform: uppercase; padding: 4px 12px; border-radius: 999px;">
+        Planos Corporativos & Branding
+      </span>
+      <h2 style="font-size: 2rem; font-weight: 900; color: #FFFFFF; margin: 12px 0 8px 0;">
+        Destaque sua marca para o Brasil inteiro
+      </h2>
+      <p style="color: #94A3B8; font-size: 0.95rem; line-height: 1.5;">
         Exponha sua logomarca no portal nacional da AQUITEM, atraia clientes qualificados e fortaleça o posicionamento da sua empresa sem pagar comissões por venda.
       </p>
     </div>
 
-    <div class="plans-pricing-grid">
+    <!-- CONTAINER DOS CARDS DE PREÇO COM ESPAÇAMENTO PERFEITO -->
+    <div style="display: flex; flex-direction: column; gap: 28px; max-width: 560px; margin: 0 auto;">
       
-      <!-- PLANO 1: MARCA DESTAQUE -->
-      <div class="plan-pricing-box">
-        <div>
-          <span class="plan-header-tag">Presença Nacional</span>
-          <h3 class="plan-title-main">Marca Destaque</h3>
-          
-          <div class="plan-price-wrapper">
-            <span class="plan-price-val">R$ 99</span>
-            <span class="plan-price-period">/ mês</span>
-          </div>
-
-          <p class="plan-desc-text">Ideal para marcas regionais e fabricantes que desejam presença e autoridade no catálogo oficial.</p>
-          
-          <ul class="plan-features-list">
-            <li><span class="check-icon">✓</span> Logomarca em alta resolução na vitrine</li>
-            <li><span class="check-icon">✓</span> Link direto para seu site oficial (DoFollow)</li>
-            <li><span class="check-icon">✓</span> Botão direto para o WhatsApp de vendas</li>
-            <li><span class="check-icon">✓</span> Selo de ✦ Marca Oficial Verificada</li>
-          </ul>
+      <!-- ==================== CARD 1: MARCA DESTAQUE (R$ 99) ==================== -->
+      <div style="background: linear-gradient(160deg, #0d2244 0%, #071530 100%); border: 2px solid rgba(205, 127, 50, 0.6); border-radius: 20px; padding: 28px 22px; box-shadow: 0 10px 30px rgba(0,0,0,0.5);">
+        <span style="font-size: 0.75rem; font-weight: 800; color: #CD7F32; text-transform: uppercase; letter-spacing: 1px;">
+          🥉 Plano Entrada
+        </span>
+        <h3 style="font-size: 1.6rem; font-weight: 900; color: #FFFFFF; margin: 6px 0 10px 0;">
+          Marca Destaque
+        </h3>
+        
+        <div style="display: flex; align-items: baseline; gap: 6px; margin: 12px 0 16px 0; padding-bottom: 14px; border-bottom: 1px solid rgba(255,255,255,0.1);">
+          <span style="font-size: 2.2rem; font-weight: 900; color: #CD7F32;">R$ 99</span>
+          <span style="color: #94A3B8; font-size: 0.9rem; font-weight: 600;">/ mês</span>
         </div>
 
-        <a href="https://mpago.la/25UHZqr" target="_blank" rel="noopener" class="btn-plan-cta btn-cta-bronze">
-          Assinar Plano Destaque &rarr;
+        <p style="font-size: 0.88rem; color: #CBD5E1; margin-bottom: 18px; line-height: 1.4;">
+          Ideal para marcas regionais e fabricantes que desejam presença e autoridade no catálogo oficial.
+        </p>
+        
+        <ul style="list-style: none; padding: 0; margin: 0 0 24px 0;">
+          <li style="font-size: 0.85rem; color: #F1F5F9; margin-bottom: 10px; display: flex; align-items: center; gap: 8px;">
+            <span style="color: #22C55E; font-weight: 900;">✓</span> Logomarca em alta resolução na vitrine
+          </li>
+          <li style="font-size: 0.85rem; color: #F1F5F9; margin-bottom: 10px; display: flex; align-items: center; gap: 8px;">
+            <span style="color: #22C55E; font-weight: 900;">✓</span> Link direto para seu site oficial (DoFollow)
+          </li>
+          <li style="font-size: 0.85rem; color: #F1F5F9; margin-bottom: 10px; display: flex; align-items: center; gap: 8px;">
+            <span style="color: #22C55E; font-weight: 900;">✓</span> Botão direto para o WhatsApp de vendas
+          </li>
+          <li style="font-size: 0.85rem; color: #F1F5F9; margin-bottom: 10px; display: flex; align-items: center; gap: 8px;">
+            <span style="color: #22C55E; font-weight: 900;">✓</span> Selo de ✦ Marca Oficial Verificada
+          </li>
+        </ul>
+
+        <a href="https://mpago.la/25UHZqr" target="_blank" rel="noopener" style="display: block; width: 100%; text-align: center; background: linear-gradient(135deg, #E6A15C 0%, #A56525 100%); color: #FFFFFF; font-weight: 900; font-size: 0.95rem; padding: 15px; border-radius: 12px; text-decoration: none; box-shadow: 0 6px 18px rgba(205, 127, 50, 0.4); text-transform: uppercase;">
+          Assinar Plano Destaque →
         </a>
       </div>
 
-      <!-- PLANO 2: MARCA MASTER (HOME - MAIS VENDIDO) -->
-      <div class="plan-pricing-box featured-gold">
-        <span class="plan-badge-top">🔥 MAIS POPULAR</span>
-        <div>
-          <span class="plan-header-tag" style="color: #F5D77F;">★ Destaque Máximo na Home</span>
-          <h3 class="plan-title-main" style="color: #FFFFFF;">Marca Master</h3>
-          
-          <div class="plan-price-wrapper">
-            <span class="plan-price-val">R$ 199</span>
-            <span class="plan-price-period">/ mês</span>
-          </div>
-
-          <p class="plan-desc-text">Máxima exposição com sua logomarca no Carrossel da Home Principal acessado por milhares de visitantes diários.</p>
-          
-          <ul class="plan-features-list">
-            <li><span class="star-icon">★</span> <strong>Logo no Carrossel da Home Nacional</strong></li>
-            <li><span class="check-icon">✓</span> Tudo do plano Marca Destaque</li>
-            <li><span class="check-icon">✓</span> Posição privilegiada no topo da categoria</li>
-            <li><span class="check-icon">✓</span> Link direto para catálogo e e-commerce</li>
-            <li><span class="check-icon">✓</span> Relatório trimestral de cliques e visualizações</li>
-          </ul>
+      <!-- ==================== CARD 2: MARCA MASTER (R$ 199 - MAIS VENDIDO) ==================== -->
+      <div style="background: linear-gradient(160deg, #133363 0%, #071530 100%); border: 2.5px solid #F5D77F; border-radius: 20px; padding: 32px 22px; position: relative; box-shadow: 0 15px 40px rgba(245, 215, 127, 0.25);">
+        
+        <div style="position: absolute; top: -14px; right: 20px; background: #DC2626; color: #FFFFFF; font-size: 0.72rem; font-weight: 900; text-transform: uppercase; padding: 4px 12px; border-radius: 999px; letter-spacing: 0.5px; box-shadow: 0 4px 10px rgba(220,38,38,0.5);">
+          🔥 MAIS POPULAR
         </div>
 
-        <a href="https://mpago.la/2HBxp5v" target="_blank" rel="noopener" class="btn-plan-cta btn-cta-gold">
-          Assinar Plano Master (Home) &rarr;
+        <span style="font-size: 0.75rem; font-weight: 800; color: #F5D77F; text-transform: uppercase; letter-spacing: 1px;">
+          ★ Destaque Máximo na Home
+        </span>
+        <h3 style="font-size: 1.8rem; font-weight: 900; color: #FFFFFF; margin: 6px 0 10px 0;">
+          Marca Master
+        </h3>
+        
+        <div style="display: flex; align-items: baseline; gap: 6px; margin: 12px 0 16px 0; padding-bottom: 14px; border-bottom: 1px solid rgba(245, 215, 127, 0.3);">
+          <span style="font-size: 2.5rem; font-weight: 900; color: #F5D77F;">R$ 199</span>
+          <span style="color: #94A3B8; font-size: 0.95rem; font-weight: 600;">/ mês</span>
+        </div>
+
+        <p style="font-size: 0.9rem; color: #FFE0B2; margin-bottom: 18px; line-height: 1.4;">
+          Máxima exposição com sua logomarca no Carrossel da Home Principal acessado por milhares de visitantes diários.
+        </p>
+        
+        <ul style="list-style: none; padding: 0; margin: 0 0 24px 0;">
+          <li style="font-size: 0.88rem; color: #FFFFFF; margin-bottom: 10px; display: flex; align-items: center; gap: 8px;">
+            <span style="color: #F5D77F; font-weight: 900;">★</span> <strong>Logo no Carrossel da Home Nacional</strong>
+          </li>
+          <li style="font-size: 0.88rem; color: #FFFFFF; margin-bottom: 10px; display: flex; align-items: center; gap: 8px;">
+            <span style="color: #22C55E; font-weight: 900;">✓</span> Tudo do plano Marca Destaque
+          </li>
+          <li style="font-size: 0.88rem; color: #FFFFFF; margin-bottom: 10px; display: flex; align-items: center; gap: 8px;">
+            <span style="color: #22C55E; font-weight: 900;">✓</span> Posição privilegiada no topo da categoria
+          </li>
+          <li style="font-size: 0.88rem; color: #FFFFFF; margin-bottom: 10px; display: flex; align-items: center; gap: 8px;">
+            <span style="color: #22C55E; font-weight: 900;">✓</span> Link direto para catálogo e e-commerce
+          </li>
+          <li style="font-size: 0.88rem; color: #FFFFFF; margin-bottom: 10px; display: flex; align-items: center; gap: 8px;">
+            <span style="color: #22C55E; font-weight: 900;">✓</span> Relatório trimestral de cliques e visualizações
+          </li>
+        </ul>
+
+        <a href="https://mpago.la/2HBxp5v" target="_blank" rel="noopener" style="display: block; width: 100%; text-align: center; background: linear-gradient(135deg, #FFE259 0%, #FFA751 100%); color: #1A0D00; font-weight: 900; font-size: 1rem; padding: 16px; border-radius: 12px; text-decoration: none; box-shadow: 0 6px 25px rgba(245, 215, 127, 0.5); text-transform: uppercase;">
+          Assinar Plano Master (Home) →
         </a>
       </div>
 
-      <!-- PLANO 3: PATROCINADOR DIAMANTE -->
-      <div class="plan-pricing-box">
-        <div>
-          <span class="plan-header-tag" style="color: #93C5FD;">💎 Exclusividade Total</span>
-          <h3 class="plan-title-main">Patrocinador Diamante</h3>
-          
-          <div class="plan-price-wrapper">
-            <span class="plan-price-val" style="color: #93C5FD;">R$ 349</span>
-            <span class="plan-price-period">/ mês</span>
-          </div>
-
-          <p class="plan-desc-text">Presença em grande estilo na Home, no topo da Vitrine de Marcas e nos guias de cidades estratégicas.</p>
-          
-          <ul class="plan-features-list">
-            <li><span class="star-icon" style="color: #60A5FA;">★</span> <strong>Destaque Fixo no Topo do Portal</strong></li>
-            <li><span class="check-icon">✓</span> Presença no Carrossel da Home Nacional</li>
-            <li><span class="check-icon">✓</span> Exibição nos guias de cidades do seu estado</li>
-            <li><span class="check-icon">✓</span> Banner institucional e suporte prioritário</li>
-          </ul>
+      <!-- ==================== CARD 3: PATROCINADOR DIAMANTE (R$ 349) ==================== -->
+      <div style="background: linear-gradient(160deg, #071530 0%, #0d2244 100%); border: 2px solid rgba(96, 165, 250, 0.6); border-radius: 20px; padding: 28px 22px; box-shadow: 0 10px 30px rgba(0,0,0,0.5);">
+        <span style="font-size: 0.75rem; font-weight: 800; color: #60A5FA; text-transform: uppercase; letter-spacing: 1px;">
+          💎 Exclusividade Total
+        </span>
+        <h3 style="font-size: 1.6rem; font-weight: 900; color: #FFFFFF; margin: 6px 0 10px 0;">
+          Patrocinador Diamante
+        </h3>
+        
+        <div style="display: flex; align-items: baseline; gap: 6px; margin: 12px 0 16px 0; padding-bottom: 14px; border-bottom: 1px solid rgba(255,255,255,0.1);">
+          <span style="font-size: 2.2rem; font-weight: 900; color: #60A5FA;">R$ 349</span>
+          <span style="color: #94A3B8; font-size: 0.9rem; font-weight: 600;">/ mês</span>
         </div>
 
-        <a href="https://mpago.la/2HBxp5v" target="_blank" rel="noopener" class="btn-plan-cta btn-cta-diamante">
-          Assinar Patrocinador Diamante &rarr;
+        <p style="font-size: 0.88rem; color: #CBD5E1; margin-bottom: 18px; line-height: 1.4;">
+          Presença em grande estilo na Home, no topo da Vitrine de Marcas e nos guias de cidades estratégicas.
+        </p>
+        
+        <ul style="list-style: none; padding: 0; margin: 0 0 24px 0;">
+          <li style="font-size: 0.85rem; color: #F1F5F9; margin-bottom: 10px; display: flex; align-items: center; gap: 8px;">
+            <span style="color: #60A5FA; font-weight: 900;">★</span> <strong>Destaque Fixo no Topo do Portal</strong>
+          </li>
+          <li style="font-size: 0.85rem; color: #F1F5F9; margin-bottom: 10px; display: flex; align-items: center; gap: 8px;">
+            <span style="color: #22C55E; font-weight: 900;">✓</span> Presença no Carrossel da Home Nacional
+          </li>
+          <li style="font-size: 0.85rem; color: #F1F5F9; margin-bottom: 10px; display: flex; align-items: center; gap: 8px;">
+            <span style="color: #22C55E; font-weight: 900;">✓</span> Exibição nos guias de cidades do seu estado
+          </li>
+          <li style="font-size: 0.85rem; color: #F1F5F9; margin-bottom: 10px; display: flex; align-items: center; gap: 8px;">
+            <span style="color: #22C55E; font-weight: 900;">✓</span> Banner institucional e suporte prioritário
+          </li>
+        </ul>
+
+        <a href="https://mpago.la/2HBxp5v" target="_blank" rel="noopener" style="display: block; width: 100%; text-align: center; background: linear-gradient(135deg, #1E40AF 0%, #3B82F6 100%); color: #FFFFFF; font-weight: 900; font-size: 0.95rem; padding: 15px; border-radius: 12px; text-decoration: none; box-shadow: 0 6px 18px rgba(59,130,246,0.4); text-transform: uppercase;">
+          Assinar Patrocinador Diamante →
         </a>
       </div>
 
@@ -495,7 +357,6 @@ document.addEventListener('DOMContentLoaded', function() {
     }).join('');
   }
 
-  // Fetch Brands from Supabase with resilient fallback
   fetch('https://efvuzxdhsirpvxclgdfg.supabase.co/rest/v1/brands?status=eq.ativo&order=ordem.asc,criado_em.desc', {
     headers: {
       apikey: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVmdnV6eGRoc2lycHZ4Y2xnZGZnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODU1MDM1OTEsImV4cCI6MjEwMTA3OTU5MX0.nPVBBKO_W9-tAccFRv7ajnllxTXvkqbsVsYecDqyeQc',
