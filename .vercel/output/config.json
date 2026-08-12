@@ -3124,6 +3124,24 @@
     "assets/o-que-fazer-em-gramado.html": {
       "path": "assets/o-que-fazer-em-gramado"
     },
+    "b2b/cotacao-corporativa.html": {
+      "path": "b2b/cotacao-corporativa"
+    },
+    "b2b/fretamento-onibus-corporativo-campinas.html": {
+      "path": "b2b/fretamento-onibus-corporativo-campinas"
+    },
+    "b2b/fretamento-onibus-corporativo-sao-paulo.html": {
+      "path": "b2b/fretamento-onibus-corporativo-sao-paulo"
+    },
+    "b2b/reservas-hoteis-lote-eventos-barretos.html": {
+      "path": "b2b/reservas-hoteis-lote-eventos-barretos"
+    },
+    "b2b/reservas-hoteis-lote-tripulacoes-sao-paulo.html": {
+      "path": "b2b/reservas-hoteis-lote-tripulacoes-sao-paulo"
+    },
+    "b2b/transporte-rodoviario-funcionarios-grande-sp.html": {
+      "path": "b2b/transporte-rodoviario-funcionarios-grande-sp"
+    },
     "contingencia/assentos-promocionais-sp-para-barretos.html": {
       "path": "contingencia/assentos-promocionais-sp-para-barretos"
     },
@@ -3162,6 +3180,24 @@
     },
     "docs/planCards.html": {
       "path": "docs/planCards"
+    },
+    "en/cheap-private-transfer-gru-airport-to-sao-paulo.html": {
+      "path": "en/cheap-private-transfer-gru-airport-to-sao-paulo"
+    },
+    "en/emergency-hotels-near-guarulhos-airport.html": {
+      "path": "en/emergency-hotels-near-guarulhos-airport"
+    },
+    "en/last-minute-flights-miami-to-sao-paulo-gru.html": {
+      "path": "en/last-minute-flights-miami-to-sao-paulo-gru"
+    },
+    "es/hoteles-y-pousadas-con-descuento-en-brasil.html": {
+      "path": "es/hoteles-y-pousadas-con-descuento-en-brasil"
+    },
+    "es/traslados-privados-aeropuerto-gru-a-sao-paulo.html": {
+      "path": "es/traslados-privados-aeropuerto-gru-a-sao-paulo"
+    },
+    "es/vuelos-baratos-buenos-aires-a-sao-paulo-gru.html": {
+      "path": "es/vuelos-baratos-buenos-aires-a-sao-paulo-gru"
     },
     "marcas/descontos-cervejaria-colorado-hoje.html": {
       "path": "marcas/descontos-cervejaria-colorado-hoje"
