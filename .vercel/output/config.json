@@ -3091,6 +3091,54 @@
     }
   ],
   "overrides": {
+    "achadinhos/amazon/mala-bordo-anac-amazon-50-off.html": {
+      "path": "achadinhos/amazon/mala-bordo-anac-amazon-50-off"
+    },
+    "achadinhos/amazon/powerbank-20000mah-amazon-60-off.html": {
+      "path": "achadinhos/amazon/powerbank-20000mah-amazon-60-off"
+    },
+    "achadinhos/mercadolivre/conjunto-panelas-antiaderente-ml-65-off.html": {
+      "path": "achadinhos/mercadolivre/conjunto-panelas-antiaderente-ml-65-off"
+    },
+    "achadinhos/shein/bota-texana-country-shein-70-off.html": {
+      "path": "achadinhos/shein/bota-texana-country-shein-70-off"
+    },
+    "achadinhos/shein/kit-vestidos-femininos-shein-80-off.html": {
+      "path": "achadinhos/shein/kit-vestidos-femininos-shein-80-off"
+    },
+    "achadinhos/shopee/fone-bluetooth-tws-shopee-75-off.html": {
+      "path": "achadinhos/shopee/fone-bluetooth-tws-shopee-75-off"
+    },
+    "achadinhos/shopee/kit-organizadores-viagem-shopee-65-off.html": {
+      "path": "achadinhos/shopee/kit-organizadores-viagem-shopee-65-off"
+    },
+    "achadinhos/shopee/kit-pinceis-maquiagem-shopee-70-off.html": {
+      "path": "achadinhos/shopee/kit-pinceis-maquiagem-shopee-70-off"
+    },
+    "achadinhos-descontos/achadinhos-amazon-viagem-malas-acessorios.html": {
+      "path": "achadinhos-descontos/achadinhos-amazon-viagem-malas-acessorios"
+    },
+    "achadinhos-descontos/achadinhos-mercado-livre-ofertas-do-dia-frete-gratis.html": {
+      "path": "achadinhos-descontos/achadinhos-mercado-livre-ofertas-do-dia-frete-gratis"
+    },
+    "achadinhos-descontos/achadinhos-shein-moda-country-festa-do-peao.html": {
+      "path": "achadinhos-descontos/achadinhos-shein-moda-country-festa-do-peao"
+    },
+    "achadinhos-descontos/achadinhos-shopee-casa-decoracao-cozinha.html": {
+      "path": "achadinhos-descontos/achadinhos-shopee-casa-decoracao-cozinha"
+    },
+    "achadinhos-descontos/achadinhos-shopee-eletronicos-celulares-baratos.html": {
+      "path": "achadinhos-descontos/achadinhos-shopee-eletronicos-celulares-baratos"
+    },
+    "achadinhos-descontos/cupom-shein-brasil-desconto-roupas-femininas.html": {
+      "path": "achadinhos-descontos/cupom-shein-brasil-desconto-roupas-femininas"
+    },
+    "achadinhos-descontos/cupom-shopee-frete-gratis-hoje-brasil.html": {
+      "path": "achadinhos-descontos/cupom-shopee-frete-gratis-hoje-brasil"
+    },
+    "achadinhos-descontos/ofertas-relampago-amazon-brasil-hoje.html": {
+      "path": "achadinhos-descontos/ofertas-relampago-amazon-brasil-hoje"
+    },
     "alerta/onibus-jabaquara-santos-atraso.html": {
       "path": "alerta/onibus-jabaquara-santos-atraso"
     },
