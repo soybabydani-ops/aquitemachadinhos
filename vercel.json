@@ -1073,6 +1073,46 @@
   ],
   "rewrites": [
     {
+      "source": "/eventos/:slug",
+      "destination": "/eventos/:slug.html"
+    },
+    {
+      "source": "/eventos",
+      "destination": "/eventos/index.html"
+    },
+    {
+      "source": "/cupons-ativos/:slug",
+      "destination": "/cupons-ativos/:slug.html"
+    },
+    {
+      "source": "/cupons-ativos",
+      "destination": "/cupons-ativos/index.html"
+    },
+    {
+      "source": "/consultas/:slug",
+      "destination": "/consultas/:slug.html"
+    },
+    {
+      "source": "/consultas",
+      "destination": "/consultas/index.html"
+    },
+    {
+      "source": "/barretos-2026/:slug",
+      "destination": "/barretos-2026/:slug.html"
+    },
+    {
+      "source": "/barretos-2026",
+      "destination": "/barretos-2026/index.html"
+    },
+    {
+      "source": "/looks/:slug",
+      "destination": "/looks/:slug.html"
+    },
+    {
+      "source": "/looks",
+      "destination": "/looks/index.html"
+    },
+    {
       "source": "/alerta-transito/:slug",
       "destination": "/alerta-transito/:slug.html"
     },
