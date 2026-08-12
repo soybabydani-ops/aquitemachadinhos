@@ -1,6 +1,6 @@
 /**
  * AQUI TEM ACHADINHOS — HIGH-SPEED AFFILIATE TRACKER & DYNAMIC INJECTOR (< 20ms)
- * Rede Global: Discover Cars, Udemy (Impact 1101l435760), Hotmart, Monetizze, Kiwify, ClickBank, Wise, Shopee, Amazon, SHEIN, ML
+ * Rede Global: Expedia, Discover Cars, Udemy (Impact 1101l435760), Hotmart, Monetizze, Kiwify, ClickBank, Wise, Shopee, Amazon, SHEIN, ML
  */
 
 (function(window, document) {
@@ -9,9 +9,10 @@
   const SUPABASE_URL = "https://efvuzxdhsirpvxclgdfg.supabase.co/rest/v1";
   const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVmdnV6eGRoc2lycHZ4Y2xnZGZnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODU1MDM1OTEsImV4cCI6MjEwMTA3OTU5MX0.nPVBBKO_W9-tAccFRv7ajnllxTXvkqbsVsYecDqyeQc";
   
+  const EXPEDIA_BASE_LINK = "https://expedia.com/affiliate/Kfv4vlu";
   const DISCOVER_CARS_DEFAULT = "https://www.discovercars.com/?a_aid=Aquitemachadinhos";
   const IMPACT_UDEMY_DEFAULT = "https://udemy.sjv.io/c/1101l435760/aquitem_cursos";
-  const CACHE_KEY = "aquitem_aff_cache_v4";
+  const CACHE_KEY = "aquitem_aff_cache_v5";
   const MEM_CACHE = new Map();
 
   // 1. Resolução em menos de 20ms a partir do cache local
@@ -49,7 +50,10 @@
     let platform = 'Geral';
     let category = 'Geral';
 
-    if (path.includes('aluguel-carros') || path.includes('car-rental') || path.includes('discovercars') || path.includes('locacao-carros')) {
+    if (path.includes('expedia') || path.includes('pacotes-viagem') || path.includes('viagens-vip') || path.includes('cruzeiros') || path.includes('resorts-luxo')) {
+      platform = 'Expedia Global Partner';
+      category = 'Turismo_Global_High_Ticket';
+    } else if (path.includes('aluguel-carros') || path.includes('car-rental') || path.includes('discovercars') || path.includes('locacao-carros')) {
       platform = 'Discover Cars Oficial';
       category = 'Locacao_Veiculos_High_Ticket';
     } else if (path.includes('/cursos') || path.includes('udemy') || path.includes('capacitacao') || path.includes('treinamento')) {
@@ -81,7 +85,7 @@
     const t0 = performance.now();
 
     // Seletores de botões e links de ação
-    const targets = document.querySelectorAll('a[href*="discovercars"], a[data-discovercars], a[data-rental], a[href*="udemy"], a[href*="sjv.io"], a[href*="ir.html"], a.btn-action, a.btn-afiliado, a.btn-comprar, a.btn-gold-action, a[data-impact], a[data-udemy], a[data-tracking]');
+    const targets = document.querySelectorAll('a[href*="expedia"], a[data-expedia], a[data-tourism], a[href*="discovercars"], a[data-discovercars], a[data-rental], a[href*="udemy"], a[href*="sjv.io"], a[href*="ir.html"], a.btn-action, a.btn-afiliado, a.btn-comprar, a.btn-gold-action, a[data-impact], a[data-udemy], a[data-tracking]');
 
     // Se já estiver em cache, injeta instantaneamente (< 1ms)
     const cachedUrl = getCachedLink(ctx.category);
@@ -105,7 +109,10 @@
       if (res.ok) {
         const rows = await res.json();
         if (rows && rows.length > 0) {
-          const fallback = ctx.category === 'Locacao_Veiculos_High_Ticket' ? DISCOVER_CARS_DEFAULT : IMPACT_UDEMY_DEFAULT;
+          let fallback = IMPACT_UDEMY_DEFAULT;
+          if (ctx.category === 'Turismo_Global_High_Ticket') fallback = EXPEDIA_BASE_LINK;
+          else if (ctx.category === 'Locacao_Veiculos_High_Ticket') fallback = DISCOVER_CARS_DEFAULT;
+
           const mainLink = rows[0].link_afiliado_final || fallback;
           setCachedLink(ctx.category, mainLink);
           
@@ -144,7 +151,10 @@
     
     let comissao = 15.00;
     let moeda = 'BRL';
-    if (ctx.platform.includes('Discover Cars')) {
+    if (ctx.platform.includes('Expedia')) {
+      comissao = 45.00; // USD
+      moeda = 'USD';
+    } else if (ctx.platform.includes('Discover Cars')) {
       comissao = 18.50; // USD
       moeda = 'USD';
     } else if (ctx.platform.includes('Udemy') || ctx.platform.includes('Impact')) {
