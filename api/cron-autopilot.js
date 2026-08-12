@@ -62,6 +62,7 @@ module.exports = async function handler(req, res) {
       `https://${HOST}/investimentos/pontos-comerciais-e-terrenos-em-sao-paulo.html`,
       `https://${HOST}/infoprodutos/clube-invest-v3.html`,
       `https://${HOST}/clube-invest/como-destravar-independencia-financeira.html`,
+      `https://${HOST}/energy-system/how-to-lower-electricity-bills-at-home-legally.html`,
       `https://${HOST}/hedge/corporate-jet-insurance-fleet-liability.html`,
       `https://${HOST}/logistica-pesada/sao-paulo-fretamento-industrial.html`,
       `https://${HOST}/en/destinations/orlando-cheap-flights-hotel-deals.html`,
