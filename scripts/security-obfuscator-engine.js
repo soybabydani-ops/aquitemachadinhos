@@ -79,12 +79,14 @@ function compileSecurityShield() {
   fs.writeFileSync(shieldPath, obfuscatedShield, 'utf8');
   console.log("✓ assets/security-shield.js compilado com detecção de interação humana.");
 
+  const rawTrackerPath = path.join(REPO_ROOT, 'assets', 'affiliate-tracker.raw.js');
   const trackerPath = path.join(REPO_ROOT, 'assets', 'affiliate-tracker.js');
-  if (fs.existsSync(trackerPath)) {
-    const trackerRaw = fs.readFileSync(trackerPath, 'utf8');
+  
+  if (fs.existsSync(rawTrackerPath)) {
+    const trackerRaw = fs.readFileSync(rawTrackerPath, 'utf8');
     const obfuscatedTracker = obfuscateJS(trackerRaw);
     fs.writeFileSync(trackerPath, obfuscatedTracker, 'utf8');
-    console.log("✓ assets/affiliate-tracker.js ofuscado e protegido contra bots.");
+    console.log("✓ assets/affiliate-tracker.js ofuscado a partir do fonte limpo.");
   }
 }
 
