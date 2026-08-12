@@ -60,6 +60,7 @@ module.exports = async function handler(req, res) {
       `https://${HOST}/destinos/paris-passagens-hoteis-baratos.html`,
       `https://${HOST}/luxo/fretamento-jato-executivo-sao-paulo-catarina-trancoso.html`,
       `https://${HOST}/investimentos/pontos-comerciais-e-terrenos-em-sao-paulo.html`,
+      `https://${HOST}/infoprodutos/clube-invest-v3.html`,
       `https://${HOST}/hedge/corporate-jet-insurance-fleet-liability.html`,
       `https://${HOST}/logistica-pesada/sao-paulo-fretamento-industrial.html`,
       `https://${HOST}/en/destinations/orlando-cheap-flights-hotel-deals.html`,
