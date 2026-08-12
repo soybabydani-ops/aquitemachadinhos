@@ -74,7 +74,8 @@ module.exports = async function handler(req, res) {
       `https://${HOST}/alerta-transito/rodovia-presidente-dutra-travada.html`,
       `https://${HOST}/concursos/barretos-inscricoes-abertas.html`,
       `https://${HOST}/alerta-clima/barretos-alerta-meteorologico.html`,
-      `https://${HOST}/pinterest-catalog.xml`
+      `https://${HOST}/pinterest-catalog.xml`,
+      `https://${HOST}/pinterest-global-catalog.xml`
     ];
 
     // 2. Disparo IndexNow Multi-Endpoint
