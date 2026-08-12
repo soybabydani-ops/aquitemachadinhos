@@ -26,6 +26,8 @@ Deno.serve(async (req: Request) => {
 
     if (payload.action === "test" || record.action === "test") {
       msg = `🚀 <b>[AQUITEM BOT TEST]</b> Protocolo de Sincronização de Notificações ao Vivo no Telegram ATIVADO com sucesso! Comunicação 100% operacional.`;
+    } else if (platLower.includes("cj") || platLower.includes("marriott") || platLower.includes("ihg") || platLower.includes("samsonite") || platLower.includes("tumi") || record.categoria === "Premium_Luxo_CJ_USD") {
+      msg = `💎 <b>ALERTA HIGH-TICKET (CJ Affiliate Luxo USD)</b>\n🚁 Reserva VIP Acionada! Suíte Presidencial/Resort 5★/Bagagem TUMI em <b>${cidade}</b>.\n💰 Comissão estimada em moeda forte: <b>${comissao}</b>\n🔗 Rota: ${rota}`;
     } else if (platLower.includes("expedia") || platLower.includes("discover") || platLower.includes("luxo") || platLower.includes("hedge")) {
       msg = `🔵 <b>ALERTA VIP (Viagens / High-Ticket)</b>\n✈️ Logística Acionada! Clique em andamento para reserva de hotel/voo/veículo na <b>${plataforma}</b> vindo do acesso de <b>${cidade}</b>.\n💰 Potencial de comissão bruta ativado! (${comissao})\n🔗 Rota: ${rota}`;
     } else if (platLower.includes("hotmart") || platLower.includes("monetizze") || platLower.includes("kiwify") || platLower.includes("udemy") || platLower.includes("clickbank")) {

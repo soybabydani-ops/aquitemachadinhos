@@ -1,6 +1,6 @@
 /**
  * AQUI TEM ACHADINHOS — HIGH-SPEED AFFILIATE TRACKER & DYNAMIC INJECTOR (< 20ms)
- * Rede Global: Expedia, Discover Cars, Udemy (Impact 1101l435760), Hotmart, Monetizze, Kiwify, ClickBank, Wise, Shopee, Amazon, SHEIN, ML
+ * Rede Global: CJ Affiliate Luxury (Marriott/IHG/Samsonite/TUMI), Expedia, Discover Cars, Udemy, Hotmart, Kiwify, Monetizze, ClickBank, Wise, Shopee, Amazon, SHEIN, ML
  */
 
 (function(window, document) {
@@ -9,10 +9,11 @@
   const SUPABASE_URL = "https://efvuzxdhsirpvxclgdfg.supabase.co/rest/v1";
   const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVmdnV6eGRoc2lycHZ4Y2xnZGZnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODU1MDM1OTEsImV4cCI6MjEwMTA3OTU5MX0.nPVBBKO_W9-tAccFRv7ajnllxTXvkqbsVsYecDqyeQc";
   
+  const CJ_LUXURY_DEFAULT = "https://www.anrdoezrs.net/click-101143576-15783291";
   const EXPEDIA_BASE_LINK = "https://expedia.com/affiliate/Kfv4vlu";
   const DISCOVER_CARS_DEFAULT = "https://www.discovercars.com/?a_aid=Aquitemachadinhos";
   const IMPACT_UDEMY_DEFAULT = "https://udemy.sjv.io/c/1101l435760/aquitem_cursos";
-  const CACHE_KEY = "aquitem_aff_cache_v5";
+  const CACHE_KEY = "aquitem_aff_cache_v6";
   const MEM_CACHE = new Map();
 
   // 1. Resolução em menos de 20ms a partir do cache local
@@ -41,7 +42,7 @@
     } catch (e) {}
   }
 
-  // 2. Detecção rápida de cidade e plataforma da URL
+  // 2. Detecção rápida de contexto, plataforma e categoria
   function detectContext() {
     const path = window.location.pathname.toLowerCase();
     const params = new URLSearchParams(window.location.search);
@@ -50,7 +51,10 @@
     let platform = 'Geral';
     let category = 'Geral';
 
-    if (path.includes('expedia') || path.includes('pacotes-viagem') || path.includes('viagens-vip') || path.includes('cruzeiros') || path.includes('resorts-luxo')) {
+    if (path.includes('luxo-vip') || path.includes('jdoqocy') || path.includes('anrdoezrs') || path.includes('marriott') || path.includes('ihg') || path.includes('samsonite') || path.includes('tumi') || path.includes('presidencial')) {
+      platform = 'CJ Affiliate Luxury';
+      category = 'Premium_Luxo_CJ_USD';
+    } else if (path.includes('expedia') || path.includes('pacotes-viagem') || path.includes('viagens-vip') || path.includes('cruzeiros') || path.includes('resorts-luxo')) {
       platform = 'Expedia Global Partner';
       category = 'Turismo_Global_High_Ticket';
     } else if (path.includes('aluguel-carros') || path.includes('car-rental') || path.includes('discovercars') || path.includes('locacao-carros')) {
@@ -85,7 +89,7 @@
     const t0 = performance.now();
 
     // Seletores de botões e links de ação
-    const targets = document.querySelectorAll('a[href*="expedia"], a[data-expedia], a[data-tourism], a[href*="discovercars"], a[data-discovercars], a[data-rental], a[href*="udemy"], a[href*="sjv.io"], a[href*="ir.html"], a.btn-action, a.btn-afiliado, a.btn-comprar, a.btn-gold-action, a[data-impact], a[data-udemy], a[data-tracking]');
+    const targets = document.querySelectorAll('a[href*="jdoqocy"], a[href*="anrdoezrs"], a[data-cj], a[data-luxury], a[href*="expedia"], a[data-expedia], a[data-tourism], a[href*="discovercars"], a[data-discovercars], a[data-rental], a[href*="udemy"], a[href*="sjv.io"], a[href*="ir.html"], a.btn-action, a.btn-afiliado, a.btn-comprar, a.btn-gold-action, a[data-impact], a[data-udemy], a[data-tracking]');
 
     // Se já estiver em cache, injeta instantaneamente (< 1ms)
     const cachedUrl = getCachedLink(ctx.category);
@@ -110,7 +114,8 @@
         const rows = await res.json();
         if (rows && rows.length > 0) {
           let fallback = IMPACT_UDEMY_DEFAULT;
-          if (ctx.category === 'Turismo_Global_High_Ticket') fallback = EXPEDIA_BASE_LINK;
+          if (ctx.category === 'Premium_Luxo_CJ_USD') fallback = CJ_LUXURY_DEFAULT;
+          else if (ctx.category === 'Turismo_Global_High_Ticket') fallback = EXPEDIA_BASE_LINK;
           else if (ctx.category === 'Locacao_Veiculos_High_Ticket') fallback = DISCOVER_CARS_DEFAULT;
 
           const mainLink = rows[0].link_afiliado_final || fallback;
@@ -151,7 +156,10 @@
     
     let comissao = 15.00;
     let moeda = 'BRL';
-    if (ctx.platform.includes('Expedia')) {
+    if (ctx.platform.includes('CJ Affiliate') || ctx.category === 'Premium_Luxo_CJ_USD') {
+      comissao = 185.00; // USD High-Ticket
+      moeda = 'USD';
+    } else if (ctx.platform.includes('Expedia')) {
       comissao = 45.00; // USD
       moeda = 'USD';
     } else if (ctx.platform.includes('Discover Cars')) {
