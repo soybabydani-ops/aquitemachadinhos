@@ -1494,6 +1494,56 @@
       "handle": "filesystem"
     },
     {
+      "src": "^/eventos(?:/([^/]+?))$",
+      "dest": "/eventos/$1.html",
+      "check": true
+    },
+    {
+      "src": "^/eventos$",
+      "dest": "/eventos/index.html",
+      "check": true
+    },
+    {
+      "src": "^/cupons-ativos(?:/([^/]+?))$",
+      "dest": "/cupons-ativos/$1.html",
+      "check": true
+    },
+    {
+      "src": "^/cupons-ativos$",
+      "dest": "/cupons-ativos/index.html",
+      "check": true
+    },
+    {
+      "src": "^/consultas(?:/([^/]+?))$",
+      "dest": "/consultas/$1.html",
+      "check": true
+    },
+    {
+      "src": "^/consultas$",
+      "dest": "/consultas/index.html",
+      "check": true
+    },
+    {
+      "src": "^/barretos-2026(?:/([^/]+?))$",
+      "dest": "/barretos-2026/$1.html",
+      "check": true
+    },
+    {
+      "src": "^/barretos-2026$",
+      "dest": "/barretos-2026/index.html",
+      "check": true
+    },
+    {
+      "src": "^/looks(?:/([^/]+?))$",
+      "dest": "/looks/$1.html",
+      "check": true
+    },
+    {
+      "src": "^/looks$",
+      "dest": "/looks/index.html",
+      "check": true
+    },
+    {
       "src": "^/alerta-transito(?:/([^/]+?))$",
       "dest": "/alerta-transito/$1.html",
       "check": true
@@ -4293,6 +4343,27 @@
     "b2b/transporte-rodoviario-funcionarios-grande-sp.html": {
       "path": "b2b/transporte-rodoviario-funcionarios-grande-sp"
     },
+    "barretos-2026/biometria-facial-festa-do-peao-barretos.html": {
+      "path": "barretos-2026/biometria-facial-festa-do-peao-barretos"
+    },
+    "barretos-2026/horarios-shows-gusttavo-lima-ana-castela-barretos.html": {
+      "path": "barretos-2026/horarios-shows-gusttavo-lima-ana-castela-barretos"
+    },
+    "barretos-2026/index.html": {
+      "path": "barretos-2026/index"
+    },
+    "barretos-2026/pacotes-hospedagem-bate-volta-barretos-2026.html": {
+      "path": "barretos-2026/pacotes-hospedagem-bate-volta-barretos-2026"
+    },
+    "barretos-2026/passagem-onibus-tiete-para-barretos-festa-do-peao.html": {
+      "path": "barretos-2026/passagem-onibus-tiete-para-barretos-festa-do-peao"
+    },
+    "barretos-2026/programacao-oficial-ingressos-remanescentes-barretos.html": {
+      "path": "barretos-2026/programacao-oficial-ingressos-remanescentes-barretos"
+    },
+    "barretos-2026/vagas-camping-estacionamento-parque-do-peao.html": {
+      "path": "barretos-2026/vagas-camping-estacionamento-parque-do-peao"
+    },
     "concursos/alter-do-chao-inscricoes-abertas.html": {
       "path": "concursos/alter-do-chao-inscricoes-abertas"
     },
@@ -4488,6 +4559,24 @@
     "concursos/vitoria-inscricoes-abertas.html": {
       "path": "concursos/vitoria-inscricoes-abertas"
     },
+    "consultas/calendario-de-pagamentos-bolsa-familia-2026.html": {
+      "path": "consultas/calendario-de-pagamentos-bolsa-familia-2026"
+    },
+    "consultas/calendario-de-pagamentos-fgts-saque-aniversario-2026.html": {
+      "path": "consultas/calendario-de-pagamentos-fgts-saque-aniversario-2026"
+    },
+    "consultas/calendario-de-pagamentos-inss-aposentados-2026.html": {
+      "path": "consultas/calendario-de-pagamentos-inss-aposentados-2026"
+    },
+    "consultas/calendario-de-pagamentos-pis-pasep-2026.html": {
+      "path": "consultas/calendario-de-pagamentos-pis-pasep-2026"
+    },
+    "consultas/calendario-de-pagamentos-prouni-fies-inscricoes-2026.html": {
+      "path": "consultas/calendario-de-pagamentos-prouni-fies-inscricoes-2026"
+    },
+    "consultas/index.html": {
+      "path": "consultas/index"
+    },
     "contingencia/assentos-promocionais-sp-para-barretos.html": {
       "path": "contingencia/assentos-promocionais-sp-para-barretos"
     },
@@ -4502,6 +4591,27 @@
     },
     "contingencia/painel-vagas-ultimahora-guarulhos-rio.html": {
       "path": "contingencia/painel-vagas-ultimahora-guarulhos-rio"
+    },
+    "cupons-ativos/bug-de-preco-air-fryer-8l-digital-inox-shopee-mercado-livre.html": {
+      "path": "cupons-ativos/bug-de-preco-air-fryer-8l-digital-inox-shopee-mercado-livre"
+    },
+    "cupons-ativos/bug-de-preco-fone-bluetooth-tws-noise-cancelling-amazon.html": {
+      "path": "cupons-ativos/bug-de-preco-fone-bluetooth-tws-noise-cancelling-amazon"
+    },
+    "cupons-ativos/bug-de-preco-jogo-panelas-ceramica-inducao-mercado-livre.html": {
+      "path": "cupons-ativos/bug-de-preco-jogo-panelas-ceramica-inducao-mercado-livre"
+    },
+    "cupons-ativos/bug-de-preco-kit-vestidos-femininos-shein.html": {
+      "path": "cupons-ativos/bug-de-preco-kit-vestidos-femininos-shein"
+    },
+    "cupons-ativos/bug-de-preco-robo-aspirador-inteligente-mop-shopee.html": {
+      "path": "cupons-ativos/bug-de-preco-robo-aspirador-inteligente-mop-shopee"
+    },
+    "cupons-ativos/bug-de-preco-smart-tv-50-4k-uhd-mercado-livre.html": {
+      "path": "cupons-ativos/bug-de-preco-smart-tv-50-4k-uhd-mercado-livre"
+    },
+    "cupons-ativos/index.html": {
+      "path": "cupons-ativos/index"
     },
     "desconto-aplicado/barretos-para-sao-paulo-passagens-madrugada-baratas.html": {
       "path": "desconto-aplicado/barretos-para-sao-paulo-passagens-madrugada-baratas"
@@ -4544,6 +4654,51 @@
     },
     "es/vuelos-baratos-buenos-aires-a-sao-paulo-gru.html": {
       "path": "es/vuelos-baratos-buenos-aires-a-sao-paulo-gru"
+    },
+    "eventos/bruno-mars-em-sao-paulo-como-chegar-hoteis.html": {
+      "path": "eventos/bruno-mars-em-sao-paulo-como-chegar-hoteis"
+    },
+    "eventos/coldplay-em-sao-paulo-como-chegar-hoteis.html": {
+      "path": "eventos/coldplay-em-sao-paulo-como-chegar-hoteis"
+    },
+    "eventos/gusttavo-lima-ana-castela-sao-paulo-como-chegar-hoteis.html": {
+      "path": "eventos/gusttavo-lima-ana-castela-sao-paulo-como-chegar-hoteis"
+    },
+    "eventos/index.html": {
+      "path": "eventos/index"
+    },
+    "eventos/lollapalooza-brasil-como-chegar-hoteis.html": {
+      "path": "eventos/lollapalooza-brasil-como-chegar-hoteis"
+    },
+    "eventos/shakira-em-sao-paulo-como-chegar-hoteis.html": {
+      "path": "eventos/shakira-em-sao-paulo-como-chegar-hoteis"
+    },
+    "eventos/the-town-festival-sao-paulo-como-chegar-hoteis.html": {
+      "path": "eventos/the-town-festival-sao-paulo-como-chegar-hoteis"
+    },
+    "looks/bota-texana-feminina-barretos-shein.html": {
+      "path": "looks/bota-texana-feminina-barretos-shein"
+    },
+    "looks/botas-goyazes-cupom-shopee.html": {
+      "path": "looks/botas-goyazes-cupom-shopee"
+    },
+    "looks/calca-jeans-country-flare-bordada-shopee.html": {
+      "path": "looks/calca-jeans-country-flare-bordada-shopee"
+    },
+    "looks/camisa-western-xadrez-mangalarga-amazon.html": {
+      "path": "looks/camisa-western-xadrez-mangalarga-amazon"
+    },
+    "looks/chapeu-pralana-barretos-promocao.html": {
+      "path": "looks/chapeu-pralana-barretos-promocao"
+    },
+    "looks/cinto-country-fivela-boiadeiro-shein.html": {
+      "path": "looks/cinto-country-fivela-boiadeiro-shein"
+    },
+    "looks/index.html": {
+      "path": "looks/index"
+    },
+    "looks/jaqueta-couro-franjas-ana-castela-barretos.html": {
+      "path": "looks/jaqueta-couro-franjas-ana-castela-barretos"
     },
     "marcas/descontos-cervejaria-colorado-hoje.html": {
       "path": "marcas/descontos-cervejaria-colorado-hoje"

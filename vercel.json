@@ -1073,6 +1073,38 @@
   ],
   "rewrites": [
     {
+      "source": "/destinos/:slug",
+      "destination": "/destinos/:slug.html"
+    },
+    {
+      "source": "/destinos",
+      "destination": "/destinos/index.html"
+    },
+    {
+      "source": "/en/destinations/:slug",
+      "destination": "/en/destinations/:slug.html"
+    },
+    {
+      "source": "/en/destinations",
+      "destination": "/en/destinations/index.html"
+    },
+    {
+      "source": "/es/destinos/:slug",
+      "destination": "/es/destinos/:slug.html"
+    },
+    {
+      "source": "/es/destinos",
+      "destination": "/es/destinos/index.html"
+    },
+    {
+      "source": "/malas-e-viagem/:slug",
+      "destination": "/malas-e-viagem/:slug.html"
+    },
+    {
+      "source": "/malas-e-viagem",
+      "destination": "/malas-e-viagem/index.html"
+    },
+    {
       "source": "/eventos/:slug",
       "destination": "/eventos/:slug.html"
     },

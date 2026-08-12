@@ -56,7 +56,11 @@ module.exports = async function handler(req, res) {
     const priorityUrls = [
       `https://${HOST}/viagens.html`,
       `https://${HOST}/captura-tarifas-bug.html`,
-      `https://${HOST}/scanner-tarifas-ocultas.html`,
+      `https://${HOST}/destinos/orlando-passagens-hoteis-baratos.html`,
+      `https://${HOST}/destinos/paris-passagens-hoteis-baratos.html`,
+      `https://${HOST}/en/destinations/orlando-cheap-flights-hotel-deals.html`,
+      `https://${HOST}/es/destinos/cancun-vuelos-baratos-hoteles.html`,
+      `https://${HOST}/malas-e-viagem/kit-malas-viagem-rigidas-360-tsa-amazon-promocao.html`,
       `https://${HOST}/eventos/shakira-em-sao-paulo-como-chegar-hoteis.html`,
       `https://${HOST}/cupons-ativos/bug-de-preco-air-fryer-8l-digital-inox-shopee-mercado-livre.html`,
       `https://${HOST}/consultas/calendario-de-pagamentos-bolsa-familia-2026.html`,
