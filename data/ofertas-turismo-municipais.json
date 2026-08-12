@@ -1,0 +1,1210 @@
+{
+  "schema_version": "2.0.0",
+  "generated_at": "2026-08-12T21:35:56.677Z",
+  "portal": {
+    "name": "Aqui Tem Achadinhos",
+    "canonical_domain": "https://www.aquitemachadinhos.com.br",
+    "contact": "contato@aquitemachadinhos.com.br",
+    "license": "Open Data Commons Open Database License (ODbL)"
+  },
+  "verticals": [
+    {
+      "id": "turismo_vip_expedia",
+      "nome": "Turismo Global VIP & Cruzeiros",
+      "url_hub": "https://www.aquitemachadinhos.com.br/pacotes-viagem",
+      "parceiro": "Expedia Group",
+      "rotas_em_destaque": [
+        "https://www.aquitemachadinhos.com.br/pacotes-viagem/pacotes-cruzeiros-maritimos-resorts-all-inclusive-promocao",
+        "https://www.aquitemachadinhos.com.br/pacotes-viagem/bugs-passagens-aereas-internacionais-orlando",
+        "https://www.aquitemachadinhos.com.br/pacotes-viagem/bugs-passagens-aereas-internacionais-paris"
+      ]
+    },
+    {
+      "id": "locacao_veicular_discovercars",
+      "nome": "Aluguel de Carros & Frotas Executivas",
+      "url_hub": "https://www.aquitemachadinhos.com.br/aluguel-carros",
+      "parceiro": "Discover Cars",
+      "rotas_em_destaque": [
+        "https://www.aquitemachadinhos.com.br/aluguel-carros/aluguel-carros-blindados-utilitarios-sao-paulo-guarulhos",
+        "https://www.aquitemachadinhos.com.br/aluguel-carros/como-conseguir-desconto-locacao-veiculos-festa-peao-barretos",
+        "https://www.aquitemachadinhos.com.br/aluguel-carros/luxury-car-hire-suv-rentals-tokyo-haneda"
+      ]
+    },
+    {
+      "id": "alto_luxo_cj",
+      "nome": "Suítes Presidenciais & Malas TUMI/Samsonite",
+      "url_hub": "https://www.aquitemachadinhos.com.br/luxo-vip",
+      "parceiro": "CJ Affiliate (Marriott / IHG / TUMI)",
+      "rotas_em_destaque": [
+        "https://www.aquitemachadinhos.com.br/luxo-vip/reservas-suites-presidenciais-resorts-luxo-heliponto-sao-paulo",
+        "https://www.aquitemachadinhos.com.br/luxo-vip/melhores-malas-bordo-alta-resistencia-samsonite-tumi-promocao",
+        "https://www.aquitemachadinhos.com.br/luxo-vip/luxury-5star-hotels-presidential-suites-dubai"
+      ]
+    },
+    {
+      "id": "educacao_capacitacao_udemy",
+      "nome": "Cursos Online com Certificado & TI",
+      "url_hub": "https://www.aquitemachadinhos.com.br/cursos",
+      "parceiro": "Udemy Brasil (Impact Radius)",
+      "rotas_em_destaque": [
+        "https://www.aquitemachadinhos.com.br/cursos/cupom-desconto-promocoes-relampago-udemy-hoje",
+        "https://www.aquitemachadinhos.com.br/cursos/cursos-inteligencia-artificial-chatgpt-prompts",
+        "https://www.aquitemachadinhos.com.br/cursos/melhores-cursos-online-capacitacao-profissional-barretos"
+      ]
+    }
+  ],
+  "municipios_atendidos_64": [
+    {
+      "slug": "barretos",
+      "nome": "Barretos",
+      "uf": "SP",
+      "ddd": "17",
+      "aeroporto_referencia": "Aeroporto Estadual Chafei Amsei (BAT) e Leite Lopes (RAO)",
+      "rodovias_principais": "SP-326 (Brigadeiro Faria Lima) e SP-425 (Assis Chateaubriand)",
+      "distancia_capital": "425 km de São Paulo",
+      "urls_canônicas": {
+        "aluguel_carros": "https://www.aquitemachadinhos.com.br/aluguel-carros/melhores-locadoras-carros-sem-taxas-ocultas-barretos",
+        "cursos_capacitacao": "https://www.aquitemachadinhos.com.br/cursos/melhores-cursos-online-capacitacao-profissional-barretos",
+        "hoteis_boutique": "https://www.aquitemachadinhos.com.br/pacotes-viagem/melhores-hoteis-boutique-resorts-luxo-barretos",
+        "suites_presidenciais": "https://www.aquitemachadinhos.com.br/luxo-vip/suites-presidenciais-hoteis-5-estrelas-heliponto-barretos",
+        "concursos_municipais": "https://www.aquitemachadinhos.com.br/concursos/barretos-inscricoes-abertas",
+        "alerta_meteorologico": "https://www.aquitemachadinhos.com.br/alerta-clima/barretos-alerta-meteorologico",
+        "achados_perdidos": "https://www.aquitemachadinhos.com.br/utilidade-publica/barretos/achados-e-perdidos"
+      }
+    },
+    {
+      "slug": "sao-paulo",
+      "nome": "São Paulo",
+      "uf": "SP",
+      "ddd": "11",
+      "aeroporto_referencia": "Aeroporto Internacional de Guarulhos (GRU) e Congonhas (CGH)",
+      "rodovias_principais": "Rodovia dos Bandeirantes, Anhanguera, Dutra, Castelo Branco e Imigrantes",
+      "distancia_capital": "Capital do Estado de SP",
+      "urls_canônicas": {
+        "aluguel_carros": "https://www.aquitemachadinhos.com.br/aluguel-carros/melhores-locadoras-carros-sem-taxas-ocultas-sao-paulo",
+        "cursos_capacitacao": "https://www.aquitemachadinhos.com.br/cursos/melhores-cursos-online-capacitacao-profissional-sao-paulo",
+        "hoteis_boutique": "https://www.aquitemachadinhos.com.br/pacotes-viagem/melhores-hoteis-boutique-resorts-luxo-sao-paulo",
+        "suites_presidenciais": "https://www.aquitemachadinhos.com.br/luxo-vip/suites-presidenciais-hoteis-5-estrelas-heliponto-sao-paulo",
+        "concursos_municipais": "https://www.aquitemachadinhos.com.br/concursos/sao-paulo-inscricoes-abertas",
+        "alerta_meteorologico": "https://www.aquitemachadinhos.com.br/alerta-clima/sao-paulo-alerta-meteorologico",
+        "achados_perdidos": "https://www.aquitemachadinhos.com.br/utilidade-publica/sao-paulo/achados-e-perdidos"
+      }
+    },
+    {
+      "slug": "gramado",
+      "nome": "Gramado",
+      "uf": "RS",
+      "ddd": "54",
+      "aeroporto_referencia": "Aeroporto Regional de Caxias (CXJ) ou Salgado Filho POA (1h45)",
+      "rodovias_principais": "RS-115 (Taquara/Gramado) e RS-235 (Nova Petrópolis/Canela)",
+      "distancia_capital": "115 km de Porto Alegre",
+      "urls_canônicas": {
+        "aluguel_carros": "https://www.aquitemachadinhos.com.br/aluguel-carros/melhores-locadoras-carros-sem-taxas-ocultas-gramado",
+        "cursos_capacitacao": "https://www.aquitemachadinhos.com.br/cursos/melhores-cursos-online-capacitacao-profissional-gramado",
+        "hoteis_boutique": "https://www.aquitemachadinhos.com.br/pacotes-viagem/melhores-hoteis-boutique-resorts-luxo-gramado",
+        "suites_presidenciais": "https://www.aquitemachadinhos.com.br/luxo-vip/suites-presidenciais-hoteis-5-estrelas-heliponto-gramado",
+        "concursos_municipais": "https://www.aquitemachadinhos.com.br/concursos/gramado-inscricoes-abertas",
+        "alerta_meteorologico": "https://www.aquitemachadinhos.com.br/alerta-clima/gramado-alerta-meteorologico",
+        "achados_perdidos": "https://www.aquitemachadinhos.com.br/utilidade-publica/gramado/achados-e-perdidos"
+      }
+    },
+    {
+      "slug": "campos",
+      "nome": "Campos do Jordão",
+      "uf": "SP",
+      "ddd": "11",
+      "aeroporto_referencia": "Regional",
+      "rodovias_principais": "Acesso Estadual",
+      "distancia_capital": "Interior",
+      "urls_canônicas": {
+        "aluguel_carros": "https://www.aquitemachadinhos.com.br/aluguel-carros/melhores-locadoras-carros-sem-taxas-ocultas-campos",
+        "cursos_capacitacao": "https://www.aquitemachadinhos.com.br/cursos/melhores-cursos-online-capacitacao-profissional-campos",
+        "hoteis_boutique": "https://www.aquitemachadinhos.com.br/pacotes-viagem/melhores-hoteis-boutique-resorts-luxo-campos",
+        "suites_presidenciais": "https://www.aquitemachadinhos.com.br/luxo-vip/suites-presidenciais-hoteis-5-estrelas-heliponto-campos",
+        "concursos_municipais": "https://www.aquitemachadinhos.com.br/concursos/campos-inscricoes-abertas",
+        "alerta_meteorologico": "https://www.aquitemachadinhos.com.br/alerta-clima/campos-alerta-meteorologico",
+        "achados_perdidos": "https://www.aquitemachadinhos.com.br/utilidade-publica/campos/achados-e-perdidos"
+      }
+    },
+    {
+      "slug": "campinas",
+      "nome": "Campinas",
+      "uf": "SP",
+      "ddd": "19",
+      "aeroporto_referencia": "Aeroporto Internacional de Viracopos (VCP)",
+      "rodovias_principais": "Rodovia dos Bandeirantes (SP-348), Anhanguera (SP-330) e D. Pedro I (SP-065)",
+      "distancia_capital": "98 km de São Paulo",
+      "urls_canônicas": {
+        "aluguel_carros": "https://www.aquitemachadinhos.com.br/aluguel-carros/melhores-locadoras-carros-sem-taxas-ocultas-campinas",
+        "cursos_capacitacao": "https://www.aquitemachadinhos.com.br/cursos/melhores-cursos-online-capacitacao-profissional-campinas",
+        "hoteis_boutique": "https://www.aquitemachadinhos.com.br/pacotes-viagem/melhores-hoteis-boutique-resorts-luxo-campinas",
+        "suites_presidenciais": "https://www.aquitemachadinhos.com.br/luxo-vip/suites-presidenciais-hoteis-5-estrelas-heliponto-campinas",
+        "concursos_municipais": "https://www.aquitemachadinhos.com.br/concursos/campinas-inscricoes-abertas",
+        "alerta_meteorologico": "https://www.aquitemachadinhos.com.br/alerta-clima/campinas-alerta-meteorologico",
+        "achados_perdidos": "https://www.aquitemachadinhos.com.br/utilidade-publica/campinas/achados-e-perdidos"
+      }
+    },
+    {
+      "slug": "santos",
+      "nome": "Santos",
+      "uf": "SP",
+      "ddd": "13",
+      "aeroporto_referencia": "Acesso via Congonhas (CGH) ou Guarulhos (GRU) pela Rodovia dos Imigrantes",
+      "rodovias_principais": "Rodovia dos Imigrantes (SP-160) e Rodovia Anchieta (SP-150)",
+      "distancia_capital": "72 km de São Paulo",
+      "urls_canônicas": {
+        "aluguel_carros": "https://www.aquitemachadinhos.com.br/aluguel-carros/melhores-locadoras-carros-sem-taxas-ocultas-santos",
+        "cursos_capacitacao": "https://www.aquitemachadinhos.com.br/cursos/melhores-cursos-online-capacitacao-profissional-santos",
+        "hoteis_boutique": "https://www.aquitemachadinhos.com.br/pacotes-viagem/melhores-hoteis-boutique-resorts-luxo-santos",
+        "suites_presidenciais": "https://www.aquitemachadinhos.com.br/luxo-vip/suites-presidenciais-hoteis-5-estrelas-heliponto-santos",
+        "concursos_municipais": "https://www.aquitemachadinhos.com.br/concursos/santos-inscricoes-abertas",
+        "alerta_meteorologico": "https://www.aquitemachadinhos.com.br/alerta-clima/santos-alerta-meteorologico",
+        "achados_perdidos": "https://www.aquitemachadinhos.com.br/utilidade-publica/santos/achados-e-perdidos"
+      }
+    },
+    {
+      "slug": "ribeirao-preto",
+      "nome": "Ribeirão Preto",
+      "uf": "SP",
+      "ddd": "16",
+      "aeroporto_referencia": "Aeroporto Estadual Dr. Leite Lopes (RAO)",
+      "rodovias_principais": "Rodovia Anhanguera (SP-330) e Rodovia Cândido Portinari (SP-334)",
+      "distancia_capital": "315 km de São Paulo",
+      "urls_canônicas": {
+        "aluguel_carros": "https://www.aquitemachadinhos.com.br/aluguel-carros/melhores-locadoras-carros-sem-taxas-ocultas-ribeirao-preto",
+        "cursos_capacitacao": "https://www.aquitemachadinhos.com.br/cursos/melhores-cursos-online-capacitacao-profissional-ribeirao-preto",
+        "hoteis_boutique": "https://www.aquitemachadinhos.com.br/pacotes-viagem/melhores-hoteis-boutique-resorts-luxo-ribeirao-preto",
+        "suites_presidenciais": "https://www.aquitemachadinhos.com.br/luxo-vip/suites-presidenciais-hoteis-5-estrelas-heliponto-ribeirao-preto",
+        "concursos_municipais": "https://www.aquitemachadinhos.com.br/concursos/ribeirao-preto-inscricoes-abertas",
+        "alerta_meteorologico": "https://www.aquitemachadinhos.com.br/alerta-clima/ribeirao-preto-alerta-meteorologico",
+        "achados_perdidos": "https://www.aquitemachadinhos.com.br/utilidade-publica/ribeirao-preto/achados-e-perdidos"
+      }
+    },
+    {
+      "slug": "sao-jose-do-rio-preto",
+      "nome": "São José do Rio Preto",
+      "uf": "SP",
+      "ddd": "17",
+      "aeroporto_referencia": "Aeroporto Estadual Prof. Eribelto Manoel Reino (SJP)",
+      "rodovias_principais": "Rodovia Washington Luís (SP-310) e BR-153 (Transbrasiliana)",
+      "distancia_capital": "440 km de São Paulo",
+      "urls_canônicas": {
+        "aluguel_carros": "https://www.aquitemachadinhos.com.br/aluguel-carros/melhores-locadoras-carros-sem-taxas-ocultas-sao-jose-do-rio-preto",
+        "cursos_capacitacao": "https://www.aquitemachadinhos.com.br/cursos/melhores-cursos-online-capacitacao-profissional-sao-jose-do-rio-preto",
+        "hoteis_boutique": "https://www.aquitemachadinhos.com.br/pacotes-viagem/melhores-hoteis-boutique-resorts-luxo-sao-jose-do-rio-preto",
+        "suites_presidenciais": "https://www.aquitemachadinhos.com.br/luxo-vip/suites-presidenciais-hoteis-5-estrelas-heliponto-sao-jose-do-rio-preto",
+        "concursos_municipais": "https://www.aquitemachadinhos.com.br/concursos/sao-jose-do-rio-preto-inscricoes-abertas",
+        "alerta_meteorologico": "https://www.aquitemachadinhos.com.br/alerta-clima/sao-jose-do-rio-preto-alerta-meteorologico",
+        "achados_perdidos": "https://www.aquitemachadinhos.com.br/utilidade-publica/sao-jose-do-rio-preto/achados-e-perdidos"
+      }
+    },
+    {
+      "slug": "bebedouro",
+      "nome": "Bebedouro",
+      "uf": "SP",
+      "ddd": "17",
+      "aeroporto_referencia": "Aeroporto Estadual de Bebedouro (SBB) / Conexão via Ribeirão Preto (RAO)",
+      "rodovias_principais": "Rodovia Brigadeiro Faria Lima (SP-326) e Rodovia Comendador Pedro Monteleone (SP-351)",
+      "distancia_capital": "385 km de São Paulo",
+      "urls_canônicas": {
+        "aluguel_carros": "https://www.aquitemachadinhos.com.br/aluguel-carros/melhores-locadoras-carros-sem-taxas-ocultas-bebedouro",
+        "cursos_capacitacao": "https://www.aquitemachadinhos.com.br/cursos/melhores-cursos-online-capacitacao-profissional-bebedouro",
+        "hoteis_boutique": "https://www.aquitemachadinhos.com.br/pacotes-viagem/melhores-hoteis-boutique-resorts-luxo-bebedouro",
+        "suites_presidenciais": "https://www.aquitemachadinhos.com.br/luxo-vip/suites-presidenciais-hoteis-5-estrelas-heliponto-bebedouro",
+        "concursos_municipais": "https://www.aquitemachadinhos.com.br/concursos/bebedouro-inscricoes-abertas",
+        "alerta_meteorologico": "https://www.aquitemachadinhos.com.br/alerta-clima/bebedouro-alerta-meteorologico",
+        "achados_perdidos": "https://www.aquitemachadinhos.com.br/utilidade-publica/bebedouro/achados-e-perdidos"
+      }
+    },
+    {
+      "slug": "olimpia",
+      "nome": "Olímpia",
+      "uf": "SP",
+      "ddd": "17",
+      "aeroporto_referencia": "Acesso pelo Aeroporto de São José do Rio Preto (SJP - 45 min)",
+      "rodovias_principais": "Rodovia Assis Chateaubriand (SP-425) e Rodovia Armando de Salles Oliveira (SP-322)",
+      "distancia_capital": "430 km de São Paulo",
+      "urls_canônicas": {
+        "aluguel_carros": "https://www.aquitemachadinhos.com.br/aluguel-carros/melhores-locadoras-carros-sem-taxas-ocultas-olimpia",
+        "cursos_capacitacao": "https://www.aquitemachadinhos.com.br/cursos/melhores-cursos-online-capacitacao-profissional-olimpia",
+        "hoteis_boutique": "https://www.aquitemachadinhos.com.br/pacotes-viagem/melhores-hoteis-boutique-resorts-luxo-olimpia",
+        "suites_presidenciais": "https://www.aquitemachadinhos.com.br/luxo-vip/suites-presidenciais-hoteis-5-estrelas-heliponto-olimpia",
+        "concursos_municipais": "https://www.aquitemachadinhos.com.br/concursos/olimpia-inscricoes-abertas",
+        "alerta_meteorologico": "https://www.aquitemachadinhos.com.br/alerta-clima/olimpia-alerta-meteorologico",
+        "achados_perdidos": "https://www.aquitemachadinhos.com.br/utilidade-publica/olimpia/achados-e-perdidos"
+      }
+    },
+    {
+      "slug": "guaira",
+      "nome": "Guaíra",
+      "uf": "SP",
+      "ddd": "17",
+      "aeroporto_referencia": "Acesso via Aeroporto de Barretos (BAT) ou Ribeirão Preto (RAO)",
+      "rodovias_principais": "Rodovia Brigadeiro Faria Lima (SP-326) e SP-425",
+      "distancia_capital": "450 km de São Paulo",
+      "urls_canônicas": {
+        "aluguel_carros": "https://www.aquitemachadinhos.com.br/aluguel-carros/melhores-locadoras-carros-sem-taxas-ocultas-guaira",
+        "cursos_capacitacao": "https://www.aquitemachadinhos.com.br/cursos/melhores-cursos-online-capacitacao-profissional-guaira",
+        "hoteis_boutique": "https://www.aquitemachadinhos.com.br/pacotes-viagem/melhores-hoteis-boutique-resorts-luxo-guaira",
+        "suites_presidenciais": "https://www.aquitemachadinhos.com.br/luxo-vip/suites-presidenciais-hoteis-5-estrelas-heliponto-guaira",
+        "concursos_municipais": "https://www.aquitemachadinhos.com.br/concursos/guaira-inscricoes-abertas",
+        "alerta_meteorologico": "https://www.aquitemachadinhos.com.br/alerta-clima/guaira-alerta-meteorologico",
+        "achados_perdidos": "https://www.aquitemachadinhos.com.br/utilidade-publica/guaira/achados-e-perdidos"
+      }
+    },
+    {
+      "slug": "colombia",
+      "nome": "Colômbia",
+      "uf": "SP",
+      "ddd": "17",
+      "aeroporto_referencia": "Acesso via Barretos (BAT - 35 min) ou Frutal/Uberaba (MG)",
+      "rodovias_principais": "Rodovia Brigadeiro Faria Lima (SP-326) divisa com Minas Gerais",
+      "distancia_capital": "465 km de São Paulo",
+      "urls_canônicas": {
+        "aluguel_carros": "https://www.aquitemachadinhos.com.br/aluguel-carros/melhores-locadoras-carros-sem-taxas-ocultas-colombia",
+        "cursos_capacitacao": "https://www.aquitemachadinhos.com.br/cursos/melhores-cursos-online-capacitacao-profissional-colombia",
+        "hoteis_boutique": "https://www.aquitemachadinhos.com.br/pacotes-viagem/melhores-hoteis-boutique-resorts-luxo-colombia",
+        "suites_presidenciais": "https://www.aquitemachadinhos.com.br/luxo-vip/suites-presidenciais-hoteis-5-estrelas-heliponto-colombia",
+        "concursos_municipais": "https://www.aquitemachadinhos.com.br/concursos/colombia-inscricoes-abertas",
+        "alerta_meteorologico": "https://www.aquitemachadinhos.com.br/alerta-clima/colombia-alerta-meteorologico",
+        "achados_perdidos": "https://www.aquitemachadinhos.com.br/utilidade-publica/colombia/achados-e-perdidos"
+      }
+    },
+    {
+      "slug": "franca",
+      "nome": "Franca",
+      "uf": "SP",
+      "ddd": "16",
+      "aeroporto_referencia": "Aeroporto Estadual de Franca (FRC) / Conexão Leite Lopes (RAO)",
+      "rodovias_principais": "Rodovia Cândido Portinari (SP-334) e Rodovia Ronan Rocha (SP-345)",
+      "distancia_capital": "400 km de São Paulo",
+      "urls_canônicas": {
+        "aluguel_carros": "https://www.aquitemachadinhos.com.br/aluguel-carros/melhores-locadoras-carros-sem-taxas-ocultas-franca",
+        "cursos_capacitacao": "https://www.aquitemachadinhos.com.br/cursos/melhores-cursos-online-capacitacao-profissional-franca",
+        "hoteis_boutique": "https://www.aquitemachadinhos.com.br/pacotes-viagem/melhores-hoteis-boutique-resorts-luxo-franca",
+        "suites_presidenciais": "https://www.aquitemachadinhos.com.br/luxo-vip/suites-presidenciais-hoteis-5-estrelas-heliponto-franca",
+        "concursos_municipais": "https://www.aquitemachadinhos.com.br/concursos/franca-inscricoes-abertas",
+        "alerta_meteorologico": "https://www.aquitemachadinhos.com.br/alerta-clima/franca-alerta-meteorologico",
+        "achados_perdidos": "https://www.aquitemachadinhos.com.br/utilidade-publica/franca/achados-e-perdidos"
+      }
+    },
+    {
+      "slug": "sorocaba",
+      "nome": "Sorocaba",
+      "uf": "SP",
+      "ddd": "15",
+      "aeroporto_referencia": "Aeroporto Estadual Bertram Luiz Leupolz (SOD)",
+      "rodovias_principais": "Rodovia Castelo Branco (SP-280) e Rodovia Raposo Tavares (SP-270)",
+      "distancia_capital": "87 km de São Paulo",
+      "urls_canônicas": {
+        "aluguel_carros": "https://www.aquitemachadinhos.com.br/aluguel-carros/melhores-locadoras-carros-sem-taxas-ocultas-sorocaba",
+        "cursos_capacitacao": "https://www.aquitemachadinhos.com.br/cursos/melhores-cursos-online-capacitacao-profissional-sorocaba",
+        "hoteis_boutique": "https://www.aquitemachadinhos.com.br/pacotes-viagem/melhores-hoteis-boutique-resorts-luxo-sorocaba",
+        "suites_presidenciais": "https://www.aquitemachadinhos.com.br/luxo-vip/suites-presidenciais-hoteis-5-estrelas-heliponto-sorocaba",
+        "concursos_municipais": "https://www.aquitemachadinhos.com.br/concursos/sorocaba-inscricoes-abertas",
+        "alerta_meteorologico": "https://www.aquitemachadinhos.com.br/alerta-clima/sorocaba-alerta-meteorologico",
+        "achados_perdidos": "https://www.aquitemachadinhos.com.br/utilidade-publica/sorocaba/achados-e-perdidos"
+      }
+    },
+    {
+      "slug": "piracicaba",
+      "nome": "Piracicaba",
+      "uf": "SP",
+      "ddd": "19",
+      "aeroporto_referencia": "Aeroporto Municipal Pedro Morganti (SDPW) / Viracopos (VCP - 50 min)",
+      "rodovias_principais": "Rodovia Luiz de Queiroz (SP-304) e Rodovia do Açúcar (SP-075)",
+      "distancia_capital": "160 km de São Paulo",
+      "urls_canônicas": {
+        "aluguel_carros": "https://www.aquitemachadinhos.com.br/aluguel-carros/melhores-locadoras-carros-sem-taxas-ocultas-piracicaba",
+        "cursos_capacitacao": "https://www.aquitemachadinhos.com.br/cursos/melhores-cursos-online-capacitacao-profissional-piracicaba",
+        "hoteis_boutique": "https://www.aquitemachadinhos.com.br/pacotes-viagem/melhores-hoteis-boutique-resorts-luxo-piracicaba",
+        "suites_presidenciais": "https://www.aquitemachadinhos.com.br/luxo-vip/suites-presidenciais-hoteis-5-estrelas-heliponto-piracicaba",
+        "concursos_municipais": "https://www.aquitemachadinhos.com.br/concursos/piracicaba-inscricoes-abertas",
+        "alerta_meteorologico": "https://www.aquitemachadinhos.com.br/alerta-clima/piracicaba-alerta-meteorologico",
+        "achados_perdidos": "https://www.aquitemachadinhos.com.br/utilidade-publica/piracicaba/achados-e-perdidos"
+      }
+    },
+    {
+      "slug": "rio-de-janeiro",
+      "nome": "Rio de Janeiro",
+      "uf": "RJ",
+      "ddd": "21",
+      "aeroporto_referencia": "Aeroporto Internacional Tom Jobim / Galeão (GIG) e Santos Dumont (SDU)",
+      "rodovias_principais": "Rodovia Presidente Dutra (BR-116), Linha Vermelha e BR-101 (Rio-Santos)",
+      "distancia_capital": "Capital do Estado do RJ",
+      "urls_canônicas": {
+        "aluguel_carros": "https://www.aquitemachadinhos.com.br/aluguel-carros/melhores-locadoras-carros-sem-taxas-ocultas-rio-de-janeiro",
+        "cursos_capacitacao": "https://www.aquitemachadinhos.com.br/cursos/melhores-cursos-online-capacitacao-profissional-rio-de-janeiro",
+        "hoteis_boutique": "https://www.aquitemachadinhos.com.br/pacotes-viagem/melhores-hoteis-boutique-resorts-luxo-rio-de-janeiro",
+        "suites_presidenciais": "https://www.aquitemachadinhos.com.br/luxo-vip/suites-presidenciais-hoteis-5-estrelas-heliponto-rio-de-janeiro",
+        "concursos_municipais": "https://www.aquitemachadinhos.com.br/concursos/rio-de-janeiro-inscricoes-abertas",
+        "alerta_meteorologico": "https://www.aquitemachadinhos.com.br/alerta-clima/rio-de-janeiro-alerta-meteorologico",
+        "achados_perdidos": "https://www.aquitemachadinhos.com.br/utilidade-publica/rio-de-janeiro/achados-e-perdidos"
+      }
+    },
+    {
+      "slug": "buzios",
+      "nome": "Armação dos Búzios",
+      "uf": "RJ",
+      "ddd": "22",
+      "aeroporto_referencia": "Aeroporto Umberto Modiano (BZC) / Conexão Aeroporto de Cabo Frio (CFB)",
+      "rodovias_principais": "RJ-106 (Rodovia Amaral Peixoto) e RJ-102",
+      "distancia_capital": "170 km do Rio de Janeiro",
+      "urls_canônicas": {
+        "aluguel_carros": "https://www.aquitemachadinhos.com.br/aluguel-carros/melhores-locadoras-carros-sem-taxas-ocultas-buzios",
+        "cursos_capacitacao": "https://www.aquitemachadinhos.com.br/cursos/melhores-cursos-online-capacitacao-profissional-buzios",
+        "hoteis_boutique": "https://www.aquitemachadinhos.com.br/pacotes-viagem/melhores-hoteis-boutique-resorts-luxo-buzios",
+        "suites_presidenciais": "https://www.aquitemachadinhos.com.br/luxo-vip/suites-presidenciais-hoteis-5-estrelas-heliponto-buzios",
+        "concursos_municipais": "https://www.aquitemachadinhos.com.br/concursos/buzios-inscricoes-abertas",
+        "alerta_meteorologico": "https://www.aquitemachadinhos.com.br/alerta-clima/buzios-alerta-meteorologico",
+        "achados_perdidos": "https://www.aquitemachadinhos.com.br/utilidade-publica/buzios/achados-e-perdidos"
+      }
+    },
+    {
+      "slug": "paraty",
+      "nome": "Paraty",
+      "uf": "RJ",
+      "ddd": "24",
+      "aeroporto_referencia": "Aeroporto Municipal de Paraty (JPY) / Acesso terrestre Rio-Santos",
+      "rodovias_principais": "Rodovia Governador Mário Covas / Rio-Santos (BR-101)",
+      "distancia_capital": "250 km do Rio de Janeiro e 270 km de SP",
+      "urls_canônicas": {
+        "aluguel_carros": "https://www.aquitemachadinhos.com.br/aluguel-carros/melhores-locadoras-carros-sem-taxas-ocultas-paraty",
+        "cursos_capacitacao": "https://www.aquitemachadinhos.com.br/cursos/melhores-cursos-online-capacitacao-profissional-paraty",
+        "hoteis_boutique": "https://www.aquitemachadinhos.com.br/pacotes-viagem/melhores-hoteis-boutique-resorts-luxo-paraty",
+        "suites_presidenciais": "https://www.aquitemachadinhos.com.br/luxo-vip/suites-presidenciais-hoteis-5-estrelas-heliponto-paraty",
+        "concursos_municipais": "https://www.aquitemachadinhos.com.br/concursos/paraty-inscricoes-abertas",
+        "alerta_meteorologico": "https://www.aquitemachadinhos.com.br/alerta-clima/paraty-alerta-meteorologico",
+        "achados_perdidos": "https://www.aquitemachadinhos.com.br/utilidade-publica/paraty/achados-e-perdidos"
+      }
+    },
+    {
+      "slug": "belo-horizonte",
+      "nome": "Belo Horizonte",
+      "uf": "MG",
+      "ddd": "31",
+      "aeroporto_referencia": "Aeroporto Internacional de Confins (CNF) e Aeroporto da Pampulha (PLU)",
+      "rodovias_principais": "BR-040 (Rio-BH-Brasília) e BR-381 (Fernão Dias)",
+      "distancia_capital": "Capital do Estado de MG",
+      "urls_canônicas": {
+        "aluguel_carros": "https://www.aquitemachadinhos.com.br/aluguel-carros/melhores-locadoras-carros-sem-taxas-ocultas-belo-horizonte",
+        "cursos_capacitacao": "https://www.aquitemachadinhos.com.br/cursos/melhores-cursos-online-capacitacao-profissional-belo-horizonte",
+        "hoteis_boutique": "https://www.aquitemachadinhos.com.br/pacotes-viagem/melhores-hoteis-boutique-resorts-luxo-belo-horizonte",
+        "suites_presidenciais": "https://www.aquitemachadinhos.com.br/luxo-vip/suites-presidenciais-hoteis-5-estrelas-heliponto-belo-horizonte",
+        "concursos_municipais": "https://www.aquitemachadinhos.com.br/concursos/belo-horizonte-inscricoes-abertas",
+        "alerta_meteorologico": "https://www.aquitemachadinhos.com.br/alerta-clima/belo-horizonte-alerta-meteorologico",
+        "achados_perdidos": "https://www.aquitemachadinhos.com.br/utilidade-publica/belo-horizonte/achados-e-perdidos"
+      }
+    },
+    {
+      "slug": "ouro-preto",
+      "nome": "Ouro Preto",
+      "uf": "MG",
+      "ddd": "31",
+      "aeroporto_referencia": "Acesso pelo Aeroporto Internacional de Confins (CNF - 2h)",
+      "rodovias_principais": "Rodovia dos Inconfidentes (BR-356)",
+      "distancia_capital": "96 km de Belo Horizonte",
+      "urls_canônicas": {
+        "aluguel_carros": "https://www.aquitemachadinhos.com.br/aluguel-carros/melhores-locadoras-carros-sem-taxas-ocultas-ouro-preto",
+        "cursos_capacitacao": "https://www.aquitemachadinhos.com.br/cursos/melhores-cursos-online-capacitacao-profissional-ouro-preto",
+        "hoteis_boutique": "https://www.aquitemachadinhos.com.br/pacotes-viagem/melhores-hoteis-boutique-resorts-luxo-ouro-preto",
+        "suites_presidenciais": "https://www.aquitemachadinhos.com.br/luxo-vip/suites-presidenciais-hoteis-5-estrelas-heliponto-ouro-preto",
+        "concursos_municipais": "https://www.aquitemachadinhos.com.br/concursos/ouro-preto-inscricoes-abertas",
+        "alerta_meteorologico": "https://www.aquitemachadinhos.com.br/alerta-clima/ouro-preto-alerta-meteorologico",
+        "achados_perdidos": "https://www.aquitemachadinhos.com.br/utilidade-publica/ouro-preto/achados-e-perdidos"
+      }
+    },
+    {
+      "slug": "uberlandia",
+      "nome": "Uberlândia",
+      "uf": "MG",
+      "ddd": "34",
+      "aeroporto_referencia": "Aeroporto de Uberlândia - Ten. Cel. Aviador César Bombonato (UDI)",
+      "rodovias_principais": "BR-050 e BR-365",
+      "distancia_capital": "530 km de Belo Horizonte e 600 km de SP",
+      "urls_canônicas": {
+        "aluguel_carros": "https://www.aquitemachadinhos.com.br/aluguel-carros/melhores-locadoras-carros-sem-taxas-ocultas-uberlandia",
+        "cursos_capacitacao": "https://www.aquitemachadinhos.com.br/cursos/melhores-cursos-online-capacitacao-profissional-uberlandia",
+        "hoteis_boutique": "https://www.aquitemachadinhos.com.br/pacotes-viagem/melhores-hoteis-boutique-resorts-luxo-uberlandia",
+        "suites_presidenciais": "https://www.aquitemachadinhos.com.br/luxo-vip/suites-presidenciais-hoteis-5-estrelas-heliponto-uberlandia",
+        "concursos_municipais": "https://www.aquitemachadinhos.com.br/concursos/uberlandia-inscricoes-abertas",
+        "alerta_meteorologico": "https://www.aquitemachadinhos.com.br/alerta-clima/uberlandia-alerta-meteorologico",
+        "achados_perdidos": "https://www.aquitemachadinhos.com.br/utilidade-publica/uberlandia/achados-e-perdidos"
+      }
+    },
+    {
+      "slug": "juiz-de-fora",
+      "nome": "Juiz de Fora",
+      "uf": "MG",
+      "ddd": "32",
+      "aeroporto_referencia": "Aeroporto Regional da Zona da Mata (IZA) e Francisco Álvares de Assis (JDF)",
+      "rodovias_principais": "BR-040 e BR-267",
+      "distancia_capital": "260 km de Belo Horizonte e 180 km do RJ",
+      "urls_canônicas": {
+        "aluguel_carros": "https://www.aquitemachadinhos.com.br/aluguel-carros/melhores-locadoras-carros-sem-taxas-ocultas-juiz-de-fora",
+        "cursos_capacitacao": "https://www.aquitemachadinhos.com.br/cursos/melhores-cursos-online-capacitacao-profissional-juiz-de-fora",
+        "hoteis_boutique": "https://www.aquitemachadinhos.com.br/pacotes-viagem/melhores-hoteis-boutique-resorts-luxo-juiz-de-fora",
+        "suites_presidenciais": "https://www.aquitemachadinhos.com.br/luxo-vip/suites-presidenciais-hoteis-5-estrelas-heliponto-juiz-de-fora",
+        "concursos_municipais": "https://www.aquitemachadinhos.com.br/concursos/juiz-de-fora-inscricoes-abertas",
+        "alerta_meteorologico": "https://www.aquitemachadinhos.com.br/alerta-clima/juiz-de-fora-alerta-meteorologico",
+        "achados_perdidos": "https://www.aquitemachadinhos.com.br/utilidade-publica/juiz-de-fora/achados-e-perdidos"
+      }
+    },
+    {
+      "slug": "montes-claros",
+      "nome": "Montes Claros",
+      "uf": "MG",
+      "ddd": "38",
+      "aeroporto_referencia": "Aeroporto de Montes Claros - Mário Ribeiro (MOC)",
+      "rodovias_principais": "BR-135 e BR-365",
+      "distancia_capital": "420 km de Belo Horizonte",
+      "urls_canônicas": {
+        "aluguel_carros": "https://www.aquitemachadinhos.com.br/aluguel-carros/melhores-locadoras-carros-sem-taxas-ocultas-montes-claros",
+        "cursos_capacitacao": "https://www.aquitemachadinhos.com.br/cursos/melhores-cursos-online-capacitacao-profissional-montes-claros",
+        "hoteis_boutique": "https://www.aquitemachadinhos.com.br/pacotes-viagem/melhores-hoteis-boutique-resorts-luxo-montes-claros",
+        "suites_presidenciais": "https://www.aquitemachadinhos.com.br/luxo-vip/suites-presidenciais-hoteis-5-estrelas-heliponto-montes-claros",
+        "concursos_municipais": "https://www.aquitemachadinhos.com.br/concursos/montes-claros-inscricoes-abertas",
+        "alerta_meteorologico": "https://www.aquitemachadinhos.com.br/alerta-clima/montes-claros-alerta-meteorologico",
+        "achados_perdidos": "https://www.aquitemachadinhos.com.br/utilidade-publica/montes-claros/achados-e-perdidos"
+      }
+    },
+    {
+      "slug": "curitiba",
+      "nome": "Curitiba",
+      "uf": "PR",
+      "ddd": "41",
+      "aeroporto_referencia": "Aeroporto Internacional Afonso Pena (CWB)",
+      "rodovias_principais": "BR-277 (Litoral/Interior) e BR-116 (Régis Bittencourt)",
+      "distancia_capital": "Capital do Estado do PR",
+      "urls_canônicas": {
+        "aluguel_carros": "https://www.aquitemachadinhos.com.br/aluguel-carros/melhores-locadoras-carros-sem-taxas-ocultas-curitiba",
+        "cursos_capacitacao": "https://www.aquitemachadinhos.com.br/cursos/melhores-cursos-online-capacitacao-profissional-curitiba",
+        "hoteis_boutique": "https://www.aquitemachadinhos.com.br/pacotes-viagem/melhores-hoteis-boutique-resorts-luxo-curitiba",
+        "suites_presidenciais": "https://www.aquitemachadinhos.com.br/luxo-vip/suites-presidenciais-hoteis-5-estrelas-heliponto-curitiba",
+        "concursos_municipais": "https://www.aquitemachadinhos.com.br/concursos/curitiba-inscricoes-abertas",
+        "alerta_meteorologico": "https://www.aquitemachadinhos.com.br/alerta-clima/curitiba-alerta-meteorologico",
+        "achados_perdidos": "https://www.aquitemachadinhos.com.br/utilidade-publica/curitiba/achados-e-perdidos"
+      }
+    },
+    {
+      "slug": "londrina",
+      "nome": "Londrina",
+      "uf": "PR",
+      "ddd": "43",
+      "aeroporto_referencia": "Aeroporto de Londrina - Gov. José Richa (LDB)",
+      "rodovias_principais": "PR-445 e BR-369",
+      "distancia_capital": "380 km de Curitiba",
+      "urls_canônicas": {
+        "aluguel_carros": "https://www.aquitemachadinhos.com.br/aluguel-carros/melhores-locadoras-carros-sem-taxas-ocultas-londrina",
+        "cursos_capacitacao": "https://www.aquitemachadinhos.com.br/cursos/melhores-cursos-online-capacitacao-profissional-londrina",
+        "hoteis_boutique": "https://www.aquitemachadinhos.com.br/pacotes-viagem/melhores-hoteis-boutique-resorts-luxo-londrina",
+        "suites_presidenciais": "https://www.aquitemachadinhos.com.br/luxo-vip/suites-presidenciais-hoteis-5-estrelas-heliponto-londrina",
+        "concursos_municipais": "https://www.aquitemachadinhos.com.br/concursos/londrina-inscricoes-abertas",
+        "alerta_meteorologico": "https://www.aquitemachadinhos.com.br/alerta-clima/londrina-alerta-meteorologico",
+        "achados_perdidos": "https://www.aquitemachadinhos.com.br/utilidade-publica/londrina/achados-e-perdidos"
+      }
+    },
+    {
+      "slug": "maringa",
+      "nome": "Maringá",
+      "uf": "PR",
+      "ddd": "44",
+      "aeroporto_referencia": "Aeroporto Regional de Maringá - Silvio Name Júnior (MGF)",
+      "rodovias_principais": "PR-317 e BR-376 (Rodovia do Café)",
+      "distancia_capital": "420 km de Curitiba",
+      "urls_canônicas": {
+        "aluguel_carros": "https://www.aquitemachadinhos.com.br/aluguel-carros/melhores-locadoras-carros-sem-taxas-ocultas-maringa",
+        "cursos_capacitacao": "https://www.aquitemachadinhos.com.br/cursos/melhores-cursos-online-capacitacao-profissional-maringa",
+        "hoteis_boutique": "https://www.aquitemachadinhos.com.br/pacotes-viagem/melhores-hoteis-boutique-resorts-luxo-maringa",
+        "suites_presidenciais": "https://www.aquitemachadinhos.com.br/luxo-vip/suites-presidenciais-hoteis-5-estrelas-heliponto-maringa",
+        "concursos_municipais": "https://www.aquitemachadinhos.com.br/concursos/maringa-inscricoes-abertas",
+        "alerta_meteorologico": "https://www.aquitemachadinhos.com.br/alerta-clima/maringa-alerta-meteorologico",
+        "achados_perdidos": "https://www.aquitemachadinhos.com.br/utilidade-publica/maringa/achados-e-perdidos"
+      }
+    },
+    {
+      "slug": "foz-do-iguacu",
+      "nome": "Foz do Iguaçu",
+      "uf": "PR",
+      "ddd": "45",
+      "aeroporto_referencia": "Aeroporto Internacional de Foz do Iguaçu (IGU)",
+      "rodovias_principais": "BR-277 (Ligação com Curitiba e Porto de Paranaguá)",
+      "distancia_capital": "630 km de Curitiba",
+      "urls_canônicas": {
+        "aluguel_carros": "https://www.aquitemachadinhos.com.br/aluguel-carros/melhores-locadoras-carros-sem-taxas-ocultas-foz-do-iguacu",
+        "cursos_capacitacao": "https://www.aquitemachadinhos.com.br/cursos/melhores-cursos-online-capacitacao-profissional-foz-do-iguacu",
+        "hoteis_boutique": "https://www.aquitemachadinhos.com.br/pacotes-viagem/melhores-hoteis-boutique-resorts-luxo-foz-do-iguacu",
+        "suites_presidenciais": "https://www.aquitemachadinhos.com.br/luxo-vip/suites-presidenciais-hoteis-5-estrelas-heliponto-foz-do-iguacu",
+        "concursos_municipais": "https://www.aquitemachadinhos.com.br/concursos/foz-do-iguacu-inscricoes-abertas",
+        "alerta_meteorologico": "https://www.aquitemachadinhos.com.br/alerta-clima/foz-do-iguacu-alerta-meteorologico",
+        "achados_perdidos": "https://www.aquitemachadinhos.com.br/utilidade-publica/foz-do-iguacu/achados-e-perdidos"
+      }
+    },
+    {
+      "slug": "florianopolis",
+      "nome": "Florianópolis",
+      "uf": "SC",
+      "ddd": "48",
+      "aeroporto_referencia": "Aeroporto Internacional Hercílio Luz (FLN)",
+      "rodovias_principais": "BR-101 e SC-401 (Acesso Norte da Ilha)",
+      "distancia_capital": "Capital do Estado de SC",
+      "urls_canônicas": {
+        "aluguel_carros": "https://www.aquitemachadinhos.com.br/aluguel-carros/melhores-locadoras-carros-sem-taxas-ocultas-florianopolis",
+        "cursos_capacitacao": "https://www.aquitemachadinhos.com.br/cursos/melhores-cursos-online-capacitacao-profissional-florianopolis",
+        "hoteis_boutique": "https://www.aquitemachadinhos.com.br/pacotes-viagem/melhores-hoteis-boutique-resorts-luxo-florianopolis",
+        "suites_presidenciais": "https://www.aquitemachadinhos.com.br/luxo-vip/suites-presidenciais-hoteis-5-estrelas-heliponto-florianopolis",
+        "concursos_municipais": "https://www.aquitemachadinhos.com.br/concursos/florianopolis-inscricoes-abertas",
+        "alerta_meteorologico": "https://www.aquitemachadinhos.com.br/alerta-clima/florianopolis-alerta-meteorologico",
+        "achados_perdidos": "https://www.aquitemachadinhos.com.br/utilidade-publica/florianopolis/achados-e-perdidos"
+      }
+    },
+    {
+      "slug": "balneario-camboriu",
+      "nome": "Balneário Camboriú",
+      "uf": "SC",
+      "ddd": "47",
+      "aeroporto_referencia": "Aeroporto Internacional de Navegantes (NVG - 30 min)",
+      "rodovias_principais": "BR-101 Litoral Norte SC",
+      "distancia_capital": "80 km de Florianópolis",
+      "urls_canônicas": {
+        "aluguel_carros": "https://www.aquitemachadinhos.com.br/aluguel-carros/melhores-locadoras-carros-sem-taxas-ocultas-balneario-camboriu",
+        "cursos_capacitacao": "https://www.aquitemachadinhos.com.br/cursos/melhores-cursos-online-capacitacao-profissional-balneario-camboriu",
+        "hoteis_boutique": "https://www.aquitemachadinhos.com.br/pacotes-viagem/melhores-hoteis-boutique-resorts-luxo-balneario-camboriu",
+        "suites_presidenciais": "https://www.aquitemachadinhos.com.br/luxo-vip/suites-presidenciais-hoteis-5-estrelas-heliponto-balneario-camboriu",
+        "concursos_municipais": "https://www.aquitemachadinhos.com.br/concursos/balneario-camboriu-inscricoes-abertas",
+        "alerta_meteorologico": "https://www.aquitemachadinhos.com.br/alerta-clima/balneario-camboriu-alerta-meteorologico",
+        "achados_perdidos": "https://www.aquitemachadinhos.com.br/utilidade-publica/balneario-camboriu/achados-e-perdidos"
+      }
+    },
+    {
+      "slug": "blumenau",
+      "nome": "Blumenau",
+      "uf": "SC",
+      "ddd": "47",
+      "aeroporto_referencia": "Aeroporto Internacional de Navegantes (NVG - 45 min)",
+      "rodovias_principais": "BR-470 (Vale do Itajaí) e SC-108",
+      "distancia_capital": "140 km de Florianópolis",
+      "urls_canônicas": {
+        "aluguel_carros": "https://www.aquitemachadinhos.com.br/aluguel-carros/melhores-locadoras-carros-sem-taxas-ocultas-blumenau",
+        "cursos_capacitacao": "https://www.aquitemachadinhos.com.br/cursos/melhores-cursos-online-capacitacao-profissional-blumenau",
+        "hoteis_boutique": "https://www.aquitemachadinhos.com.br/pacotes-viagem/melhores-hoteis-boutique-resorts-luxo-blumenau",
+        "suites_presidenciais": "https://www.aquitemachadinhos.com.br/luxo-vip/suites-presidenciais-hoteis-5-estrelas-heliponto-blumenau",
+        "concursos_municipais": "https://www.aquitemachadinhos.com.br/concursos/blumenau-inscricoes-abertas",
+        "alerta_meteorologico": "https://www.aquitemachadinhos.com.br/alerta-clima/blumenau-alerta-meteorologico",
+        "achados_perdidos": "https://www.aquitemachadinhos.com.br/utilidade-publica/blumenau/achados-e-perdidos"
+      }
+    },
+    {
+      "slug": "joinville",
+      "nome": "Joinville",
+      "uf": "SC",
+      "ddd": "47",
+      "aeroporto_referencia": "Aeroporto Lauro Carneiro de Loyola (JOI)",
+      "rodovias_principais": "BR-101 e BR-280",
+      "distancia_capital": "180 km de Florianópolis",
+      "urls_canônicas": {
+        "aluguel_carros": "https://www.aquitemachadinhos.com.br/aluguel-carros/melhores-locadoras-carros-sem-taxas-ocultas-joinville",
+        "cursos_capacitacao": "https://www.aquitemachadinhos.com.br/cursos/melhores-cursos-online-capacitacao-profissional-joinville",
+        "hoteis_boutique": "https://www.aquitemachadinhos.com.br/pacotes-viagem/melhores-hoteis-boutique-resorts-luxo-joinville",
+        "suites_presidenciais": "https://www.aquitemachadinhos.com.br/luxo-vip/suites-presidenciais-hoteis-5-estrelas-heliponto-joinville",
+        "concursos_municipais": "https://www.aquitemachadinhos.com.br/concursos/joinville-inscricoes-abertas",
+        "alerta_meteorologico": "https://www.aquitemachadinhos.com.br/alerta-clima/joinville-alerta-meteorologico",
+        "achados_perdidos": "https://www.aquitemachadinhos.com.br/utilidade-publica/joinville/achados-e-perdidos"
+      }
+    },
+    {
+      "slug": "porto-alegre",
+      "nome": "Porto Alegre",
+      "uf": "RS",
+      "ddd": "51",
+      "aeroporto_referencia": "Aeroporto Internacional Salgado Filho (POA)",
+      "rodovias_principais": "BR-116, BR-290 (Freeway) e BR-386",
+      "distancia_capital": "Capital do Estado do RS",
+      "urls_canônicas": {
+        "aluguel_carros": "https://www.aquitemachadinhos.com.br/aluguel-carros/melhores-locadoras-carros-sem-taxas-ocultas-porto-alegre",
+        "cursos_capacitacao": "https://www.aquitemachadinhos.com.br/cursos/melhores-cursos-online-capacitacao-profissional-porto-alegre",
+        "hoteis_boutique": "https://www.aquitemachadinhos.com.br/pacotes-viagem/melhores-hoteis-boutique-resorts-luxo-porto-alegre",
+        "suites_presidenciais": "https://www.aquitemachadinhos.com.br/luxo-vip/suites-presidenciais-hoteis-5-estrelas-heliponto-porto-alegre",
+        "concursos_municipais": "https://www.aquitemachadinhos.com.br/concursos/porto-alegre-inscricoes-abertas",
+        "alerta_meteorologico": "https://www.aquitemachadinhos.com.br/alerta-clima/porto-alegre-alerta-meteorologico",
+        "achados_perdidos": "https://www.aquitemachadinhos.com.br/utilidade-publica/porto-alegre/achados-e-perdidos"
+      }
+    },
+    {
+      "slug": "caxias-do-sul",
+      "nome": "Caxias do Sul",
+      "uf": "RS",
+      "ddd": "54",
+      "aeroporto_referencia": "Aeroporto Regional Hugo Cantergiani (CXJ)",
+      "rodovias_principais": "BR-116 e RS-122 (Serra Gaúcha)",
+      "distancia_capital": "125 km de Porto Alegre",
+      "urls_canônicas": {
+        "aluguel_carros": "https://www.aquitemachadinhos.com.br/aluguel-carros/melhores-locadoras-carros-sem-taxas-ocultas-caxias-do-sul",
+        "cursos_capacitacao": "https://www.aquitemachadinhos.com.br/cursos/melhores-cursos-online-capacitacao-profissional-caxias-do-sul",
+        "hoteis_boutique": "https://www.aquitemachadinhos.com.br/pacotes-viagem/melhores-hoteis-boutique-resorts-luxo-caxias-do-sul",
+        "suites_presidenciais": "https://www.aquitemachadinhos.com.br/luxo-vip/suites-presidenciais-hoteis-5-estrelas-heliponto-caxias-do-sul",
+        "concursos_municipais": "https://www.aquitemachadinhos.com.br/concursos/caxias-do-sul-inscricoes-abertas",
+        "alerta_meteorologico": "https://www.aquitemachadinhos.com.br/alerta-clima/caxias-do-sul-alerta-meteorologico",
+        "achados_perdidos": "https://www.aquitemachadinhos.com.br/utilidade-publica/caxias-do-sul/achados-e-perdidos"
+      }
+    },
+    {
+      "slug": "salvador",
+      "nome": "Salvador",
+      "uf": "BA",
+      "ddd": "71",
+      "aeroporto_referencia": "Aeroporto Internacional Dep. Luís Eduardo Magalhães (SSA)",
+      "rodovias_principais": "BR-324 e BA-099 (Estrada do Coco / Linha Verde)",
+      "distancia_capital": "Capital do Estado da BA",
+      "urls_canônicas": {
+        "aluguel_carros": "https://www.aquitemachadinhos.com.br/aluguel-carros/melhores-locadoras-carros-sem-taxas-ocultas-salvador",
+        "cursos_capacitacao": "https://www.aquitemachadinhos.com.br/cursos/melhores-cursos-online-capacitacao-profissional-salvador",
+        "hoteis_boutique": "https://www.aquitemachadinhos.com.br/pacotes-viagem/melhores-hoteis-boutique-resorts-luxo-salvador",
+        "suites_presidenciais": "https://www.aquitemachadinhos.com.br/luxo-vip/suites-presidenciais-hoteis-5-estrelas-heliponto-salvador",
+        "concursos_municipais": "https://www.aquitemachadinhos.com.br/concursos/salvador-inscricoes-abertas",
+        "alerta_meteorologico": "https://www.aquitemachadinhos.com.br/alerta-clima/salvador-alerta-meteorologico",
+        "achados_perdidos": "https://www.aquitemachadinhos.com.br/utilidade-publica/salvador/achados-e-perdidos"
+      }
+    },
+    {
+      "slug": "porto",
+      "nome": "Porto de Galinhas",
+      "uf": "PE",
+      "ddd": "11",
+      "aeroporto_referencia": "Regional",
+      "rodovias_principais": "Acesso Estadual",
+      "distancia_capital": "Interior",
+      "urls_canônicas": {
+        "aluguel_carros": "https://www.aquitemachadinhos.com.br/aluguel-carros/melhores-locadoras-carros-sem-taxas-ocultas-porto",
+        "cursos_capacitacao": "https://www.aquitemachadinhos.com.br/cursos/melhores-cursos-online-capacitacao-profissional-porto",
+        "hoteis_boutique": "https://www.aquitemachadinhos.com.br/pacotes-viagem/melhores-hoteis-boutique-resorts-luxo-porto",
+        "suites_presidenciais": "https://www.aquitemachadinhos.com.br/luxo-vip/suites-presidenciais-hoteis-5-estrelas-heliponto-porto",
+        "concursos_municipais": "https://www.aquitemachadinhos.com.br/concursos/porto-inscricoes-abertas",
+        "alerta_meteorologico": "https://www.aquitemachadinhos.com.br/alerta-clima/porto-alerta-meteorologico",
+        "achados_perdidos": "https://www.aquitemachadinhos.com.br/utilidade-publica/porto/achados-e-perdidos"
+      }
+    },
+    {
+      "slug": "recife",
+      "nome": "Recife",
+      "uf": "PE",
+      "ddd": "81",
+      "aeroporto_referencia": "Aeroporto Internacional dos Guararapes / Gilberto Freyre (REC)",
+      "rodovias_principais": "BR-101 e BR-232",
+      "distancia_capital": "Capital do Estado de PE",
+      "urls_canônicas": {
+        "aluguel_carros": "https://www.aquitemachadinhos.com.br/aluguel-carros/melhores-locadoras-carros-sem-taxas-ocultas-recife",
+        "cursos_capacitacao": "https://www.aquitemachadinhos.com.br/cursos/melhores-cursos-online-capacitacao-profissional-recife",
+        "hoteis_boutique": "https://www.aquitemachadinhos.com.br/pacotes-viagem/melhores-hoteis-boutique-resorts-luxo-recife",
+        "suites_presidenciais": "https://www.aquitemachadinhos.com.br/luxo-vip/suites-presidenciais-hoteis-5-estrelas-heliponto-recife",
+        "concursos_municipais": "https://www.aquitemachadinhos.com.br/concursos/recife-inscricoes-abertas",
+        "alerta_meteorologico": "https://www.aquitemachadinhos.com.br/alerta-clima/recife-alerta-meteorologico",
+        "achados_perdidos": "https://www.aquitemachadinhos.com.br/utilidade-publica/recife/achados-e-perdidos"
+      }
+    },
+    {
+      "slug": "caruaru",
+      "nome": "Caruaru",
+      "uf": "PE",
+      "ddd": "81",
+      "aeroporto_referencia": "Aeroporto Oscar Laranjeira (CAU) / Conexão Guararapes REC",
+      "rodovias_principais": "BR-232 (Duplicada) e BR-104",
+      "distancia_capital": "135 km de Recife",
+      "urls_canônicas": {
+        "aluguel_carros": "https://www.aquitemachadinhos.com.br/aluguel-carros/melhores-locadoras-carros-sem-taxas-ocultas-caruaru",
+        "cursos_capacitacao": "https://www.aquitemachadinhos.com.br/cursos/melhores-cursos-online-capacitacao-profissional-caruaru",
+        "hoteis_boutique": "https://www.aquitemachadinhos.com.br/pacotes-viagem/melhores-hoteis-boutique-resorts-luxo-caruaru",
+        "suites_presidenciais": "https://www.aquitemachadinhos.com.br/luxo-vip/suites-presidenciais-hoteis-5-estrelas-heliponto-caruaru",
+        "concursos_municipais": "https://www.aquitemachadinhos.com.br/concursos/caruaru-inscricoes-abertas",
+        "alerta_meteorologico": "https://www.aquitemachadinhos.com.br/alerta-clima/caruaru-alerta-meteorologico",
+        "achados_perdidos": "https://www.aquitemachadinhos.com.br/utilidade-publica/caruaru/achados-e-perdidos"
+      }
+    },
+    {
+      "slug": "noronha",
+      "nome": "Fernando de Noronha",
+      "uf": "PE",
+      "ddd": "11",
+      "aeroporto_referencia": "Regional",
+      "rodovias_principais": "Acesso Estadual",
+      "distancia_capital": "Interior",
+      "urls_canônicas": {
+        "aluguel_carros": "https://www.aquitemachadinhos.com.br/aluguel-carros/melhores-locadoras-carros-sem-taxas-ocultas-noronha",
+        "cursos_capacitacao": "https://www.aquitemachadinhos.com.br/cursos/melhores-cursos-online-capacitacao-profissional-noronha",
+        "hoteis_boutique": "https://www.aquitemachadinhos.com.br/pacotes-viagem/melhores-hoteis-boutique-resorts-luxo-noronha",
+        "suites_presidenciais": "https://www.aquitemachadinhos.com.br/luxo-vip/suites-presidenciais-hoteis-5-estrelas-heliponto-noronha",
+        "concursos_municipais": "https://www.aquitemachadinhos.com.br/concursos/noronha-inscricoes-abertas",
+        "alerta_meteorologico": "https://www.aquitemachadinhos.com.br/alerta-clima/noronha-alerta-meteorologico",
+        "achados_perdidos": "https://www.aquitemachadinhos.com.br/utilidade-publica/noronha/achados-e-perdidos"
+      }
+    },
+    {
+      "slug": "fortaleza",
+      "nome": "Fortaleza",
+      "uf": "CE",
+      "ddd": "85",
+      "aeroporto_referencia": "Aeroporto Internacional Pinto Martins (FOR)",
+      "rodovias_principais": "BR-116 e CE-040 (Litoral Leste)",
+      "distancia_capital": "Capital do Estado do CE",
+      "urls_canônicas": {
+        "aluguel_carros": "https://www.aquitemachadinhos.com.br/aluguel-carros/melhores-locadoras-carros-sem-taxas-ocultas-fortaleza",
+        "cursos_capacitacao": "https://www.aquitemachadinhos.com.br/cursos/melhores-cursos-online-capacitacao-profissional-fortaleza",
+        "hoteis_boutique": "https://www.aquitemachadinhos.com.br/pacotes-viagem/melhores-hoteis-boutique-resorts-luxo-fortaleza",
+        "suites_presidenciais": "https://www.aquitemachadinhos.com.br/luxo-vip/suites-presidenciais-hoteis-5-estrelas-heliponto-fortaleza",
+        "concursos_municipais": "https://www.aquitemachadinhos.com.br/concursos/fortaleza-inscricoes-abertas",
+        "alerta_meteorologico": "https://www.aquitemachadinhos.com.br/alerta-clima/fortaleza-alerta-meteorologico",
+        "achados_perdidos": "https://www.aquitemachadinhos.com.br/utilidade-publica/fortaleza/achados-e-perdidos"
+      }
+    },
+    {
+      "slug": "jericoacoara",
+      "nome": "Jericoacoara",
+      "uf": "CE",
+      "ddd": "88",
+      "aeroporto_referencia": "Aeroporto Regional Comandante Ariston Pessoa (JJD) em Cruz",
+      "rodovias_principais": "CE-085 (Estruturante) e transfer 4x4",
+      "distancia_capital": "300 km de Fortaleza",
+      "urls_canônicas": {
+        "aluguel_carros": "https://www.aquitemachadinhos.com.br/aluguel-carros/melhores-locadoras-carros-sem-taxas-ocultas-jericoacoara",
+        "cursos_capacitacao": "https://www.aquitemachadinhos.com.br/cursos/melhores-cursos-online-capacitacao-profissional-jericoacoara",
+        "hoteis_boutique": "https://www.aquitemachadinhos.com.br/pacotes-viagem/melhores-hoteis-boutique-resorts-luxo-jericoacoara",
+        "suites_presidenciais": "https://www.aquitemachadinhos.com.br/luxo-vip/suites-presidenciais-hoteis-5-estrelas-heliponto-jericoacoara",
+        "concursos_municipais": "https://www.aquitemachadinhos.com.br/concursos/jericoacoara-inscricoes-abertas",
+        "alerta_meteorologico": "https://www.aquitemachadinhos.com.br/alerta-clima/jericoacoara-alerta-meteorologico",
+        "achados_perdidos": "https://www.aquitemachadinhos.com.br/utilidade-publica/jericoacoara/achados-e-perdidos"
+      }
+    },
+    {
+      "slug": "natal",
+      "nome": "Natal",
+      "uf": "RN",
+      "ddd": "84",
+      "aeroporto_referencia": "Aeroporto Internacional Gov. Aluízio Alves (NAT) em São Gonçalo do Amarante",
+      "rodovias_principais": "BR-101 e Rota do Sol",
+      "distancia_capital": "Capital do Estado do RN",
+      "urls_canônicas": {
+        "aluguel_carros": "https://www.aquitemachadinhos.com.br/aluguel-carros/melhores-locadoras-carros-sem-taxas-ocultas-natal",
+        "cursos_capacitacao": "https://www.aquitemachadinhos.com.br/cursos/melhores-cursos-online-capacitacao-profissional-natal",
+        "hoteis_boutique": "https://www.aquitemachadinhos.com.br/pacotes-viagem/melhores-hoteis-boutique-resorts-luxo-natal",
+        "suites_presidenciais": "https://www.aquitemachadinhos.com.br/luxo-vip/suites-presidenciais-hoteis-5-estrelas-heliponto-natal",
+        "concursos_municipais": "https://www.aquitemachadinhos.com.br/concursos/natal-inscricoes-abertas",
+        "alerta_meteorologico": "https://www.aquitemachadinhos.com.br/alerta-clima/natal-alerta-meteorologico",
+        "achados_perdidos": "https://www.aquitemachadinhos.com.br/utilidade-publica/natal/achados-e-perdidos"
+      }
+    },
+    {
+      "slug": "joao-pessoa",
+      "nome": "João Pessoa",
+      "uf": "PB",
+      "ddd": "83",
+      "aeroporto_referencia": "Aeroporto Internacional Presidente Castro Pinto (JPA)",
+      "rodovias_principais": "BR-101 e BR-230",
+      "distancia_capital": "Capital do Estado da PB",
+      "urls_canônicas": {
+        "aluguel_carros": "https://www.aquitemachadinhos.com.br/aluguel-carros/melhores-locadoras-carros-sem-taxas-ocultas-joao-pessoa",
+        "cursos_capacitacao": "https://www.aquitemachadinhos.com.br/cursos/melhores-cursos-online-capacitacao-profissional-joao-pessoa",
+        "hoteis_boutique": "https://www.aquitemachadinhos.com.br/pacotes-viagem/melhores-hoteis-boutique-resorts-luxo-joao-pessoa",
+        "suites_presidenciais": "https://www.aquitemachadinhos.com.br/luxo-vip/suites-presidenciais-hoteis-5-estrelas-heliponto-joao-pessoa",
+        "concursos_municipais": "https://www.aquitemachadinhos.com.br/concursos/joao-pessoa-inscricoes-abertas",
+        "alerta_meteorologico": "https://www.aquitemachadinhos.com.br/alerta-clima/joao-pessoa-alerta-meteorologico",
+        "achados_perdidos": "https://www.aquitemachadinhos.com.br/utilidade-publica/joao-pessoa/achados-e-perdidos"
+      }
+    },
+    {
+      "slug": "campina-grande",
+      "nome": "Campina Grande",
+      "uf": "PB",
+      "ddd": "11",
+      "aeroporto_referencia": "Regional",
+      "rodovias_principais": "Acesso Estadual",
+      "distancia_capital": "Interior",
+      "urls_canônicas": {
+        "aluguel_carros": "https://www.aquitemachadinhos.com.br/aluguel-carros/melhores-locadoras-carros-sem-taxas-ocultas-campina-grande",
+        "cursos_capacitacao": "https://www.aquitemachadinhos.com.br/cursos/melhores-cursos-online-capacitacao-profissional-campina-grande",
+        "hoteis_boutique": "https://www.aquitemachadinhos.com.br/pacotes-viagem/melhores-hoteis-boutique-resorts-luxo-campina-grande",
+        "suites_presidenciais": "https://www.aquitemachadinhos.com.br/luxo-vip/suites-presidenciais-hoteis-5-estrelas-heliponto-campina-grande",
+        "concursos_municipais": "https://www.aquitemachadinhos.com.br/concursos/campina-grande-inscricoes-abertas",
+        "alerta_meteorologico": "https://www.aquitemachadinhos.com.br/alerta-clima/campina-grande-alerta-meteorologico",
+        "achados_perdidos": "https://www.aquitemachadinhos.com.br/utilidade-publica/campina-grande/achados-e-perdidos"
+      }
+    },
+    {
+      "slug": "maceio",
+      "nome": "Maceió",
+      "uf": "AL",
+      "ddd": "82",
+      "aeroporto_referencia": "Aeroporto Internacional Zumbi dos Palmares (MCZ)",
+      "rodovias_principais": "BR-101 e AL-101 (Litoral Norte e Sul)",
+      "distancia_capital": "Capital do Estado de AL",
+      "urls_canônicas": {
+        "aluguel_carros": "https://www.aquitemachadinhos.com.br/aluguel-carros/melhores-locadoras-carros-sem-taxas-ocultas-maceio",
+        "cursos_capacitacao": "https://www.aquitemachadinhos.com.br/cursos/melhores-cursos-online-capacitacao-profissional-maceio",
+        "hoteis_boutique": "https://www.aquitemachadinhos.com.br/pacotes-viagem/melhores-hoteis-boutique-resorts-luxo-maceio",
+        "suites_presidenciais": "https://www.aquitemachadinhos.com.br/luxo-vip/suites-presidenciais-hoteis-5-estrelas-heliponto-maceio",
+        "concursos_municipais": "https://www.aquitemachadinhos.com.br/concursos/maceio-inscricoes-abertas",
+        "alerta_meteorologico": "https://www.aquitemachadinhos.com.br/alerta-clima/maceio-alerta-meteorologico",
+        "achados_perdidos": "https://www.aquitemachadinhos.com.br/utilidade-publica/maceio/achados-e-perdidos"
+      }
+    },
+    {
+      "slug": "aracaju",
+      "nome": "Aracaju",
+      "uf": "SE",
+      "ddd": "79",
+      "aeroporto_referencia": "Aeroporto Internacional Santa Maria (AJU)",
+      "rodovias_principais": "BR-101 e BR-235",
+      "distancia_capital": "Capital do Estado de SE",
+      "urls_canônicas": {
+        "aluguel_carros": "https://www.aquitemachadinhos.com.br/aluguel-carros/melhores-locadoras-carros-sem-taxas-ocultas-aracaju",
+        "cursos_capacitacao": "https://www.aquitemachadinhos.com.br/cursos/melhores-cursos-online-capacitacao-profissional-aracaju",
+        "hoteis_boutique": "https://www.aquitemachadinhos.com.br/pacotes-viagem/melhores-hoteis-boutique-resorts-luxo-aracaju",
+        "suites_presidenciais": "https://www.aquitemachadinhos.com.br/luxo-vip/suites-presidenciais-hoteis-5-estrelas-heliponto-aracaju",
+        "concursos_municipais": "https://www.aquitemachadinhos.com.br/concursos/aracaju-inscricoes-abertas",
+        "alerta_meteorologico": "https://www.aquitemachadinhos.com.br/alerta-clima/aracaju-alerta-meteorologico",
+        "achados_perdidos": "https://www.aquitemachadinhos.com.br/utilidade-publica/aracaju/achados-e-perdidos"
+      }
+    },
+    {
+      "slug": "brasilia",
+      "nome": "Brasília",
+      "uf": "DF",
+      "ddd": "61",
+      "aeroporto_referencia": "Aeroporto Internacional Presidente Juscelino Kubitschek (BSB)",
+      "rodovias_principais": "BR-040, BR-060 e BR-020",
+      "distancia_capital": "Distrito Federal (Capital do País)",
+      "urls_canônicas": {
+        "aluguel_carros": "https://www.aquitemachadinhos.com.br/aluguel-carros/melhores-locadoras-carros-sem-taxas-ocultas-brasilia",
+        "cursos_capacitacao": "https://www.aquitemachadinhos.com.br/cursos/melhores-cursos-online-capacitacao-profissional-brasilia",
+        "hoteis_boutique": "https://www.aquitemachadinhos.com.br/pacotes-viagem/melhores-hoteis-boutique-resorts-luxo-brasilia",
+        "suites_presidenciais": "https://www.aquitemachadinhos.com.br/luxo-vip/suites-presidenciais-hoteis-5-estrelas-heliponto-brasilia",
+        "concursos_municipais": "https://www.aquitemachadinhos.com.br/concursos/brasilia-inscricoes-abertas",
+        "alerta_meteorologico": "https://www.aquitemachadinhos.com.br/alerta-clima/brasilia-alerta-meteorologico",
+        "achados_perdidos": "https://www.aquitemachadinhos.com.br/utilidade-publica/brasilia/achados-e-perdidos"
+      }
+    },
+    {
+      "slug": "goiania",
+      "nome": "Goiânia",
+      "uf": "GO",
+      "ddd": "62",
+      "aeroporto_referencia": "Aeroporto Internacional Santa Genoveva (GYN)",
+      "rodovias_principais": "BR-153 e BR-060",
+      "distancia_capital": "Capital do Estado de GO",
+      "urls_canônicas": {
+        "aluguel_carros": "https://www.aquitemachadinhos.com.br/aluguel-carros/melhores-locadoras-carros-sem-taxas-ocultas-goiania",
+        "cursos_capacitacao": "https://www.aquitemachadinhos.com.br/cursos/melhores-cursos-online-capacitacao-profissional-goiania",
+        "hoteis_boutique": "https://www.aquitemachadinhos.com.br/pacotes-viagem/melhores-hoteis-boutique-resorts-luxo-goiania",
+        "suites_presidenciais": "https://www.aquitemachadinhos.com.br/luxo-vip/suites-presidenciais-hoteis-5-estrelas-heliponto-goiania",
+        "concursos_municipais": "https://www.aquitemachadinhos.com.br/concursos/goiania-inscricoes-abertas",
+        "alerta_meteorologico": "https://www.aquitemachadinhos.com.br/alerta-clima/goiania-alerta-meteorologico",
+        "achados_perdidos": "https://www.aquitemachadinhos.com.br/utilidade-publica/goiania/achados-e-perdidos"
+      }
+    },
+    {
+      "slug": "anapolis",
+      "nome": "Anápolis",
+      "uf": "GO",
+      "ddd": "62",
+      "aeroporto_referencia": "Base Aérea / Conexão via Santa Genoveva GYN (40 min)",
+      "rodovias_principais": "BR-153 e BR-060 (Eixo Goiânia-Brasília)",
+      "distancia_capital": "55 km de Goiânia",
+      "urls_canônicas": {
+        "aluguel_carros": "https://www.aquitemachadinhos.com.br/aluguel-carros/melhores-locadoras-carros-sem-taxas-ocultas-anapolis",
+        "cursos_capacitacao": "https://www.aquitemachadinhos.com.br/cursos/melhores-cursos-online-capacitacao-profissional-anapolis",
+        "hoteis_boutique": "https://www.aquitemachadinhos.com.br/pacotes-viagem/melhores-hoteis-boutique-resorts-luxo-anapolis",
+        "suites_presidenciais": "https://www.aquitemachadinhos.com.br/luxo-vip/suites-presidenciais-hoteis-5-estrelas-heliponto-anapolis",
+        "concursos_municipais": "https://www.aquitemachadinhos.com.br/concursos/anapolis-inscricoes-abertas",
+        "alerta_meteorologico": "https://www.aquitemachadinhos.com.br/alerta-clima/anapolis-alerta-meteorologico",
+        "achados_perdidos": "https://www.aquitemachadinhos.com.br/utilidade-publica/anapolis/achados-e-perdidos"
+      }
+    },
+    {
+      "slug": "rio-verde",
+      "nome": "Rio Verde",
+      "uf": "GO",
+      "ddd": "64",
+      "aeroporto_referencia": "Aeroporto General Leite de Castro (RVD)",
+      "rodovias_principais": "BR-060 e BR-452",
+      "distancia_capital": "230 km de Goiânia",
+      "urls_canônicas": {
+        "aluguel_carros": "https://www.aquitemachadinhos.com.br/aluguel-carros/melhores-locadoras-carros-sem-taxas-ocultas-rio-verde",
+        "cursos_capacitacao": "https://www.aquitemachadinhos.com.br/cursos/melhores-cursos-online-capacitacao-profissional-rio-verde",
+        "hoteis_boutique": "https://www.aquitemachadinhos.com.br/pacotes-viagem/melhores-hoteis-boutique-resorts-luxo-rio-verde",
+        "suites_presidenciais": "https://www.aquitemachadinhos.com.br/luxo-vip/suites-presidenciais-hoteis-5-estrelas-heliponto-rio-verde",
+        "concursos_municipais": "https://www.aquitemachadinhos.com.br/concursos/rio-verde-inscricoes-abertas",
+        "alerta_meteorologico": "https://www.aquitemachadinhos.com.br/alerta-clima/rio-verde-alerta-meteorologico",
+        "achados_perdidos": "https://www.aquitemachadinhos.com.br/utilidade-publica/rio-verde/achados-e-perdidos"
+      }
+    },
+    {
+      "slug": "caldasnovas",
+      "nome": "Caldas Novas",
+      "uf": "GO",
+      "ddd": "11",
+      "aeroporto_referencia": "Regional",
+      "rodovias_principais": "Acesso Estadual",
+      "distancia_capital": "Interior",
+      "urls_canônicas": {
+        "aluguel_carros": "https://www.aquitemachadinhos.com.br/aluguel-carros/melhores-locadoras-carros-sem-taxas-ocultas-caldasnovas",
+        "cursos_capacitacao": "https://www.aquitemachadinhos.com.br/cursos/melhores-cursos-online-capacitacao-profissional-caldasnovas",
+        "hoteis_boutique": "https://www.aquitemachadinhos.com.br/pacotes-viagem/melhores-hoteis-boutique-resorts-luxo-caldasnovas",
+        "suites_presidenciais": "https://www.aquitemachadinhos.com.br/luxo-vip/suites-presidenciais-hoteis-5-estrelas-heliponto-caldasnovas",
+        "concursos_municipais": "https://www.aquitemachadinhos.com.br/concursos/caldasnovas-inscricoes-abertas",
+        "alerta_meteorologico": "https://www.aquitemachadinhos.com.br/alerta-clima/caldasnovas-alerta-meteorologico",
+        "achados_perdidos": "https://www.aquitemachadinhos.com.br/utilidade-publica/caldasnovas/achados-e-perdidos"
+      }
+    },
+    {
+      "slug": "pirenopolis",
+      "nome": "Pirenópolis",
+      "uf": "GO",
+      "ddd": "62",
+      "aeroporto_referencia": "Acesso via Brasília BSB (2h) ou Goiânia GYN (1h40)",
+      "rodovias_principais": "GO-431 e GO-338",
+      "distancia_capital": "120 km de Goiânia",
+      "urls_canônicas": {
+        "aluguel_carros": "https://www.aquitemachadinhos.com.br/aluguel-carros/melhores-locadoras-carros-sem-taxas-ocultas-pirenopolis",
+        "cursos_capacitacao": "https://www.aquitemachadinhos.com.br/cursos/melhores-cursos-online-capacitacao-profissional-pirenopolis",
+        "hoteis_boutique": "https://www.aquitemachadinhos.com.br/pacotes-viagem/melhores-hoteis-boutique-resorts-luxo-pirenopolis",
+        "suites_presidenciais": "https://www.aquitemachadinhos.com.br/luxo-vip/suites-presidenciais-hoteis-5-estrelas-heliponto-pirenopolis",
+        "concursos_municipais": "https://www.aquitemachadinhos.com.br/concursos/pirenopolis-inscricoes-abertas",
+        "alerta_meteorologico": "https://www.aquitemachadinhos.com.br/alerta-clima/pirenopolis-alerta-meteorologico",
+        "achados_perdidos": "https://www.aquitemachadinhos.com.br/utilidade-publica/pirenopolis/achados-e-perdidos"
+      }
+    },
+    {
+      "slug": "cuiaba",
+      "nome": "Cuiabá",
+      "uf": "MT",
+      "ddd": "65",
+      "aeroporto_referencia": "Aeroporto Internacional Marechal Rondon (CGB) em Várzea Grande",
+      "rodovias_principais": "BR-163 e BR-364",
+      "distancia_capital": "Capital do Estado de MT",
+      "urls_canônicas": {
+        "aluguel_carros": "https://www.aquitemachadinhos.com.br/aluguel-carros/melhores-locadoras-carros-sem-taxas-ocultas-cuiaba",
+        "cursos_capacitacao": "https://www.aquitemachadinhos.com.br/cursos/melhores-cursos-online-capacitacao-profissional-cuiaba",
+        "hoteis_boutique": "https://www.aquitemachadinhos.com.br/pacotes-viagem/melhores-hoteis-boutique-resorts-luxo-cuiaba",
+        "suites_presidenciais": "https://www.aquitemachadinhos.com.br/luxo-vip/suites-presidenciais-hoteis-5-estrelas-heliponto-cuiaba",
+        "concursos_municipais": "https://www.aquitemachadinhos.com.br/concursos/cuiaba-inscricoes-abertas",
+        "alerta_meteorologico": "https://www.aquitemachadinhos.com.br/alerta-clima/cuiaba-alerta-meteorologico",
+        "achados_perdidos": "https://www.aquitemachadinhos.com.br/utilidade-publica/cuiaba/achados-e-perdidos"
+      }
+    },
+    {
+      "slug": "chapada-guimaraes",
+      "nome": "Chapada dos Guimarães",
+      "uf": "MT",
+      "ddd": "11",
+      "aeroporto_referencia": "Regional",
+      "rodovias_principais": "Acesso Estadual",
+      "distancia_capital": "Interior",
+      "urls_canônicas": {
+        "aluguel_carros": "https://www.aquitemachadinhos.com.br/aluguel-carros/melhores-locadoras-carros-sem-taxas-ocultas-chapada-guimaraes",
+        "cursos_capacitacao": "https://www.aquitemachadinhos.com.br/cursos/melhores-cursos-online-capacitacao-profissional-chapada-guimaraes",
+        "hoteis_boutique": "https://www.aquitemachadinhos.com.br/pacotes-viagem/melhores-hoteis-boutique-resorts-luxo-chapada-guimaraes",
+        "suites_presidenciais": "https://www.aquitemachadinhos.com.br/luxo-vip/suites-presidenciais-hoteis-5-estrelas-heliponto-chapada-guimaraes",
+        "concursos_municipais": "https://www.aquitemachadinhos.com.br/concursos/chapada-guimaraes-inscricoes-abertas",
+        "alerta_meteorologico": "https://www.aquitemachadinhos.com.br/alerta-clima/chapada-guimaraes-alerta-meteorologico",
+        "achados_perdidos": "https://www.aquitemachadinhos.com.br/utilidade-publica/chapada-guimaraes/achados-e-perdidos"
+      }
+    },
+    {
+      "slug": "campo-grande",
+      "nome": "Campo Grande",
+      "uf": "MS",
+      "ddd": "67",
+      "aeroporto_referencia": "Aeroporto Internacional de Campo Grande (CGR)",
+      "rodovias_principais": "BR-163 e BR-262",
+      "distancia_capital": "Capital do Estado de MS",
+      "urls_canônicas": {
+        "aluguel_carros": "https://www.aquitemachadinhos.com.br/aluguel-carros/melhores-locadoras-carros-sem-taxas-ocultas-campo-grande",
+        "cursos_capacitacao": "https://www.aquitemachadinhos.com.br/cursos/melhores-cursos-online-capacitacao-profissional-campo-grande",
+        "hoteis_boutique": "https://www.aquitemachadinhos.com.br/pacotes-viagem/melhores-hoteis-boutique-resorts-luxo-campo-grande",
+        "suites_presidenciais": "https://www.aquitemachadinhos.com.br/luxo-vip/suites-presidenciais-hoteis-5-estrelas-heliponto-campo-grande",
+        "concursos_municipais": "https://www.aquitemachadinhos.com.br/concursos/campo-grande-inscricoes-abertas",
+        "alerta_meteorologico": "https://www.aquitemachadinhos.com.br/alerta-clima/campo-grande-alerta-meteorologico",
+        "achados_perdidos": "https://www.aquitemachadinhos.com.br/utilidade-publica/campo-grande/achados-e-perdidos"
+      }
+    },
+    {
+      "slug": "bonito",
+      "nome": "Bonito",
+      "uf": "MS",
+      "ddd": "67",
+      "aeroporto_referencia": "Aeroporto Regional de Bonito (BYO)",
+      "rodovias_principais": "MS-178 e MS-382",
+      "distancia_capital": "290 km de Campo Grande",
+      "urls_canônicas": {
+        "aluguel_carros": "https://www.aquitemachadinhos.com.br/aluguel-carros/melhores-locadoras-carros-sem-taxas-ocultas-bonito",
+        "cursos_capacitacao": "https://www.aquitemachadinhos.com.br/cursos/melhores-cursos-online-capacitacao-profissional-bonito",
+        "hoteis_boutique": "https://www.aquitemachadinhos.com.br/pacotes-viagem/melhores-hoteis-boutique-resorts-luxo-bonito",
+        "suites_presidenciais": "https://www.aquitemachadinhos.com.br/luxo-vip/suites-presidenciais-hoteis-5-estrelas-heliponto-bonito",
+        "concursos_municipais": "https://www.aquitemachadinhos.com.br/concursos/bonito-inscricoes-abertas",
+        "alerta_meteorologico": "https://www.aquitemachadinhos.com.br/alerta-clima/bonito-alerta-meteorologico",
+        "achados_perdidos": "https://www.aquitemachadinhos.com.br/utilidade-publica/bonito/achados-e-perdidos"
+      }
+    },
+    {
+      "slug": "manaus",
+      "nome": "Manaus",
+      "uf": "AM",
+      "ddd": "92",
+      "aeroporto_referencia": "Aeroporto Internacional Eduardo Gomes (MAO)",
+      "rodovias_principais": "BR-174 (Acesso a Roraima) e transporte hidroviário",
+      "distancia_capital": "Capital do Estado do AM",
+      "urls_canônicas": {
+        "aluguel_carros": "https://www.aquitemachadinhos.com.br/aluguel-carros/melhores-locadoras-carros-sem-taxas-ocultas-manaus",
+        "cursos_capacitacao": "https://www.aquitemachadinhos.com.br/cursos/melhores-cursos-online-capacitacao-profissional-manaus",
+        "hoteis_boutique": "https://www.aquitemachadinhos.com.br/pacotes-viagem/melhores-hoteis-boutique-resorts-luxo-manaus",
+        "suites_presidenciais": "https://www.aquitemachadinhos.com.br/luxo-vip/suites-presidenciais-hoteis-5-estrelas-heliponto-manaus",
+        "concursos_municipais": "https://www.aquitemachadinhos.com.br/concursos/manaus-inscricoes-abertas",
+        "alerta_meteorologico": "https://www.aquitemachadinhos.com.br/alerta-clima/manaus-alerta-meteorologico",
+        "achados_perdidos": "https://www.aquitemachadinhos.com.br/utilidade-publica/manaus/achados-e-perdidos"
+      }
+    },
+    {
+      "slug": "belem",
+      "nome": "Belém",
+      "uf": "PA",
+      "ddd": "91",
+      "aeroporto_referencia": "Aeroporto Internacional Val-de-Cans / Júlio Cezar Ribeiro (BEL)",
+      "rodovias_principais": "BR-316 e Rodovia Augusto Montenegro",
+      "distancia_capital": "Capital do Estado do PA",
+      "urls_canônicas": {
+        "aluguel_carros": "https://www.aquitemachadinhos.com.br/aluguel-carros/melhores-locadoras-carros-sem-taxas-ocultas-belem",
+        "cursos_capacitacao": "https://www.aquitemachadinhos.com.br/cursos/melhores-cursos-online-capacitacao-profissional-belem",
+        "hoteis_boutique": "https://www.aquitemachadinhos.com.br/pacotes-viagem/melhores-hoteis-boutique-resorts-luxo-belem",
+        "suites_presidenciais": "https://www.aquitemachadinhos.com.br/luxo-vip/suites-presidenciais-hoteis-5-estrelas-heliponto-belem",
+        "concursos_municipais": "https://www.aquitemachadinhos.com.br/concursos/belem-inscricoes-abertas",
+        "alerta_meteorologico": "https://www.aquitemachadinhos.com.br/alerta-clima/belem-alerta-meteorologico",
+        "achados_perdidos": "https://www.aquitemachadinhos.com.br/utilidade-publica/belem/achados-e-perdidos"
+      }
+    },
+    {
+      "slug": "alter-do-chao",
+      "nome": "Alter do Chão",
+      "uf": "PA",
+      "ddd": "93",
+      "aeroporto_referencia": "Aeroporto Internacional Maestro Wilson Fonseca em Santarém (STM - 35 km)",
+      "rodovias_principais": "PA-457 (Rodovia Everaldo Martins)",
+      "distancia_capital": "35 km de Santarém e 1.300 km de Belém",
+      "urls_canônicas": {
+        "aluguel_carros": "https://www.aquitemachadinhos.com.br/aluguel-carros/melhores-locadoras-carros-sem-taxas-ocultas-alter-do-chao",
+        "cursos_capacitacao": "https://www.aquitemachadinhos.com.br/cursos/melhores-cursos-online-capacitacao-profissional-alter-do-chao",
+        "hoteis_boutique": "https://www.aquitemachadinhos.com.br/pacotes-viagem/melhores-hoteis-boutique-resorts-luxo-alter-do-chao",
+        "suites_presidenciais": "https://www.aquitemachadinhos.com.br/luxo-vip/suites-presidenciais-hoteis-5-estrelas-heliponto-alter-do-chao",
+        "concursos_municipais": "https://www.aquitemachadinhos.com.br/concursos/alter-do-chao-inscricoes-abertas",
+        "alerta_meteorologico": "https://www.aquitemachadinhos.com.br/alerta-clima/alter-do-chao-alerta-meteorologico",
+        "achados_perdidos": "https://www.aquitemachadinhos.com.br/utilidade-publica/alter-do-chao/achados-e-perdidos"
+      }
+    },
+    {
+      "slug": "sao-luis",
+      "nome": "São Luís",
+      "uf": "MA",
+      "ddd": "98",
+      "aeroporto_referencia": "Aeroporto Internacional Marechal Cunha Machado (SLZ)",
+      "rodovias_principais": "BR-135 (Único acesso rodoviário à ilha)",
+      "distancia_capital": "Capital do Estado do MA",
+      "urls_canônicas": {
+        "aluguel_carros": "https://www.aquitemachadinhos.com.br/aluguel-carros/melhores-locadoras-carros-sem-taxas-ocultas-sao-luis",
+        "cursos_capacitacao": "https://www.aquitemachadinhos.com.br/cursos/melhores-cursos-online-capacitacao-profissional-sao-luis",
+        "hoteis_boutique": "https://www.aquitemachadinhos.com.br/pacotes-viagem/melhores-hoteis-boutique-resorts-luxo-sao-luis",
+        "suites_presidenciais": "https://www.aquitemachadinhos.com.br/luxo-vip/suites-presidenciais-hoteis-5-estrelas-heliponto-sao-luis",
+        "concursos_municipais": "https://www.aquitemachadinhos.com.br/concursos/sao-luis-inscricoes-abertas",
+        "alerta_meteorologico": "https://www.aquitemachadinhos.com.br/alerta-clima/sao-luis-alerta-meteorologico",
+        "achados_perdidos": "https://www.aquitemachadinhos.com.br/utilidade-publica/sao-luis/achados-e-perdidos"
+      }
+    },
+    {
+      "slug": "teresina",
+      "nome": "Teresina",
+      "uf": "PI",
+      "ddd": "86",
+      "aeroporto_referencia": "Aeroporto Senador Petrônio Portella (THE)",
+      "rodovias_principais": "BR-343 e BR-316",
+      "distancia_capital": "Capital do Estado do PI",
+      "urls_canônicas": {
+        "aluguel_carros": "https://www.aquitemachadinhos.com.br/aluguel-carros/melhores-locadoras-carros-sem-taxas-ocultas-teresina",
+        "cursos_capacitacao": "https://www.aquitemachadinhos.com.br/cursos/melhores-cursos-online-capacitacao-profissional-teresina",
+        "hoteis_boutique": "https://www.aquitemachadinhos.com.br/pacotes-viagem/melhores-hoteis-boutique-resorts-luxo-teresina",
+        "suites_presidenciais": "https://www.aquitemachadinhos.com.br/luxo-vip/suites-presidenciais-hoteis-5-estrelas-heliponto-teresina",
+        "concursos_municipais": "https://www.aquitemachadinhos.com.br/concursos/teresina-inscricoes-abertas",
+        "alerta_meteorologico": "https://www.aquitemachadinhos.com.br/alerta-clima/teresina-alerta-meteorologico",
+        "achados_perdidos": "https://www.aquitemachadinhos.com.br/utilidade-publica/teresina/achados-e-perdidos"
+      }
+    },
+    {
+      "slug": "vitoria",
+      "nome": "Vitória",
+      "uf": "ES",
+      "ddd": "11",
+      "aeroporto_referencia": "Regional",
+      "rodovias_principais": "Acesso Estadual",
+      "distancia_capital": "Interior",
+      "urls_canônicas": {
+        "aluguel_carros": "https://www.aquitemachadinhos.com.br/aluguel-carros/melhores-locadoras-carros-sem-taxas-ocultas-vitoria",
+        "cursos_capacitacao": "https://www.aquitemachadinhos.com.br/cursos/melhores-cursos-online-capacitacao-profissional-vitoria",
+        "hoteis_boutique": "https://www.aquitemachadinhos.com.br/pacotes-viagem/melhores-hoteis-boutique-resorts-luxo-vitoria",
+        "suites_presidenciais": "https://www.aquitemachadinhos.com.br/luxo-vip/suites-presidenciais-hoteis-5-estrelas-heliponto-vitoria",
+        "concursos_municipais": "https://www.aquitemachadinhos.com.br/concursos/vitoria-inscricoes-abertas",
+        "alerta_meteorologico": "https://www.aquitemachadinhos.com.br/alerta-clima/vitoria-alerta-meteorologico",
+        "achados_perdidos": "https://www.aquitemachadinhos.com.br/utilidade-publica/vitoria/achados-e-perdidos"
+      }
+    },
+    {
+      "slug": "feira-de-santana",
+      "nome": "Feira de Santana",
+      "uf": "BA",
+      "ddd": "75",
+      "aeroporto_referencia": "Aeroporto Gov. João Durval Carneiro (FEC)",
+      "rodovias_principais": "BR-324, BR-101 e BR-116 (Maior entroncamento rodoviário do Nordeste)",
+      "distancia_capital": "108 km de Salvador",
+      "urls_canônicas": {
+        "aluguel_carros": "https://www.aquitemachadinhos.com.br/aluguel-carros/melhores-locadoras-carros-sem-taxas-ocultas-feira-de-santana",
+        "cursos_capacitacao": "https://www.aquitemachadinhos.com.br/cursos/melhores-cursos-online-capacitacao-profissional-feira-de-santana",
+        "hoteis_boutique": "https://www.aquitemachadinhos.com.br/pacotes-viagem/melhores-hoteis-boutique-resorts-luxo-feira-de-santana",
+        "suites_presidenciais": "https://www.aquitemachadinhos.com.br/luxo-vip/suites-presidenciais-hoteis-5-estrelas-heliponto-feira-de-santana",
+        "concursos_municipais": "https://www.aquitemachadinhos.com.br/concursos/feira-de-santana-inscricoes-abertas",
+        "alerta_meteorologico": "https://www.aquitemachadinhos.com.br/alerta-clima/feira-de-santana-alerta-meteorologico",
+        "achados_perdidos": "https://www.aquitemachadinhos.com.br/utilidade-publica/feira-de-santana/achados-e-perdidos"
+      }
+    },
+    {
+      "slug": "lencois",
+      "nome": "Lençóis",
+      "uf": "BA",
+      "ddd": "11",
+      "aeroporto_referencia": "Regional",
+      "rodovias_principais": "Acesso Estadual",
+      "distancia_capital": "Interior",
+      "urls_canônicas": {
+        "aluguel_carros": "https://www.aquitemachadinhos.com.br/aluguel-carros/melhores-locadoras-carros-sem-taxas-ocultas-lencois",
+        "cursos_capacitacao": "https://www.aquitemachadinhos.com.br/cursos/melhores-cursos-online-capacitacao-profissional-lencois",
+        "hoteis_boutique": "https://www.aquitemachadinhos.com.br/pacotes-viagem/melhores-hoteis-boutique-resorts-luxo-lencois",
+        "suites_presidenciais": "https://www.aquitemachadinhos.com.br/luxo-vip/suites-presidenciais-hoteis-5-estrelas-heliponto-lencois",
+        "concursos_municipais": "https://www.aquitemachadinhos.com.br/concursos/lencois-inscricoes-abertas",
+        "alerta_meteorologico": "https://www.aquitemachadinhos.com.br/alerta-clima/lencois-alerta-meteorologico",
+        "achados_perdidos": "https://www.aquitemachadinhos.com.br/utilidade-publica/lencois/achados-e-perdidos"
+      }
+    },
+    {
+      "slug": "jalapao",
+      "nome": "Jalapão / Ponte Alta",
+      "uf": "TO",
+      "ddd": "63",
+      "aeroporto_referencia": "Aeroporto Brigadeiro Lysias Rodrigues em Palmas (PMW) + transfer 4x4",
+      "rodovias_principais": "TO-030 e TO-255 (Ponte Alta do Tocantins e Mateiros)",
+      "distancia_capital": "300 km de Palmas",
+      "urls_canônicas": {
+        "aluguel_carros": "https://www.aquitemachadinhos.com.br/aluguel-carros/melhores-locadoras-carros-sem-taxas-ocultas-jalapao",
+        "cursos_capacitacao": "https://www.aquitemachadinhos.com.br/cursos/melhores-cursos-online-capacitacao-profissional-jalapao",
+        "hoteis_boutique": "https://www.aquitemachadinhos.com.br/pacotes-viagem/melhores-hoteis-boutique-resorts-luxo-jalapao",
+        "suites_presidenciais": "https://www.aquitemachadinhos.com.br/luxo-vip/suites-presidenciais-hoteis-5-estrelas-heliponto-jalapao",
+        "concursos_municipais": "https://www.aquitemachadinhos.com.br/concursos/jalapao-inscricoes-abertas",
+        "alerta_meteorologico": "https://www.aquitemachadinhos.com.br/alerta-clima/jalapao-alerta-meteorologico",
+        "achados_perdidos": "https://www.aquitemachadinhos.com.br/utilidade-publica/jalapao/achados-e-perdidos"
+      }
+    }
+  ]
+}
