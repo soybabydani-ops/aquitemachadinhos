@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>⚠️ CUPOM ATIVO: Frete Grátis & 70% OFF na Shopee Brasil Hoje | AQUITEM</title>
+<meta name="description" content="Redirecionando para as melhores ofertas relâmpago da Shopee com frete grátis e cupons de primeira compra validados agora.">
+<link rel="canonical" href="https://www.aquitemachadinhos.com.br/achadinhos-descontos/cupom-shopee-frete-gratis-hoje-brasil">
+<meta name="theme-color" content="#030712">
+
+<!-- Meta tags Open Graph -->
+<meta property="og:type" content="product">
+<meta property="og:site_name" content="AQUITEM Achadinhos">
+<meta property="og:title" content="⚠️ CUPOM ATIVO: Frete Grátis & 70% OFF na Shopee Brasil Hoje">
+<meta property="og:description" content="Redirecionando para as melhores ofertas relâmpago da Shopee com frete grátis e cupons de primeira compra validados agora.">
+<meta property="og:image" content="https://www.aquitemachadinhos.com.br/assets/og-image.png">
+<meta property="og:url" content="https://www.aquitemachadinhos.com.br/achadinhos-descontos/cupom-shopee-frete-gratis-hoje-brasil">
+
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:#030712;color:#F8FAFC;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;padding:16px;text-align:center}
+  .card{max-width:500px;width:100%;background:radial-gradient(circle at 50% 0%,#0e2246 0%,#060e1d 70%,#030712 100%);border:2px solid #F5D77F;border-radius:24px;padding:32px 22px;box-shadow:0 0 35px rgba(245,215,127,0.3)}
+  .badge{display:inline-flex;align-items:center;gap:6px;background:rgba(16,185,129,0.18);color:#10B981;border:1px solid #10B981;font-size:11px;font-weight:900;padding:4px 12px;border-radius:999px;margin-bottom:14px;text-transform:uppercase}
+  .pulse{width:8px;height:8px;background:#10B981;border-radius:50%;animation:p 1s infinite}
+  @keyframes p{0%,100%{opacity:1}50%{opacity:0.3}}
+  h1{font-size:1.35rem;font-weight:900;color:#FFF;line-height:1.3;margin-bottom:8px}
+  .desc{font-size:13px;color:#CBD5E1;line-height:1.5;margin-bottom:20px}
+  .discount-box{background:#050c18;border:1px solid rgba(245,215,127,0.3);border-radius:16px;padding:16px;margin-bottom:20px}
+  .btn-go{display:block;width:100%;text-align:center;background:linear-gradient(135deg,#FFE259,#FFA751);color:#0B1426;font-weight:900;font-size:14px;padding:16px;border-radius:14px;text-decoration:none;text-transform:uppercase;letter-spacing:0.5px;box-shadow:0 6px 20px rgba(245,215,127,0.4);transition:transform 0.2s}
+  .btn-go:hover{transform:scale(1.02)}
+</style>
+</head>
+<body>
+
+<div class="card">
+  <div class="badge"><span class="pulse"></span> CUPOM ATIVO & VALIDADO · -70% OFF</div>
+  <div style="font-size:2.5rem;margin-bottom:8px">🛍️</div>
+  <h1>Shopee Brasil</h1>
+  <p class="desc">Redirecionando para as melhores ofertas relâmpago da Shopee com frete grátis e cupons de primeira compra validados agora.</p>
+
+  <div class="discount-box">
+    <div style="font-size:11px;font-weight:800;color:#F5D77F;text-transform:uppercase">⚡ Redirecionamento Automático Ativo</div>
+    <div style="font-size:1.6rem;font-weight:900;color:#10B981;margin-top:4px">-70% OFF</div>
+    <div style="font-size:11px;color:#94A3B8">Clique abaixo para acessar o catálogo oficial comissionado:</div>
+  </div>
+
+  <a id="btnAfiliado" href="https://s.shopee.com.br/30n7ohzzU6" target="_blank" rel="noopener" class="btn-go">
+    👉 ABRIR OFERTAS NO SHOPEE BRASIL &rarr;
+  </a>
+
+  <div style="margin-top:16px;font-size:11px;color:#64748B">
+    AQUITEM Achadinhos · Rede Oficial de Descontos e Afiliados do Brasil
+  </div>
+</div>
+
+<script>
+// Registro atômico no Supabase e auto-redirecionamento
+document.addEventListener('DOMContentLoaded', function() {
+  var SUPABASE_URL = "https://efvuzxdhsirpvxclgdfg.supabase.co/rest/v1";
+  var SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVmdnV6eGRoc2lycHZ4Y2xnZGZnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODU1MDM1OTEsImV4cCI6MjEwMTA3OTU5MX0.nPVBBKO_W9-tAccFRv7ajnllxTXvkqbsVsYecDqyeQc";
+
+  // Registra clique no log
+  fetch(SUPABASE_URL + "/cliques_afiliados_logs", {
+    method: "POST",
+    headers: { apikey: SUPABASE_KEY, Authorization: "Bearer " + SUPABASE_KEY, "Content-Type": "application/json", Prefer: "return=minimal" },
+    body: JSON.stringify({ cidade_destino: "Nacional", tipo_transporte: "Shopee", rota: "cupom-shopee-frete-gratis-hoje-brasil", criado_em: new Date().toISOString() })
+  }).catch(function(){});
+
+  // Redireciona automaticamente em 1.5 segundos se o usuário não clicar
+  setTimeout(function() {
+    window.location.href = "https://s.shopee.com.br/30n7ohzzU6";
+  }, 1500);
+});
+</script>
+</body>
+</html>
