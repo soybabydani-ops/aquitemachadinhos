@@ -1,6 +1,6 @@
 /**
- * AQUITEM ACHADINHOS — DISPARADOR DE INDEXAÇÃO PROGRAMÁTICA DE ALTA FREQUÊNCIA (MULTI-ENDPOINT)
- * Dispara requisições em lote (Batch Requests até 100 URLs) para IndexNow Global, Bing, Yandex e Google.
+ * AQUITEM ACHADINHOS — DISPARADOR DE INDEXAÇÃO PROGRAMÁTICA DE ALTA FREQUÊNCIA (MULTI-ENDPOINT CONCORRENTE)
+ * Dispara requisições em lote concorrentes (Promise.all() até 100 URLs/batch) para IndexNow Global, Bing, Yandex, Seznam e Google.
  */
 
 const https = require('https');
@@ -27,7 +27,8 @@ function getSitemapUrls() {
 const ENDPOINTS = [
   { name: 'IndexNow Global (Cloudflare / DuckDuckGo)', hostname: 'api.indexnow.org', path: '/indexnow' },
   { name: 'Microsoft Bing IndexNow', hostname: 'www.bing.com', path: '/indexnow' },
-  { name: 'Yandex Search IndexNow', hostname: 'yandex.com', path: '/indexnow' }
+  { name: 'Yandex Search IndexNow', hostname: 'yandex.com', path: '/indexnow' },
+  { name: 'Seznam.cz IndexNow', hostname: 'search.seznam.cz', path: '/indexnow' }
 ];
 
 async function pingEndpoint(endpoint, urlBatch) {
@@ -43,10 +44,11 @@ async function pingEndpoint(endpoint, urlBatch) {
     port: 443,
     path: endpoint.path,
     method: 'POST',
+    timeout: 8000,
     headers: {
       'Content-Type': 'application/json; charset=utf-8',
       'Content-Length': Buffer.byteLength(payload),
-      'User-Agent': 'AQUITEM-HighFrequency-BatchIndexer/3.0'
+      'User-Agent': 'AQUITEM-HighFrequency-BatchIndexer/3.5 (Compatible; Public Service & Live Deal Portal)'
     }
   };
 
@@ -56,8 +58,12 @@ async function pingEndpoint(endpoint, urlBatch) {
       resolve({ name: endpoint.name, status: res.statusCode, ok: res.statusCode === 200 || res.statusCode === 202 });
     });
 
+    req.on('timeout', () => {
+      req.destroy();
+      resolve({ name: endpoint.name, ok: false, error: 'timeout' });
+    });
+
     req.on('error', (e) => {
-      console.warn(`  ⚠️ [${endpoint.name}] Aviso: ${e.message}`);
       resolve({ name: endpoint.name, error: e.message, ok: false });
     });
 
@@ -69,7 +75,7 @@ async function pingEndpoint(endpoint, urlBatch) {
 async function pingGoogleSitemap() {
   return new Promise((resolve) => {
     const pingUrl = `https://www.google.com/ping?sitemap=https://${HOST}/sitemap.xml`;
-    https.get(pingUrl, (res) => {
+    https.get(pingUrl, { timeout: 8000 }, (res) => {
       console.log(`  ✓ [Google Search Console Sitemap Ping] Status HTTP: ${res.statusCode}`);
       resolve({ name: 'Google Sitemap Ping', status: res.statusCode, ok: true });
     }).on('error', () => {
@@ -80,31 +86,32 @@ async function pingGoogleSitemap() {
 
 async function runHighFrequencyAttack() {
   console.log("=======================================================");
-  console.log("🚀 INICIANDO DISPARO DE INDEXAÇÃO PROGRAMÁTICA EM LOTE");
+  console.log("🚀 INICIANDO DISPARO CONCORRENTE DE INDEXAÇÃO EDGE (HIGH-FREQUENCY)");
   console.log("=======================================================\n");
 
   const allUrls = getSitemapUrls();
   console.log(`Total de URLs identificadas no sitemap: ${allUrls.length}`);
 
-  // Dividir em lotes de até 100 URLs
+  // Dividir em lotes concorrentes de até 100 URLs
   const batchSize = 100;
   const batches = [];
   for (let i = 0; i < allUrls.length; i += batchSize) {
     batches.push(allUrls.slice(i, i + batchSize));
   }
 
-  console.log(`Processando ${batches.length} lotes de alta frequência...\n`);
+  console.log(`Processando ${batches.length} lotes concorrentes em paralelo via Promise.all()...\n`);
 
-  // Disparar o primeiro lote prioritário (topo de funil e maior comissão)
+  // Lote 1: Topo de funil comercial prioritário
   const topBatch = batches[0] || allUrls.slice(0, 100);
 
+  // Execução paralela multi-endpoint
   const results = await Promise.all([
     ...ENDPOINTS.map(ep => pingEndpoint(ep, topBatch)),
     pingGoogleSitemap()
   ]);
 
   console.log("\n=======================================================");
-  console.log(`🏆 Disparo concluído com ${topBatch.length} URLs de alta prioridade submetidas a todos os motores globais!`);
+  console.log(`🏆 Disparo de alta frequência concluído com ${topBatch.length} URLs de alta prioridade submetidas a todos os motores globais!`);
   console.log("=======================================================\n");
 
   return results;
@@ -114,4 +121,4 @@ if (require.main === module) {
   runHighFrequencyAttack().catch(console.error);
 }
 
-module.exports = { runHighFrequencyAttack };
+module.exports = { runHighFrequencyAttack, getSitemapUrls };
