@@ -1,9 +1,0 @@
-/* Tema Caldas Novas — Azul Água Termal */
-:root {
-  --cidade-primary: #0a7a8a;
-  --cidade-secondary: #0e4f7a;
-  --cidade-accent: #f5e642;
-}
-.cidade-hero { background: linear-gradient(135deg, #0e4f7a 0%, #0a7a8a 60%, #064d6b 100%) !important; }
-.btn-cidade { background: var(--cidade-primary); }
-.badge-cidade { background: #0a7a8a; color: #fff; }

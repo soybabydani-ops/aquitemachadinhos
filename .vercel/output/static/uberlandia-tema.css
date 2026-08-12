@@ -1,9 +1,0 @@
-/* Tema Uberlândia — Verde Minas + Azul Corporativo */
-:root {
-  --cidade-primary: #1a5e2e;
-  --cidade-secondary: #1a2e5e;
-  --cidade-accent: #f5a623;
-}
-.cidade-hero { background: linear-gradient(135deg, #1a2e5e 0%, #1a5e2e 60%, #0d3a1a 100%) !important; }
-.btn-cidade { background: var(--cidade-primary); }
-.badge-cidade { background: #1a5e2e; color: #fff; }
