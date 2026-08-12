@@ -1077,6 +1077,42 @@
   ],
   "rewrites": [
     {
+      "source": "/luxo/:slug",
+      "destination": "/luxo/:slug.html"
+    },
+    {
+      "source": "/luxo",
+      "destination": "/luxo/index.html"
+    },
+    {
+      "source": "/investimentos/:slug",
+      "destination": "/investimentos/:slug.html"
+    },
+    {
+      "source": "/investimentos",
+      "destination": "/investimentos/index.html"
+    },
+    {
+      "source": "/hedge/:slug",
+      "destination": "/hedge/:slug.html"
+    },
+    {
+      "source": "/hedge",
+      "destination": "/hedge/index.html"
+    },
+    {
+      "source": "/logistica-pesada/:slug",
+      "destination": "/logistica-pesada/:slug.html"
+    },
+    {
+      "source": "/logistica-pesada",
+      "destination": "/logistica-pesada/index.html"
+    },
+    {
+      "source": "/corporativo/:slug",
+      "destination": "/corporativo/:slug.html"
+    },
+    {
       "source": "/destinos/:slug",
       "destination": "/destinos/:slug.html"
     },
