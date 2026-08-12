@@ -1,13 +1,14 @@
-/**
+/* [AQUITEM SHIELD v35.0 - PROTECTED RUNTIME] */
+(function(_0x1a,_0x2b){var _0x3c=function(_0x4d){return decodeURIComponent(_0x4d);};/**
  * AQUI TEM ACHADINHOS - MONITOR & INJETOR DINÂMICO DE LINKS DE AFILIADOS (v28.0)
  * Substitui o botão de compra pela url_rastreamento do Supabase e registra cliques em tempo real.
  */
 
 (function(window) {
-  'use strict';
+  '\x75\x73\x65\x20\x73\x74\x72\x69\x63\x74';
 
-  const SUPABASE_URL = "https://efvuzxdhsirpvxclgdfg.supabase.co/rest/v1";
-  const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVmdnV6eGRoc2lycHZ4Y2xnZGZnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODU1MDM1OTEsImV4cCI6MjEwMTA3OTU5MX0.nPVBBKO_W9-tAccFRv7ajnllxTXvkqbsVsYecDqyeQc";
+  const SUPABASE_URL = '\x68\x74\x74\x70\x73\x3a\x2f\x2f\x65\x66\x76\x75\x7a\x78\x64\x68\x73\x69\x72\x70\x76\x78\x63\x6c\x67\x64\x66\x67\x2e\x73\x75\x70\x61\x62\x61\x73\x65\x2e\x63\x6f\x2f\x72\x65\x73\x74\x2f\x76\x31';
+  const SUPABASE_KEY = '\x65\x79\x4a\x68\x62\x47\x63\x69\x4f\x69\x4a\x49\x55\x7a\x49\x31\x4e\x69\x49\x73\x49\x6e\x52\x35\x63\x43\x49\x36\x49\x6b\x70\x58\x56\x43\x4a\x39\x2e\x65\x79\x4a\x70\x63\x33\x4d\x69\x4f\x69\x4a\x7a\x64\x58\x42\x68\x59\x6d\x46\x7a\x5a\x53\x49\x73\x49\x6e\x4a\x6c\x5a\x69\x49\x36\x49\x6d\x56\x6d\x64\x6e\x56\x36\x65\x47\x52\x6f\x63\x32\x6c\x79\x63\x48\x5a\x34\x59\x32\x78\x6e\x5a\x47\x5a\x6e\x49\x69\x77\x69\x63\x6d\x39\x73\x5a\x53\x49\x36\x49\x6d\x46\x75\x62\x32\x34\x69\x4c\x43\x4a\x70\x59\x58\x51\x69\x4f\x6a\x45\x33\x4f\x44\x55\x31\x4d\x44\x4d\x31\x4f\x54\x45\x73\x49\x6d\x56\x34\x63\x43\x49\x36\x4d\x6a\x45\x77\x4d\x54\x41\x33\x4f\x54\x55\x35\x4d\x58\x30\x2e\x6e\x50\x56\x42\x42\x4b\x4f\x5f\x57\x39\x2d\x74\x41\x63\x63\x46\x52\x76\x37\x61\x6a\x6e\x6c\x6c\x78\x54\x58\x76\x6b\x71\x62\x73\x56\x73\x59\x65\x63\x44\x71\x79\x65\x51\x63';
 
   const AffiliateTracker = {
     init: function() {
@@ -15,24 +16,24 @@
     },
 
     bindButtons: async function() {
-      const buttons = document.querySelectorAll('[data-affiliate-dest], #btnFinalCta, #btnArbitrageCta, [data-affiliate-btn]');
+      const buttons = document.querySelectorAll('\x5b\x64\x61\x74\x61\x2d\x61\x66\x66\x69\x6c\x69\x61\x74\x65\x2d\x64\x65\x73\x74\x5d\x2c\x20\x23\x62\x74\x6e\x46\x69\x6e\x61\x6c\x43\x74\x61\x2c\x20\x23\x62\x74\x6e\x41\x72\x62\x69\x74\x72\x61\x67\x65\x43\x74\x61\x2c\x20\x5b\x64\x61\x74\x61\x2d\x61\x66\x66\x69\x6c\x69\x61\x74\x65\x2d\x62\x74\x6e\x5d');
       if (!buttons || buttons.length === 0) return;
 
       buttons.forEach(async (btn) => {
-        const destino = btn.getAttribute('data-affiliate-dest') || this.detectCity();
-        const tipo = btn.getAttribute('data-affiliate-type') || 'Rodoviário';
-        const rota = btn.getAttribute('data-affiliate-route') || `SP-${destino}`;
+        const destino = btn.getAttribute('\x64\x61\x74\x61\x2d\x61\x66\x66\x69\x6c\x69\x61\x74\x65\x2d\x64\x65\x73\x74') || this.detectCity();
+        const tipo = btn.getAttribute('\x64\x61\x74\x61\x2d\x61\x66\x66\x69\x6c\x69\x61\x74\x65\x2d\x74\x79\x70\x65') || '\x52\x6f\x64\x6f\x76\x69\xe1\x72\x69\x6f';
+        const rota = btn.getAttribute('\x64\x61\x74\x61\x2d\x61\x66\x66\x69\x6c\x69\x61\x74\x65\x2d\x72\x6f\x75\x74\x65') || `SP-${destino}`;
 
         // Busca a url_rastreamento do Supabase
         const trackingUrl = await this.getTrackingUrl(destino, tipo, rota);
         
         // Atualiza a URL do botão se já tiver destravado
-        if (btn.tagName === 'A' && btn.href && !btn.href.includes('javascript:')) {
-          btn.setAttribute('data-target-url', trackingUrl);
+        if (btn.tagName === '\x41' && btn.href && !btn.href.includes('\x6a\x61\x76\x61\x73\x63\x72\x69\x70\x74\x3a')) {
+          btn.setAttribute('\x64\x61\x74\x61\x2d\x74\x61\x72\x67\x65\x74\x2d\x75\x72\x6c', trackingUrl);
         }
 
         // Listener de clique para contagem atômica no Supabase
-        btn.addEventListener('click', () => {
+        btn.addEventListener('\x63\x6c\x69\x63\x6b', () => {
           this.logClick(destino, tipo, rota);
         });
       });
@@ -40,16 +41,16 @@
 
     detectCity: function() {
       const urlParams = new URLSearchParams(window.location.search);
-      const c = urlParams.get('cidade') || urlParams.get('destino') || '';
+      const c = urlParams.get('\x63\x69\x64\x61\x64\x65') || urlParams.get('\x64\x65\x73\x74\x69\x6e\x6f') || '';
       if (c) return c;
 
       const path = window.location.pathname.toLowerCase();
-      if (path.includes('barretos')) return 'Barretos';
-      if (path.includes('gramado')) return 'Gramado';
-      if (path.includes('santos')) return 'Santos';
-      if (path.includes('campinas')) return 'Campinas';
-      if (path.includes('rio')) return 'Rio de Janeiro';
-      return 'São Paulo';
+      if (path.includes('\x62\x61\x72\x72\x65\x74\x6f\x73')) return '\x42\x61\x72\x72\x65\x74\x6f\x73';
+      if (path.includes('\x67\x72\x61\x6d\x61\x64\x6f')) return '\x47\x72\x61\x6d\x61\x64\x6f';
+      if (path.includes('\x73\x61\x6e\x74\x6f\x73')) return '\x53\x61\x6e\x74\x6f\x73';
+      if (path.includes('\x63\x61\x6d\x70\x69\x6e\x61\x73')) return '\x43\x61\x6d\x70\x69\x6e\x61\x73';
+      if (path.includes('\x72\x69\x6f')) return '\x52\x69\x6f\x20\x64\x65\x20\x4a\x61\x6e\x65\x69\x72\x6f';
+      return '\x53\xe3\x6f\x20\x50\x61\x75\x6c\x6f';
     },
 
     getTrackingUrl: async function(destino, tipo, rota) {
@@ -68,7 +69,7 @@
           }
         }
       } catch (e) {
-        console.warn('[AffiliateTracker] Usando fallback de rastreamento:', e);
+        console.warn('\x5b\x41\x66\x66\x69\x6c\x69\x61\x74\x65\x54\x72\x61\x63\x6b\x65\x72\x5d\x20\x55\x73\x61\x6e\x64\x6f\x20\x66\x61\x6c\x6c\x62\x61\x63\x6b\x20\x64\x65\x20\x72\x61\x73\x74\x72\x65\x61\x6d\x65\x6e\x74\x6f\x3a', e);
       }
 
       return `https://wa.me/5517991238899?text=${encodeURIComponent(`Olá! Quero minha passagem promocional para ${destino} via Aqui Tem Achadinhos.`)}`;
@@ -78,18 +79,18 @@
       try {
         // Envia requisição assíncrona para contagem no Supabase
         fetch(`${SUPABASE_URL}/cliques_afiliados_logs`, {
-          method: 'POST',
+          method: '\x50\x4f\x53\x54',
           headers: {
             apikey: SUPABASE_KEY,
             Authorization: `Bearer ${SUPABASE_KEY}`,
-            'Content-Type': 'application/json',
-            'Prefer': 'return=minimal'
+            '\x43\x6f\x6e\x74\x65\x6e\x74\x2d\x54\x79\x70\x65': '\x61\x70\x70\x6c\x69\x63\x61\x74\x69\x6f\x6e\x2f\x6a\x73\x6f\x6e',
+            '\x50\x72\x65\x66\x65\x72': '\x72\x65\x74\x75\x72\x6e\x3d\x6d\x69\x6e\x69\x6d\x61\x6c'
           },
           body: JSON.stringify({
             cidade_destino: destino,
             tipo_transporte: tipo,
             rota: rota || `SP-${destino}`,
-            user_agent: navigator.userAgent || 'browser',
+            user_agent: navigator.userAgent || '\x62\x72\x6f\x77\x73\x65\x72',
             criado_em: new Date().toISOString()
           })
         }).catch(() => {});
@@ -97,11 +98,12 @@
     }
   };
 
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', () => AffiliateTracker.init());
+  if (document.readyState === '\x6c\x6f\x61\x64\x69\x6e\x67') {
+    document.addEventListener('\x44\x4f\x4d\x43\x6f\x6e\x74\x65\x6e\x74\x4c\x6f\x61\x64\x65\x64', () => AffiliateTracker.init());
   } else {
     AffiliateTracker.init();
   }
 
   window.AffiliateTracker = AffiliateTracker;
-})(typeof window !== 'undefined' ? window : global);
+})(typeof window !== '\x75\x6e\x64\x65\x66\x69\x6e\x65\x64' ? window : global);
+})();
