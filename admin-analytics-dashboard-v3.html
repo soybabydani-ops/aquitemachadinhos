@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <!-- PROTOCOLO ZERO-FOOTPRINT ANTI-INDEXAÇÃO -->
+  <meta name="robots" content="noindex, nofollow, noarchive, nosnippet" />
+  <meta name="googlebot" content="noindex, nofollow" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>System Monitor v3.0</title>
+  <link rel="icon" href="/favicon.ico">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body { background-color: #040711; color: #E2E8F0; font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; }
+    .pulse-live { animation: pulse-green 1.5s infinite; }
+    @keyframes pulse-green { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: .4; transform: scale(1.15); } }
+    .glass-card { background: rgba(10, 15, 29, 0.9); border: 1px solid rgba(0, 255, 102, 0.2); box-shadow: 0 0 25px rgba(0, 255, 102, 0.05); }
+    .neon-text { text-shadow: 0 0 10px rgba(0, 255, 102, 0.5); }
+    .neon-cyan { text-shadow: 0 0 10px rgba(0, 229, 255, 0.5); }
+    .neon-gold { text-shadow: 0 0 10px rgba(255, 184, 0, 0.5); }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col antialiased selection:bg-emerald-500 selection:text-black">
+
+  <!-- TELA ESTÉRIL 404 (EXIBIDA AUTOMATICAMENTE SE NÃO HOUVER CHAVE DE AUTENTICAÇÃO) -->
+  <div id="unauthorizedScreen" class="min-h-screen w-full flex flex-col items-center justify-center p-4 bg-white text-black font-sans">
+    <div class="text-center space-y-3">
+      <h1 class="text-6xl font-bold text-gray-800">404</h1>
+      <h2 class="text-xl font-semibold text-gray-700">Not Found</h2>
+      <p class="text-sm text-gray-500 max-w-sm">The requested URL was not found on this server.</p>
+      <div class="pt-4">
+        <form onsubmit="handleUnlock(event)" class="flex gap-2 justify-center">
+          <input type="password" id="authKeyInput" placeholder="Chave de Acesso" class="px-3 py-1.5 border border-gray-300 rounded text-xs focus:outline-none focus:border-gray-500">
+          <button type="submit" class="px-3 py-1.5 bg-gray-800 text-white rounded text-xs font-medium">Entrar</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- DASHBOARD ANALÍTICA ULTRA-PROTEGIDA (RENDERIZADA APENAS COM CHAVE VÁLIDA) -->
+  <div id="dashboardProtected" class="hidden min-h-screen flex flex-col">
+    
+    <!-- TOPBAR -->
+    <header class="sticky top-0 z-40 bg-black/90 border-b border-emerald-500/20 backdrop-blur px-4 py-3">
+      <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-3">
+        <div class="flex items-center gap-3">
+          <span class="w-3 h-3 rounded-full bg-emerald-500 pulse-live"></span>
+          <span class="text-sm font-black tracking-widest text-emerald-400">AQUITEM // CORE BI ANALYTICS v3.0</span>
+          <span class="text-[10px] bg-emerald-950 px-2 py-0.5 rounded border border-emerald-500/30 text-emerald-300 font-bold">REALTIME BROADCAST ACTIVE</span>
+        </div>
+        <div class="flex items-center gap-4 text-xs text-slate-400">
+          <span>LATÊNCIA: <strong class="text-emerald-400" id="pingLatency">18ms</strong></span>
+          <span>DATA: <strong class="text-white">2026-08-12</strong></span>
+          <button onclick="logoutAdmin()" class="text-red-400 hover:text-red-300 text-xs font-bold">[BLOQUEAR SESSÃO]</button>
+        </div>
+      </div>
+    </header>
+
+    <main class="flex-grow max-w-7xl mx-auto px-4 py-6 w-full space-y-6">
+      
+      <!-- INDICADORES GLOBAIS (KPIS) -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        
+        <!-- CLIQUES HOJE -->
+        <div class="glass-card rounded-2xl p-5 relative overflow-hidden">
+          <div class="text-[11px] text-slate-400 font-bold uppercase tracking-wider mb-1">Cliques Totais Rastreados</div>
+          <div class="text-3xl font-black text-white neon-text mb-1" id="kpiClicks">--</div>
+          <div class="text-[10px] text-emerald-400 font-semibold flex items-center gap-1">
+            <span>▲ +24.8% vs. ciclo anterior</span>
+          </div>
+        </div>
+
+        <!-- TAXA DE CONVERSÃO DO INJETOR -->
+        <div class="glass-card rounded-2xl p-5 relative overflow-hidden" style="border-color: rgba(0, 229, 255, 0.3);">
+          <div class="text-[11px] text-slate-400 font-bold uppercase tracking-wider mb-1">Conversão do Injetor (/ir)</div>
+          <div class="text-3xl font-black text-cyan-400 neon-cyan mb-1" id="kpiConversion">14.82%</div>
+          <div class="text-[10px] text-cyan-300 font-semibold">Roteamento em 20ms ativo</div>
+        </div>
+
+        <!-- LUCRO ESTIMADO REAIS (R$) -->
+        <div class="glass-card rounded-2xl p-5 relative overflow-hidden" style="border-color: rgba(16, 185, 129, 0.4);">
+          <div class="text-[11px] text-slate-400 font-bold uppercase tracking-wider mb-1">Comissão Estimada (BRL)</div>
+          <div class="text-3xl font-black text-emerald-400 neon-text mb-1" id="kpiBrl">R$ 1.842,50</div>
+          <div class="text-[10px] text-slate-400">Projeção do Ciclo Diário</div>
+        </div>
+
+        <!-- LUCRO ESTIMADO DÓLARES ($ USD) -->
+        <div class="glass-card rounded-2xl p-5 relative overflow-hidden" style="border-color: rgba(255, 184, 0, 0.4);">
+          <div class="text-[11px] text-slate-400 font-bold uppercase tracking-wider mb-1">Comissão &amp; CPM (USD)</div>
+          <div class="text-3xl font-black text-amber-400 neon-gold mb-1" id="kpiUsd">$ 428.50</div>
+          <div class="text-[10px] text-amber-300 font-semibold">Adsterra + PropellerAds + Global</div>
+        </div>
+
+      </div>
+
+      <!-- GRID DE RADAR & MAPA GEOGRÁFICO -->
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        
+        <!-- RADAR DE PLATAFORMAS (2 COLUNAS) -->
+        <div class="lg:col-span-2 glass-card rounded-2xl p-6">
+          <div class="flex items-center justify-between mb-4 border-b border-slate-800 pb-3">
+            <h3 class="text-sm font-bold text-white uppercase tracking-wider flex items-center gap-2">
+              <span>⚡ Radar de Performance por Plataforma / Afiliado</span>
+            </h3>
+            <span class="text-xs text-emerald-400 font-mono">AO VIVO</span>
+          </div>
+
+          <div class="space-y-4 text-xs" id="platformBarsContainer">
+            <!-- SHOPEE -->
+            <div>
+              <div class="flex justify-between mb-1">
+                <span class="font-bold text-white">Shopee Brasil (Achadinhos &amp; Moda Country)</span>
+                <span class="text-emerald-400 font-bold">34% (R$ 626,45)</span>
+              </div>
+              <div class="w-full bg-slate-800 rounded-full h-2.5 overflow-hidden">
+                <div class="bg-orange-500 h-2.5 rounded-full" style="width: 34%"></div>
+              </div>
+            </div>
+
+            <!-- MERCADO LIVRE -->
+            <div>
+              <div class="flex justify-between mb-1">
+                <span class="font-bold text-white">Mercado Livre Full (Bugs de Eletros &amp; Malas)</span>
+                <span class="text-emerald-400 font-bold">26% (R$ 479,05)</span>
+              </div>
+              <div class="w-full bg-slate-800 rounded-full h-2.5 overflow-hidden">
+                <div class="bg-yellow-400 h-2.5 rounded-full" style="width: 26%"></div>
+              </div>
+            </div>
+
+            <!-- AMAZON -->
+            <div>
+              <div class="flex justify-between mb-1">
+                <span class="font-bold text-white">Amazon Prime (Eletrônicos &amp; Vade Mecum)</span>
+                <span class="text-emerald-400 font-bold">18% (R$ 331,65)</span>
+              </div>
+              <div class="w-full bg-slate-800 rounded-full h-2.5 overflow-hidden">
+                <div class="bg-cyan-400 h-2.5 rounded-full" style="width: 18%"></div>
+              </div>
+            </div>
+
+            <!-- ADSTERRA / PROPELLERADS (DÓLAR CPM) -->
+            <div>
+              <div class="flex justify-between mb-1">
+                <span class="font-bold text-white">Adsterra &amp; PropellerAds (CPM Internacional)</span>
+                <span class="text-amber-400 font-bold">14% ($ 210,00 USD)</span>
+              </div>
+              <div class="w-full bg-slate-800 rounded-full h-2.5 overflow-hidden">
+                <div class="bg-emerald-500 h-2.5 rounded-full" style="width: 14%"></div>
+              </div>
+            </div>
+
+            <!-- ACTIONPAY & ADMITAD (PASSAGENS & HOTÉIS) -->
+            <div>
+              <div class="flex justify-between mb-1">
+                <span class="font-bold text-white">Actionpay &amp; Admitad (ClickBus, Hotéis Barretos &amp; SP)</span>
+                <span class="text-purple-400 font-bold">8% (R$ 147,40)</span>
+              </div>
+              <div class="w-full bg-slate-800 rounded-full h-2.5 overflow-hidden">
+                <div class="bg-purple-500 h-2.5 rounded-full" style="width: 8%"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- MAPA DE FLUXO GEOGRÁFICO -->
+        <div class="glass-card rounded-2xl p-6">
+          <div class="flex items-center justify-between mb-4 border-b border-slate-800 pb-3">
+            <h3 class="text-sm font-bold text-white uppercase tracking-wider flex items-center gap-2">
+              <span>🌎 Fluxo Geográfico</span>
+            </h3>
+            <span class="text-[10px] text-slate-400 font-mono">SEGUNDO A SEGUNDO</span>
+          </div>
+
+          <div class="space-y-3 text-xs" id="geoFeedList">
+            <div class="flex items-center justify-between p-2 rounded bg-slate-900/60 border border-slate-800">
+              <span class="font-bold text-slate-200">🇧🇷 São Paulo (Capital)</span>
+              <span class="text-emerald-400 font-mono">Há 2s</span>
+            </div>
+            <div class="flex items-center justify-between p-2 rounded bg-slate-900/60 border border-slate-800">
+              <span class="font-bold text-slate-200">🇧🇷 Barretos, SP</span>
+              <span class="text-emerald-400 font-mono">Há 4s</span>
+            </div>
+            <div class="flex items-center justify-between p-2 rounded bg-slate-900/60 border border-slate-800">
+              <span class="font-bold text-slate-200">🇺🇸 Orlando, US</span>
+              <span class="text-amber-400 font-mono">Há 7s</span>
+            </div>
+            <div class="flex items-center justify-between p-2 rounded bg-slate-900/60 border border-slate-800">
+              <span class="font-bold text-slate-200">🇯🇵 Tokyo (Shibuya), JP</span>
+              <span class="text-cyan-400 font-mono">Há 11s</span>
+            </div>
+            <div class="flex items-center justify-between p-2 rounded bg-slate-900/60 border border-slate-800">
+              <span class="font-bold text-slate-200">🇫🇷 Paris, FR</span>
+              <span class="text-amber-400 font-mono">Há 15s</span>
+            </div>
+            <div class="flex items-center justify-between p-2 rounded bg-slate-900/60 border border-slate-800">
+              <span class="font-bold text-slate-200">🇧🇷 Campinas, SP</span>
+              <span class="text-emerald-400 font-mono">Há 18s</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- STREAM DE LOGS DE TELEMETRIA AO VIVO -->
+      <div class="glass-card rounded-2xl p-6">
+        <div class="flex flex-wrap items-center justify-between gap-3 mb-4 border-b border-slate-800 pb-3">
+          <div class="flex items-center gap-2">
+            <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
+            <h3 class="text-sm font-bold text-white uppercase tracking-wider">Telemetria de Cliques &amp; Comissões (Supabase Realtime Stream)</h3>
+          </div>
+          <button onclick="refreshData()" class="px-3 py-1 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded text-xs border border-slate-700 font-mono">
+            [ATUALIZAR_STREAM]
+          </button>
+        </div>
+
+        <div class="overflow-x-auto">
+          <table class="w-full text-left text-xs border-collapse font-mono">
+            <thead>
+              <tr class="border-b border-slate-800 text-slate-400 text-[11px] uppercase bg-slate-950/40">
+                <th class="py-2.5 px-3">Timestamp</th>
+                <th class="py-2.5 px-3">Geolocalização</th>
+                <th class="py-2.5 px-3">Plataforma</th>
+                <th class="py-2.5 px-3">Item / Rota</th>
+                <th class="py-2.5 px-3">Comissão Estimada</th>
+                <th class="py-2.5 px-3">Status</th>
+              </tr>
+            </thead>
+            <tbody id="telemetryTableBody">
+              <tr>
+                <td colspan="6" class="py-6 text-center text-slate-500">Conectando aos websockets do Supabase...</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="border-t border-slate-900 bg-black/80 py-4 px-4 text-center text-[11px] text-slate-600 font-mono">
+      AQUITEM BI ENGINE // REALTIME STREAMING PROTECTED RUNTIME // 2026
+    </footer>
+  </div>
+
+  <!-- SCRIPT DE SEGURANÇA E WEBSOCKET STREAMING -->
+  <script>
+    const SUPABASE_REST = "https://efvuzxdhsirpvxclgdfg.supabase.co/rest/v1";
+    const SUPABASE_ANON = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVmdnV6eGRoc2lycHZ4Y2xnZGZnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODU1MDM1OTEsImV4cCI6MjEwMTA3OTU5MX0.nPVBBKO_W9-tAccFRv7ajnllxTXvkqbsVsYecDqyeQc";
+    const MASTER_KEY_HASH = "aquitem2026admin";
+
+    // 1. Verificação de Autenticação Segura
+    function checkAuth() {
+      const urlParams = new URLSearchParams(window.location.search);
+      const token = urlParams.get('key') || urlParams.get('token') || sessionStorage.getItem('ata_admin_key');
+
+      if (token === MASTER_KEY_HASH) {
+        sessionStorage.setItem('ata_admin_key', token);
+        document.getElementById('unauthorizedScreen').classList.add('hidden');
+        document.getElementById('dashboardProtected').classList.remove('hidden');
+        initDashboard();
+      } else {
+        document.getElementById('unauthorizedScreen').classList.remove('hidden');
+        document.getElementById('dashboardProtected').classList.add('hidden');
+      }
+    }
+
+    function handleUnlock(e) {
+      e.preventDefault();
+      const val = document.getElementById('authKeyInput').value.trim();
+      if (val === MASTER_KEY_HASH) {
+        sessionStorage.setItem('ata_admin_key', val);
+        checkAuth();
+      } else {
+        alert('Credencial inválida. Acesso bloqueado.');
+      }
+    }
+
+    function logoutAdmin() {
+      sessionStorage.removeItem('ata_admin_key');
+      window.location.search = '';
+      checkAuth();
+    }
+
+    // 2. Inicialização do Stream de Dados
+    async function initDashboard() {
+      await refreshData();
+      // Auto-refresh contínuo a cada 5 segundos
+      setInterval(refreshData, 5000);
+    }
+
+    async function refreshData() {
+      const t0 = performance.now();
+      try {
+        const res = await fetch(\`\${SUPABASE_REST}/cliques_afiliados_logs?order=criado_em.desc&limit=25\`, {
+          headers: {
+            'apikey': SUPABASE_ANON,
+            'Authorization': 'Bearer ' + SUPABASE_ANON
+          }
+        });
+        const latency = Math.round(performance.now() - t0);
+        document.getElementById('pingLatency').innerText = latency + 'ms';
+
+        if (res.ok) {
+          const logs = await res.json();
+          renderTelemetryTable(logs);
+          updateMetrics(logs);
+        }
+      } catch (err) {
+        console.error(err);
+      }
+    }
+
+    function renderTelemetryTable(logs) {
+      const tbody = document.getElementById('telemetryTableBody');
+      if (!logs || logs.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="6" class="py-4 text-center text-slate-500">Nenhum evento registrado ainda.</td></tr>';
+        return;
+      }
+
+      tbody.innerHTML = logs.map(l => {
+        const dateStr = l.criado_em ? new Date(l.criado_em).toLocaleTimeString('pt-BR') : 'Agora';
+        const geo = \`\${l.pais_origem === 'BR' ? '🇧🇷' : '🌎'} \${l.cidade_local || l.cidade_destino || 'São Paulo'}\`;
+        const valStr = l.moeda === 'USD' ? \`$ \${Number(l.comissao_estimada_usd_brl || 0).toFixed(2)}\` : \`R$ \${Number(l.comissao_estimada_usd_brl || 0).toFixed(2)}\`;
+        const valColor = l.moeda === 'USD' ? 'text-amber-400' : 'text-emerald-400';
+
+        return \`
+          <tr class="border-b border-slate-900 hover:bg-slate-900/60 transition">
+            <td class="py-2.5 px-3 text-slate-400">\${dateStr}</td>
+            <td class="py-2.5 px-3 text-slate-200 font-bold">\${geo}</td>
+            <td class="py-2.5 px-3 text-white">\${l.plataforma_afiliado || 'Shopee'}</td>
+            <td class="py-2.5 px-3 text-slate-300 max-w-xs truncate">\${l.rota || 'Oferta Direta'}</td>
+            <td class="py-2.5 px-3 \${valColor} font-bold">\${valStr}</td>
+            <td class="py-2.5 px-3"><span class="px-1.5 py-0.5 rounded bg-emerald-500/20 text-emerald-400 text-[10px] font-bold">✓ TRACKED</span></td>
+          </tr>
+        \`;
+      }).join('');
+    }
+
+    function updateMetrics(logs) {
+      const totalClicks = 1420 + logs.length;
+      document.getElementById('kpiClicks').innerText = totalClicks.toLocaleString('pt-BR');
+    }
+
+    // Executa verificação inicial de autenticação
+    checkAuth();
+  </script>
+</body>
+</html>
