@@ -1,0 +1,67 @@
+{
+  "@context": "https://schema.org",
+  "@type": "Dataset",
+  "name": "Aqui Tem Achadinhos — Base Nacional de Mobilidade, Turismo e Utilidade Pública",
+  "description": "Conjunto de dados abertos integrando malha aérea, transporte rodoviário, turismo VIP, vagas municipais e comércio eletrônico em 64 cidades do Brasil.",
+  "url": "https://www.aquitemachadinhos.com.br/data/schema-open-dataset.jsonld",
+  "sameAs": "https://www.aquitemachadinhos.com.br/OPEN-DATA-INDEX.md",
+  "keywords": [
+    "Open Data",
+    "Mobilidade Urbana",
+    "Turismo Brasil",
+    "Aeroportos",
+    "Aluguel de Carros",
+    "Cursos Online",
+    "Barretos",
+    "Utilidade Pública"
+  ],
+  "creator": {
+    "@type": "Organization",
+    "name": "Aqui Tem Achadinhos",
+    "url": "https://www.aquitemachadinhos.com.br",
+    "logo": "https://www.aquitemachadinhos.com.br/logo.svg",
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "email": "contato@aquitemachadinhos.com.br",
+      "contactType": "customer service"
+    }
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Aqui Tem Achadinhos Open Data Factory",
+    "url": "https://www.aquitemachadinhos.com.br"
+  },
+  "license": "https://opendatacommons.org/licenses/odbl/",
+  "isAccessibleForFree": true,
+  "spatialCoverage": {
+    "@type": "Place",
+    "geo": {
+      "@type": "GeoShape",
+      "addressCountry": "BR"
+    }
+  },
+  "distribution": [
+    {
+      "@type": "DataDownload",
+      "encodingFormat": "application/geo+json",
+      "contentUrl": "https://www.aquitemachadinhos.com.br/data/municipios-cobertura.geojson"
+    },
+    {
+      "@type": "DataDownload",
+      "encodingFormat": "text/csv",
+      "contentUrl": "https://www.aquitemachadinhos.com.br/data/indicadores-mobilidade-municipais.csv"
+    },
+    {
+      "@type": "DataDownload",
+      "encodingFormat": "application/json",
+      "contentUrl": "https://www.aquitemachadinhos.com.br/data/ofertas-turismo-municipais.json"
+    },
+    {
+      "@type": "DataDownload",
+      "encodingFormat": "application/rss+xml",
+      "contentUrl": "https://www.aquitemachadinhos.com.br/feeds/achadinhos-global.xml"
+    }
+  ],
+  "temporalCoverage": "2026/..",
+  "dateModified": "2026-08-12T21:43:00.827Z"
+}

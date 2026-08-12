@@ -1,0 +1,1550 @@
+{
+  "type": "FeatureCollection",
+  "metadata": {
+    "name": "Aqui Tem Achadinhos — Cobertura Geográfica e Infraestrutura Municipal",
+    "source_provider": "https://www.aquitemachadinhos.com.br",
+    "publisher": "Aqui Tem Achadinhos Intelligence Engine",
+    "canonical_url": "https://www.aquitemachadinhos.com.br/data/municipios-cobertura.geojson",
+    "license": "https://opendatacommons.org/licenses/odbl/",
+    "generated_at": "2026-08-12T21:43:00.827Z",
+    "total_features": 64
+  },
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -48.5678,
+          -20.5572
+        ]
+      },
+      "properties": {
+        "municipio": "Barretos",
+        "uf": "SP",
+        "slug": "barretos",
+        "ddd": "17",
+        "aeroporto_referencia": "Aeroporto Estadual Chafei Amsei (BAT) e Leite Lopes (RAO)",
+        "rodovias_principais": "SP-326 (Brigadeiro Faria Lima) e SP-425 (Assis Chateaubriand)",
+        "polos_comerciais": "Calçadão da Rua 20, Bairro Marília, Av. 43 e Região do Parque do Peão",
+        "distancia_capital": "425 km de São Paulo",
+        "perfil_economico": "Capital Nacional do Rodeio e polo de excelência em saúde oncológica (Hospital de Amor). A circulação veicular se intensifica na Av. 43 e no anel viário durante a Festa do Peão em agosto. Recomenda-se reservar veículos utilitários ou SUVs com antecedência devido à alta demanda por transporte rural e hospedagens em chácaras vizinhas.",
+        "source_provider": "https://www.aquitemachadinhos.com.br",
+        "authoritative_url": "https://www.aquitemachadinhos.com.br/aluguel-carros/melhores-locadoras-carros-sem-taxas-ocultas-barretos",
+        "updated_at": "2026-08-12T21:43:00.827Z"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -46.6333,
+          -23.5505
+        ]
+      },
+      "properties": {
+        "municipio": "São Paulo",
+        "uf": "SP",
+        "slug": "sao-paulo",
+        "ddd": "11",
+        "aeroporto_referencia": "Aeroporto Internacional de Guarulhos (GRU) e Congonhas (CGH)",
+        "rodovias_principais": "Rodovia dos Bandeirantes, Anhanguera, Dutra, Castelo Branco e Imigrantes",
+        "polos_comerciais": "Avenida Paulista, Faria Lima, Berrini, Centro Histórico e Itaim Bibi",
+        "distancia_capital": "Capital do Estado de SP",
+        "perfil_economico": "Maior centro financeiro e corporativo da América Latina. O trânsito na Marginal Pinheiros e Tietê exige planejamento de horários fora do pico (7h-10h e 17h-20h) e atenção às regras de rodízio municipal de veículos. Veículos automáticos e sedans blindados são amplamente procurados para traslados executivos.",
+        "source_provider": "https://www.aquitemachadinhos.com.br",
+        "authoritative_url": "https://www.aquitemachadinhos.com.br/aluguel-carros/melhores-locadoras-carros-sem-taxas-ocultas-sao-paulo",
+        "updated_at": "2026-08-12T21:43:00.827Z"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -50.8764,
+          -29.3746
+        ]
+      },
+      "properties": {
+        "municipio": "Gramado",
+        "uf": "RS",
+        "slug": "gramado",
+        "ddd": "54",
+        "aeroporto_referencia": "Aeroporto Regional de Caxias (CXJ) ou Salgado Filho POA (1h45)",
+        "rodovias_principais": "RS-115 (Taquara/Gramado) e RS-235 (Nova Petrópolis/Canela)",
+        "polos_comerciais": "Avenida Borges de Medeiros, Rua Coberta, Bairro Planalto e Bavária",
+        "distancia_capital": "115 km de Porto Alegre",
+        "perfil_economico": "Principal destino de inverno e turismo temático do Brasil, famoso pelo Natal Luz e Festival de Cinema. As avenidas Borges de Medeiros e das Hortênsias concentram fábricas de chocolate artesanal, fondues e hotéis de alto luxo.",
+        "source_provider": "https://www.aquitemachadinhos.com.br",
+        "authoritative_url": "https://www.aquitemachadinhos.com.br/aluguel-carros/melhores-locadoras-carros-sem-taxas-ocultas-gramado",
+        "updated_at": "2026-08-12T21:43:00.827Z"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -48.5678,
+          -20.5572
+        ]
+      },
+      "properties": {
+        "municipio": "Campos do Jordão",
+        "uf": "SP",
+        "slug": "campos",
+        "ddd": "11",
+        "aeroporto_referencia": "Regional",
+        "rodovias_principais": "Acesso Estadual",
+        "polos_comerciais": "Centro",
+        "distancia_capital": "Interior",
+        "perfil_economico": "",
+        "source_provider": "https://www.aquitemachadinhos.com.br",
+        "authoritative_url": "https://www.aquitemachadinhos.com.br/aluguel-carros/melhores-locadoras-carros-sem-taxas-ocultas-campos",
+        "updated_at": "2026-08-12T21:43:00.827Z"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -47.0626,
+          -22.9099
+        ]
+      },
+      "properties": {
+        "municipio": "Campinas",
+        "uf": "SP",
+        "slug": "campinas",
+        "ddd": "19",
+        "aeroporto_referencia": "Aeroporto Internacional de Viracopos (VCP)",
+        "rodovias_principais": "Rodovia dos Bandeirantes (SP-348), Anhanguera (SP-330) e D. Pedro I (SP-065)",
+        "polos_comerciais": "Bairro Cambuí, Centro, Barão Geraldo (Unicamp) e Parque D. Pedro Shopping",
+        "distancia_capital": "98 km de São Paulo",
+        "perfil_economico": "Principal polo de tecnologia e inovação do interior paulista (Vale do Silício brasileiro). Viracopos é o maior hub de cargas e conexões aéreas da Azul. A ligação viária pela Rodovia D. Pedro I facilita o acesso direto às regiões de Atibaia, Jacareí e Vale do Paraíba.",
+        "source_provider": "https://www.aquitemachadinhos.com.br",
+        "authoritative_url": "https://www.aquitemachadinhos.com.br/aluguel-carros/melhores-locadoras-carros-sem-taxas-ocultas-campinas",
+        "updated_at": "2026-08-12T21:43:00.827Z"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -46.3322,
+          -23.9618
+        ]
+      },
+      "properties": {
+        "municipio": "Santos",
+        "uf": "SP",
+        "slug": "santos",
+        "ddd": "13",
+        "aeroporto_referencia": "Acesso via Congonhas (CGH) ou Guarulhos (GRU) pela Rodovia dos Imigrantes",
+        "rodovias_principais": "Rodovia dos Imigrantes (SP-160) e Rodovia Anchieta (SP-150)",
+        "polos_comerciais": "Bairros Gonzaga, Boqueirão, Ponta da Praia e Porto de Santos",
+        "distancia_capital": "72 km de São Paulo",
+        "perfil_economico": "Maior complexo portuário da América Latina e polo turístico da Baixada Santista. O tráfego na orla da praia (Avenida Vicente de Carvalho) e no canal do porto conta com ciclovias extensas e estacionamentos rotativos monitorados pela CET Santos.",
+        "source_provider": "https://www.aquitemachadinhos.com.br",
+        "authoritative_url": "https://www.aquitemachadinhos.com.br/aluguel-carros/melhores-locadoras-carros-sem-taxas-ocultas-santos",
+        "updated_at": "2026-08-12T21:43:00.827Z"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -47.8103,
+          -21.1775
+        ]
+      },
+      "properties": {
+        "municipio": "Ribeirão Preto",
+        "uf": "SP",
+        "slug": "ribeirao-preto",
+        "ddd": "16",
+        "aeroporto_referencia": "Aeroporto Estadual Dr. Leite Lopes (RAO)",
+        "rodovias_principais": "Rodovia Anhanguera (SP-330) e Rodovia Cândido Portinari (SP-334)",
+        "polos_comerciais": "Zona Sul (Fiusa), Boulevard, Centro e Bairro Ipiranga",
+        "distancia_capital": "315 km de São Paulo",
+        "perfil_economico": "Capital do Agronegócio e sede da Agrishow. A Zona Sul concentra edifícios comerciais de alto padrão, shoppings de luxo e clínicas médicas. As avenidas Nove de Julho, Presidente Vargas e Professor João Fiúsa são os eixos gastronômicos e corporativos mais movimentados.",
+        "source_provider": "https://www.aquitemachadinhos.com.br",
+        "authoritative_url": "https://www.aquitemachadinhos.com.br/aluguel-carros/melhores-locadoras-carros-sem-taxas-ocultas-ribeirao-preto",
+        "updated_at": "2026-08-12T21:43:00.827Z"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -49.3758,
+          -20.8113
+        ]
+      },
+      "properties": {
+        "municipio": "São José do Rio Preto",
+        "uf": "SP",
+        "slug": "sao-jose-do-rio-preto",
+        "ddd": "17",
+        "aeroporto_referencia": "Aeroporto Estadual Prof. Eribelto Manoel Reino (SJP)",
+        "rodovias_principais": "Rodovia Washington Luís (SP-310) e BR-153 (Transbrasiliana)",
+        "polos_comerciais": "Bairro Redentora, Avenida Alberto Andaló e Shopping Iguatemi",
+        "distancia_capital": "440 km de São Paulo",
+        "perfil_economico": "Importante polo médico-hospitalar e educacional do Noroeste Paulista (FAMERP/HB). O trânsito flui pelas avenidas Alberto Andaló, Bady Bassitt e José Munia. A proximidade com o interior de Minas e Mato Grosso do Sul torna a cidade um entroncamento logístico estratégico.",
+        "source_provider": "https://www.aquitemachadinhos.com.br",
+        "authoritative_url": "https://www.aquitemachadinhos.com.br/aluguel-carros/melhores-locadoras-carros-sem-taxas-ocultas-sao-jose-do-rio-preto",
+        "updated_at": "2026-08-12T21:43:00.827Z"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -48.4794,
+          -20.9492
+        ]
+      },
+      "properties": {
+        "municipio": "Bebedouro",
+        "uf": "SP",
+        "slug": "bebedouro",
+        "ddd": "17",
+        "aeroporto_referencia": "Aeroporto Estadual de Bebedouro (SBB) / Conexão via Ribeirão Preto (RAO)",
+        "rodovias_principais": "Rodovia Brigadeiro Faria Lima (SP-326) e Rodovia Comendador Pedro Monteleone (SP-351)",
+        "polos_comerciais": "Centro Histórico, Jardim Menino Deus e Avenida Raul Furquim",
+        "distancia_capital": "385 km de São Paulo",
+        "perfil_economico": "Polo histórico da citricultura e indústria de suco de laranja. O município conta com fácil acesso pelo trevo da SP-326 e conexão rápida com Barretos, Catanduva e Monte Azul Paulista. A circulação urbana concentra-se na Praça Barão do Rio Branco e no Lago Artificial.",
+        "source_provider": "https://www.aquitemachadinhos.com.br",
+        "authoritative_url": "https://www.aquitemachadinhos.com.br/aluguel-carros/melhores-locadoras-carros-sem-taxas-ocultas-bebedouro",
+        "updated_at": "2026-08-12T21:43:00.827Z"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -48.9147,
+          -20.7372
+        ]
+      },
+      "properties": {
+        "municipio": "Olímpia",
+        "uf": "SP",
+        "slug": "olimpia",
+        "ddd": "17",
+        "aeroporto_referencia": "Acesso pelo Aeroporto de São José do Rio Preto (SJP - 45 min)",
+        "rodovias_principais": "Rodovia Assis Chateaubriand (SP-425) e Rodovia Armando de Salles Oliveira (SP-322)",
+        "polos_comerciais": "Avenida Aurora Forti Neves, Centro e Complexo Termas dos Laranjais / Hot Beach",
+        "distancia_capital": "430 km de São Paulo",
+        "perfil_economico": "Capital Nacional do Folclore e um dos maiores polos de parques aquáticos termais da América Latina. O fluxo de visitantes é intenso aos finais de semana e férias ao longo da Av. Aurora Forti Neves, com ampla oferta de resorts multipropriedade e pousadas familiares.",
+        "source_provider": "https://www.aquitemachadinhos.com.br",
+        "authoritative_url": "https://www.aquitemachadinhos.com.br/aluguel-carros/melhores-locadoras-carros-sem-taxas-ocultas-olimpia",
+        "updated_at": "2026-08-12T21:43:00.827Z"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -48.3108,
+          -20.3178
+        ]
+      },
+      "properties": {
+        "municipio": "Guaíra",
+        "uf": "SP",
+        "slug": "guaira",
+        "ddd": "17",
+        "aeroporto_referencia": "Acesso via Aeroporto de Barretos (BAT) ou Ribeirão Preto (RAO)",
+        "rodovias_principais": "Rodovia Brigadeiro Faria Lima (SP-326) e SP-425",
+        "polos_comerciais": "Centro Comercial, Vila Guaíra e Região do Parque Ecológico",
+        "distancia_capital": "450 km de São Paulo",
+        "perfil_economico": "Importante polo da agroindústria sucroalcooleira e agricultura de grãos irrigada. O Parque Ecológico Maracá é o principal ponto de lazer e caminhada, enquanto a Rua 8 e Rua 10 concentram os serviços bancários e comércio varejista.",
+        "source_provider": "https://www.aquitemachadinhos.com.br",
+        "authoritative_url": "https://www.aquitemachadinhos.com.br/aluguel-carros/melhores-locadoras-carros-sem-taxas-ocultas-guaira",
+        "updated_at": "2026-08-12T21:43:00.827Z"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -48.6908,
+          -20.1764
+        ]
+      },
+      "properties": {
+        "municipio": "Colômbia",
+        "uf": "SP",
+        "slug": "colombia",
+        "ddd": "17",
+        "aeroporto_referencia": "Acesso via Barretos (BAT - 35 min) ou Frutal/Uberaba (MG)",
+        "rodovias_principais": "Rodovia Brigadeiro Faria Lima (SP-326) divisa com Minas Gerais",
+        "polos_comerciais": "Centro e Área Turística do Rio Grande / Prainha de Colômbia",
+        "distancia_capital": "465 km de São Paulo",
+        "perfil_economico": "Município turístico situado às margens do Rio Grande na divisa SP/MG, muito procurado para pesca esportiva, esportes náuticos e turismo de rancho. A SP-326 cruza a cidade pela Ponte Gumercindo Penteado ligando diretamente a Planura e Frutal (MG).",
+        "source_provider": "https://www.aquitemachadinhos.com.br",
+        "authoritative_url": "https://www.aquitemachadinhos.com.br/aluguel-carros/melhores-locadoras-carros-sem-taxas-ocultas-colombia",
+        "updated_at": "2026-08-12T21:43:00.827Z"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -47.4008,
+          -20.5386
+        ]
+      },
+      "properties": {
+        "municipio": "Franca",
+        "uf": "SP",
+        "slug": "franca",
+        "ddd": "16",
+        "aeroporto_referencia": "Aeroporto Estadual de Franca (FRC) / Conexão Leite Lopes (RAO)",
+        "rodovias_principais": "Rodovia Cândido Portinari (SP-334) e Rodovia Ronan Rocha (SP-345)",
+        "polos_comerciais": "Centro, Bairro Estação, Polo Calçadista e Franca Shopping",
+        "distancia_capital": "400 km de São Paulo",
+        "perfil_economico": "Capital Nacional do Calçado Masculino e polo cafeeiro da Alta Mogiana. A cidade possui relevo ondulado e eixos viários estruturados pela Av. Presidente Vargas e Av. Major Nicácio. O basquete profissional é paixão local no Ginásio Pedrocão.",
+        "source_provider": "https://www.aquitemachadinhos.com.br",
+        "authoritative_url": "https://www.aquitemachadinhos.com.br/aluguel-carros/melhores-locadoras-carros-sem-taxas-ocultas-franca",
+        "updated_at": "2026-08-12T21:43:00.827Z"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -47.4526,
+          -23.5015
+        ]
+      },
+      "properties": {
+        "municipio": "Sorocaba",
+        "uf": "SP",
+        "slug": "sorocaba",
+        "ddd": "15",
+        "aeroporto_referencia": "Aeroporto Estadual Bertram Luiz Leupolz (SOD)",
+        "rodovias_principais": "Rodovia Castelo Branco (SP-280) e Rodovia Raposo Tavares (SP-270)",
+        "polos_comerciais": "Parque Campolim, Bairro Além Ponte, Trujillo e Centro",
+        "distancia_capital": "87 km de São Paulo",
+        "perfil_economico": "Quarto polo industrial do Estado de SP com forte presença dos setores automotivo e metalmecânico. O Parque Campolim é a área nobre com torres corporativas e shoppings. O Aeroporto de Sorocaba é referência nacional em manutenção e hangaragem de jatos executivos.",
+        "source_provider": "https://www.aquitemachadinhos.com.br",
+        "authoritative_url": "https://www.aquitemachadinhos.com.br/aluguel-carros/melhores-locadoras-carros-sem-taxas-ocultas-sorocaba",
+        "updated_at": "2026-08-12T21:43:00.827Z"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -47.6476,
+          -22.7338
+        ]
+      },
+      "properties": {
+        "municipio": "Piracicaba",
+        "uf": "SP",
+        "slug": "piracicaba",
+        "ddd": "19",
+        "aeroporto_referencia": "Aeroporto Municipal Pedro Morganti (SDPW) / Viracopos (VCP - 50 min)",
+        "rodovias_principais": "Rodovia Luiz de Queiroz (SP-304) e Rodovia do Açúcar (SP-075)",
+        "polos_comerciais": "Rua do Porto, Bairro São Dimas (ESALQ/USP) e Vila Rezende",
+        "distancia_capital": "160 km de São Paulo",
+        "perfil_economico": "Berço do setor sucroalcooleiro e sede da centenária ESALQ/USP. A Rua do Porto é o polo gastronômico tradicional com peixe no tambor à beira do Rio Piracicaba. O Parque Automotivo abriga montadoras globais e indústrias metalúrgicas pesadas.",
+        "source_provider": "https://www.aquitemachadinhos.com.br",
+        "authoritative_url": "https://www.aquitemachadinhos.com.br/aluguel-carros/melhores-locadoras-carros-sem-taxas-ocultas-piracicaba",
+        "updated_at": "2026-08-12T21:43:00.827Z"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -43.1729,
+          -22.9068
+        ]
+      },
+      "properties": {
+        "municipio": "Rio de Janeiro",
+        "uf": "RJ",
+        "slug": "rio-de-janeiro",
+        "ddd": "21",
+        "aeroporto_referencia": "Aeroporto Internacional Tom Jobim / Galeão (GIG) e Santos Dumont (SDU)",
+        "rodovias_principais": "Rodovia Presidente Dutra (BR-116), Linha Vermelha e BR-101 (Rio-Santos)",
+        "polos_comerciais": "Centro Financeiro / Rio Branco, Copacabana, Barra da Tijuca e Botafogo",
+        "distancia_capital": "Capital do Estado do RJ",
+        "perfil_economico": "Principal cartão postal do turismo internacional brasileiro e sede de grandes empresas de energia e telecomunicações. As vias expressas (Linha Vermelha, Amarela e Túnel Santa Bárbara) conectam a Zona Sul à Barra da Tijuca e aos aeroportos.",
+        "source_provider": "https://www.aquitemachadinhos.com.br",
+        "authoritative_url": "https://www.aquitemachadinhos.com.br/aluguel-carros/melhores-locadoras-carros-sem-taxas-ocultas-rio-de-janeiro",
+        "updated_at": "2026-08-12T21:43:00.827Z"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -41.8894,
+          -22.7565
+        ]
+      },
+      "properties": {
+        "municipio": "Armação dos Búzios",
+        "uf": "RJ",
+        "slug": "buzios",
+        "ddd": "22",
+        "aeroporto_referencia": "Aeroporto Umberto Modiano (BZC) / Conexão Aeroporto de Cabo Frio (CFB)",
+        "rodovias_principais": "RJ-106 (Rodovia Amaral Peixoto) e RJ-102",
+        "polos_comerciais": "Rua das Pedras, Orla Bardot, Praia de Geribá e Manguinhos",
+        "distancia_capital": "170 km do Rio de Janeiro",
+        "perfil_economico": "Destino de charme internacional na Região dos Lagos fluminense com mais de 20 praias de águas cristalinas. O tráfego no centro histórico é restrito a pedestres na Rua das Pedras, sendo recomendado circular de carro entre as praias de João Fernandes, Ferradura e Geribá.",
+        "source_provider": "https://www.aquitemachadinhos.com.br",
+        "authoritative_url": "https://www.aquitemachadinhos.com.br/aluguel-carros/melhores-locadoras-carros-sem-taxas-ocultas-buzios",
+        "updated_at": "2026-08-12T21:43:00.827Z"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -44.7131,
+          -23.2178
+        ]
+      },
+      "properties": {
+        "municipio": "Paraty",
+        "uf": "RJ",
+        "slug": "paraty",
+        "ddd": "24",
+        "aeroporto_referencia": "Aeroporto Municipal de Paraty (JPY) / Acesso terrestre Rio-Santos",
+        "rodovias_principais": "Rodovia Governador Mário Covas / Rio-Santos (BR-101)",
+        "polos_comerciais": "Centro Histórico Tombado, Bairro Caborê, Jabaquara e Marina",
+        "distancia_capital": "250 km do Rio de Janeiro e 270 km de SP",
+        "perfil_economico": "Patrimônio Mundial da UNESCO unindo cultura colonial e biodiversidade da Mata Atlântica. O centro histórico possui calçamento pé-de-moleque onde veículos não circulam. O estacionamento ocorre no entorno do canal e nos bairros Caborê e Pontal.",
+        "source_provider": "https://www.aquitemachadinhos.com.br",
+        "authoritative_url": "https://www.aquitemachadinhos.com.br/aluguel-carros/melhores-locadoras-carros-sem-taxas-ocultas-paraty",
+        "updated_at": "2026-08-12T21:43:00.827Z"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -43.9345,
+          -19.9167
+        ]
+      },
+      "properties": {
+        "municipio": "Belo Horizonte",
+        "uf": "MG",
+        "slug": "belo-horizonte",
+        "ddd": "31",
+        "aeroporto_referencia": "Aeroporto Internacional de Confins (CNF) e Aeroporto da Pampulha (PLU)",
+        "rodovias_principais": "BR-040 (Rio-BH-Brasília) e BR-381 (Fernão Dias)",
+        "polos_comerciais": "Bairro Savassi, Lourdes, Região Central e Pampulha",
+        "distancia_capital": "Capital do Estado de MG",
+        "perfil_economico": "Capital gastronômica nacional e polo de mineração, finanças e tecnologia (San Pedro Valley). A Avenida Afonso Pena, Contorno e Cristiano Machado são as principais artérias viárias. O complexo da Pampulha é patrimônio da humanidade da UNESCO.",
+        "source_provider": "https://www.aquitemachadinhos.com.br",
+        "authoritative_url": "https://www.aquitemachadinhos.com.br/aluguel-carros/melhores-locadoras-carros-sem-taxas-ocultas-belo-horizonte",
+        "updated_at": "2026-08-12T21:43:00.827Z"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -43.5035,
+          -20.3856
+        ]
+      },
+      "properties": {
+        "municipio": "Ouro Preto",
+        "uf": "MG",
+        "slug": "ouro-preto",
+        "ddd": "31",
+        "aeroporto_referencia": "Acesso pelo Aeroporto Internacional de Confins (CNF - 2h)",
+        "rodovias_principais": "Rodovia dos Inconfidentes (BR-356)",
+        "polos_comerciais": "Praça Tiradentes, Bairro Bauxita (UFOP) e Rua Direita",
+        "distancia_capital": "96 km de Belo Horizonte",
+        "perfil_economico": "Monumento histórico do Ciclo do Ouro e barroco mineiro de Aleijadinho. A topografia montanhosa e ruas de pedra exigem calçados confortáveis e condução cuidadosa em aclives acentuados. A UFOP atrai grande população universitária e cultural.",
+        "source_provider": "https://www.aquitemachadinhos.com.br",
+        "authoritative_url": "https://www.aquitemachadinhos.com.br/aluguel-carros/melhores-locadoras-carros-sem-taxas-ocultas-ouro-preto",
+        "updated_at": "2026-08-12T21:43:00.827Z"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -48.2772,
+          -18.9186
+        ]
+      },
+      "properties": {
+        "municipio": "Uberlândia",
+        "uf": "MG",
+        "slug": "uberlandia",
+        "ddd": "34",
+        "aeroporto_referencia": "Aeroporto de Uberlândia - Ten. Cel. Aviador César Bombonato (UDI)",
+        "rodovias_principais": "BR-050 e BR-365",
+        "polos_comerciais": "Bairro Santa Mônica (UFU), Granja Marileusa, Centro e Bairro Martins",
+        "distancia_capital": "530 km de Belo Horizonte e 600 km de SP",
+        "perfil_economico": "Maior polo atacadista e logístico do interior do Brasil, situado no Triângulo Mineiro. Granja Marileusa é o polo de tecnologia e inovação, enquanto a UFU movimenta os setores de educação e serviços.",
+        "source_provider": "https://www.aquitemachadinhos.com.br",
+        "authoritative_url": "https://www.aquitemachadinhos.com.br/aluguel-carros/melhores-locadoras-carros-sem-taxas-ocultas-uberlandia",
+        "updated_at": "2026-08-12T21:43:00.827Z"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -43.3496,
+          -21.7545
+        ]
+      },
+      "properties": {
+        "municipio": "Juiz de Fora",
+        "uf": "MG",
+        "slug": "juiz-de-fora",
+        "ddd": "32",
+        "aeroporto_referencia": "Aeroporto Regional da Zona da Mata (IZA) e Francisco Álvares de Assis (JDF)",
+        "rodovias_principais": "BR-040 e BR-267",
+        "polos_comerciais": "Avenida Rio Branco, Bairro São Mateus, Cascatinha e Granbery",
+        "distancia_capital": "260 km de Belo Horizonte e 180 km do RJ",
+        "perfil_economico": "Polo industrial e de serviços da Zona da Mata mineira com forte conexão com o estado do Rio de Janeiro pela BR-040. A Av. Barão do Rio Branco é a principal espinha dorsal de tráfego e comércio da cidade.",
+        "source_provider": "https://www.aquitemachadinhos.com.br",
+        "authoritative_url": "https://www.aquitemachadinhos.com.br/aluguel-carros/melhores-locadoras-carros-sem-taxas-ocultas-juiz-de-fora",
+        "updated_at": "2026-08-12T21:43:00.827Z"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -43.8617,
+          -16.7282
+        ]
+      },
+      "properties": {
+        "municipio": "Montes Claros",
+        "uf": "MG",
+        "slug": "montes-claros",
+        "ddd": "38",
+        "aeroporto_referencia": "Aeroporto de Montes Claros - Mário Ribeiro (MOC)",
+        "rodovias_principais": "BR-135 e BR-365",
+        "polos_comerciais": "Centro, Bairro Todos os Santos, Melo e Major Prates",
+        "distancia_capital": "420 km de Belo Horizonte",
+        "perfil_economico": "Principal polo econômico e universitário do Norte de Minas Gerais, com forte presença do setor farmacêutico e têxtil. A cidade é entroncamento rodoviário vital para o transporte de passageiros e cargas em direção à Bahia.",
+        "source_provider": "https://www.aquitemachadinhos.com.br",
+        "authoritative_url": "https://www.aquitemachadinhos.com.br/aluguel-carros/melhores-locadoras-carros-sem-taxas-ocultas-montes-claros",
+        "updated_at": "2026-08-12T21:43:00.827Z"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -49.2671,
+          -25.429
+        ]
+      },
+      "properties": {
+        "municipio": "Curitiba",
+        "uf": "PR",
+        "slug": "curitiba",
+        "ddd": "41",
+        "aeroporto_referencia": "Aeroporto Internacional Afonso Pena (CWB)",
+        "rodovias_principais": "BR-277 (Litoral/Interior) e BR-116 (Régis Bittencourt)",
+        "polos_comerciais": "Bairro Batel, Bigorrilho, Centro Cívico, Cabral e Santa Felicidade",
+        "distancia_capital": "Capital do Estado do PR",
+        "perfil_economico": "Referência mundial em planejamento urbano, transporte público e sustentabilidade. O bairro Batel concentra a gastronomia sofisticada e hotelaria corporativa, enquanto Santa Felicidade é o tradicional polo gastronômico italiano.",
+        "source_provider": "https://www.aquitemachadinhos.com.br",
+        "authoritative_url": "https://www.aquitemachadinhos.com.br/aluguel-carros/melhores-locadoras-carros-sem-taxas-ocultas-curitiba",
+        "updated_at": "2026-08-12T21:43:00.827Z"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -51.1628,
+          -23.3103
+        ]
+      },
+      "properties": {
+        "municipio": "Londrina",
+        "uf": "PR",
+        "slug": "londrina",
+        "ddd": "43",
+        "aeroporto_referencia": "Aeroporto de Londrina - Gov. José Richa (LDB)",
+        "rodovias_principais": "PR-445 e BR-369",
+        "polos_comerciais": "Gleba Palhano, Centro, Jardim Higienópolis e Avenida Duque de Caxias",
+        "distancia_capital": "380 km de Curitiba",
+        "perfil_economico": "Segunda maior cidade do Paraná e polo do agronegócio e ensino superior no Norte Pioneiro. A Gleba Palhano no entorno do Lago Igapó reúne os edifícios corporativos mais modernos e shoppings de alto padrão.",
+        "source_provider": "https://www.aquitemachadinhos.com.br",
+        "authoritative_url": "https://www.aquitemachadinhos.com.br/aluguel-carros/melhores-locadoras-carros-sem-taxas-ocultas-londrina",
+        "updated_at": "2026-08-12T21:43:00.827Z"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -51.9331,
+          -23.4205
+        ]
+      },
+      "properties": {
+        "municipio": "Maringá",
+        "uf": "PR",
+        "slug": "maringa",
+        "ddd": "44",
+        "aeroporto_referencia": "Aeroporto Regional de Maringá - Silvio Name Júnior (MGF)",
+        "rodovias_principais": "PR-317 e BR-376 (Rodovia do Café)",
+        "polos_comerciais": "Zona 01 / Centro, Zona 07 (UEM) e Avenida Brasil",
+        "distancia_capital": "420 km de Curitiba",
+        "perfil_economico": "Cidade arborizada e planejada com altíssima qualidade de vida no Noroeste do Paraná. O Parque do Ingá e a Catedral Basílica Menor Nossa Senhora da Glória são os principais marcos paisagísticos urbanos.",
+        "source_provider": "https://www.aquitemachadinhos.com.br",
+        "authoritative_url": "https://www.aquitemachadinhos.com.br/aluguel-carros/melhores-locadoras-carros-sem-taxas-ocultas-maringa",
+        "updated_at": "2026-08-12T21:43:00.827Z"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -54.5882,
+          -25.5469
+        ]
+      },
+      "properties": {
+        "municipio": "Foz do Iguaçu",
+        "uf": "PR",
+        "slug": "foz-do-iguacu",
+        "ddd": "45",
+        "aeroporto_referencia": "Aeroporto Internacional de Foz do Iguaçu (IGU)",
+        "rodovias_principais": "BR-277 (Ligação com Curitiba e Porto de Paranaguá)",
+        "polos_comerciais": "Avenida Brasil / Centro, Vila Portes (Ponte da Amizade) e Cataratas",
+        "distancia_capital": "630 km de Curitiba",
+        "perfil_economico": "Destino turístico internacional de primeira grandeza abrigando as Cataratas do Iguaçu e a Usina Hidrelétrica de Itaipu na Tríplice Fronteira (Brasil, Paraguai e Argentina). Locação de veículos é essencial para travessias e passeios na região.",
+        "source_provider": "https://www.aquitemachadinhos.com.br",
+        "authoritative_url": "https://www.aquitemachadinhos.com.br/aluguel-carros/melhores-locadoras-carros-sem-taxas-ocultas-foz-do-iguacu",
+        "updated_at": "2026-08-12T21:43:00.827Z"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -48.548,
+          -27.5954
+        ]
+      },
+      "properties": {
+        "municipio": "Florianópolis",
+        "uf": "SC",
+        "slug": "florianopolis",
+        "ddd": "48",
+        "aeroporto_referencia": "Aeroporto Internacional Hercílio Luz (FLN)",
+        "rodovias_principais": "BR-101 e SC-401 (Acesso Norte da Ilha)",
+        "polos_comerciais": "Centro / Beira-Mar Norte, Lagoa da Conceição, Jurerê Internacional e Trindade (UFSC)",
+        "distancia_capital": "Capital do Estado de SC",
+        "perfil_economico": "A Ilha do Silício combina polo de tecnologia de ponta com mais de 40 praias paradisíacas. A rodovia SC-401 liga o Centro Financeiro a Jurerê e Canasvieiras, com trânsito intenso na temporada de verão.",
+        "source_provider": "https://www.aquitemachadinhos.com.br",
+        "authoritative_url": "https://www.aquitemachadinhos.com.br/aluguel-carros/melhores-locadoras-carros-sem-taxas-ocultas-florianopolis",
+        "updated_at": "2026-08-12T21:43:00.827Z"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -48.6353,
+          -26.9926
+        ]
+      },
+      "properties": {
+        "municipio": "Balneário Camboriú",
+        "uf": "SC",
+        "slug": "balneario-camboriu",
+        "ddd": "47",
+        "aeroporto_referencia": "Aeroporto Internacional de Navegantes (NVG - 30 min)",
+        "rodovias_principais": "BR-101 Litoral Norte SC",
+        "polos_comerciais": "Avenida Atlântica, Avenida Brasil, Barra Sul e Pioneiros",
+        "distancia_capital": "80 km de Florianópolis",
+        "perfil_economico": "A Dubai Brasileira com os arranha-céus residenciais mais altos da América Latina, vida noturna agitada e a praia central alargada. A mobilidade urbana se faz pelas avenidas Atlântica e Brasil, com fluxo contínuo de turismo de alto padrão.",
+        "source_provider": "https://www.aquitemachadinhos.com.br",
+        "authoritative_url": "https://www.aquitemachadinhos.com.br/aluguel-carros/melhores-locadoras-carros-sem-taxas-ocultas-balneario-camboriu",
+        "updated_at": "2026-08-12T21:43:00.827Z"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -49.0658,
+          -26.9196
+        ]
+      },
+      "properties": {
+        "municipio": "Blumenau",
+        "uf": "SC",
+        "slug": "blumenau",
+        "ddd": "47",
+        "aeroporto_referencia": "Aeroporto Internacional de Navegantes (NVG - 45 min)",
+        "rodovias_principais": "BR-470 (Vale do Itajaí) e SC-108",
+        "polos_comerciais": "Vila Germânica (Oktoberfest), Bairro Victor Konder e Rua XV de Novembro",
+        "distancia_capital": "140 km de Florianópolis",
+        "perfil_economico": "Capital Nacional da Cerveja e polo têxtil e de software do Vale Europeu. A arquitetura em enxaimel e a Vila Germânica recebem centenas de milhares de turistas durante a Oktoberfest e festivais gastronômicos.",
+        "source_provider": "https://www.aquitemachadinhos.com.br",
+        "authoritative_url": "https://www.aquitemachadinhos.com.br/aluguel-carros/melhores-locadoras-carros-sem-taxas-ocultas-blumenau",
+        "updated_at": "2026-08-12T21:43:00.827Z"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -48.8487,
+          -26.3045
+        ]
+      },
+      "properties": {
+        "municipio": "Joinville",
+        "uf": "SC",
+        "slug": "joinville",
+        "ddd": "47",
+        "aeroporto_referencia": "Aeroporto Lauro Carneiro de Loyola (JOI)",
+        "rodovias_principais": "BR-101 e BR-280",
+        "polos_comerciais": "Centro Industrial, Bairro América, Atiradores e Costa e Silva",
+        "distancia_capital": "180 km de Florianópolis",
+        "perfil_economico": "Maior economia de Santa Catarina com poderoso parque industrial metalmecânico e sede da Escola do Teatro Bolshoi no Brasil. A cidade é cortada pela BR-101 com fácil acesso a Curitiba e ao litoral catarinense.",
+        "source_provider": "https://www.aquitemachadinhos.com.br",
+        "authoritative_url": "https://www.aquitemachadinhos.com.br/aluguel-carros/melhores-locadoras-carros-sem-taxas-ocultas-joinville",
+        "updated_at": "2026-08-12T21:43:00.827Z"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -51.2177,
+          -30.0346
+        ]
+      },
+      "properties": {
+        "municipio": "Porto Alegre",
+        "uf": "RS",
+        "slug": "porto-alegre",
+        "ddd": "51",
+        "aeroporto_referencia": "Aeroporto Internacional Salgado Filho (POA)",
+        "rodovias_principais": "BR-116, BR-290 (Freeway) e BR-386",
+        "polos_comerciais": "Moinhos de Vento, Centro Histórico, Menino Deus e Carlos Gomes",
+        "distancia_capital": "Capital do Estado do RS",
+        "perfil_economico": "Polo cultural e econômico do Sul do país com bela orla revitalizada no Lago Guaíba. A Av. Carlos Gomes concentra o centro empresarial corporativo e o bairro Moinhos de Vento reúne hotelaria e gastronomia refinada.",
+        "source_provider": "https://www.aquitemachadinhos.com.br",
+        "authoritative_url": "https://www.aquitemachadinhos.com.br/aluguel-carros/melhores-locadoras-carros-sem-taxas-ocultas-porto-alegre",
+        "updated_at": "2026-08-12T21:43:00.827Z"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -51.1794,
+          -29.1678
+        ]
+      },
+      "properties": {
+        "municipio": "Caxias do Sul",
+        "uf": "RS",
+        "slug": "caxias-do-sul",
+        "ddd": "54",
+        "aeroporto_referencia": "Aeroporto Regional Hugo Cantergiani (CXJ)",
+        "rodovias_principais": "BR-116 e RS-122 (Serra Gaúcha)",
+        "polos_comerciais": "Centro, Bairro São Pelegrino, Lourdes e Polo Metalmecânico",
+        "distancia_capital": "125 km de Porto Alegre",
+        "perfil_economico": "Coração industrial e vitivinícola da Serra Gaúcha, sede da Festa Nacional da Uva. A RS-122 é a via de escoamento industrial e conexão turística com Bento Gonçalves, Farroupilha e Gramado.",
+        "source_provider": "https://www.aquitemachadinhos.com.br",
+        "authoritative_url": "https://www.aquitemachadinhos.com.br/aluguel-carros/melhores-locadoras-carros-sem-taxas-ocultas-caxias-do-sul",
+        "updated_at": "2026-08-12T21:43:00.827Z"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -38.5016,
+          -12.9777
+        ]
+      },
+      "properties": {
+        "municipio": "Salvador",
+        "uf": "BA",
+        "slug": "salvador",
+        "ddd": "71",
+        "aeroporto_referencia": "Aeroporto Internacional Dep. Luís Eduardo Magalhães (SSA)",
+        "rodovias_principais": "BR-324 e BA-099 (Estrada do Coco / Linha Verde)",
+        "polos_comerciais": "Avenida Tancredo Neves / Iguatemi, Barra, Rio Vermelho e Pelourinho",
+        "distancia_capital": "Capital do Estado da BA",
+        "perfil_economico": "Primeira capital do Brasil, terra do axé, do Pelourinho e do Carnaval. A Avenida Tancredo Neves é o centro financeiro da cidade, enquanto a orla da Barra ao Farol de Itapuã concentra os hotéis de praia e restaurantes de acarajé.",
+        "source_provider": "https://www.aquitemachadinhos.com.br",
+        "authoritative_url": "https://www.aquitemachadinhos.com.br/aluguel-carros/melhores-locadoras-carros-sem-taxas-ocultas-salvador",
+        "updated_at": "2026-08-12T21:43:00.827Z"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -48.5678,
+          -20.5572
+        ]
+      },
+      "properties": {
+        "municipio": "Porto de Galinhas",
+        "uf": "PE",
+        "slug": "porto",
+        "ddd": "11",
+        "aeroporto_referencia": "Regional",
+        "rodovias_principais": "Acesso Estadual",
+        "polos_comerciais": "Centro",
+        "distancia_capital": "Interior",
+        "perfil_economico": "",
+        "source_provider": "https://www.aquitemachadinhos.com.br",
+        "authoritative_url": "https://www.aquitemachadinhos.com.br/aluguel-carros/melhores-locadoras-carros-sem-taxas-ocultas-porto",
+        "updated_at": "2026-08-12T21:43:00.827Z"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -34.877,
+          -8.0476
+        ]
+      },
+      "properties": {
+        "municipio": "Recife",
+        "uf": "PE",
+        "slug": "recife",
+        "ddd": "81",
+        "aeroporto_referencia": "Aeroporto Internacional dos Guararapes / Gilberto Freyre (REC)",
+        "rodovias_principais": "BR-101 e BR-232",
+        "polos_comerciais": "Boa Viagem, Porto Digital / Recife Antigo, Ilha do Leite e Casa Forte",
+        "distancia_capital": "Capital do Estado de PE",
+        "perfil_economico": "Capital da cultura pernambucana, do frevo e sede do Porto Digital (maior parque tecnológico urbano do Brasil). Boa Viagem concentra a orla e hotéis 5 estrelas, enquanto a BR-101 Sul leva até Porto de Galinhas e Suape.",
+        "source_provider": "https://www.aquitemachadinhos.com.br",
+        "authoritative_url": "https://www.aquitemachadinhos.com.br/aluguel-carros/melhores-locadoras-carros-sem-taxas-ocultas-recife",
+        "updated_at": "2026-08-12T21:43:00.827Z"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -35.9761,
+          -8.2839
+        ]
+      },
+      "properties": {
+        "municipio": "Caruaru",
+        "uf": "PE",
+        "slug": "caruaru",
+        "ddd": "81",
+        "aeroporto_referencia": "Aeroporto Oscar Laranjeira (CAU) / Conexão Guararapes REC",
+        "rodovias_principais": "BR-232 (Duplicada) e BR-104",
+        "polos_comerciais": "Feira de Caruaru / Polo de Confecções, Bairro Maurício de Nassau e Centro",
+        "distancia_capital": "135 km de Recife",
+        "perfil_economico": "Capital do Forró e maior polo têxtil e de confecções do Agreste Pernambucano. A Feira de Caruaru e o Pátio do Forró são patrimônios culturais de reconhecimento nacional no Alto do Moura.",
+        "source_provider": "https://www.aquitemachadinhos.com.br",
+        "authoritative_url": "https://www.aquitemachadinhos.com.br/aluguel-carros/melhores-locadoras-carros-sem-taxas-ocultas-caruaru",
+        "updated_at": "2026-08-12T21:43:00.827Z"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -48.5678,
+          -20.5572
+        ]
+      },
+      "properties": {
+        "municipio": "Fernando de Noronha",
+        "uf": "PE",
+        "slug": "noronha",
+        "ddd": "11",
+        "aeroporto_referencia": "Regional",
+        "rodovias_principais": "Acesso Estadual",
+        "polos_comerciais": "Centro",
+        "distancia_capital": "Interior",
+        "perfil_economico": "",
+        "source_provider": "https://www.aquitemachadinhos.com.br",
+        "authoritative_url": "https://www.aquitemachadinhos.com.br/aluguel-carros/melhores-locadoras-carros-sem-taxas-ocultas-noronha",
+        "updated_at": "2026-08-12T21:43:00.827Z"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -38.5433,
+          -3.7172
+        ]
+      },
+      "properties": {
+        "municipio": "Fortaleza",
+        "uf": "CE",
+        "slug": "fortaleza",
+        "ddd": "85",
+        "aeroporto_referencia": "Aeroporto Internacional Pinto Martins (FOR)",
+        "rodovias_principais": "BR-116 e CE-040 (Litoral Leste)",
+        "polos_comerciais": "Avenida Beira-Mar / Meireles, Aldeota, Praia de Iracema e Centro",
+        "distancia_capital": "Capital do Estado do CE",
+        "perfil_economico": "Polo turístico e hub aéreo internacional do Nordeste. A orla da Beira-Mar conta com feira de artesanato diária e mercado de peixes no Mucuripe, com conexão rodoviária expressa para o Beach Park em Aquiraz e Cumbuco.",
+        "source_provider": "https://www.aquitemachadinhos.com.br",
+        "authoritative_url": "https://www.aquitemachadinhos.com.br/aluguel-carros/melhores-locadoras-carros-sem-taxas-ocultas-fortaleza",
+        "updated_at": "2026-08-12T21:43:00.827Z"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -40.5142,
+          -2.7958
+        ]
+      },
+      "properties": {
+        "municipio": "Jericoacoara",
+        "uf": "CE",
+        "slug": "jericoacoara",
+        "ddd": "88",
+        "aeroporto_referencia": "Aeroporto Regional Comandante Ariston Pessoa (JJD) em Cruz",
+        "rodovias_principais": "CE-085 (Estruturante) e transfer 4x4",
+        "polos_comerciais": "Vila de Jericoacoara, Rua Principal e Praia da Malhada",
+        "distancia_capital": "300 km de Fortaleza",
+        "perfil_economico": "Parque Nacional de dunas e praias intocadas no litoral oeste cearense, santuário mundial do kitesurf e windsurf. As ruas de areia proíbem carros comuns, sendo obrigatório o acesso por jardineiras 4x4 a partir de Jijoca.",
+        "source_provider": "https://www.aquitemachadinhos.com.br",
+        "authoritative_url": "https://www.aquitemachadinhos.com.br/aluguel-carros/melhores-locadoras-carros-sem-taxas-ocultas-jericoacoara",
+        "updated_at": "2026-08-12T21:43:00.827Z"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -35.211,
+          -5.7945
+        ]
+      },
+      "properties": {
+        "municipio": "Natal",
+        "uf": "RN",
+        "slug": "natal",
+        "ddd": "84",
+        "aeroporto_referencia": "Aeroporto Internacional Gov. Aluízio Alves (NAT) em São Gonçalo do Amarante",
+        "rodovias_principais": "BR-101 e Rota do Sol",
+        "polos_comerciais": "Praia de Ponta Negra, Bairro Petrópolis, Tirol e Via Costeira",
+        "distancia_capital": "Capital do Estado do RN",
+        "perfil_economico": "A Cidade do Sol possui o ar mais puro das Américas e as famosas Dunas de Genipabu. A Praia de Ponta Negra com o Morro do Careca é o coração da hotelaria e gastronomia potiguar.",
+        "source_provider": "https://www.aquitemachadinhos.com.br",
+        "authoritative_url": "https://www.aquitemachadinhos.com.br/aluguel-carros/melhores-locadoras-carros-sem-taxas-ocultas-natal",
+        "updated_at": "2026-08-12T21:43:00.827Z"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -34.845,
+          -7.1195
+        ]
+      },
+      "properties": {
+        "municipio": "João Pessoa",
+        "uf": "PB",
+        "slug": "joao-pessoa",
+        "ddd": "83",
+        "aeroporto_referencia": "Aeroporto Internacional Presidente Castro Pinto (JPA)",
+        "rodovias_principais": "BR-101 e BR-230",
+        "polos_comerciais": "Tambaú, Cabo Branco, Manaíra e Bessa",
+        "distancia_capital": "Capital do Estado da PB",
+        "perfil_economico": "Ponto mais oriental das Américas na Ponta do Seixas com orla protegida por lei sem espigões. A tranquilidade e praias urbanas de Cabo Branco e Tambaú fazem da cidade uma das mais procuradas para moradia e turismo de bem-estar.",
+        "source_provider": "https://www.aquitemachadinhos.com.br",
+        "authoritative_url": "https://www.aquitemachadinhos.com.br/aluguel-carros/melhores-locadoras-carros-sem-taxas-ocultas-joao-pessoa",
+        "updated_at": "2026-08-12T21:43:00.827Z"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -48.5678,
+          -20.5572
+        ]
+      },
+      "properties": {
+        "municipio": "Campina Grande",
+        "uf": "PB",
+        "slug": "campina-grande",
+        "ddd": "11",
+        "aeroporto_referencia": "Regional",
+        "rodovias_principais": "Acesso Estadual",
+        "polos_comerciais": "Centro",
+        "distancia_capital": "Interior",
+        "perfil_economico": "",
+        "source_provider": "https://www.aquitemachadinhos.com.br",
+        "authoritative_url": "https://www.aquitemachadinhos.com.br/aluguel-carros/melhores-locadoras-carros-sem-taxas-ocultas-campina-grande",
+        "updated_at": "2026-08-12T21:43:00.827Z"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -35.735,
+          -9.6658
+        ]
+      },
+      "properties": {
+        "municipio": "Maceió",
+        "uf": "AL",
+        "slug": "maceio",
+        "ddd": "82",
+        "aeroporto_referencia": "Aeroporto Internacional Zumbi dos Palmares (MCZ)",
+        "rodovias_principais": "BR-101 e AL-101 (Litoral Norte e Sul)",
+        "polos_comerciais": "Pajuçara, Ponta Verde, Jatiúca e Stella Maris",
+        "distancia_capital": "Capital do Estado de AL",
+        "perfil_economico": "O Caribe Brasileiro encanta pela cor verde-esmeralda do mar e piscinas naturais de Pajuçara com jangadas a vela. A AL-101 Norte leva às praias paradisíacas de São Miguel dos Milagres e Maragogi.",
+        "source_provider": "https://www.aquitemachadinhos.com.br",
+        "authoritative_url": "https://www.aquitemachadinhos.com.br/aluguel-carros/melhores-locadoras-carros-sem-taxas-ocultas-maceio",
+        "updated_at": "2026-08-12T21:43:00.827Z"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -37.0731,
+          -10.9472
+        ]
+      },
+      "properties": {
+        "municipio": "Aracaju",
+        "uf": "SE",
+        "slug": "aracaju",
+        "ddd": "79",
+        "aeroporto_referencia": "Aeroporto Internacional Santa Maria (AJU)",
+        "rodovias_principais": "BR-101 e BR-235",
+        "polos_comerciais": "Orla de Atalaia, Bairro 13 de Julho, Jardins e Centro",
+        "distancia_capital": "Capital do Estado de SE",
+        "perfil_economico": "Capital planejada com uma das orlas mais estruturadas do Brasil na Praia de Atalaia, com oceanário, lagos e passarela do caranguejo. Cidade plana de trânsito fluido e acolhimento sergipano.",
+        "source_provider": "https://www.aquitemachadinhos.com.br",
+        "authoritative_url": "https://www.aquitemachadinhos.com.br/aluguel-carros/melhores-locadoras-carros-sem-taxas-ocultas-aracaju",
+        "updated_at": "2026-08-12T21:43:00.827Z"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -47.8919,
+          -15.7975
+        ]
+      },
+      "properties": {
+        "municipio": "Brasília",
+        "uf": "DF",
+        "slug": "brasilia",
+        "ddd": "61",
+        "aeroporto_referencia": "Aeroporto Internacional Presidente Juscelino Kubitschek (BSB)",
+        "rodovias_principais": "BR-040, BR-060 e BR-020",
+        "polos_comerciais": "Setor Comercial Sul/Norte, Esplanada dos Ministérios, Asa Sul e Asa Norte",
+        "distancia_capital": "Distrito Federal (Capital do País)",
+        "perfil_economico": "Centro do poder político e administrativo nacional com arquitetura tombada de Oscar Niemeyer. O Eixo Monumental e as W3 Sul/Norte ordenam a mobilidade planejada em setores de embaixadas, ministérios e hotelaria executiva.",
+        "source_provider": "https://www.aquitemachadinhos.com.br",
+        "authoritative_url": "https://www.aquitemachadinhos.com.br/aluguel-carros/melhores-locadoras-carros-sem-taxas-ocultas-brasilia",
+        "updated_at": "2026-08-12T21:43:00.827Z"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -49.2648,
+          -16.6869
+        ]
+      },
+      "properties": {
+        "municipio": "Goiânia",
+        "uf": "GO",
+        "slug": "goiania",
+        "ddd": "62",
+        "aeroporto_referencia": "Aeroporto Internacional Santa Genoveva (GYN)",
+        "rodovias_principais": "BR-153 e BR-060",
+        "polos_comerciais": "Setor Bueno, Setor Marista, Centro e Bairro Oeste",
+        "distancia_capital": "Capital do Estado de GO",
+        "perfil_economico": "Capital do Centro-Oeste com expressiva força no agronegócio, moda atacadista e serviços médicos. O Setor Marista e Bueno abrigam parques arborizados (Vaca Brava e Areião) e renomada gastronomia sertaneja e internacional.",
+        "source_provider": "https://www.aquitemachadinhos.com.br",
+        "authoritative_url": "https://www.aquitemachadinhos.com.br/aluguel-carros/melhores-locadoras-carros-sem-taxas-ocultas-goiania",
+        "updated_at": "2026-08-12T21:43:00.827Z"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -48.9534,
+          -16.3286
+        ]
+      },
+      "properties": {
+        "municipio": "Anápolis",
+        "uf": "GO",
+        "slug": "anapolis",
+        "ddd": "62",
+        "aeroporto_referencia": "Base Aérea / Conexão via Santa Genoveva GYN (40 min)",
+        "rodovias_principais": "BR-153 e BR-060 (Eixo Goiânia-Brasília)",
+        "polos_comerciais": "DAIA (Distrito Agroindustrial), Centro e Jundiaí",
+        "distancia_capital": "55 km de Goiânia",
+        "perfil_economico": "Importante polo farmacêutico e logístico do país situado estrategicamente entre Brasília e Goiânia. O DAIA abriga montadoras e multinacionais químicas conectadas pela ferrovia Norte-Sul.",
+        "source_provider": "https://www.aquitemachadinhos.com.br",
+        "authoritative_url": "https://www.aquitemachadinhos.com.br/aluguel-carros/melhores-locadoras-carros-sem-taxas-ocultas-anapolis",
+        "updated_at": "2026-08-12T21:43:00.827Z"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -50.9192,
+          -17.7925
+        ]
+      },
+      "properties": {
+        "municipio": "Rio Verde",
+        "uf": "GO",
+        "slug": "rio-verde",
+        "ddd": "64",
+        "aeroporto_referencia": "Aeroporto General Leite de Castro (RVD)",
+        "rodovias_principais": "BR-060 e BR-452",
+        "polos_comerciais": "Polo do Agronegócio, Setor Central e Morada do Sol",
+        "distancia_capital": "230 km de Goiânia",
+        "perfil_economico": "Gigante da produção de soja, milho e carnes do Sudoeste Goiano. A BR-060 escoa a safra agrícola para os portos e centros consumidores, atraindo empresas multinacionais de insumos e maquinários agrícolas.",
+        "source_provider": "https://www.aquitemachadinhos.com.br",
+        "authoritative_url": "https://www.aquitemachadinhos.com.br/aluguel-carros/melhores-locadoras-carros-sem-taxas-ocultas-rio-verde",
+        "updated_at": "2026-08-12T21:43:00.827Z"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -48.5678,
+          -20.5572
+        ]
+      },
+      "properties": {
+        "municipio": "Caldas Novas",
+        "uf": "GO",
+        "slug": "caldasnovas",
+        "ddd": "11",
+        "aeroporto_referencia": "Regional",
+        "rodovias_principais": "Acesso Estadual",
+        "polos_comerciais": "Centro",
+        "distancia_capital": "Interior",
+        "perfil_economico": "",
+        "source_provider": "https://www.aquitemachadinhos.com.br",
+        "authoritative_url": "https://www.aquitemachadinhos.com.br/aluguel-carros/melhores-locadoras-carros-sem-taxas-ocultas-caldasnovas",
+        "updated_at": "2026-08-12T21:43:00.827Z"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -48.9592,
+          -15.8525
+        ]
+      },
+      "properties": {
+        "municipio": "Pirenópolis",
+        "uf": "GO",
+        "slug": "pirenopolis",
+        "ddd": "62",
+        "aeroporto_referencia": "Acesso via Brasília BSB (2h) ou Goiânia GYN (1h40)",
+        "rodovias_principais": "GO-431 e GO-338",
+        "polos_comerciais": "Rua do Lazer, Centro Histórico e Alto do Bonfim",
+        "distancia_capital": "120 km de Goiânia",
+        "perfil_economico": "Joia colonial encravada nos Pireneus goianos, célebre pela Festa do Divino e Cavalhadas. A Rua do Lazer é famosa pelas mesas ao ar livre, enquanto o Parque Estadual abriga dezenas de cachoeiras de preservação ambiental.",
+        "source_provider": "https://www.aquitemachadinhos.com.br",
+        "authoritative_url": "https://www.aquitemachadinhos.com.br/aluguel-carros/melhores-locadoras-carros-sem-taxas-ocultas-pirenopolis",
+        "updated_at": "2026-08-12T21:43:00.827Z"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -56.0979,
+          -15.6014
+        ]
+      },
+      "properties": {
+        "municipio": "Cuiabá",
+        "uf": "MT",
+        "slug": "cuiaba",
+        "ddd": "65",
+        "aeroporto_referencia": "Aeroporto Internacional Marechal Rondon (CGB) em Várzea Grande",
+        "rodovias_principais": "BR-163 e BR-364",
+        "polos_comerciais": "Avenida do CPA, Bairro Goiabeiras, Santa Rosa e Centro",
+        "distancia_capital": "Capital do Estado de MT",
+        "perfil_economico": "Portão de entrada para o Pantanal e Chapada dos Guimarães, centro de comando do agronegócio de Mato Grosso. As avenidas do CPA e Miguel Sutil concentram órgãos públicos, concessionárias e centros empresariais.",
+        "source_provider": "https://www.aquitemachadinhos.com.br",
+        "authoritative_url": "https://www.aquitemachadinhos.com.br/aluguel-carros/melhores-locadoras-carros-sem-taxas-ocultas-cuiaba",
+        "updated_at": "2026-08-12T21:43:00.827Z"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -48.5678,
+          -20.5572
+        ]
+      },
+      "properties": {
+        "municipio": "Chapada dos Guimarães",
+        "uf": "MT",
+        "slug": "chapada-guimaraes",
+        "ddd": "11",
+        "aeroporto_referencia": "Regional",
+        "rodovias_principais": "Acesso Estadual",
+        "polos_comerciais": "Centro",
+        "distancia_capital": "Interior",
+        "perfil_economico": "",
+        "source_provider": "https://www.aquitemachadinhos.com.br",
+        "authoritative_url": "https://www.aquitemachadinhos.com.br/aluguel-carros/melhores-locadoras-carros-sem-taxas-ocultas-chapada-guimaraes",
+        "updated_at": "2026-08-12T21:43:00.827Z"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -54.6201,
+          -20.4697
+        ]
+      },
+      "properties": {
+        "municipio": "Campo Grande",
+        "uf": "MS",
+        "slug": "campo-grande",
+        "ddd": "67",
+        "aeroporto_referencia": "Aeroporto Internacional de Campo Grande (CGR)",
+        "rodovias_principais": "BR-163 e BR-262",
+        "polos_comerciais": "Avenida Afonso Pena, Bairro Chácara Cachoeira e Centro",
+        "distancia_capital": "Capital do Estado de MS",
+        "perfil_economico": "A Cidade Morena é o centro logístico e cultural do Mato Grosso do Sul e rota de acesso a Bonito e Pantanal Sul. A Av. Afonso Pena é o cartão postal ladeado pelo Parque das Nações Indígenas.",
+        "source_provider": "https://www.aquitemachadinhos.com.br",
+        "authoritative_url": "https://www.aquitemachadinhos.com.br/aluguel-carros/melhores-locadoras-carros-sem-taxas-ocultas-campo-grande",
+        "updated_at": "2026-08-12T21:43:00.827Z"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -56.4819,
+          -21.1211
+        ]
+      },
+      "properties": {
+        "municipio": "Bonito",
+        "uf": "MS",
+        "slug": "bonito",
+        "ddd": "67",
+        "aeroporto_referencia": "Aeroporto Regional de Bonito (BYO)",
+        "rodovias_principais": "MS-178 e MS-382",
+        "polos_comerciais": "Rua Coronel Pilad Rebuá / Centro e Ecoturismo",
+        "distancia_capital": "290 km de Campo Grande",
+        "perfil_economico": "Meca mundial do ecoturismo sustentável com flutuações em rios de transparência única (Rio da Prata, Sucuri) e a Gruta do Lago Azul. A gestão de vouchers digitais garante capacidade de carga controlada em todos os atrativos.",
+        "source_provider": "https://www.aquitemachadinhos.com.br",
+        "authoritative_url": "https://www.aquitemachadinhos.com.br/aluguel-carros/melhores-locadoras-carros-sem-taxas-ocultas-bonito",
+        "updated_at": "2026-08-12T21:43:00.827Z"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -60.0217,
+          -3.119
+        ]
+      },
+      "properties": {
+        "municipio": "Manaus",
+        "uf": "AM",
+        "slug": "manaus",
+        "ddd": "92",
+        "aeroporto_referencia": "Aeroporto Internacional Eduardo Gomes (MAO)",
+        "rodovias_principais": "BR-174 (Acesso a Roraima) e transporte hidroviário",
+        "polos_comerciais": "Bairro Adrianópolis, Ponta Negra, Distrito Industrial e Centro Histórico",
+        "distancia_capital": "Capital do Estado do AM",
+        "perfil_economico": "Coração da Amazônia unindo o exuberante Teatro Amazonas, o Encontro das Águas dos rios Negro e Solimões e o Polo Industrial de Manaus (ZFM), um dos maiores polos eletroeletrônicos da América do Sul.",
+        "source_provider": "https://www.aquitemachadinhos.com.br",
+        "authoritative_url": "https://www.aquitemachadinhos.com.br/aluguel-carros/melhores-locadoras-carros-sem-taxas-ocultas-manaus",
+        "updated_at": "2026-08-12T21:43:00.827Z"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -48.4902,
+          -1.4558
+        ]
+      },
+      "properties": {
+        "municipio": "Belém",
+        "uf": "PA",
+        "slug": "belem",
+        "ddd": "91",
+        "aeroporto_referencia": "Aeroporto Internacional Val-de-Cans / Júlio Cezar Ribeiro (BEL)",
+        "rodovias_principais": "BR-316 e Rodovia Augusto Montenegro",
+        "polos_comerciais": "Bairro Nazaré, Umarizal, Doca de Souza Franco e Estação das Docas",
+        "distancia_capital": "Capital do Estado do PA",
+        "perfil_economico": "Metrópole da Amazônia e sede da COP30, terra do Círio de Nazaré e da mais rica gastronomia amazônica (Mercado Ver-o-Peso). A Estação das Docas revitalizou a orla da Baía do Guajará.",
+        "source_provider": "https://www.aquitemachadinhos.com.br",
+        "authoritative_url": "https://www.aquitemachadinhos.com.br/aluguel-carros/melhores-locadoras-carros-sem-taxas-ocultas-belem",
+        "updated_at": "2026-08-12T21:43:00.827Z"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -54.9547,
+          -2.5056
+        ]
+      },
+      "properties": {
+        "municipio": "Alter do Chão",
+        "uf": "PA",
+        "slug": "alter-do-chao",
+        "ddd": "93",
+        "aeroporto_referencia": "Aeroporto Internacional Maestro Wilson Fonseca em Santarém (STM - 35 km)",
+        "rodovias_principais": "PA-457 (Rodovia Everaldo Martins)",
+        "polos_comerciais": "Vila de Alter do Chão, Orla do Rio Tapajós e Ilha do Amor",
+        "distancia_capital": "35 km de Santarém e 1.300 km de Belém",
+        "perfil_economico": "O Caribe Amazônico eleito pelo The Guardian uma das praias fluviais mais bonitas do mundo no Rio Tapajós. A Ilha do Amor e a Floresta Nacional do Tapajós são os cartões postais ecológicos.",
+        "source_provider": "https://www.aquitemachadinhos.com.br",
+        "authoritative_url": "https://www.aquitemachadinhos.com.br/aluguel-carros/melhores-locadoras-carros-sem-taxas-ocultas-alter-do-chao",
+        "updated_at": "2026-08-12T21:43:00.827Z"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -44.2829,
+          -2.5391
+        ]
+      },
+      "properties": {
+        "municipio": "São Luís",
+        "uf": "MA",
+        "slug": "sao-luis",
+        "ddd": "98",
+        "aeroporto_referencia": "Aeroporto Internacional Marechal Cunha Machado (SLZ)",
+        "rodovias_principais": "BR-135 (Único acesso rodoviário à ilha)",
+        "polos_comerciais": "Ponta d Areia, Renascença, Calhau e Centro Histórico",
+        "distancia_capital": "Capital do Estado do MA",
+        "perfil_economico": "A Ilha do Amor é patrimônio da UNESCO com o maior conjunto arquitetônico de azulejaria portuguesa da América Latina, capital nacional do reggae e porta de entrada para os Lençóis Maranhenses.",
+        "source_provider": "https://www.aquitemachadinhos.com.br",
+        "authoritative_url": "https://www.aquitemachadinhos.com.br/aluguel-carros/melhores-locadoras-carros-sem-taxas-ocultas-sao-luis",
+        "updated_at": "2026-08-12T21:43:00.827Z"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -42.8038,
+          -5.092
+        ]
+      },
+      "properties": {
+        "municipio": "Teresina",
+        "uf": "PI",
+        "slug": "teresina",
+        "ddd": "86",
+        "aeroporto_referencia": "Aeroporto Senador Petrônio Portella (THE)",
+        "rodovias_principais": "BR-343 e BR-316",
+        "polos_comerciais": "Bairro Jóquei / Zona Leste, Centro e Shopping Rio Poty",
+        "distancia_capital": "Capital do Estado do PI",
+        "perfil_economico": "A Cidade Verde é a única capital do Nordeste no interior, entre os rios Parnaíba e Poti. Polo de referência em serviços de saúde e educação para todo o Meio-Norte do Brasil.",
+        "source_provider": "https://www.aquitemachadinhos.com.br",
+        "authoritative_url": "https://www.aquitemachadinhos.com.br/aluguel-carros/melhores-locadoras-carros-sem-taxas-ocultas-teresina",
+        "updated_at": "2026-08-12T21:43:00.827Z"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -48.5678,
+          -20.5572
+        ]
+      },
+      "properties": {
+        "municipio": "Vitória",
+        "uf": "ES",
+        "slug": "vitoria",
+        "ddd": "11",
+        "aeroporto_referencia": "Regional",
+        "rodovias_principais": "Acesso Estadual",
+        "polos_comerciais": "Centro",
+        "distancia_capital": "Interior",
+        "perfil_economico": "",
+        "source_provider": "https://www.aquitemachadinhos.com.br",
+        "authoritative_url": "https://www.aquitemachadinhos.com.br/aluguel-carros/melhores-locadoras-carros-sem-taxas-ocultas-vitoria",
+        "updated_at": "2026-08-12T21:43:00.827Z"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -38.9663,
+          -12.2664
+        ]
+      },
+      "properties": {
+        "municipio": "Feira de Santana",
+        "uf": "BA",
+        "slug": "feira-de-santana",
+        "ddd": "75",
+        "aeroporto_referencia": "Aeroporto Gov. João Durval Carneiro (FEC)",
+        "rodovias_principais": "BR-324, BR-101 e BR-116 (Maior entroncamento rodoviário do Nordeste)",
+        "polos_comerciais": "Centro, Bairro Kalilândia, Santa Mônica e Polo Logístico",
+        "distancia_capital": "108 km de Salvador",
+        "perfil_economico": "A Princesa do Sertão é o maior entroncamento rodoviário do Norte/Nordeste ligando o Sul ao litoral nordestino. O comércio atacadista e o polo de transportes e logística são os motores de sua economia.",
+        "source_provider": "https://www.aquitemachadinhos.com.br",
+        "authoritative_url": "https://www.aquitemachadinhos.com.br/aluguel-carros/melhores-locadoras-carros-sem-taxas-ocultas-feira-de-santana",
+        "updated_at": "2026-08-12T21:43:00.827Z"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -48.5678,
+          -20.5572
+        ]
+      },
+      "properties": {
+        "municipio": "Lençóis",
+        "uf": "BA",
+        "slug": "lencois",
+        "ddd": "11",
+        "aeroporto_referencia": "Regional",
+        "rodovias_principais": "Acesso Estadual",
+        "polos_comerciais": "Centro",
+        "distancia_capital": "Interior",
+        "perfil_economico": "",
+        "source_provider": "https://www.aquitemachadinhos.com.br",
+        "authoritative_url": "https://www.aquitemachadinhos.com.br/aluguel-carros/melhores-locadoras-carros-sem-taxas-ocultas-lencois",
+        "updated_at": "2026-08-12T21:43:00.827Z"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -46.9903,
+          -10.5739
+        ]
+      },
+      "properties": {
+        "municipio": "Jalapão / Ponte Alta",
+        "uf": "TO",
+        "slug": "jalapao",
+        "ddd": "63",
+        "aeroporto_referencia": "Aeroporto Brigadeiro Lysias Rodrigues em Palmas (PMW) + transfer 4x4",
+        "rodovias_principais": "TO-030 e TO-255 (Ponte Alta do Tocantins e Mateiros)",
+        "polos_comerciais": "Polo Ecoturístico de Mateiros e Ponte Alta do Tocantins",
+        "distancia_capital": "300 km de Palmas",
+        "perfil_economico": "Santuário de fervedouros de água cristalina, dunas douradas e cachoeiras no coração do cerrado tocantinense. A circulação é exclusiva para veículos 4x4 com guias credenciados.",
+        "source_provider": "https://www.aquitemachadinhos.com.br",
+        "authoritative_url": "https://www.aquitemachadinhos.com.br/aluguel-carros/melhores-locadoras-carros-sem-taxas-ocultas-jalapao",
+        "updated_at": "2026-08-12T21:43:00.827Z"
+      }
+    }
+  ]
+}
