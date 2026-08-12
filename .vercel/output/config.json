@@ -3091,6 +3091,21 @@
     }
   ],
   "overrides": {
+    "alerta/onibus-jabaquara-santos-atraso.html": {
+      "path": "alerta/onibus-jabaquara-santos-atraso"
+    },
+    "alerta/onibus-tiete-barretos-esgotado.html": {
+      "path": "alerta/onibus-tiete-barretos-esgotado"
+    },
+    "alerta/voo-azul-4321-cancelado.html": {
+      "path": "alerta/voo-azul-4321-cancelado"
+    },
+    "alerta/voo-gol-1234-atrasado-congonhas.html": {
+      "path": "alerta/voo-gol-1234-atrasado-congonhas"
+    },
+    "alerta/voo-latam-3456-guarulhos-cancelado.html": {
+      "path": "alerta/voo-latam-3456-guarulhos-cancelado"
+    },
     "assets/gramado-home.html": {
       "path": "assets/gramado-home"
     },
