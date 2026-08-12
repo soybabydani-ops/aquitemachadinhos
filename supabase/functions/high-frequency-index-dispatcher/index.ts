@@ -11,16 +11,23 @@ const INDEXNOW_ENDPOINTS = [
   "https://search.seznam.cz/indexnow"
 ];
 
-// URLs de alta prioridade cruzando todos os canais de monetização
+// URLs de alta prioridade cruzando todos os canais da malha interna circular
 const TOP_PRIORITY_URLS = [
+  `https://${HOST}/luxo-vip`,
+  `https://${HOST}/luxo-vip/reservas-suites-presidenciais-resorts-luxo-heliponto-sao-paulo.html`,
+  `https://${HOST}/luxo-vip/melhores-malas-bordo-alta-resistencia-samsonite-tumi-promocao.html`,
+  `https://${HOST}/luxo-vip/luxury-5star-hotels-presidential-suites-dubai.html`,
+  `https://${HOST}/pacotes-viagem`,
   `https://${HOST}/pacotes-viagem/pacotes-cruzeiros-maritimos-resorts-all-inclusive-promocao.html`,
   `https://${HOST}/pacotes-viagem/bugs-passagens-aereas-internacionais-orlando.html`,
   `https://${HOST}/pacotes-viagem/bugs-passagens-aereas-internacionais-paris.html`,
   `https://${HOST}/pacotes-viagem/melhores-hoteis-boutique-resorts-luxo-barretos.html`,
+  `https://${HOST}/aluguel-carros`,
   `https://${HOST}/aluguel-carros/aluguel-carros-blindados-utilitarios-sao-paulo-guarulhos.html`,
   `https://${HOST}/aluguel-carros/como-conseguir-desconto-locacao-veiculos-festa-peao-barretos.html`,
   `https://${HOST}/aluguel-carros/luxury-car-hire-suv-rentals-tokyo-haneda.html`,
   `https://${HOST}/aluguel-carros/best-car-rental-deals-free-cancellation-mia-airport.html`,
+  `https://${HOST}/cursos`,
   `https://${HOST}/cursos/cupom-desconto-promocoes-relampago-udemy-hoje.html`,
   `https://${HOST}/cursos/melhores-cursos-online-capacitacao-profissional-barretos.html`,
   `https://${HOST}/cursos/cursos-inteligencia-artificial-chatgpt-prompts.html`,
@@ -35,6 +42,7 @@ const TOP_PRIORITY_URLS = [
   `https://${HOST}/looks/chapeu-pralana-barretos-promocao.html`,
   `https://${HOST}/alerta-clima/barretos-alerta-meteorologico.html`,
   `https://${HOST}/concursos/barretos-inscricoes-abertas.html`,
+  `https://${HOST}/sobre.html`,
   `https://${HOST}/pinterest-catalog.xml`,
   `https://${HOST}/pinterest-global-catalog.xml`
 ];
@@ -65,7 +73,7 @@ Deno.serve(async (req: Request) => {
           method: "POST",
           headers: {
             "Content-Type": "application/json; charset=utf-8",
-            "User-Agent": "AQUITEM-HighFrequency-BatchIndexer/3.5 (Compatible; Public Service & Live Deal Portal)"
+            "User-Agent": "AQUITEM-CircularMesh-BatchIndexer/4.0 (Compatible; Public Service & Live Deal Portal)"
           },
           body: payload
         });

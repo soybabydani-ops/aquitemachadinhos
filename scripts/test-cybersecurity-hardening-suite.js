@@ -97,7 +97,8 @@ async function runSecurityTests() {
   // 5. CABEÇALHOS DE SEGURANÇA VERCEL WAF
   console.log("\n5. Testando Cabeçalhos de Segurança em vercel.json...");
   const vercelConfig = JSON.parse(fs.readFileSync(path.join(REPO_ROOT, 'vercel.json'), 'utf8'));
-  const headers = vercelConfig.headers[0].headers;
+  const headerBlock = vercelConfig.headers.find(h => h.headers && h.headers.some(x => x.key === 'Strict-Transport-Security'));
+  const headers = headerBlock ? headerBlock.headers : [];
 
   const hsts = headers.find(h => h.key === 'Strict-Transport-Security');
   const xfo = headers.find(h => h.key === 'X-Frame-Options');
