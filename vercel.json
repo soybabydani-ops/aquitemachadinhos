@@ -1073,6 +1073,38 @@
   ],
   "rewrites": [
     {
+      "source": "/alerta-transito/:slug",
+      "destination": "/alerta-transito/:slug.html"
+    },
+    {
+      "source": "/alerta-transito",
+      "destination": "/alerta-transito/index.html"
+    },
+    {
+      "source": "/concursos/:cidade-inscricoes-abertas",
+      "destination": "/concursos/:cidade-inscricoes-abertas.html"
+    },
+    {
+      "source": "/concursos",
+      "destination": "/concursos/index.html"
+    },
+    {
+      "source": "/alerta-clima/:cidade-alerta-meteorologico",
+      "destination": "/alerta-clima/:cidade-alerta-meteorologico.html"
+    },
+    {
+      "source": "/alerta-clima",
+      "destination": "/alerta-clima/index.html"
+    },
+    {
+      "source": "/utilidade-publica/:cidade/doacoes-e-desapegos",
+      "destination": "/utilidade-publica/:cidade/doacoes-e-desapegos.html"
+    },
+    {
+      "source": "/utilidade-publica/:cidade/desapegos",
+      "destination": "/utilidade-publica/:cidade/desapegos.html"
+    },
+    {
       "source": "/utilidade-publica/:cidade/achados-e-perdidos",
       "destination": "/utilidade-publica/:cidade/achados-e-perdidos.html"
     },
