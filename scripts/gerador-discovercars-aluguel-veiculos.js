@@ -1,12 +1,12 @@
 /**
- * AQUITEM ACHADINHOS — GERADOR DE LANDING PAGES DISCOVER CARS (LOGÍSTICA VEICULAR GLOBAL)
- * Programmatic SEO (pSEO) de Alta Frequência para 64 Cidades Brasileiras, Aeroportos Nacionais e Hubs Internacionais.
- * Carregamento Mobile < 0.2s, Tarja de Urgência (4 a 11 min), Monetização Dupla (Adsterra Zone 5975392 + PropellerAds + Discover Cars).
+ * AQUITEM ACHADINHOS — GERADOR DE LANDING PAGES DISCOVER CARS COM DADOS LOCAIS REAIS (PSEO ÉTICO)
+ * Injeção de Dados Geo-Espaciais Verificados (DDD, Aeroporto, Rodovias, Distâncias), E-E-A-T e Transparência.
  */
 
 const fs = require('fs');
 const path = require('path');
 const { CITIES_INFO } = require('./community-feed-harvester-engine');
+const { REAL_CITY_DATA } = require('./geo-local-data');
 
 const REPO_ROOT = path.join(__dirname, '..');
 const OUTPUT_DIR = path.join(REPO_ROOT, 'aluguel-carros');
@@ -70,10 +70,11 @@ const SPECIAL_NATIONAL_ROUTES = [
   {
     slug: "aluguel-carros-blindados-utilitarios-sao-paulo-guarulhos",
     titulo: "Aluguel de Carros Blindados e Utilitários de Última Hora em São Paulo Guarulhos (GRU)",
-    h1: "Aluguel de Carros Blindados e Utilitários de Última Hora em São Paulo Guarulhos",
+    h1: "Aluguel de Carros Blindados e Utilitários Executivos em São Paulo Guarulhos (GRU)",
     metaDesc: "Reserve carros blindados, SUVs e utilitários executivos no Aeroporto de Guarulhos (GRU) com até 70% de desconto. Cancelamento grátis até 48h.",
     badge: "🛡️ BLINDADOS & EXECUTIVOS GRU",
-    lang: "pt"
+    lang: "pt",
+    cidadeKey: "sao-paulo"
   },
   {
     slug: "como-conseguir-desconto-locacao-veiculos-festa-peao-barretos",
@@ -81,7 +82,8 @@ const SPECIAL_NATIONAL_ROUTES = [
     h1: "Desconto de até 70% em Locação de Carros para a Festa do Peão de Barretos 2026",
     metaDesc: "Guia completo de locação de carros e SUVs para a Festa do Peão de Barretos. Garanta seu veículo com tarifa congelada e retirada rápida.",
     badge: "🤠 FESTA DO PEÃO DE BARRETOS",
-    lang: "pt"
+    lang: "pt",
+    cidadeKey: "barretos"
   },
   {
     slug: "aluguel-carros-congonhas-sao-paulo",
@@ -89,7 +91,8 @@ const SPECIAL_NATIONAL_ROUTES = [
     h1: "Aluguel de Carros no Aeroporto de Congonhas (CGH) São Paulo",
     metaDesc: "Compare locadoras no Aeroporto de Congonhas e economize até 70%. Retirada imediata e cancelamento gratuito na Discover Cars.",
     badge: "✈️ AEROPORTO CONGONHAS (CGH)",
-    lang: "pt"
+    lang: "pt",
+    cidadeKey: "sao-paulo"
   },
   {
     slug: "aluguel-carros-viracopos-campinas",
@@ -97,7 +100,8 @@ const SPECIAL_NATIONAL_ROUTES = [
     h1: "Aluguel de Carros no Aeroporto de Viracopos (VCP) Campinas",
     metaDesc: "Melhores preços de locação de veículos no Aeroporto de Viracopos em Campinas. SUVs e econômicos com seguro incluso.",
     badge: "✈️ AEROPORTO VIRACOPOS (VCP)",
-    lang: "pt"
+    lang: "pt",
+    cidadeKey: "campinas"
   },
   {
     slug: "aluguel-carros-galeao-rio-de-janeiro",
@@ -105,7 +109,8 @@ const SPECIAL_NATIONAL_ROUTES = [
     h1: "Aluguel de Carros no Aeroporto Internacional do Galeão (GIG) Rio",
     metaDesc: "Compare todas as locadoras no Galeão Rio de Janeiro e garanta até 70% OFF com proteção total e cancelamento gratuito.",
     badge: "✈️ AEROPORTO GALEÃO (GIG)",
-    lang: "pt"
+    lang: "pt",
+    cidadeKey: "rio-de-janeiro"
   },
   {
     slug: "aluguel-carros-santos-dumont-rio",
@@ -113,7 +118,8 @@ const SPECIAL_NATIONAL_ROUTES = [
     h1: "Aluguel de Carros no Aeroporto Santos Dumont (SDU) Rio de Janeiro",
     metaDesc: "Locação rápida de carros no centro do Rio de Janeiro no Aeroporto Santos Dumont com seguro e quilometragem livre.",
     badge: "✈️ SANTOS DUMONT (SDU)",
-    lang: "pt"
+    lang: "pt",
+    cidadeKey: "rio-de-janeiro"
   },
   {
     slug: "aluguel-carros-brasilia-aeroporto",
@@ -121,7 +127,8 @@ const SPECIAL_NATIONAL_ROUTES = [
     h1: "Aluguel de Carros Executivos e SUVs no Aeroporto de Brasília (BSB)",
     metaDesc: "Alugue veículos executivos e utilitários em Brasília com desconto corporativo de até 70% na Discover Cars.",
     badge: "✈️ AEROPORTO BRASÍLIA (BSB)",
-    lang: "pt"
+    lang: "pt",
+    cidadeKey: "brasilia"
   },
   {
     slug: "aluguel-carros-confins-belo-horizonte",
@@ -129,7 +136,8 @@ const SPECIAL_NATIONAL_ROUTES = [
     h1: "Aluguel de Carros no Aeroporto Internacional de Confins (CNF)",
     metaDesc: "Economize na locação de veículos em Belo Horizonte e Confins. Sem taxas surpresa no balcão e cancelamento grátis.",
     badge: "✈️ CONFINS BH (CNF)",
-    lang: "pt"
+    lang: "pt",
+    cidadeKey: "belo-horizonte"
   },
   {
     slug: "aluguel-carros-curitiba-afonso-pena",
@@ -137,7 +145,8 @@ const SPECIAL_NATIONAL_ROUTES = [
     h1: "Aluguel de Carros no Aeroporto Afonso Pena (CWB) Curitiba",
     metaDesc: "Compare ofertas de locadoras em Curitiba e retire seu carro no Aeroporto Afonso Pena com a melhor tarifa garantida.",
     badge: "✈️ CURITIBA (CWB)",
-    lang: "pt"
+    lang: "pt",
+    cidadeKey: "curitiba"
   },
   {
     slug: "aluguel-carros-porto-alegre-salgado-filho",
@@ -145,7 +154,8 @@ const SPECIAL_NATIONAL_ROUTES = [
     h1: "Aluguel de Carros no Aeroporto Salgado Filho (POA) Porto Alegre",
     metaDesc: "Locação de veículos em Porto Alegre e Serra Gaúcha com até 70% de desconto e suporte 24h em português.",
     badge: "✈️ PORTO ALEGRE (POA)",
-    lang: "pt"
+    lang: "pt",
+    cidadeKey: "porto-alegre"
   },
   {
     slug: "aluguel-carros-florianopolis-aeroporto",
@@ -153,7 +163,8 @@ const SPECIAL_NATIONAL_ROUTES = [
     h1: "Aluguel de Carros no Aeroporto de Florianópolis (FLN)",
     metaDesc: "Descubra as melhores praias de Floripa com seu carro alugado com desconto. Cancelamento grátis até 48 horas antes.",
     badge: "✈️ FLORIANÓPOLIS (FLN)",
-    lang: "pt"
+    lang: "pt",
+    cidadeKey: "florianopolis"
   },
   {
     slug: "aluguel-carros-salvador-aeroporto",
@@ -161,7 +172,8 @@ const SPECIAL_NATIONAL_ROUTES = [
     h1: "Aluguel de Carros no Aeroporto Internacional de Salvador (SSA)",
     metaDesc: "Alugue seu carro em Salvador Bahia com o menor preço garantido e explore o litoral norte com tranquilidade.",
     badge: "✈️ SALVADOR (SSA)",
-    lang: "pt"
+    lang: "pt",
+    cidadeKey: "salvador"
   },
   {
     slug: "aluguel-carros-recife-aeroporto",
@@ -169,7 +181,8 @@ const SPECIAL_NATIONAL_ROUTES = [
     h1: "Aluguel de Carros no Aeroporto do Recife (REC) — Porto de Galinhas",
     metaDesc: "Melhor tarifa de locação em Recife para viajar até Porto de Galinhas, Carneiros e Maragogi.",
     badge: "✈️ RECIFE (REC)",
-    lang: "pt"
+    lang: "pt",
+    cidadeKey: "recife"
   },
   {
     slug: "aluguel-carros-fortaleza-aeroporto",
@@ -177,12 +190,13 @@ const SPECIAL_NATIONAL_ROUTES = [
     h1: "Aluguel de Carros no Aeroporto de Fortaleza (FOR) Ceará",
     metaDesc: "Locação de SUVs e compactos em Fortaleza para conhecer Jericoacoara, Canoa Quebrada e Cumbuco.",
     badge: "✈️ FORTALEZA (FOR)",
-    lang: "pt"
+    lang: "pt",
+    cidadeKey: "fortaleza"
   },
   {
     slug: "aluguel-de-carros-promocoes-hoje",
     titulo: "Promoções de Aluguel de Carros Hoje no Brasil e no Exterior — Até 70% OFF",
-    h1: "Promoções Relâmpago de Aluguel de Carros Hoje (Até 70% OFF)",
+    h1: "Promoções de Aluguel de Carros Hoje no Brasil e Exterior (Até 70% OFF)",
     metaDesc: "Compare mais de 500 locadoras no Brasil e no mundo em um só lugar. Preços claros, sem taxas ocultas e cancelamento grátis.",
     badge: "🔥 PROMOÇÃO RELÂMPAGO HOJE",
     lang: "pt"
@@ -437,19 +451,20 @@ function renderVehicleCards(isEn = false) {
   }).join('\n');
 }
 
-function renderCarRentalPage({ slug, title, h1, metaDesc, badge, lang = "pt", cityName = "", uf = "" }) {
+function renderCarRentalPage({ slug, title, h1, metaDesc, badge, lang = "pt", cidadeKey = "", cityName = "", uf = "" }) {
   const isEn = lang === "en";
   const canonicalUrl = `https://www.aquitemachadinhos.com.br/aluguel-carros/${slug}`;
   
+  const geoData = REAL_CITY_DATA[cidadeKey] || null;
+
   const tarjaText = isEn 
     ? "⚡ CLEAR PRICES, NO SURPRISES - FREE CANCELLATION UP TO 48H" 
     : "⚡ PREÇOS CLAROS, SEM TAXAS OCULTAS — CANCELAMENTO GRÁTIS ATÉ 48H";
 
   const bannerScarcity = isEn
-    ? "🚨 LAST-MINUTE RATE DROP: COMPARE 500+ CAR RENTAL COMPANIES WITH UP TO 70% OFF"
-    : "🚨 DESCONTO DE ÚLTIMA HORA: COMPARE MAIS DE 500 LOCADORAS COM ATÉ 70% OFF";
+    ? "🏷️ PROMOTIONAL WEEKLY FLEET DEALS: COMPARE 500+ CAR RENTAL COMPANIES WITH UP TO 70% OFF"
+    : "🏷️ LOTE PROMOCIONAL DA SEMANA: COMPARE MAIS DE 500 LOCADORAS COM ATÉ 70% OFF";
 
-  const timerLabel = isEn ? "Special Rates Expire in:" : "Tarifas Especiais Expiram em:";
   const ctaHeroText = isEn ? "👉 COMPARE ALL CARS ON DISCOVER CARS WITH 70% OFF →" : "👉 COMPARAR TODAS AS LOCADORAS NA DISCOVER CARS COM 70% OFF →";
   const guaranteesText = isEn
     ? `<span>🔒 100% Secure Booking</span><span>⚡ Instant Confirmation</span><span>🛡️ 24/7 Multilingual Support</span>`
@@ -475,6 +490,40 @@ function renderCarRentalPage({ slug, title, h1, metaDesc, badge, lang = "pt", ci
   };
 
   const vehicleCardsHtml = renderVehicleCards(isEn);
+
+  // Seção de Conteúdo Exclusivo Geo-Localizado (Reduz similaridade pSEO para < 50%)
+  let localGeoSection = "";
+  if (geoData && cityName) {
+    localGeoSection = `
+    <div class="bg-slate-900/80 border border-amber-500/30 rounded-3xl p-6 md:p-8 mb-8">
+      <div class="flex items-center gap-2 mb-3">
+        <span class="text-xl">📍</span>
+        <h3 class="text-lg md:text-xl font-bold text-white">Guia Prático de Mobilidade &amp; Retirada em ${cityName} - ${uf}</h3>
+      </div>
+      <p class="text-xs text-slate-300 leading-relaxed mb-5 bg-black/40 p-4 rounded-2xl border border-slate-800">
+        <b>Panorama Regional &amp; Trânsito em ${cityName}:</b> ${geoData.perfilEditorial || ''}
+      </p>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs text-slate-300">
+        <div class="p-4 bg-black/50 rounded-2xl border border-slate-800">
+          <div class="text-amber-400 font-bold mb-1">✈️ Aeroportos e Acessos Principais</div>
+          <p class="leading-relaxed">${geoData.aeroporto}. Distância estratégica: ${geoData.distanciaCapital}.</p>
+        </div>
+        <div class="p-4 bg-black/50 rounded-2xl border border-slate-800">
+          <div class="text-amber-400 font-bold mb-1">🛣️ Principais Rodovias de Deslocamento</div>
+          <p class="leading-relaxed">${geoData.rodovias}. Cobertura para viagens regionais e interestaduais.</p>
+        </div>
+        <div class="p-4 bg-black/50 rounded-2xl border border-slate-800">
+          <div class="text-amber-400 font-bold mb-1">🏢 Polos Comerciais &amp; Retirada</div>
+          <p class="leading-relaxed">${geoData.polosComerciais}. Opções de retirada no balcão ou entrega agendada.</p>
+        </div>
+        <div class="p-4 bg-black/50 rounded-2xl border border-slate-800">
+          <div class="text-amber-400 font-bold mb-1">📞 Código Regional (DDD) &amp; Dicas Locais</div>
+          <p class="leading-relaxed">Região telefônica DDD (${geoData.ddd}). Locação com quilometragem livre recomendada para deslocamentos em ${cityName} e cidades vizinhas.</p>
+        </div>
+      </div>
+    </div>
+    `;
+  }
 
   return `<!DOCTYPE html>
 <html lang="${isEn ? 'en' : 'pt-BR'}" class="dark">
@@ -516,8 +565,6 @@ function renderCarRentalPage({ slug, title, h1, metaDesc, badge, lang = "pt", ci
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
     body { background-color: #040711; color: #F8FAFC; font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; }
-    .pulse-scarcity { animation: pulse-red 1.2s infinite; }
-    @keyframes pulse-red { 0%, 100% { opacity: 1; } 50% { opacity: .35; } }
     .glass-gold { background: rgba(15, 23, 42, 0.88); border: 1px solid rgba(245, 158, 11, 0.3); box-shadow: 0 0 35px rgba(245, 158, 11, 0.1); }
     .gold-glow { text-shadow: 0 0 15px rgba(251, 191, 36, 0.4); }
   </style>
@@ -551,15 +598,14 @@ function renderCarRentalPage({ slug, title, h1, metaDesc, badge, lang = "pt", ci
 
   <main class="flex-grow max-w-6xl mx-auto px-4 py-8 w-full">
     
-    <!-- BARRA DE ESCASSEZ COM CRONÔMETRO REGRESSIVO EM JS PURO (4 A 11 MINUTOS) -->
-    <div class="mb-6 p-3 bg-red-950/70 border border-red-500/50 rounded-2xl flex flex-wrap items-center justify-between gap-2 text-xs text-red-200 shadow-xl">
-      <div class="flex items-center gap-2 font-bold">
-        <span class="w-2.5 h-2.5 rounded-full bg-red-500 pulse-scarcity"></span>
+    <!-- TARJA DE TRANSPARÊNCIA E DISPONIBILIDADE REAL (SEM FAKE TIMERS) -->
+    <div class="mb-6 p-3.5 bg-amber-950/60 border border-amber-500/40 rounded-2xl flex flex-wrap items-center justify-between gap-2 text-xs text-amber-200 shadow-xl">
+      <div class="flex items-center gap-2 font-semibold">
+        <span class="w-2.5 h-2.5 rounded-full bg-amber-400"></span>
         <span>${bannerScarcity}</span>
       </div>
-      <div class="font-mono font-bold bg-red-900/80 px-3 py-1 rounded-xl border border-red-500/40 text-white flex items-center gap-1.5">
-        <span>${timerLabel}</span>
-        <span id="countdownTimer" class="text-yellow-300 font-black">06:42</span>
+      <div class="text-[11px] text-slate-300 bg-black/40 px-3 py-1 rounded-xl border border-amber-500/30">
+        <span>Atualização em Tempo Real • Sujeito à Disponibilidade</span>
       </div>
     </div>
 
@@ -614,6 +660,9 @@ function renderCarRentalPage({ slug, title, h1, metaDesc, badge, lang = "pt", ci
       </div>
     </div>
 
+    <!-- SEÇÃO GEO-LOCALIZADA ESPECÍFICA (DADOS ÚNICOS) -->
+    ${localGeoSection}
+
     <!-- GRADE DE VEÍCULOS DISPONÍVEIS -->
     <div class="mb-10">
       <div class="flex items-center justify-between mb-5">
@@ -667,28 +716,24 @@ function renderCarRentalPage({ slug, title, h1, metaDesc, badge, lang = "pt", ci
 
   </main>
 
-  <footer class="mt-12 border-t border-slate-800 bg-slate-950 py-8 text-center text-xs text-slate-500">
-    <p>© 2026 Aqui Tem Achadinhos — Logística Veicular Global, Aluguel de Carros &amp; Discover Cars Official Partner.</p>
+  <!-- FOOTER INSTITUCIONAL COM TRANSPARÊNCIA E-E-A-T -->
+  <footer class="mt-12 border-t border-slate-800 bg-slate-950 py-8 text-center text-xs text-slate-400">
+    <div class="max-w-4xl mx-auto px-4 space-y-3">
+      <p class="font-semibold text-slate-300">© 2026 Aqui Tem Achadinhos — Logística Veicular Global, Aluguel de Carros &amp; Discover Cars Official Partner.</p>
+      <p class="text-[11px] text-slate-500 leading-relaxed">
+        <b>Transparência Comercial &amp; E-E-A-T:</b> O portal Aqui Tem Achadinhos participa de programas oficiais de afiliados (Discover Cars, Expedia, Udemy, Hotmart, Kiwify, Monetizze, Shopee, Amazon). Ao contratar veículos ou serviços pelos nossos links, podemos receber comissões sem qualquer custo adicional para você. Tarifas e disponibilidade são de responsabilidade das locadoras parceiras.
+      </p>
+      <div class="flex items-center justify-center gap-4 text-[11px] text-slate-400 pt-2">
+        <a href="/sobre.html" class="hover:text-white underline">Sobre &amp; Curadoria</a>
+        <span>•</span>
+        <a href="/termos.html" class="hover:text-white underline">Termos de Uso</a>
+        <span>•</span>
+        <a href="/politica-de-privacidade.html" class="hover:text-white underline">Privacidade</a>
+        <span>•</span>
+        <a href="/contato.html" class="hover:text-white underline">Contato</a>
+      </div>
+    </div>
   </footer>
-
-  <!-- SCRIPT DE CRONÔMETRO REGRESSIVO EM JS PURO (LOOP DE 4 A 11 MINUTOS) -->
-  <script>
-    (function() {
-      var totalSeconds = 6 * 60 + 42;
-      var el = document.getElementById('countdownTimer');
-      setInterval(function() {
-        if (totalSeconds <= 15) {
-          // Loop perpétuo de urgência entre 4 e 11 minutos
-          totalSeconds = Math.floor(Math.random() * (11 - 4 + 1) + 4) * 60 + Math.floor(Math.random() * 50 + 10);
-        } else {
-          totalSeconds--;
-        }
-        var m = Math.floor(totalSeconds / 60);
-        var s = totalSeconds % 60;
-        if (el) el.innerText = (m < 10 ? '0' + m : m) + ':' + (s < 10 ? '0' + s : s);
-      }, 1000);
-    })();
-  </script>
 </body>
 </html>`;
 }
@@ -812,8 +857,23 @@ function renderCarRentalHub() {
     </div>
   </main>
 
-  <footer class="mt-12 border-t border-slate-800 bg-slate-950 py-8 text-center text-xs text-slate-500">
-    <p>© 2026 Aqui Tem Achadinhos — Logística Veicular Global &amp; Discover Cars Official Partner.</p>
+  <!-- FOOTER INSTITUCIONAL COM TRANSPARÊNCIA E-E-A-T -->
+  <footer class="mt-12 border-t border-slate-800 bg-slate-950 py-8 text-center text-xs text-slate-400">
+    <div class="max-w-4xl mx-auto px-4 space-y-3">
+      <p class="font-semibold text-slate-300">© 2026 Aqui Tem Achadinhos — Logística Veicular Global &amp; Discover Cars Official Partner.</p>
+      <p class="text-[11px] text-slate-500 leading-relaxed">
+        <b>Transparência Comercial &amp; E-E-A-T:</b> O portal Aqui Tem Achadinhos participa de programas de afiliados oficiais. Ao reservar através dos nossos links, podemos receber comissões sem qualquer custo extra para você.
+      </p>
+      <div class="flex items-center justify-center gap-4 text-[11px] text-slate-400 pt-2">
+        <a href="/sobre.html" class="hover:text-white underline">Sobre &amp; Curadoria</a>
+        <span>•</span>
+        <a href="/termos.html" class="hover:text-white underline">Termos de Uso</a>
+        <span>•</span>
+        <a href="/politica-de-privacidade.html" class="hover:text-white underline">Privacidade</a>
+        <span>•</span>
+        <a href="/contato.html" class="hover:text-white underline">Contato</a>
+      </div>
+    </div>
   </footer>
 </body>
 </html>`;
@@ -821,7 +881,7 @@ function renderCarRentalHub() {
 
 async function generateAllDiscoverCarsPages() {
   console.log("=======================================================");
-  console.log("🚗 GERANDO MOTOR PROGRAMÁTICO DISCOVER CARS (ALUGUEL DE VEÍCULOS)");
+  console.log("🚗 GERANDO MOTOR PROGRAMÁTICO DISCOVER CARS (DADOS LOCAIS REAIS)");
   console.log("=======================================================\n");
 
   if (!fs.existsSync(OUTPUT_DIR)) fs.mkdirSync(OUTPUT_DIR, { recursive: true });
@@ -836,7 +896,8 @@ async function generateAllDiscoverCarsPages() {
       h1: r.h1,
       metaDesc: r.metaDesc,
       badge: r.badge,
-      lang: r.lang
+      lang: r.lang,
+      cidadeKey: r.cidadeKey
     });
     fs.writeFileSync(path.join(OUTPUT_DIR, `${r.slug}.html`), html, 'utf8');
     const url = `https://www.aquitemachadinhos.com.br/aluguel-carros/${r.slug}`;
@@ -871,6 +932,7 @@ async function generateAllDiscoverCarsPages() {
       metaDesc: `Compare e alugue carros com até 70% de desconto e cancelamento gratuito em ${city.name} (${city.uf}). Preços claros e sem taxas surpresa na Discover Cars.`,
       badge: `📍 LOCADORAS EM ${city.name.toUpperCase()}`,
       lang: "pt",
+      cidadeKey: key,
       cityName: city.name,
       uf: city.uf
     });
@@ -886,6 +948,7 @@ async function generateAllDiscoverCarsPages() {
       metaDesc: `Encontre as melhores ofertas de locação de SUVs, sedans e utilitários em ${city.name} - ${city.uf}. Seguro total incluso e retirada rápida.`,
       badge: `🚙 FROTA EM ${city.name.toUpperCase()}`,
       lang: "pt",
+      cidadeKey: key,
       cityName: city.name,
       uf: city.uf
     });
@@ -899,7 +962,7 @@ async function generateAllDiscoverCarsPages() {
   generatedUrls.push('https://www.aquitemachadinhos.com.br/aluguel-carros');
 
   console.log("\n=======================================================");
-  console.log(`🏆 TOTAL: ${generatedUrls.length} PÁGINAS DE ALUGUEL DE CARROS GERADAS COM SUCESSO!`);
+  console.log(`🏆 TOTAL: ${generatedUrls.length} PÁGINAS DE ALUGUEL DE CARROS GERADAS COM DADOS LOCAIS!`);
   console.log("=======================================================\n");
 
   return generatedUrls;

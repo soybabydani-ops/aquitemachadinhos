@@ -66,7 +66,7 @@ async function runExpediaTests() {
   const cCruzeiro = fs.readFileSync(pCruzeiro, 'utf8');
   assert(cCruzeiro.includes("Pacotes de Cruzeiros Marítimos e Resorts All-Inclusive"), "Título de cruzeiros all-inclusive validado");
   assert(cCruzeiro.includes("EXCLUSIVE DEALS - SECURE YOUR BOOKING BEFORE DISMISSAL"), "Tarja de transparência Expedia VIP presente");
-  assert(cCruzeiro.includes("countdownTimer"), "Cronômetro regressivo de escassez (loop 5-12min) presente");
+  assert(cCruzeiro.includes("Atualização em Tempo Real") || cCruzeiro.includes("LOTE PROMOCIONAL"), "Tarja de disponibilidade real e lote semanal presente");
   assert(cCruzeiro.includes("5975392"), "Bloco Adsterra CPM Zone 5975392 injetado");
   assert(cCruzeiro.includes("11558154"), "Smart Tag PropellerAds Zone 11558154 injetada");
   assert(cCruzeiro.includes("Kfv4vlu"), "Link oficial Expedia comissionado embutido");

@@ -1,12 +1,12 @@
 /**
- * AQUITEM ACHADINHOS — GERADOR DE LANDING PAGES EXPEDIA (TURISMO GLOBAL & PACOTES VIP)
- * Programmatic SEO Internacional com hreflang bidirecional, cruzeiros, resorts all-inclusive e passagens executivas.
- * Carregamento Mobile < 0.2s, Tarja de Urgência (5 a 12 min), Monetização Dupla (Adsterra Zone 5975392 + PropellerAds + Expedia).
+ * AQUITEM ACHADINHOS — GERADOR DE LANDING PAGES EXPEDIA COM DADOS LOCAIS REAIS (PSEO ÉTICO)
+ * Injeção de Dados Geo-Espaciais Verificados (DDD, Aeroporto, Rodovias, Distâncias), E-E-A-T e Transparência.
  */
 
 const fs = require('fs');
 const path = require('path');
 const { CITIES_INFO } = require('./community-feed-harvester-engine');
+const { REAL_CITY_DATA } = require('./geo-local-data');
 
 const REPO_ROOT = path.join(__dirname, '..');
 const OUTPUT_DIR = path.join(REPO_ROOT, 'pacotes-viagem');
@@ -307,16 +307,17 @@ function renderPackageCards(isEn = false) {
   }).join('\n');
 }
 
-function renderExpediaPage({ slug, title, h1, metaDesc, badge, lang = "pt", destName = "" }) {
+function renderExpediaPage({ slug, title, h1, metaDesc, badge, lang = "pt", destName = "", cidadeKey = "" }) {
   const isEn = lang === "en";
   const canonicalUrl = `https://www.aquitemachadinhos.com.br/pacotes-viagem/${slug}`;
   
+  const geoData = REAL_CITY_DATA[cidadeKey] || null;
+
   const tarjaText = "⚡ EXCLUSIVE DEALS - SECURE YOUR BOOKING BEFORE DISMISSAL";
   const bannerScarcity = isEn
-    ? "🚨 FLASH TRAVEL SALE: AIRLINES & 5-STAR RESORTS RELEASING UNBOOKED VIP PACKAGES"
-    : "🚨 PROMOÇÃO RELÂMPAGO DE TURISMO: COMPANHIAS AÉREAS E RESORTS 5 ESTRELAS LIBERANDO VAGAS VIP";
+    ? "🏷️ PROMOTIONAL WEEKLY TRAVEL DEALS: AIRLINES & 5-STAR RESORTS RELEASING UNBOOKED VIP PACKAGES"
+    : "🏷️ LOTE PROMOCIONAL DA SEMANA: COMPANHIAS AÉREAS E RESORTS 5 ESTRELAS LIBERANDO VAGAS VIP";
 
-  const timerLabel = isEn ? "Secret Deal Dismissal in:" : "Encerramento das Vagas VIP em:";
   const ctaHeroText = isEn ? "👉 UNLOCK EXCLUSIVE DISCOUNTS ON EXPEDIA NOW →" : "👉 DESBLOQUEAR TARIFAS SECRETAS NA EXPEDIA AGORA →";
   const guaranteesText = isEn
     ? `<span>🔒 100% Verified Expedia Partner</span><span>⚡ Instant E-Ticket Confirmation</span><span>🛡️ 24/7 Global Concierge</span>`
@@ -342,6 +343,40 @@ function renderExpediaPage({ slug, title, h1, metaDesc, badge, lang = "pt", dest
   };
 
   const packageCardsHtml = renderPackageCards(isEn);
+
+  // Seção de Conteúdo Exclusivo Geo-Localizado (Reduz similaridade pSEO para < 50%)
+  let localGeoSection = "";
+  if (geoData && destName) {
+    localGeoSection = `
+    <div class="bg-slate-900/80 border border-sky-500/30 rounded-3xl p-6 md:p-8 mb-8">
+      <div class="flex items-center gap-2 mb-3">
+        <span class="text-xl">📍</span>
+        <h3 class="text-lg md:text-xl font-bold text-white">Guia Estratégico de Hospedagem &amp; Turismo em ${destName}</h3>
+      </div>
+      <p class="text-xs text-slate-300 leading-relaxed mb-5 bg-black/40 p-4 rounded-2xl border border-slate-800">
+        <b>Perfil Turístico &amp; Dicas de Hospedagem em ${destName}:</b> ${geoData.perfilEditorial || ''}
+      </p>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs text-slate-300">
+        <div class="p-4 bg-black/50 rounded-2xl border border-slate-800">
+          <div class="text-sky-400 font-bold mb-1">✈️ Aeroportos e Malha Aérea</div>
+          <p class="leading-relaxed">${geoData.aeroporto}. Distância estratégica: ${geoData.distanciaCapital}.</p>
+        </div>
+        <div class="p-4 bg-black/50 rounded-2xl border border-slate-800">
+          <div class="text-sky-400 font-bold mb-1">🛣️ Vias de Acesso e Conexões Terrestres</div>
+          <p class="leading-relaxed">${geoData.rodovias}. Conexão direta para transfer executivo e viagens regionais.</p>
+        </div>
+        <div class="p-4 bg-black/50 rounded-2xl border border-slate-800">
+          <div class="text-sky-400 font-bold mb-1">🏨 Bairros Mais Procurados para Hospedagem</div>
+          <p class="leading-relaxed">${geoData.polosComerciais}. Regiões nobres com fácil acesso à gastronomia e negócios.</p>
+        </div>
+        <div class="p-4 bg-black/50 rounded-2xl border border-slate-800">
+          <div class="text-sky-400 font-bold mb-1">📞 Informações Regionais (DDD ${geoData.ddd})</div>
+          <p class="leading-relaxed">Recomendamos reservar pacotes de hotel + voo integrados na Expedia para desbloquear até 70% de desconto adicional na tarifa balcão.</p>
+        </div>
+      </div>
+    </div>
+    `;
+  }
 
   return `<!DOCTYPE html>
 <html lang="${isEn ? 'en' : 'pt-BR'}" class="dark">
@@ -386,8 +421,6 @@ function renderExpediaPage({ slug, title, h1, metaDesc, badge, lang = "pt", dest
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
     body { background-color: #03050C; color: #F8FAFC; font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; }
-    .pulse-scarcity { animation: pulse-red 1.2s infinite; }
-    @keyframes pulse-red { 0%, 100% { opacity: 1; } 50% { opacity: .35; } }
     .glass-luxury { background: rgba(15, 23, 42, 0.88); border: 1px solid rgba(56, 189, 248, 0.3); box-shadow: 0 0 35px rgba(56, 189, 248, 0.1); }
     .luxury-glow { text-shadow: 0 0 15px rgba(56, 189, 248, 0.4); }
   </style>
@@ -421,15 +454,14 @@ function renderExpediaPage({ slug, title, h1, metaDesc, badge, lang = "pt", dest
 
   <main class="flex-grow max-w-6xl mx-auto px-4 py-8 w-full">
     
-    <!-- BARRA DE ESCASSEZ COM CRONÔMETRO REGRESSIVO EM JS PURO (5 A 12 MINUTOS) -->
-    <div class="mb-6 p-3 bg-red-950/70 border border-red-500/50 rounded-2xl flex flex-wrap items-center justify-between gap-2 text-xs text-red-200 shadow-xl">
-      <div class="flex items-center gap-2 font-bold">
-        <span class="w-2.5 h-2.5 rounded-full bg-red-500 pulse-scarcity"></span>
+    <!-- TARJA DE TRANSPARÊNCIA E DISPONIBILIDADE REAL (SEM FAKE TIMERS) -->
+    <div class="mb-6 p-3.5 bg-blue-950/60 border border-sky-500/40 rounded-2xl flex flex-wrap items-center justify-between gap-2 text-xs text-sky-200 shadow-xl">
+      <div class="flex items-center gap-2 font-semibold">
+        <span class="w-2.5 h-2.5 rounded-full bg-sky-400"></span>
         <span>${bannerScarcity}</span>
       </div>
-      <div class="font-mono font-bold bg-red-900/80 px-3 py-1 rounded-xl border border-red-500/40 text-white flex items-center gap-1.5">
-        <span>${timerLabel}</span>
-        <span id="countdownTimer" class="text-yellow-300 font-black">08:14</span>
+      <div class="text-[11px] text-slate-300 bg-black/40 px-3 py-1 rounded-xl border border-sky-500/30">
+        <span>Atualização em Tempo Real • Sujeito à Disponibilidade</span>
       </div>
     </div>
 
@@ -484,6 +516,9 @@ function renderExpediaPage({ slug, title, h1, metaDesc, badge, lang = "pt", dest
       </div>
     </div>
 
+    <!-- SEÇÃO GEO-LOCALIZADA ESPECÍFICA (DADOS ÚNICOS) -->
+    ${localGeoSection}
+
     <!-- GRADE DE PACOTES E CRUZEIROS DISPONÍVEIS -->
     <div class="mb-10">
       <div class="flex items-center justify-between mb-5">
@@ -536,28 +571,24 @@ function renderExpediaPage({ slug, title, h1, metaDesc, badge, lang = "pt", dest
 
   </main>
 
-  <footer class="mt-12 border-t border-slate-800 bg-slate-950 py-8 text-center text-xs text-slate-500">
-    <p>© 2026 Aqui Tem Achadinhos — Turismo Global VIP, Pacotes All-Inclusive &amp; Expedia Official Partner.</p>
+  <!-- FOOTER INSTITUCIONAL COM TRANSPARÊNCIA E-E-A-T -->
+  <footer class="mt-12 border-t border-slate-800 bg-slate-950 py-8 text-center text-xs text-slate-400">
+    <div class="max-w-4xl mx-auto px-4 space-y-3">
+      <p class="font-semibold text-slate-300">© 2026 Aqui Tem Achadinhos — Turismo Global VIP, Pacotes All-Inclusive &amp; Expedia Official Partner.</p>
+      <p class="text-[11px] text-slate-500 leading-relaxed">
+        <b>Transparência Comercial &amp; E-E-A-T:</b> O portal Aqui Tem Achadinhos participa de programas oficiais de afiliados (Expedia, Discover Cars, Udemy, Hotmart, Kiwify, Monetizze, Shopee, Amazon). Ao reservar pacotes, voos ou hotéis pelos nossos links, podemos receber comissões sem qualquer custo adicional para você.
+      </p>
+      <div class="flex items-center justify-center gap-4 text-[11px] text-slate-400 pt-2">
+        <a href="/sobre.html" class="hover:text-white underline">Sobre &amp; Curadoria</a>
+        <span>•</span>
+        <a href="/termos.html" class="hover:text-white underline">Termos de Uso</a>
+        <span>•</span>
+        <a href="/politica-de-privacidade.html" class="hover:text-white underline">Privacidade</a>
+        <span>•</span>
+        <a href="/contato.html" class="hover:text-white underline">Contato</a>
+      </div>
+    </div>
   </footer>
-
-  <!-- SCRIPT DE CRONÔMETRO REGRESSIVO EM JS PURO (LOOP DE 5 A 12 MINUTOS) -->
-  <script>
-    (function() {
-      var totalSeconds = 8 * 60 + 14;
-      var el = document.getElementById('countdownTimer');
-      setInterval(function() {
-        if (totalSeconds <= 15) {
-          // Loop perpétuo de urgência entre 5 e 12 minutos
-          totalSeconds = Math.floor(Math.random() * (12 - 5 + 1) + 5) * 60 + Math.floor(Math.random() * 50 + 10);
-        } else {
-          totalSeconds--;
-        }
-        var m = Math.floor(totalSeconds / 60);
-        var s = totalSeconds % 60;
-        if (el) el.innerText = (m < 10 ? '0' + m : m) + ':' + (s < 10 ? '0' + s : s);
-      }, 1000);
-    })();
-  </script>
 </body>
 </html>`;
 }
@@ -695,8 +726,23 @@ function renderExpediaHub() {
     </div>
   </main>
 
-  <footer class="mt-12 border-t border-slate-800 bg-slate-950 py-8 text-center text-xs text-slate-500">
-    <p>© 2026 Aqui Tem Achadinhos — Turismo Global VIP &amp; Expedia Official Partner.</p>
+  <!-- FOOTER INSTITUCIONAL COM TRANSPARÊNCIA E-E-A-T -->
+  <footer class="mt-12 border-t border-slate-800 bg-slate-950 py-8 text-center text-xs text-slate-400">
+    <div class="max-w-4xl mx-auto px-4 space-y-3">
+      <p class="font-semibold text-slate-300">© 2026 Aqui Tem Achadinhos — Turismo Global VIP &amp; Expedia Official Partner.</p>
+      <p class="text-[11px] text-slate-500 leading-relaxed">
+        <b>Transparência Comercial &amp; E-E-A-T:</b> O portal Aqui Tem Achadinhos participa de programas oficiais de afiliados. Ao contratar através dos nossos links, podemos receber comissões sem qualquer custo extra para você.
+      </p>
+      <div class="flex items-center justify-center gap-4 text-[11px] text-slate-400 pt-2">
+        <a href="/sobre.html" class="hover:text-white underline">Sobre &amp; Curadoria</a>
+        <span>•</span>
+        <a href="/termos.html" class="hover:text-white underline">Termos de Uso</a>
+        <span>•</span>
+        <a href="/politica-de-privacidade.html" class="hover:text-white underline">Privacidade</a>
+        <span>•</span>
+        <a href="/contato.html" class="hover:text-white underline">Contato</a>
+      </div>
+    </div>
   </footer>
 </body>
 </html>`;
@@ -704,7 +750,7 @@ function renderExpediaHub() {
 
 async function generateAllExpediaPages() {
   console.log("=======================================================");
-  console.log("✈️ GERANDO MOTOR PROGRAMÁTICO EXPEDIA (TURISMO GLOBAL VIP)");
+  console.log("✈️ GERANDO MOTOR PROGRAMÁTICO EXPEDIA COM DADOS LOCAIS REAIS");
   console.log("=======================================================\n");
 
   if (!fs.existsSync(OUTPUT_DIR)) fs.mkdirSync(OUTPUT_DIR, { recursive: true });
@@ -772,7 +818,8 @@ async function generateAllExpediaPages() {
       metaDesc: `Descubra os hotéis boutique mais bem avaliados e resorts de alto padrão em ${city.name} (${city.uf}). Tarifas secretas de membros e cancelamento grátis na Expedia.`,
       badge: `🏨 HOTÉIS VIP EM ${city.name.toUpperCase()}`,
       lang: "pt",
-      destName: city.name
+      destName: city.name,
+      cidadeKey: key
     });
     fs.writeFileSync(path.join(OUTPUT_DIR, `${slugHoteis}.html`), htmlHoteis, 'utf8');
     generatedUrls.push(`https://www.aquitemachadinhos.com.br/pacotes-viagem/${slugHoteis}`);
@@ -786,7 +833,8 @@ async function generateAllExpediaPages() {
       metaDesc: `Reserve pacotes completos com passagens aéreas e hotéis de alto luxo em ${city.name} - ${city.uf} com garantia de menor preço na Expedia.`,
       badge: `🌴 PACOTES EM ${city.name.toUpperCase()}`,
       lang: "pt",
-      destName: city.name
+      destName: city.name,
+      cidadeKey: key
     });
     fs.writeFileSync(path.join(OUTPUT_DIR, `${slugPacotes}.html`), htmlPacotes, 'utf8');
     generatedUrls.push(`https://www.aquitemachadinhos.com.br/pacotes-viagem/${slugPacotes}`);
@@ -798,7 +846,7 @@ async function generateAllExpediaPages() {
   generatedUrls.push('https://www.aquitemachadinhos.com.br/pacotes-viagem');
 
   console.log("\n=======================================================");
-  console.log(`🏆 TOTAL: ${generatedUrls.length} PÁGINAS EXPEDIA GERADAS COM SUCESSO!`);
+  console.log(`🏆 TOTAL: ${generatedUrls.length} PÁGINAS EXPEDIA GERADAS COM DADOS LOCAIS!`);
   console.log("=======================================================\n");
 
   return generatedUrls;

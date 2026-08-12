@@ -65,7 +65,7 @@ async function runUdemyTests() {
   console.log("\n3. Testando Títulos, Escassez e Injeção de Monetização Dupla...");
   const cBarretos = fs.readFileSync(pBarretos, 'utf8');
   assert(cBarretos.includes("Melhores Cursos Online de Capacitação Profissional"), "Título de capacitação validado");
-  assert(cBarretos.includes("countdownTimer"), "Cronômetro regressivo de escassez (loop 6-13min) presente");
+  assert(cBarretos.includes("Atualização em Tempo Real") || cBarretos.includes("LOTE PROMOCIONAL"), "Tarja de disponibilidade real e lote semanal presente");
   assert(cBarretos.includes("5975392"), "Bloco Adsterra CPM Zone 5975392 injetado");
   assert(cBarretos.includes("11558154"), "Smart Tag PropellerAds Zone 11558154 injetada");
   assert(cBarretos.includes("1101l435760"), "Impact Radius Universal Tracking Tag presente");

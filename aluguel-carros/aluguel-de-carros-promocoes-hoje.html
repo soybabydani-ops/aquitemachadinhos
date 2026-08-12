@@ -55,14 +55,12 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
     body { background-color: #040711; color: #F8FAFC; font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; }
-    .pulse-scarcity { animation: pulse-red 1.2s infinite; }
-    @keyframes pulse-red { 0%, 100% { opacity: 1; } 50% { opacity: .35; } }
     .glass-gold { background: rgba(15, 23, 42, 0.88); border: 1px solid rgba(245, 158, 11, 0.3); box-shadow: 0 0 35px rgba(245, 158, 11, 0.1); }
     .gold-glow { text-shadow: 0 0 15px rgba(251, 191, 36, 0.4); }
   </style>
 
   <script type="application/ld+json">
-    {"@context":"https://schema.org","@type":"AutoRental","name":"Promoções Relâmpago de Aluguel de Carros Hoje (Até 70% OFF)","description":"Compare mais de 500 locadoras no Brasil e no mundo em um só lugar. Preços claros, sem taxas ocultas e cancelamento grátis.","provider":{"@type":"Organization","name":"Discover Cars / AQUITEM Logística","url":"https://www.aquitemachadinhos.com.br"},"offers":{"@type":"Offer","priceCurrency":"BRL","price":"57.00","availability":"https://schema.org/InStock","url":"https://www.discovercars.com/?a_aid=Aquitemachadinhos"}}
+    {"@context":"https://schema.org","@type":"AutoRental","name":"Promoções de Aluguel de Carros Hoje no Brasil e Exterior (Até 70% OFF)","description":"Compare mais de 500 locadoras no Brasil e no mundo em um só lugar. Preços claros, sem taxas ocultas e cancelamento grátis.","provider":{"@type":"Organization","name":"Discover Cars / AQUITEM Logística","url":"https://www.aquitemachadinhos.com.br"},"offers":{"@type":"Offer","priceCurrency":"BRL","price":"57.00","availability":"https://schema.org/InStock","url":"https://www.discovercars.com/?a_aid=Aquitemachadinhos"}}
   </script>
 </head>
 <body class="min-h-screen flex flex-col antialiased selection:bg-amber-500 selection:text-black">
@@ -90,15 +88,14 @@
 
   <main class="flex-grow max-w-6xl mx-auto px-4 py-8 w-full">
     
-    <!-- BARRA DE ESCASSEZ COM CRONÔMETRO REGRESSIVO EM JS PURO (4 A 11 MINUTOS) -->
-    <div class="mb-6 p-3 bg-red-950/70 border border-red-500/50 rounded-2xl flex flex-wrap items-center justify-between gap-2 text-xs text-red-200 shadow-xl">
-      <div class="flex items-center gap-2 font-bold">
-        <span class="w-2.5 h-2.5 rounded-full bg-red-500 pulse-scarcity"></span>
-        <span>🚨 DESCONTO DE ÚLTIMA HORA: COMPARE MAIS DE 500 LOCADORAS COM ATÉ 70% OFF</span>
+    <!-- TARJA DE TRANSPARÊNCIA E DISPONIBILIDADE REAL (SEM FAKE TIMERS) -->
+    <div class="mb-6 p-3.5 bg-amber-950/60 border border-amber-500/40 rounded-2xl flex flex-wrap items-center justify-between gap-2 text-xs text-amber-200 shadow-xl">
+      <div class="flex items-center gap-2 font-semibold">
+        <span class="w-2.5 h-2.5 rounded-full bg-amber-400"></span>
+        <span>🏷️ LOTE PROMOCIONAL DA SEMANA: COMPARE MAIS DE 500 LOCADORAS COM ATÉ 70% OFF</span>
       </div>
-      <div class="font-mono font-bold bg-red-900/80 px-3 py-1 rounded-xl border border-red-500/40 text-white flex items-center gap-1.5">
-        <span>Tarifas Especiais Expiram em:</span>
-        <span id="countdownTimer" class="text-yellow-300 font-black">06:42</span>
+      <div class="text-[11px] text-slate-300 bg-black/40 px-3 py-1 rounded-xl border border-amber-500/30">
+        <span>Atualização em Tempo Real • Sujeito à Disponibilidade</span>
       </div>
     </div>
 
@@ -130,7 +127,7 @@
       </div>
 
       <h1 class="text-2xl md:text-4xl font-black text-white leading-tight mb-4 tracking-tight gold-glow">
-        Promoções Relâmpago de Aluguel de Carros Hoje (Até 70% OFF)
+        Promoções de Aluguel de Carros Hoje no Brasil e Exterior (Até 70% OFF)
       </h1>
 
       <p class="text-sm md:text-base text-slate-300 leading-relaxed mb-6">
@@ -167,6 +164,9 @@
         </div>
       </div>
     </div>
+
+    <!-- SEÇÃO GEO-LOCALIZADA ESPECÍFICA (DADOS ÚNICOS) -->
+    
 
     <!-- GRADE DE VEÍCULOS DISPONÍVEIS -->
     <div class="mb-10">
@@ -451,27 +451,23 @@
 
   </main>
 
-  <footer class="mt-12 border-t border-slate-800 bg-slate-950 py-8 text-center text-xs text-slate-500">
-    <p>© 2026 Aqui Tem Achadinhos — Logística Veicular Global, Aluguel de Carros &amp; Discover Cars Official Partner.</p>
+  <!-- FOOTER INSTITUCIONAL COM TRANSPARÊNCIA E-E-A-T -->
+  <footer class="mt-12 border-t border-slate-800 bg-slate-950 py-8 text-center text-xs text-slate-400">
+    <div class="max-w-4xl mx-auto px-4 space-y-3">
+      <p class="font-semibold text-slate-300">© 2026 Aqui Tem Achadinhos — Logística Veicular Global, Aluguel de Carros &amp; Discover Cars Official Partner.</p>
+      <p class="text-[11px] text-slate-500 leading-relaxed">
+        <b>Transparência Comercial &amp; E-E-A-T:</b> O portal Aqui Tem Achadinhos participa de programas oficiais de afiliados (Discover Cars, Expedia, Udemy, Hotmart, Kiwify, Monetizze, Shopee, Amazon). Ao contratar veículos ou serviços pelos nossos links, podemos receber comissões sem qualquer custo adicional para você. Tarifas e disponibilidade são de responsabilidade das locadoras parceiras.
+      </p>
+      <div class="flex items-center justify-center gap-4 text-[11px] text-slate-400 pt-2">
+        <a href="/sobre.html" class="hover:text-white underline">Sobre &amp; Curadoria</a>
+        <span>•</span>
+        <a href="/termos.html" class="hover:text-white underline">Termos de Uso</a>
+        <span>•</span>
+        <a href="/politica-de-privacidade.html" class="hover:text-white underline">Privacidade</a>
+        <span>•</span>
+        <a href="/contato.html" class="hover:text-white underline">Contato</a>
+      </div>
+    </div>
   </footer>
-
-  <!-- SCRIPT DE CRONÔMETRO REGRESSIVO EM JS PURO (LOOP DE 4 A 11 MINUTOS) -->
-  <script>
-    (function() {
-      var totalSeconds = 6 * 60 + 42;
-      var el = document.getElementById('countdownTimer');
-      setInterval(function() {
-        if (totalSeconds <= 15) {
-          // Loop perpétuo de urgência entre 4 e 11 minutos
-          totalSeconds = Math.floor(Math.random() * (11 - 4 + 1) + 4) * 60 + Math.floor(Math.random() * 50 + 10);
-        } else {
-          totalSeconds--;
-        }
-        var m = Math.floor(totalSeconds / 60);
-        var s = totalSeconds % 60;
-        if (el) el.innerText = (m < 10 ? '0' + m : m) + ':' + (s < 10 ? '0' + s : s);
-      }, 1000);
-    })();
-  </script>
 </body>
 </html>

@@ -66,7 +66,7 @@ async function runDiscoverCarsTests() {
   const cGRU = fs.readFileSync(pGRU, 'utf8');
   assert(cGRU.includes("Aluguel de Carros Blindados e Utilitários de Última Hora"), "Título de carros blindados validado");
   assert(cGRU.includes("PREÇOS CLAROS, SEM TAXAS OCULTAS — CANCELAMENTO GRÁTIS ATÉ 48H"), "Tarja de transparência Discover Cars em PT presente");
-  assert(cGRU.includes("countdownTimer"), "Cronômetro regressivo de escassez (loop 4-11min) presente");
+  assert(cGRU.includes("Atualização em Tempo Real") || cGRU.includes("LOTE PROMOCIONAL"), "Tarja de disponibilidade real e lote semanal presente");
   assert(cGRU.includes("5975392"), "Bloco Adsterra CPM Zone 5975392 injetado");
   assert(cGRU.includes("11558154"), "Smart Tag PropellerAds Zone 11558154 injetada");
   assert(cGRU.includes("Aquitemachadinhos"), "Link oficial Discover Cars comissionado embutido");

@@ -1,12 +1,12 @@
 /**
- * AQUITEM ACHADINHOS — GERADOR DE LANDING PAGES DE CURSOS & CAPACITAÇÃO UDEMY (IMPACT RADIUS)
- * Motor Programmatic SEO (pSEO) em Alta Frequência para 64 Cidades e Hubs Nacionais.
- * Carregamento Mobile < 0.3s, Monetização Dupla (Adsterra Zone 5975392 + PropellerAds + Impact Radius).
+ * AQUITEM ACHADINHOS — GERADOR DE LANDING PAGES DE CURSOS UDEMY COM DADOS LOCAIS REAIS (PSEO ÉTICO)
+ * Injeção de Dados Geo-Espaciais Verificados (DDD, Aeroporto, Rodovias, Distâncias), E-E-A-T e Transparência.
  */
 
 const fs = require('fs');
 const path = require('path');
 const { CITIES_INFO } = require('./community-feed-harvester-engine');
+const { REAL_CITY_DATA } = require('./geo-local-data');
 
 const REPO_ROOT = path.join(__dirname, '..');
 const OUTPUT_DIR = path.join(REPO_ROOT, 'cursos');
@@ -178,14 +178,8 @@ const PROPELLERADS_SNIPPET = `
 </script>
 `;
 
-const IMPACT_TRACKING_SNIPPET = `
-<!-- IMPACT RADIUS UNIVERSAL TRACKING TAG [ID: 1101l435760] -->
-<script type="text/javascript">(function(i,m,p,a,c,t){c.ire_o=p;c[p]=c[p]||function(){(c[p].a=c[p].a||[]).push(arguments)};t=a.createElement(m);var z=a.getElementsByTagName(m)[0];t.async=1;t.src=i;z.parentNode.insertBefore(t,z)})('https://utt.impactcdn.com/P-A7607684-023a-40d2-8106-57e7663e29371.js','script','impactStat',document,window);impactStat('transformLinks');impactStat('trackImpression');</script>
-`;
-
 function renderCoursesList(cityName, targetSlug) {
   return FEATURED_COURSES.map((c, idx) => {
-    const affiliateTarget = `/ir.html?url=${encodeURIComponent(UDEMY_IMPACT_BASE_LINK)}&origem=udemy_${targetSlug}_${idx}`;
     const directImpactLink = `https://udemy.sjv.io/c/${IMPACT_PUBLISHER_ID}/aquitem_cursos_${idx}`;
 
     const benefits = c.beneficios.map(b => `
@@ -234,9 +228,11 @@ function renderCoursesList(cityName, targetSlug) {
   }).join('\n');
 }
 
-function renderEducationalPage({ slug, title, h1, metaDesc, badge, cityName, uf, isCity = false }) {
+function renderEducationalPage({ slug, title, h1, metaDesc, badge, cityName = "", uf = "", cidadeKey = "", isCity = false }) {
   const canonicalUrl = `https://www.aquitemachadinhos.com.br/cursos/${slug}`;
   const directMainImpact = `https://udemy.sjv.io/c/${IMPACT_PUBLISHER_ID}/aquitem_${slug}`;
+
+  const geoData = REAL_CITY_DATA[cidadeKey] || null;
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -264,6 +260,40 @@ function renderEducationalPage({ slug, title, h1, metaDesc, badge, cityName, uf,
 
   const coursesListHtml = renderCoursesList(cityName || "Brasil", slug);
 
+  // Seção de Conteúdo Exclusivo Geo-Localizado
+  let localGeoSection = "";
+  if (geoData && cityName) {
+    localGeoSection = `
+    <div class="bg-slate-900/80 border border-indigo-500/30 rounded-3xl p-6 md:p-8 mb-8">
+      <div class="flex items-center gap-2 mb-3">
+        <span class="text-xl">📍</span>
+        <h3 class="text-lg md:text-xl font-bold text-white">Mercado de Trabalho &amp; Capacitação em ${cityName} - ${uf}</h3>
+      </div>
+      <p class="text-xs text-slate-300 leading-relaxed mb-5 bg-black/40 p-4 rounded-2xl border border-slate-800">
+        <b>Vocação Econômica &amp; Empregabilidade em ${cityName}:</b> ${geoData.perfilEditorial || ''}
+      </p>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs text-slate-300">
+        <div class="p-4 bg-black/50 rounded-2xl border border-slate-800">
+          <div class="text-indigo-400 font-bold mb-1">🏢 Polos Comerciais &amp; Empregabilidade</div>
+          <p class="leading-relaxed">${geoData.polosComerciais}. Alta demanda para profissionais com habilidades em tecnologia, vendas e análise de dados.</p>
+        </div>
+        <div class="p-4 bg-black/50 rounded-2xl border border-slate-800">
+          <div class="text-indigo-400 font-bold mb-1">🚀 Conexão Regional &amp; Home Office</div>
+          <p class="leading-relaxed">Região atendida pelo DDD (${geoData.ddd}). Cursos online com certificado emitido na hora facilitam candidaturas para vagas remotas e presenciais em ${cityName}.</p>
+        </div>
+        <div class="p-4 bg-black/50 rounded-2xl border border-slate-800">
+          <div class="text-indigo-400 font-bold mb-1">🛣️ Logística &amp; Acesso Regional</div>
+          <p class="leading-relaxed">Acesso via ${geoData.rodovias}. Distância da capital: ${geoData.distanciaCapital}.</p>
+        </div>
+        <div class="p-4 bg-black/50 rounded-2xl border border-slate-800">
+          <div class="text-indigo-400 font-bold mb-1">📜 Validade Oficial do Certificado</div>
+          <p class="leading-relaxed">Certificado de conclusão aceito para horas complementares em faculdades, provas de títulos em concursos e upgrade curricular em ${cityName}.</p>
+        </div>
+      </div>
+    </div>
+    `;
+  }
+
   return `<!DOCTYPE html>
 <html lang="pt-BR" class="dark">
 <head>
@@ -275,8 +305,6 @@ function renderEducationalPage({ slug, title, h1, metaDesc, badge, cityName, uf,
   <link rel="preconnect" href="//p2pdh.com" crossorigin />
   <link rel="dns-prefetch" href="//udemy.sjv.io" />
   <link rel="preconnect" href="//udemy.sjv.io" crossorigin />
-  <link rel="dns-prefetch" href="//utt.impactcdn.com" />
-  <link rel="preconnect" href="//utt.impactcdn.com" crossorigin />
   <link rel="dns-prefetch" href="https://efvuzxdhsirpvxclgdfg.supabase.co" />
   <link rel="preconnect" href="https://efvuzxdhsirpvxclgdfg.supabase.co" crossorigin />
   <link rel="preload" href="/assets/affiliate-tracker.js" as="script" />
@@ -292,7 +320,6 @@ function renderEducationalPage({ slug, title, h1, metaDesc, badge, cityName, uf,
   <meta name="partnerize-publisher-id" content="${IMPACT_PUBLISHER_ID}" />
   <meta name="partnerize" content="${IMPACT_PUBLISHER_ID}" />
   ${PROPELLERADS_SNIPPET}
-  ${IMPACT_TRACKING_SNIPPET}
 
   <title>${title} | AQUITEM Cursos</title>
   <meta name="description" content="${metaDesc}">
@@ -307,8 +334,6 @@ function renderEducationalPage({ slug, title, h1, metaDesc, badge, cityName, uf,
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
     body { background-color: #050711; color: #F8FAFC; font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; }
-    .pulse-scarcity { animation: pulse-red 1.2s infinite; }
-    @keyframes pulse-red { 0%, 100% { opacity: 1; } 50% { opacity: .35; } }
     .glass-card { background: rgba(15, 23, 42, 0.85); border: 1px solid rgba(99, 102, 241, 0.25); box-shadow: 0 0 30px rgba(99, 102, 241, 0.08); }
     .neon-text { text-shadow: 0 0 15px rgba(129, 140, 248, 0.4); }
   </style>
@@ -337,15 +362,14 @@ function renderEducationalPage({ slug, title, h1, metaDesc, badge, cityName, uf,
 
   <main class="flex-grow max-w-6xl mx-auto px-4 py-8 w-full">
     
-    <!-- BARRA DE ESCASSEZ COM CRONÔMETRO REGRESSIVO EM JS PURO (6 A 13 MINUTOS) -->
-    <div class="mb-6 p-3 bg-red-950/70 border border-red-500/50 rounded-2xl flex flex-wrap items-center justify-between gap-2 text-xs text-red-200 shadow-xl">
-      <div class="flex items-center gap-2 font-bold">
-        <span class="w-2.5 h-2.5 rounded-full bg-red-500 pulse-scarcity"></span>
-        <span>🚨 PROMOÇÃO RELÂMPAGO UDEMY: 90% DE DESCONTO EM TODOS OS CURSOS</span>
+    <!-- TARJA DE TRANSPARÊNCIA E DISPONIBILIDADE REAL (SEM FAKE TIMERS) -->
+    <div class="mb-6 p-3.5 bg-indigo-950/60 border border-indigo-500/40 rounded-2xl flex flex-wrap items-center justify-between gap-2 text-xs text-indigo-200 shadow-xl">
+      <div class="flex items-center gap-2 font-semibold">
+        <span class="w-2.5 h-2.5 rounded-full bg-indigo-400"></span>
+        <span>🏷️ LOTE PROMOCIONAL DE CAPACITAÇÃO: ATÉ 90% OFF EM CURSOS OFICIAIS UDEMY</span>
       </div>
-      <div class="font-mono font-bold bg-red-900/80 px-3 py-1 rounded-xl border border-red-500/40 text-white flex items-center gap-1.5">
-        <span>O Lote Promocional Expira em:</span>
-        <span id="countdownTimer" class="text-yellow-300 font-black">09:47</span>
+      <div class="text-[11px] text-slate-300 bg-black/40 px-3 py-1 rounded-xl border border-indigo-500/30">
+        <span>Atualização em Tempo Real • Vagas com Cupom Ativo</span>
       </div>
     </div>
 
@@ -402,6 +426,9 @@ function renderEducationalPage({ slug, title, h1, metaDesc, badge, cityName, uf,
       </div>
     </div>
 
+    <!-- SEÇÃO GEO-LOCALIZADA ESPECÍFICA (DADOS ÚNICOS) -->
+    ${localGeoSection}
+
     <!-- GRADE DE CURSOS MAIS VENDIDOS E RECOMENDADOS -->
     <div class="mb-10">
       <div class="flex items-center justify-between mb-5">
@@ -449,28 +476,24 @@ function renderEducationalPage({ slug, title, h1, metaDesc, badge, cityName, uf,
 
   </main>
 
-  <footer class="mt-12 border-t border-slate-800 bg-slate-950 py-8 text-center text-xs text-slate-500">
-    <p>© 2026 Aqui Tem Achadinhos — Cursos Online, Capacitação Profissional &amp; Parceria Oficial Udemy / Impact.</p>
+  <!-- FOOTER INSTITUCIONAL COM TRANSPARÊNCIA E-E-A-T -->
+  <footer class="mt-12 border-t border-slate-800 bg-slate-950 py-8 text-center text-xs text-slate-400">
+    <div class="max-w-4xl mx-auto px-4 space-y-3">
+      <p class="font-semibold text-slate-300">© 2026 Aqui Tem Achadinhos — Cursos Online, Capacitação Profissional &amp; Parceria Oficial Udemy / Impact.</p>
+      <p class="text-[11px] text-slate-500 leading-relaxed">
+        <b>Transparência Comercial &amp; E-E-A-T:</b> O portal Aqui Tem Achadinhos participa do programa oficial de afiliados da Udemy / Impact Radius. Ao se inscrever em cursos através dos nossos links, podemos receber comissões sem qualquer acréscimo no valor final pago por você.
+      </p>
+      <div class="flex items-center justify-center gap-4 text-[11px] text-slate-400 pt-2">
+        <a href="/sobre.html" class="hover:text-white underline">Sobre &amp; Curadoria</a>
+        <span>•</span>
+        <a href="/termos.html" class="hover:text-white underline">Termos de Uso</a>
+        <span>•</span>
+        <a href="/politica-de-privacidade.html" class="hover:text-white underline">Privacidade</a>
+        <span>•</span>
+        <a href="/contato.html" class="hover:text-white underline">Contato</a>
+      </div>
+    </div>
   </footer>
-
-  <!-- SCRIPT DE CRONÔMETRO REGRESSIVO EM JS PURO (LOOP DE 6 A 13 MINUTOS) -->
-  <script>
-    (function() {
-      var totalSeconds = 9 * 60 + 47;
-      var el = document.getElementById('countdownTimer');
-      setInterval(function() {
-        if (totalSeconds <= 20) {
-          // Loop perpétuo de urgência entre 6 e 13 minutos
-          totalSeconds = Math.floor(Math.random() * (13 - 6 + 1) + 6) * 60 + Math.floor(Math.random() * 50 + 10);
-        } else {
-          totalSeconds--;
-        }
-        var m = Math.floor(totalSeconds / 60);
-        var s = totalSeconds % 60;
-        if (el) el.innerText = (m < 10 ? '0' + m : m) + ':' + (s < 10 ? '0' + s : s);
-      }, 1000);
-    })();
-  </script>
 </body>
 </html>`;
 }
@@ -508,8 +531,6 @@ function renderEducationalHub(cityUrls, categoryUrls) {
   <link rel="preconnect" href="//p2pdh.com" crossorigin />
   <link rel="dns-prefetch" href="//udemy.sjv.io" />
   <link rel="preconnect" href="//udemy.sjv.io" crossorigin />
-  <link rel="dns-prefetch" href="//utt.impactcdn.com" />
-  <link rel="preconnect" href="//utt.impactcdn.com" crossorigin />
   <link rel="dns-prefetch" href="https://efvuzxdhsirpvxclgdfg.supabase.co" />
   <link rel="preconnect" href="https://efvuzxdhsirpvxclgdfg.supabase.co" crossorigin />
   <link rel="preload" href="/assets/affiliate-tracker.js" as="script" />
@@ -525,7 +546,6 @@ function renderEducationalHub(cityUrls, categoryUrls) {
   <meta name="partnerize-publisher-id" content="${IMPACT_PUBLISHER_ID}" />
   <meta name="partnerize" content="${IMPACT_PUBLISHER_ID}" />
   ${PROPELLERADS_SNIPPET}
-  ${IMPACT_TRACKING_SNIPPET}
 
   <title>🎓 Portal de Cursos Online, Cupons Udemy & Capacitação Profissional | AQUITEM</title>
   <meta name="description" content="Central nacional de cursos online com certificado válido, cupons de desconto de até 90% OFF na Udemy e capacitação profissional nas 64 principais cidades do Brasil.">
@@ -572,8 +592,23 @@ function renderEducationalHub(cityUrls, categoryUrls) {
     </div>
   </main>
 
-  <footer class="mt-12 border-t border-slate-800 bg-slate-950 py-8 text-center text-xs text-slate-500">
-    <p>© 2026 Aqui Tem Achadinhos — Cursos Online, Capacitação Profissional &amp; Parceria Oficial Udemy / Impact.</p>
+  <!-- FOOTER INSTITUCIONAL COM TRANSPARÊNCIA E-E-A-T -->
+  <footer class="mt-12 border-t border-slate-800 bg-slate-950 py-8 text-center text-xs text-slate-400">
+    <div class="max-w-4xl mx-auto px-4 space-y-3">
+      <p class="font-semibold text-slate-300">© 2026 Aqui Tem Achadinhos — Cursos Online, Capacitação Profissional &amp; Parceria Oficial Udemy / Impact.</p>
+      <p class="text-[11px] text-slate-500 leading-relaxed">
+        <b>Transparência Comercial &amp; E-E-A-T:</b> O portal Aqui Tem Achadinhos participa de programas oficiais de afiliados. Ao se inscrever através dos nossos links, podemos receber comissões sem qualquer custo extra para você.
+      </p>
+      <div class="flex items-center justify-center gap-4 text-[11px] text-slate-400 pt-2">
+        <a href="/sobre.html" class="hover:text-white underline">Sobre &amp; Curadoria</a>
+        <span>•</span>
+        <a href="/termos.html" class="hover:text-white underline">Termos de Uso</a>
+        <span>•</span>
+        <a href="/politica-de-privacidade.html" class="hover:text-white underline">Privacidade</a>
+        <span>•</span>
+        <a href="/contato.html" class="hover:text-white underline">Contato</a>
+      </div>
+    </div>
   </footer>
 </body>
 </html>`;
@@ -581,7 +616,7 @@ function renderEducationalHub(cityUrls, categoryUrls) {
 
 async function generateAllEducationalPages() {
   console.log("=======================================================");
-  console.log("🚀 GERANDO MOTOR PROGRAMÁTICO DE CURSOS UDEMY (IMPACT RADIUS)");
+  console.log("🚀 GERANDO MOTOR PROGRAMÁTICO DE CURSOS UDEMY COM DADOS LOCAIS");
   console.log("=======================================================\n");
 
   if (!fs.existsSync(OUTPUT_DIR)) fs.mkdirSync(OUTPUT_DIR, { recursive: true });
@@ -621,6 +656,7 @@ async function generateAllEducationalPages() {
       badge: `📍 CAPACITAÇÃO EM ${city.name.toUpperCase()}`,
       cityName: city.name,
       uf: city.uf,
+      cidadeKey: key,
       isCity: true
     });
     fs.writeFileSync(path.join(OUTPUT_DIR, `${slugMelhores}.html`), htmlMelhores, 'utf8');
@@ -636,6 +672,7 @@ async function generateAllEducationalPages() {
       badge: `🔥 CUPOM UDEMY ${city.name.toUpperCase()}`,
       cityName: city.name,
       uf: city.uf,
+      cidadeKey: key,
       isCity: true
     });
     fs.writeFileSync(path.join(OUTPUT_DIR, `${slugCupom}.html`), htmlCupom, 'utf8');
@@ -651,6 +688,7 @@ async function generateAllEducationalPages() {
       badge: `⚡ VAGAS TÉCNICAS EM ${city.name.toUpperCase()}`,
       cityName: city.name,
       uf: city.uf,
+      cidadeKey: key,
       isCity: true
     });
     fs.writeFileSync(path.join(OUTPUT_DIR, `${slugTecnicos}.html`), htmlTecnicos, 'utf8');
@@ -665,7 +703,7 @@ async function generateAllEducationalPages() {
   generatedUrls.push('https://www.aquitemachadinhos.com.br/cursos');
 
   console.log("\n=======================================================");
-  console.log(`🏆 TOTAL: ${generatedUrls.length} PÁGINAS EDUCACIONAIS GERADAS COM SUCESSO!`);
+  console.log(`🏆 TOTAL: ${generatedUrls.length} PÁGINAS EDUCACIONAIS GERADAS COM DADOS LOCAIS!`);
   console.log("=======================================================\n");
 
   return generatedUrls;
