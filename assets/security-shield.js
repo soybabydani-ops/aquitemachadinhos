@@ -1,61 +1,48 @@
-/* [AQUITEM SHIELD v35.0 - PROTECTED RUNTIME] */
+/* [AQUITEM SHIELD v36.0 - AUDITED BEHAVIORAL RUNTIME] */
 (function(_0x1a,_0x2b){var _0x3c=function(_0x4d){return decodeURIComponent(_0x4d);};
 (function() {
   '\x75\x73\x65\x20\x73\x74\x72\x69\x63\x74';
 
-  // 1. Bloqueio de Botão Direito (Context Menu)
+  // 1. Variáveis de Telemetria Comportamental Humana
+  window.__humanInteraction = false;
+  window.__pageStartTime = performance.now();
+
+  window.addEventListener('\x6d\x6f\x75\x73\x65\x6d\x6f\x76\x65', function() { window.__humanInteraction = true; }, { passive: true, once: true });
+  window.addEventListener('\x74\x6f\x75\x63\x68\x73\x74\x61\x72\x74', function() { window.__humanInteraction = true; }, { passive: true, once: true });
+  window.addEventListener('\x73\x63\x72\x6f\x6c\x6c', function() { window.__humanInteraction = true; }, { passive: true, once: true });
+  window.addEventListener('\x6b\x65\x79\x64\x6f\x77\x6e', function() { window.__humanInteraction = true; }, { passive: true, once: true });
+
+  // 2. Bloqueio de Botão Direito (Context Menu)
   document.addEventListener('\x63\x6f\x6e\x74\x65\x78\x74\x6d\x65\x6e\x75', function(e) {
     e.preventDefault();
     return false;
   }, { capture: true, passive: false });
 
-  // 2. Bloqueio de Teclas de Atalho de Inspeção e Cópia (F12, Ctrl+Shift+I, Ctrl+U, etc)
+  // 3. Bloqueio de Teclas de Atalho de Inspeção e Cópia (F12, Ctrl+Shift+I, Ctrl+U, etc)
   document.addEventListener('\x6b\x65\x79\x64\x6f\x77\x6e', function(e) {
     var k = e.key || e.keyCode;
     var ctrl = e.ctrlKey || e.metaKey;
     var shift = e.shiftKey;
     
-    // F12
-    if (k === '\x46\x31\x32' || k === 123) {
-      e.preventDefault();
-      return false;
-    }
-    // Ctrl+Shift+I / J / C (DevTools)
-    if (ctrl && shift && (k === '\x49' || k === '\x69' || k === '\x4a' || k === '\x6a' || k === '\x43' || k === '\x63' || k === 73 || k === 74 || k === 67)) {
-      e.preventDefault();
-      return false;
-    }
-    // Ctrl+U (View Source)
-    if (ctrl && (k === '\x55' || k === '\x75' || k === 85)) {
-      e.preventDefault();
-      return false;
-    }
-    // Ctrl+S (Salvar Página)
-    if (ctrl && (k === '\x53' || k === '\x73' || k === 83)) {
-      e.preventDefault();
-      return false;
-    }
+    if (k === '\x46\x31\x32' || k === 123) { e.preventDefault(); return false; }
+    if (ctrl && shift && (k === '\x49' || k === '\x69' || k === '\x4a' || k === '\x6a' || k === '\x43' || k === '\x63' || k === 73 || k === 74 || k === 67)) { e.preventDefault(); return false; }
+    if (ctrl && (k === '\x55' || k === '\x75' || k === 85)) { e.preventDefault(); return false; }
+    if (ctrl && (k === '\x53' || k === '\x73' || k === 83)) { e.preventDefault(); return false; }
   }, { capture: true, passive: false });
 
-  // 3. Bloqueio de Drag & Drop de Imagens
-  document.addEventListener('\x64\x72\x61\x67\x73\x74\x61\x72\x74', function(e) {
-    e.preventDefault();
-    return false;
-  }, false);
+  // 4. Bloqueio de Drag & Drop de Imagens
+  document.addEventListener('\x64\x72\x61\x67\x73\x74\x61\x72\x74', function(e) { e.preventDefault(); return false; }, false);
 
-  // 4. Injeção de CSS Anti-Seleção Global
+  // 5. Injeção de CSS Anti-Seleção Global
   try {
     var style = document.createElement('\x73\x74\x79\x6c\x65');
     style.innerHTML = '\x62\x6f\x64\x79\x2c\x20\x68\x74\x6d\x6c\x2c\x20\x2e\x61\x71\x75\x69\x74\x65\x6d\x2d\x63\x61\x72\x64\x2c\x20\x2e\x69\x74\x65\x6d\x2d\x63\x61\x72\x64\x20\x7b\x20\x2d\x77\x65\x62\x6b\x69\x74\x2d\x75\x73\x65\x72\x2d\x73\x65\x6c\x65\x63\x74\x3a\x20\x6e\x6f\x6e\x65\x20\x21\x69\x6d\x70\x6f\x72\x74\x61\x6e\x74\x3b\x20\x2d\x6d\x6f\x7a\x2d\x75\x73\x65\x72\x2d\x73\x65\x6c\x65\x63\x74\x3a\x20\x6e\x6f\x6e\x65\x20\x21\x69\x6d\x70\x6f\x72\x74\x61\x6e\x74\x3b\x20\x2d\x6d\x73\x2d\x75\x73\x65\x72\x2d\x73\x65\x6c\x65\x63\x74\x3a\x20\x6e\x6f\x6e\x65\x20\x21\x69\x6d\x70\x6f\x72\x74\x61\x6e\x74\x3b\x20\x75\x73\x65\x72\x2d\x73\x65\x6c\x65\x63\x74\x3a\x20\x6e\x6f\x6e\x65\x20\x21\x69\x6d\x70\x6f\x72\x74\x61\x6e\x74\x3b\x20\x2d\x77\x65\x62\x6b\x69\x74\x2d\x74\x6f\x75\x63\x68\x2d\x63\x61\x6c\x6c\x6f\x75\x74\x3a\x20\x6e\x6f\x6e\x65\x20\x21\x69\x6d\x70\x6f\x72\x74\x61\x6e\x74\x3b\x20\x7d\x20\x69\x6e\x70\x75\x74\x2c\x20\x74\x65\x78\x74\x61\x72\x65\x61\x2c\x20\x73\x65\x6c\x65\x63\x74\x20\x7b\x20\x2d\x77\x65\x62\x6b\x69\x74\x2d\x75\x73\x65\x72\x2d\x73\x65\x6c\x65\x63\x74\x3a\x20\x61\x75\x74\x6f\x20\x21\x69\x6d\x70\x6f\x72\x74\x61\x6e\x74\x3b\x20\x75\x73\x65\x72\x2d\x73\x65\x6c\x65\x63\x74\x3a\x20\x61\x75\x74\x6f\x20\x21\x69\x6d\x70\x6f\x72\x74\x61\x6e\x74\x3b\x20\x7d';
     document.head.appendChild(style);
   } catch (err) {}
 
-  // 5. Anti-Debugging e Console Wiper Contínuo
+  // 6. Anti-Debugging & Console Wiper
   try {
     if (window.console) {
-      var noop = function() {};
-      var methods = ['\x6c\x6f\x67', '\x64\x65\x62\x75\x67', '\x69\x6e\x66\x6f', '\x77\x61\x72\x6e', '\x65\x72\x72\x6f\x72', '\x74\x61\x62\x6c\x65'];
-      // Limpeza de logs periódica
       setInterval(function() {
         try { console.clear(); } catch(e) {}
       }, 5000);
