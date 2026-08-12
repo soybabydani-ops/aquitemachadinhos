@@ -1,6 +1,6 @@
 /**
  * GERADOR AUTOMÁTICO DE FEED XML DO PINTEREST (PINTEREST CATALOG & RSS 2.0)
- * Gera feed de produtos para criação de Pins automáticos 24h por dia.
+ * Gera feed de produtos com overlay hacker para criação de Pins automáticos 24h por dia.
  */
 
 const fs = require('fs');
@@ -11,36 +11,36 @@ const { TRAVEL_GEAR_DATA } = require('./seeder-global-destinos-travel-gear');
 const ALL_PINTEREST_ITEMS = [
   ...BUGS_DATA.map(b => ({
     id: `bug-${b.slug}`,
-    title: `🚨 BUG DE PREÇO: ${b.nome} (${b.desconto}% OFF)`,
-    description: `Oferta relâmpago na ${b.loja}: ${b.nome} de ${b.normal} por apenas ${b.bug}. Resgate seu cupom no Aqui Tem Achadinhos.`,
+    title: `⚠️ BUG DE PREÇO: ${b.nome} (-${b.desconto}% OFF)`,
+    description: `Erro de preço verificado na ${b.loja}! ${b.nome} saindo de ${b.normal} por apenas ${b.bug}. Resgate seu cupom no Aqui Tem Achadinhos.`,
     link: `https://www.aquitemachadinhos.com.br/cupons-ativos/${b.slug}.html`,
     affiliateLink: b.link,
-    image: 'https://www.aquitemachadinhos.com.br/assets/og-image.png',
+    image: `https://www.aquitemachadinhos.com.br/assets/pins/${b.slug}-badge.svg`,
     price: `${b.bug.replace('R$', '').trim()} BRL`,
     brand: b.loja,
-    category: 'Achadinhos & Cupons'
+    category: 'Eletrônicos & Smart Home'
   })),
   ...LOOKS_DATA.map(l => ({
     id: `look-${l.slug}`,
-    title: `🤠 LOOK BARRETOS: ${l.nome} (${l.desconto}% OFF)`,
+    title: `🤠 LOOK BARRETOS: ${l.nome} (-${l.desconto}% OFF)`,
     description: `Moda country e sertaneja para a Festa do Peão: ${l.nome} por apenas ${l.promo}. Inspiração: ${l.inspiracao}.`,
     link: `https://www.aquitemachadinhos.com.br/looks/${l.slug}.html`,
     affiliateLink: l.link,
-    image: 'https://www.aquitemachadinhos.com.br/assets/og-image.png',
+    image: `https://www.aquitemachadinhos.com.br/assets/pins/${l.slug}-badge.svg`,
     price: `${l.promo.replace('R$', '').trim()} BRL`,
     brand: l.marca,
-    category: 'Moda & Vestuário > Country'
+    category: 'Moda & Looks Country'
   })),
   ...TRAVEL_GEAR_DATA.map(g => ({
     id: `gear-${g.slug}`,
-    title: `✈️ ESSENCIAIS DE VIAGEM: ${g.nome} (${g.desconto}% OFF)`,
+    title: `✈️ ESSENCIAL DE VIAGEM: ${g.nome} (-${g.desconto}% OFF)`,
     description: `Equipamento de viagem indispensável: ${g.nome} saindo de ${g.normal} por apenas ${g.promo} na ${g.loja}.`,
     link: `https://www.aquitemachadinhos.com.br/malas-e-viagem/${g.slug}.html`,
     affiliateLink: g.link,
-    image: 'https://www.aquitemachadinhos.com.br/assets/og-image.png',
+    image: `https://www.aquitemachadinhos.com.br/assets/pins/${g.slug}-badge.svg`,
     price: `${g.promo.replace('R$', '').trim()} BRL`,
     brand: g.loja,
-    category: `Viagem & Malas > ${g.cat}`
+    category: 'Viagens & Malas'
   }))
 ];
 
@@ -78,4 +78,4 @@ function gerarXMLPinterest() {
 
 const xmlContent = gerarXMLPinterest();
 fs.writeFileSync(path.join(__dirname, '..', 'pinterest-catalog.xml'), xmlContent, 'utf8');
-console.log(`✓ Feed do Pinterest gerado: pinterest-catalog.xml (${ALL_PINTEREST_ITEMS.length} itens catalogados, ${Buffer.byteLength(xmlContent)} bytes)`);
+console.log(`✓ Feed do Pinterest gerado: pinterest-catalog.xml (${ALL_PINTEREST_ITEMS.length} itens catalogados com Hacker Overlay, ${Buffer.byteLength(xmlContent)} bytes)`);
