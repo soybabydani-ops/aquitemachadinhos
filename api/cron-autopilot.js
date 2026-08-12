@@ -1,115 +1,89 @@
 // ============================================================
-// AQUITEM — 24/7 Autopilot Machine & Growth Engine (/api/cron-autopilot)
-// Vercel Serverless Cron / Heartbeat Routine
-// Executa automaticamente tarefas de SEO, Link Equity,
-// Indexação Googlebot, Telemetria e Manutenção Contínua.
+// AQUITEM — 24/7 Autopilot Machine & Traffic Booster (/api/cron-autopilot)
+// Vercel Serverless Cron / Real-Time SEO Indexing Pinger
 // ============================================================
 
-const { supabase, supabaseAdmin, SUPABASE_URL } = require('./_lib/supabase');
+const https = require('https');
+const { supabase } = require('./_lib/supabase');
+
+const HOST = 'www.aquitemachadinhos.com.br';
+const KEY = 'aquitem2026indexnowkey';
+const KEY_LOCATION = `https://${HOST}/${KEY}.txt`;
+
+const INDEXNOW_ENDPOINTS = [
+  'api.indexnow.org',
+  'www.bing.com',
+  'yandex.com'
+];
+
+async function pingIndexNow(urls) {
+  const payload = JSON.stringify({
+    host: HOST,
+    key: KEY,
+    keyLocation: KEY_LOCATION,
+    urlList: urls
+  });
+
+  const promises = INDEXNOW_ENDPOINTS.map(hostname => {
+    return new Promise(resolve => {
+      const req = https.request({
+        hostname: hostname,
+        port: 443,
+        path: '/indexnow',
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json; charset=utf-8',
+          'Content-Length': Buffer.byteLength(payload)
+        }
+      }, (res) => {
+        resolve({ host: hostname, status: res.statusCode });
+      });
+      req.on('error', (e) => resolve({ host: hostname, error: e.message }));
+      req.write(payload);
+      req.end();
+    });
+  });
+
+  return Promise.all(promises);
+}
 
 module.exports = async function handler(req, res) {
   const startTime = Date.now();
-
   res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate');
-  res.setHeader('Access-Control-Allow-Origin', '*');
-
-  const authHeader = req.headers.authorization || '';
-  const cronSecret = process.env.CRON_SECRET || 'aquitem-cron-autopilot-2026';
-
-  // Se houver CRON_SECRET configurado, valida autorização básica
-  if (process.env.CRON_SECRET && !authHeader.includes(cronSecret) && req.query.secret !== cronSecret) {
-    // Permite chamadas internas Vercel Cron
-    if (req.headers['x-vercel-cron'] !== '1' && process.env.NODE_ENV === 'production') {
-      return res.status(401).json({ error: 'Unauthorized Cron Invocation' });
-    }
-  }
-
-  const report = {
-    timestamp: new Date().toISOString(),
-    status: 'operational',
-    tasks_executed: []
-  };
 
   try {
-    // ----------------------------------------------------
-    // TAREFA 1: Telemetria e Contagem de Métricas do Supabase
-    // ----------------------------------------------------
-    const [citiesRes, listingsRes, storesRes, brandsRes] = await Promise.all([
-      supabase.from('cities').select('id', { count: 'exact' }).limit(1).execute(),
-      supabase.from('listings').select('id', { count: 'exact' }).eq('status', 'ativo').limit(1).execute(),
-      supabase.from('stores').select('id', { count: 'exact' }).eq('status', 'ativo').limit(1).execute(),
-      supabase.from('brands').select('id', { count: 'exact' }).eq('status', 'ativo').limit(1).execute()
-    ]);
+    // 1. Coleta das rotas e produtos de maior conversão
+    const priorityUrls = [
+      `https://${HOST}/viagens.html`,
+      `https://${HOST}/captura-tarifas-bug.html`,
+      `https://${HOST}/scanner-tarifas-ocultas.html`,
+      `https://${HOST}/achadinhos/oferta-urgente-fone-tws-noise-cancelling.html`,
+      `https://${HOST}/achadinhos/oferta-urgente-kit-vestidos-elegance-shein.html`,
+      `https://${HOST}/achadinhos/oferta-urgente-mala-viagem-bordo-360-amazon.html`,
+      `https://${HOST}/achadinhos/oferta-urgente-jogo-panelas-ceramica-inducao-ml.html`,
+      `https://${HOST}/viagens-imperdiveis/sao-paulo-tiete-para-barretos.html`,
+      `https://${HOST}/vagas-e-viagens/guarulhos-para-sao-paulo.html`,
+      `https://${HOST}/pinterest-catalog.xml`
+    ];
 
-    const metrics = {
-      total_cities: citiesRes.count || 5581,
-      active_listings: listingsRes.count || 16637,
-      verified_stores: storesRes.count || 16832,
-      active_brands: brandsRes.count || 16
-    };
+    // 2. Disparo IndexNow Multi-Endpoint
+    const indexResults = await pingIndexNow(priorityUrls);
 
-    report.metrics = metrics;
-    report.tasks_executed.push({ name: 'telemetry_check', status: 'success', details: metrics });
-
-    // ----------------------------------------------------
-    // TAREFA 2: Distribuição de Link Equity (PageRank Interno)
-    // ----------------------------------------------------
-    const { data: recentListings } = await supabase
-      .from('listings')
-      .select('id,titulo,city_slug,cidade')
-      .eq('status', 'ativo')
-      .order('criado_em', { ascending: false })
-      .limit(10)
-      .execute();
-
-    report.tasks_executed.push({
-      name: 'link_equity_rotation',
-      status: 'success',
-      promoted_urls_count: recentListings ? recentListings.length : 0
-    });
-
-    // ----------------------------------------------------
-    // TAREFA 3: Fila de Indexação do Google Indexing API
-    // ----------------------------------------------------
-    const priorityHubs = ['barretos', 'olimpia', 'ribeirao-preto', 'gramado', 'campinas', 'sao-paulo'];
-    const urlsToQueue = priorityHubs.map(hub => ({
-      url: `https://www.aquitemachadinhos.com.br/vagas?cidade=${hub}`,
-      action: 'URL_UPDATED',
-      entityType: 'priority_hub',
-      entityId: hub
-    }));
-
-    report.tasks_executed.push({
-      name: 'google_indexing_pinger',
-      status: 'success',
-      queued_urls: urlsToQueue.length
-    });
-
-    // ----------------------------------------------------
-    // TAREFA 4: Auditoria de Expiração de Vagas (Sequestro Semântico Guard)
-    // ----------------------------------------------------
-    const thirtyDaysAgo = new Date(Date.now() - 30 * 24 * 60 * 60 * 1000).toISOString();
-    report.tasks_executed.push({
-      name: 'semantic_sequestration_guard',
-      status: 'active',
-      lookback_threshold: thirtyDaysAgo
-    });
-
-    const duration = Date.now() - startTime;
-    report.execution_time_ms = duration;
+    // 3. Ping Google Search Console
+    https.get(`https://www.google.com/ping?sitemap=https://${HOST}/sitemap.xml`, () => {}).on('error', () => {});
 
     return res.status(200).json({
       success: true,
-      message: 'AquiTem 24/7 Autopilot routine executed successfully.',
-      report
+      timestamp: new Date().toISOString(),
+      execution_ms: Date.now() - startTime,
+      urls_boosted: priorityUrls.length,
+      indexing_pings: indexResults
     });
-
-  } catch (err) {
-    console.error('[Autopilot Error]:', err);
+  } catch (error) {
     return res.status(500).json({
       success: false,
-      error: err.message,
-      execution_time_ms: Date.now() - startTime
+      error: error.message,
+      execution_ms: Date.now() - startTime
     });
   }
 };
