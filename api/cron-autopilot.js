@@ -71,6 +71,8 @@ module.exports = async function handler(req, res) {
       `https://${HOST}/consultas/calendario-de-pagamentos-bolsa-familia-2026.html`,
       `https://${HOST}/barretos-2026/biometria-facial-festa-do-peao-barretos.html`,
       `https://${HOST}/barretos-2026/horarios-shows-gusttavo-lima-ana-castela-barretos.html`,
+      `https://${HOST}/estudante/como-pagar-meia-entrada-festa-do-peao-barretos.html`,
+      `https://${HOST}/estudante/carteirinha-estudante-digital-emitida-na-hora.html`,
       `https://${HOST}/looks/chapeu-pralana-barretos-promocao.html`,
       `https://${HOST}/looks/jaqueta-couro-franjas-ana-castela-barretos.html`,
       `https://${HOST}/utilidade-publica`,
