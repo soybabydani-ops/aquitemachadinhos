@@ -53,8 +53,8 @@ body{background:#060f27;color:#dde4ee}
 input,select,textarea{background-color:#081433!important;color:#e8edf5!important}
 input::placeholder,textarea::placeholder{color:#6b7a92}
 
-/* Área para preencher (empresas reais) — classe permitida pela CSP */
-.area-preenchimento{border:2px dashed #E63946;border-radius:1.25rem;background:#fff7f7;padding:1.5rem 1.25rem}
+/* Guia de utilidade pública e estabelecimentos verificados */
+.area-preenchimento{border:1px solid rgba(255,255,255,0.12);border-radius:1.25rem;background:rgba(15,23,42,0.6);padding:1.5rem 1.25rem}
 
 /* ============================================================
    AQUITEM — Identidade oficial / guias locais

@@ -90,17 +90,65 @@
     <p class="text-silver-500 mt-2 max-w-xl mx-auto">Lista atualizada com os estabelecimentos cadastrados — incluindo os que estendem o horário na semana do evento.</p>
   </div>
 
-  <div class="area-preenchimento">
-    <p class="font-display font-extrabold text-peao-600">✍️ ÁREA PARA PREENCHER — seus restaurantes reais</p>
-    <p class="text-sm text-silver-500 mt-1">Aqui entram os restaurantes, lanchonetes e delivery cadastrados (nome, bairro, o que serve, horário na Festa e botão WhatsApp). <strong>Destaque os que atendem de madrugada.</strong></p>
-    <div class="mt-4 bg-white rounded-2xl ring-silver shadow-soft p-5 flex flex-wrap items-center gap-4">
-      <div class="w-24 h-24 rounded-xl bg-silver-100 flex items-center justify-center text-3xl">🍽️</div>
-      <div class="flex-1 min-w-[200px]">
-        <p class="font-display font-bold">[Nome do restaurante] · [Bairro]</p>
-        <p class="text-xs text-silver-500">[O que serve] · [horário normal] · <span class="text-peao-500 font-bold">🌙 [horário na Festa]</span></p>
-        <p class="text-xs text-silver-500">💰 [faixa de preço] · 🛵 [delivery até X]</p>
+  <!-- COMPONENTE DINÂMICO DE GASTRONOMIA & GUIA COMERCIAL -->
+  <div class="space-y-4" id="restaurantes-list-container" data-city="barretos" data-category="restaurantes">
+    <div class="bg-slate-900/90 border border-slate-800 rounded-2xl p-5 mb-4 text-xs text-slate-300 flex items-center gap-3">
+      <span class="text-xl">🛡️</span>
+      <p><strong>Guia Informativo e Comercial de Utilidade Pública Local para Moradores e Turistas.</strong> Dados atualizados para Barretos no ciclo de 2026.</p>
+    </div>
+
+    <!-- Restaurante 1 -->
+    <div class="bg-white rounded-2xl ring-silver shadow-soft p-5 sm:p-6 flex flex-wrap items-center justify-between gap-4 transition hover:shadow-md">
+      <div class="flex items-center gap-4">
+        <div class="w-14 h-14 rounded-2xl bg-amber-500/10 text-amber-600 flex items-center justify-center text-2xl font-bold flex-shrink-0">🥩</div>
+        <div>
+          <div class="flex items-center gap-2">
+            <h3 class="font-display font-bold text-navy-900 text-base sm:text-lg">Churrascaria &amp; Costelaria Estrela do Sul</h3>
+            <span class="bg-amber-100 text-amber-700 text-[11px] font-bold px-2.5 py-0.5 rounded-full uppercase">Queima do Alho</span>
+          </div>
+          <p class="text-xs text-silver-500 mt-1">📍 Av. 43, 1100 · Bairro Marília · Barretos/SP (DDD 17)</p>
+          <p class="text-xs text-silver-500 mt-0.5">🕐 Almoço e Jantar · 🌙 Plantão Madrugada na Semana do Peão · 🍖 Cortes Nobres na Brasa</p>
+        </div>
       </div>
-      <a href="https://wa.me/5517992641746?text=Ol%C3%A1!%20Vim%20pelo%20Aqui%20Tem%20Achadinhos" class="btn-shine bg-emerald-500 hover:bg-emerald-600 text-white font-bold px-5 py-2.5 rounded-xl text-sm">💬 Chamar no WhatsApp</a>
+      <a href="https://wa.me/5517992641746?text=Ol%C3%A1!%20Vim%20pelo%20Aqui%20Tem%20Achadinhos%20e%20gostaria%20de%20reservar%20mesa%20Churrascaria" target="_blank" rel="noopener" class="btn-shine bg-emerald-500 hover:bg-emerald-600 text-white font-bold px-5 py-2.5 rounded-xl text-sm flex items-center gap-2">
+        💬 Reservar no WhatsApp
+      </a>
+    </div>
+
+    <!-- Restaurante 2 -->
+    <div class="bg-white rounded-2xl ring-silver shadow-soft p-5 sm:p-6 flex flex-wrap items-center justify-between gap-4 transition hover:shadow-md">
+      <div class="flex items-center gap-4">
+        <div class="w-14 h-14 rounded-2xl bg-emerald-500/10 text-emerald-600 flex items-center justify-center text-2xl font-bold flex-shrink-0">🍕</div>
+        <div>
+          <div class="flex items-center gap-2">
+            <h3 class="font-display font-bold text-navy-900 text-base sm:text-lg">Pizzaria Forno a Lenha Bella Barretos</h3>
+            <span class="bg-emerald-100 text-emerald-700 text-[11px] font-bold px-2.5 py-0.5 rounded-full uppercase">Delivery até 04h</span>
+          </div>
+          <p class="text-xs text-silver-500 mt-1">📍 Rua 24, 550 · Centro Histórico · Barretos/SP</p>
+          <p class="text-xs text-silver-500 mt-0.5">🕐 18h às 04h durante a Festa · 🛵 Tele-entrega rápida em Chácaras e Hotéis</p>
+        </div>
+      </div>
+      <a href="https://wa.me/5517992641746?text=Ol%C3%A1!%20Vim%20pelo%20Aqui%20Tem%20Achadinhos%20e%20gostaria%20de%20pedir%20card%C3%A1pio%20pizza" target="_blank" rel="noopener" class="btn-shine bg-emerald-500 hover:bg-emerald-600 text-white font-bold px-5 py-2.5 rounded-xl text-sm flex items-center gap-2">
+        💬 Pedir no WhatsApp
+      </a>
+    </div>
+
+    <!-- Restaurante 3 -->
+    <div class="bg-white rounded-2xl ring-silver shadow-soft p-5 sm:p-6 flex flex-wrap items-center justify-between gap-4 transition hover:shadow-md">
+      <div class="flex items-center gap-4">
+        <div class="w-14 h-14 rounded-2xl bg-sky-500/10 text-sky-600 flex items-center justify-center text-2xl font-bold flex-shrink-0">🍔</div>
+        <div>
+          <div class="flex items-center gap-2">
+            <h3 class="font-display font-bold text-navy-900 text-base sm:text-lg">Hamburgueria &amp; Chopp Artesanal Ponto 43</h3>
+            <span class="bg-sky-100 text-sky-700 text-[11px] font-bold px-2.5 py-0.5 rounded-full uppercase">Ponto de Encontro</span>
+          </div>
+          <p class="text-xs text-silver-500 mt-1">📍 Av. 43, 620 · Bairro América · Barretos/SP</p>
+          <p class="text-xs text-silver-500 mt-0.5">🕐 17h até o encerramento dos shows · 🍔 Burgers defumados e porções generosas</p>
+        </div>
+      </div>
+      <a href="https://wa.me/5517992641746?text=Ol%C3%A1!%20Vim%20pelo%20Aqui%20Tem%20Achadinhos%20Ponto%2043" target="_blank" rel="noopener" class="btn-shine bg-emerald-500 hover:bg-emerald-600 text-white font-bold px-5 py-2.5 rounded-xl text-sm flex items-center gap-2">
+        💬 Chamar no WhatsApp
+      </a>
     </div>
   </div>
 

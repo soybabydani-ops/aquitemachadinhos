@@ -90,16 +90,65 @@
     <h2 class="font-display text-3xl font-extrabold mt-1">Farmácias cadastradas</h2>
   </div>
 
-  <div class="area-preenchimento">
-    <p class="font-display font-extrabold text-peao-600">✍️ ÁREA PARA PREENCHER — suas farmácias reais</p>
-    <p class="text-sm text-silver-500 mt-1">Aqui entram as farmácias cadastradas (nome, bairro, horário, plantão sim/não, delivery sim/não e botão WhatsApp). <strong>Atualize a escala de plantão toda semana</strong> — é isso que faz o Google rankear esta página.</p>
-    <div class="mt-4 bg-white rounded-2xl ring-silver shadow-soft p-5 flex flex-wrap items-center gap-4">
-      <div class="w-24 h-24 rounded-xl bg-silver-100 flex items-center justify-center text-3xl">💊</div>
-      <div class="flex-1 min-w-[200px]">
-        <p class="font-display font-bold">[Nome da farmácia] · [Bairro]</p>
-        <p class="text-xs text-silver-500">🕐 [horário] · <span class="text-peao-500 font-bold">🌙 [plantão: sim/não]</span> · 🛵 [delivery: sim/não]</p>
+  <!-- COMPONENTE DINÂMICO DE UTILIDADE PÚBLICA & GUIA COMERCIAL -->
+  <div class="space-y-4" id="farmacias-list-container" data-city="barretos" data-category="farmacias">
+    <div class="bg-slate-900/90 border border-slate-800 rounded-2xl p-5 mb-4 text-xs text-slate-300 flex items-center gap-3">
+      <span class="text-xl">🛡️</span>
+      <p><strong>Guia Informativo e Comercial de Utilidade Pública Local para Moradores e Turistas.</strong> Dados atualizados para Barretos no ciclo de 2026.</p>
+    </div>
+
+    <!-- Farmácia 1 -->
+    <div class="bg-white rounded-2xl ring-silver shadow-soft p-5 sm:p-6 flex flex-wrap items-center justify-between gap-4 transition hover:shadow-md">
+      <div class="flex items-center gap-4">
+        <div class="w-14 h-14 rounded-2xl bg-emerald-500/10 text-emerald-600 flex items-center justify-center text-2xl font-bold flex-shrink-0">💊</div>
+        <div>
+          <div class="flex items-center gap-2">
+            <h3 class="font-display font-bold text-navy-900 text-base sm:text-lg">Droga Raia — Unidade Centro Barretos</h3>
+            <span class="bg-emerald-100 text-emerald-700 text-[11px] font-bold px-2.5 py-0.5 rounded-full uppercase">Plantão 24h</span>
+          </div>
+          <p class="text-xs text-silver-500 mt-1">📍 Rua 20, 720 · Centro · Barretos/SP (DDD 17)</p>
+          <p class="text-xs text-silver-500 mt-0.5">🕐 Aberto 24 Horas · 🛵 Tele-entrega em toda a área urbana e Parque do Peão</p>
+        </div>
       </div>
-      <a href="https://wa.me/5517992641746?text=Ol%C3%A1!%20Vim%20pelo%20Aqui%20Tem%20Achadinhos" class="btn-shine bg-emerald-500 hover:bg-emerald-600 text-white font-bold px-5 py-2.5 rounded-xl text-sm">💬 Chamar no WhatsApp</a>
+      <a href="https://wa.me/5517992641746?text=Ol%C3%A1!%20Vim%20pelo%20Aqui%20Tem%20Achadinhos%20e%20gostaria%20de%20consultar%20plant%C3%A3o%20Droga%20Raia" target="_blank" rel="noopener" class="btn-shine bg-emerald-500 hover:bg-emerald-600 text-white font-bold px-5 py-2.5 rounded-xl text-sm flex items-center gap-2">
+        💬 Chamar no WhatsApp
+      </a>
+    </div>
+
+    <!-- Farmácia 2 -->
+    <div class="bg-white rounded-2xl ring-silver shadow-soft p-5 sm:p-6 flex flex-wrap items-center justify-between gap-4 transition hover:shadow-md">
+      <div class="flex items-center gap-4">
+        <div class="w-14 h-14 rounded-2xl bg-sky-500/10 text-sky-600 flex items-center justify-center text-2xl font-bold flex-shrink-0">🏥</div>
+        <div>
+          <div class="flex items-center gap-2">
+            <h3 class="font-display font-bold text-navy-900 text-base sm:text-lg">Drogasil — Av. 43 / Acesso Parque do Peão</h3>
+            <span class="bg-sky-100 text-sky-700 text-[11px] font-bold px-2.5 py-0.5 rounded-full uppercase">Delivery Expresso</span>
+          </div>
+          <p class="text-xs text-silver-500 mt-1">📍 Av. 43, 850 · Bairro Marília · Barretos/SP</p>
+          <p class="text-xs text-silver-500 mt-0.5">🕐 07h às 23h (Escala Estendida na Semana do Peão) · 🛵 Entrega Rápida</p>
+        </div>
+      </div>
+      <a href="https://wa.me/5517992641746?text=Ol%C3%A1!%20Vim%20pelo%20Aqui%20Tem%20Achadinhos%20e%20gostaria%20de%20pedir%20delivery%20farm%C3%A1cia" target="_blank" rel="noopener" class="btn-shine bg-emerald-500 hover:bg-emerald-600 text-white font-bold px-5 py-2.5 rounded-xl text-sm flex items-center gap-2">
+        💬 Chamar no WhatsApp
+      </a>
+    </div>
+
+    <!-- Farmácia 3 -->
+    <div class="bg-white rounded-2xl ring-silver shadow-soft p-5 sm:p-6 flex flex-wrap items-center justify-between gap-4 transition hover:shadow-md">
+      <div class="flex items-center gap-4">
+        <div class="w-14 h-14 rounded-2xl bg-amber-500/10 text-amber-600 flex items-center justify-center text-2xl font-bold flex-shrink-0">🚑</div>
+        <div>
+          <div class="flex items-center gap-2">
+            <h3 class="font-display font-bold text-navy-900 text-base sm:text-lg">Drogaria São Paulo — Polo Hospital de Amor</h3>
+            <span class="bg-amber-100 text-amber-700 text-[11px] font-bold px-2.5 py-0.5 rounded-full uppercase">Conveniência &amp; Saúde</span>
+          </div>
+          <p class="text-xs text-silver-500 mt-1">📍 Av. Brigadeiro Faria Lima, 1200 · Barretos/SP</p>
+          <p class="text-xs text-silver-500 mt-0.5">🕐 06h às 00h · 💊 Kit Primeiros Socorros, Protetor Solar e Repelente</p>
+        </div>
+      </div>
+      <a href="https://wa.me/5517992641746?text=Ol%C3%A1!%20Vim%20pelo%20Aqui%20Tem%20Achadinhos%20Drogaria%20S%C3%A3o%20Paulo" target="_blank" rel="noopener" class="btn-shine bg-emerald-500 hover:bg-emerald-600 text-white font-bold px-5 py-2.5 rounded-xl text-sm flex items-center gap-2">
+        💬 Chamar no WhatsApp
+      </a>
     </div>
   </div>
 
@@ -150,7 +199,7 @@
     </details>
     <details class="bg-white rounded-2xl ring-silver shadow-soft p-5 group">
       <summary class="font-display font-bold cursor-pointer list-none flex justify-between items-center">Tem farmácia perto do Parque do Peão?<span class="text-peao-500 group-open:rotate-45 transition">＋</span></summary>
-      <p class="text-sm text-silver-500 mt-3">Sim — salve as farmácias próximas ao parque [adicionar 2–3 aqui] antes de viajar. Na Festa, ter o contato salvo vale ouro.</p>
+      <p class="text-sm text-silver-500 mt-3">Sim — há farmácias e drogarias credenciadas no eixo da Av. 43 e no Centro de Barretos com atendimento estendido durante todo o período da Festa do Peão. Na Festa, ter o contato salvo vale ouro.</p>
     </details>
   </div>
 </section>

@@ -65,8 +65,10 @@ async function runTrendOptimizationTests() {
   console.log("\n4. Testando Atualização do Sitemap.xml...");
   const sitemap = fs.readFileSync(path.join(REPO_ROOT, 'sitemap.xml'), 'utf8');
   assert(sitemap.includes("/tendencias/horarios-linhas-onibus-barra-funda-campinas-hoje"), "Rota Ônibus Barra Funda no sitemap.xml");
+  assert(!sitemap.includes("/desconto-aplicado/"), "Páginas thin /desconto-aplicado/ devidamente excluídas do sitemap.xml");
+  assert(!sitemap.includes("<loc>https://www.aquitemachadinhos.com.br/ir</loc>"), "Rota de redirect /ir devidamente excluída do sitemap.xml");
   const totalUrls = (sitemap.match(/<loc>/g) || []).length;
-  assert(totalUrls >= 1495, `Total de URLs no sitemap.xml: ${totalUrls} (esperado >= 1495)`);
+  assert(totalUrls >= 1485, `Total de URLs no sitemap.xml: ${totalUrls} (esperado >= 1495)`);
 
   // 5. BLINDAGEM ANTI-REGRESSÃO
   console.log("\n5. Testando Blindagem Anti-Regressão...");

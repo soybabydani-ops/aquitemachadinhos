@@ -115,6 +115,7 @@ function gerarHTMLPassivo(p) {
 <meta name="description" content="[DESCONTO ATIVO] Menor preço encontrado pelo robô para ${p.termoBusca}. De ${p.precoTradicional} por apenas ${p.menorPreco}. Cupom ${p.cupom} validado.">
 <link rel="canonical" href="https://www.aquitemachadinhos.com.br/desconto-aplicado/${p.slug}">
 <meta name="theme-color" content="#030712">
+<meta name="robots" content="noindex, nofollow" />
 
 <!-- CSS e Fontes -->
 <link rel="stylesheet" href="../assets/tailwind.css">

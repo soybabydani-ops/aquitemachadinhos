@@ -459,7 +459,71 @@ const REAL_CITY_DATA = {
     polosComerciais: 'Polo Ecoturístico de Mateiros e Ponte Alta do Tocantins',
     distanciaCapital: '300 km de Palmas',
     perfilEditorial: 'Santuário de fervedouros de água cristalina, dunas douradas e cachoeiras no coração do cerrado tocantinense. A circulação é exclusiva para veículos 4x4 com guias credenciados.'
-  }
+  },
+  'campos': {
+    ddd: '12',
+    aeroporto: 'Aeroporto Internacional de Guarulhos (GRU - 150 km) ou São José dos Campos (SJK - 80 km)',
+    rodovias: 'SP-123 (Rodovia Floriano Rodrigues Pinheiro) conectando à Rodovia Dutra e Carvalho Pinto',
+    polosComerciais: 'Vila Capivari, Abernéssia, Jaguaribe e Av. Macedo Soares',
+    distanciaCapital: '170 km de São Paulo',
+    perfilEditorial: 'Suíça Brasileira na Serra da Mantiqueira, a 1.628m de altitude. O Festival Internacional de Inverno e a gastronomia alpina (fondue, trutas, chocolates artesanais e cervejas locais) impulsionam o turismo de alto padrão durante todo o ano.'
+  },
+  'porto': {
+    ddd: '73',
+    aeroporto: 'Aeroporto Internacional de Porto Seguro (BPS)',
+    rodovias: 'BR-367 e BR-101',
+    polosComerciais: 'Passarela do Descobrimento, Orla Norte (Praia de Taperapuã), Arraial d\'Ajuda e Trancoso',
+    distanciaCapital: '700 km de Salvador',
+    perfilEditorial: 'Berço histórico do Brasil e um dos principais polos turísticos do Nordeste. A Orla Norte concentra grandes barracas de praia e resorts, enquanto a travessia de balsa conecta aos vilarejos sofisticados de Arraial d\'Ajuda, Trancoso e Caraíva.'
+  },
+  'noronha': {
+    ddd: '81',
+    aeroporto: 'Aeroporto de Fernando de Noronha - Governador Carlos Wilson (FEN)',
+    rodovias: 'BR-363 (a menor rodovia federal do Brasil, com 7,9 km de extensão)',
+    polosComerciais: 'Vila dos Remédios, Vila do Trinta e Floresta Nova',
+    distanciaCapital: '545 km de Recife (via aérea)',
+    perfilEditorial: 'Patrimônio Mundial Natural da UNESCO e o mais preservado santuário ecológico marinho do Atlântico Sul. Conhecido pela Baía do Sancho, Baía dos Porcos e Baía dos Golfinhos, com controle rigoroso de preservação ambiental.'
+  },
+  'campina-grande': {
+    ddd: '83',
+    aeroporto: 'Aeroporto Presidente João Suassuna (CPV)',
+    rodovias: 'BR-230 (Rodovia Transamazônica) e BR-104',
+    polosComerciais: 'Parque do Povo, Centro, Bairro da Prata e Shopping Partage',
+    distanciaCapital: '125 km de João Pessoa',
+    perfilEditorial: 'Polo tecnológico do Nordeste e sede d\'O Maior São João do Mundo no Parque do Povo. Cidade de vocação universitária, polo têxtil, de couro e calçados, com expressiva produção de software e inovação digital.'
+  },
+  'caldasnovas': {
+    ddd: '64',
+    aeroporto: 'Aeroporto Nelson Ribeiro Guimarães (CLV) e Santa Genoveva em Goiânia (GYN - 170 km)',
+    rodovias: 'GO-213 e GO-139',
+    polosComerciais: 'Bairro do Turista, Centro, Região dos Parques Aquáticos e Rio Quente',
+    distanciaCapital: '170 km de Goiânia e 300 km de Brasília',
+    perfilEditorial: 'Maior estância hidrotermal do mundo, recebendo milhões de turistas nos seus parques aquáticos termais, hotéis resorts e no Parque Estadual da Serra de Caldas Novas.'
+  },
+  'chapada-guimaraes': {
+    ddd: '65',
+    aeroporto: 'Aeroporto Internacional Marechal Rondon em Cuiabá/Várzea Grande (CGB - 70 km)',
+    rodovias: 'MT-251 (Rodovia Emanuel Pinheiro)',
+    polosComerciais: 'Praça Dom Wunibaldo, Centro Histórico e Mirante Morro dos Ventos',
+    distanciaCapital: '65 km de Cuiabá',
+    perfilEditorial: 'Parque Nacional de paredões de arenito avermelhado, cachoeiras impressionantes (como a Véu de Noiva), cavernas de arenito e sítios arqueológicos no divisor das bacias Amazônica e Platina.'
+  },
+  'vitoria': {
+    ddd: '27',
+    aeroporto: 'Aeroporto de Vitória - Eurico de Aguiar Salles (VIX)',
+    rodovias: 'BR-101 e Rodovia do Sol (ES-060)',
+    polosComerciais: 'Praia do Canto, Enseada do Suá, Jardim da Penha e Centro Histórico',
+    distanciaCapital: 'Capital do Estado do ES',
+    perfilEditorial: 'Ilha capital com altíssimo índice de desenvolvimento humano, polo portuário e siderúrgico de escala global (Porto de Tubarão) e culinária típica célebre (Moqueca e Torta Capixaba na panela de barro).'
+  },
+  'lencois': {
+    ddd: '75',
+    aeroporto: 'Aeroporto Horácio de Mattos em Lençóis (LEC) ou Salvador (SSA - 420 km)',
+    rodovias: 'BR-242 (Rodovia Milton Santos)',
+    polosComerciais: 'Centro Histórico Tombado pelo IPHAN, Rua das Pedras e Praça Horácio de Mattos',
+    distanciaCapital: '420 km de Salvador',
+    perfilEditorial: 'Portal de entrada da Chapada Diamantina, com casario colonial preservado do ciclo dos diamantes do século XIX, base para trilhas no Morro do Pai Inácio, Cachoeira da Fumaça, Poço Encantado e Poço Azul.'
+  },
 };
 
 module.exports = { REAL_CITY_DATA };

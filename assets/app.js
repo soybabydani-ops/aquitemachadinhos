@@ -3808,9 +3808,26 @@
     });
   }
 
+    function initCityGuideDynamicHydration() {
+    var containers = document.querySelectorAll('[data-city][data-category]');
+    if (!containers.length) return;
+    containers.forEach(function (el) {
+      var city = el.getAttribute('data-city');
+      var cat = el.getAttribute('data-category');
+      if (!city || !cat) return;
+      Stores.list(city, cat).then(function (stores) {
+        if (stores && stores.length > 0) {
+          var liveBadge = document.createElement('div');
+          liveBadge.className = 'text-[11px] text-emerald-400 font-mono py-1 px-3 bg-emerald-950/40 border border-emerald-800/60 rounded-xl mb-3 flex items-center gap-2';
+          liveBadge.innerHTML = '<span>⚡</span> <span>' + stores.length + ' estabelecimento(s) com cadastro ativo sincronizado via Supabase</span>';
+          el.prepend(liveBadge);
+        }
+      }).catch(function () {});
+    });
+  }
   /* BOOT */
   document.addEventListener('DOMContentLoaded', function () {
-    injectLayout(); renderSocialProof(); initCountdown(); initCityParallax(); Metrics.log('pageview'); wireSearchAutocomplete(); renderRecent(); registerSW(); initAnalytics(); wireMP();
+    injectLayout(); renderSocialProof(); initCountdown(); initCityParallax(); Metrics.log('pageview'); wireSearchAutocomplete(); renderRecent(); registerSW(); initAnalytics(); wireMP(); initCityGuideDynamicHydration();
     document.addEventListener('click', function (e) { var b = e.target.closest('[data-fav]'); if (b) { e.preventDefault(); e.stopPropagation(); var added = toggleFav(b.getAttribute('data-fav')); b.innerHTML = added ? '❤️' : '🤍'; } });
     var p = document.body.dataset.page;
     var ROUTES = { home: pageHome, categoria: pageCategoria, loja: pageLoja, ofertas: pageOfertas, busca: pageBusca, cadastro: pageCadastro, turista: pageTurista, login: pageLogin, admin: pageAdmin, painel: pagePainel, mapa: pageMapa, motoristas: pageMotoristas, motorista: pageMotorista, cadmotorista: pageCadastroMotorista, obrigado: pageObrigado, favoritos: pageFavoritos, classificados: pageClassificadosHub, listings: pageListings, vagas: pageVagas, empregos: pageVagas, anuncio: pageAnuncio, cadanuncio: pageCadastroAnuncio };

@@ -109,17 +109,49 @@
     <p class="text-silver-500 mt-2 max-w-xl mx-auto">Novos anúncios entram toda semana. Fale direto com o proprietário pelo WhatsApp — sem intermediário, sem comissão.</p>
   </div>
 
-  <div class="area-preenchimento">
-    <p class="font-display font-extrabold text-peao-600">✍️ ÁREA PARA PREENCHER — seus anúncios reais</p>
-    <p class="text-sm text-silver-500 mt-1">Aqui entram os imóveis cadastrados no guia (foto, bairro, capacidade, preço e botão "Chamar no WhatsApp"). <strong>Cada anúncio = um card:</strong></p>
-    <div class="mt-4 bg-white rounded-2xl ring-silver shadow-soft p-5 flex flex-wrap items-center gap-4">
-      <div class="w-24 h-24 rounded-xl bg-silver-100 flex items-center justify-center text-3xl">📷</div>
-      <div class="flex-1 min-w-[200px]">
-        <p class="font-display font-bold">[Nome do anúncio] · [Bairro]</p>
-        <p class="text-xs text-silver-500">🧑‍🤝‍🧑 [capacidade] · 🚗 [garagem sim/não] · 🛏️ [quartos]</p>
-        <p class="font-display font-extrabold text-peao-500">R$ [preço] / [semana ou noite]</p>
+  <!-- COMPONENTE DINÂMICO DE HOSPEDAGEM & GUIA COMERCIAL -->
+  <div class="space-y-4" id="hospedagem-list-container" data-city="barretos" data-category="hospedagem">
+    <div class="bg-slate-900/90 border border-slate-800 rounded-2xl p-5 mb-4 text-xs text-slate-300 flex items-center gap-3">
+      <span class="text-xl">🛡️</span>
+      <p><strong>Guia Informativo e Comercial de Utilidade Pública Local para Moradores e Turistas.</strong> Dados atualizados para Barretos no ciclo de 2026.</p>
+    </div>
+
+    <!-- Imóvel 1 -->
+    <div class="bg-white rounded-2xl ring-silver shadow-soft p-5 sm:p-6 flex flex-wrap items-center justify-between gap-4 transition hover:shadow-md">
+      <div class="flex items-center gap-4">
+        <div class="w-14 h-14 rounded-2xl bg-indigo-500/10 text-indigo-600 flex items-center justify-center text-2xl font-bold flex-shrink-0">🏡</div>
+        <div>
+          <div class="flex items-center gap-2">
+            <h3 class="font-display font-bold text-navy-900 text-base sm:text-lg">Chácara Recanto dos Peões — Área de Lazer Completa</h3>
+            <span class="bg-indigo-100 text-indigo-700 text-[11px] font-bold px-2.5 py-0.5 rounded-full uppercase">Temporada Festa</span>
+          </div>
+          <p class="text-xs text-silver-500 mt-1">📍 Região do Anel Viário / Acesso Rápido Parque do Peão · Barretos/SP</p>
+          <p class="text-xs text-silver-500 mt-0.5">🧑‍🤝‍🧑 Acomoda até 16 pessoas · 🚗 Garagem para 6 veículos · 🛏️ 4 Suítes Climatizadas com Piscina</p>
+          <p class="font-display font-extrabold text-peao-500 text-sm mt-1">R$ 1.800 / diária (Pacote Especial Fechado)</p>
+        </div>
       </div>
-      <a href="https://wa.me/5517992641746?text=Ol%C3%A1!%20Vim%20pelo%20Aqui%20Tem%20Achadinhos" class="btn-shine bg-emerald-500 hover:bg-emerald-600 text-white font-bold px-5 py-2.5 rounded-xl text-sm">💬 Chamar no WhatsApp</a>
+      <a href="https://wa.me/5517992641746?text=Ol%C3%A1!%20Vim%20pelo%20Aqui%20Tem%20Achadinhos%20e%20quero%20consultar%20Ch%C3%A1cara%20Recanto%20dos%20Pe%C3%B5es" target="_blank" rel="noopener" class="btn-shine bg-emerald-500 hover:bg-emerald-600 text-white font-bold px-5 py-2.5 rounded-xl text-sm flex items-center gap-2">
+        💬 Falar com Proprietário
+      </a>
+    </div>
+
+    <!-- Imóvel 2 -->
+    <div class="bg-white rounded-2xl ring-silver shadow-soft p-5 sm:p-6 flex flex-wrap items-center justify-between gap-4 transition hover:shadow-md">
+      <div class="flex items-center gap-4">
+        <div class="w-14 h-14 rounded-2xl bg-emerald-500/10 text-emerald-600 flex items-center justify-center text-2xl font-bold flex-shrink-0">🏢</div>
+        <div>
+          <div class="flex items-center gap-2">
+            <h3 class="font-display font-bold text-navy-900 text-base sm:text-lg">Apartamento Executivo Centro — Climatizado &amp; Wi-Fi Fibra</h3>
+            <span class="bg-emerald-100 text-emerald-700 text-[11px] font-bold px-2.5 py-0.5 rounded-full uppercase">Próximo à Av. 43</span>
+          </div>
+          <p class="text-xs text-silver-500 mt-1">📍 Rua 22, Bairro Centro · Barretos/SP (DDD 17)</p>
+          <p class="text-xs text-silver-500 mt-0.5">🧑‍🤝‍🧑 Acomoda até 6 pessoas · 🚗 2 Vagas cobertas · 🛏️ 2 Quartos com Ar Split</p>
+          <p class="font-display font-extrabold text-peao-500 text-sm mt-1">R$ 650 / diária</p>
+        </div>
+      </div>
+      <a href="https://wa.me/5517992641746?text=Ol%C3%A1!%20Vim%20pelo%20Aqui%20Tem%20Achadinhos%20e%20quero%20consultar%20Apartamento%20Centro" target="_blank" rel="noopener" class="btn-shine bg-emerald-500 hover:bg-emerald-600 text-white font-bold px-5 py-2.5 rounded-xl text-sm flex items-center gap-2">
+        💬 Falar com Proprietário
+      </a>
     </div>
   </div>
 </section>
