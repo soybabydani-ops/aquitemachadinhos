@@ -1073,6 +1073,26 @@
   ],
   "rewrites": [
     {
+      "source": "/utilidade-publica/:cidade/achados-e-perdidos",
+      "destination": "/utilidade-publica/:cidade/achados-e-perdidos.html"
+    },
+    {
+      "source": "/utilidade-publica/:cidade/doacoes",
+      "destination": "/utilidade-publica/:cidade/doacoes.html"
+    },
+    {
+      "source": "/achados-e-perdidos/:cidade",
+      "destination": "/utilidade-publica/:cidade/achados-e-perdidos.html"
+    },
+    {
+      "source": "/doacoes/:cidade",
+      "destination": "/utilidade-publica/:cidade/doacoes.html"
+    },
+    {
+      "source": "/utilidade-publica/:cidade",
+      "destination": "/utilidade-publica/cidade.html?cidade=:cidade"
+    },
+    {
       "source": "/assets/(.*)",
       "has": [
         {

@@ -1494,6 +1494,31 @@
       "handle": "filesystem"
     },
     {
+      "src": "^/utilidade-publica(?:/([^/]+?))/achados-e-perdidos$",
+      "dest": "/utilidade-publica/$1/achados-e-perdidos.html",
+      "check": true
+    },
+    {
+      "src": "^/utilidade-publica(?:/([^/]+?))/doacoes$",
+      "dest": "/utilidade-publica/$1/doacoes.html",
+      "check": true
+    },
+    {
+      "src": "^/achados-e-perdidos(?:/([^/]+?))$",
+      "dest": "/utilidade-publica/$1/achados-e-perdidos.html",
+      "check": true
+    },
+    {
+      "src": "^/doacoes(?:/([^/]+?))$",
+      "dest": "/utilidade-publica/$1/doacoes.html",
+      "check": true
+    },
+    {
+      "src": "^/utilidade-publica(?:/([^/]+?))$",
+      "dest": "/utilidade-publica/cidade.html?cidade=$1",
+      "check": true
+    },
+    {
       "src": "^/assets(?:/(.*))$",
       "dest": "/assets/$1?host=$host",
       "check": true,
@@ -3115,6 +3140,396 @@
     "achadinhos/shopee/kit-pinceis-maquiagem-shopee-70-off.html": {
       "path": "achadinhos/shopee/kit-pinceis-maquiagem-shopee-70-off"
     },
+    "achadinhos/shopee/mini-impressora-termica-bluetooth-shopee-70-off.html": {
+      "path": "achadinhos/shopee/mini-impressora-termica-bluetooth-shopee-70-off"
+    },
+    "achadinhos/shopee/mochila-antifurto-notebook-shopee-65-off.html": {
+      "path": "achadinhos/shopee/mochila-antifurto-notebook-shopee-65-off"
+    },
+    "utilidade-publica/alter-do-chao/achados-e-perdidos.html": {
+      "path": "utilidade-publica/alter-do-chao/achados-e-perdidos"
+    },
+    "utilidade-publica/alter-do-chao/doacoes.html": {
+      "path": "utilidade-publica/alter-do-chao/doacoes"
+    },
+    "utilidade-publica/anapolis/achados-e-perdidos.html": {
+      "path": "utilidade-publica/anapolis/achados-e-perdidos"
+    },
+    "utilidade-publica/anapolis/doacoes.html": {
+      "path": "utilidade-publica/anapolis/doacoes"
+    },
+    "utilidade-publica/aracaju/achados-e-perdidos.html": {
+      "path": "utilidade-publica/aracaju/achados-e-perdidos"
+    },
+    "utilidade-publica/aracaju/doacoes.html": {
+      "path": "utilidade-publica/aracaju/doacoes"
+    },
+    "utilidade-publica/balneario-camboriu/achados-e-perdidos.html": {
+      "path": "utilidade-publica/balneario-camboriu/achados-e-perdidos"
+    },
+    "utilidade-publica/balneario-camboriu/doacoes.html": {
+      "path": "utilidade-publica/balneario-camboriu/doacoes"
+    },
+    "utilidade-publica/barretos/achados-e-perdidos.html": {
+      "path": "utilidade-publica/barretos/achados-e-perdidos"
+    },
+    "utilidade-publica/barretos/doacoes.html": {
+      "path": "utilidade-publica/barretos/doacoes"
+    },
+    "utilidade-publica/bebedouro/achados-e-perdidos.html": {
+      "path": "utilidade-publica/bebedouro/achados-e-perdidos"
+    },
+    "utilidade-publica/bebedouro/doacoes.html": {
+      "path": "utilidade-publica/bebedouro/doacoes"
+    },
+    "utilidade-publica/belem/achados-e-perdidos.html": {
+      "path": "utilidade-publica/belem/achados-e-perdidos"
+    },
+    "utilidade-publica/belem/doacoes.html": {
+      "path": "utilidade-publica/belem/doacoes"
+    },
+    "utilidade-publica/belo-horizonte/achados-e-perdidos.html": {
+      "path": "utilidade-publica/belo-horizonte/achados-e-perdidos"
+    },
+    "utilidade-publica/belo-horizonte/doacoes.html": {
+      "path": "utilidade-publica/belo-horizonte/doacoes"
+    },
+    "utilidade-publica/blumenau/achados-e-perdidos.html": {
+      "path": "utilidade-publica/blumenau/achados-e-perdidos"
+    },
+    "utilidade-publica/blumenau/doacoes.html": {
+      "path": "utilidade-publica/blumenau/doacoes"
+    },
+    "utilidade-publica/bonito/achados-e-perdidos.html": {
+      "path": "utilidade-publica/bonito/achados-e-perdidos"
+    },
+    "utilidade-publica/bonito/doacoes.html": {
+      "path": "utilidade-publica/bonito/doacoes"
+    },
+    "utilidade-publica/brasilia/achados-e-perdidos.html": {
+      "path": "utilidade-publica/brasilia/achados-e-perdidos"
+    },
+    "utilidade-publica/brasilia/doacoes.html": {
+      "path": "utilidade-publica/brasilia/doacoes"
+    },
+    "utilidade-publica/buzios/achados-e-perdidos.html": {
+      "path": "utilidade-publica/buzios/achados-e-perdidos"
+    },
+    "utilidade-publica/buzios/doacoes.html": {
+      "path": "utilidade-publica/buzios/doacoes"
+    },
+    "utilidade-publica/caldasnovas/achados-e-perdidos.html": {
+      "path": "utilidade-publica/caldasnovas/achados-e-perdidos"
+    },
+    "utilidade-publica/caldasnovas/doacoes.html": {
+      "path": "utilidade-publica/caldasnovas/doacoes"
+    },
+    "utilidade-publica/campina-grande/achados-e-perdidos.html": {
+      "path": "utilidade-publica/campina-grande/achados-e-perdidos"
+    },
+    "utilidade-publica/campina-grande/doacoes.html": {
+      "path": "utilidade-publica/campina-grande/doacoes"
+    },
+    "utilidade-publica/campinas/achados-e-perdidos.html": {
+      "path": "utilidade-publica/campinas/achados-e-perdidos"
+    },
+    "utilidade-publica/campinas/doacoes.html": {
+      "path": "utilidade-publica/campinas/doacoes"
+    },
+    "utilidade-publica/campo-grande/achados-e-perdidos.html": {
+      "path": "utilidade-publica/campo-grande/achados-e-perdidos"
+    },
+    "utilidade-publica/campo-grande/doacoes.html": {
+      "path": "utilidade-publica/campo-grande/doacoes"
+    },
+    "utilidade-publica/campos/achados-e-perdidos.html": {
+      "path": "utilidade-publica/campos/achados-e-perdidos"
+    },
+    "utilidade-publica/campos/doacoes.html": {
+      "path": "utilidade-publica/campos/doacoes"
+    },
+    "utilidade-publica/caruaru/achados-e-perdidos.html": {
+      "path": "utilidade-publica/caruaru/achados-e-perdidos"
+    },
+    "utilidade-publica/caruaru/doacoes.html": {
+      "path": "utilidade-publica/caruaru/doacoes"
+    },
+    "utilidade-publica/caxias-do-sul/achados-e-perdidos.html": {
+      "path": "utilidade-publica/caxias-do-sul/achados-e-perdidos"
+    },
+    "utilidade-publica/caxias-do-sul/doacoes.html": {
+      "path": "utilidade-publica/caxias-do-sul/doacoes"
+    },
+    "utilidade-publica/chapada-guimaraes/achados-e-perdidos.html": {
+      "path": "utilidade-publica/chapada-guimaraes/achados-e-perdidos"
+    },
+    "utilidade-publica/chapada-guimaraes/doacoes.html": {
+      "path": "utilidade-publica/chapada-guimaraes/doacoes"
+    },
+    "utilidade-publica/colombia/achados-e-perdidos.html": {
+      "path": "utilidade-publica/colombia/achados-e-perdidos"
+    },
+    "utilidade-publica/colombia/doacoes.html": {
+      "path": "utilidade-publica/colombia/doacoes"
+    },
+    "utilidade-publica/cuiaba/achados-e-perdidos.html": {
+      "path": "utilidade-publica/cuiaba/achados-e-perdidos"
+    },
+    "utilidade-publica/cuiaba/doacoes.html": {
+      "path": "utilidade-publica/cuiaba/doacoes"
+    },
+    "utilidade-publica/curitiba/achados-e-perdidos.html": {
+      "path": "utilidade-publica/curitiba/achados-e-perdidos"
+    },
+    "utilidade-publica/curitiba/doacoes.html": {
+      "path": "utilidade-publica/curitiba/doacoes"
+    },
+    "utilidade-publica/feira-de-santana/achados-e-perdidos.html": {
+      "path": "utilidade-publica/feira-de-santana/achados-e-perdidos"
+    },
+    "utilidade-publica/feira-de-santana/doacoes.html": {
+      "path": "utilidade-publica/feira-de-santana/doacoes"
+    },
+    "utilidade-publica/florianopolis/achados-e-perdidos.html": {
+      "path": "utilidade-publica/florianopolis/achados-e-perdidos"
+    },
+    "utilidade-publica/florianopolis/doacoes.html": {
+      "path": "utilidade-publica/florianopolis/doacoes"
+    },
+    "utilidade-publica/fortaleza/achados-e-perdidos.html": {
+      "path": "utilidade-publica/fortaleza/achados-e-perdidos"
+    },
+    "utilidade-publica/fortaleza/doacoes.html": {
+      "path": "utilidade-publica/fortaleza/doacoes"
+    },
+    "utilidade-publica/foz-do-iguacu/achados-e-perdidos.html": {
+      "path": "utilidade-publica/foz-do-iguacu/achados-e-perdidos"
+    },
+    "utilidade-publica/foz-do-iguacu/doacoes.html": {
+      "path": "utilidade-publica/foz-do-iguacu/doacoes"
+    },
+    "utilidade-publica/franca/achados-e-perdidos.html": {
+      "path": "utilidade-publica/franca/achados-e-perdidos"
+    },
+    "utilidade-publica/franca/doacoes.html": {
+      "path": "utilidade-publica/franca/doacoes"
+    },
+    "utilidade-publica/goiania/achados-e-perdidos.html": {
+      "path": "utilidade-publica/goiania/achados-e-perdidos"
+    },
+    "utilidade-publica/goiania/doacoes.html": {
+      "path": "utilidade-publica/goiania/doacoes"
+    },
+    "utilidade-publica/gramado/achados-e-perdidos.html": {
+      "path": "utilidade-publica/gramado/achados-e-perdidos"
+    },
+    "utilidade-publica/gramado/doacoes.html": {
+      "path": "utilidade-publica/gramado/doacoes"
+    },
+    "utilidade-publica/guaira/achados-e-perdidos.html": {
+      "path": "utilidade-publica/guaira/achados-e-perdidos"
+    },
+    "utilidade-publica/guaira/doacoes.html": {
+      "path": "utilidade-publica/guaira/doacoes"
+    },
+    "utilidade-publica/jalapao/achados-e-perdidos.html": {
+      "path": "utilidade-publica/jalapao/achados-e-perdidos"
+    },
+    "utilidade-publica/jalapao/doacoes.html": {
+      "path": "utilidade-publica/jalapao/doacoes"
+    },
+    "utilidade-publica/jericoacoara/achados-e-perdidos.html": {
+      "path": "utilidade-publica/jericoacoara/achados-e-perdidos"
+    },
+    "utilidade-publica/jericoacoara/doacoes.html": {
+      "path": "utilidade-publica/jericoacoara/doacoes"
+    },
+    "utilidade-publica/joao-pessoa/achados-e-perdidos.html": {
+      "path": "utilidade-publica/joao-pessoa/achados-e-perdidos"
+    },
+    "utilidade-publica/joao-pessoa/doacoes.html": {
+      "path": "utilidade-publica/joao-pessoa/doacoes"
+    },
+    "utilidade-publica/joinville/achados-e-perdidos.html": {
+      "path": "utilidade-publica/joinville/achados-e-perdidos"
+    },
+    "utilidade-publica/joinville/doacoes.html": {
+      "path": "utilidade-publica/joinville/doacoes"
+    },
+    "utilidade-publica/juiz-de-fora/achados-e-perdidos.html": {
+      "path": "utilidade-publica/juiz-de-fora/achados-e-perdidos"
+    },
+    "utilidade-publica/juiz-de-fora/doacoes.html": {
+      "path": "utilidade-publica/juiz-de-fora/doacoes"
+    },
+    "utilidade-publica/lencois/achados-e-perdidos.html": {
+      "path": "utilidade-publica/lencois/achados-e-perdidos"
+    },
+    "utilidade-publica/lencois/doacoes.html": {
+      "path": "utilidade-publica/lencois/doacoes"
+    },
+    "utilidade-publica/londrina/achados-e-perdidos.html": {
+      "path": "utilidade-publica/londrina/achados-e-perdidos"
+    },
+    "utilidade-publica/londrina/doacoes.html": {
+      "path": "utilidade-publica/londrina/doacoes"
+    },
+    "utilidade-publica/maceio/achados-e-perdidos.html": {
+      "path": "utilidade-publica/maceio/achados-e-perdidos"
+    },
+    "utilidade-publica/maceio/doacoes.html": {
+      "path": "utilidade-publica/maceio/doacoes"
+    },
+    "utilidade-publica/manaus/achados-e-perdidos.html": {
+      "path": "utilidade-publica/manaus/achados-e-perdidos"
+    },
+    "utilidade-publica/manaus/doacoes.html": {
+      "path": "utilidade-publica/manaus/doacoes"
+    },
+    "utilidade-publica/maringa/achados-e-perdidos.html": {
+      "path": "utilidade-publica/maringa/achados-e-perdidos"
+    },
+    "utilidade-publica/maringa/doacoes.html": {
+      "path": "utilidade-publica/maringa/doacoes"
+    },
+    "utilidade-publica/montes-claros/achados-e-perdidos.html": {
+      "path": "utilidade-publica/montes-claros/achados-e-perdidos"
+    },
+    "utilidade-publica/montes-claros/doacoes.html": {
+      "path": "utilidade-publica/montes-claros/doacoes"
+    },
+    "utilidade-publica/natal/achados-e-perdidos.html": {
+      "path": "utilidade-publica/natal/achados-e-perdidos"
+    },
+    "utilidade-publica/natal/doacoes.html": {
+      "path": "utilidade-publica/natal/doacoes"
+    },
+    "utilidade-publica/noronha/achados-e-perdidos.html": {
+      "path": "utilidade-publica/noronha/achados-e-perdidos"
+    },
+    "utilidade-publica/noronha/doacoes.html": {
+      "path": "utilidade-publica/noronha/doacoes"
+    },
+    "utilidade-publica/olimpia/achados-e-perdidos.html": {
+      "path": "utilidade-publica/olimpia/achados-e-perdidos"
+    },
+    "utilidade-publica/olimpia/doacoes.html": {
+      "path": "utilidade-publica/olimpia/doacoes"
+    },
+    "utilidade-publica/ouro-preto/achados-e-perdidos.html": {
+      "path": "utilidade-publica/ouro-preto/achados-e-perdidos"
+    },
+    "utilidade-publica/ouro-preto/doacoes.html": {
+      "path": "utilidade-publica/ouro-preto/doacoes"
+    },
+    "utilidade-publica/paraty/achados-e-perdidos.html": {
+      "path": "utilidade-publica/paraty/achados-e-perdidos"
+    },
+    "utilidade-publica/paraty/doacoes.html": {
+      "path": "utilidade-publica/paraty/doacoes"
+    },
+    "utilidade-publica/piracicaba/achados-e-perdidos.html": {
+      "path": "utilidade-publica/piracicaba/achados-e-perdidos"
+    },
+    "utilidade-publica/piracicaba/doacoes.html": {
+      "path": "utilidade-publica/piracicaba/doacoes"
+    },
+    "utilidade-publica/pirenopolis/achados-e-perdidos.html": {
+      "path": "utilidade-publica/pirenopolis/achados-e-perdidos"
+    },
+    "utilidade-publica/pirenopolis/doacoes.html": {
+      "path": "utilidade-publica/pirenopolis/doacoes"
+    },
+    "utilidade-publica/porto-alegre/achados-e-perdidos.html": {
+      "path": "utilidade-publica/porto-alegre/achados-e-perdidos"
+    },
+    "utilidade-publica/porto-alegre/doacoes.html": {
+      "path": "utilidade-publica/porto-alegre/doacoes"
+    },
+    "utilidade-publica/porto/achados-e-perdidos.html": {
+      "path": "utilidade-publica/porto/achados-e-perdidos"
+    },
+    "utilidade-publica/porto/doacoes.html": {
+      "path": "utilidade-publica/porto/doacoes"
+    },
+    "utilidade-publica/recife/achados-e-perdidos.html": {
+      "path": "utilidade-publica/recife/achados-e-perdidos"
+    },
+    "utilidade-publica/recife/doacoes.html": {
+      "path": "utilidade-publica/recife/doacoes"
+    },
+    "utilidade-publica/ribeirao-preto/achados-e-perdidos.html": {
+      "path": "utilidade-publica/ribeirao-preto/achados-e-perdidos"
+    },
+    "utilidade-publica/ribeirao-preto/doacoes.html": {
+      "path": "utilidade-publica/ribeirao-preto/doacoes"
+    },
+    "utilidade-publica/rio-de-janeiro/achados-e-perdidos.html": {
+      "path": "utilidade-publica/rio-de-janeiro/achados-e-perdidos"
+    },
+    "utilidade-publica/rio-de-janeiro/doacoes.html": {
+      "path": "utilidade-publica/rio-de-janeiro/doacoes"
+    },
+    "utilidade-publica/rio-verde/achados-e-perdidos.html": {
+      "path": "utilidade-publica/rio-verde/achados-e-perdidos"
+    },
+    "utilidade-publica/rio-verde/doacoes.html": {
+      "path": "utilidade-publica/rio-verde/doacoes"
+    },
+    "utilidade-publica/salvador/achados-e-perdidos.html": {
+      "path": "utilidade-publica/salvador/achados-e-perdidos"
+    },
+    "utilidade-publica/salvador/doacoes.html": {
+      "path": "utilidade-publica/salvador/doacoes"
+    },
+    "utilidade-publica/santos/achados-e-perdidos.html": {
+      "path": "utilidade-publica/santos/achados-e-perdidos"
+    },
+    "utilidade-publica/santos/doacoes.html": {
+      "path": "utilidade-publica/santos/doacoes"
+    },
+    "utilidade-publica/sao-jose-do-rio-preto/achados-e-perdidos.html": {
+      "path": "utilidade-publica/sao-jose-do-rio-preto/achados-e-perdidos"
+    },
+    "utilidade-publica/sao-jose-do-rio-preto/doacoes.html": {
+      "path": "utilidade-publica/sao-jose-do-rio-preto/doacoes"
+    },
+    "utilidade-publica/sao-luis/achados-e-perdidos.html": {
+      "path": "utilidade-publica/sao-luis/achados-e-perdidos"
+    },
+    "utilidade-publica/sao-luis/doacoes.html": {
+      "path": "utilidade-publica/sao-luis/doacoes"
+    },
+    "utilidade-publica/sao-paulo/achados-e-perdidos.html": {
+      "path": "utilidade-publica/sao-paulo/achados-e-perdidos"
+    },
+    "utilidade-publica/sao-paulo/doacoes.html": {
+      "path": "utilidade-publica/sao-paulo/doacoes"
+    },
+    "utilidade-publica/sorocaba/achados-e-perdidos.html": {
+      "path": "utilidade-publica/sorocaba/achados-e-perdidos"
+    },
+    "utilidade-publica/sorocaba/doacoes.html": {
+      "path": "utilidade-publica/sorocaba/doacoes"
+    },
+    "utilidade-publica/teresina/achados-e-perdidos.html": {
+      "path": "utilidade-publica/teresina/achados-e-perdidos"
+    },
+    "utilidade-publica/teresina/doacoes.html": {
+      "path": "utilidade-publica/teresina/doacoes"
+    },
+    "utilidade-publica/uberlandia/achados-e-perdidos.html": {
+      "path": "utilidade-publica/uberlandia/achados-e-perdidos"
+    },
+    "utilidade-publica/uberlandia/doacoes.html": {
+      "path": "utilidade-publica/uberlandia/doacoes"
+    },
+    "utilidade-publica/vitoria/achados-e-perdidos.html": {
+      "path": "utilidade-publica/vitoria/achados-e-perdidos"
+    },
+    "utilidade-publica/vitoria/doacoes.html": {
+      "path": "utilidade-publica/vitoria/doacoes"
+    },
     "achadinhos-descontos/achadinhos-amazon-viagem-malas-acessorios.html": {
       "path": "achadinhos-descontos/achadinhos-amazon-viagem-malas-acessorios"
     },
@@ -3310,6 +3725,12 @@
     "marcas/onde-encontrar-tramontina-em-sao-paulo.html": {
       "path": "marcas/onde-encontrar-tramontina-em-sao-paulo"
     },
+    "utilidade-publica/cidade.html": {
+      "path": "utilidade-publica/cidade"
+    },
+    "utilidade-publica/index.html": {
+      "path": "utilidade-publica/index"
+    },
     "vagas-e-viagens/campinas-para-sao-paulo.html": {
       "path": "vagas-e-viagens/campinas-para-sao-paulo"
     },
@@ -3396,6 +3817,9 @@
     },
     "404.html": {
       "path": "404"
+    },
+    "achados-e-perdidos.html": {
+      "path": "achados-e-perdidos"
     },
     "admin.html": {
       "path": "admin"
@@ -3549,6 +3973,9 @@
     },
     "curitiba-home.html": {
       "path": "curitiba-home"
+    },
+    "doacoes.html": {
+      "path": "doacoes"
     },
     "eletronicos.html": {
       "path": "eletronicos"
