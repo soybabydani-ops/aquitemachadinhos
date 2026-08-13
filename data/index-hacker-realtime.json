@@ -1,0 +1,162 @@
+{
+  "engine": "Aqui Tem Achadinhos High-Frequency Gateway Ingestion Engine v4.2",
+  "sourceProvider": "https://www.aquitemachadinhos.com.br",
+  "status": "ONLINE_HEALTHY",
+  "timestamp": "2026-08-13T03:00:27.723Z",
+  "totalMonetizedRoutes": 16,
+  "supportedProtocols": [
+    "IndexNow v2",
+    "Atom 1.0",
+    "RSS 2.0",
+    "Schema DataCatalog",
+    "Google Indexing API v3 Payload"
+  ],
+  "activePartners": [
+    "CJ Affiliate (Luxury USD)",
+    "Expedia Global Group",
+    "Discover Cars Global",
+    "Udemy (Impact Radius)",
+    "Hotmart Oficial",
+    "Kiwify Clube Invest",
+    "Monetizze DNE FESN",
+    "ClickBank Global",
+    "Wise Global",
+    "Shopee Brasil",
+    "Mercado Livre",
+    "Amazon Prime",
+    "SHEIN Brasil",
+    "Adsterra CPM (5975392)",
+    "PropellerAds (11558154)",
+    "Mercado Pago B2B"
+  ],
+  "highPriorityEndpoints": [
+    {
+      "loc": "https://www.aquitemachadinhos.com.br/luxo-vip",
+      "category": "Turismo VIP",
+      "partnerNetwork": "CJ Affiliate",
+      "priorityScore": "1.0",
+      "indexingAction": "URL_UPDATED",
+      "lastModified": "2026-08-13T03:00:27.723Z"
+    },
+    {
+      "loc": "https://www.aquitemachadinhos.com.br/pacotes-viagem",
+      "category": "Turismo VIP",
+      "partnerNetwork": "Expedia",
+      "priorityScore": "1.0",
+      "indexingAction": "URL_UPDATED",
+      "lastModified": "2026-08-13T03:00:27.723Z"
+    },
+    {
+      "loc": "https://www.aquitemachadinhos.com.br/aluguel-carros",
+      "category": "Mobilidade & Frotas",
+      "partnerNetwork": "Discover Cars",
+      "priorityScore": "1.0",
+      "indexingAction": "URL_UPDATED",
+      "lastModified": "2026-08-13T03:00:27.723Z"
+    },
+    {
+      "loc": "https://www.aquitemachadinhos.com.br/barretos-2026/biometria-facial-festa-do-peao-barretos",
+      "category": "Turismo & Eventos",
+      "partnerNetwork": "Aqui Tem Barretos",
+      "priorityScore": "1.0",
+      "indexingAction": "URL_UPDATED",
+      "lastModified": "2026-08-13T03:00:27.723Z"
+    },
+    {
+      "loc": "https://www.aquitemachadinhos.com.br/cursos",
+      "category": "Educação & Tecnologia",
+      "partnerNetwork": "Udemy Impact",
+      "priorityScore": "0.95",
+      "indexingAction": "URL_UPDATED",
+      "lastModified": "2026-08-13T03:00:27.723Z"
+    },
+    {
+      "loc": "https://www.aquitemachadinhos.com.br/cursos/cupom-desconto-promocoes-relampago-udemy-hoje",
+      "category": "Educação & Tecnologia",
+      "partnerNetwork": "Udemy Impact",
+      "priorityScore": "0.95",
+      "indexingAction": "URL_UPDATED",
+      "lastModified": "2026-08-13T03:00:27.723Z"
+    },
+    {
+      "loc": "https://www.aquitemachadinhos.com.br/infoprodutos/clube-invest-v3",
+      "category": "Finanças & Negócios",
+      "partnerNetwork": "Hotmart / Kiwify",
+      "priorityScore": "0.90",
+      "indexingAction": "URL_UPDATED",
+      "lastModified": "2026-08-13T03:00:27.723Z"
+    },
+    {
+      "loc": "https://www.aquitemachadinhos.com.br/estudante/carteirinha-estudante-digital-emitida-na-hora",
+      "category": "Utilidade Pública & Benefícios",
+      "partnerNetwork": "Monetizze",
+      "priorityScore": "0.90",
+      "indexingAction": "URL_UPDATED",
+      "lastModified": "2026-08-13T03:00:27.723Z"
+    },
+    {
+      "loc": "https://www.aquitemachadinhos.com.br/energy-system/how-to-lower-electricity-bills-at-home-legally",
+      "category": "Sustentabilidade",
+      "partnerNetwork": "ClickBank USD",
+      "priorityScore": "0.85",
+      "indexingAction": "URL_UPDATED",
+      "lastModified": "2026-08-13T03:00:27.723Z"
+    },
+    {
+      "loc": "https://www.aquitemachadinhos.com.br/achadinhos",
+      "category": "E-commerce & Achadinhos",
+      "partnerNetwork": "Shopee / Amazon",
+      "priorityScore": "0.90",
+      "indexingAction": "URL_UPDATED",
+      "lastModified": "2026-08-13T03:00:27.723Z"
+    },
+    {
+      "loc": "https://www.aquitemachadinhos.com.br/marcas",
+      "category": "E-commerce & Marcas",
+      "partnerNetwork": "Grandes Redes",
+      "priorityScore": "0.85",
+      "indexingAction": "URL_UPDATED",
+      "lastModified": "2026-08-13T03:00:27.723Z"
+    },
+    {
+      "loc": "https://www.aquitemachadinhos.com.br/looks/chapeu-pralana-barretos-promocao",
+      "category": "Moda & Vestuário",
+      "partnerNetwork": "SHEIN / ML",
+      "priorityScore": "0.85",
+      "indexingAction": "URL_UPDATED",
+      "lastModified": "2026-08-13T03:00:27.723Z"
+    },
+    {
+      "loc": "https://www.aquitemachadinhos.com.br/alerta-transito",
+      "category": "Utilidade Pública",
+      "partnerNetwork": "DER / CCR",
+      "priorityScore": "0.90",
+      "indexingAction": "URL_UPDATED",
+      "lastModified": "2026-08-13T03:00:27.723Z"
+    },
+    {
+      "loc": "https://www.aquitemachadinhos.com.br/concursos",
+      "category": "Utilidade Pública",
+      "partnerNetwork": "Diários Oficiais",
+      "priorityScore": "0.90",
+      "indexingAction": "URL_UPDATED",
+      "lastModified": "2026-08-13T03:00:27.723Z"
+    },
+    {
+      "loc": "https://www.aquitemachadinhos.com.br/alerta-clima",
+      "category": "Utilidade Pública",
+      "partnerNetwork": "Defesa Civil",
+      "priorityScore": "0.90",
+      "indexingAction": "URL_UPDATED",
+      "lastModified": "2026-08-13T03:00:27.723Z"
+    },
+    {
+      "loc": "https://www.aquitemachadinhos.com.br/utilidade-publica/barretos/achados-e-perdidos",
+      "category": "Utilidade Pública",
+      "partnerNetwork": "Aqui Tem Comunidade",
+      "priorityScore": "0.85",
+      "indexingAction": "URL_UPDATED",
+      "lastModified": "2026-08-13T03:00:27.723Z"
+    }
+  ]
+}
