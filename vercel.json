@@ -1042,11 +1042,11 @@
   ],
   "headers": [
     {
-      "source": "/feeds/(.*).atom",
+      "source": "/feeds/(.*)",
       "headers": [
         {
           "key": "Content-Type",
-          "value": "application/atom+xml; charset=utf-8"
+          "value": "application/rss+xml; charset=utf-8"
         },
         {
           "key": "Access-Control-Allow-Origin",
@@ -1059,11 +1059,11 @@
       ]
     },
     {
-      "source": "/feeds/(.*)",
+      "source": "/feeds/(.*).atom",
       "headers": [
         {
           "key": "Content-Type",
-          "value": "application/rss+xml; charset=utf-8"
+          "value": "application/atom+xml; charset=utf-8"
         },
         {
           "key": "Access-Control-Allow-Origin",
