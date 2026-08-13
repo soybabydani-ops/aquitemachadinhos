@@ -1,0 +1,175 @@
+{
+  "@context": "https://schema.org",
+  "@type": "DataFeed",
+  "name": "Aqui Tem Achadinhos — Realtime Dynamic Edge Ingestion Feed",
+  "description": "Feed em tempo real para indexação prioritária pelo Googlebot e Bingbot com mapeamento de utilidade pública e afiliados.",
+  "provider": {
+    "@type": "Organization",
+    "name": "Aqui Tem Achadinhos",
+    "url": "https://www.aquitemachadinhos.com.br"
+  },
+  "dateModified": "2026-08-13T03:14:16.006Z",
+  "totalUrls": 16,
+  "dataFeedElement": [
+    {
+      "@type": "DataFeedItem",
+      "name": "Suítes Presidenciais, Helipontos & Resorts 5★ — CJ Luxury",
+      "url": "https://www.aquitemachadinhos.com.br/luxo-vip",
+      "category": "Turismo VIP",
+      "partnerNetwork": "CJ Affiliate",
+      "indexingAction": "URL_UPDATED",
+      "priority": "1.0",
+      "dateModified": "2026-08-13T03:14:16.006Z"
+    },
+    {
+      "@type": "DataFeedItem",
+      "name": "Cruzeiros All-Inclusive & Hotéis Boutique — Expedia Global",
+      "url": "https://www.aquitemachadinhos.com.br/pacotes-viagem",
+      "category": "Turismo VIP",
+      "partnerNetwork": "Expedia",
+      "indexingAction": "URL_UPDATED",
+      "priority": "1.0",
+      "dateModified": "2026-08-13T03:14:16.006Z"
+    },
+    {
+      "@type": "DataFeedItem",
+      "name": "Aluguel de Carros & Frotas Executivas Aeroportos — Discover Cars",
+      "url": "https://www.aquitemachadinhos.com.br/aluguel-carros",
+      "category": "Mobilidade & Frotas",
+      "partnerNetwork": "Discover Cars",
+      "indexingAction": "URL_UPDATED",
+      "priority": "1.0",
+      "dateModified": "2026-08-13T03:14:16.006Z"
+    },
+    {
+      "@type": "DataFeedItem",
+      "name": "Guia Estratégico & Acomodações Festa do Peão de Barretos 2026",
+      "url": "https://www.aquitemachadinhos.com.br/barretos-2026/biometria-facial-festa-do-peao-barretos",
+      "category": "Turismo & Eventos",
+      "partnerNetwork": "Aqui Tem Barretos",
+      "indexingAction": "URL_UPDATED",
+      "priority": "1.0",
+      "dateModified": "2026-08-13T03:14:16.006Z"
+    },
+    {
+      "@type": "DataFeedItem",
+      "name": "Cursos Profissionalizantes com Certificado — Portal Udemy Oficial",
+      "url": "https://www.aquitemachadinhos.com.br/cursos",
+      "category": "Educação & Tecnologia",
+      "partnerNetwork": "Udemy Impact",
+      "indexingAction": "URL_UPDATED",
+      "priority": "0.95",
+      "dateModified": "2026-08-13T03:14:16.006Z"
+    },
+    {
+      "@type": "DataFeedItem",
+      "name": "Cupons de Desconto e Promoções Relâmpago Cursos Udemy Hoje",
+      "url": "https://www.aquitemachadinhos.com.br/cursos/cupom-desconto-promocoes-relampago-udemy-hoje",
+      "category": "Educação & Tecnologia",
+      "partnerNetwork": "Udemy Impact",
+      "indexingAction": "URL_UPDATED",
+      "priority": "0.95",
+      "dateModified": "2026-08-13T03:14:16.006Z"
+    },
+    {
+      "@type": "DataFeedItem",
+      "name": "Clube Invest v3 — Estratégia de Renda Passiva e Investimentos",
+      "url": "https://www.aquitemachadinhos.com.br/infoprodutos/clube-invest-v3",
+      "category": "Finanças & Negócios",
+      "partnerNetwork": "Hotmart / Kiwify",
+      "indexingAction": "URL_UPDATED",
+      "priority": "0.90",
+      "dateModified": "2026-08-13T03:14:16.006Z"
+    },
+    {
+      "@type": "DataFeedItem",
+      "name": "Documento Nacional do Estudante Meia-Entrada DNE FESN",
+      "url": "https://www.aquitemachadinhos.com.br/estudante/carteirinha-estudante-digital-emitida-na-hora",
+      "category": "Utilidade Pública & Benefícios",
+      "partnerNetwork": "Monetizze",
+      "indexingAction": "URL_UPDATED",
+      "priority": "0.90",
+      "dateModified": "2026-08-13T03:14:16.006Z"
+    },
+    {
+      "@type": "DataFeedItem",
+      "name": "Energy Revolution System Tesla Blueprint — ClickBank Global",
+      "url": "https://www.aquitemachadinhos.com.br/energy-system/how-to-lower-electricity-bills-at-home-legally",
+      "category": "Sustentabilidade",
+      "partnerNetwork": "ClickBank USD",
+      "indexingAction": "URL_UPDATED",
+      "priority": "0.85",
+      "dateModified": "2026-08-13T03:14:16.006Z"
+    },
+    {
+      "@type": "DataFeedItem",
+      "name": "Achadinhos Virais Shopee, Amazon e SHEIN — Ofertas Validadas",
+      "url": "https://www.aquitemachadinhos.com.br/achadinhos",
+      "category": "E-commerce & Achadinhos",
+      "partnerNetwork": "Shopee / Amazon",
+      "indexingAction": "URL_UPDATED",
+      "priority": "0.90",
+      "dateModified": "2026-08-13T03:14:16.006Z"
+    },
+    {
+      "@type": "DataFeedItem",
+      "name": "Grandes Marcas Credenciadas & Lojas Oficiais",
+      "url": "https://www.aquitemachadinhos.com.br/marcas",
+      "category": "E-commerce & Marcas",
+      "partnerNetwork": "Grandes Redes",
+      "indexingAction": "URL_UPDATED",
+      "priority": "0.85",
+      "dateModified": "2026-08-13T03:14:16.006Z"
+    },
+    {
+      "@type": "DataFeedItem",
+      "name": "Moda Country, Botas Western & Chapéus Pralana Barretos",
+      "url": "https://www.aquitemachadinhos.com.br/looks/chapeu-pralana-barretos-promocao",
+      "category": "Moda & Vestuário",
+      "partnerNetwork": "SHEIN / ML",
+      "indexingAction": "URL_UPDATED",
+      "priority": "0.85",
+      "dateModified": "2026-08-13T03:14:16.006Z"
+    },
+    {
+      "@type": "DataFeedItem",
+      "name": "Radar de Trânsito & Fluidez em Rodovias de SP — Defesa & DER",
+      "url": "https://www.aquitemachadinhos.com.br/alerta-transito",
+      "category": "Utilidade Pública",
+      "partnerNetwork": "DER / CCR",
+      "indexingAction": "URL_UPDATED",
+      "priority": "0.90",
+      "dateModified": "2026-08-13T03:14:16.006Z"
+    },
+    {
+      "@type": "DataFeedItem",
+      "name": "Radar de Concursos Municipais & Editais Abertos 2026",
+      "url": "https://www.aquitemachadinhos.com.br/concursos",
+      "category": "Utilidade Pública",
+      "partnerNetwork": "Diários Oficiais",
+      "indexingAction": "URL_UPDATED",
+      "priority": "0.90",
+      "dateModified": "2026-08-13T03:14:16.006Z"
+    },
+    {
+      "@type": "DataFeedItem",
+      "name": "Alertas Meteorológicos de Emergência & Defesa Civil Regional",
+      "url": "https://www.aquitemachadinhos.com.br/alerta-clima",
+      "category": "Utilidade Pública",
+      "partnerNetwork": "Defesa Civil",
+      "indexingAction": "URL_UPDATED",
+      "priority": "0.90",
+      "dateModified": "2026-08-13T03:14:16.006Z"
+    },
+    {
+      "@type": "DataFeedItem",
+      "name": "Central de Achados e Perdidos & Doações Comunitárias Barretos",
+      "url": "https://www.aquitemachadinhos.com.br/utilidade-publica/barretos/achados-e-perdidos",
+      "category": "Utilidade Pública",
+      "partnerNetwork": "Aqui Tem Comunidade",
+      "indexingAction": "URL_UPDATED",
+      "priority": "0.85",
+      "dateModified": "2026-08-13T03:14:16.006Z"
+    }
+  ]
+}

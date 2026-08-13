@@ -1,4 +1,4 @@
-// AQUITEM EDGE CACHE PURGE ENGINE (Deno Native)
+// AQUITEM EDGE CACHE PURGE ENGINE (CDN Invalidation v5.0)
 const DOMAIN = "https://www.aquitemachadinhos.com.br";
 
 const corsHeaders = {
@@ -12,6 +12,7 @@ const EDGE_ROUTES_TO_PURGE = [
   "/feeds/sitemap-urgente.atom",
   "/feeds/achadinhos-global.xml",
   "/data/hubs-municipais.json",
+  "/data/index-realtime.json",
   "/data/index-hacker-realtime.json",
   "/sitemap.xml",
   "/index.html"
@@ -23,6 +24,7 @@ Deno.serve(async (req: Request) => {
   }
 
   const startTime = Date.now();
+  console.log(`[EdgeCachePurgeEngine v5.0] Executing CDN purge protocol at ${new Date().toISOString()}`);
 
   try {
     const purgeResults = await Promise.allSettled(
@@ -52,7 +54,7 @@ Deno.serve(async (req: Request) => {
     return new Response(
       JSON.stringify({
         success: true,
-        protocol: "High-Frequency CDN Edge Ingestion & Cache Invalidation v4.2",
+        protocol: "Multiplexed Edge CDN Cache Invalidation Engine v5.0",
         sourceProvider: DOMAIN,
         totalRoutesPurged: EDGE_ROUTES_TO_PURGE.length,
         routes: purgeResults.map(r => r.status === "fulfilled" ? r.value : { error: r.reason }),

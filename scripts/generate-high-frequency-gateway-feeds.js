@@ -219,6 +219,38 @@ function generateIndexHackerRealtimeJSON() {
 }
 
 // EXECUÇÃO COMPLETA
+
+// 5. GERAR /data/index-realtime.json (Structured Schema.org DataFeed)
+function generateIndexRealtimeJSON() {
+  const payload = {
+    "@context": "https://schema.org",
+    "@type": "DataFeed",
+    "name": "Aqui Tem Achadinhos — Realtime Dynamic Edge Ingestion Feed",
+    "description": "Feed em tempo real para indexação prioritária pelo Googlebot e Bingbot com mapeamento de utilidade pública e afiliados.",
+    "provider": {
+      "@type": "Organization",
+      "name": "Aqui Tem Achadinhos",
+      "url": DOMAIN
+    },
+    "dateModified": NOW_ISO,
+    "totalUrls": TOP_MONETIZED_ROUTES.length,
+    "dataFeedElement": TOP_MONETIZED_ROUTES.map(r => ({
+      "@type": "DataFeedItem",
+      "name": r.title,
+      "url": r.url,
+      "category": r.category,
+      "partnerNetwork": r.partner,
+      "indexingAction": "URL_UPDATED",
+      "priority": r.priority,
+      "dateModified": NOW_ISO
+    }))
+  };
+
+  const p = path.join(DATA_DIR, 'index-realtime.json');
+  fs.writeFileSync(p, JSON.stringify(payload, null, 2), 'utf8');
+  console.log(`✓ Gerado feed JSON: data/index-realtime.json (${payload.dataFeedElement.length} rotas)`);
+}
+
 function run() {
   console.log("\n=======================================================");
   console.log("⚡ GERANDO FEEDS DE DADOS DE ALTA VELOCIDADE & ATOM");
@@ -227,6 +259,7 @@ function run() {
   generateSitemapAtom();
   generateHubsMunicipaisJSON();
   generateIndexHackerRealtimeJSON();
+  generateIndexRealtimeJSON();
   console.log("\n✅ Todos os feeds de dados gerados com sucesso!\n");
 }
 
