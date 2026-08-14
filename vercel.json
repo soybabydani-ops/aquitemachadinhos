@@ -2,8 +2,10 @@
   "version": 2,
   "framework": "nextjs",
   "regions": ["gru1"],
-  "rewrites": [
-    { "source": "/en/:path*", "destination": "/en/:path*" },
-    { "source": "/es/:path*", "destination": "/es/:path*" }
+  "crons": [
+    {
+      "path": "/api/v1/cron-global-hydration",
+      "schedule": "0 3 * * *"
+    }
   ]
 }
