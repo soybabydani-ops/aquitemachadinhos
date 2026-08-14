@@ -2,9 +2,10 @@ import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 
 export function middleware(request: NextRequest) {
-  const { pathname } = request.nextUrl;
+  const { pathname, search } = request.nextUrl;
   const country = request.geo?.country || 'BR';
   const userAgent = request.headers.get('user-agent') || '';
+  const host = request.headers.get('host') || '';
 
   // 1. Security: Block malicious scanners
   const badAgents = ['sqlmap', 'nikto', 'nmap', 'masscan', 'zgrab', 'curl/7'];
@@ -12,13 +13,34 @@ export function middleware(request: NextRequest) {
     return new NextResponse('Access Denied', { status: 403 });
   }
 
-  // 2. 301 HTTPS + clean .html
+  // 2. BLINDAGEM DE REDIRECIONAMENTOS 301 (strict + authority protection)
+  // HTTP → HTTPS (permanent)
   if (request.headers.get('x-forwarded-proto') === 'http') {
-    const httpsUrl = `https://${request.headers.get('host')}${pathname}`;
+    const httpsUrl = `https://${host}${pathname}${search || ''}`;
     return NextResponse.redirect(httpsUrl, 301);
   }
-  if (pathname.endsWith('.html')) {
-    return NextResponse.redirect(pathname.replace(/\.html$/, ''), 301);
+
+  // Remove .html + fragment params that fragment authority
+  let cleanPath = pathname;
+  if (cleanPath.endsWith('.html')) {
+    cleanPath = cleanPath.replace(/\.html$/, '');
+  }
+
+  // Strip tracking / temporary query params that fragment authority
+  const urlObj = new URL(request.url);
+  const badParamPrefixes = ['utm', 'ref', 'fbclid', 'gclid', 'mc_', 'source', 'campaign', 'yclid'];
+  let paramsRemoved = false;
+
+  Array.from(urlObj.searchParams.keys()).forEach(key => {
+    if (badParamPrefixes.some(p => key.toLowerCase().startsWith(p))) {
+      urlObj.searchParams.delete(key);
+      paramsRemoved = true;
+    }
+  });
+
+  if (pathname !== cleanPath || paramsRemoved) {
+    const finalUrl = `${urlObj.origin}${cleanPath}${urlObj.search}`;
+    return NextResponse.redirect(finalUrl, 301);
   }
 
   // 3. Geo targeting (Glassmorphism dynamic offers)
@@ -31,13 +53,19 @@ export function middleware(request: NextRequest) {
   response.headers.set('X-Geo-Country', country);
   response.headers.set('X-Offer-Variant', variant);
 
-  // 4. Hreflang + Canonical
+  // 4. BLINDAGEM HREFLANG + CANONICAL (cross-folder /en /es)
   const base = 'https://www.aquitemachadinhos.com.br';
-  response.headers.set('Link', 
-    `<${base}${pathname}>; rel="alternate"; hreflang="pt-br", ` +
-    `<${base}/en${pathname}>; rel="alternate"; hreflang="en", ` +
-    `<${base}/es${pathname}>; rel="alternate"; hreflang="es"`
-  );
+  const cleanPathname = cleanPath || pathname;
+
+  const hreflangs = [
+    `<${base}${cleanPathname}>; rel="alternate"; hreflang="pt-br"`,
+    `<${base}/en${cleanPathname}>; rel="alternate"; hreflang="en"`,
+    `<${base}/es${cleanPathname}>; rel="alternate"; hreflang="es"`,
+    `<${base}${cleanPathname}>; rel="canonical"`
+  ].join(', ');
+
+  response.headers.set('Link', hreflangs);
+  response.headers.set('X-Robots-Tag', 'index, follow');
 
   return response;
 }

@@ -40,7 +40,7 @@ const LSIClusterBlock: React.FC<LSIClusterProps> = ({ tenant, clusterType, quest
           </div>
           <div className="mt-4 flex flex-wrap gap-2 text-xs">
             <span className="px-2.5 py-0.5 rounded-full bg-emerald-500/10 text-emerald-600 font-medium">
-              {tenant} • {CURRENT_YEAR}
+              {tenant} • 2026
             </span>
             <span className="px-2.5 py-0.5 rounded-full bg-blue-500/10 text-blue-600 font-medium">
               LSI Cluster • RankBrain
