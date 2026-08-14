@@ -1,18 +1,9 @@
 {
   "version": 2,
   "framework": "nextjs",
-  "regions": ["gru1", "iad1", "sfo1", "fra1"],
+  "regions": ["gru1"],
   "rewrites": [
     { "source": "/en/:path*", "destination": "/en/:path*" },
     { "source": "/es/:path*", "destination": "/es/:path*" }
-  ],
-  "headers": [
-    {
-      "source": "/(.*)",
-      "headers": [
-        { "key": "X-Content-Type-Options", "value": "nosniff" },
-        { "key": "X-Frame-Options", "value": "DENY" }
-      ]
-    }
   ]
 }
