@@ -1,15 +1,30 @@
 {
-  "name": "aquitemachadinhos",
-  "version": "10.0.0",
-  "description": "Super Portal Nacional de Guias Locais, Vagas e Classificados no Brasil",
-  "main": "app.js",
-  "keywords": [
-    "guia-local",
-    "vagas-de-emprego",
-    "classificados",
-    "brasil",
-    "programmatic-seo"
-  ],
-  "author": "AQUITEM",
-  "license": "UNLICENSED"
+  "name": "aquitemachadinhos-portal",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "generate-sitemap": "node scripts/generate-sitemap.js",
+    "seed-tenants": "node scripts/seed-tenants.js",
+    "deploy": "npm run build && vercel --prod"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.109.0",
+    "googleapis": "^174.0.1",
+    "next": "14.2.5",
+    "react": "^18",
+    "react-dom": "^18"
+  },
+  "devDependencies": {
+    "@types/node": "^20",
+    "@types/react": "^18",
+    "@types/react-dom": "^18",
+    "autoprefixer": "^10",
+    "postcss": "^8",
+    "tailwindcss": "^3.4.1",
+    "typescript": "^5"
+  }
 }

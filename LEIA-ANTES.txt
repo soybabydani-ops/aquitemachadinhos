@@ -1,6 +1,0 @@
-CORREÇÃO FINAL — EXIBIÇÃO DE EMPRESAS
-
-1) No Supabase execute correcao-operacao-final.sql (é seguro repetir; apenas ativa empresa vinculada a lead ativo que ficou pendente).
-2) No GitHub substitua assets/app.js.
-
-Corrige o componente que renderiza o cartão da empresa no diretório. Sem ele, a contagem mostrava 1 mas o cartão não era exibido.
