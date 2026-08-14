@@ -1,6 +1,6 @@
 {
   "/_not-found/page": "app/_not-found/page.js",
+  "/[city]/page": "app/[city]/page.js",
   "/vagas-e-viagens/[city]/page": "app/vagas-e-viagens/[city]/page.js",
-  "/utilidade-publica/[city]/page": "app/utilidade-publica/[city]/page.js",
-  "/[city]/page": "app/[city]/page.js"
+  "/utilidade-publica/[city]/page": "app/utilidade-publica/[city]/page.js"
 }
