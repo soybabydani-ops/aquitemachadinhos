@@ -15,13 +15,6 @@
       "static/css/d3c7adf391d87e52.css",
       "static/chunks/app/layout-df8d1c81e8ea4a0f.js"
     ],
-    "/[city]/page": [
-      "static/chunks/webpack-889906d2d9470bce.js",
-      "static/chunks/fd9d1056-2821b0f0cabcd8bd.js",
-      "static/chunks/23-b75664ace61c0abb.js",
-      "static/chunks/main-app-0cf466be5c520360.js",
-      "static/chunks/app/[city]/page-cbfde282a501ed3a.js"
-    ],
     "/utilidade-publica/[city]/page": [
       "static/chunks/webpack-889906d2d9470bce.js",
       "static/chunks/fd9d1056-2821b0f0cabcd8bd.js",
@@ -29,12 +22,19 @@
       "static/chunks/main-app-0cf466be5c520360.js",
       "static/chunks/app/utilidade-publica/[city]/page-02c06ca4d363ec02.js"
     ],
+    "/[city]/page": [
+      "static/chunks/webpack-889906d2d9470bce.js",
+      "static/chunks/fd9d1056-2821b0f0cabcd8bd.js",
+      "static/chunks/23-b75664ace61c0abb.js",
+      "static/chunks/main-app-0cf466be5c520360.js",
+      "static/chunks/app/[city]/page-cbfde282a501ed3a.js"
+    ],
     "/vagas-e-viagens/[city]/page": [
       "static/chunks/webpack-889906d2d9470bce.js",
       "static/chunks/fd9d1056-2821b0f0cabcd8bd.js",
       "static/chunks/23-b75664ace61c0abb.js",
       "static/chunks/main-app-0cf466be5c520360.js",
-      "static/chunks/app/vagas-e-viagens/[city]/page-3ea3130a84f002fc.js"
+      "static/chunks/app/vagas-e-viagens/[city]/page-f6726d0dcaa67cb1.js"
     ]
   }
 }
