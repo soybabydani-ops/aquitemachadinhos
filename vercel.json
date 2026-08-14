@@ -2,10 +2,5 @@
   "version": 2,
   "framework": "nextjs",
   "regions": ["gru1"],
-  "crons": [
-    {
-      "path": "/api/v1/automated-global-loop",
-      "schedule": "0 * * * *"
-    }
-  ]
+  "crons": [{ "path": "/api/v1/automated-global-loop", "schedule": "0 * * * *" }]
 }
