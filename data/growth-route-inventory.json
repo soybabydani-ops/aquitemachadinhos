@@ -1,0 +1,2701 @@
+{
+  "generated_at": "2026-08-14T12:00:00-03:00",
+  "version": "safe-growth-2026.08.14",
+  "tenant_cities": 64,
+  "total_routes": 449,
+  "routes": [
+    {
+      "type": "network_hub",
+      "route": "/guias/",
+      "canonical": "https://www.aquitemachadinhos.com.br/guias/"
+    },
+    {
+      "type": "city_hub",
+      "city": "barretos",
+      "route": "/guias/barretos",
+      "canonical": "https://barretos.aquitemachadinhos.com.br/guias/barretos"
+    },
+    {
+      "type": "home_office",
+      "city": "barretos",
+      "route": "/guias/barretos/home-office-sem-experiencia-2026",
+      "canonical": "https://barretos.aquitemachadinhos.com.br/guias/barretos/home-office-sem-experiencia-2026"
+    },
+    {
+      "type": "concursos",
+      "city": "barretos",
+      "route": "/guias/barretos/concursos-municipais-como-consultar-2026",
+      "canonical": "https://barretos.aquitemachadinhos.com.br/guias/barretos/concursos-municipais-como-consultar-2026"
+    },
+    {
+      "type": "clima_energia",
+      "city": "barretos",
+      "route": "/guias/barretos/ventos-fortes-e-falta-de-luz-preparacao",
+      "canonical": "https://barretos.aquitemachadinhos.com.br/guias/barretos/ventos-fortes-e-falta-de-luz-preparacao"
+    },
+    {
+      "type": "economia_energia",
+      "city": "barretos",
+      "route": "/guias/barretos/como-reduzir-conta-de-luz-2026",
+      "canonical": "https://barretos.aquitemachadinhos.com.br/guias/barretos/como-reduzir-conta-de-luz-2026"
+    },
+    {
+      "type": "moda_country",
+      "city": "barretos",
+      "route": "/guias/barretos/moda-country-chapeus-guia-de-compra",
+      "canonical": "https://barretos.aquitemachadinhos.com.br/guias/barretos/moda-country-chapeus-guia-de-compra"
+    },
+    {
+      "type": "tecnologia_social",
+      "city": "barretos",
+      "route": "/guias/barretos/tecnologia-popular-no-tiktok-guia-de-compra",
+      "canonical": "https://barretos.aquitemachadinhos.com.br/guias/barretos/tecnologia-popular-no-tiktok-guia-de-compra"
+    },
+    {
+      "type": "city_hub",
+      "city": "sao-paulo",
+      "route": "/guias/sao-paulo",
+      "canonical": "https://saopaulo.aquitemachadinhos.com.br/guias/sao-paulo"
+    },
+    {
+      "type": "home_office",
+      "city": "sao-paulo",
+      "route": "/guias/sao-paulo/home-office-sem-experiencia-2026",
+      "canonical": "https://saopaulo.aquitemachadinhos.com.br/guias/sao-paulo/home-office-sem-experiencia-2026"
+    },
+    {
+      "type": "concursos",
+      "city": "sao-paulo",
+      "route": "/guias/sao-paulo/concursos-municipais-como-consultar-2026",
+      "canonical": "https://saopaulo.aquitemachadinhos.com.br/guias/sao-paulo/concursos-municipais-como-consultar-2026"
+    },
+    {
+      "type": "clima_energia",
+      "city": "sao-paulo",
+      "route": "/guias/sao-paulo/ventos-fortes-e-falta-de-luz-preparacao",
+      "canonical": "https://saopaulo.aquitemachadinhos.com.br/guias/sao-paulo/ventos-fortes-e-falta-de-luz-preparacao"
+    },
+    {
+      "type": "economia_energia",
+      "city": "sao-paulo",
+      "route": "/guias/sao-paulo/como-reduzir-conta-de-luz-2026",
+      "canonical": "https://saopaulo.aquitemachadinhos.com.br/guias/sao-paulo/como-reduzir-conta-de-luz-2026"
+    },
+    {
+      "type": "moda_country",
+      "city": "sao-paulo",
+      "route": "/guias/sao-paulo/moda-country-chapeus-guia-de-compra",
+      "canonical": "https://saopaulo.aquitemachadinhos.com.br/guias/sao-paulo/moda-country-chapeus-guia-de-compra"
+    },
+    {
+      "type": "tecnologia_social",
+      "city": "sao-paulo",
+      "route": "/guias/sao-paulo/tecnologia-popular-no-tiktok-guia-de-compra",
+      "canonical": "https://saopaulo.aquitemachadinhos.com.br/guias/sao-paulo/tecnologia-popular-no-tiktok-guia-de-compra"
+    },
+    {
+      "type": "city_hub",
+      "city": "gramado",
+      "route": "/guias/gramado",
+      "canonical": "https://gramado.aquitemachadinhos.com.br/guias/gramado"
+    },
+    {
+      "type": "home_office",
+      "city": "gramado",
+      "route": "/guias/gramado/home-office-sem-experiencia-2026",
+      "canonical": "https://gramado.aquitemachadinhos.com.br/guias/gramado/home-office-sem-experiencia-2026"
+    },
+    {
+      "type": "concursos",
+      "city": "gramado",
+      "route": "/guias/gramado/concursos-municipais-como-consultar-2026",
+      "canonical": "https://gramado.aquitemachadinhos.com.br/guias/gramado/concursos-municipais-como-consultar-2026"
+    },
+    {
+      "type": "clima_energia",
+      "city": "gramado",
+      "route": "/guias/gramado/ventos-fortes-e-falta-de-luz-preparacao",
+      "canonical": "https://gramado.aquitemachadinhos.com.br/guias/gramado/ventos-fortes-e-falta-de-luz-preparacao"
+    },
+    {
+      "type": "economia_energia",
+      "city": "gramado",
+      "route": "/guias/gramado/como-reduzir-conta-de-luz-2026",
+      "canonical": "https://gramado.aquitemachadinhos.com.br/guias/gramado/como-reduzir-conta-de-luz-2026"
+    },
+    {
+      "type": "moda_country",
+      "city": "gramado",
+      "route": "/guias/gramado/moda-country-chapeus-guia-de-compra",
+      "canonical": "https://gramado.aquitemachadinhos.com.br/guias/gramado/moda-country-chapeus-guia-de-compra"
+    },
+    {
+      "type": "tecnologia_social",
+      "city": "gramado",
+      "route": "/guias/gramado/tecnologia-popular-no-tiktok-guia-de-compra",
+      "canonical": "https://gramado.aquitemachadinhos.com.br/guias/gramado/tecnologia-popular-no-tiktok-guia-de-compra"
+    },
+    {
+      "type": "city_hub",
+      "city": "campos",
+      "route": "/guias/campos",
+      "canonical": "https://campos.aquitemachadinhos.com.br/guias/campos"
+    },
+    {
+      "type": "home_office",
+      "city": "campos",
+      "route": "/guias/campos/home-office-sem-experiencia-2026",
+      "canonical": "https://campos.aquitemachadinhos.com.br/guias/campos/home-office-sem-experiencia-2026"
+    },
+    {
+      "type": "concursos",
+      "city": "campos",
+      "route": "/guias/campos/concursos-municipais-como-consultar-2026",
+      "canonical": "https://campos.aquitemachadinhos.com.br/guias/campos/concursos-municipais-como-consultar-2026"
+    },
+    {
+      "type": "clima_energia",
+      "city": "campos",
+      "route": "/guias/campos/ventos-fortes-e-falta-de-luz-preparacao",
+      "canonical": "https://campos.aquitemachadinhos.com.br/guias/campos/ventos-fortes-e-falta-de-luz-preparacao"
+    },
+    {
+      "type": "economia_energia",
+      "city": "campos",
+      "route": "/guias/campos/como-reduzir-conta-de-luz-2026",
+      "canonical": "https://campos.aquitemachadinhos.com.br/guias/campos/como-reduzir-conta-de-luz-2026"
+    },
+    {
+      "type": "moda_country",
+      "city": "campos",
+      "route": "/guias/campos/moda-country-chapeus-guia-de-compra",
+      "canonical": "https://campos.aquitemachadinhos.com.br/guias/campos/moda-country-chapeus-guia-de-compra"
+    },
+    {
+      "type": "tecnologia_social",
+      "city": "campos",
+      "route": "/guias/campos/tecnologia-popular-no-tiktok-guia-de-compra",
+      "canonical": "https://campos.aquitemachadinhos.com.br/guias/campos/tecnologia-popular-no-tiktok-guia-de-compra"
+    },
+    {
+      "type": "city_hub",
+      "city": "campinas",
+      "route": "/guias/campinas",
+      "canonical": "https://campinas.aquitemachadinhos.com.br/guias/campinas"
+    },
+    {
+      "type": "home_office",
+      "city": "campinas",
+      "route": "/guias/campinas/home-office-sem-experiencia-2026",
+      "canonical": "https://campinas.aquitemachadinhos.com.br/guias/campinas/home-office-sem-experiencia-2026"
+    },
+    {
+      "type": "concursos",
+      "city": "campinas",
+      "route": "/guias/campinas/concursos-municipais-como-consultar-2026",
+      "canonical": "https://campinas.aquitemachadinhos.com.br/guias/campinas/concursos-municipais-como-consultar-2026"
+    },
+    {
+      "type": "clima_energia",
+      "city": "campinas",
+      "route": "/guias/campinas/ventos-fortes-e-falta-de-luz-preparacao",
+      "canonical": "https://campinas.aquitemachadinhos.com.br/guias/campinas/ventos-fortes-e-falta-de-luz-preparacao"
+    },
+    {
+      "type": "economia_energia",
+      "city": "campinas",
+      "route": "/guias/campinas/como-reduzir-conta-de-luz-2026",
+      "canonical": "https://campinas.aquitemachadinhos.com.br/guias/campinas/como-reduzir-conta-de-luz-2026"
+    },
+    {
+      "type": "moda_country",
+      "city": "campinas",
+      "route": "/guias/campinas/moda-country-chapeus-guia-de-compra",
+      "canonical": "https://campinas.aquitemachadinhos.com.br/guias/campinas/moda-country-chapeus-guia-de-compra"
+    },
+    {
+      "type": "tecnologia_social",
+      "city": "campinas",
+      "route": "/guias/campinas/tecnologia-popular-no-tiktok-guia-de-compra",
+      "canonical": "https://campinas.aquitemachadinhos.com.br/guias/campinas/tecnologia-popular-no-tiktok-guia-de-compra"
+    },
+    {
+      "type": "city_hub",
+      "city": "santos",
+      "route": "/guias/santos",
+      "canonical": "https://santos.aquitemachadinhos.com.br/guias/santos"
+    },
+    {
+      "type": "home_office",
+      "city": "santos",
+      "route": "/guias/santos/home-office-sem-experiencia-2026",
+      "canonical": "https://santos.aquitemachadinhos.com.br/guias/santos/home-office-sem-experiencia-2026"
+    },
+    {
+      "type": "concursos",
+      "city": "santos",
+      "route": "/guias/santos/concursos-municipais-como-consultar-2026",
+      "canonical": "https://santos.aquitemachadinhos.com.br/guias/santos/concursos-municipais-como-consultar-2026"
+    },
+    {
+      "type": "clima_energia",
+      "city": "santos",
+      "route": "/guias/santos/ventos-fortes-e-falta-de-luz-preparacao",
+      "canonical": "https://santos.aquitemachadinhos.com.br/guias/santos/ventos-fortes-e-falta-de-luz-preparacao"
+    },
+    {
+      "type": "economia_energia",
+      "city": "santos",
+      "route": "/guias/santos/como-reduzir-conta-de-luz-2026",
+      "canonical": "https://santos.aquitemachadinhos.com.br/guias/santos/como-reduzir-conta-de-luz-2026"
+    },
+    {
+      "type": "moda_country",
+      "city": "santos",
+      "route": "/guias/santos/moda-country-chapeus-guia-de-compra",
+      "canonical": "https://santos.aquitemachadinhos.com.br/guias/santos/moda-country-chapeus-guia-de-compra"
+    },
+    {
+      "type": "tecnologia_social",
+      "city": "santos",
+      "route": "/guias/santos/tecnologia-popular-no-tiktok-guia-de-compra",
+      "canonical": "https://santos.aquitemachadinhos.com.br/guias/santos/tecnologia-popular-no-tiktok-guia-de-compra"
+    },
+    {
+      "type": "city_hub",
+      "city": "ribeirao-preto",
+      "route": "/guias/ribeirao-preto",
+      "canonical": "https://ribeiraopreto.aquitemachadinhos.com.br/guias/ribeirao-preto"
+    },
+    {
+      "type": "home_office",
+      "city": "ribeirao-preto",
+      "route": "/guias/ribeirao-preto/home-office-sem-experiencia-2026",
+      "canonical": "https://ribeiraopreto.aquitemachadinhos.com.br/guias/ribeirao-preto/home-office-sem-experiencia-2026"
+    },
+    {
+      "type": "concursos",
+      "city": "ribeirao-preto",
+      "route": "/guias/ribeirao-preto/concursos-municipais-como-consultar-2026",
+      "canonical": "https://ribeiraopreto.aquitemachadinhos.com.br/guias/ribeirao-preto/concursos-municipais-como-consultar-2026"
+    },
+    {
+      "type": "clima_energia",
+      "city": "ribeirao-preto",
+      "route": "/guias/ribeirao-preto/ventos-fortes-e-falta-de-luz-preparacao",
+      "canonical": "https://ribeiraopreto.aquitemachadinhos.com.br/guias/ribeirao-preto/ventos-fortes-e-falta-de-luz-preparacao"
+    },
+    {
+      "type": "economia_energia",
+      "city": "ribeirao-preto",
+      "route": "/guias/ribeirao-preto/como-reduzir-conta-de-luz-2026",
+      "canonical": "https://ribeiraopreto.aquitemachadinhos.com.br/guias/ribeirao-preto/como-reduzir-conta-de-luz-2026"
+    },
+    {
+      "type": "moda_country",
+      "city": "ribeirao-preto",
+      "route": "/guias/ribeirao-preto/moda-country-chapeus-guia-de-compra",
+      "canonical": "https://ribeiraopreto.aquitemachadinhos.com.br/guias/ribeirao-preto/moda-country-chapeus-guia-de-compra"
+    },
+    {
+      "type": "tecnologia_social",
+      "city": "ribeirao-preto",
+      "route": "/guias/ribeirao-preto/tecnologia-popular-no-tiktok-guia-de-compra",
+      "canonical": "https://ribeiraopreto.aquitemachadinhos.com.br/guias/ribeirao-preto/tecnologia-popular-no-tiktok-guia-de-compra"
+    },
+    {
+      "type": "city_hub",
+      "city": "sao-jose-do-rio-preto",
+      "route": "/guias/sao-jose-do-rio-preto",
+      "canonical": "https://saojosedoriopreto.aquitemachadinhos.com.br/guias/sao-jose-do-rio-preto"
+    },
+    {
+      "type": "home_office",
+      "city": "sao-jose-do-rio-preto",
+      "route": "/guias/sao-jose-do-rio-preto/home-office-sem-experiencia-2026",
+      "canonical": "https://saojosedoriopreto.aquitemachadinhos.com.br/guias/sao-jose-do-rio-preto/home-office-sem-experiencia-2026"
+    },
+    {
+      "type": "concursos",
+      "city": "sao-jose-do-rio-preto",
+      "route": "/guias/sao-jose-do-rio-preto/concursos-municipais-como-consultar-2026",
+      "canonical": "https://saojosedoriopreto.aquitemachadinhos.com.br/guias/sao-jose-do-rio-preto/concursos-municipais-como-consultar-2026"
+    },
+    {
+      "type": "clima_energia",
+      "city": "sao-jose-do-rio-preto",
+      "route": "/guias/sao-jose-do-rio-preto/ventos-fortes-e-falta-de-luz-preparacao",
+      "canonical": "https://saojosedoriopreto.aquitemachadinhos.com.br/guias/sao-jose-do-rio-preto/ventos-fortes-e-falta-de-luz-preparacao"
+    },
+    {
+      "type": "economia_energia",
+      "city": "sao-jose-do-rio-preto",
+      "route": "/guias/sao-jose-do-rio-preto/como-reduzir-conta-de-luz-2026",
+      "canonical": "https://saojosedoriopreto.aquitemachadinhos.com.br/guias/sao-jose-do-rio-preto/como-reduzir-conta-de-luz-2026"
+    },
+    {
+      "type": "moda_country",
+      "city": "sao-jose-do-rio-preto",
+      "route": "/guias/sao-jose-do-rio-preto/moda-country-chapeus-guia-de-compra",
+      "canonical": "https://saojosedoriopreto.aquitemachadinhos.com.br/guias/sao-jose-do-rio-preto/moda-country-chapeus-guia-de-compra"
+    },
+    {
+      "type": "tecnologia_social",
+      "city": "sao-jose-do-rio-preto",
+      "route": "/guias/sao-jose-do-rio-preto/tecnologia-popular-no-tiktok-guia-de-compra",
+      "canonical": "https://saojosedoriopreto.aquitemachadinhos.com.br/guias/sao-jose-do-rio-preto/tecnologia-popular-no-tiktok-guia-de-compra"
+    },
+    {
+      "type": "city_hub",
+      "city": "bebedouro",
+      "route": "/guias/bebedouro",
+      "canonical": "https://bebedouro.aquitemachadinhos.com.br/guias/bebedouro"
+    },
+    {
+      "type": "home_office",
+      "city": "bebedouro",
+      "route": "/guias/bebedouro/home-office-sem-experiencia-2026",
+      "canonical": "https://bebedouro.aquitemachadinhos.com.br/guias/bebedouro/home-office-sem-experiencia-2026"
+    },
+    {
+      "type": "concursos",
+      "city": "bebedouro",
+      "route": "/guias/bebedouro/concursos-municipais-como-consultar-2026",
+      "canonical": "https://bebedouro.aquitemachadinhos.com.br/guias/bebedouro/concursos-municipais-como-consultar-2026"
+    },
+    {
+      "type": "clima_energia",
+      "city": "bebedouro",
+      "route": "/guias/bebedouro/ventos-fortes-e-falta-de-luz-preparacao",
+      "canonical": "https://bebedouro.aquitemachadinhos.com.br/guias/bebedouro/ventos-fortes-e-falta-de-luz-preparacao"
+    },
+    {
+      "type": "economia_energia",
+      "city": "bebedouro",
+      "route": "/guias/bebedouro/como-reduzir-conta-de-luz-2026",
+      "canonical": "https://bebedouro.aquitemachadinhos.com.br/guias/bebedouro/como-reduzir-conta-de-luz-2026"
+    },
+    {
+      "type": "moda_country",
+      "city": "bebedouro",
+      "route": "/guias/bebedouro/moda-country-chapeus-guia-de-compra",
+      "canonical": "https://bebedouro.aquitemachadinhos.com.br/guias/bebedouro/moda-country-chapeus-guia-de-compra"
+    },
+    {
+      "type": "tecnologia_social",
+      "city": "bebedouro",
+      "route": "/guias/bebedouro/tecnologia-popular-no-tiktok-guia-de-compra",
+      "canonical": "https://bebedouro.aquitemachadinhos.com.br/guias/bebedouro/tecnologia-popular-no-tiktok-guia-de-compra"
+    },
+    {
+      "type": "city_hub",
+      "city": "olimpia",
+      "route": "/guias/olimpia",
+      "canonical": "https://olimpia.aquitemachadinhos.com.br/guias/olimpia"
+    },
+    {
+      "type": "home_office",
+      "city": "olimpia",
+      "route": "/guias/olimpia/home-office-sem-experiencia-2026",
+      "canonical": "https://olimpia.aquitemachadinhos.com.br/guias/olimpia/home-office-sem-experiencia-2026"
+    },
+    {
+      "type": "concursos",
+      "city": "olimpia",
+      "route": "/guias/olimpia/concursos-municipais-como-consultar-2026",
+      "canonical": "https://olimpia.aquitemachadinhos.com.br/guias/olimpia/concursos-municipais-como-consultar-2026"
+    },
+    {
+      "type": "clima_energia",
+      "city": "olimpia",
+      "route": "/guias/olimpia/ventos-fortes-e-falta-de-luz-preparacao",
+      "canonical": "https://olimpia.aquitemachadinhos.com.br/guias/olimpia/ventos-fortes-e-falta-de-luz-preparacao"
+    },
+    {
+      "type": "economia_energia",
+      "city": "olimpia",
+      "route": "/guias/olimpia/como-reduzir-conta-de-luz-2026",
+      "canonical": "https://olimpia.aquitemachadinhos.com.br/guias/olimpia/como-reduzir-conta-de-luz-2026"
+    },
+    {
+      "type": "moda_country",
+      "city": "olimpia",
+      "route": "/guias/olimpia/moda-country-chapeus-guia-de-compra",
+      "canonical": "https://olimpia.aquitemachadinhos.com.br/guias/olimpia/moda-country-chapeus-guia-de-compra"
+    },
+    {
+      "type": "tecnologia_social",
+      "city": "olimpia",
+      "route": "/guias/olimpia/tecnologia-popular-no-tiktok-guia-de-compra",
+      "canonical": "https://olimpia.aquitemachadinhos.com.br/guias/olimpia/tecnologia-popular-no-tiktok-guia-de-compra"
+    },
+    {
+      "type": "city_hub",
+      "city": "guaira",
+      "route": "/guias/guaira",
+      "canonical": "https://guaira.aquitemachadinhos.com.br/guias/guaira"
+    },
+    {
+      "type": "home_office",
+      "city": "guaira",
+      "route": "/guias/guaira/home-office-sem-experiencia-2026",
+      "canonical": "https://guaira.aquitemachadinhos.com.br/guias/guaira/home-office-sem-experiencia-2026"
+    },
+    {
+      "type": "concursos",
+      "city": "guaira",
+      "route": "/guias/guaira/concursos-municipais-como-consultar-2026",
+      "canonical": "https://guaira.aquitemachadinhos.com.br/guias/guaira/concursos-municipais-como-consultar-2026"
+    },
+    {
+      "type": "clima_energia",
+      "city": "guaira",
+      "route": "/guias/guaira/ventos-fortes-e-falta-de-luz-preparacao",
+      "canonical": "https://guaira.aquitemachadinhos.com.br/guias/guaira/ventos-fortes-e-falta-de-luz-preparacao"
+    },
+    {
+      "type": "economia_energia",
+      "city": "guaira",
+      "route": "/guias/guaira/como-reduzir-conta-de-luz-2026",
+      "canonical": "https://guaira.aquitemachadinhos.com.br/guias/guaira/como-reduzir-conta-de-luz-2026"
+    },
+    {
+      "type": "moda_country",
+      "city": "guaira",
+      "route": "/guias/guaira/moda-country-chapeus-guia-de-compra",
+      "canonical": "https://guaira.aquitemachadinhos.com.br/guias/guaira/moda-country-chapeus-guia-de-compra"
+    },
+    {
+      "type": "tecnologia_social",
+      "city": "guaira",
+      "route": "/guias/guaira/tecnologia-popular-no-tiktok-guia-de-compra",
+      "canonical": "https://guaira.aquitemachadinhos.com.br/guias/guaira/tecnologia-popular-no-tiktok-guia-de-compra"
+    },
+    {
+      "type": "city_hub",
+      "city": "colombia",
+      "route": "/guias/colombia",
+      "canonical": "https://colombia.aquitemachadinhos.com.br/guias/colombia"
+    },
+    {
+      "type": "home_office",
+      "city": "colombia",
+      "route": "/guias/colombia/home-office-sem-experiencia-2026",
+      "canonical": "https://colombia.aquitemachadinhos.com.br/guias/colombia/home-office-sem-experiencia-2026"
+    },
+    {
+      "type": "concursos",
+      "city": "colombia",
+      "route": "/guias/colombia/concursos-municipais-como-consultar-2026",
+      "canonical": "https://colombia.aquitemachadinhos.com.br/guias/colombia/concursos-municipais-como-consultar-2026"
+    },
+    {
+      "type": "clima_energia",
+      "city": "colombia",
+      "route": "/guias/colombia/ventos-fortes-e-falta-de-luz-preparacao",
+      "canonical": "https://colombia.aquitemachadinhos.com.br/guias/colombia/ventos-fortes-e-falta-de-luz-preparacao"
+    },
+    {
+      "type": "economia_energia",
+      "city": "colombia",
+      "route": "/guias/colombia/como-reduzir-conta-de-luz-2026",
+      "canonical": "https://colombia.aquitemachadinhos.com.br/guias/colombia/como-reduzir-conta-de-luz-2026"
+    },
+    {
+      "type": "moda_country",
+      "city": "colombia",
+      "route": "/guias/colombia/moda-country-chapeus-guia-de-compra",
+      "canonical": "https://colombia.aquitemachadinhos.com.br/guias/colombia/moda-country-chapeus-guia-de-compra"
+    },
+    {
+      "type": "tecnologia_social",
+      "city": "colombia",
+      "route": "/guias/colombia/tecnologia-popular-no-tiktok-guia-de-compra",
+      "canonical": "https://colombia.aquitemachadinhos.com.br/guias/colombia/tecnologia-popular-no-tiktok-guia-de-compra"
+    },
+    {
+      "type": "city_hub",
+      "city": "franca",
+      "route": "/guias/franca",
+      "canonical": "https://franca.aquitemachadinhos.com.br/guias/franca"
+    },
+    {
+      "type": "home_office",
+      "city": "franca",
+      "route": "/guias/franca/home-office-sem-experiencia-2026",
+      "canonical": "https://franca.aquitemachadinhos.com.br/guias/franca/home-office-sem-experiencia-2026"
+    },
+    {
+      "type": "concursos",
+      "city": "franca",
+      "route": "/guias/franca/concursos-municipais-como-consultar-2026",
+      "canonical": "https://franca.aquitemachadinhos.com.br/guias/franca/concursos-municipais-como-consultar-2026"
+    },
+    {
+      "type": "clima_energia",
+      "city": "franca",
+      "route": "/guias/franca/ventos-fortes-e-falta-de-luz-preparacao",
+      "canonical": "https://franca.aquitemachadinhos.com.br/guias/franca/ventos-fortes-e-falta-de-luz-preparacao"
+    },
+    {
+      "type": "economia_energia",
+      "city": "franca",
+      "route": "/guias/franca/como-reduzir-conta-de-luz-2026",
+      "canonical": "https://franca.aquitemachadinhos.com.br/guias/franca/como-reduzir-conta-de-luz-2026"
+    },
+    {
+      "type": "moda_country",
+      "city": "franca",
+      "route": "/guias/franca/moda-country-chapeus-guia-de-compra",
+      "canonical": "https://franca.aquitemachadinhos.com.br/guias/franca/moda-country-chapeus-guia-de-compra"
+    },
+    {
+      "type": "tecnologia_social",
+      "city": "franca",
+      "route": "/guias/franca/tecnologia-popular-no-tiktok-guia-de-compra",
+      "canonical": "https://franca.aquitemachadinhos.com.br/guias/franca/tecnologia-popular-no-tiktok-guia-de-compra"
+    },
+    {
+      "type": "city_hub",
+      "city": "sorocaba",
+      "route": "/guias/sorocaba",
+      "canonical": "https://sorocaba.aquitemachadinhos.com.br/guias/sorocaba"
+    },
+    {
+      "type": "home_office",
+      "city": "sorocaba",
+      "route": "/guias/sorocaba/home-office-sem-experiencia-2026",
+      "canonical": "https://sorocaba.aquitemachadinhos.com.br/guias/sorocaba/home-office-sem-experiencia-2026"
+    },
+    {
+      "type": "concursos",
+      "city": "sorocaba",
+      "route": "/guias/sorocaba/concursos-municipais-como-consultar-2026",
+      "canonical": "https://sorocaba.aquitemachadinhos.com.br/guias/sorocaba/concursos-municipais-como-consultar-2026"
+    },
+    {
+      "type": "clima_energia",
+      "city": "sorocaba",
+      "route": "/guias/sorocaba/ventos-fortes-e-falta-de-luz-preparacao",
+      "canonical": "https://sorocaba.aquitemachadinhos.com.br/guias/sorocaba/ventos-fortes-e-falta-de-luz-preparacao"
+    },
+    {
+      "type": "economia_energia",
+      "city": "sorocaba",
+      "route": "/guias/sorocaba/como-reduzir-conta-de-luz-2026",
+      "canonical": "https://sorocaba.aquitemachadinhos.com.br/guias/sorocaba/como-reduzir-conta-de-luz-2026"
+    },
+    {
+      "type": "moda_country",
+      "city": "sorocaba",
+      "route": "/guias/sorocaba/moda-country-chapeus-guia-de-compra",
+      "canonical": "https://sorocaba.aquitemachadinhos.com.br/guias/sorocaba/moda-country-chapeus-guia-de-compra"
+    },
+    {
+      "type": "tecnologia_social",
+      "city": "sorocaba",
+      "route": "/guias/sorocaba/tecnologia-popular-no-tiktok-guia-de-compra",
+      "canonical": "https://sorocaba.aquitemachadinhos.com.br/guias/sorocaba/tecnologia-popular-no-tiktok-guia-de-compra"
+    },
+    {
+      "type": "city_hub",
+      "city": "piracicaba",
+      "route": "/guias/piracicaba",
+      "canonical": "https://piracicaba.aquitemachadinhos.com.br/guias/piracicaba"
+    },
+    {
+      "type": "home_office",
+      "city": "piracicaba",
+      "route": "/guias/piracicaba/home-office-sem-experiencia-2026",
+      "canonical": "https://piracicaba.aquitemachadinhos.com.br/guias/piracicaba/home-office-sem-experiencia-2026"
+    },
+    {
+      "type": "concursos",
+      "city": "piracicaba",
+      "route": "/guias/piracicaba/concursos-municipais-como-consultar-2026",
+      "canonical": "https://piracicaba.aquitemachadinhos.com.br/guias/piracicaba/concursos-municipais-como-consultar-2026"
+    },
+    {
+      "type": "clima_energia",
+      "city": "piracicaba",
+      "route": "/guias/piracicaba/ventos-fortes-e-falta-de-luz-preparacao",
+      "canonical": "https://piracicaba.aquitemachadinhos.com.br/guias/piracicaba/ventos-fortes-e-falta-de-luz-preparacao"
+    },
+    {
+      "type": "economia_energia",
+      "city": "piracicaba",
+      "route": "/guias/piracicaba/como-reduzir-conta-de-luz-2026",
+      "canonical": "https://piracicaba.aquitemachadinhos.com.br/guias/piracicaba/como-reduzir-conta-de-luz-2026"
+    },
+    {
+      "type": "moda_country",
+      "city": "piracicaba",
+      "route": "/guias/piracicaba/moda-country-chapeus-guia-de-compra",
+      "canonical": "https://piracicaba.aquitemachadinhos.com.br/guias/piracicaba/moda-country-chapeus-guia-de-compra"
+    },
+    {
+      "type": "tecnologia_social",
+      "city": "piracicaba",
+      "route": "/guias/piracicaba/tecnologia-popular-no-tiktok-guia-de-compra",
+      "canonical": "https://piracicaba.aquitemachadinhos.com.br/guias/piracicaba/tecnologia-popular-no-tiktok-guia-de-compra"
+    },
+    {
+      "type": "city_hub",
+      "city": "rio-de-janeiro",
+      "route": "/guias/rio-de-janeiro",
+      "canonical": "https://riodejaneiro.aquitemachadinhos.com.br/guias/rio-de-janeiro"
+    },
+    {
+      "type": "home_office",
+      "city": "rio-de-janeiro",
+      "route": "/guias/rio-de-janeiro/home-office-sem-experiencia-2026",
+      "canonical": "https://riodejaneiro.aquitemachadinhos.com.br/guias/rio-de-janeiro/home-office-sem-experiencia-2026"
+    },
+    {
+      "type": "concursos",
+      "city": "rio-de-janeiro",
+      "route": "/guias/rio-de-janeiro/concursos-municipais-como-consultar-2026",
+      "canonical": "https://riodejaneiro.aquitemachadinhos.com.br/guias/rio-de-janeiro/concursos-municipais-como-consultar-2026"
+    },
+    {
+      "type": "clima_energia",
+      "city": "rio-de-janeiro",
+      "route": "/guias/rio-de-janeiro/ventos-fortes-e-falta-de-luz-preparacao",
+      "canonical": "https://riodejaneiro.aquitemachadinhos.com.br/guias/rio-de-janeiro/ventos-fortes-e-falta-de-luz-preparacao"
+    },
+    {
+      "type": "economia_energia",
+      "city": "rio-de-janeiro",
+      "route": "/guias/rio-de-janeiro/como-reduzir-conta-de-luz-2026",
+      "canonical": "https://riodejaneiro.aquitemachadinhos.com.br/guias/rio-de-janeiro/como-reduzir-conta-de-luz-2026"
+    },
+    {
+      "type": "moda_country",
+      "city": "rio-de-janeiro",
+      "route": "/guias/rio-de-janeiro/moda-country-chapeus-guia-de-compra",
+      "canonical": "https://riodejaneiro.aquitemachadinhos.com.br/guias/rio-de-janeiro/moda-country-chapeus-guia-de-compra"
+    },
+    {
+      "type": "tecnologia_social",
+      "city": "rio-de-janeiro",
+      "route": "/guias/rio-de-janeiro/tecnologia-popular-no-tiktok-guia-de-compra",
+      "canonical": "https://riodejaneiro.aquitemachadinhos.com.br/guias/rio-de-janeiro/tecnologia-popular-no-tiktok-guia-de-compra"
+    },
+    {
+      "type": "city_hub",
+      "city": "buzios",
+      "route": "/guias/buzios",
+      "canonical": "https://buzios.aquitemachadinhos.com.br/guias/buzios"
+    },
+    {
+      "type": "home_office",
+      "city": "buzios",
+      "route": "/guias/buzios/home-office-sem-experiencia-2026",
+      "canonical": "https://buzios.aquitemachadinhos.com.br/guias/buzios/home-office-sem-experiencia-2026"
+    },
+    {
+      "type": "concursos",
+      "city": "buzios",
+      "route": "/guias/buzios/concursos-municipais-como-consultar-2026",
+      "canonical": "https://buzios.aquitemachadinhos.com.br/guias/buzios/concursos-municipais-como-consultar-2026"
+    },
+    {
+      "type": "clima_energia",
+      "city": "buzios",
+      "route": "/guias/buzios/ventos-fortes-e-falta-de-luz-preparacao",
+      "canonical": "https://buzios.aquitemachadinhos.com.br/guias/buzios/ventos-fortes-e-falta-de-luz-preparacao"
+    },
+    {
+      "type": "economia_energia",
+      "city": "buzios",
+      "route": "/guias/buzios/como-reduzir-conta-de-luz-2026",
+      "canonical": "https://buzios.aquitemachadinhos.com.br/guias/buzios/como-reduzir-conta-de-luz-2026"
+    },
+    {
+      "type": "moda_country",
+      "city": "buzios",
+      "route": "/guias/buzios/moda-country-chapeus-guia-de-compra",
+      "canonical": "https://buzios.aquitemachadinhos.com.br/guias/buzios/moda-country-chapeus-guia-de-compra"
+    },
+    {
+      "type": "tecnologia_social",
+      "city": "buzios",
+      "route": "/guias/buzios/tecnologia-popular-no-tiktok-guia-de-compra",
+      "canonical": "https://buzios.aquitemachadinhos.com.br/guias/buzios/tecnologia-popular-no-tiktok-guia-de-compra"
+    },
+    {
+      "type": "city_hub",
+      "city": "paraty",
+      "route": "/guias/paraty",
+      "canonical": "https://paraty.aquitemachadinhos.com.br/guias/paraty"
+    },
+    {
+      "type": "home_office",
+      "city": "paraty",
+      "route": "/guias/paraty/home-office-sem-experiencia-2026",
+      "canonical": "https://paraty.aquitemachadinhos.com.br/guias/paraty/home-office-sem-experiencia-2026"
+    },
+    {
+      "type": "concursos",
+      "city": "paraty",
+      "route": "/guias/paraty/concursos-municipais-como-consultar-2026",
+      "canonical": "https://paraty.aquitemachadinhos.com.br/guias/paraty/concursos-municipais-como-consultar-2026"
+    },
+    {
+      "type": "clima_energia",
+      "city": "paraty",
+      "route": "/guias/paraty/ventos-fortes-e-falta-de-luz-preparacao",
+      "canonical": "https://paraty.aquitemachadinhos.com.br/guias/paraty/ventos-fortes-e-falta-de-luz-preparacao"
+    },
+    {
+      "type": "economia_energia",
+      "city": "paraty",
+      "route": "/guias/paraty/como-reduzir-conta-de-luz-2026",
+      "canonical": "https://paraty.aquitemachadinhos.com.br/guias/paraty/como-reduzir-conta-de-luz-2026"
+    },
+    {
+      "type": "moda_country",
+      "city": "paraty",
+      "route": "/guias/paraty/moda-country-chapeus-guia-de-compra",
+      "canonical": "https://paraty.aquitemachadinhos.com.br/guias/paraty/moda-country-chapeus-guia-de-compra"
+    },
+    {
+      "type": "tecnologia_social",
+      "city": "paraty",
+      "route": "/guias/paraty/tecnologia-popular-no-tiktok-guia-de-compra",
+      "canonical": "https://paraty.aquitemachadinhos.com.br/guias/paraty/tecnologia-popular-no-tiktok-guia-de-compra"
+    },
+    {
+      "type": "city_hub",
+      "city": "belo-horizonte",
+      "route": "/guias/belo-horizonte",
+      "canonical": "https://belohorizonte.aquitemachadinhos.com.br/guias/belo-horizonte"
+    },
+    {
+      "type": "home_office",
+      "city": "belo-horizonte",
+      "route": "/guias/belo-horizonte/home-office-sem-experiencia-2026",
+      "canonical": "https://belohorizonte.aquitemachadinhos.com.br/guias/belo-horizonte/home-office-sem-experiencia-2026"
+    },
+    {
+      "type": "concursos",
+      "city": "belo-horizonte",
+      "route": "/guias/belo-horizonte/concursos-municipais-como-consultar-2026",
+      "canonical": "https://belohorizonte.aquitemachadinhos.com.br/guias/belo-horizonte/concursos-municipais-como-consultar-2026"
+    },
+    {
+      "type": "clima_energia",
+      "city": "belo-horizonte",
+      "route": "/guias/belo-horizonte/ventos-fortes-e-falta-de-luz-preparacao",
+      "canonical": "https://belohorizonte.aquitemachadinhos.com.br/guias/belo-horizonte/ventos-fortes-e-falta-de-luz-preparacao"
+    },
+    {
+      "type": "economia_energia",
+      "city": "belo-horizonte",
+      "route": "/guias/belo-horizonte/como-reduzir-conta-de-luz-2026",
+      "canonical": "https://belohorizonte.aquitemachadinhos.com.br/guias/belo-horizonte/como-reduzir-conta-de-luz-2026"
+    },
+    {
+      "type": "moda_country",
+      "city": "belo-horizonte",
+      "route": "/guias/belo-horizonte/moda-country-chapeus-guia-de-compra",
+      "canonical": "https://belohorizonte.aquitemachadinhos.com.br/guias/belo-horizonte/moda-country-chapeus-guia-de-compra"
+    },
+    {
+      "type": "tecnologia_social",
+      "city": "belo-horizonte",
+      "route": "/guias/belo-horizonte/tecnologia-popular-no-tiktok-guia-de-compra",
+      "canonical": "https://belohorizonte.aquitemachadinhos.com.br/guias/belo-horizonte/tecnologia-popular-no-tiktok-guia-de-compra"
+    },
+    {
+      "type": "city_hub",
+      "city": "ouro-preto",
+      "route": "/guias/ouro-preto",
+      "canonical": "https://ouropreto.aquitemachadinhos.com.br/guias/ouro-preto"
+    },
+    {
+      "type": "home_office",
+      "city": "ouro-preto",
+      "route": "/guias/ouro-preto/home-office-sem-experiencia-2026",
+      "canonical": "https://ouropreto.aquitemachadinhos.com.br/guias/ouro-preto/home-office-sem-experiencia-2026"
+    },
+    {
+      "type": "concursos",
+      "city": "ouro-preto",
+      "route": "/guias/ouro-preto/concursos-municipais-como-consultar-2026",
+      "canonical": "https://ouropreto.aquitemachadinhos.com.br/guias/ouro-preto/concursos-municipais-como-consultar-2026"
+    },
+    {
+      "type": "clima_energia",
+      "city": "ouro-preto",
+      "route": "/guias/ouro-preto/ventos-fortes-e-falta-de-luz-preparacao",
+      "canonical": "https://ouropreto.aquitemachadinhos.com.br/guias/ouro-preto/ventos-fortes-e-falta-de-luz-preparacao"
+    },
+    {
+      "type": "economia_energia",
+      "city": "ouro-preto",
+      "route": "/guias/ouro-preto/como-reduzir-conta-de-luz-2026",
+      "canonical": "https://ouropreto.aquitemachadinhos.com.br/guias/ouro-preto/como-reduzir-conta-de-luz-2026"
+    },
+    {
+      "type": "moda_country",
+      "city": "ouro-preto",
+      "route": "/guias/ouro-preto/moda-country-chapeus-guia-de-compra",
+      "canonical": "https://ouropreto.aquitemachadinhos.com.br/guias/ouro-preto/moda-country-chapeus-guia-de-compra"
+    },
+    {
+      "type": "tecnologia_social",
+      "city": "ouro-preto",
+      "route": "/guias/ouro-preto/tecnologia-popular-no-tiktok-guia-de-compra",
+      "canonical": "https://ouropreto.aquitemachadinhos.com.br/guias/ouro-preto/tecnologia-popular-no-tiktok-guia-de-compra"
+    },
+    {
+      "type": "city_hub",
+      "city": "uberlandia",
+      "route": "/guias/uberlandia",
+      "canonical": "https://uberlandia.aquitemachadinhos.com.br/guias/uberlandia"
+    },
+    {
+      "type": "home_office",
+      "city": "uberlandia",
+      "route": "/guias/uberlandia/home-office-sem-experiencia-2026",
+      "canonical": "https://uberlandia.aquitemachadinhos.com.br/guias/uberlandia/home-office-sem-experiencia-2026"
+    },
+    {
+      "type": "concursos",
+      "city": "uberlandia",
+      "route": "/guias/uberlandia/concursos-municipais-como-consultar-2026",
+      "canonical": "https://uberlandia.aquitemachadinhos.com.br/guias/uberlandia/concursos-municipais-como-consultar-2026"
+    },
+    {
+      "type": "clima_energia",
+      "city": "uberlandia",
+      "route": "/guias/uberlandia/ventos-fortes-e-falta-de-luz-preparacao",
+      "canonical": "https://uberlandia.aquitemachadinhos.com.br/guias/uberlandia/ventos-fortes-e-falta-de-luz-preparacao"
+    },
+    {
+      "type": "economia_energia",
+      "city": "uberlandia",
+      "route": "/guias/uberlandia/como-reduzir-conta-de-luz-2026",
+      "canonical": "https://uberlandia.aquitemachadinhos.com.br/guias/uberlandia/como-reduzir-conta-de-luz-2026"
+    },
+    {
+      "type": "moda_country",
+      "city": "uberlandia",
+      "route": "/guias/uberlandia/moda-country-chapeus-guia-de-compra",
+      "canonical": "https://uberlandia.aquitemachadinhos.com.br/guias/uberlandia/moda-country-chapeus-guia-de-compra"
+    },
+    {
+      "type": "tecnologia_social",
+      "city": "uberlandia",
+      "route": "/guias/uberlandia/tecnologia-popular-no-tiktok-guia-de-compra",
+      "canonical": "https://uberlandia.aquitemachadinhos.com.br/guias/uberlandia/tecnologia-popular-no-tiktok-guia-de-compra"
+    },
+    {
+      "type": "city_hub",
+      "city": "juiz-de-fora",
+      "route": "/guias/juiz-de-fora",
+      "canonical": "https://juizdefora.aquitemachadinhos.com.br/guias/juiz-de-fora"
+    },
+    {
+      "type": "home_office",
+      "city": "juiz-de-fora",
+      "route": "/guias/juiz-de-fora/home-office-sem-experiencia-2026",
+      "canonical": "https://juizdefora.aquitemachadinhos.com.br/guias/juiz-de-fora/home-office-sem-experiencia-2026"
+    },
+    {
+      "type": "concursos",
+      "city": "juiz-de-fora",
+      "route": "/guias/juiz-de-fora/concursos-municipais-como-consultar-2026",
+      "canonical": "https://juizdefora.aquitemachadinhos.com.br/guias/juiz-de-fora/concursos-municipais-como-consultar-2026"
+    },
+    {
+      "type": "clima_energia",
+      "city": "juiz-de-fora",
+      "route": "/guias/juiz-de-fora/ventos-fortes-e-falta-de-luz-preparacao",
+      "canonical": "https://juizdefora.aquitemachadinhos.com.br/guias/juiz-de-fora/ventos-fortes-e-falta-de-luz-preparacao"
+    },
+    {
+      "type": "economia_energia",
+      "city": "juiz-de-fora",
+      "route": "/guias/juiz-de-fora/como-reduzir-conta-de-luz-2026",
+      "canonical": "https://juizdefora.aquitemachadinhos.com.br/guias/juiz-de-fora/como-reduzir-conta-de-luz-2026"
+    },
+    {
+      "type": "moda_country",
+      "city": "juiz-de-fora",
+      "route": "/guias/juiz-de-fora/moda-country-chapeus-guia-de-compra",
+      "canonical": "https://juizdefora.aquitemachadinhos.com.br/guias/juiz-de-fora/moda-country-chapeus-guia-de-compra"
+    },
+    {
+      "type": "tecnologia_social",
+      "city": "juiz-de-fora",
+      "route": "/guias/juiz-de-fora/tecnologia-popular-no-tiktok-guia-de-compra",
+      "canonical": "https://juizdefora.aquitemachadinhos.com.br/guias/juiz-de-fora/tecnologia-popular-no-tiktok-guia-de-compra"
+    },
+    {
+      "type": "city_hub",
+      "city": "montes-claros",
+      "route": "/guias/montes-claros",
+      "canonical": "https://montesclaros.aquitemachadinhos.com.br/guias/montes-claros"
+    },
+    {
+      "type": "home_office",
+      "city": "montes-claros",
+      "route": "/guias/montes-claros/home-office-sem-experiencia-2026",
+      "canonical": "https://montesclaros.aquitemachadinhos.com.br/guias/montes-claros/home-office-sem-experiencia-2026"
+    },
+    {
+      "type": "concursos",
+      "city": "montes-claros",
+      "route": "/guias/montes-claros/concursos-municipais-como-consultar-2026",
+      "canonical": "https://montesclaros.aquitemachadinhos.com.br/guias/montes-claros/concursos-municipais-como-consultar-2026"
+    },
+    {
+      "type": "clima_energia",
+      "city": "montes-claros",
+      "route": "/guias/montes-claros/ventos-fortes-e-falta-de-luz-preparacao",
+      "canonical": "https://montesclaros.aquitemachadinhos.com.br/guias/montes-claros/ventos-fortes-e-falta-de-luz-preparacao"
+    },
+    {
+      "type": "economia_energia",
+      "city": "montes-claros",
+      "route": "/guias/montes-claros/como-reduzir-conta-de-luz-2026",
+      "canonical": "https://montesclaros.aquitemachadinhos.com.br/guias/montes-claros/como-reduzir-conta-de-luz-2026"
+    },
+    {
+      "type": "moda_country",
+      "city": "montes-claros",
+      "route": "/guias/montes-claros/moda-country-chapeus-guia-de-compra",
+      "canonical": "https://montesclaros.aquitemachadinhos.com.br/guias/montes-claros/moda-country-chapeus-guia-de-compra"
+    },
+    {
+      "type": "tecnologia_social",
+      "city": "montes-claros",
+      "route": "/guias/montes-claros/tecnologia-popular-no-tiktok-guia-de-compra",
+      "canonical": "https://montesclaros.aquitemachadinhos.com.br/guias/montes-claros/tecnologia-popular-no-tiktok-guia-de-compra"
+    },
+    {
+      "type": "city_hub",
+      "city": "curitiba",
+      "route": "/guias/curitiba",
+      "canonical": "https://curitiba.aquitemachadinhos.com.br/guias/curitiba"
+    },
+    {
+      "type": "home_office",
+      "city": "curitiba",
+      "route": "/guias/curitiba/home-office-sem-experiencia-2026",
+      "canonical": "https://curitiba.aquitemachadinhos.com.br/guias/curitiba/home-office-sem-experiencia-2026"
+    },
+    {
+      "type": "concursos",
+      "city": "curitiba",
+      "route": "/guias/curitiba/concursos-municipais-como-consultar-2026",
+      "canonical": "https://curitiba.aquitemachadinhos.com.br/guias/curitiba/concursos-municipais-como-consultar-2026"
+    },
+    {
+      "type": "clima_energia",
+      "city": "curitiba",
+      "route": "/guias/curitiba/ventos-fortes-e-falta-de-luz-preparacao",
+      "canonical": "https://curitiba.aquitemachadinhos.com.br/guias/curitiba/ventos-fortes-e-falta-de-luz-preparacao"
+    },
+    {
+      "type": "economia_energia",
+      "city": "curitiba",
+      "route": "/guias/curitiba/como-reduzir-conta-de-luz-2026",
+      "canonical": "https://curitiba.aquitemachadinhos.com.br/guias/curitiba/como-reduzir-conta-de-luz-2026"
+    },
+    {
+      "type": "moda_country",
+      "city": "curitiba",
+      "route": "/guias/curitiba/moda-country-chapeus-guia-de-compra",
+      "canonical": "https://curitiba.aquitemachadinhos.com.br/guias/curitiba/moda-country-chapeus-guia-de-compra"
+    },
+    {
+      "type": "tecnologia_social",
+      "city": "curitiba",
+      "route": "/guias/curitiba/tecnologia-popular-no-tiktok-guia-de-compra",
+      "canonical": "https://curitiba.aquitemachadinhos.com.br/guias/curitiba/tecnologia-popular-no-tiktok-guia-de-compra"
+    },
+    {
+      "type": "city_hub",
+      "city": "londrina",
+      "route": "/guias/londrina",
+      "canonical": "https://londrina.aquitemachadinhos.com.br/guias/londrina"
+    },
+    {
+      "type": "home_office",
+      "city": "londrina",
+      "route": "/guias/londrina/home-office-sem-experiencia-2026",
+      "canonical": "https://londrina.aquitemachadinhos.com.br/guias/londrina/home-office-sem-experiencia-2026"
+    },
+    {
+      "type": "concursos",
+      "city": "londrina",
+      "route": "/guias/londrina/concursos-municipais-como-consultar-2026",
+      "canonical": "https://londrina.aquitemachadinhos.com.br/guias/londrina/concursos-municipais-como-consultar-2026"
+    },
+    {
+      "type": "clima_energia",
+      "city": "londrina",
+      "route": "/guias/londrina/ventos-fortes-e-falta-de-luz-preparacao",
+      "canonical": "https://londrina.aquitemachadinhos.com.br/guias/londrina/ventos-fortes-e-falta-de-luz-preparacao"
+    },
+    {
+      "type": "economia_energia",
+      "city": "londrina",
+      "route": "/guias/londrina/como-reduzir-conta-de-luz-2026",
+      "canonical": "https://londrina.aquitemachadinhos.com.br/guias/londrina/como-reduzir-conta-de-luz-2026"
+    },
+    {
+      "type": "moda_country",
+      "city": "londrina",
+      "route": "/guias/londrina/moda-country-chapeus-guia-de-compra",
+      "canonical": "https://londrina.aquitemachadinhos.com.br/guias/londrina/moda-country-chapeus-guia-de-compra"
+    },
+    {
+      "type": "tecnologia_social",
+      "city": "londrina",
+      "route": "/guias/londrina/tecnologia-popular-no-tiktok-guia-de-compra",
+      "canonical": "https://londrina.aquitemachadinhos.com.br/guias/londrina/tecnologia-popular-no-tiktok-guia-de-compra"
+    },
+    {
+      "type": "city_hub",
+      "city": "maringa",
+      "route": "/guias/maringa",
+      "canonical": "https://maringa.aquitemachadinhos.com.br/guias/maringa"
+    },
+    {
+      "type": "home_office",
+      "city": "maringa",
+      "route": "/guias/maringa/home-office-sem-experiencia-2026",
+      "canonical": "https://maringa.aquitemachadinhos.com.br/guias/maringa/home-office-sem-experiencia-2026"
+    },
+    {
+      "type": "concursos",
+      "city": "maringa",
+      "route": "/guias/maringa/concursos-municipais-como-consultar-2026",
+      "canonical": "https://maringa.aquitemachadinhos.com.br/guias/maringa/concursos-municipais-como-consultar-2026"
+    },
+    {
+      "type": "clima_energia",
+      "city": "maringa",
+      "route": "/guias/maringa/ventos-fortes-e-falta-de-luz-preparacao",
+      "canonical": "https://maringa.aquitemachadinhos.com.br/guias/maringa/ventos-fortes-e-falta-de-luz-preparacao"
+    },
+    {
+      "type": "economia_energia",
+      "city": "maringa",
+      "route": "/guias/maringa/como-reduzir-conta-de-luz-2026",
+      "canonical": "https://maringa.aquitemachadinhos.com.br/guias/maringa/como-reduzir-conta-de-luz-2026"
+    },
+    {
+      "type": "moda_country",
+      "city": "maringa",
+      "route": "/guias/maringa/moda-country-chapeus-guia-de-compra",
+      "canonical": "https://maringa.aquitemachadinhos.com.br/guias/maringa/moda-country-chapeus-guia-de-compra"
+    },
+    {
+      "type": "tecnologia_social",
+      "city": "maringa",
+      "route": "/guias/maringa/tecnologia-popular-no-tiktok-guia-de-compra",
+      "canonical": "https://maringa.aquitemachadinhos.com.br/guias/maringa/tecnologia-popular-no-tiktok-guia-de-compra"
+    },
+    {
+      "type": "city_hub",
+      "city": "foz-do-iguacu",
+      "route": "/guias/foz-do-iguacu",
+      "canonical": "https://fozdoiguacu.aquitemachadinhos.com.br/guias/foz-do-iguacu"
+    },
+    {
+      "type": "home_office",
+      "city": "foz-do-iguacu",
+      "route": "/guias/foz-do-iguacu/home-office-sem-experiencia-2026",
+      "canonical": "https://fozdoiguacu.aquitemachadinhos.com.br/guias/foz-do-iguacu/home-office-sem-experiencia-2026"
+    },
+    {
+      "type": "concursos",
+      "city": "foz-do-iguacu",
+      "route": "/guias/foz-do-iguacu/concursos-municipais-como-consultar-2026",
+      "canonical": "https://fozdoiguacu.aquitemachadinhos.com.br/guias/foz-do-iguacu/concursos-municipais-como-consultar-2026"
+    },
+    {
+      "type": "clima_energia",
+      "city": "foz-do-iguacu",
+      "route": "/guias/foz-do-iguacu/ventos-fortes-e-falta-de-luz-preparacao",
+      "canonical": "https://fozdoiguacu.aquitemachadinhos.com.br/guias/foz-do-iguacu/ventos-fortes-e-falta-de-luz-preparacao"
+    },
+    {
+      "type": "economia_energia",
+      "city": "foz-do-iguacu",
+      "route": "/guias/foz-do-iguacu/como-reduzir-conta-de-luz-2026",
+      "canonical": "https://fozdoiguacu.aquitemachadinhos.com.br/guias/foz-do-iguacu/como-reduzir-conta-de-luz-2026"
+    },
+    {
+      "type": "moda_country",
+      "city": "foz-do-iguacu",
+      "route": "/guias/foz-do-iguacu/moda-country-chapeus-guia-de-compra",
+      "canonical": "https://fozdoiguacu.aquitemachadinhos.com.br/guias/foz-do-iguacu/moda-country-chapeus-guia-de-compra"
+    },
+    {
+      "type": "tecnologia_social",
+      "city": "foz-do-iguacu",
+      "route": "/guias/foz-do-iguacu/tecnologia-popular-no-tiktok-guia-de-compra",
+      "canonical": "https://fozdoiguacu.aquitemachadinhos.com.br/guias/foz-do-iguacu/tecnologia-popular-no-tiktok-guia-de-compra"
+    },
+    {
+      "type": "city_hub",
+      "city": "florianopolis",
+      "route": "/guias/florianopolis",
+      "canonical": "https://florianopolis.aquitemachadinhos.com.br/guias/florianopolis"
+    },
+    {
+      "type": "home_office",
+      "city": "florianopolis",
+      "route": "/guias/florianopolis/home-office-sem-experiencia-2026",
+      "canonical": "https://florianopolis.aquitemachadinhos.com.br/guias/florianopolis/home-office-sem-experiencia-2026"
+    },
+    {
+      "type": "concursos",
+      "city": "florianopolis",
+      "route": "/guias/florianopolis/concursos-municipais-como-consultar-2026",
+      "canonical": "https://florianopolis.aquitemachadinhos.com.br/guias/florianopolis/concursos-municipais-como-consultar-2026"
+    },
+    {
+      "type": "clima_energia",
+      "city": "florianopolis",
+      "route": "/guias/florianopolis/ventos-fortes-e-falta-de-luz-preparacao",
+      "canonical": "https://florianopolis.aquitemachadinhos.com.br/guias/florianopolis/ventos-fortes-e-falta-de-luz-preparacao"
+    },
+    {
+      "type": "economia_energia",
+      "city": "florianopolis",
+      "route": "/guias/florianopolis/como-reduzir-conta-de-luz-2026",
+      "canonical": "https://florianopolis.aquitemachadinhos.com.br/guias/florianopolis/como-reduzir-conta-de-luz-2026"
+    },
+    {
+      "type": "moda_country",
+      "city": "florianopolis",
+      "route": "/guias/florianopolis/moda-country-chapeus-guia-de-compra",
+      "canonical": "https://florianopolis.aquitemachadinhos.com.br/guias/florianopolis/moda-country-chapeus-guia-de-compra"
+    },
+    {
+      "type": "tecnologia_social",
+      "city": "florianopolis",
+      "route": "/guias/florianopolis/tecnologia-popular-no-tiktok-guia-de-compra",
+      "canonical": "https://florianopolis.aquitemachadinhos.com.br/guias/florianopolis/tecnologia-popular-no-tiktok-guia-de-compra"
+    },
+    {
+      "type": "city_hub",
+      "city": "balneario-camboriu",
+      "route": "/guias/balneario-camboriu",
+      "canonical": "https://balneariocamboriu.aquitemachadinhos.com.br/guias/balneario-camboriu"
+    },
+    {
+      "type": "home_office",
+      "city": "balneario-camboriu",
+      "route": "/guias/balneario-camboriu/home-office-sem-experiencia-2026",
+      "canonical": "https://balneariocamboriu.aquitemachadinhos.com.br/guias/balneario-camboriu/home-office-sem-experiencia-2026"
+    },
+    {
+      "type": "concursos",
+      "city": "balneario-camboriu",
+      "route": "/guias/balneario-camboriu/concursos-municipais-como-consultar-2026",
+      "canonical": "https://balneariocamboriu.aquitemachadinhos.com.br/guias/balneario-camboriu/concursos-municipais-como-consultar-2026"
+    },
+    {
+      "type": "clima_energia",
+      "city": "balneario-camboriu",
+      "route": "/guias/balneario-camboriu/ventos-fortes-e-falta-de-luz-preparacao",
+      "canonical": "https://balneariocamboriu.aquitemachadinhos.com.br/guias/balneario-camboriu/ventos-fortes-e-falta-de-luz-preparacao"
+    },
+    {
+      "type": "economia_energia",
+      "city": "balneario-camboriu",
+      "route": "/guias/balneario-camboriu/como-reduzir-conta-de-luz-2026",
+      "canonical": "https://balneariocamboriu.aquitemachadinhos.com.br/guias/balneario-camboriu/como-reduzir-conta-de-luz-2026"
+    },
+    {
+      "type": "moda_country",
+      "city": "balneario-camboriu",
+      "route": "/guias/balneario-camboriu/moda-country-chapeus-guia-de-compra",
+      "canonical": "https://balneariocamboriu.aquitemachadinhos.com.br/guias/balneario-camboriu/moda-country-chapeus-guia-de-compra"
+    },
+    {
+      "type": "tecnologia_social",
+      "city": "balneario-camboriu",
+      "route": "/guias/balneario-camboriu/tecnologia-popular-no-tiktok-guia-de-compra",
+      "canonical": "https://balneariocamboriu.aquitemachadinhos.com.br/guias/balneario-camboriu/tecnologia-popular-no-tiktok-guia-de-compra"
+    },
+    {
+      "type": "city_hub",
+      "city": "blumenau",
+      "route": "/guias/blumenau",
+      "canonical": "https://blumenau.aquitemachadinhos.com.br/guias/blumenau"
+    },
+    {
+      "type": "home_office",
+      "city": "blumenau",
+      "route": "/guias/blumenau/home-office-sem-experiencia-2026",
+      "canonical": "https://blumenau.aquitemachadinhos.com.br/guias/blumenau/home-office-sem-experiencia-2026"
+    },
+    {
+      "type": "concursos",
+      "city": "blumenau",
+      "route": "/guias/blumenau/concursos-municipais-como-consultar-2026",
+      "canonical": "https://blumenau.aquitemachadinhos.com.br/guias/blumenau/concursos-municipais-como-consultar-2026"
+    },
+    {
+      "type": "clima_energia",
+      "city": "blumenau",
+      "route": "/guias/blumenau/ventos-fortes-e-falta-de-luz-preparacao",
+      "canonical": "https://blumenau.aquitemachadinhos.com.br/guias/blumenau/ventos-fortes-e-falta-de-luz-preparacao"
+    },
+    {
+      "type": "economia_energia",
+      "city": "blumenau",
+      "route": "/guias/blumenau/como-reduzir-conta-de-luz-2026",
+      "canonical": "https://blumenau.aquitemachadinhos.com.br/guias/blumenau/como-reduzir-conta-de-luz-2026"
+    },
+    {
+      "type": "moda_country",
+      "city": "blumenau",
+      "route": "/guias/blumenau/moda-country-chapeus-guia-de-compra",
+      "canonical": "https://blumenau.aquitemachadinhos.com.br/guias/blumenau/moda-country-chapeus-guia-de-compra"
+    },
+    {
+      "type": "tecnologia_social",
+      "city": "blumenau",
+      "route": "/guias/blumenau/tecnologia-popular-no-tiktok-guia-de-compra",
+      "canonical": "https://blumenau.aquitemachadinhos.com.br/guias/blumenau/tecnologia-popular-no-tiktok-guia-de-compra"
+    },
+    {
+      "type": "city_hub",
+      "city": "joinville",
+      "route": "/guias/joinville",
+      "canonical": "https://joinville.aquitemachadinhos.com.br/guias/joinville"
+    },
+    {
+      "type": "home_office",
+      "city": "joinville",
+      "route": "/guias/joinville/home-office-sem-experiencia-2026",
+      "canonical": "https://joinville.aquitemachadinhos.com.br/guias/joinville/home-office-sem-experiencia-2026"
+    },
+    {
+      "type": "concursos",
+      "city": "joinville",
+      "route": "/guias/joinville/concursos-municipais-como-consultar-2026",
+      "canonical": "https://joinville.aquitemachadinhos.com.br/guias/joinville/concursos-municipais-como-consultar-2026"
+    },
+    {
+      "type": "clima_energia",
+      "city": "joinville",
+      "route": "/guias/joinville/ventos-fortes-e-falta-de-luz-preparacao",
+      "canonical": "https://joinville.aquitemachadinhos.com.br/guias/joinville/ventos-fortes-e-falta-de-luz-preparacao"
+    },
+    {
+      "type": "economia_energia",
+      "city": "joinville",
+      "route": "/guias/joinville/como-reduzir-conta-de-luz-2026",
+      "canonical": "https://joinville.aquitemachadinhos.com.br/guias/joinville/como-reduzir-conta-de-luz-2026"
+    },
+    {
+      "type": "moda_country",
+      "city": "joinville",
+      "route": "/guias/joinville/moda-country-chapeus-guia-de-compra",
+      "canonical": "https://joinville.aquitemachadinhos.com.br/guias/joinville/moda-country-chapeus-guia-de-compra"
+    },
+    {
+      "type": "tecnologia_social",
+      "city": "joinville",
+      "route": "/guias/joinville/tecnologia-popular-no-tiktok-guia-de-compra",
+      "canonical": "https://joinville.aquitemachadinhos.com.br/guias/joinville/tecnologia-popular-no-tiktok-guia-de-compra"
+    },
+    {
+      "type": "city_hub",
+      "city": "porto-alegre",
+      "route": "/guias/porto-alegre",
+      "canonical": "https://portoalegre.aquitemachadinhos.com.br/guias/porto-alegre"
+    },
+    {
+      "type": "home_office",
+      "city": "porto-alegre",
+      "route": "/guias/porto-alegre/home-office-sem-experiencia-2026",
+      "canonical": "https://portoalegre.aquitemachadinhos.com.br/guias/porto-alegre/home-office-sem-experiencia-2026"
+    },
+    {
+      "type": "concursos",
+      "city": "porto-alegre",
+      "route": "/guias/porto-alegre/concursos-municipais-como-consultar-2026",
+      "canonical": "https://portoalegre.aquitemachadinhos.com.br/guias/porto-alegre/concursos-municipais-como-consultar-2026"
+    },
+    {
+      "type": "clima_energia",
+      "city": "porto-alegre",
+      "route": "/guias/porto-alegre/ventos-fortes-e-falta-de-luz-preparacao",
+      "canonical": "https://portoalegre.aquitemachadinhos.com.br/guias/porto-alegre/ventos-fortes-e-falta-de-luz-preparacao"
+    },
+    {
+      "type": "economia_energia",
+      "city": "porto-alegre",
+      "route": "/guias/porto-alegre/como-reduzir-conta-de-luz-2026",
+      "canonical": "https://portoalegre.aquitemachadinhos.com.br/guias/porto-alegre/como-reduzir-conta-de-luz-2026"
+    },
+    {
+      "type": "moda_country",
+      "city": "porto-alegre",
+      "route": "/guias/porto-alegre/moda-country-chapeus-guia-de-compra",
+      "canonical": "https://portoalegre.aquitemachadinhos.com.br/guias/porto-alegre/moda-country-chapeus-guia-de-compra"
+    },
+    {
+      "type": "tecnologia_social",
+      "city": "porto-alegre",
+      "route": "/guias/porto-alegre/tecnologia-popular-no-tiktok-guia-de-compra",
+      "canonical": "https://portoalegre.aquitemachadinhos.com.br/guias/porto-alegre/tecnologia-popular-no-tiktok-guia-de-compra"
+    },
+    {
+      "type": "city_hub",
+      "city": "caxias-do-sul",
+      "route": "/guias/caxias-do-sul",
+      "canonical": "https://caxiasdosul.aquitemachadinhos.com.br/guias/caxias-do-sul"
+    },
+    {
+      "type": "home_office",
+      "city": "caxias-do-sul",
+      "route": "/guias/caxias-do-sul/home-office-sem-experiencia-2026",
+      "canonical": "https://caxiasdosul.aquitemachadinhos.com.br/guias/caxias-do-sul/home-office-sem-experiencia-2026"
+    },
+    {
+      "type": "concursos",
+      "city": "caxias-do-sul",
+      "route": "/guias/caxias-do-sul/concursos-municipais-como-consultar-2026",
+      "canonical": "https://caxiasdosul.aquitemachadinhos.com.br/guias/caxias-do-sul/concursos-municipais-como-consultar-2026"
+    },
+    {
+      "type": "clima_energia",
+      "city": "caxias-do-sul",
+      "route": "/guias/caxias-do-sul/ventos-fortes-e-falta-de-luz-preparacao",
+      "canonical": "https://caxiasdosul.aquitemachadinhos.com.br/guias/caxias-do-sul/ventos-fortes-e-falta-de-luz-preparacao"
+    },
+    {
+      "type": "economia_energia",
+      "city": "caxias-do-sul",
+      "route": "/guias/caxias-do-sul/como-reduzir-conta-de-luz-2026",
+      "canonical": "https://caxiasdosul.aquitemachadinhos.com.br/guias/caxias-do-sul/como-reduzir-conta-de-luz-2026"
+    },
+    {
+      "type": "moda_country",
+      "city": "caxias-do-sul",
+      "route": "/guias/caxias-do-sul/moda-country-chapeus-guia-de-compra",
+      "canonical": "https://caxiasdosul.aquitemachadinhos.com.br/guias/caxias-do-sul/moda-country-chapeus-guia-de-compra"
+    },
+    {
+      "type": "tecnologia_social",
+      "city": "caxias-do-sul",
+      "route": "/guias/caxias-do-sul/tecnologia-popular-no-tiktok-guia-de-compra",
+      "canonical": "https://caxiasdosul.aquitemachadinhos.com.br/guias/caxias-do-sul/tecnologia-popular-no-tiktok-guia-de-compra"
+    },
+    {
+      "type": "city_hub",
+      "city": "salvador",
+      "route": "/guias/salvador",
+      "canonical": "https://salvador.aquitemachadinhos.com.br/guias/salvador"
+    },
+    {
+      "type": "home_office",
+      "city": "salvador",
+      "route": "/guias/salvador/home-office-sem-experiencia-2026",
+      "canonical": "https://salvador.aquitemachadinhos.com.br/guias/salvador/home-office-sem-experiencia-2026"
+    },
+    {
+      "type": "concursos",
+      "city": "salvador",
+      "route": "/guias/salvador/concursos-municipais-como-consultar-2026",
+      "canonical": "https://salvador.aquitemachadinhos.com.br/guias/salvador/concursos-municipais-como-consultar-2026"
+    },
+    {
+      "type": "clima_energia",
+      "city": "salvador",
+      "route": "/guias/salvador/ventos-fortes-e-falta-de-luz-preparacao",
+      "canonical": "https://salvador.aquitemachadinhos.com.br/guias/salvador/ventos-fortes-e-falta-de-luz-preparacao"
+    },
+    {
+      "type": "economia_energia",
+      "city": "salvador",
+      "route": "/guias/salvador/como-reduzir-conta-de-luz-2026",
+      "canonical": "https://salvador.aquitemachadinhos.com.br/guias/salvador/como-reduzir-conta-de-luz-2026"
+    },
+    {
+      "type": "moda_country",
+      "city": "salvador",
+      "route": "/guias/salvador/moda-country-chapeus-guia-de-compra",
+      "canonical": "https://salvador.aquitemachadinhos.com.br/guias/salvador/moda-country-chapeus-guia-de-compra"
+    },
+    {
+      "type": "tecnologia_social",
+      "city": "salvador",
+      "route": "/guias/salvador/tecnologia-popular-no-tiktok-guia-de-compra",
+      "canonical": "https://salvador.aquitemachadinhos.com.br/guias/salvador/tecnologia-popular-no-tiktok-guia-de-compra"
+    },
+    {
+      "type": "city_hub",
+      "city": "porto",
+      "route": "/guias/porto",
+      "canonical": "https://porto.aquitemachadinhos.com.br/guias/porto"
+    },
+    {
+      "type": "home_office",
+      "city": "porto",
+      "route": "/guias/porto/home-office-sem-experiencia-2026",
+      "canonical": "https://porto.aquitemachadinhos.com.br/guias/porto/home-office-sem-experiencia-2026"
+    },
+    {
+      "type": "concursos",
+      "city": "porto",
+      "route": "/guias/porto/concursos-municipais-como-consultar-2026",
+      "canonical": "https://porto.aquitemachadinhos.com.br/guias/porto/concursos-municipais-como-consultar-2026"
+    },
+    {
+      "type": "clima_energia",
+      "city": "porto",
+      "route": "/guias/porto/ventos-fortes-e-falta-de-luz-preparacao",
+      "canonical": "https://porto.aquitemachadinhos.com.br/guias/porto/ventos-fortes-e-falta-de-luz-preparacao"
+    },
+    {
+      "type": "economia_energia",
+      "city": "porto",
+      "route": "/guias/porto/como-reduzir-conta-de-luz-2026",
+      "canonical": "https://porto.aquitemachadinhos.com.br/guias/porto/como-reduzir-conta-de-luz-2026"
+    },
+    {
+      "type": "moda_country",
+      "city": "porto",
+      "route": "/guias/porto/moda-country-chapeus-guia-de-compra",
+      "canonical": "https://porto.aquitemachadinhos.com.br/guias/porto/moda-country-chapeus-guia-de-compra"
+    },
+    {
+      "type": "tecnologia_social",
+      "city": "porto",
+      "route": "/guias/porto/tecnologia-popular-no-tiktok-guia-de-compra",
+      "canonical": "https://porto.aquitemachadinhos.com.br/guias/porto/tecnologia-popular-no-tiktok-guia-de-compra"
+    },
+    {
+      "type": "city_hub",
+      "city": "recife",
+      "route": "/guias/recife",
+      "canonical": "https://recife.aquitemachadinhos.com.br/guias/recife"
+    },
+    {
+      "type": "home_office",
+      "city": "recife",
+      "route": "/guias/recife/home-office-sem-experiencia-2026",
+      "canonical": "https://recife.aquitemachadinhos.com.br/guias/recife/home-office-sem-experiencia-2026"
+    },
+    {
+      "type": "concursos",
+      "city": "recife",
+      "route": "/guias/recife/concursos-municipais-como-consultar-2026",
+      "canonical": "https://recife.aquitemachadinhos.com.br/guias/recife/concursos-municipais-como-consultar-2026"
+    },
+    {
+      "type": "clima_energia",
+      "city": "recife",
+      "route": "/guias/recife/ventos-fortes-e-falta-de-luz-preparacao",
+      "canonical": "https://recife.aquitemachadinhos.com.br/guias/recife/ventos-fortes-e-falta-de-luz-preparacao"
+    },
+    {
+      "type": "economia_energia",
+      "city": "recife",
+      "route": "/guias/recife/como-reduzir-conta-de-luz-2026",
+      "canonical": "https://recife.aquitemachadinhos.com.br/guias/recife/como-reduzir-conta-de-luz-2026"
+    },
+    {
+      "type": "moda_country",
+      "city": "recife",
+      "route": "/guias/recife/moda-country-chapeus-guia-de-compra",
+      "canonical": "https://recife.aquitemachadinhos.com.br/guias/recife/moda-country-chapeus-guia-de-compra"
+    },
+    {
+      "type": "tecnologia_social",
+      "city": "recife",
+      "route": "/guias/recife/tecnologia-popular-no-tiktok-guia-de-compra",
+      "canonical": "https://recife.aquitemachadinhos.com.br/guias/recife/tecnologia-popular-no-tiktok-guia-de-compra"
+    },
+    {
+      "type": "city_hub",
+      "city": "caruaru",
+      "route": "/guias/caruaru",
+      "canonical": "https://caruaru.aquitemachadinhos.com.br/guias/caruaru"
+    },
+    {
+      "type": "home_office",
+      "city": "caruaru",
+      "route": "/guias/caruaru/home-office-sem-experiencia-2026",
+      "canonical": "https://caruaru.aquitemachadinhos.com.br/guias/caruaru/home-office-sem-experiencia-2026"
+    },
+    {
+      "type": "concursos",
+      "city": "caruaru",
+      "route": "/guias/caruaru/concursos-municipais-como-consultar-2026",
+      "canonical": "https://caruaru.aquitemachadinhos.com.br/guias/caruaru/concursos-municipais-como-consultar-2026"
+    },
+    {
+      "type": "clima_energia",
+      "city": "caruaru",
+      "route": "/guias/caruaru/ventos-fortes-e-falta-de-luz-preparacao",
+      "canonical": "https://caruaru.aquitemachadinhos.com.br/guias/caruaru/ventos-fortes-e-falta-de-luz-preparacao"
+    },
+    {
+      "type": "economia_energia",
+      "city": "caruaru",
+      "route": "/guias/caruaru/como-reduzir-conta-de-luz-2026",
+      "canonical": "https://caruaru.aquitemachadinhos.com.br/guias/caruaru/como-reduzir-conta-de-luz-2026"
+    },
+    {
+      "type": "moda_country",
+      "city": "caruaru",
+      "route": "/guias/caruaru/moda-country-chapeus-guia-de-compra",
+      "canonical": "https://caruaru.aquitemachadinhos.com.br/guias/caruaru/moda-country-chapeus-guia-de-compra"
+    },
+    {
+      "type": "tecnologia_social",
+      "city": "caruaru",
+      "route": "/guias/caruaru/tecnologia-popular-no-tiktok-guia-de-compra",
+      "canonical": "https://caruaru.aquitemachadinhos.com.br/guias/caruaru/tecnologia-popular-no-tiktok-guia-de-compra"
+    },
+    {
+      "type": "city_hub",
+      "city": "noronha",
+      "route": "/guias/noronha",
+      "canonical": "https://noronha.aquitemachadinhos.com.br/guias/noronha"
+    },
+    {
+      "type": "home_office",
+      "city": "noronha",
+      "route": "/guias/noronha/home-office-sem-experiencia-2026",
+      "canonical": "https://noronha.aquitemachadinhos.com.br/guias/noronha/home-office-sem-experiencia-2026"
+    },
+    {
+      "type": "concursos",
+      "city": "noronha",
+      "route": "/guias/noronha/concursos-municipais-como-consultar-2026",
+      "canonical": "https://noronha.aquitemachadinhos.com.br/guias/noronha/concursos-municipais-como-consultar-2026"
+    },
+    {
+      "type": "clima_energia",
+      "city": "noronha",
+      "route": "/guias/noronha/ventos-fortes-e-falta-de-luz-preparacao",
+      "canonical": "https://noronha.aquitemachadinhos.com.br/guias/noronha/ventos-fortes-e-falta-de-luz-preparacao"
+    },
+    {
+      "type": "economia_energia",
+      "city": "noronha",
+      "route": "/guias/noronha/como-reduzir-conta-de-luz-2026",
+      "canonical": "https://noronha.aquitemachadinhos.com.br/guias/noronha/como-reduzir-conta-de-luz-2026"
+    },
+    {
+      "type": "moda_country",
+      "city": "noronha",
+      "route": "/guias/noronha/moda-country-chapeus-guia-de-compra",
+      "canonical": "https://noronha.aquitemachadinhos.com.br/guias/noronha/moda-country-chapeus-guia-de-compra"
+    },
+    {
+      "type": "tecnologia_social",
+      "city": "noronha",
+      "route": "/guias/noronha/tecnologia-popular-no-tiktok-guia-de-compra",
+      "canonical": "https://noronha.aquitemachadinhos.com.br/guias/noronha/tecnologia-popular-no-tiktok-guia-de-compra"
+    },
+    {
+      "type": "city_hub",
+      "city": "fortaleza",
+      "route": "/guias/fortaleza",
+      "canonical": "https://fortaleza.aquitemachadinhos.com.br/guias/fortaleza"
+    },
+    {
+      "type": "home_office",
+      "city": "fortaleza",
+      "route": "/guias/fortaleza/home-office-sem-experiencia-2026",
+      "canonical": "https://fortaleza.aquitemachadinhos.com.br/guias/fortaleza/home-office-sem-experiencia-2026"
+    },
+    {
+      "type": "concursos",
+      "city": "fortaleza",
+      "route": "/guias/fortaleza/concursos-municipais-como-consultar-2026",
+      "canonical": "https://fortaleza.aquitemachadinhos.com.br/guias/fortaleza/concursos-municipais-como-consultar-2026"
+    },
+    {
+      "type": "clima_energia",
+      "city": "fortaleza",
+      "route": "/guias/fortaleza/ventos-fortes-e-falta-de-luz-preparacao",
+      "canonical": "https://fortaleza.aquitemachadinhos.com.br/guias/fortaleza/ventos-fortes-e-falta-de-luz-preparacao"
+    },
+    {
+      "type": "economia_energia",
+      "city": "fortaleza",
+      "route": "/guias/fortaleza/como-reduzir-conta-de-luz-2026",
+      "canonical": "https://fortaleza.aquitemachadinhos.com.br/guias/fortaleza/como-reduzir-conta-de-luz-2026"
+    },
+    {
+      "type": "moda_country",
+      "city": "fortaleza",
+      "route": "/guias/fortaleza/moda-country-chapeus-guia-de-compra",
+      "canonical": "https://fortaleza.aquitemachadinhos.com.br/guias/fortaleza/moda-country-chapeus-guia-de-compra"
+    },
+    {
+      "type": "tecnologia_social",
+      "city": "fortaleza",
+      "route": "/guias/fortaleza/tecnologia-popular-no-tiktok-guia-de-compra",
+      "canonical": "https://fortaleza.aquitemachadinhos.com.br/guias/fortaleza/tecnologia-popular-no-tiktok-guia-de-compra"
+    },
+    {
+      "type": "city_hub",
+      "city": "jericoacoara",
+      "route": "/guias/jericoacoara",
+      "canonical": "https://jericoacoara.aquitemachadinhos.com.br/guias/jericoacoara"
+    },
+    {
+      "type": "home_office",
+      "city": "jericoacoara",
+      "route": "/guias/jericoacoara/home-office-sem-experiencia-2026",
+      "canonical": "https://jericoacoara.aquitemachadinhos.com.br/guias/jericoacoara/home-office-sem-experiencia-2026"
+    },
+    {
+      "type": "concursos",
+      "city": "jericoacoara",
+      "route": "/guias/jericoacoara/concursos-municipais-como-consultar-2026",
+      "canonical": "https://jericoacoara.aquitemachadinhos.com.br/guias/jericoacoara/concursos-municipais-como-consultar-2026"
+    },
+    {
+      "type": "clima_energia",
+      "city": "jericoacoara",
+      "route": "/guias/jericoacoara/ventos-fortes-e-falta-de-luz-preparacao",
+      "canonical": "https://jericoacoara.aquitemachadinhos.com.br/guias/jericoacoara/ventos-fortes-e-falta-de-luz-preparacao"
+    },
+    {
+      "type": "economia_energia",
+      "city": "jericoacoara",
+      "route": "/guias/jericoacoara/como-reduzir-conta-de-luz-2026",
+      "canonical": "https://jericoacoara.aquitemachadinhos.com.br/guias/jericoacoara/como-reduzir-conta-de-luz-2026"
+    },
+    {
+      "type": "moda_country",
+      "city": "jericoacoara",
+      "route": "/guias/jericoacoara/moda-country-chapeus-guia-de-compra",
+      "canonical": "https://jericoacoara.aquitemachadinhos.com.br/guias/jericoacoara/moda-country-chapeus-guia-de-compra"
+    },
+    {
+      "type": "tecnologia_social",
+      "city": "jericoacoara",
+      "route": "/guias/jericoacoara/tecnologia-popular-no-tiktok-guia-de-compra",
+      "canonical": "https://jericoacoara.aquitemachadinhos.com.br/guias/jericoacoara/tecnologia-popular-no-tiktok-guia-de-compra"
+    },
+    {
+      "type": "city_hub",
+      "city": "natal",
+      "route": "/guias/natal",
+      "canonical": "https://natal.aquitemachadinhos.com.br/guias/natal"
+    },
+    {
+      "type": "home_office",
+      "city": "natal",
+      "route": "/guias/natal/home-office-sem-experiencia-2026",
+      "canonical": "https://natal.aquitemachadinhos.com.br/guias/natal/home-office-sem-experiencia-2026"
+    },
+    {
+      "type": "concursos",
+      "city": "natal",
+      "route": "/guias/natal/concursos-municipais-como-consultar-2026",
+      "canonical": "https://natal.aquitemachadinhos.com.br/guias/natal/concursos-municipais-como-consultar-2026"
+    },
+    {
+      "type": "clima_energia",
+      "city": "natal",
+      "route": "/guias/natal/ventos-fortes-e-falta-de-luz-preparacao",
+      "canonical": "https://natal.aquitemachadinhos.com.br/guias/natal/ventos-fortes-e-falta-de-luz-preparacao"
+    },
+    {
+      "type": "economia_energia",
+      "city": "natal",
+      "route": "/guias/natal/como-reduzir-conta-de-luz-2026",
+      "canonical": "https://natal.aquitemachadinhos.com.br/guias/natal/como-reduzir-conta-de-luz-2026"
+    },
+    {
+      "type": "moda_country",
+      "city": "natal",
+      "route": "/guias/natal/moda-country-chapeus-guia-de-compra",
+      "canonical": "https://natal.aquitemachadinhos.com.br/guias/natal/moda-country-chapeus-guia-de-compra"
+    },
+    {
+      "type": "tecnologia_social",
+      "city": "natal",
+      "route": "/guias/natal/tecnologia-popular-no-tiktok-guia-de-compra",
+      "canonical": "https://natal.aquitemachadinhos.com.br/guias/natal/tecnologia-popular-no-tiktok-guia-de-compra"
+    },
+    {
+      "type": "city_hub",
+      "city": "joao-pessoa",
+      "route": "/guias/joao-pessoa",
+      "canonical": "https://joaopessoa.aquitemachadinhos.com.br/guias/joao-pessoa"
+    },
+    {
+      "type": "home_office",
+      "city": "joao-pessoa",
+      "route": "/guias/joao-pessoa/home-office-sem-experiencia-2026",
+      "canonical": "https://joaopessoa.aquitemachadinhos.com.br/guias/joao-pessoa/home-office-sem-experiencia-2026"
+    },
+    {
+      "type": "concursos",
+      "city": "joao-pessoa",
+      "route": "/guias/joao-pessoa/concursos-municipais-como-consultar-2026",
+      "canonical": "https://joaopessoa.aquitemachadinhos.com.br/guias/joao-pessoa/concursos-municipais-como-consultar-2026"
+    },
+    {
+      "type": "clima_energia",
+      "city": "joao-pessoa",
+      "route": "/guias/joao-pessoa/ventos-fortes-e-falta-de-luz-preparacao",
+      "canonical": "https://joaopessoa.aquitemachadinhos.com.br/guias/joao-pessoa/ventos-fortes-e-falta-de-luz-preparacao"
+    },
+    {
+      "type": "economia_energia",
+      "city": "joao-pessoa",
+      "route": "/guias/joao-pessoa/como-reduzir-conta-de-luz-2026",
+      "canonical": "https://joaopessoa.aquitemachadinhos.com.br/guias/joao-pessoa/como-reduzir-conta-de-luz-2026"
+    },
+    {
+      "type": "moda_country",
+      "city": "joao-pessoa",
+      "route": "/guias/joao-pessoa/moda-country-chapeus-guia-de-compra",
+      "canonical": "https://joaopessoa.aquitemachadinhos.com.br/guias/joao-pessoa/moda-country-chapeus-guia-de-compra"
+    },
+    {
+      "type": "tecnologia_social",
+      "city": "joao-pessoa",
+      "route": "/guias/joao-pessoa/tecnologia-popular-no-tiktok-guia-de-compra",
+      "canonical": "https://joaopessoa.aquitemachadinhos.com.br/guias/joao-pessoa/tecnologia-popular-no-tiktok-guia-de-compra"
+    },
+    {
+      "type": "city_hub",
+      "city": "campina-grande",
+      "route": "/guias/campina-grande",
+      "canonical": "https://campinagrande.aquitemachadinhos.com.br/guias/campina-grande"
+    },
+    {
+      "type": "home_office",
+      "city": "campina-grande",
+      "route": "/guias/campina-grande/home-office-sem-experiencia-2026",
+      "canonical": "https://campinagrande.aquitemachadinhos.com.br/guias/campina-grande/home-office-sem-experiencia-2026"
+    },
+    {
+      "type": "concursos",
+      "city": "campina-grande",
+      "route": "/guias/campina-grande/concursos-municipais-como-consultar-2026",
+      "canonical": "https://campinagrande.aquitemachadinhos.com.br/guias/campina-grande/concursos-municipais-como-consultar-2026"
+    },
+    {
+      "type": "clima_energia",
+      "city": "campina-grande",
+      "route": "/guias/campina-grande/ventos-fortes-e-falta-de-luz-preparacao",
+      "canonical": "https://campinagrande.aquitemachadinhos.com.br/guias/campina-grande/ventos-fortes-e-falta-de-luz-preparacao"
+    },
+    {
+      "type": "economia_energia",
+      "city": "campina-grande",
+      "route": "/guias/campina-grande/como-reduzir-conta-de-luz-2026",
+      "canonical": "https://campinagrande.aquitemachadinhos.com.br/guias/campina-grande/como-reduzir-conta-de-luz-2026"
+    },
+    {
+      "type": "moda_country",
+      "city": "campina-grande",
+      "route": "/guias/campina-grande/moda-country-chapeus-guia-de-compra",
+      "canonical": "https://campinagrande.aquitemachadinhos.com.br/guias/campina-grande/moda-country-chapeus-guia-de-compra"
+    },
+    {
+      "type": "tecnologia_social",
+      "city": "campina-grande",
+      "route": "/guias/campina-grande/tecnologia-popular-no-tiktok-guia-de-compra",
+      "canonical": "https://campinagrande.aquitemachadinhos.com.br/guias/campina-grande/tecnologia-popular-no-tiktok-guia-de-compra"
+    },
+    {
+      "type": "city_hub",
+      "city": "maceio",
+      "route": "/guias/maceio",
+      "canonical": "https://maceio.aquitemachadinhos.com.br/guias/maceio"
+    },
+    {
+      "type": "home_office",
+      "city": "maceio",
+      "route": "/guias/maceio/home-office-sem-experiencia-2026",
+      "canonical": "https://maceio.aquitemachadinhos.com.br/guias/maceio/home-office-sem-experiencia-2026"
+    },
+    {
+      "type": "concursos",
+      "city": "maceio",
+      "route": "/guias/maceio/concursos-municipais-como-consultar-2026",
+      "canonical": "https://maceio.aquitemachadinhos.com.br/guias/maceio/concursos-municipais-como-consultar-2026"
+    },
+    {
+      "type": "clima_energia",
+      "city": "maceio",
+      "route": "/guias/maceio/ventos-fortes-e-falta-de-luz-preparacao",
+      "canonical": "https://maceio.aquitemachadinhos.com.br/guias/maceio/ventos-fortes-e-falta-de-luz-preparacao"
+    },
+    {
+      "type": "economia_energia",
+      "city": "maceio",
+      "route": "/guias/maceio/como-reduzir-conta-de-luz-2026",
+      "canonical": "https://maceio.aquitemachadinhos.com.br/guias/maceio/como-reduzir-conta-de-luz-2026"
+    },
+    {
+      "type": "moda_country",
+      "city": "maceio",
+      "route": "/guias/maceio/moda-country-chapeus-guia-de-compra",
+      "canonical": "https://maceio.aquitemachadinhos.com.br/guias/maceio/moda-country-chapeus-guia-de-compra"
+    },
+    {
+      "type": "tecnologia_social",
+      "city": "maceio",
+      "route": "/guias/maceio/tecnologia-popular-no-tiktok-guia-de-compra",
+      "canonical": "https://maceio.aquitemachadinhos.com.br/guias/maceio/tecnologia-popular-no-tiktok-guia-de-compra"
+    },
+    {
+      "type": "city_hub",
+      "city": "aracaju",
+      "route": "/guias/aracaju",
+      "canonical": "https://aracaju.aquitemachadinhos.com.br/guias/aracaju"
+    },
+    {
+      "type": "home_office",
+      "city": "aracaju",
+      "route": "/guias/aracaju/home-office-sem-experiencia-2026",
+      "canonical": "https://aracaju.aquitemachadinhos.com.br/guias/aracaju/home-office-sem-experiencia-2026"
+    },
+    {
+      "type": "concursos",
+      "city": "aracaju",
+      "route": "/guias/aracaju/concursos-municipais-como-consultar-2026",
+      "canonical": "https://aracaju.aquitemachadinhos.com.br/guias/aracaju/concursos-municipais-como-consultar-2026"
+    },
+    {
+      "type": "clima_energia",
+      "city": "aracaju",
+      "route": "/guias/aracaju/ventos-fortes-e-falta-de-luz-preparacao",
+      "canonical": "https://aracaju.aquitemachadinhos.com.br/guias/aracaju/ventos-fortes-e-falta-de-luz-preparacao"
+    },
+    {
+      "type": "economia_energia",
+      "city": "aracaju",
+      "route": "/guias/aracaju/como-reduzir-conta-de-luz-2026",
+      "canonical": "https://aracaju.aquitemachadinhos.com.br/guias/aracaju/como-reduzir-conta-de-luz-2026"
+    },
+    {
+      "type": "moda_country",
+      "city": "aracaju",
+      "route": "/guias/aracaju/moda-country-chapeus-guia-de-compra",
+      "canonical": "https://aracaju.aquitemachadinhos.com.br/guias/aracaju/moda-country-chapeus-guia-de-compra"
+    },
+    {
+      "type": "tecnologia_social",
+      "city": "aracaju",
+      "route": "/guias/aracaju/tecnologia-popular-no-tiktok-guia-de-compra",
+      "canonical": "https://aracaju.aquitemachadinhos.com.br/guias/aracaju/tecnologia-popular-no-tiktok-guia-de-compra"
+    },
+    {
+      "type": "city_hub",
+      "city": "brasilia",
+      "route": "/guias/brasilia",
+      "canonical": "https://brasilia.aquitemachadinhos.com.br/guias/brasilia"
+    },
+    {
+      "type": "home_office",
+      "city": "brasilia",
+      "route": "/guias/brasilia/home-office-sem-experiencia-2026",
+      "canonical": "https://brasilia.aquitemachadinhos.com.br/guias/brasilia/home-office-sem-experiencia-2026"
+    },
+    {
+      "type": "concursos",
+      "city": "brasilia",
+      "route": "/guias/brasilia/concursos-municipais-como-consultar-2026",
+      "canonical": "https://brasilia.aquitemachadinhos.com.br/guias/brasilia/concursos-municipais-como-consultar-2026"
+    },
+    {
+      "type": "clima_energia",
+      "city": "brasilia",
+      "route": "/guias/brasilia/ventos-fortes-e-falta-de-luz-preparacao",
+      "canonical": "https://brasilia.aquitemachadinhos.com.br/guias/brasilia/ventos-fortes-e-falta-de-luz-preparacao"
+    },
+    {
+      "type": "economia_energia",
+      "city": "brasilia",
+      "route": "/guias/brasilia/como-reduzir-conta-de-luz-2026",
+      "canonical": "https://brasilia.aquitemachadinhos.com.br/guias/brasilia/como-reduzir-conta-de-luz-2026"
+    },
+    {
+      "type": "moda_country",
+      "city": "brasilia",
+      "route": "/guias/brasilia/moda-country-chapeus-guia-de-compra",
+      "canonical": "https://brasilia.aquitemachadinhos.com.br/guias/brasilia/moda-country-chapeus-guia-de-compra"
+    },
+    {
+      "type": "tecnologia_social",
+      "city": "brasilia",
+      "route": "/guias/brasilia/tecnologia-popular-no-tiktok-guia-de-compra",
+      "canonical": "https://brasilia.aquitemachadinhos.com.br/guias/brasilia/tecnologia-popular-no-tiktok-guia-de-compra"
+    },
+    {
+      "type": "city_hub",
+      "city": "goiania",
+      "route": "/guias/goiania",
+      "canonical": "https://goiania.aquitemachadinhos.com.br/guias/goiania"
+    },
+    {
+      "type": "home_office",
+      "city": "goiania",
+      "route": "/guias/goiania/home-office-sem-experiencia-2026",
+      "canonical": "https://goiania.aquitemachadinhos.com.br/guias/goiania/home-office-sem-experiencia-2026"
+    },
+    {
+      "type": "concursos",
+      "city": "goiania",
+      "route": "/guias/goiania/concursos-municipais-como-consultar-2026",
+      "canonical": "https://goiania.aquitemachadinhos.com.br/guias/goiania/concursos-municipais-como-consultar-2026"
+    },
+    {
+      "type": "clima_energia",
+      "city": "goiania",
+      "route": "/guias/goiania/ventos-fortes-e-falta-de-luz-preparacao",
+      "canonical": "https://goiania.aquitemachadinhos.com.br/guias/goiania/ventos-fortes-e-falta-de-luz-preparacao"
+    },
+    {
+      "type": "economia_energia",
+      "city": "goiania",
+      "route": "/guias/goiania/como-reduzir-conta-de-luz-2026",
+      "canonical": "https://goiania.aquitemachadinhos.com.br/guias/goiania/como-reduzir-conta-de-luz-2026"
+    },
+    {
+      "type": "moda_country",
+      "city": "goiania",
+      "route": "/guias/goiania/moda-country-chapeus-guia-de-compra",
+      "canonical": "https://goiania.aquitemachadinhos.com.br/guias/goiania/moda-country-chapeus-guia-de-compra"
+    },
+    {
+      "type": "tecnologia_social",
+      "city": "goiania",
+      "route": "/guias/goiania/tecnologia-popular-no-tiktok-guia-de-compra",
+      "canonical": "https://goiania.aquitemachadinhos.com.br/guias/goiania/tecnologia-popular-no-tiktok-guia-de-compra"
+    },
+    {
+      "type": "city_hub",
+      "city": "anapolis",
+      "route": "/guias/anapolis",
+      "canonical": "https://anapolis.aquitemachadinhos.com.br/guias/anapolis"
+    },
+    {
+      "type": "home_office",
+      "city": "anapolis",
+      "route": "/guias/anapolis/home-office-sem-experiencia-2026",
+      "canonical": "https://anapolis.aquitemachadinhos.com.br/guias/anapolis/home-office-sem-experiencia-2026"
+    },
+    {
+      "type": "concursos",
+      "city": "anapolis",
+      "route": "/guias/anapolis/concursos-municipais-como-consultar-2026",
+      "canonical": "https://anapolis.aquitemachadinhos.com.br/guias/anapolis/concursos-municipais-como-consultar-2026"
+    },
+    {
+      "type": "clima_energia",
+      "city": "anapolis",
+      "route": "/guias/anapolis/ventos-fortes-e-falta-de-luz-preparacao",
+      "canonical": "https://anapolis.aquitemachadinhos.com.br/guias/anapolis/ventos-fortes-e-falta-de-luz-preparacao"
+    },
+    {
+      "type": "economia_energia",
+      "city": "anapolis",
+      "route": "/guias/anapolis/como-reduzir-conta-de-luz-2026",
+      "canonical": "https://anapolis.aquitemachadinhos.com.br/guias/anapolis/como-reduzir-conta-de-luz-2026"
+    },
+    {
+      "type": "moda_country",
+      "city": "anapolis",
+      "route": "/guias/anapolis/moda-country-chapeus-guia-de-compra",
+      "canonical": "https://anapolis.aquitemachadinhos.com.br/guias/anapolis/moda-country-chapeus-guia-de-compra"
+    },
+    {
+      "type": "tecnologia_social",
+      "city": "anapolis",
+      "route": "/guias/anapolis/tecnologia-popular-no-tiktok-guia-de-compra",
+      "canonical": "https://anapolis.aquitemachadinhos.com.br/guias/anapolis/tecnologia-popular-no-tiktok-guia-de-compra"
+    },
+    {
+      "type": "city_hub",
+      "city": "rio-verde",
+      "route": "/guias/rio-verde",
+      "canonical": "https://rioverde.aquitemachadinhos.com.br/guias/rio-verde"
+    },
+    {
+      "type": "home_office",
+      "city": "rio-verde",
+      "route": "/guias/rio-verde/home-office-sem-experiencia-2026",
+      "canonical": "https://rioverde.aquitemachadinhos.com.br/guias/rio-verde/home-office-sem-experiencia-2026"
+    },
+    {
+      "type": "concursos",
+      "city": "rio-verde",
+      "route": "/guias/rio-verde/concursos-municipais-como-consultar-2026",
+      "canonical": "https://rioverde.aquitemachadinhos.com.br/guias/rio-verde/concursos-municipais-como-consultar-2026"
+    },
+    {
+      "type": "clima_energia",
+      "city": "rio-verde",
+      "route": "/guias/rio-verde/ventos-fortes-e-falta-de-luz-preparacao",
+      "canonical": "https://rioverde.aquitemachadinhos.com.br/guias/rio-verde/ventos-fortes-e-falta-de-luz-preparacao"
+    },
+    {
+      "type": "economia_energia",
+      "city": "rio-verde",
+      "route": "/guias/rio-verde/como-reduzir-conta-de-luz-2026",
+      "canonical": "https://rioverde.aquitemachadinhos.com.br/guias/rio-verde/como-reduzir-conta-de-luz-2026"
+    },
+    {
+      "type": "moda_country",
+      "city": "rio-verde",
+      "route": "/guias/rio-verde/moda-country-chapeus-guia-de-compra",
+      "canonical": "https://rioverde.aquitemachadinhos.com.br/guias/rio-verde/moda-country-chapeus-guia-de-compra"
+    },
+    {
+      "type": "tecnologia_social",
+      "city": "rio-verde",
+      "route": "/guias/rio-verde/tecnologia-popular-no-tiktok-guia-de-compra",
+      "canonical": "https://rioverde.aquitemachadinhos.com.br/guias/rio-verde/tecnologia-popular-no-tiktok-guia-de-compra"
+    },
+    {
+      "type": "city_hub",
+      "city": "caldasnovas",
+      "route": "/guias/caldasnovas",
+      "canonical": "https://caldasnovas.aquitemachadinhos.com.br/guias/caldasnovas"
+    },
+    {
+      "type": "home_office",
+      "city": "caldasnovas",
+      "route": "/guias/caldasnovas/home-office-sem-experiencia-2026",
+      "canonical": "https://caldasnovas.aquitemachadinhos.com.br/guias/caldasnovas/home-office-sem-experiencia-2026"
+    },
+    {
+      "type": "concursos",
+      "city": "caldasnovas",
+      "route": "/guias/caldasnovas/concursos-municipais-como-consultar-2026",
+      "canonical": "https://caldasnovas.aquitemachadinhos.com.br/guias/caldasnovas/concursos-municipais-como-consultar-2026"
+    },
+    {
+      "type": "clima_energia",
+      "city": "caldasnovas",
+      "route": "/guias/caldasnovas/ventos-fortes-e-falta-de-luz-preparacao",
+      "canonical": "https://caldasnovas.aquitemachadinhos.com.br/guias/caldasnovas/ventos-fortes-e-falta-de-luz-preparacao"
+    },
+    {
+      "type": "economia_energia",
+      "city": "caldasnovas",
+      "route": "/guias/caldasnovas/como-reduzir-conta-de-luz-2026",
+      "canonical": "https://caldasnovas.aquitemachadinhos.com.br/guias/caldasnovas/como-reduzir-conta-de-luz-2026"
+    },
+    {
+      "type": "moda_country",
+      "city": "caldasnovas",
+      "route": "/guias/caldasnovas/moda-country-chapeus-guia-de-compra",
+      "canonical": "https://caldasnovas.aquitemachadinhos.com.br/guias/caldasnovas/moda-country-chapeus-guia-de-compra"
+    },
+    {
+      "type": "tecnologia_social",
+      "city": "caldasnovas",
+      "route": "/guias/caldasnovas/tecnologia-popular-no-tiktok-guia-de-compra",
+      "canonical": "https://caldasnovas.aquitemachadinhos.com.br/guias/caldasnovas/tecnologia-popular-no-tiktok-guia-de-compra"
+    },
+    {
+      "type": "city_hub",
+      "city": "pirenopolis",
+      "route": "/guias/pirenopolis",
+      "canonical": "https://pirenopolis.aquitemachadinhos.com.br/guias/pirenopolis"
+    },
+    {
+      "type": "home_office",
+      "city": "pirenopolis",
+      "route": "/guias/pirenopolis/home-office-sem-experiencia-2026",
+      "canonical": "https://pirenopolis.aquitemachadinhos.com.br/guias/pirenopolis/home-office-sem-experiencia-2026"
+    },
+    {
+      "type": "concursos",
+      "city": "pirenopolis",
+      "route": "/guias/pirenopolis/concursos-municipais-como-consultar-2026",
+      "canonical": "https://pirenopolis.aquitemachadinhos.com.br/guias/pirenopolis/concursos-municipais-como-consultar-2026"
+    },
+    {
+      "type": "clima_energia",
+      "city": "pirenopolis",
+      "route": "/guias/pirenopolis/ventos-fortes-e-falta-de-luz-preparacao",
+      "canonical": "https://pirenopolis.aquitemachadinhos.com.br/guias/pirenopolis/ventos-fortes-e-falta-de-luz-preparacao"
+    },
+    {
+      "type": "economia_energia",
+      "city": "pirenopolis",
+      "route": "/guias/pirenopolis/como-reduzir-conta-de-luz-2026",
+      "canonical": "https://pirenopolis.aquitemachadinhos.com.br/guias/pirenopolis/como-reduzir-conta-de-luz-2026"
+    },
+    {
+      "type": "moda_country",
+      "city": "pirenopolis",
+      "route": "/guias/pirenopolis/moda-country-chapeus-guia-de-compra",
+      "canonical": "https://pirenopolis.aquitemachadinhos.com.br/guias/pirenopolis/moda-country-chapeus-guia-de-compra"
+    },
+    {
+      "type": "tecnologia_social",
+      "city": "pirenopolis",
+      "route": "/guias/pirenopolis/tecnologia-popular-no-tiktok-guia-de-compra",
+      "canonical": "https://pirenopolis.aquitemachadinhos.com.br/guias/pirenopolis/tecnologia-popular-no-tiktok-guia-de-compra"
+    },
+    {
+      "type": "city_hub",
+      "city": "cuiaba",
+      "route": "/guias/cuiaba",
+      "canonical": "https://cuiaba.aquitemachadinhos.com.br/guias/cuiaba"
+    },
+    {
+      "type": "home_office",
+      "city": "cuiaba",
+      "route": "/guias/cuiaba/home-office-sem-experiencia-2026",
+      "canonical": "https://cuiaba.aquitemachadinhos.com.br/guias/cuiaba/home-office-sem-experiencia-2026"
+    },
+    {
+      "type": "concursos",
+      "city": "cuiaba",
+      "route": "/guias/cuiaba/concursos-municipais-como-consultar-2026",
+      "canonical": "https://cuiaba.aquitemachadinhos.com.br/guias/cuiaba/concursos-municipais-como-consultar-2026"
+    },
+    {
+      "type": "clima_energia",
+      "city": "cuiaba",
+      "route": "/guias/cuiaba/ventos-fortes-e-falta-de-luz-preparacao",
+      "canonical": "https://cuiaba.aquitemachadinhos.com.br/guias/cuiaba/ventos-fortes-e-falta-de-luz-preparacao"
+    },
+    {
+      "type": "economia_energia",
+      "city": "cuiaba",
+      "route": "/guias/cuiaba/como-reduzir-conta-de-luz-2026",
+      "canonical": "https://cuiaba.aquitemachadinhos.com.br/guias/cuiaba/como-reduzir-conta-de-luz-2026"
+    },
+    {
+      "type": "moda_country",
+      "city": "cuiaba",
+      "route": "/guias/cuiaba/moda-country-chapeus-guia-de-compra",
+      "canonical": "https://cuiaba.aquitemachadinhos.com.br/guias/cuiaba/moda-country-chapeus-guia-de-compra"
+    },
+    {
+      "type": "tecnologia_social",
+      "city": "cuiaba",
+      "route": "/guias/cuiaba/tecnologia-popular-no-tiktok-guia-de-compra",
+      "canonical": "https://cuiaba.aquitemachadinhos.com.br/guias/cuiaba/tecnologia-popular-no-tiktok-guia-de-compra"
+    },
+    {
+      "type": "city_hub",
+      "city": "chapada-guimaraes",
+      "route": "/guias/chapada-guimaraes",
+      "canonical": "https://chapadaguimaraes.aquitemachadinhos.com.br/guias/chapada-guimaraes"
+    },
+    {
+      "type": "home_office",
+      "city": "chapada-guimaraes",
+      "route": "/guias/chapada-guimaraes/home-office-sem-experiencia-2026",
+      "canonical": "https://chapadaguimaraes.aquitemachadinhos.com.br/guias/chapada-guimaraes/home-office-sem-experiencia-2026"
+    },
+    {
+      "type": "concursos",
+      "city": "chapada-guimaraes",
+      "route": "/guias/chapada-guimaraes/concursos-municipais-como-consultar-2026",
+      "canonical": "https://chapadaguimaraes.aquitemachadinhos.com.br/guias/chapada-guimaraes/concursos-municipais-como-consultar-2026"
+    },
+    {
+      "type": "clima_energia",
+      "city": "chapada-guimaraes",
+      "route": "/guias/chapada-guimaraes/ventos-fortes-e-falta-de-luz-preparacao",
+      "canonical": "https://chapadaguimaraes.aquitemachadinhos.com.br/guias/chapada-guimaraes/ventos-fortes-e-falta-de-luz-preparacao"
+    },
+    {
+      "type": "economia_energia",
+      "city": "chapada-guimaraes",
+      "route": "/guias/chapada-guimaraes/como-reduzir-conta-de-luz-2026",
+      "canonical": "https://chapadaguimaraes.aquitemachadinhos.com.br/guias/chapada-guimaraes/como-reduzir-conta-de-luz-2026"
+    },
+    {
+      "type": "moda_country",
+      "city": "chapada-guimaraes",
+      "route": "/guias/chapada-guimaraes/moda-country-chapeus-guia-de-compra",
+      "canonical": "https://chapadaguimaraes.aquitemachadinhos.com.br/guias/chapada-guimaraes/moda-country-chapeus-guia-de-compra"
+    },
+    {
+      "type": "tecnologia_social",
+      "city": "chapada-guimaraes",
+      "route": "/guias/chapada-guimaraes/tecnologia-popular-no-tiktok-guia-de-compra",
+      "canonical": "https://chapadaguimaraes.aquitemachadinhos.com.br/guias/chapada-guimaraes/tecnologia-popular-no-tiktok-guia-de-compra"
+    },
+    {
+      "type": "city_hub",
+      "city": "campo-grande",
+      "route": "/guias/campo-grande",
+      "canonical": "https://campogrande.aquitemachadinhos.com.br/guias/campo-grande"
+    },
+    {
+      "type": "home_office",
+      "city": "campo-grande",
+      "route": "/guias/campo-grande/home-office-sem-experiencia-2026",
+      "canonical": "https://campogrande.aquitemachadinhos.com.br/guias/campo-grande/home-office-sem-experiencia-2026"
+    },
+    {
+      "type": "concursos",
+      "city": "campo-grande",
+      "route": "/guias/campo-grande/concursos-municipais-como-consultar-2026",
+      "canonical": "https://campogrande.aquitemachadinhos.com.br/guias/campo-grande/concursos-municipais-como-consultar-2026"
+    },
+    {
+      "type": "clima_energia",
+      "city": "campo-grande",
+      "route": "/guias/campo-grande/ventos-fortes-e-falta-de-luz-preparacao",
+      "canonical": "https://campogrande.aquitemachadinhos.com.br/guias/campo-grande/ventos-fortes-e-falta-de-luz-preparacao"
+    },
+    {
+      "type": "economia_energia",
+      "city": "campo-grande",
+      "route": "/guias/campo-grande/como-reduzir-conta-de-luz-2026",
+      "canonical": "https://campogrande.aquitemachadinhos.com.br/guias/campo-grande/como-reduzir-conta-de-luz-2026"
+    },
+    {
+      "type": "moda_country",
+      "city": "campo-grande",
+      "route": "/guias/campo-grande/moda-country-chapeus-guia-de-compra",
+      "canonical": "https://campogrande.aquitemachadinhos.com.br/guias/campo-grande/moda-country-chapeus-guia-de-compra"
+    },
+    {
+      "type": "tecnologia_social",
+      "city": "campo-grande",
+      "route": "/guias/campo-grande/tecnologia-popular-no-tiktok-guia-de-compra",
+      "canonical": "https://campogrande.aquitemachadinhos.com.br/guias/campo-grande/tecnologia-popular-no-tiktok-guia-de-compra"
+    },
+    {
+      "type": "city_hub",
+      "city": "bonito",
+      "route": "/guias/bonito",
+      "canonical": "https://bonito.aquitemachadinhos.com.br/guias/bonito"
+    },
+    {
+      "type": "home_office",
+      "city": "bonito",
+      "route": "/guias/bonito/home-office-sem-experiencia-2026",
+      "canonical": "https://bonito.aquitemachadinhos.com.br/guias/bonito/home-office-sem-experiencia-2026"
+    },
+    {
+      "type": "concursos",
+      "city": "bonito",
+      "route": "/guias/bonito/concursos-municipais-como-consultar-2026",
+      "canonical": "https://bonito.aquitemachadinhos.com.br/guias/bonito/concursos-municipais-como-consultar-2026"
+    },
+    {
+      "type": "clima_energia",
+      "city": "bonito",
+      "route": "/guias/bonito/ventos-fortes-e-falta-de-luz-preparacao",
+      "canonical": "https://bonito.aquitemachadinhos.com.br/guias/bonito/ventos-fortes-e-falta-de-luz-preparacao"
+    },
+    {
+      "type": "economia_energia",
+      "city": "bonito",
+      "route": "/guias/bonito/como-reduzir-conta-de-luz-2026",
+      "canonical": "https://bonito.aquitemachadinhos.com.br/guias/bonito/como-reduzir-conta-de-luz-2026"
+    },
+    {
+      "type": "moda_country",
+      "city": "bonito",
+      "route": "/guias/bonito/moda-country-chapeus-guia-de-compra",
+      "canonical": "https://bonito.aquitemachadinhos.com.br/guias/bonito/moda-country-chapeus-guia-de-compra"
+    },
+    {
+      "type": "tecnologia_social",
+      "city": "bonito",
+      "route": "/guias/bonito/tecnologia-popular-no-tiktok-guia-de-compra",
+      "canonical": "https://bonito.aquitemachadinhos.com.br/guias/bonito/tecnologia-popular-no-tiktok-guia-de-compra"
+    },
+    {
+      "type": "city_hub",
+      "city": "manaus",
+      "route": "/guias/manaus",
+      "canonical": "https://manaus.aquitemachadinhos.com.br/guias/manaus"
+    },
+    {
+      "type": "home_office",
+      "city": "manaus",
+      "route": "/guias/manaus/home-office-sem-experiencia-2026",
+      "canonical": "https://manaus.aquitemachadinhos.com.br/guias/manaus/home-office-sem-experiencia-2026"
+    },
+    {
+      "type": "concursos",
+      "city": "manaus",
+      "route": "/guias/manaus/concursos-municipais-como-consultar-2026",
+      "canonical": "https://manaus.aquitemachadinhos.com.br/guias/manaus/concursos-municipais-como-consultar-2026"
+    },
+    {
+      "type": "clima_energia",
+      "city": "manaus",
+      "route": "/guias/manaus/ventos-fortes-e-falta-de-luz-preparacao",
+      "canonical": "https://manaus.aquitemachadinhos.com.br/guias/manaus/ventos-fortes-e-falta-de-luz-preparacao"
+    },
+    {
+      "type": "economia_energia",
+      "city": "manaus",
+      "route": "/guias/manaus/como-reduzir-conta-de-luz-2026",
+      "canonical": "https://manaus.aquitemachadinhos.com.br/guias/manaus/como-reduzir-conta-de-luz-2026"
+    },
+    {
+      "type": "moda_country",
+      "city": "manaus",
+      "route": "/guias/manaus/moda-country-chapeus-guia-de-compra",
+      "canonical": "https://manaus.aquitemachadinhos.com.br/guias/manaus/moda-country-chapeus-guia-de-compra"
+    },
+    {
+      "type": "tecnologia_social",
+      "city": "manaus",
+      "route": "/guias/manaus/tecnologia-popular-no-tiktok-guia-de-compra",
+      "canonical": "https://manaus.aquitemachadinhos.com.br/guias/manaus/tecnologia-popular-no-tiktok-guia-de-compra"
+    },
+    {
+      "type": "city_hub",
+      "city": "belem",
+      "route": "/guias/belem",
+      "canonical": "https://belem.aquitemachadinhos.com.br/guias/belem"
+    },
+    {
+      "type": "home_office",
+      "city": "belem",
+      "route": "/guias/belem/home-office-sem-experiencia-2026",
+      "canonical": "https://belem.aquitemachadinhos.com.br/guias/belem/home-office-sem-experiencia-2026"
+    },
+    {
+      "type": "concursos",
+      "city": "belem",
+      "route": "/guias/belem/concursos-municipais-como-consultar-2026",
+      "canonical": "https://belem.aquitemachadinhos.com.br/guias/belem/concursos-municipais-como-consultar-2026"
+    },
+    {
+      "type": "clima_energia",
+      "city": "belem",
+      "route": "/guias/belem/ventos-fortes-e-falta-de-luz-preparacao",
+      "canonical": "https://belem.aquitemachadinhos.com.br/guias/belem/ventos-fortes-e-falta-de-luz-preparacao"
+    },
+    {
+      "type": "economia_energia",
+      "city": "belem",
+      "route": "/guias/belem/como-reduzir-conta-de-luz-2026",
+      "canonical": "https://belem.aquitemachadinhos.com.br/guias/belem/como-reduzir-conta-de-luz-2026"
+    },
+    {
+      "type": "moda_country",
+      "city": "belem",
+      "route": "/guias/belem/moda-country-chapeus-guia-de-compra",
+      "canonical": "https://belem.aquitemachadinhos.com.br/guias/belem/moda-country-chapeus-guia-de-compra"
+    },
+    {
+      "type": "tecnologia_social",
+      "city": "belem",
+      "route": "/guias/belem/tecnologia-popular-no-tiktok-guia-de-compra",
+      "canonical": "https://belem.aquitemachadinhos.com.br/guias/belem/tecnologia-popular-no-tiktok-guia-de-compra"
+    },
+    {
+      "type": "city_hub",
+      "city": "alter-do-chao",
+      "route": "/guias/alter-do-chao",
+      "canonical": "https://alterdochao.aquitemachadinhos.com.br/guias/alter-do-chao"
+    },
+    {
+      "type": "home_office",
+      "city": "alter-do-chao",
+      "route": "/guias/alter-do-chao/home-office-sem-experiencia-2026",
+      "canonical": "https://alterdochao.aquitemachadinhos.com.br/guias/alter-do-chao/home-office-sem-experiencia-2026"
+    },
+    {
+      "type": "concursos",
+      "city": "alter-do-chao",
+      "route": "/guias/alter-do-chao/concursos-municipais-como-consultar-2026",
+      "canonical": "https://alterdochao.aquitemachadinhos.com.br/guias/alter-do-chao/concursos-municipais-como-consultar-2026"
+    },
+    {
+      "type": "clima_energia",
+      "city": "alter-do-chao",
+      "route": "/guias/alter-do-chao/ventos-fortes-e-falta-de-luz-preparacao",
+      "canonical": "https://alterdochao.aquitemachadinhos.com.br/guias/alter-do-chao/ventos-fortes-e-falta-de-luz-preparacao"
+    },
+    {
+      "type": "economia_energia",
+      "city": "alter-do-chao",
+      "route": "/guias/alter-do-chao/como-reduzir-conta-de-luz-2026",
+      "canonical": "https://alterdochao.aquitemachadinhos.com.br/guias/alter-do-chao/como-reduzir-conta-de-luz-2026"
+    },
+    {
+      "type": "moda_country",
+      "city": "alter-do-chao",
+      "route": "/guias/alter-do-chao/moda-country-chapeus-guia-de-compra",
+      "canonical": "https://alterdochao.aquitemachadinhos.com.br/guias/alter-do-chao/moda-country-chapeus-guia-de-compra"
+    },
+    {
+      "type": "tecnologia_social",
+      "city": "alter-do-chao",
+      "route": "/guias/alter-do-chao/tecnologia-popular-no-tiktok-guia-de-compra",
+      "canonical": "https://alterdochao.aquitemachadinhos.com.br/guias/alter-do-chao/tecnologia-popular-no-tiktok-guia-de-compra"
+    },
+    {
+      "type": "city_hub",
+      "city": "sao-luis",
+      "route": "/guias/sao-luis",
+      "canonical": "https://saoluis.aquitemachadinhos.com.br/guias/sao-luis"
+    },
+    {
+      "type": "home_office",
+      "city": "sao-luis",
+      "route": "/guias/sao-luis/home-office-sem-experiencia-2026",
+      "canonical": "https://saoluis.aquitemachadinhos.com.br/guias/sao-luis/home-office-sem-experiencia-2026"
+    },
+    {
+      "type": "concursos",
+      "city": "sao-luis",
+      "route": "/guias/sao-luis/concursos-municipais-como-consultar-2026",
+      "canonical": "https://saoluis.aquitemachadinhos.com.br/guias/sao-luis/concursos-municipais-como-consultar-2026"
+    },
+    {
+      "type": "clima_energia",
+      "city": "sao-luis",
+      "route": "/guias/sao-luis/ventos-fortes-e-falta-de-luz-preparacao",
+      "canonical": "https://saoluis.aquitemachadinhos.com.br/guias/sao-luis/ventos-fortes-e-falta-de-luz-preparacao"
+    },
+    {
+      "type": "economia_energia",
+      "city": "sao-luis",
+      "route": "/guias/sao-luis/como-reduzir-conta-de-luz-2026",
+      "canonical": "https://saoluis.aquitemachadinhos.com.br/guias/sao-luis/como-reduzir-conta-de-luz-2026"
+    },
+    {
+      "type": "moda_country",
+      "city": "sao-luis",
+      "route": "/guias/sao-luis/moda-country-chapeus-guia-de-compra",
+      "canonical": "https://saoluis.aquitemachadinhos.com.br/guias/sao-luis/moda-country-chapeus-guia-de-compra"
+    },
+    {
+      "type": "tecnologia_social",
+      "city": "sao-luis",
+      "route": "/guias/sao-luis/tecnologia-popular-no-tiktok-guia-de-compra",
+      "canonical": "https://saoluis.aquitemachadinhos.com.br/guias/sao-luis/tecnologia-popular-no-tiktok-guia-de-compra"
+    },
+    {
+      "type": "city_hub",
+      "city": "teresina",
+      "route": "/guias/teresina",
+      "canonical": "https://teresina.aquitemachadinhos.com.br/guias/teresina"
+    },
+    {
+      "type": "home_office",
+      "city": "teresina",
+      "route": "/guias/teresina/home-office-sem-experiencia-2026",
+      "canonical": "https://teresina.aquitemachadinhos.com.br/guias/teresina/home-office-sem-experiencia-2026"
+    },
+    {
+      "type": "concursos",
+      "city": "teresina",
+      "route": "/guias/teresina/concursos-municipais-como-consultar-2026",
+      "canonical": "https://teresina.aquitemachadinhos.com.br/guias/teresina/concursos-municipais-como-consultar-2026"
+    },
+    {
+      "type": "clima_energia",
+      "city": "teresina",
+      "route": "/guias/teresina/ventos-fortes-e-falta-de-luz-preparacao",
+      "canonical": "https://teresina.aquitemachadinhos.com.br/guias/teresina/ventos-fortes-e-falta-de-luz-preparacao"
+    },
+    {
+      "type": "economia_energia",
+      "city": "teresina",
+      "route": "/guias/teresina/como-reduzir-conta-de-luz-2026",
+      "canonical": "https://teresina.aquitemachadinhos.com.br/guias/teresina/como-reduzir-conta-de-luz-2026"
+    },
+    {
+      "type": "moda_country",
+      "city": "teresina",
+      "route": "/guias/teresina/moda-country-chapeus-guia-de-compra",
+      "canonical": "https://teresina.aquitemachadinhos.com.br/guias/teresina/moda-country-chapeus-guia-de-compra"
+    },
+    {
+      "type": "tecnologia_social",
+      "city": "teresina",
+      "route": "/guias/teresina/tecnologia-popular-no-tiktok-guia-de-compra",
+      "canonical": "https://teresina.aquitemachadinhos.com.br/guias/teresina/tecnologia-popular-no-tiktok-guia-de-compra"
+    },
+    {
+      "type": "city_hub",
+      "city": "vitoria",
+      "route": "/guias/vitoria",
+      "canonical": "https://vitoria.aquitemachadinhos.com.br/guias/vitoria"
+    },
+    {
+      "type": "home_office",
+      "city": "vitoria",
+      "route": "/guias/vitoria/home-office-sem-experiencia-2026",
+      "canonical": "https://vitoria.aquitemachadinhos.com.br/guias/vitoria/home-office-sem-experiencia-2026"
+    },
+    {
+      "type": "concursos",
+      "city": "vitoria",
+      "route": "/guias/vitoria/concursos-municipais-como-consultar-2026",
+      "canonical": "https://vitoria.aquitemachadinhos.com.br/guias/vitoria/concursos-municipais-como-consultar-2026"
+    },
+    {
+      "type": "clima_energia",
+      "city": "vitoria",
+      "route": "/guias/vitoria/ventos-fortes-e-falta-de-luz-preparacao",
+      "canonical": "https://vitoria.aquitemachadinhos.com.br/guias/vitoria/ventos-fortes-e-falta-de-luz-preparacao"
+    },
+    {
+      "type": "economia_energia",
+      "city": "vitoria",
+      "route": "/guias/vitoria/como-reduzir-conta-de-luz-2026",
+      "canonical": "https://vitoria.aquitemachadinhos.com.br/guias/vitoria/como-reduzir-conta-de-luz-2026"
+    },
+    {
+      "type": "moda_country",
+      "city": "vitoria",
+      "route": "/guias/vitoria/moda-country-chapeus-guia-de-compra",
+      "canonical": "https://vitoria.aquitemachadinhos.com.br/guias/vitoria/moda-country-chapeus-guia-de-compra"
+    },
+    {
+      "type": "tecnologia_social",
+      "city": "vitoria",
+      "route": "/guias/vitoria/tecnologia-popular-no-tiktok-guia-de-compra",
+      "canonical": "https://vitoria.aquitemachadinhos.com.br/guias/vitoria/tecnologia-popular-no-tiktok-guia-de-compra"
+    },
+    {
+      "type": "city_hub",
+      "city": "feira-de-santana",
+      "route": "/guias/feira-de-santana",
+      "canonical": "https://feiradesantana.aquitemachadinhos.com.br/guias/feira-de-santana"
+    },
+    {
+      "type": "home_office",
+      "city": "feira-de-santana",
+      "route": "/guias/feira-de-santana/home-office-sem-experiencia-2026",
+      "canonical": "https://feiradesantana.aquitemachadinhos.com.br/guias/feira-de-santana/home-office-sem-experiencia-2026"
+    },
+    {
+      "type": "concursos",
+      "city": "feira-de-santana",
+      "route": "/guias/feira-de-santana/concursos-municipais-como-consultar-2026",
+      "canonical": "https://feiradesantana.aquitemachadinhos.com.br/guias/feira-de-santana/concursos-municipais-como-consultar-2026"
+    },
+    {
+      "type": "clima_energia",
+      "city": "feira-de-santana",
+      "route": "/guias/feira-de-santana/ventos-fortes-e-falta-de-luz-preparacao",
+      "canonical": "https://feiradesantana.aquitemachadinhos.com.br/guias/feira-de-santana/ventos-fortes-e-falta-de-luz-preparacao"
+    },
+    {
+      "type": "economia_energia",
+      "city": "feira-de-santana",
+      "route": "/guias/feira-de-santana/como-reduzir-conta-de-luz-2026",
+      "canonical": "https://feiradesantana.aquitemachadinhos.com.br/guias/feira-de-santana/como-reduzir-conta-de-luz-2026"
+    },
+    {
+      "type": "moda_country",
+      "city": "feira-de-santana",
+      "route": "/guias/feira-de-santana/moda-country-chapeus-guia-de-compra",
+      "canonical": "https://feiradesantana.aquitemachadinhos.com.br/guias/feira-de-santana/moda-country-chapeus-guia-de-compra"
+    },
+    {
+      "type": "tecnologia_social",
+      "city": "feira-de-santana",
+      "route": "/guias/feira-de-santana/tecnologia-popular-no-tiktok-guia-de-compra",
+      "canonical": "https://feiradesantana.aquitemachadinhos.com.br/guias/feira-de-santana/tecnologia-popular-no-tiktok-guia-de-compra"
+    },
+    {
+      "type": "city_hub",
+      "city": "lencois",
+      "route": "/guias/lencois",
+      "canonical": "https://lencois.aquitemachadinhos.com.br/guias/lencois"
+    },
+    {
+      "type": "home_office",
+      "city": "lencois",
+      "route": "/guias/lencois/home-office-sem-experiencia-2026",
+      "canonical": "https://lencois.aquitemachadinhos.com.br/guias/lencois/home-office-sem-experiencia-2026"
+    },
+    {
+      "type": "concursos",
+      "city": "lencois",
+      "route": "/guias/lencois/concursos-municipais-como-consultar-2026",
+      "canonical": "https://lencois.aquitemachadinhos.com.br/guias/lencois/concursos-municipais-como-consultar-2026"
+    },
+    {
+      "type": "clima_energia",
+      "city": "lencois",
+      "route": "/guias/lencois/ventos-fortes-e-falta-de-luz-preparacao",
+      "canonical": "https://lencois.aquitemachadinhos.com.br/guias/lencois/ventos-fortes-e-falta-de-luz-preparacao"
+    },
+    {
+      "type": "economia_energia",
+      "city": "lencois",
+      "route": "/guias/lencois/como-reduzir-conta-de-luz-2026",
+      "canonical": "https://lencois.aquitemachadinhos.com.br/guias/lencois/como-reduzir-conta-de-luz-2026"
+    },
+    {
+      "type": "moda_country",
+      "city": "lencois",
+      "route": "/guias/lencois/moda-country-chapeus-guia-de-compra",
+      "canonical": "https://lencois.aquitemachadinhos.com.br/guias/lencois/moda-country-chapeus-guia-de-compra"
+    },
+    {
+      "type": "tecnologia_social",
+      "city": "lencois",
+      "route": "/guias/lencois/tecnologia-popular-no-tiktok-guia-de-compra",
+      "canonical": "https://lencois.aquitemachadinhos.com.br/guias/lencois/tecnologia-popular-no-tiktok-guia-de-compra"
+    },
+    {
+      "type": "city_hub",
+      "city": "jalapao",
+      "route": "/guias/jalapao",
+      "canonical": "https://jalapao.aquitemachadinhos.com.br/guias/jalapao"
+    },
+    {
+      "type": "home_office",
+      "city": "jalapao",
+      "route": "/guias/jalapao/home-office-sem-experiencia-2026",
+      "canonical": "https://jalapao.aquitemachadinhos.com.br/guias/jalapao/home-office-sem-experiencia-2026"
+    },
+    {
+      "type": "concursos",
+      "city": "jalapao",
+      "route": "/guias/jalapao/concursos-municipais-como-consultar-2026",
+      "canonical": "https://jalapao.aquitemachadinhos.com.br/guias/jalapao/concursos-municipais-como-consultar-2026"
+    },
+    {
+      "type": "clima_energia",
+      "city": "jalapao",
+      "route": "/guias/jalapao/ventos-fortes-e-falta-de-luz-preparacao",
+      "canonical": "https://jalapao.aquitemachadinhos.com.br/guias/jalapao/ventos-fortes-e-falta-de-luz-preparacao"
+    },
+    {
+      "type": "economia_energia",
+      "city": "jalapao",
+      "route": "/guias/jalapao/como-reduzir-conta-de-luz-2026",
+      "canonical": "https://jalapao.aquitemachadinhos.com.br/guias/jalapao/como-reduzir-conta-de-luz-2026"
+    },
+    {
+      "type": "moda_country",
+      "city": "jalapao",
+      "route": "/guias/jalapao/moda-country-chapeus-guia-de-compra",
+      "canonical": "https://jalapao.aquitemachadinhos.com.br/guias/jalapao/moda-country-chapeus-guia-de-compra"
+    },
+    {
+      "type": "tecnologia_social",
+      "city": "jalapao",
+      "route": "/guias/jalapao/tecnologia-popular-no-tiktok-guia-de-compra",
+      "canonical": "https://jalapao.aquitemachadinhos.com.br/guias/jalapao/tecnologia-popular-no-tiktok-guia-de-compra"
+    }
+  ]
+}

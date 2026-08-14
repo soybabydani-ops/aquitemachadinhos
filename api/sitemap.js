@@ -1,90 +1,64 @@
-// ============================================================
-// AQUITEM — Dynamic XML Sitemap Generator (/api/sitemap)
-// Vercel Serverless Nativo em Node.js com Cache Edge & HTTP 304
-// Suporta 5.581 cidades, rotas principais e sitemap index.
-// ============================================================
-
+// Dynamic sitemap for core, city and verified growth routes.
 const { supabase } = require('./_lib/supabase');
 
 const PRIORITY_HUBS = [
-  'barretos', 'olimpia', 'ribeirao-preto', 'bebedouro', 'colombia', 'guaira',
-  'sao-paulo', 'campinas', 'santos', 'sao-jose-do-rio-preto', 'franca', 'sorocaba',
-  'piracicaba', 'rio-de-janeiro', 'buzios', 'paraty', 'belo-horizonte', 'uberlandia',
-  'juiz-de-fora', 'montes-claros', 'curitiba', 'londrina', 'maringa', 'foz-do-iguacu',
-  'florianopolis', 'joinville', 'blumenau', 'balneario-camboriu', 'porto-alegre',
-  'caxias-do-sul', 'gramado', 'brasilia', 'goiania', 'anapolis', 'rio-verde',
-  'caldas-novas', 'pirenopolis', 'cuiaba', 'campo-grande', 'bonito', 'salvador',
-  'feira-de-santana', 'porto-seguro', 'recife', 'caruaru', 'fortaleza', 'jericoacoara',
-  'natal', 'joao-pessoa', 'maceio', 'aracaju', 'teresina', 'sao-luis', 'belem',
-  'alter-do-chao', 'manaus', 'palmas', 'jalapao'
+  'barretos','sao-paulo','gramado','campos','campinas','santos','ribeirao-preto','sao-jose-do-rio-preto',
+  'bebedouro','olimpia','guaira','colombia','franca','sorocaba','piracicaba','rio-de-janeiro','buzios','paraty',
+  'belo-horizonte','ouro-preto','uberlandia','juiz-de-fora','montes-claros','curitiba','londrina','maringa',
+  'foz-do-iguacu','florianopolis','balneario-camboriu','blumenau','joinville','porto-alegre','caxias-do-sul',
+  'salvador','porto','recife','caruaru','noronha','fortaleza','jericoacoara','natal','joao-pessoa','campina-grande',
+  'maceio','aracaju','brasilia','goiania','anapolis','rio-verde','caldasnovas','pirenopolis','cuiaba',
+  'chapada-guimaraes','campo-grande','bonito','manaus','belem','alter-do-chao','sao-luis','teresina','vitoria',
+  'feira-de-santana','lencois','jalapao'
 ];
 
+function escapeXml(value) {
+  return String(value).replace(/[<>&'\"]/g, c => ({'<':'&lt;','>':'&gt;','&':'&amp;',"'":'&apos;','"':'&quot;'}[c]));
+}
+function urlNode(loc, lastmod, changefreq, priority) {
+  return `  <url><loc>${escapeXml(loc)}</loc><lastmod>${lastmod}</lastmod><changefreq>${changefreq}</changefreq><priority>${priority}</priority></url>\n`;
+}
+
 module.exports = async function handler(req, res) {
-  // 1. Injeção de Headers XML e Cache Edge
   res.setHeader('Content-Type', 'application/xml; charset=utf-8');
-  res.setHeader('Cache-Control', 'public, max-age=0, s-maxage=86400, stale-while-revalidate=3600');
-
-  const { uf, page = 1 } = req.query || {};
+  res.setHeader('Cache-Control', 'public, max-age=0, s-maxage=21600, stale-while-revalidate=3600');
   const baseUrl = 'https://www.aquitemachadinhos.com.br';
-  const todayStr = new Date().toISOString().split('T')[0];
-
-  // 2. Checagem HTTP 304 Condicional
-  const ifModifiedSince = req.headers['if-modified-since'];
-  if (ifModifiedSince) {
-    const reqDate = new Date(ifModifiedSince).toISOString().split('T')[0];
-    if (reqDate === todayStr) {
-      return res.status(304).end();
-    }
-  }
-
-  res.setHeader('Last-Modified', new Date().toUTCString());
+  const today = new Date().toISOString().slice(0, 10);
+  const page = Math.max(1, Number(req.query && req.query.page) || 1);
+  const uf = String((req.query && req.query.uf) || '').toUpperCase().slice(0, 2);
 
   try {
-    let xml = '<?xml version="1.0" encoding="UTF-8"?>\n';
-    xml += '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n';
-
-    // Páginas Principais Nacionais
-    const coreRoutes = [
-      { loc: '/', priority: '1.0', changefreq: 'daily' },
-      { loc: '/cidades', priority: '0.9', changefreq: 'daily' },
-      { loc: '/vagas', priority: '0.9', changefreq: 'hourly' },
-      { loc: '/classificados', priority: '0.8', changefreq: 'hourly' },
-      { loc: '/marcas', priority: '0.8', changefreq: 'weekly' },
-      { loc: '/anuncie', priority: '0.7', changefreq: 'monthly' }
+    let xml = '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n';
+    const core = [
+      ['/', 'daily', '1.0'], ['/cidades', 'daily', '0.9'], ['/guias/', 'weekly', '0.9'],
+      ['/vagas', 'daily', '0.8'], ['/classificados', 'daily', '0.8'], ['/marcas', 'weekly', '0.7'], ['/anuncie', 'monthly', '0.6']
     ];
+    for (const [route, freq, priority] of core) xml += urlNode(`${baseUrl}${route}`, today, freq, priority);
+    for (const slug of PRIORITY_HUBS) xml += urlNode(`${baseUrl}/${slug}-home`, today, 'weekly', '0.75');
 
-    for (const route of coreRoutes) {
-      xml += `  <url>\n    <loc>${baseUrl}${route.loc}</loc>\n    <lastmod>${todayStr}</lastmod>\n    <changefreq>${route.changefreq}</changefreq>\n    <priority>${route.priority}</priority>\n  </url>\n`;
+    // Canonical URLs are stored only after editorial generation and hydration.
+    const growthResult = await supabase.from('growth_city_pages').select('canonical_url,updated_at').eq('active', true).limit(1000).execute();
+    for (const row of growthResult.data || []) {
+      const mod = row.updated_at ? String(row.updated_at).slice(0, 10) : today;
+      xml += urlNode(row.canonical_url, mod, 'weekly', '0.72');
     }
 
-    // Hubs Prioritários com Landing Pages Dedicadas
-    for (const hub of PRIORITY_HUBS) {
-      xml += `  <url>\n    <loc>${baseUrl}/${hub}-home</loc>\n    <lastmod>${todayStr}</lastmod>\n    <changefreq>daily</changefreq>\n    <priority>0.85</priority>\n  </url>\n`;
-      xml += `  <url>\n    <loc>${baseUrl}/vagas?cidade=${hub}</loc>\n    <lastmod>${todayStr}</lastmod>\n    <changefreq>daily</changefreq>\n    <priority>0.80</priority>\n  </url>\n`;
-    }
-
-    // Consulta de Cidades no Supabase para URLs dinâmicas
-    let query = supabase.from('cities').select('slug,uf,atualizado_em').limit(1000);
-    if (uf) {
-      query = query.eq('uf', uf.toUpperCase());
-    }
-
-    const { data: cities } = await query.execute();
-
-    if (cities && cities.length > 0) {
-      for (const city of cities) {
-        if (!PRIORITY_HUBS.includes(city.slug)) {
-          const modDate = city.atualizado_em ? city.atualizado_em.split('T')[0] : todayStr;
-          xml += `  <url>\n    <loc>${baseUrl}/guia.html?cidade=${city.slug}</loc>\n    <lastmod>${modDate}</lastmod>\n    <changefreq>weekly</changefreq>\n    <priority>0.70</priority>\n  </url>\n`;
-        }
+    // General municipal registry is paged to stay below sitemap limits.
+    const from = (page - 1) * 1000;
+    let cityQuery = supabase.from('cities').select('slug,criado_em').eq('ativo', true).range(from, from + 999);
+    if (uf) cityQuery = cityQuery.eq('uf', uf);
+    const cityResult = await cityQuery.execute();
+    for (const city of cityResult.data || []) {
+      if (!PRIORITY_HUBS.includes(city.slug)) {
+        xml += urlNode(`${baseUrl}/guia.html?cidade=${encodeURIComponent(city.slug)}`, city.criado_em ? String(city.criado_em).slice(0, 10) : today, 'monthly', '0.50');
       }
     }
 
-    xml += '</urlset>';
-
+    xml += '</urlset>\n';
+    res.setHeader('Last-Modified', new Date().toUTCString());
     return res.status(200).send(xml);
-  } catch (err) {
-    console.error('[API Sitemap Error]:', err);
+  } catch (error) {
+    console.error('[sitemap]', error);
     return res.status(500).send('<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"></urlset>');
   }
 };

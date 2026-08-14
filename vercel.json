@@ -10,6 +10,16 @@
   ],
   "redirects": [
     {
+      "source": "/concursos/:cidade-inscricoes-abertas",
+      "destination": "/guias/:cidade/concursos-municipais-como-consultar-2026",
+      "permanent": true
+    },
+    {
+      "source": "/alerta-clima/:cidade-alerta-meteorologico",
+      "destination": "/guias/:cidade/ventos-fortes-e-falta-de-luz-preparacao",
+      "permanent": true
+    },
+    {
       "source": "/barretos",
       "destination": "/barretos-home",
       "permanent": false
