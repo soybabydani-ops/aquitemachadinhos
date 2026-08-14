@@ -1,0 +1,43 @@
+{
+  "tenant": "barretos",
+  "blocks": [
+    {
+      "title": "Guias Corporativos Globais - Barretos",
+      "links": [
+        {
+          "label": "Remote Tech Jobs (EN)",
+          "url": "/en/barretos"
+        },
+        {
+          "label": "Guías de Infraestructura (ES)",
+          "url": "/es/barretos"
+        },
+        {
+          "label": "Eficiência Energética",
+          "url": "/utilidade-publica/eficiencia-energetica"
+        }
+      ]
+    },
+    {
+      "title": "Conexões Regionais - SP",
+      "links": [
+        {
+          "label": "Vagas e Clima em Campos do Jordão",
+          "url": "/campos-do-jordao-home.html"
+        },
+        {
+          "label": "Vagas e Clima em Olímpia",
+          "url": "/olimpia-home.html"
+        },
+        {
+          "label": "Vagas e Clima em Colômbia",
+          "url": "/colombia-home.html"
+        },
+        {
+          "label": "Vagas e Clima em São Paulo",
+          "url": "/sao-paulo-home.html"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "tenant": "bonito",
+  "blocks": [
+    {
+      "title": "Guias Corporativos Globais - Bonito",
+      "links": [
+        {
+          "label": "Remote Tech Jobs (EN)",
+          "url": "/en/bonito"
+        },
+        {
+          "label": "Guías de Infraestructura (ES)",
+          "url": "/es/bonito"
+        },
+        {
+          "label": "Eficiência Energética",
+          "url": "/utilidade-publica/eficiencia-energetica"
+        }
+      ]
+    },
+    {
+      "title": "Conexões Regionais - MS",
+      "links": [
+        {
+          "label": "Vagas e Clima em Campo Grande",
+          "url": "/campo-grande-home.html"
+        }
+      ]
+    }
+  ]
+}

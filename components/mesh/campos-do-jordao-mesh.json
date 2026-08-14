@@ -1,0 +1,43 @@
+{
+  "tenant": "campos-do-jordao",
+  "blocks": [
+    {
+      "title": "Guias Corporativos Globais - Campos do Jordão",
+      "links": [
+        {
+          "label": "Remote Tech Jobs (EN)",
+          "url": "/en/campos-do-jordao"
+        },
+        {
+          "label": "Guías de Infraestructura (ES)",
+          "url": "/es/campos-do-jordao"
+        },
+        {
+          "label": "Eficiência Energética",
+          "url": "/utilidade-publica/eficiencia-energetica"
+        }
+      ]
+    },
+    {
+      "title": "Conexões Regionais - SP",
+      "links": [
+        {
+          "label": "Vagas e Clima em Barretos",
+          "url": "/barretos-home.html"
+        },
+        {
+          "label": "Vagas e Clima em Olímpia",
+          "url": "/olimpia-home.html"
+        },
+        {
+          "label": "Vagas e Clima em Colômbia",
+          "url": "/colombia-home.html"
+        },
+        {
+          "label": "Vagas e Clima em São Paulo",
+          "url": "/sao-paulo-home.html"
+        }
+      ]
+    }
+  ]
+}

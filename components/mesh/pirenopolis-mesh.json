@@ -1,0 +1,35 @@
+{
+  "tenant": "pirenopolis",
+  "blocks": [
+    {
+      "title": "Guias Corporativos Globais - Pirenópolis",
+      "links": [
+        {
+          "label": "Remote Tech Jobs (EN)",
+          "url": "/en/pirenopolis"
+        },
+        {
+          "label": "Guías de Infraestructura (ES)",
+          "url": "/es/pirenopolis"
+        },
+        {
+          "label": "Eficiência Energética",
+          "url": "/utilidade-publica/eficiencia-energetica"
+        }
+      ]
+    },
+    {
+      "title": "Conexões Regionais - GO",
+      "links": [
+        {
+          "label": "Vagas e Clima em Caldas Novas",
+          "url": "/caldas-novas-home.html"
+        },
+        {
+          "label": "Vagas e Clima em Goiânia",
+          "url": "/goiania-home.html"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,43 @@
+{
+  "tenant": "paraty",
+  "blocks": [
+    {
+      "title": "Guias Corporativos Globais - Paraty",
+      "links": [
+        {
+          "label": "Remote Tech Jobs (EN)",
+          "url": "/en/paraty"
+        },
+        {
+          "label": "Guías de Infraestructura (ES)",
+          "url": "/es/paraty"
+        },
+        {
+          "label": "Eficiência Energética",
+          "url": "/utilidade-publica/eficiencia-energetica"
+        }
+      ]
+    },
+    {
+      "title": "Conexões Regionais - RJ",
+      "links": [
+        {
+          "label": "Vagas e Clima em Búzios",
+          "url": "/buzios-home.html"
+        },
+        {
+          "label": "Vagas e Clima em Rio de Janeiro",
+          "url": "/rio-de-janeiro-home.html"
+        },
+        {
+          "label": "Vagas e Clima em Niterói",
+          "url": "/niteroi-home.html"
+        },
+        {
+          "label": "Vagas e Clima em São Gonçalo",
+          "url": "/sao-goncalo-home.html"
+        }
+      ]
+    }
+  ]
+}

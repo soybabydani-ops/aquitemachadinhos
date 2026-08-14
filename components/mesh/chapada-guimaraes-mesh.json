@@ -1,0 +1,31 @@
+{
+  "tenant": "chapada-guimaraes",
+  "blocks": [
+    {
+      "title": "Guias Corporativos Globais - Chapada dos Guimarães",
+      "links": [
+        {
+          "label": "Remote Tech Jobs (EN)",
+          "url": "/en/chapada-guimaraes"
+        },
+        {
+          "label": "Guías de Infraestructura (ES)",
+          "url": "/es/chapada-guimaraes"
+        },
+        {
+          "label": "Eficiência Energética",
+          "url": "/utilidade-publica/eficiencia-energetica"
+        }
+      ]
+    },
+    {
+      "title": "Conexões Regionais - MT",
+      "links": [
+        {
+          "label": "Vagas e Clima em Cuiabá",
+          "url": "/cuiaba-home.html"
+        }
+      ]
+    }
+  ]
+}

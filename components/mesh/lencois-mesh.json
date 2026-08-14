@@ -1,0 +1,35 @@
+{
+  "tenant": "lencois",
+  "blocks": [
+    {
+      "title": "Guias Corporativos Globais - Lençóis",
+      "links": [
+        {
+          "label": "Remote Tech Jobs (EN)",
+          "url": "/en/lencois"
+        },
+        {
+          "label": "Guías de Infraestructura (ES)",
+          "url": "/es/lencois"
+        },
+        {
+          "label": "Eficiência Energética",
+          "url": "/utilidade-publica/eficiencia-energetica"
+        }
+      ]
+    },
+    {
+      "title": "Conexões Regionais - BA",
+      "links": [
+        {
+          "label": "Vagas e Clima em Salvador",
+          "url": "/salvador-home.html"
+        },
+        {
+          "label": "Vagas e Clima em Feira de Santana",
+          "url": "/feira-de-santana-home.html"
+        }
+      ]
+    }
+  ]
+}

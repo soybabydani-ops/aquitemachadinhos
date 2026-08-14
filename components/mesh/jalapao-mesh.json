@@ -1,0 +1,31 @@
+{
+  "tenant": "jalapao",
+  "blocks": [
+    {
+      "title": "Guias Corporativos Globais - Jalapão",
+      "links": [
+        {
+          "label": "Remote Tech Jobs (EN)",
+          "url": "/en/jalapao"
+        },
+        {
+          "label": "Guías de Infraestructura (ES)",
+          "url": "/es/jalapao"
+        },
+        {
+          "label": "Eficiência Energética",
+          "url": "/utilidade-publica/eficiencia-energetica"
+        }
+      ]
+    },
+    {
+      "title": "Conexões Regionais - TO",
+      "links": [
+        {
+          "label": "Vagas e Clima em Palmas",
+          "url": "/palmas-home.html"
+        }
+      ]
+    }
+  ]
+}

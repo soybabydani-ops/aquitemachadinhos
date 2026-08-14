@@ -1,0 +1,39 @@
+{
+  "tenant": "ouro-preto",
+  "blocks": [
+    {
+      "title": "Guias Corporativos Globais - Ouro Preto",
+      "links": [
+        {
+          "label": "Remote Tech Jobs (EN)",
+          "url": "/en/ouro-preto"
+        },
+        {
+          "label": "Guías de Infraestructura (ES)",
+          "url": "/es/ouro-preto"
+        },
+        {
+          "label": "Eficiência Energética",
+          "url": "/utilidade-publica/eficiencia-energetica"
+        }
+      ]
+    },
+    {
+      "title": "Conexões Regionais - MG",
+      "links": [
+        {
+          "label": "Vagas e Clima em Belo Horizonte",
+          "url": "/belo-horizonte-home.html"
+        },
+        {
+          "label": "Vagas e Clima em Uberlândia",
+          "url": "/uberlandia-home.html"
+        },
+        {
+          "label": "Vagas e Clima em Juiz de Fora",
+          "url": "/juiz-de-fora-home.html"
+        }
+      ]
+    }
+  ]
+}

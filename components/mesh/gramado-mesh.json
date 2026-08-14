@@ -1,0 +1,31 @@
+{
+  "tenant": "gramado",
+  "blocks": [
+    {
+      "title": "Guias Corporativos Globais - Gramado",
+      "links": [
+        {
+          "label": "Remote Tech Jobs (EN)",
+          "url": "/en/gramado"
+        },
+        {
+          "label": "Guías de Infraestructura (ES)",
+          "url": "/es/gramado"
+        },
+        {
+          "label": "Eficiência Energética",
+          "url": "/utilidade-publica/eficiencia-energetica"
+        }
+      ]
+    },
+    {
+      "title": "Conexões Regionais - RS",
+      "links": [
+        {
+          "label": "Vagas e Clima em Porto Alegre",
+          "url": "/porto-alegre-home.html"
+        }
+      ]
+    }
+  ]
+}
