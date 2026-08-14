@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="robots" content="noindex,nofollow,noarchive">
+  <meta name="referrer" content="no-referrer">
+  <title>Confirmar saída para parceiro | AQUITEM</title>
+  <style>
+    *{box-sizing:border-box}body{margin:0;min-height:100vh;display:grid;place-items:center;padding:20px;background:radial-gradient(circle at top,#15344e,#06101d 55%);color:#f8fafc;font:16px/1.55 system-ui,sans-serif}.card{width:min(520px,100%);padding:28px;border:1px solid rgba(255,255,255,.15);border-radius:24px;background:rgba(12,27,45,.78);backdrop-filter:blur(18px);box-shadow:0 24px 80px rgba(0,0,0,.35)}.tag{display:inline-block;padding:6px 10px;border-radius:999px;background:rgba(72,224,164,.11);border:1px solid rgba(72,224,164,.35);color:#9cf2cf;font-size:.75rem;font-weight:800}h1{font-size:2rem;line-height:1.05;letter-spacing:-.04em;margin:18px 0 12px}p{color:#b9c7d8}.btn{display:flex;justify-content:center;margin-top:18px;padding:14px 18px;border-radius:14px;background:linear-gradient(135deg,#48e0a4,#42c8ff);color:#04111b;text-decoration:none;font-weight:900}.back{display:block;text-align:center;margin-top:12px;color:#b9c7d8}.fine{font-size:.78rem;color:#8ea0b4;margin-top:16px}.error{color:#ffd7a1}
+  </style>
+</head>
+<body>
+  <main class="card">
+    <span class="tag">Saída transparente</span>
+    <h1 id="title">Confirmar acesso ao parceiro</h1>
+    <p id="copy">Você está prestes a sair do Aqui Tem Achadinhos. Confira preço, vendedor, frete e regras diretamente no destino.</p>
+    <a id="continue" class="btn" href="/" rel="nofollow sponsored noopener noreferrer">Continuar</a>
+    <a class="back" href="javascript:history.back()">Voltar ao guia</a>
+    <p class="fine">Este pode ser um link de afiliado. Podemos receber comissão sem custo adicional. Não fazemos redirecionamento automático e não aceitamos URLs externas por parâmetro.</p>
+  </main>
+  <script>
+  (function(){
+    'use strict';
+    var PARTNERS=Object.freeze({
+      shopee:{label:'Shopee Brasil',url:'https://s.shopee.com.br/30n7ohzzU6'},
+      shein:{label:'SHEIN Brasil',url:'https://onelink.shein.com/47/5ylqchgphidl'},
+      'mercado-livre':{label:'Mercado Livre',url:'https://meli.la/1U3rtgV'},
+      amazon:{label:'Amazon Brasil',url:'https://link.amazon/B0hmLsxcH'},
+      udemy:{label:'Udemy via Impact',url:'https://udemy.sjv.io/c/1101l435760/aquitem_cursos'}
+    });
+    var key=(new URLSearchParams(location.search).get('partner')||'').toLowerCase();
+    var partner=PARTNERS[key];
+    var button=document.getElementById('continue');
+    if(!partner){
+      document.getElementById('title').textContent='Parceiro ainda não configurado';
+      document.getElementById('copy').innerHTML='<span class="error">Nenhum destino aprovado foi encontrado. Volte ao guia e escolha outra opção.</span>';
+      button.hidden=true;
+      return;
+    }
+    document.getElementById('title').textContent='Continuar para '+partner.label+'?';
+    button.href=partner.url;
+    button.textContent='Abrir '+partner.label;
+  })();
+  </script>
+</body>
+</html>

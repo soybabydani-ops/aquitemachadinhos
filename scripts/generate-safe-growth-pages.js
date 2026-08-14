@@ -43,7 +43,7 @@ function canonicalFor(city, topic) { return `https://${tenant(city)}${routeFor(c
 function cityHubRoute(city) { return `/guias/${city.slug}`; }
 function cityHubCanonical(city) { return `https://${tenant(city)}${cityHubRoute(city)}`; }
 function affiliate(partner, city, source) {
-  return `/api/affiliate-redirect?partner=${encodeURIComponent(partner)}&city=${encodeURIComponent(city.slug)}&source=${encodeURIComponent(source)}`;
+  return `/affiliate-redirect.html?partner=${encodeURIComponent(partner)}&city=${encodeURIComponent(city.slug)}&source=${encodeURIComponent(source)}`;
 }
 function cityContext(city) {
   const geo = REAL_CITY_DATA[city.slug] || {};
