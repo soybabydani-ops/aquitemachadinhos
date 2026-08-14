@@ -4,8 +4,8 @@
   "regions": ["gru1"],
   "crons": [
     {
-      "path": "/api/v1/cron-global-hydration",
-      "schedule": "0 3 * * *"
+      "path": "/api/v1/automated-global-loop",
+      "schedule": "0 * * * *"
     }
   ]
 }
