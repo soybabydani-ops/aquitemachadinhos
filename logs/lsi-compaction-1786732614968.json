@@ -1,0 +1,9 @@
+{
+  "protocol": "LSI Semantic Clusters",
+  "generated_at": "2026-08-14T18:36:54.968Z",
+  "tenants": 63,
+  "total_clusters": 189,
+  "avg_size": null,
+  "edge_target_ms": "<5",
+  "clusters": []
+}

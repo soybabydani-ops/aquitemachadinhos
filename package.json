@@ -16,7 +16,8 @@
     "googleapis": "^174.0.1",
     "next": "14.2.5",
     "react": "^18",
-    "react-dom": "^18"
+    "react-dom": "^18",
+    "ws": "^8.21.3"
   },
   "devDependencies": {
     "@types/node": "^20",
