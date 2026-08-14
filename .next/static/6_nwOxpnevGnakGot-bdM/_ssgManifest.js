@@ -1,0 +1,1 @@
+self.__SSG_MANIFEST=new Set(["\u002F[city]","\u002Futilidade-publica\u002F[city]","\u002Fvagas-e-viagens\u002F[city]"]);self.__SSG_MANIFEST_CB&&self.__SSG_MANIFEST_CB()
