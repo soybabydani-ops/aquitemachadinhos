@@ -59,8 +59,7 @@ function renderBugPage(bug) {
     "offers": {
       "@type": "Offer",
       "priceCurrency": "BRL",
-      "price": bug.bug.replace("R$", "").trim(),
-      "priceValidUntil": "2026-12-31",
+      "price": bug.bug.replace(/[^\d,.-]/g, '').replace(/\./g, '').replace(',', '.'),
       "availability": "https://schema.org/InStock",
       "url": bug.link
     }
