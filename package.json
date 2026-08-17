@@ -11,5 +11,9 @@
     "programmatic-seo"
   ],
   "author": "AQUITEM",
-  "license": "UNLICENSED"
+  "license": "UNLICENSED",
+  "scripts": {
+    "vercel-prebuild": "node scripts/validate-env.mjs",
+    "audit:schemas": "node scripts/audit-structured-data-conformance.js"
+  }
 }

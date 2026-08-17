@@ -28,8 +28,12 @@ for (const file of files) {
         products += 1;
         const offer = entity.offers;
         if (offer) {
-          if (!/^\d+(?:\.\d+)?$/.test(String(offer.price || ''))) errors.push(`${path.relative(ROOT, file)}: invalid Product price`);
-          if (!String(offer.url || '').startsWith('https://')) errors.push(`${path.relative(ROOT, file)}: invalid Offer URL`);
+          if (offer['@type'] === 'AggregateOffer') {
+            if (!/^\d+(?:\.\d+)?$/.test(String(offer.lowPrice || '')) || !/^\d+(?:\.\d+)?$/.test(String(offer.highPrice || ''))) errors.push(`${path.relative(ROOT, file)}: invalid AggregateOffer price range`);
+          } else {
+            if (!/^\d+(?:\.\d+)?$/.test(String(offer.price || ''))) errors.push(`${path.relative(ROOT, file)}: invalid Product price`);
+            if (!String(offer.url || '').startsWith('https://')) errors.push(`${path.relative(ROOT, file)}: invalid Offer URL`);
+          }
           if (offer.priceValidUntil && Number.isNaN(Date.parse(offer.priceValidUntil))) errors.push(`${path.relative(ROOT, file)}: invalid priceValidUntil`);
         }
       }
