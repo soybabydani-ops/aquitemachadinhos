@@ -1,8 +1,28 @@
-import { readFile, readdir, writeFile } from 'node:fs/promises';
+import { cp, mkdir, readFile, readdir, rm, writeFile } from 'node:fs/promises';
 import { existsSync } from 'node:fs';
 import path from 'node:path';
 
 const ROOT = process.cwd();
+const OUTPUT = path.join(ROOT, 'public');
+const DEPLOYMENT_EXCLUDES = new Set([
+  '.git',
+  '.vercel',
+  'api',
+  'server',
+  'scripts',
+  'supabase',
+  'docs',
+  'node_modules',
+  'public',
+  'package.json',
+  'package-lock.json',
+  'vercel.json',
+  '.env',
+  '.env.local',
+  '.env.production',
+  '.env.example',
+  '.gitignore',
+]);
 const PLACEHOLDERS = {
   '__AQUITEM_SUPABASE_URL__': 'SUPABASE_URL',
   '__AQUITEM_SUPABASE_ANON_KEY__': 'SUPABASE_ANON_KEY',
@@ -26,6 +46,23 @@ function required(name) {
   return value;
 }
 
+async function prepareStaticOutput(indexNowKey) {
+  await rm(OUTPUT, { recursive: true, force: true });
+  await mkdir(OUTPUT, { recursive: true });
+
+  // Copy root entries one-by-one. Copying ROOT directly into ROOT/public would
+  // recurse into itself even when a filter excludes the destination directory.
+  const entries = await readdir(ROOT, { withFileTypes: true });
+  for (const entry of entries) {
+    if (DEPLOYMENT_EXCLUDES.has(entry.name)) continue;
+    await cp(path.join(ROOT, entry.name), path.join(OUTPUT, entry.name), { recursive: entry.isDirectory() });
+  }
+
+  if (indexNowKey) {
+    await writeFile(path.join(OUTPUT, 'indexnow-key.txt'), `${indexNowKey}\n`, 'utf8');
+  }
+}
+
 async function main() {
   if (!process.env.VERCEL) {
     console.info('prepare_vercel_build_skipped: local environment');
@@ -44,11 +81,10 @@ async function main() {
         '__AQUITEM_SUPABASE_ANON_KEY__': '',
       };
 
+  const indexNowKey = production ? required('INDEXNOW_KEY') : '';
   if (production) {
     required('CRON_SECRET');
     required('SEO_REFRESH_SECRET');
-    const indexNowKey = required('INDEXNOW_KEY');
-    await writeFile(path.join(ROOT, 'indexnow-key.txt'), `${indexNowKey}\n`, 'utf8');
   }
 
   const files = await walk(ROOT);
@@ -65,7 +101,8 @@ async function main() {
     }
   }
 
-  if (production && !existsSync(path.join(ROOT, 'indexnow-key.txt'))) {
+  await prepareStaticOutput(indexNowKey);
+  if (production && !existsSync(path.join(OUTPUT, 'indexnow-key.txt'))) {
     throw new Error('IndexNow verification file was not created.');
   }
 
@@ -73,6 +110,7 @@ async function main() {
     event: 'vercel_public_config_injected',
     production,
     filesUpdated: replacements,
+    outputDirectory: 'public',
   }));
 }
 

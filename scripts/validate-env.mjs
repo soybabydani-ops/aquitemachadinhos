@@ -16,7 +16,7 @@ if (process.env.VERCEL && process.env.VERCEL_ENV === 'production') {
   ]) {
     if (!process.env[name]) errors.push(`${name} is required in Vercel production.`);
   }
-  if (!existsSync('indexnow-key.txt')) errors.push('Generated IndexNow verification file is missing.');
+  if (!existsSync('public/indexnow-key.txt')) errors.push('Generated IndexNow verification file is missing.');
 }
 
 if (errors.length) {
