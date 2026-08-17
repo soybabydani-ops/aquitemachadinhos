@@ -164,7 +164,7 @@ function gerarHTMLAchadinho(p) {
 // Registro atômico no Supabase e auto-redirecionamento
 document.addEventListener('DOMContentLoaded', function() {
   var SUPABASE_URL = "https://efvuzxdhsirpvxclgdfg.supabase.co/rest/v1";
-  var SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVmdnV6eGRoc2lycHZ4Y2xnZGZnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODU1MDM1OTEsImV4cCI6MjEwMTA3OTU5MX0.nPVBBKO_W9-tAccFRv7ajnllxTXvkqbsVsYecDqyeQc";
+  var SUPABASE_KEY = "process.env.SUPABASE_ANON_KEY || ''";
 
   // Registra clique no log
   fetch(SUPABASE_URL + "/cliques_afiliados_logs", {

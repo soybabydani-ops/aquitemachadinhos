@@ -1,10 +1,11 @@
+import os
 #!/usr/bin/env python3
 import urllib.request, json, uuid, time
 
 URL = "https://efvuzxdhsirpvxclgdfg.supabase.co/rest/v1"
 HEADERS = {
-    "apikey": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVmdnV6eGRoc2lycHZ4Y2xnZGZnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODU1MDM1OTEsImV4cCI6MjEwMTA3OTU5MX0.nPVBBKO_W9-tAccFRv7ajnllxTXvkqbsVsYecDqyeQc",
-    "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVmdnV6eGRoc2lycHZ4Y2xnZGZnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODU1MDM1OTEsImV4cCI6MjEwMTA3OTU5MX0.nPVBBKO_W9-tAccFRv7ajnllxTXvkqbsVsYecDqyeQc",
+    "apikey": "os.environ.get("SUPABASE_ANON_KEY", "")",
+    "Authorization": "Bearer os.environ.get("SUPABASE_ANON_KEY", "")",
     "Content-Type": "application/json"
 }
 

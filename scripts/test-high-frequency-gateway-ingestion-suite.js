@@ -7,7 +7,7 @@ const path = require('path');
 const https = require('https');
 
 const REPO_ROOT = path.join(__dirname, '..');
-const SUPABASE_ANON = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVmdnV6eGRoc2lycHZ4Y2xnZGZnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODU1MDM1OTEsImV4cCI6MjEwMTA3OTU5MX0.nPVBBKO_W9-tAccFRv7ajnllxTXvkqbsVsYecDqyeQc";
+const SUPABASE_ANON = "process.env.SUPABASE_ANON_KEY || ''";
 
 let passed = 0;
 let failed = 0;

@@ -8,8 +8,8 @@ const fs = require('fs');
 const path = require('path');
 
 const HOST = 'www.aquitemachadinhos.com.br';
-const KEY = 'aquitem2026indexnowkey';
-const KEY_LOCATION = `https://${HOST}/${KEY}.txt`;
+const KEY = process.env.INDEXNOW_KEY || '';
+const KEY_LOCATION = `https://${HOST}/indexnow-key.txt`;
 
 function getSitemapUrls() {
   const xmlPath = path.join(__dirname, '..', 'sitemap.xml');

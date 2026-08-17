@@ -301,7 +301,7 @@ setInterval(function() {
 document.addEventListener('DOMContentLoaded', function() {
   var btn = document.getElementById('btnResgatarOferta');
   var SUPABASE_URL = "https://efvuzxdhsirpvxclgdfg.supabase.co/rest/v1";
-  var SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVmdnV6eGRoc2lycHZ4Y2xnZGZnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODU1MDM1OTEsImV4cCI6MjEwMTA3OTU5MX0.nPVBBKO_W9-tAccFRv7ajnllxTXvkqbsVsYecDqyeQc";
+  var SUPABASE_KEY = "process.env.SUPABASE_ANON_KEY || ''";
 
   fetch(SUPABASE_URL + "/monetizacao_urgente?categoria=eq.${d.plataforma}&select=url_afiliado_padrao&limit=1", {
     headers: { apikey: SUPABASE_KEY, Authorization: "Bearer " + SUPABASE_KEY }

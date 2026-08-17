@@ -11,7 +11,7 @@ const REPO_ROOT = path.join(__dirname, '..');
 const OUTPUT_DIR = path.join(REPO_ROOT, 'concursos');
 
 const SUPABASE_REST = "https://efvuzxdhsirpvxclgdfg.supabase.co/rest/v1";
-const SUPABASE_ANON = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVmdnV6eGRoc2lycHZ4Y2xnZGZnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODU1MDM1OTEsImV4cCI6MjEwMTA3OTU5MX0.nPVBBKO_W9-tAccFRv7ajnllxTXvkqbsVsYecDqyeQc";
+const SUPABASE_ANON = "process.env.SUPABASE_ANON_KEY || ''";
 
 const PRODUTOS_CONCURSOS = [
   {

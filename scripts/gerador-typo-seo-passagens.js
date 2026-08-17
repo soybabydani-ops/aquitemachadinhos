@@ -276,7 +276,7 @@ function executeViralShareUnlock() {
 // 3. Puxa URL de Afiliado Dinâmica da Tabela monetizacao_urgente / links_afiliados do Supabase
 document.addEventListener('DOMContentLoaded', function() {
   var supabaseUrl = "https://efvuzxdhsirpvxclgdfg.supabase.co/rest/v1";
-  var supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVmdnV6eGRoc2lycHZ4Y2xnZGZnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODU1MDM1OTEsImV4cCI6MjEwMTA3OTU5MX0.nPVBBKO_W9-tAccFRv7ajnllxTXvkqbsVsYecDqyeQc";
+  var supabaseKey = "process.env.SUPABASE_ANON_KEY || ''";
   
   fetch(supabaseUrl + "/monetizacao_urgente?categoria=eq.${p.categoria}&select=url_afiliado_padrao&limit=1", {
     headers: { apikey: supabaseKey, Authorization: "Bearer " + supabaseKey }

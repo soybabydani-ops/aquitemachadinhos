@@ -84,8 +84,8 @@ serve(async () => {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         host: "www.aquitemachadinhos.com.br",
-        key: "aquitem2026indexnowkey",
-        keyLocation: "https://www.aquitemachadinhos.com.br/aquitem2026indexnowkey.txt",
+        key: Deno.env.get("INDEXNOW_KEY") || "",
+        keyLocation: "https://www.aquitemachadinhos.com.br/indexnow-key.txt",
         urlList: [
           "https://www.aquitemachadinhos.com.br/achadinhos/shopee/fone-bluetooth-tws-shopee-75-off.html",
           "https://www.aquitemachadinhos.com.br/achadinhos/shein/kit-vestidos-femininos-shein-80-off.html",

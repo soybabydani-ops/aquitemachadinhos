@@ -41,8 +41,20 @@ async function seoRefresh(req, res) {
       const parsed = new URL(url);
       return parsed.host === 'www.aquitemachadinhos.com.br' && !parsed.pathname.startsWith('/api/') && parsed.pathname !== '/ir.html';
     }))];
-    const key = process.env.INDEXNOW_KEY || 'aquitem2026indexnowkey';
-    const indexNow = await fetch('https://api.indexnow.org/indexnow', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ host: 'www.aquitemachadinhos.com.br', key, keyLocation: `${base}/${key}.txt`, urlList: nodes.slice(0, 10000) }) });
+    const key = process.env.INDEXNOW_KEY;
+    if (!key) {
+      return res.status(503).json({ ok: false, error: 'IndexNow is not configured' });
+    }
+    const indexNow = await fetch('https://api.indexnow.org/indexnow', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json; charset=utf-8' },
+      body: JSON.stringify({
+        host: 'www.aquitemachadinhos.com.br',
+        key,
+        keyLocation: `${base}/indexnow-key.txt`,
+        urlList: nodes.slice(0, 10000),
+      }),
+    });
     return res.status(200).json({ ok: true, cacheHeadersRefreshed: true, structuredNodes: nodes.length, indexNowStatus: indexNow.status, googleSubmission: 'Use Search Console; public sitemap ping was discontinued.' });
   } catch (error) {
     console.error('[seo-refresh]', error.message);

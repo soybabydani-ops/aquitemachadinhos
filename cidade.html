@@ -375,8 +375,8 @@ document.addEventListener('DOMContentLoaded', function() {
     // Fetch Stores from Supabase
     fetch('https://efvuzxdhsirpvxclgdfg.supabase.co/rest/v1/stores?city_slug=eq.' + encodeURIComponent(cParam) + '&status=eq.ativo&order=destaque.desc,criado_em.desc', {
       headers: {
-        apikey: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVmdnV6eGRoc2lycHZ4Y2xnZGZnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODU1MDM1OTEsImV4cCI6MjEwMTA3OTU5MX0.nPVBBKO_W9-tAccFRv7ajnllxTXvkqbsVsYecDqyeQc',
-        Authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVmdnV6eGRoc2lycHZ4Y2xnZGZnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODU1MDM1OTEsImV4cCI6MjEwMTA3OTU5MX0.nPVBBKO_W9-tAccFRv7ajnllxTXvkqbsVsYecDqyeQc'
+        apikey: '__AQUITEM_SUPABASE_ANON_KEY__',
+        Authorization: 'Bearer __AQUITEM_SUPABASE_ANON_KEY__'
       }
     }).then(function(r){ return r.json(); }).then(function(stores) {
       var sc = document.getElementById('guiaStoresContainer');
@@ -411,8 +411,8 @@ document.addEventListener('DOMContentLoaded', function() {
     // Fetch Listings & Jobs from Supabase
     fetch('https://efvuzxdhsirpvxclgdfg.supabase.co/rest/v1/listings?city_slug=eq.' + encodeURIComponent(cParam) + '&status=eq.ativo&order=destaque.desc,criado_em.desc', {
       headers: {
-        apikey: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVmdnV6eGRoc2lycHZ4Y2xnZGZnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODU1MDM1OTEsImV4cCI6MjEwMTA3OTU5MX0.nPVBBKO_W9-tAccFRv7ajnllxTXvkqbsVsYecDqyeQc',
-        Authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVmdnV6eGRoc2lycHZ4Y2xnZGZnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODU1MDM1OTEsImV4cCI6MjEwMTA3OTU5MX0.nPVBBKO_W9-tAccFRv7ajnllxTXvkqbsVsYecDqyeQc'
+        apikey: '__AQUITEM_SUPABASE_ANON_KEY__',
+        Authorization: 'Bearer __AQUITEM_SUPABASE_ANON_KEY__'
       }
     }).then(function(r){ return r.json(); }).then(function(listings) {
       var lc = document.getElementById('guiaListingsContainer');

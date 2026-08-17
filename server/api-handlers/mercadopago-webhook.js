@@ -17,13 +17,13 @@ module.exports = async function handler(req, res) {
     const type = body.type || body.topic || query.topic || query.type;
     const id = (body.data && body.data.id) || body.id || query['data.id'] || query.id;
 
-    const MP_TOKEN = process.env.MP_ACCESS_TOKEN || 'APP_USR-67890-test';
-    const SUPABASE_URL = process.env.SUPABASE_URL || 'https://efvuzxdhsirpvxclgdfg.supabase.co';
+    const MP_TOKEN = process.env.MP_ACCESS_TOKEN || '';
+    const SUPABASE_URL = process.env.SUPABASE_URL || '';
     const SERVICE_ROLE = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.SUPABASE_SERVICE_KEY || '';
 
     // Se não tiver credenciais completas configuradas, apenas confirma recebimento
-    if (!id || !MP_TOKEN) {
-      return res.status(200).json({ received: true });
+    if (!id || !MP_TOKEN || !SUPABASE_URL || !SERVICE_ROLE) {
+      return res.status(200).json({ received: true, processed: false });
     }
 
     async function mpFetch(path) {

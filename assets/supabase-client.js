@@ -8,7 +8,7 @@
 
   const SUPABASE_CONFIG = {
     url: window.__SUPABASE_URL__ || 'https://efvuzxdhsirpvxclgdfg.supabase.co',
-    anonKey: window.__SUPABASE_ANON_KEY__ || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVmdnV6eGRoc2lycHZ4Y2xnZGZnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODU1MDM1OTEsImV4cCI6MjEwMTA3OTU5MX0.nPVBBKO_W9-tAccFRv7ajnllxTXvkqbsVsYecDqyeQc',
+    anonKey: window.__SUPABASE_ANON_KEY__ || '__AQUITEM_SUPABASE_ANON_KEY__',
     isMock: false
   };
 

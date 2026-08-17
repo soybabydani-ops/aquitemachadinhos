@@ -1,8 +1,8 @@
 // AQUITEM HIGH-FREQUENCY EDGE CRAWL OPTIMIZER (Deno Native Runtime)
 
 const HOST = "www.aquitemachadinhos.com.br";
-const KEY = "aquitem2026indexnowkey";
-const KEY_LOCATION = `https://${HOST}/${KEY}.txt`;
+const INDEXNOW_KEY = Deno.env.get("INDEXNOW_KEY") || "";
+const KEY_LOCATION = `https://${HOST}/indexnow-key.txt`;
 
 const INDEXNOW_ENDPOINTS = [
   "https://api.indexnow.org/indexnow",

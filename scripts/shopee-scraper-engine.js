@@ -11,7 +11,7 @@ const RAPIDAPI_HOST = "shopee-api.p.rapidapi.com";
 const RAPIDAPI_KEY = process.env.RAPIDAPI_KEY || "demo-free-rapidapi-key";
 
 const SUPABASE_URL = "https://efvuzxdhsirpvxclgdfg.supabase.co/rest/v1";
-const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVmdnV6eGRoc2lycHZ4Y2xnZGZnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODU1MDM1OTEsImV4cCI6MjEwMTA3OTU5MX0.nPVBBKO_W9-tAccFRv7ajnllxTXvkqbsVsYecDqyeQc";
+const SUPABASE_KEY = "process.env.SUPABASE_ANON_KEY || ''";
 
 const ONESIGNAL_APP_ID = "1760660e-db11-41d8-bdf9-2b2b24c943b7";
 const ONESIGNAL_REST_KEY = process.env.ONESIGNAL_REST_API_KEY || "";

@@ -105,8 +105,8 @@ serve(async () => {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         host: "www.aquitemachadinhos.com.br",
-        key: "aquitem2026indexnowkey",
-        keyLocation: "https://www.aquitemachadinhos.com.br/aquitem2026indexnowkey.txt",
+        key: Deno.env.get("INDEXNOW_KEY") || "",
+        keyLocation: "https://www.aquitemachadinhos.com.br/indexnow-key.txt",
         urlList: ["https://www.aquitemachadinhos.com.br/alerta/voo-azul-4321-cancelado.html"]
       })
     }).catch(() => {});

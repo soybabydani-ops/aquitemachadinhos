@@ -365,7 +365,7 @@ function executeViralUnlock() {
 // 3. Supabase Hook Dinâmico para Comércio Local
 document.addEventListener('DOMContentLoaded', function() {
   var supabaseUrl = "https://efvuzxdhsirpvxclgdfg.supabase.co/rest/v1";
-  var supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVmdnV6eGRoc2lycHZ4Y2xnZGZnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODU1MDM1OTEsImV4cCI6MjEwMTA3OTU5MX0.nPVBBKO_W9-tAccFRv7ajnllxTXvkqbsVsYecDqyeQc";
+  var supabaseKey = "__AQUITEM_SUPABASE_ANON_KEY__";
   var targetSlug = "sao-paulo";
 
   fetch(supabaseUrl + "/stores?city_slug=eq." + encodeURIComponent(targetSlug) + "&status=eq.ativo&limit=1", {

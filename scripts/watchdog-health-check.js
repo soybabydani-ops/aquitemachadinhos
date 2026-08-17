@@ -7,7 +7,7 @@ const https = require('https');
 
 const DOMAIN = 'https://www.aquitemachadinhos.com.br';
 const SUPABASE_URL = "https://efvuzxdhsirpvxclgdfg.supabase.co/rest/v1";
-const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVmdnV6eGRoc2lycHZ4Y2xnZGZnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODU1MDM1OTEsImV4cCI6MjEwMTA3OTU5MX0.nPVBBKO_W9-tAccFRv7ajnllxTXvkqbsVsYecDqyeQc";
+const SUPABASE_KEY = "process.env.SUPABASE_ANON_KEY || ''";
 
 const KEY_PAGES_TO_AUDIT = [
   '/',

@@ -8,7 +8,7 @@ const fs = require("fs");
 const path = require("path");
 
 const SUPABASE_URL = process.env.SUPABASE_URL || "https://efvuzxdhsirpvxclgdfg.supabase.co/rest/v1";
-const SUPABASE_KEY = process.env.SUPABASE_ANON_KEY || "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVmdnV6eGRoc2lycHZ4Y2xnZGZnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODU1MDM1OTEsImV4cCI6MjEwMTA3OTU5MX0.nPVBBKO_W9-tAccFRv7ajnllxTXvkqbsVsYecDqyeQc";
+const SUPABASE_KEY = process.env.SUPABASE_ANON_KEY || "process.env.SUPABASE_ANON_KEY || ''";
 const SUPABASE_PAT = process.env.SUPABASE_PAT || process.env.SUPABASE_SERVICE_ROLE_KEY || "";
 
 const CITIES_INFO = {

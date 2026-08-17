@@ -4,8 +4,8 @@ const SUPABASE_URL = Deno.env.get("SUPABASE_URL") || "https://efvuzxdhsirpvxclgd
 const SUPABASE_SERVICE_ROLE_KEY = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY") || "";
 
 const HOST = "www.aquitemachadinhos.com.br";
-const KEY = "aquitem2026indexnowkey";
-const KEY_LOCATION = `https://${HOST}/${KEY}.txt`;
+const INDEXNOW_KEY = Deno.env.get("INDEXNOW_KEY") || "";
+const KEY_LOCATION = `https://${HOST}/indexnow-key.txt`;
 
 serve(async () => {
   try {

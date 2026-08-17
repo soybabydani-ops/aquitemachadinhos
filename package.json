@@ -13,7 +13,8 @@
   "author": "AQUITEM",
   "license": "UNLICENSED",
   "scripts": {
-    "vercel-prebuild": "node scripts/validate-env.mjs",
-    "audit:schemas": "node scripts/audit-structured-data-conformance.js"
+    "vercel-prebuild": "node scripts/prepare-vercel-build.mjs && node scripts/validate-env.mjs",
+    "audit:schemas": "node scripts/audit-structured-data-conformance.js",
+    "audit:secrets": "node scripts/audit-no-hardcoded-secrets.mjs"
   }
 }

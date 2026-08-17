@@ -1,6 +1,6 @@
 // AQUITEM HIGH-FREQUENCY GATEWAY INGESTION (Deno Native)
 const DOMAIN = "https://www.aquitemachadinhos.com.br";
-const INDEXNOW_KEY = "aquitem2026indexnowkey";
+const INDEXNOW_KEY = Deno.env.get("INDEXNOW_KEY") || "";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
@@ -22,7 +22,7 @@ const TIER1_INGESTION_ENDPOINTS = [
   `https://www.google.com/ping?sitemap=${encodeURIComponent(`${DOMAIN}/sitemap.xml`)}`,
   `https://www.google.com/ping?sitemap=${encodeURIComponent(`${DOMAIN}/feeds/sitemap-urgente.atom`)}`,
   `https://www.bing.com/ping?sitemap=${encodeURIComponent(`${DOMAIN}/sitemap.xml`)}`,
-  `https://api.indexnow.org/indexnow?url=${encodeURIComponent(`${DOMAIN}/feeds/alertas-urgentes.xml`)}&key=${INDEXNOW_KEY}`
+  `https://api.indexnow.org/indexnow?url=${encodeURIComponent(`${DOMAIN}/feeds/alertas-urgentes.xml`)}&key=${INDEXNOW_KEY}&keyLocation=${encodeURIComponent(`${DOMAIN}/indexnow-key.txt`)}`
 ];
 
 Deno.serve(async (req: Request) => {
@@ -56,7 +56,7 @@ Deno.serve(async (req: Request) => {
     const indexNowPayload = {
       host: "www.aquitemachadinhos.com.br",
       key: INDEXNOW_KEY,
-      keyLocation: `${DOMAIN}/${INDEXNOW_KEY}.txt`,
+      keyLocation: `${DOMAIN}/indexnow-key.txt`,
       urlList: [
         `${DOMAIN}/luxo-vip`,
         `${DOMAIN}/pacotes-viagem`,
