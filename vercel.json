@@ -2787,5 +2787,6 @@
       ],
       "destination": "/$1"
     }
-  ]
+  ],
+  "buildCommand": "npm run vercel-prebuild"
 }
