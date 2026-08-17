@@ -13,6 +13,7 @@ if (process.env.VERCEL && process.env.VERCEL_ENV === 'production') {
     'SUPABASE_URL',
     'SUPABASE_ANON_KEY',
     'INDEXNOW_KEY',
+    'NEXT_PUBLIC_GA_MEASUREMENT_ID',
   ]) {
     if (!process.env[name]) errors.push(`${name} is required in Vercel production.`);
   }
