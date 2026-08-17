@@ -28,6 +28,41 @@ const PLACEHOLDERS = {
   '__AQUITEM_SUPABASE_ANON_KEY__': 'SUPABASE_ANON_KEY',
 };
 
+const NETWORK_HINTS = [
+  '<link rel="dns-prefetch" href="https://anrdoezrs.net">',
+  '<link rel="dns-prefetch" href="https://www.cj.com">',
+  '<link rel="dns-prefetch" href="https://s.shopee.com.br">',
+  '<link rel="dns-prefetch" href="https://meli.la">',
+  '<link rel="preconnect" href="https://anrdoezrs.net" crossorigin="anonymous">',
+  '<link rel="preconnect" href="https://s.shopee.com.br" crossorigin="anonymous">',
+].join('');
+
+const ORGANIZATION_SCHEMA = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'Organization',
+      '@id': 'https://www.aquitemachadinhos.com.br/#organization',
+      name: 'Aqui Tem Achadinhos',
+      url: 'https://www.aquitemachadinhos.com.br',
+      logo: 'https://www.aquitemachadinhos.com.br/logo.svg',
+    },
+    {
+      '@type': 'WebSite',
+      '@id': 'https://www.aquitemachadinhos.com.br/#website',
+      name: 'Aqui Tem Achadinhos',
+      url: 'https://www.aquitemachadinhos.com.br',
+      publisher: { '@id': 'https://www.aquitemachadinhos.com.br/#organization' },
+      hasPart: [
+        { '@type': 'WebPage', name: 'Política de privacidade', url: 'https://www.aquitemachadinhos.com.br/politica-de-privacidade' },
+        { '@type': 'WebPage', name: 'Termos de uso', url: 'https://www.aquitemachadinhos.com.br/termos' },
+      ],
+    },
+  ],
+}).replace(/</g, '\\u003c');
+
+const HEAD_ENHANCEMENTS = `${NETWORK_HINTS}<script id="aquitem-organization-schema" type="application/ld+json">${ORGANIZATION_SCHEMA}</script>`;
+
 async function walk(directory) {
   const entries = await readdir(directory, { withFileTypes: true });
   const files = [];
@@ -46,6 +81,24 @@ function required(name) {
   return value;
 }
 
+async function injectHeadEnhancements(directory) {
+  const entries = await readdir(directory, { withFileTypes: true });
+  let updated = 0;
+  for (const entry of entries) {
+    const target = path.join(directory, entry.name);
+    if (entry.isDirectory()) {
+      updated += await injectHeadEnhancements(target);
+      continue;
+    }
+    if (!entry.isFile() || !entry.name.endsWith('.html')) continue;
+    const content = await readFile(target, 'utf8');
+    if (content.includes('id="aquitem-organization-schema"') || !/<\/head>/i.test(content)) continue;
+    await writeFile(target, content.replace(/<\/head>/i, `${HEAD_ENHANCEMENTS}</head>`), 'utf8');
+    updated += 1;
+  }
+  return updated;
+}
+
 async function prepareStaticOutput(indexNowKey) {
   await rm(OUTPUT, { recursive: true, force: true });
   await mkdir(OUTPUT, { recursive: true });
@@ -58,9 +111,11 @@ async function prepareStaticOutput(indexNowKey) {
     await cp(path.join(ROOT, entry.name), path.join(OUTPUT, entry.name), { recursive: entry.isDirectory() });
   }
 
+  const htmlFilesUpdated = await injectHeadEnhancements(OUTPUT);
   if (indexNowKey) {
     await writeFile(path.join(OUTPUT, 'indexnow-key.txt'), `${indexNowKey}\n`, 'utf8');
   }
+  return htmlFilesUpdated;
 }
 
 async function main() {
@@ -101,7 +156,7 @@ async function main() {
     }
   }
 
-  await prepareStaticOutput(indexNowKey);
+  const htmlFilesUpdated = await prepareStaticOutput(indexNowKey);
   if (production && !existsSync(path.join(OUTPUT, 'indexnow-key.txt'))) {
     throw new Error('IndexNow verification file was not created.');
   }
@@ -110,6 +165,7 @@ async function main() {
     event: 'vercel_public_config_injected',
     production,
     filesUpdated: replacements,
+    htmlFilesUpdated,
     outputDirectory: 'public',
   }));
 }
