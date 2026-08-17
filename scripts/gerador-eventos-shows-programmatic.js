@@ -50,14 +50,18 @@ function renderShowPage(show) {
   const metaDesc = `Guia completo de transporte, metrô, ônibus de outros estados e hotéis próximos à ${show.arena} para o show de ${show.artista}. Garanta passagem barata e hospedagem sem estresse.`;
   const canonicalUrl = `https://www.aquitemachadinhos.com.br/eventos/${show.slug}`;
 
+  // These pages are travel guides. Without a verified ISO startDate and a real
+  // ticket offer they must not be declared as Event rich results.
   const jsonLd = {
     "@context": "https://schema.org",
-    "@type": "Event",
-    "name": show.artista,
-    "location": { "@type": "Place", "name": show.arena, "address": { "@type": "PostalAddress", "addressLocality": show.cidade, "addressCountry": "BR" } },
+    "@type": "Article",
+    "headline": show.artista,
     "description": metaDesc,
     "url": canonicalUrl,
-    "offers": { "@type": "Offer", "url": show.passagens, "availability": "https://schema.org/InStock" }
+    "mainEntityOfPage": { "@type": "WebPage", "@id": canonicalUrl },
+    "about": { "@type": "Place", "name": show.arena, "address": { "@type": "PostalAddress", "addressLocality": show.cidade, "addressCountry": "BR" } },
+    "author": { "@type": "Organization", "name": "Aqui Tem Achadinhos" },
+    "publisher": { "@type": "Organization", "name": "Aqui Tem Achadinhos" }
   };
 
   return `<!DOCTYPE html>

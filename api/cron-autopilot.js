@@ -86,8 +86,8 @@ module.exports = async function handler(req, res) {
       headers: { 'apikey': SUPABASE_ANON, 'Authorization': `Bearer ${SUPABASE_ANON}` }
     }, () => {}).on('error', () => {});
 
-    // 3. Ping Google Search Console
-    https.get(`https://www.google.com/ping?sitemap=https://${HOST}/feeds/sitemap-urgente.atom`, () => {}).on('error', () => {});
+    // Google removed its unauthenticated sitemap ping endpoint. Discovery is
+    // handled by robots.txt/Search Console; IndexNow remains enabled above.
 
     return res.status(200).json({
       success: true,

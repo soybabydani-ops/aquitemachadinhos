@@ -9,6 +9,7 @@
     "lint": "next lint",
     "generate-sitemap": "node scripts/generate-sitemap.js",
     "seed-tenants": "node scripts/seed-tenants.js",
+    "audit:schemas": "node scripts/audit-structured-data-conformance.js",
     "deploy": "npm run build && vercel --prod"
   },
   "dependencies": {

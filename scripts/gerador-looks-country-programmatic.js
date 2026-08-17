@@ -59,7 +59,7 @@ function renderLookPage(look) {
     "offers": {
       "@type": "Offer",
       "priceCurrency": "BRL",
-      "price": look.promo.replace("R$", "").trim(),
+      "price": look.promo.replace(/[^\d,.-]/g, '').replace(/\./g, '').replace(',', '.'),
       "availability": "https://schema.org/InStock",
       "url": look.link
     }

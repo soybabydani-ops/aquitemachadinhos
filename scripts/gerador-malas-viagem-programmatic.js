@@ -59,7 +59,7 @@ function renderGearPage(gear) {
     "offers": {
       "@type": "Offer",
       "priceCurrency": "BRL",
-      "price": gear.promo.replace("R$", "").trim(),
+      "price": gear.promo.replace(/[^\d,.-]/g, '').replace(/\./g, '').replace(',', '.'),
       "availability": "https://schema.org/InStock",
       "url": gear.link
     }
