@@ -15,6 +15,7 @@
   "scripts": {
     "vercel-prebuild": "node scripts/prepare-vercel-build.mjs && node scripts/validate-env.mjs",
     "audit:schemas": "node scripts/audit-structured-data-conformance.js",
-    "audit:secrets": "node scripts/audit-no-hardcoded-secrets.mjs"
+    "audit:secrets": "node scripts/audit-no-hardcoded-secrets.mjs",
+    "test:ga4-consent": "node scripts/test-ga4-consent.mjs"
   }
 }
